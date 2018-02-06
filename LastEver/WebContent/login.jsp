@@ -1,19 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>LastEver</title>	
 	<!-- Bootstrap core CSS -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
-    <title>LastEver</title>	
+	<title>Sign up & Login</title>
 </head>
-
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -24,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="index.jsp">Home</a>
+              <a class="nav-link" href="index.jsp">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,7 +40,7 @@
               <a class="nav-link" href="index.jsp">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.jsp">Sign In</a>
+              <a class="nav-link active" href="login.jsp">Sign In</a>
             </li>
           </ul>
         </div>
@@ -52,38 +49,14 @@
     <div class="main-cover">    	
     	<!-- Page Content -->
 		<div class="cards-container container">
-	    	<h1 class="my-4">Welcome to LastEver</h1>
+	    	<h1 class="my-4">Sign In</h1>
 			<!-- Marketing Icons Section -->
 			<div class="row">
-			  <div class="col-lg-4 mb-4">
+			  <div class="col-lg-12 mb-4">
 			    <div class="card h-100">
-			      <h4 class="card-header">News</h4>
+			      <h4 class="card-header">Have an Existing Account?</h4>
 			      <div class="card-body">
 			        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-			      </div>
-			      <div class="card-footer">
-			        <a href="#" class="btn btn-primary">Learn More</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col-lg-4 mb-4">
-			    <div class="card h-100">
-			      <h4 class="card-header">Upcoming games</h4>
-			      <div class="card-body">
-			        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-			      </div>
-			      <div class="card-footer">
-			        <a href="#" class="btn btn-primary">Learn More</a>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col-lg-4 mb-4">
-			    <div class="card h-100">
-			      <h4 class="card-header">Weather</h4>
-			      <div class="card-body">
-			        <p class="card-text">
-			        	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
-			        </p>
 			      </div>
 			      <div class="card-footer">
 			        <a href="#" class="btn btn-primary">Learn More</a>

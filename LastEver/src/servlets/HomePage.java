@@ -16,7 +16,7 @@ public class HomePage extends HttpServlet{
     	super();
     }
 
-    public void goGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
         response.setContentType("text/html");
         response.getWriter().append("Served at: ").append(request.getContextPath());
         PrintWriter out = response.getWriter();
