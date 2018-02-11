@@ -50,6 +50,7 @@
 					aria-haspopup="true" aria-expanded="false"> League </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
+						
 						<a class="dropdown-item" href="about.jsp">About</a> <a
 							class="dropdown-item" href="rules.jsp">Rules</a> <a
 							class="dropdown-item" href="registration.jsp">Registration</a> <a
