@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+<fmt:setLocale value="${param.language}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -15,14 +17,17 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<title>LastEver</title>
+
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="div2"/></title>
+	</fmt:bundle>
 </head>
 
 <body>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
-		<a class="navbar-brand" href="index.jsp"><i>LastEver</i></a>
+		<a class="navbar-brand" href="index.jsp"><img src="images/logo_sm4.png" /></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -63,21 +68,38 @@
 
 				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
 						In</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item">
+			<fmt:bundle basename="TestBundle">
+    <form action="" method="post">
+		<select name="language" onchange="this.form.submit()">
+    	 	<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message key="english" /></option>
+	    	<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message key="french" /></option>
+    	</select>
+    </form>
+    </fmt:bundle>
+    </li>
+    
+    
 			</ul>
 		</div>
 	</div>
-	</nav>
+		</nav>
 
 
+	<fmt:bundle basename="TestBundle">
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<h1 class="my-4">Division 2</h1>
+			<h1 class="my-4"><fmt:message key="div_header"/></h1>
 			<!-- Marketing Icons Section -->
 			<div class="row">
+			
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Teams</h4>
+						
+						<h4 class="card-header"><fmt:message key="div_head1"/></h4>
 						<div class="card-body">
 							<p class="card-text">
 
@@ -154,7 +176,7 @@
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Schedule</h4>
+						<h4 class="card-header"><fmt:message key="div_head2"/></h4>
 						<div class="card-body">
 							<p class="card-text">
 
@@ -240,23 +262,23 @@
 								</div>
 								<div class="col-lg-4 mb-4">
 									<div class="card h-100">
-										<h4 class="card-header">Results</h4>
+										<h4 class="card-header"><fmt:message key="div_head3"/></h4>
 										<div class="card-body">
-											<p class="card-text">Results</p>
+											<p class="card-text"></p>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-4 mb-4">
 									<div class="card h-100">
-										<h4 class="card-header">Standings</h4>
+										<h4 class="card-header"><fmt:message key="div_head4"/></h4>
 										<div class="card-body">
-											<p class="card-text">Standings</p>
+											<p class="card-text"></p>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-4 mb-4">
 									<div class="card h-100">
-										<h4 class="card-header">Leaders</h4>
+										<h4 class="card-header"><fmt:message key="div_head5"/></h4>
 										<div class="card-body">
 											<p class="card-text">
 
@@ -340,9 +362,12 @@
 									</div>
 								</div>
 								</div>
+
 								<!-- /.row -->
 								</div>
+																
 								</div>
+																</fmt:bundle>
 								<!-- Footer -->
 								<footer class="page-footer py-3 bg-dark">
 								<div class="container-fluid">
@@ -350,7 +375,6 @@
 										LastEver 2018</p>
 								</div>
 								</footer>
-
 								<!-- Bootstrap core JavaScript -->
 								<script type="text/javascript"
 		src="bootstrap/js/bootstrap.min.js"></script>

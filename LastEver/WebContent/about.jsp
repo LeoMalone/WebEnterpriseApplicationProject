@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+<fmt:setLocale value="${param.language}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -14,14 +16,16 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<title>LastEver</title>
+<fmt:bundle basename="TestBundle">
+	<title><fmt:message key="about"/></title>
+	</fmt:bundle>
 </head>
 
 <body>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
-		<a class="navbar-brand" href="index.jsp"><i>LastEver</i></a>
+		<a class="navbar-brand" href="index.jsp"><img src="images/logo_sm4.png" /></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -63,6 +67,19 @@
 
 				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
 						In</a></li>
+						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item">
+			<fmt:bundle basename="TestBundle">
+    <form action="" method="post">
+		<select name="language" onchange="this.form.submit()">
+    	 	<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message key="english" /></option>
+	    	<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message key="french" /></option>
+    	</select>
+    </form>
+    </fmt:bundle>
+    </li>
+    
+    
 			</ul>
 		</div>
 	</div>
@@ -70,37 +87,39 @@
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<h1 class="my-4">About the League</h1>
+			
 			<!-- Marketing Icons Section -->
+			<fmt:bundle basename="TestBundle">
+			<h1 class="my-4"><fmt:message key="ab_header"/></h1>
 			<div class="row">
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">About</h4>
+						<h4 class="card-header"><fmt:message key="ab_head1"/></h4>
 						<div class="card-body">
-							<p class="card-text">This league is located at the Sporting
-								Stadium in Ottawa, Ontario. <br /><br /><b>Any special info to share about the league</b></p>
+							<p class="card-text"><fmt:message key="ab_text1"/></p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">The Stadium</h4>
+						<h4 class="card-header"><fmt:message key="ab_head2"/></h4>
 						<div class="card-body">
 							<img src="images/stadium.JPG" alt="stadium" width="300px" height="300px">
-							<p class="card-text"><br />Lorem.</p>
+							<p class="card-text"><br /><fmt:message key="ab_text2"/></p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Map</h4>
+						<h4 class="card-header"><fmt:message key="ab_head3"/></h4>
 						<div class="card-body">
 							<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d22409.355508682052!2d-75.70157807521635!3d45.40592270176919!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4a69b90dfe9b6eb2!2sTD+Place!5e0!3m2!1sen!2sca!4v1518301220254" width="300px" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
-							<p class="card-text"><br />Lorem 2.</p>
+							<p class="card-text"><br /><fmt:message key="ab_text3"/></p>
 						</div>
 					</div>
 				</div>
 			</div>
+				</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
