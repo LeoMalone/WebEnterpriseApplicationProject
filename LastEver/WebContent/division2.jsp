@@ -372,7 +372,7 @@
 								<footer class="page-footer py-3 bg-dark">
 								<div class="container-fluid">
 									<p class="m-0 text-center text-white">Copyright &copy;
-										LastEver 2018</p>
+										<img src="images/logo_sm4.png" /> 2018</p>
 								</div>
 								</footer>
 								<!-- Bootstrap core JavaScript -->
