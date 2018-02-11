@@ -18,15 +18,6 @@
 </head>
 
 <body>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -39,12 +30,17 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link active"
+				<li class="nav-item"><a class="nav-link"
 					href="index.jsp">Home</a></li>
+
+
+				<%--kevin read
+            updating menu bar - feb 10
+            --%>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> League </a>
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						League </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="about.jsp">About</a> <a
@@ -53,9 +49,9 @@
 							class="dropdown-item" href="contact.jsp">Contact</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Divisions </a>
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Divisions </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="division1.jsp">Division 1</a> <a
@@ -74,63 +70,33 @@
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<h1 class="my-4">Welcome to LastEver</h1>
+			<h1 class="my-4">About the League</h1>
 			<!-- Marketing Icons Section -->
 			<div class="row">
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">News</h4>
+						<h4 class="card-header">About</h4>
 						<div class="card-body">
-							<p class="card-text">
-							<div class="fb-page"
-								data-href="https://fb.me/lasteversports"
-								data-tabs="timeline" data-small-header="false"
-								data-adapt-container-width="true" data-hide-cover="false"
-								data-show-facepile="true">
-								<blockquote
-									cite="https://fb.me/lasteversports"
-									class="fb-xfbml-parse-ignore">
-									<a
-										href="https://fb.me/lasteversports">
-										LastEver Sports</a>
-								</blockquote>
-							</div>
-
-
-							</p>
+							<p class="card-text">This league is located at the Sporting
+								Stadium in Ottawa, Ontario. <br /><br /><b>Any special info to share about the league</b></p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Upcoming games</h4>
+						<h4 class="card-header">The Stadium</h4>
 						<div class="card-body">
-							<p class="card-text">
-								<iframe src="https://scorestream.com/widgets/scoreboards/vert?userWidgetId=21758"  
-								style="padding:0px;border:0px;width:300px;height:500px;max-height:500px;"  
-								title="Realtime sports scoreboard widget"  scrolling="no" frameBorder="0"></iframe>
-							</p>
+							<img src="images/stadium.JPG" alt="stadium" width="300px" height="300px">
+							<p class="card-text"><br />Lorem.</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Weather</h4>
+						<h4 class="card-header">Map</h4>
 						<div class="card-body">
-							<p class="card-text">
-								<div id="plemx-root"></div> 
-								
-								
-								<div style="width: 320px;">
-								<iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=81845" 
-								width="320" height="500" frameborder="0"  scrolling="no"></iframe><a style="display: block;z-index: 1;
-								height: 20px;text-indent: -9999em;margin: -20px 0 0 0;position: relative" href="https://www.willyweather.com/pa/montour-county/ottawa.html" 
-								rel="nofollow">Forecast</a></div>
-								
-								
-								
-								
-							</p>
+							<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d22409.355508682052!2d-75.70157807521635!3d45.40592270176919!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4a69b90dfe9b6eb2!2sTD+Place!5e0!3m2!1sen!2sca!4v1518301220254" width="300px" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
+							<p class="card-text"><br />Lorem 2.</p>
 						</div>
 					</div>
 				</div>
@@ -160,5 +126,8 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjvCeJFzEnkShiIgO4gTBEVF1UqDwWfwc&callback=myMap"
+		></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -18,15 +18,6 @@
 </head>
 
 <body>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -39,8 +30,12 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link active"
-					href="index.jsp">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+
+
+				<%--kevin read
+            updating menu bar - feb 10
+            --%>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -71,66 +66,118 @@
 		</div>
 	</div>
 	</nav>
+
+
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<h1 class="my-4">Welcome to LastEver</h1>
+			<h1 class="my-4">Division 2</h1>
 			<!-- Marketing Icons Section -->
 			<div class="row">
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">News</h4>
+						<h4 class="card-header">Teams</h4>
 						<div class="card-body">
-							<p class="card-text">
-							<div class="fb-page"
-								data-href="https://fb.me/lasteversports"
-								data-tabs="timeline" data-small-header="false"
-								data-adapt-container-width="true" data-hide-cover="false"
-								data-show-facepile="true">
-								<blockquote
-									cite="https://fb.me/lasteversports"
-									class="fb-xfbml-parse-ignore">
-									<a
-										href="https://fb.me/lasteversports">
-										LastEver Sports</a>
-								</blockquote>
-							</div>
-
-
-							</p>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+								adipisicing elit. Sapiente esse necessitatibus neque.</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Upcoming games</h4>
+						<h4 class="card-header">Schedule</h4>
 						<div class="card-body">
-							<p class="card-text">
-								<iframe src="https://scorestream.com/widgets/scoreboards/vert?userWidgetId=21758"  
-								style="padding:0px;border:0px;width:300px;height:500px;max-height:500px;"  
-								title="Realtime sports scoreboard widget"  scrolling="no" frameBorder="0"></iframe>
-							</p>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+								adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus
+								commodi similique totam consectetur praesentium molestiae atque
+								exercitationem ut consequuntur, sed eveniet, magni nostrum sint
+								fuga.</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Weather</h4>
+						<h4 class="card-header">Results</h4>
+						<div class="card-body">
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+								adipisicing elit. Sapiente esse necessitatibus neque.</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100">
+						<h4 class="card-header">Standings</h4>
+						<div class="card-body">
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+								adipisicing elit. Sapiente esse necessitatibus neque.</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100">
+						<h4 class="card-header">Leaders</h4>
 						<div class="card-body">
 							<p class="card-text">
-								<div id="plemx-root"></div> 
-								
-								
-								<div style="width: 320px;">
-								<iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=81845" 
-								width="320" height="500" frameborder="0"  scrolling="no"></iframe><a style="display: block;z-index: 1;
-								height: 20px;text-indent: -9999em;margin: -20px 0 0 0;position: relative" href="https://www.willyweather.com/pa/montour-county/ottawa.html" 
-								rel="nofollow">Forecast</a></div>
-								
-								
-								
-								
+
+
+
+								<%
+  String db = request.getParameter("db");
+  String user = "admin"; // assumes database name is the same as username
+  try {
+    java.sql.Connection con;
+    Class.forName("org.gjt.mm.mysql.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, user, "lastever");
+    out.println (db+ "database successfully opened.");
+  }
+  catch(SQLException e) {
+    out.println("SQLException caught: " +e.getMessage());
+  }
+%>
+
+
+
+								<sql:query>
+			        	select mr.group1 "Group"
+, t1.country||'-'||t2.country match
+, mr.home_goals||'-'||away_goals score
+from match_results mr
+join
+teams t1
+on (mr.home = t1.seq_in_group
+and
+mr.group1 = t1.group1)
+join
+teams t2
+on ( mr.away= t2.seq_in_group
+and
+t1.group1 = t2.group1
+)
+join
+match_schedule ms
+on (ms.home = mr.home
+and
+ms.away = mr.away
+)
+order
+by mr.group1
+, ms.seq</sql:query>
 							</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -138,7 +185,6 @@
 			<!-- /.row -->
 		</div>
 	</div>
-
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 	<div class="container-fluid">

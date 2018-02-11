@@ -18,15 +18,6 @@
 </head>
 
 <body>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -39,12 +30,16 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link active"
-					href="index.jsp">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+
+
+								<%--kevin read
+            updating menu bar - feb 10
+            --%>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> League </a>
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						League </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="about.jsp">About</a> <a
@@ -53,18 +48,18 @@
 							class="dropdown-item" href="contact.jsp">Contact</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Divisions </a>
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Divisions </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="division1.jsp">Division 1</a> <a
 							class="dropdown-item" href="division2.jsp">Division 2</a> <a
 							class="dropdown-item" href="division3.jsp">Division 3</a>
 					</div></li>
-
-
-
+					
+					
+					
 				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
 						In</a></li>
 			</ul>
@@ -74,63 +69,46 @@
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<h1 class="my-4">Welcome to LastEver</h1>
+			<h1 class="my-4">League Registration</h1>
 			<!-- Marketing Icons Section -->
 			<div class="row">
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">News</h4>
+						<h4 class="card-header">Registration Information</h4>
 						<div class="card-body">
 							<p class="card-text">
-							<div class="fb-page"
-								data-href="https://fb.me/lasteversports"
-								data-tabs="timeline" data-small-header="false"
-								data-adapt-container-width="true" data-hide-cover="false"
-								data-show-facepile="true">
-								<blockquote
-									cite="https://fb.me/lasteversports"
-									class="fb-xfbml-parse-ignore">
-									<a
-										href="https://fb.me/lasteversports">
-										LastEver Sports</a>
-								</blockquote>
-							</div>
-
-
+								Team registration fee: $2000
+								<br /><br />
+								Players must provide all indiviudal equipment (including jersey)
 							</p>
+						</div>
+												<div class="card-footer">
+							<a href="login.jsp" class="btn btn-primary">Register</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Upcoming games</h4>
+						<h4 class="card-header">Individual Registration</h4>
 						<div class="card-body">
 							<p class="card-text">
-								<iframe src="https://scorestream.com/widgets/scoreboards/vert?userWidgetId=21758"  
-								style="padding:0px;border:0px;width:300px;height:500px;max-height:500px;"  
-								title="Realtime sports scoreboard widget"  scrolling="no" frameBorder="0"></iframe>
+								<b>To register as a player on a team, create an account or sign-in and link your account to your team</b>
+								<br /><br />
 							</p>
+						</div>
+												<div class="card-footer">
+							<a href="login.jsp" class="btn btn-primary">Join your team</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100">
-						<h4 class="card-header">Weather</h4>
+						<h4 class="card-header">Team Registration</h4>
 						<div class="card-body">
-							<p class="card-text">
-								<div id="plemx-root"></div> 
-								
-								
-								<div style="width: 320px;">
-								<iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=81845" 
-								width="320" height="500" frameborder="0"  scrolling="no"></iframe><a style="display: block;z-index: 1;
-								height: 20px;text-indent: -9999em;margin: -20px 0 0 0;position: relative" href="https://www.willyweather.com/pa/montour-county/ottawa.html" 
-								rel="nofollow">Forecast</a></div>
-								
-								
-								
-								
-							</p>
+							<p class="card-text"><b>To register a team, create or sign-in to your team account and create your team</b></p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-primary">Register your team</a>
 						</div>
 					</div>
 				</div>

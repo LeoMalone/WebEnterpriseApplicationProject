@@ -23,24 +23,37 @@
             <li class="nav-item">
               <a class="nav-link" href="index.jsp">Home</a>
             </li>
+            
+            
+            <%--kevin read
+            updating menu bar - feb 10
+            --%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                League
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="about.jsp">About</a>
+                <a class="dropdown-item" href="rules.jsp">Rules</a>
+                <a class="dropdown-item" href="registration.jsp">Registration</a>
+                <a class="dropdown-item" href="contact.jsp">Contact</a> 
+              </div>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Divisions
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="index.jsp">Mens</a>
-                <a class="dropdown-item" href="index.jsp">Woman</a>
-                <a class="dropdown-item" href="index.jsp">Kids x-y</a> 
+                <a class="dropdown-item" href="division1.jsp">Division 1</a>
+                <a class="dropdown-item" href="division2.jsp">Division 2</a>
+                <a class="dropdown-item" href="division3.jsp">Division 3</a> 
               </div>
             </li>
+
+
+
             <li class="nav-item">
-              <a class="nav-link" href="index.jsp">Statistics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.jsp">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="login.jsp">Sign In</a>
+              <a class="nav-link active" href="#">Sign In</a>
             </li>
           </ul>
         </div>
