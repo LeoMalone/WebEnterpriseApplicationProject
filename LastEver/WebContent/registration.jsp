@@ -108,7 +108,7 @@
 							<p class="card-text"><b>To register a team, create or sign-in to your team account and create your team</b></p>
 						</div>
 						<div class="card-footer">
-							<a href="#" class="btn btn-primary">Register your team</a>
+							<a href="login.jsp" class="btn btn-primary">Register your team</a>
 						</div>
 					</div>
 				</div>
