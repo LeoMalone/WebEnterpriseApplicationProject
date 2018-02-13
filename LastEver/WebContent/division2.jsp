@@ -213,7 +213,7 @@
 								<p class="card-text"></p>
 
 								<sql:query dataSource="${dataSource}" var="result">
-					select team, GP, W, D, L, PTS, GF, GA, GD from results where divisionID = 2 order by PTS desc, W desc, L asc, GD desc
+					select team, GP, W, D, L, PTS, GF, GA, GD from standings where divisionID = 2 order by PTS desc, W desc, L asc, GD desc
 					</sql:query>
 								<table width="100%">
 									<tr>
