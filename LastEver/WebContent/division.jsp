@@ -92,7 +92,7 @@ select divsionName from division where divisionID = ?
 						<a class="dropdown-item active" href=""><fmt:message key="nav_divisions" /></a>
 						</c:when>
 							<c:otherwise>
-			            <c:forEach var="row" items="${div1.rows}">
+			            <c:forEach var="row" items="${div2.rows}">
 						<a class="dropdown-item" href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
 							</c:forEach>
         				</c:otherwise>
