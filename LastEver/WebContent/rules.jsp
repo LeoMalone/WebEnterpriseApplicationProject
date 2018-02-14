@@ -5,8 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<fmt:setLocale value="${param.language}" />
+<c:if test="${param.language ne 'fr'}">
+	<html lang="en">
+	</c:if>
+<c:if test="${param.language eq 'fr'}">
+	<html lang="fr">
+	</c:if>
+	<fmt:setLocale value="${param.language}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -45,25 +50,27 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+			<fmt:bundle basename="TestBundle">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="index.jsp"><fmt:message key="nav_home" /></a></li>
 
 
 				<%--kevin read
             updating menu bar - feb 10
             --%>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> League </a>
+<li class="nav-item dropdown"><a
+					class="nav-link active dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<fmt:message key="nav_league" /> </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
-
-						<a class="dropdown-item" href="about.jsp">About</a> <a
-							class="dropdown-item" href="rules.jsp">Rules</a> <a
-							class="dropdown-item" href="registration.jsp">Registration</a> <a
-							class="dropdown-item" href="contact.jsp">Contact</a>
+						
+						<a class="dropdown-item" href="about.jsp"><fmt:message key="about" /></a> <a
+							class="dropdown-item active" href="rules.jsp"><fmt:message key="rules" /></a> <a
+							class="dropdown-item" href="registration.jsp"><fmt:message key="registration" /></a> <a
+							class="dropdown-item" href="contact.jsp"><fmt:message key="contact" /></a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
@@ -74,7 +81,7 @@
 						 <c:choose>
 						<c:when test="${div1.rowCount == 0}">
 						
-						<a class="dropdown-item" href="">No Divisions</a>
+						<a class="dropdown-item" href=""><fmt:message key="nav_divisions" /></a>
 						</c:when>
 							<c:otherwise>
 			            <c:forEach var="row" items="${div1.rows}">
@@ -84,10 +91,14 @@
 					</c:choose>
 					</div>
 					</li>
-				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
-						In</a></li>
+
+
+
+				<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
 				<li class="nav-item"><a class="nav-link" href=""></a></li>
-				<li class="nav-item"><fmt:bundle basename="TestBundle">
+
+
+				<li class="nav-item">
 						<form action="" method="post">
 							<select class="form-control form-control-sm" name="language"
 								onchange="this.form.submit()">
@@ -97,8 +108,9 @@
 										key="french" /></option>
 							</select>
 						</form>
-					</fmt:bundle></li>
+					</li>
 			</ul>
+		</fmt:bundle>
 		</div>
 	</div>
 	</nav>
@@ -118,9 +130,6 @@
 								
 							</p>
 						</div>
-												<div class="card-footer">
-							<a href="#" class="btn btn-primary">Learn More</a>
-						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 mb-4">
@@ -128,6 +137,9 @@
 						<h4 class="card-header"><fmt:message key="rules_head2"/></h4>
 						<div class="card-body">
 							<p class="card-text"><fmt:message key="rules_text2"/></p>
+						</div>
+						<div class="card-footer">
+							<a href="./rules_summary.jsp" class="btn btn-primary">"<fmt:message key="rules_text3"/>"</a>
 						</div>
 					</div>
 				</div>

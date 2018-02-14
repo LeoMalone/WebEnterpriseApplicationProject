@@ -5,8 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<fmt:setLocale value="${param.language}" />
+<c:if test="${param.language ne 'fr'}">
+	<html lang="en">
+	</c:if>
+<c:if test="${param.language eq 'fr'}">
+	<html lang="fr">
+	</c:if>
+	<fmt:setLocale value="${param.language}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -53,55 +58,55 @@ select divsionName from division where divisionID = ?
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+			<fmt:bundle basename="TestBundle">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="index.jsp"><fmt:message key="nav_home" /></a></li>
 
 
 				<%--kevin read
             updating menu bar - feb 10
             --%>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> League </a>
+<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<fmt:message key="nav_league" /> </a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
-
-						<a class="dropdown-item" href="about.jsp">About</a> <a
-							class="dropdown-item" href="rules.jsp">Rules</a> <a
-							class="dropdown-item" href="registration.jsp">Registration</a> <a
-							class="dropdown-item" href="contact.jsp">Contact</a>
+						
+						<a class="dropdown-item" href="about.jsp"><fmt:message key="about" /></a> <a
+							class="dropdown-item" href="rules.jsp"><fmt:message key="rules" /></a> <a
+							class="dropdown-item" href="registration.jsp"><fmt:message key="registration" /></a> <a
+							class="dropdown-item" href="contact.jsp"><fmt:message key="contact" /></a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownPortfolio" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Divisions </a> <c:choose>
-						<c:when test="${result.rowCount == 0}">
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="">No Divisions</a>
-							</div>
+					aria-haspopup="true" aria-expanded="false"> Divisions </a>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdownPortfolio">
+						 <c:choose>
+						<c:when test="${div1.rowCount == 0}">
+						
+						<a class="dropdown-item active" href=""><fmt:message key="nav_divisions" /></a>
 						</c:when>
-						<c:otherwise>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-								<c:forEach var="row" items="${div2.rows}">
-									<a class="dropdown-item"
-										href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
-								</c:forEach>
-							</div>
-						</c:otherwise>
-					</c:choose></li>
+							<c:otherwise>
+			            <c:forEach var="row" items="${div1.rows}">
+						<a class="dropdown-item" href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+							</c:forEach>
+        				</c:otherwise>
+					</c:choose>
+					</div>
+					</li>
 
 
 
-				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
-						In</a></li>
+				<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
 				<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 
-				<li class="nav-item"><fmt:bundle basename="TestBundle">
+				<li class="nav-item">
 						<form action="" method="post">
 							<select class="form-control form-control-sm" name="language"
 								onchange="this.form.submit()">
@@ -111,9 +116,9 @@ select divsionName from division where divisionID = ?
 										key="french" /></option>
 							</select>
 						</form>
-					</fmt:bundle></li>
+					</li>
 			</ul>
-
+		</fmt:bundle>
 		</div>
 
 
