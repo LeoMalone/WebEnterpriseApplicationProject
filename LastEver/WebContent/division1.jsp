@@ -20,7 +20,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="div2" /></title>
+	<title>Last Ever - <fmt:message key="div1" /></title>
 </fmt:bundle>
 </head>
 
