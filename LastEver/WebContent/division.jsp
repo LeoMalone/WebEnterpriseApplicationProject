@@ -154,9 +154,8 @@ select divsionName from division where divisionID = ?
 								<table width="100%" class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col" style="text-align: center">Team Name</th>
-											<th scope="col" style="text-align: center">Team
-												Abbreviation</th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head1_text1"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head1_text2"/></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -197,16 +196,16 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col" style="text-align: center">Date</th>
-											<th scope="col" style="text-align: center">Time</th>
-											<th scope="col" style="text-align: center">Home</th>
-											<th scope="col" style="text-align: center">Away</th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head2_text1"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head2_text2"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head2_text3"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head2_text4"/></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="4" style="text-align: center"><b>No Games Scheduled</b></td>
+												<td colspan="4" style="text-align: center"><b><fmt:message key="div_nogames" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
@@ -242,18 +241,18 @@ select divsionName from division where divisionID = ?
 									class="ttable table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col" style="text-align: center">Date</th>
-											<th scope="col" style="text-align: center">Home</th>
-											<th scope="col" style="text-align: center">Score</th>
-											<th scope="col" style="text-align: center">Away</th>
-											<th scope="col" style="text-align: center">Score</th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head3_text1"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head3_text2"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head3_text3"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head3_text4"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head3_text5"/></th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="5" style="text-align: center"><b>No Results</b></td>
+												<td colspan="5" style="text-align: center"><b><fmt:message key="div_noresults" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
@@ -294,15 +293,15 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col" style="text-align: center">Team Name</th>
-											<th scope="col" style="text-align: center">GP</th>
-											<th scope="col" style="text-align: center">W</th>
-											<th scope="col" style="text-align: center">L</th>
-											<th scope="col" style="text-align: center">D</th>
-											<th scope="col" style="text-align: center">PTS</th>
-											<th scope="col" style="text-align: center">GF</th>
-											<th scope="col" style="text-align: center">GA</th>
-											<th scope="col" style="text-align: center">GD</th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text1"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text2"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text3"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text4"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text5"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text6"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text7"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text8"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head4_text9"/></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -355,12 +354,12 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col" style="text-align: center">Team Name</th>
-											<th scope="col" style="text-align: center">Player Name</th>
-											<th scope="col" style="text-align: center">GP</th>
-											<th scope="col" style="text-align: center">Goals</th>
-											<th scope="col" style="text-align: center">Yellow Cards</th>
-											<th scope="col" style="text-align: center">Red Cards</th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text1"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text2"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text3"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text4"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text5"/></th>
+											<th scope="col" style="text-align: center"><fmt:message key="div_head5_text6"/></th>
 										</tr>
 									</thead>
 									<tbody>
