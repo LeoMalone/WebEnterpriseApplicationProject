@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
@@ -30,9 +31,10 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="login" /></title>
+	<title>Last Ever - <fmt:message key="contact" /></title>
 </fmt:bundle>
 </head>
+
 <body>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
@@ -62,7 +64,7 @@
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
+							class="nav-link active dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
 									key="nav_league" />
@@ -74,7 +76,7 @@
 										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
 									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+								<a class="dropdown-item active" href="contact.jsp"><fmt:message
 										key="contact" /></a>
 							</div></li>
 						<li class="nav-item dropdown"><a
@@ -100,8 +102,8 @@
 
 
 
-						<li class="nav-item"><a class="nav-link active"
-							href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
+									key="nav_signin" /></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 
@@ -124,28 +126,24 @@
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it
-		- text, form, button to sign in
+		- text, mailto link
 		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<fmt:message key="signin_header" />
+					<fmt:message key="contact_header" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-12 mb-4">
+					<div class="col-lg-4 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_head1" />
+								<fmt:message key="contact_head1" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="signin_text1" />
+									<fmt:message key="contact_text1" />
 								</p>
-							</div>
-							<div class="card-footer">
-								<a href="#" class="btn btn-primary"><fmt:message
-										key="signin_button1" /></a>
 							</div>
 						</div>
 					</div>

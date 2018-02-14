@@ -30,15 +30,18 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="login" /></title>
+	<title>Last Ever - <fmt:message key="registration" /></title>
 </fmt:bundle>
 </head>
+
 <body>
+
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
+
 	<sql:query dataSource="${dataSource}" var="div1">
 	select divisionID, divsionName from division
 	</sql:query>
@@ -62,7 +65,7 @@
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
+							class="nav-link active dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
 									key="nav_league" />
@@ -72,7 +75,7 @@
 
 								<a class="dropdown-item" href="about.jsp"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
+										key="rules" /></a> <a class="dropdown-item active"
 									href="registration.jsp"><fmt:message key="registration" /></a>
 								<a class="dropdown-item" href="contact.jsp"><fmt:message
 										key="contact" /></a>
@@ -100,8 +103,8 @@
 
 
 
-						<li class="nav-item"><a class="nav-link active"
-							href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
+									key="nav_signin" /></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 
@@ -123,29 +126,61 @@
 	</nav>
 	<div class="main-cover">
 		<!-- Page Content
-		- card with information on it
-		- text, form, button to sign in
+		- cards with information on them
+		- text, buttons with links to jsp
 		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<fmt:message key="signin_header" />
+					<fmt:message key="reg_header" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-12 mb-4">
+					<div class="col-lg-4 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_head1" />
+								<fmt:message key="reg_head1" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="signin_text1" />
+									<fmt:message key="reg_text1" />
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="#" class="btn btn-primary"><fmt:message
-										key="signin_button1" /></a>
+								<a href="login.jsp" class="btn btn-primary"><fmt:message
+										key="reg_button1" /></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								<fmt:message key="reg_head2" />
+							</h4>
+							<div class="card-body">
+								<p class="card-text">
+									<fmt:message key="reg_text2" />
+								</p>
+							</div>
+							<div class="card-footer">
+								<a href="login.jsp" class="btn btn-primary"><fmt:message
+										key="reg_button2" /></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								<fmt:message key="reg_head3" />
+							</h4>
+							<div class="card-body">
+								<p class="card-text">
+									<b><fmt:message key="reg_text3" /></b>
+								</p>
+							</div>
+							<div class="card-footer">
+								<a href="login.jsp" class="btn btn-primary"><fmt:message
+										key="reg_button3" /></a>
 							</div>
 						</div>
 					</div>
