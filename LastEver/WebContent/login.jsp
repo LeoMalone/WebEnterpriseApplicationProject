@@ -1,80 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <fmt:setLocale value="${param.language}" />
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LastEver</title>	
-	<!-- Bootstrap core CSS -->
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<!-- Custom styles for this template -->
-    <link href="css/cover.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost:3306/lastever" user="admin"
+	password="lastever" />
+
+<!-- Bootstrap core CSS -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- Custom styles for this template -->
+<link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="login"/></title>
 	</fmt:bundle>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-		<a class="navbar-brand" href="index.jsp"><img src="images/logo_sm4.png" /></a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.jsp">Home</a>
-            </li>
-            
-            
-            <%--kevin read
+<sql:query dataSource="${dataSource}" var="div1">
+	select divisionID, divsionName from division
+	</sql:query>
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="index.jsp"><img
+			src="images/logo_sm4.png" /></a>
+
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+
+
+				<%--kevin read
             updating menu bar - feb 10
             --%>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                League
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="about.jsp">About</a>
-                <a class="dropdown-item" href="rules.jsp">Rules</a>
-                <a class="dropdown-item" href="registration.jsp">Registration</a>
-                <a class="dropdown-item" href="contact.jsp">Contact</a> 
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Divisions
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="division1.jsp">Division 1</a>
-                <a class="dropdown-item" href="division2.jsp">Division 2</a>
-              </div>
-            </li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownPortfolio" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> League </a>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdownPortfolio">
 
-
-
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Sign In</a>
-              <li class="nav-item"><a class="nav-link" href=""></a></li>
-              <li class="nav-item">
-			<fmt:bundle basename="TestBundle">
-    <form action="" method="post">
-		<select class="form-control form-control-sm" name="language" onchange="this.form.submit()">
-    	 	<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message key="english" /></option>
-	    	<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message key="french" /></option>
-    	</select>
-    </form>
-    </fmt:bundle>
-    </li>
-    
-    
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+						<a class="dropdown-item" href="about.jsp">About</a> <a
+							class="dropdown-item" href="rules.jsp">Rules</a> <a
+							class="dropdown-item" href="registration.jsp">Registration</a> <a
+							class="dropdown-item" href="contact.jsp">Contact</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownPortfolio" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Divisions </a>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdownPortfolio">
+						 <c:choose>
+						<c:when test="${div1.rowCount == 0}">
+						
+						<a class="dropdown-item" href="">No Divisions</a>
+						</c:when>
+							<c:otherwise>
+			            <c:forEach var="row" items="${div1.rows}">
+						<a class="dropdown-item" href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+							</c:forEach>
+        				</c:otherwise>
+					</c:choose>
+					</div>
+					</li>
+				<li class="nav-item"><a class="nav-link" href="login.jsp">Sign
+						In</a></li>
+				<li class="nav-item"><a class="nav-link" href=""></a></li>
+				<li class="nav-item"><fmt:bundle basename="TestBundle">
+						<form action="" method="post">
+							<select class="form-control form-control-sm" name="language"
+								onchange="this.form.submit()">
+								<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message
+										key="english" /></option>
+								<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message
+										key="french" /></option>
+							</select>
+						</form>
+					</fmt:bundle></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
     <div class="main-cover">    	
     	<!-- Page Content -->
 		<div class="cards-container container">
