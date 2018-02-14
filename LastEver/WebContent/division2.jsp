@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.sql.*"%>
-<%@ page import="java.util.*"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -70,8 +69,7 @@
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="division1.jsp">Division 1</a> <a
-							class="dropdown-item" href="division2.jsp">Division 2</a> <a
-							class="dropdown-item" href="division3.jsp">Division 3</a>
+							class="dropdown-item" href="division2.jsp">Division 2</a>
 					</div></li>
 
 
@@ -83,7 +81,8 @@
 
 				<li class="nav-item"><fmt:bundle basename="TestBundle">
 						<form action="" method="post">
-							<select name="language" onchange="this.form.submit()">
+							<select class="form-control form-control-sm" name="language"
+								onchange="this.form.submit()">
 								<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message
 										key="english" /></option>
 								<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message
@@ -111,8 +110,8 @@
 				<!-- Marketing Icons Section -->
 				<div class="row">
 
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
+					<div class="col-lg-12 mb-5">
+						<div class="card">
 
 							<h4 class="card-header">
 								<fmt:message key="div_head1" />
@@ -122,25 +121,31 @@
 									<sql:query dataSource="${dataSource}" var="result">
 					select t.teamName, t.teamAbbreviation from team t inner join teamxdivision td on td.teamID = t.teamID where td.divisionID = 2
 					</sql:query>
-								<table width="100%">
-									<tr>
-										<th>Team Name</th>
-										<th>Team Abbreviation</th>
-									</tr>
-									<c:forEach var="row" items="${result.rows}">
+								<table width="100%" class="table table-dark table-sm">
+									<thead>
 										<tr>
-											<td><c:out value="${row.teamName}" /></td>
-											<td><c:out value="${row.teamAbbreviation}" /></td>
+											<th scope="col" style="text-align: center">Team Name</th>
+											<th scope="col" style="text-align: center">Team
+												Abbreviation</th>
 										</tr>
-									</c:forEach>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${result.rows}">
+											<tr>
+												<td scope="row"><c:out value="${row.teamName}" /></td>
+												<td><c:out value="${row.teamAbbreviation}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 								</p>
 
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
+					<br>
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
 							<h4 class="card-header">
 								<fmt:message key="div_head2" />
 							</h4>
@@ -150,27 +155,34 @@
 									<sql:query dataSource="${dataSource}" var="result">
 					select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '') as away from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = 2 and s.gameStatus = 'Scheduled'
 					</sql:query>
-								<table width="100%">
-									<tr>
-										<th>Date</th>
-										<th>Time</th>
-										<th>Home Team</th>
-										<th>Away Team</th>
-									</tr>
-									<c:forEach var="row" items="${result.rows}">
+								<table width="100%"
+									class="table table-dark table-striped table-sm">
+									<thead>
 										<tr>
-											<td><c:out value="${row.gameDate}" /></td>
-											<td><c:out value="${row.gameTime}" /></td>
-											<td><c:out value="${row.teamName}" /></td>
-											<td><c:out value="${row.away}" /></td>
+											<th scope="col" style="text-align: center">Date</th>
+											<th scope="col" style="text-align: center">Time</th>
+											<th scope="col" style="text-align: center">Home</th>
+											<th scope="col" style="text-align: center">Away</th>
 										</tr>
-									</c:forEach>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${result.rows}">
+											<tr>
+												<td scope="row" style="text-align: center"><c:out
+														value="${row.gameDate}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.gameTime}" /></td>
+												<td><c:out value="${row.teamName}" /></td>
+												<td><c:out value="${row.away}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
 							<h4 class="card-header">
 								<fmt:message key="div_head3" />
 							</h4>
@@ -180,93 +192,123 @@
 								<sql:query dataSource="${dataSource}" var="result">
 					select s.gameDate, h.teamName, s.homeScore, concat(a.teamName, '') as away, s.awayScore, s.gameStatus from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = 2 and s.gameStatus = 'Final'
 					</sql:query>
-								<table width="100%">
-									<tr>
-										<th>Date</th>
-										<th>Home Team</th>
-										<th>Home Score</th>
-										<th>Away Team</th>
-										<th>AwayScore</th>
-										<th></th>
-									</tr>
-									<c:forEach var="row" items="${result.rows}">
+								<table width="100%"
+									class="table table-bordered table-dark table-hover table-sm">
+									<thead>
 										<tr>
-											<td><c:out value="${row.gameDate}" /></td>
-											<td><c:out value="${row.teamName}" /></td>
-											<td><c:out value="${row.homescore}" /></td>
-											<td><c:out value="${row.away}" /></td>
-											<td><c:out value="${row.awayScore}" /></td>
-											<td><c:out value="${row.gameStatus}" /></td>
+											<th scope="col" style="text-align: center">Date</th>
+											<th scope="col" style="text-align: center">Home</th>
+											<th scope="col" style="text-align: center">Score</th>
+											<th scope="col" style="text-align: center">Away</th>
+											<th scope="col" style="text-align: center">Score</th>
+											<th scope="col"></th>
 										</tr>
-									</c:forEach>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${result.rows}">
+											<tr>
+												<td scope="row" style="text-align: center"><c:out
+														value="${row.gameDate}" /></td>
+												<td><c:out value="${row.teamName}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.homescore}" /></td>
+												<td><c:out value="${row.away}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.awayScore}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.gameStatus}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
 							<h4 class="card-header">
 								<fmt:message key="div_head4" />
 							</h4>
 							<div class="card-body">
-								<p class="card-text"></p>
+								<p class="card-text">
 
-								<sql:query dataSource="${dataSource}" var="result">
+									<sql:query dataSource="${dataSource}" var="result">
 					select team, GP, W, D, L, PTS, GF, GA, GD from standings where divisionID = 2 order by PTS desc, W desc, L asc, GD desc
 					</sql:query>
-								<table width="100%">
-									<tr>
-										<th>Team Name</th>
-										<th>GP</th>
-										<th>W</th>
-										<th>L</th>
-										<th>D</th>
-										<th>PTS</th>
-										<th>GF</th>
-										<th>GA</th>
-										<th>GD</th>
-									</tr>
-									<c:forEach var="row" items="${result.rows}">
+								<table width="100%"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
 										<tr>
-											<td><c:out value="${row.team}" /></td>
-											<td><c:out value="${row.GP}" /></td>
-											<td><c:out value="${row.W}" /></td>
-											<td><c:out value="${row.L}" /></td>
-											<td><c:out value="${row.D}" /></td>
-											<td><c:out value="${row.PTS}" /></td>
-											<td><c:out value="${row.GF}" /></td>
-											<td><c:out value="${row.GA}" /></td>
-											<td><c:out value="${row.GD}" /></td>
+											<th scope="col" style="text-align: center">Team Name</th>
+											<th scope="col" style="text-align: center">GP</th>
+											<th scope="col" style="text-align: center">W</th>
+											<th scope="col" style="text-align: center">L</th>
+											<th scope="col" style="text-align: center">D</th>
+											<th scope="col" style="text-align: center">PTS</th>
+											<th scope="col" style="text-align: center">GF</th>
+											<th scope="col" style="text-align: center">GA</th>
+											<th scope="col" style="text-align: center">GD</th>
 										</tr>
-									</c:forEach>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${result.rows}">
+											<tr>
+												<td scope="row"><c:out value="${row.team}" /></td>
+												<td style="text-align: center"><c:out value="${row.GP}" /></td>
+												<td style="text-align: center"><c:out value="${row.W}" /></td>
+												<td style="text-align: center"><c:out value="${row.L}" /></td>
+												<td style="text-align: center"><c:out value="${row.D}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.PTS}" /></td>
+												<td style="text-align: center"><c:out value="${row.GF}" /></td>
+												<td style="text-align: center"><c:out value="${row.GA}" /></td>
+												<td style="text-align: center"><c:out value="${row.GD}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
+								</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
 							<h4 class="card-header">
 								<fmt:message key="div_head5" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
 									<sql:query dataSource="${dataSource}" var="result">
-					select teamName, playerName, goals from statistics where divisionID = 2 order by goals desc
+					select teamName, GP, playerName, goals, yellowCards, redCards from statistics where divisionID = 2 order by goals desc, GP asc
 					</sql:query>
-								<table width="100%">
-									<tr>
-										<th>Team Name</th>
-										<th>Player Name</th>
-										<th>Goals</th>
-									</tr>
-									<c:forEach var="row" items="${result.rows}">
+								<table width="100%"
+									class="table table-bordered table-dark table-sm">
+									<thead>
 										<tr>
-											<td><c:out value="${row.teamName}" /></td>
-											<td><c:out value="${row.playerName}" /></td>
-											<td><c:out value="${row.Goals}" /></td>
+											<th scope="col" style="text-align: center">Team Name</th>
+											<th scope="col" style="text-align: center">Player Name</th>
+											<th scope="col" style="text-align: center">GP</th>
+											<th scope="col" style="text-align: center">Goals</th>
+											<th scope="col" style="text-align: center">Yellow Cards</th>
+											<th scope="col" style="text-align: center">Red Cards</th>
 										</tr>
-									</c:forEach>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${result.rows}">
+											<tr>
+												<td scope="row"><c:out value="${row.teamName}" /></td>
+												<td><c:out value="${row.playerName}" /></td>
+												<td style="text-align: center"><c:out value="${row.GP}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.Goals}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.yellowCards}" /></td>
+												<td style="text-align: center"><c:out
+														value="${row.redCards}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 								</p>
 							</div>
