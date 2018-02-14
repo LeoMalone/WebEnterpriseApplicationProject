@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
+
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
 	</c:if>
@@ -210,10 +210,19 @@ select divsionName from division where divisionID = ?
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
-														<td scope="row" style="text-align: center"><fmt:formatDate type="date"
-														pattern="MMM d y" value="${row.gameDate}" /></td>
-														<td style="text-align: center"><fmt:formatDate type="time"
-														pattern="h:mm a" value="${row.gameTime}" /></td>
+														<td scope="row" style="text-align: center"><c:if test="${param.language eq 'fr'}">
+														<fmt:formatDate type="date"
+														pattern="d MMM y" value="${row.gameDate}" /></c:if>
+														<c:if test="${param.language ne 'fr'}">
+														<fmt:formatDate type="date"
+														pattern="MMM d y" value="${row.gameDate}" /></c:if></td>
+														<td style="text-align: center">
+														<c:if test="${param.language eq 'fr'}">
+														<fmt:formatDate type="time"
+														pattern="H:mm" value="${row.gameTime}" /></c:if>
+														<c:if test="${param.language ne 'fr'}">
+														<fmt:formatDate type="time"
+														pattern="h:mm a" value="${row.gameTime}" /></c:if></td>
 														<td><c:out value="${row.teamName}" /></td>
 														<td><c:out value="${row.away}" /></td>
 													</tr>
@@ -257,8 +266,13 @@ select divsionName from division where divisionID = ?
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
-														<td scope="row" style="text-align: center"><fmt:formatDate type="date"
-														pattern="MMM d y" value="${row.gameDate}" /></td>
+														<td scope="row" style="text-align: center">
+														<c:if test="${param.language eq 'fr'}">
+														<fmt:formatDate type="date"
+														pattern="d MMM y" value="${row.gameDate}" /></c:if>
+														<c:if test="${param.language ne 'fr'}">
+														<fmt:formatDate type="date"
+														pattern="MMM d y" value="${row.gameDate}" /></c:if></td>
 														<td><c:out value="${row.teamName}" /></td>
 														<td style="text-align: center"><c:out
 																value="${row.homescore}" /></td>

@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
 	</c:if>
@@ -151,7 +150,7 @@
 					<div class="card h-100">
 						<h4 class="card-header"><fmt:message key="reg_head3"/></h4>
 						<div class="card-body">
-							<p class="card-text"><b><fmt:message key="reg_text3"/></p>
+							<p class="card-text"><b><fmt:message key="reg_text3"/></b></p>
 						</div>
 						<div class="card-footer">
 							<a href="login.jsp" class="btn btn-primary"><fmt:message key="reg_button3"/></a>

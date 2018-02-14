@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE HTML>
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
 	</c:if>
@@ -17,6 +18,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost:3306/lastever" user="admin"
+	password="lastever" />
+
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
@@ -28,6 +33,9 @@
 </head>
 
 <body>
+<sql:query dataSource="${dataSource}" var="div1">
+	select divisionID, divsionName from division
+	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
