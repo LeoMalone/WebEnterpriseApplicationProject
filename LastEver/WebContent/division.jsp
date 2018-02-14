@@ -365,7 +365,7 @@ select divsionName from division where divisionID = ?
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="6" style="text-align: center"><b>No Players</b></td>
+												<td colspan="6" style="text-align: center"><b><fmt:message key="no_players"/></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
