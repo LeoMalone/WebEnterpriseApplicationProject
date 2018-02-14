@@ -4,8 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+<!-- if language is not set to French, set language to English -->
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
+<c:set var="language" value="en" />
 </c:if>
 <c:if test="${param.language eq 'fr'}">
 	<html lang="fr">
@@ -33,6 +35,12 @@
 </head>
 
 <body>
+
+	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+	- sets parent link active
+	- in dropdown, sets active with full bar color
+	-->
+
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {
@@ -68,10 +76,6 @@
 						<li class="nav-item"><a class="nav-link active"
 							href="index.jsp"><fmt:message key="nav_home" /></a></li>
 
-
-						<%--kevin read
-            updating menu bar - feb 10
-            --%>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -136,7 +140,10 @@
 
 	</nav>
 	<div class="main-cover">
-		<!-- Page Content -->
+		<!-- Page Content
+		- cards with information on them
+		- widgets
+		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">

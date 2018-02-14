@@ -5,8 +5,10 @@
 
 <!DOCTYPE HTML>
 
+<!-- if language is not set to French, set language to English -->
 <c:if test="${param.language ne 'fr'}">
 	<html lang="en">
+<c:set var="language" value="en" />
 </c:if>
 <c:if test="${param.language eq 'fr'}">
 	<html lang="fr">
@@ -34,6 +36,25 @@
 </head>
 
 <body>
+	<!-- cookie - future development -->
+	<%
+	String language = "en";
+	Cookie [] theCookies = request.getCookies();
+	
+	if (theCookies != null){
+		for (Cookie tempCookie : theCookies){
+			if ("lastEver".equals(tempCookie.getName())){
+				language = tempCookie.getValue();
+				break;
+			}
+		}
+	}
+	%>
+
+	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+	- sets parent link active
+	- in dropdown, sets active with full bar color
+	-->
 	<sql:query dataSource="${dataSource}" var="div1">
 	select divisionID, divsionName from division
 	</sql:query>
@@ -56,10 +77,6 @@
 						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
 									key="nav_home" /></a></li>
 
-
-						<%--kevin read
-            updating menu bar - feb 10
-            --%>
 						<li class="nav-item dropdown"><a
 							class="nav-link active dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -120,8 +137,15 @@
 			</div>
 		</div>
 	</nav>
+
+
+
+
 	<div class="main-cover">
-		<!-- Page Content -->
+		<!-- Page Content
+		- cards with information on them
+		- text, img, iframe
+		-->
 		<div class="cards-container container">
 
 			<!-- Marketing Icons Section -->
