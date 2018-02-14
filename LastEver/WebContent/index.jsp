@@ -63,8 +63,7 @@
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownPortfolio">
 						<a class="dropdown-item" href="division1.jsp">Division 1</a> <a
-							class="dropdown-item" href="division2.jsp">Division 2</a> <a
-							class="dropdown-item" href="division3.jsp">Division 3</a>
+							class="dropdown-item" href="division2.jsp">Division 2</a>
 					</div></li>
 
 
@@ -75,7 +74,7 @@
 						<li class="nav-item">
 			<fmt:bundle basename="TestBundle">
     <form action="" method="post">
-		<select name="language" onchange="this.form.submit()">
+		<select class="form-control form-control-sm" name="language" onchange="this.form.submit()">
     	 	<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message key="english" /></option>
 	    	<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message key="french" /></option>
     	</select>
