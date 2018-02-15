@@ -6,14 +6,42 @@
 <!DOCTYPE HTML>
 
 <!-- if language is not set to French, set language to English -->
-<c:if test="${param.language ne 'fr'}">
-	<html lang="en">
-<c:set var="language" value="en" />
+<!-- cookie - future development -->
+
+<c:if test="${cookie.language eq null}">
+	<%
+		Cookie cookieLanguage = new Cookie("language", "en");
+			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
+			response.addCookie(cookieLanguage);
+	%>
 </c:if>
-<c:if test="${param.language eq 'fr'}">
+<c:if test="${cookie.language ne null}">
+	<%
+		String language = request.getParameter("language");
+			Cookie cookieLanguage;
+			Cookie[] theCookies = request.getCookies();
+
+			for (Cookie tempCookie : theCookies) {
+				if ("language".equals(tempCookie.getName())) {
+					if (language != null)
+						tempCookie.setValue(language);
+					response.addCookie(tempCookie);
+					break;
+				}
+			}
+	%>
+
+</c:if>
+
+<!-- if language is not set to French, set language to English -->
+<c:if test="${cookie.language.value ne 'fr'}">
+	<html lang="en">
+</c:if>
+<c:if test="${cookie.language.value eq 'fr'}">
 	<html lang="fr">
 </c:if>
-<fmt:setLocale value="${param.language}" />
+
+<fmt:setLocale value="${cookie.language.value}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -118,9 +146,9 @@ select divsionName from division where divisionID = ?
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -137,7 +165,7 @@ select divsionName from division where divisionID = ?
 
 	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
-		<!-- Page Content
+			<!-- Page Content
 		- cards with information on them
 		- teams, schedules, results, standings, leaders
 		- calls from database 'LastEver' to get all information
@@ -176,8 +204,8 @@ select divsionName from division where divisionID = ?
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="2" style="text-align: center"><b>No
-														Teams</b></td>
+												<td colspan="2" style="text-align: center"><b><fmt:message
+													key="div_noteams" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
@@ -232,18 +260,18 @@ select divsionName from division where divisionID = ?
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
-																test="${param.language eq 'fr'}">
+																test="${cookie.language.value eq 'fr'}">
 																<fmt:formatDate type="date" pattern="d MMM y"
 																	value="${row.gameDate}" />
-															</c:if> <c:if test="${param.language ne 'fr'}">
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
 																<fmt:formatDate type="date" pattern="MMM d y"
 																	value="${row.gameDate}" />
 															</c:if></td>
 														<td style="text-align: center"><c:if
-																test="${param.language eq 'fr'}">
+																test="${cookie.language.value eq 'fr'}">
 																<fmt:formatDate type="time" pattern="H:mm"
 																	value="${row.gameTime}" />
-															</c:if> <c:if test="${param.language ne 'fr'}">
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${row.gameTime}" />
 															</c:if></td>
@@ -290,7 +318,7 @@ select divsionName from division where divisionID = ?
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="5" style="text-align: center"><b><fmt:message
+												<td colspan="6" style="text-align: center"><b><fmt:message
 															key="div_noresults" /></b></td>
 											</c:when>
 											<c:otherwise>
@@ -317,6 +345,7 @@ select divsionName from division where divisionID = ?
 											</c:otherwise>
 										</c:choose>
 									</tbody>
+
 								</table>
 
 							</div>
@@ -361,8 +390,8 @@ select divsionName from division where divisionID = ?
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="9" style="text-align: center"><b>No
-														Teams</b></td>
+												<td colspan="9" style="text-align: center"><b><fmt:message
+													key="div_noteams" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">

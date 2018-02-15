@@ -6,14 +6,42 @@
 <!DOCTYPE HTML>
 
 <!-- if language is not set to French, set language to English -->
-<c:if test="${param.language ne 'fr'}">
-	<html lang="en">
-<c:set var="language" value="en" />
+<!-- cookie - future development -->
+
+<c:if test="${cookie.language eq null}">
+	<%
+		Cookie cookieLanguage = new Cookie("language", "en");
+			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
+			response.addCookie(cookieLanguage);
+	%>
 </c:if>
-<c:if test="${param.language eq 'fr'}">
+<c:if test="${cookie.language ne null}">
+	<%
+		String language = request.getParameter("language");
+			Cookie cookieLanguage;
+			Cookie[] theCookies = request.getCookies();
+
+			for (Cookie tempCookie : theCookies) {
+				if ("language".equals(tempCookie.getName())) {
+					if (language != null)
+						tempCookie.setValue(language);
+					response.addCookie(tempCookie);
+					break;
+				}
+			}
+	%>
+
+</c:if>
+
+<!-- if language is not set to French, set language to English -->
+<c:if test="${cookie.language.value ne 'fr'}">
+	<html lang="en">
+</c:if>
+<c:if test="${cookie.language.value eq 'fr'}">
 	<html lang="fr">
 </c:if>
-<fmt:setLocale value="${param.language}" />
+
+<fmt:setLocale value="${cookie.language.value}" />
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -111,9 +139,9 @@
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${param.language == 'en' ? 'selected' : ''}><fmt:message
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${param.language == 'fr' ? 'selected' : ''}><fmt:message
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
