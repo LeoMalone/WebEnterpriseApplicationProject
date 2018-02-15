@@ -58,12 +58,28 @@ select divsionName from division where divisionID = ?
 <sql:param value="${param.id}" />
 </sql:query>
 
+<%
+	int rank = 1;
+	pageContext.setAttribute("rank", rank);
+%>
+
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
+	<c:choose>
+		<c:when test="${div1.rowCount == 0}">
+
+			<title>Last Ever - Division</title>
+		</c:when>
+		<c:otherwise>
+			<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
+					<c:out value="${row.divsionName}" />
+				</c:forEach></title>
+		</c:otherwise>
+	</c:choose>
 	<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
 			<c:out value="${row.divsionName}" />
 		</c:forEach></title>
@@ -79,10 +95,6 @@ select divsionName from division where divisionID = ?
 	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
-	<%
-		int rank = 1;
-	pageContext.setAttribute("rank", rank);
-	%>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -125,7 +137,7 @@ select divsionName from division where divisionID = ?
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
 										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
@@ -178,9 +190,17 @@ select divsionName from division where divisionID = ?
 		-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:forEach var="row" items="${div1.rows}">
-						<c:out value="${row.divsionName}" />
-					</c:forEach>
+					<c:choose>
+						<c:when test="${div1.rowCount == 0}">
+						Division
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="row" items="${div1.rows}">
+								<c:out value="${row.divsionName}" />
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -373,7 +393,6 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col"></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head4_text1" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
@@ -392,19 +411,22 @@ select divsionName from division where divisionID = ?
 													key="div_head4_text8" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head4_text9" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head4_text10" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="9" style="text-align: center"><b><fmt:message
+												<td colspan="10" style="text-align: center"><b><fmt:message
 															key="div_noteams" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
 														<td scope="row" style="text-align: center">
-													<% pageContext.setAttribute("rank", rank++); %> ${rank} </td>
+															<% pageContext.setAttribute("rank", rank++); %> ${rank}
+														</td>
 														<td scope="row"><c:out value="${row.team}" /></td>
 														<td style="text-align: center"><c:out
 																value="${row.GP}" /></td>
@@ -443,11 +465,13 @@ select divsionName from division where divisionID = ?
 					select teamName, GP, playerName, goals, yellowCards, redCards from statistics where divisionID = ? order by goals desc, GP asc, playerName asc
 					<sql:param value="${param.id}" />
 									</sql:query>
+									<% rank = 1;
+									pageContext.setAttribute("rank", rank); %>
+								
 								<table width="100%"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
-											<th scope="col"></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head5_text1" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
@@ -460,20 +484,22 @@ select divsionName from division where divisionID = ?
 													key="div_head5_text5" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head5_text6" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text7" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
-												<td colspan="6" style="text-align: center"><b><fmt:message
+												<td colspan="7" style="text-align: center"><b><fmt:message
 															key="no_players" /></b></td>
 											</c:when>
 											<c:otherwise>
-											<% rank = 1; pageContext.setAttribute("rank", rank); %>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
-													<td scope="row" style="text-align: center">
-													<% pageContext.setAttribute("rank", rank++); %> ${rank} </td>
+														<td scope="row" style="text-align: center">
+															<% pageContext.setAttribute("rank", rank++);%> ${rank}
+														</td>
 														<td scope="row"><c:out value="${row.teamName}" /></td>
 														<td><c:out value="${row.playerName}" /></td>
 														<td style="text-align: center"><c:out
