@@ -79,6 +79,10 @@ select divsionName from division where divisionID = ?
 	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
+	<%
+		int rank = 1;
+	pageContext.setAttribute("rank", rank);
+	%>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -146,9 +150,11 @@ select divsionName from division where divisionID = ?
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -205,7 +211,7 @@ select divsionName from division where divisionID = ?
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
 												<td colspan="2" style="text-align: center"><b><fmt:message
-													key="div_noteams" /></b></td>
+															key="div_noteams" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
@@ -367,6 +373,7 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
+											<th scope="col"></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head4_text1" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
@@ -391,11 +398,13 @@ select divsionName from division where divisionID = ?
 										<c:choose>
 											<c:when test="${result.rowCount == 0}">
 												<td colspan="9" style="text-align: center"><b><fmt:message
-													key="div_noteams" /></b></td>
+															key="div_noteams" /></b></td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
+														<td scope="row" style="text-align: center">
+													<% pageContext.setAttribute("rank", rank++); %> ${rank} </td>
 														<td scope="row"><c:out value="${row.team}" /></td>
 														<td style="text-align: center"><c:out
 																value="${row.GP}" /></td>
@@ -438,6 +447,7 @@ select divsionName from division where divisionID = ?
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
+											<th scope="col"></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head5_text1" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
@@ -459,8 +469,11 @@ select divsionName from division where divisionID = ?
 															key="no_players" /></b></td>
 											</c:when>
 											<c:otherwise>
+											<% rank = 1; pageContext.setAttribute("rank", rank); %>
 												<c:forEach var="row" items="${result.rows}">
 													<tr>
+													<td scope="row" style="text-align: center">
+													<% pageContext.setAttribute("rank", rank++); %> ${rank} </td>
 														<td scope="row"><c:out value="${row.teamName}" /></td>
 														<td><c:out value="${row.playerName}" /></td>
 														<td style="text-align: center"><c:out
