@@ -179,7 +179,8 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Welcome Team Owner ENTER NAME HERE
+								<fmt:message key="logged_in_hello"/>
+        					<%=session.getAttribute("name")%>
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
@@ -187,8 +188,8 @@
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="#" class="btn btn-primary"><fmt:message
-										key="signin_button1" /></a>
+								<a href="logout.jsp" class="btn btn-primary"><fmt:message key="logged_in_signout" /></a>
+
 							</div>
 						</div>
 					</div>
