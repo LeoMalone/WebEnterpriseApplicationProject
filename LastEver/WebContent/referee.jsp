@@ -179,7 +179,7 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Welcome Referee NAME HERE
+								Welcome Referee NAME HERE PLEASE
 							</h4>
 							<div class="card-body">
 								<p class="card-text">

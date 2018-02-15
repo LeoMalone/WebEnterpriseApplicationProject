@@ -179,7 +179,7 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Welcome Team Owner
+								Welcome Team Owner ENTER NAME HERE
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
