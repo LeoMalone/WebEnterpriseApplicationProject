@@ -129,12 +129,9 @@
 								</c:choose>
 							</div></li>
 
-
-
 						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
 									key="nav_signin" /></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 
 						<li class="nav-item">
 							<form action="" method="post">

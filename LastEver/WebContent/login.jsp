@@ -167,20 +167,81 @@
 							<h4 class="card-header">
 								<fmt:message key="signin_head1" />
 							</h4>
+							<form action="login" method="POST">
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="signin_text1" />
+									 <div class="form-group">
+									    <label for="loginEmail">Email address</label>
+									    <input type="email" class="form-control" name="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+									 </div>
+									 <div class="form-group">
+										<label for="loginPass">Password</label>
+										<input type="password" class="form-control" name="loginPass" placeholder="Password">
+									 </div>						        										
 								</p>
 							</div>
-							<div class="card-footer">
-								<a href="#" class="btn btn-primary"><fmt:message
-										key="signin_button1" /></a>
-							</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary"><fmt:message key="signin_button1"/></button>	
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</fmt:bundle>
+				
+				
+				<h1 class="my-4">
+					<fmt:message key="signin_register" />
+				</h1>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Create New Account
+							</h4>
+							<form action="login" method="POST">
+							<div class="card-body">
+								<p class="card-text">
+									<div class="form-group">
+										<label for="loginEmail">Username</label>
+										<input type="email" class="form-control" name="newUsername" placeholder="Enter Username">
+									</div>
+									 <div class="form-group">
+									    <label for="loginEmail">Email address</label>
+									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="Enter email">
+									 </div>
+									 <div class="form-group">
+										<label for="loginPass">Password</label>
+										<input type="password" class="form-control" name="newPass" placeholder="Password">
+									 </div>	
+									 <div class="form-check">
+									  <input class="form-check-input" type="radio" name="adminRadio" value="option1">
+									  <label class="form-check-label" for="adminRadio">
+									    Admin
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="teamOwnerRadio" value="option2">
+									  <label class="form-check-label" for="teamOwnerRadio">
+									    Team Owner
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="refRadio" value="option3">
+									  <label class="form-check-label" for="refRadio">
+									    Referee
+									  </label>
+									</div>					        										
+								</p>
+							</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary"><fmt:message key="signin_button1"/></button>	
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			<!-- /.row -->
+			</fmt:bundle>
 		</div>
 	</div>
 
