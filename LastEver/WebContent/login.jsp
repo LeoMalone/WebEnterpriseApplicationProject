@@ -171,12 +171,12 @@
 							<div class="card-body">
 								<p class="card-text">
 									 <div class="form-group">
-									    <label for="loginEmail">Email address</label>
-									    <input type="email" class="form-control" name="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+									    <label for="loginEmail"><fmt:message key="signin_email" /></label>
+									    <input type="email" class="form-control" name="loginEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
 									 </div>
 									 <div class="form-group">
-										<label for="loginPass">Password</label>
-										<input type="password" class="form-control" name="loginPass" placeholder="Password">
+										<label for="loginPass"><fmt:message key="signin_password" /></label>
+										<input type="password" class="form-control" name="loginPass" placeholder="<fmt:message key='signin_enter_password' />">
 									 </div>						        										
 								</p>
 							</div>
@@ -196,39 +196,39 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Create New Account
+								<fmt:message key="signin_createnew" />
 							</h4>
 							<form action="login" method="POST">
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="loginEmail">Username</label>
-										<input type="email" class="form-control" name="newUsername" placeholder="Enter Username">
+										<label for="loginEmail"><fmt:message key="signin_user" /></label>
+										<input type="email" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
 									</div>
 									 <div class="form-group">
-									    <label for="loginEmail">Email address</label>
-									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="Enter email">
+									    <label for="loginEmail"><fmt:message key="signin_email" /></label>
+									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
 									 </div>
 									 <div class="form-group">
-										<label for="loginPass">Password</label>
-										<input type="password" class="form-control" name="newPass" placeholder="Password">
+										<label for="loginPass"><fmt:message key="signin_password" /></label>
+										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
 									 </div>	
 									 <div class="form-check">
 									  <input class="form-check-input" type="radio" name="adminRadio" value="option1">
 									  <label class="form-check-label" for="adminRadio">
-									    Admin
+									    <fmt:message key="signin_prop1" />
 									  </label>
 									</div>
 									<div class="form-check">
 									  <input class="form-check-input" type="radio" name="teamOwnerRadio" value="option2">
 									  <label class="form-check-label" for="teamOwnerRadio">
-									    Team Owner
+									    <fmt:message key="signin_prop2" />
 									  </label>
 									</div>
 									<div class="form-check">
 									  <input class="form-check-input" type="radio" name="refRadio" value="option3">
 									  <label class="form-check-label" for="refRadio">
-									    Referee
+									    <fmt:message key="signin_prop3" />
 									  </label>
 									</div>					        										
 								</p>
