@@ -172,14 +172,14 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					Admin
+					Team Owner
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Welcome Admin
+								Welcome Team Owner
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
