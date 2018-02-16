@@ -50,8 +50,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 
                 session.setAttribute("userType", jsp);
-                RequestDispatcher rd = request.getRequestDispatcher(jsp);
-                rd.forward(request, response);
+                response.sendRedirect(jsp);
             }            
         } else {
         	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  

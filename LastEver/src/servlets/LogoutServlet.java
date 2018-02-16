@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ public class LogoutServlet extends HttpServlet {
 		if (session != null) {
 			session.invalidate();
 		}
-		response.sendRedirect("index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);
 	}
 }
