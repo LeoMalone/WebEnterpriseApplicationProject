@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.Login;
 
-public class LoginServlet extends HttpServlet{
+public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
@@ -31,8 +31,10 @@ public class LoginServlet extends HttpServlet{
 
         if(Login.validateUserLogin(user)) {
         	
-            if(session!=null)
+            if(session!=null) {
             	session.setAttribute("username", user.getUsername());
+            	session.setAttribute("signedIn", 1);
+            }
             
             String jsp = null;
             if(user.getUserType().equals("Administrator")) {

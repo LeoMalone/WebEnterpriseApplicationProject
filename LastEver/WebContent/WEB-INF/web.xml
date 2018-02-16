@@ -13,6 +13,16 @@
     	<url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>CreateAccountServlet</servlet-name>
+        <servlet-class>servlets.CreateAccountServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>CreateAccountServlet</servlet-name>
+    	<url-pattern>/createAccount</url-pattern>
+    </servlet-mapping>
+    
     <display-name>LastEver</display-name>
 	<welcome-file-list>
 	 	<welcome-file>index.jsp</welcome-file>

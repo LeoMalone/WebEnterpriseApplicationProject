@@ -185,8 +185,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 				
 				<h1 class="my-4">
 					<fmt:message key="signin_register" />
@@ -201,32 +200,32 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="loginEmail"><fmt:message key="signin_user" /></label>
-										<input type="email" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
+										<label for="newUsername"><fmt:message key="signin_user" /></label>
+										<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
 									</div>
 									 <div class="form-group">
-									    <label for="loginEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
+									    <label for="newEmail"><fmt:message key="signin_email" /></label>
+									    <input type="text" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
 									 </div>
 									 <div class="form-group">
-										<label for="loginPass"><fmt:message key="signin_password" /></label>
+										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
 									 </div>	
 									 <div class="form-check">
-									  <input class="form-check-input" type="radio" name="adminRadio" value="option1">
-									  <label class="form-check-label" for="adminRadio">
+									  <input class="form-check-input" type="radio" name="createRadio" value="Administrator">
+									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop1" />
 									  </label>
 									</div>
 									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="teamOwnerRadio" value="option2">
-									  <label class="form-check-label" for="teamOwnerRadio">
+									  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
+									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop2" />
 									  </label>
 									</div>
 									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="refRadio" value="option3">
-									  <label class="form-check-label" for="refRadio">
+									  <input class="form-check-input" type="radio" name="createRadio" value="Referee">
+									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop3" />
 									  </label>
 									</div>					        										
@@ -241,7 +240,7 @@
 				</div>
 			<!-- /.row -->
 			</fmt:bundle>
-			</div>
+		</div>
 	</div>
 
 	<!-- Footer -->

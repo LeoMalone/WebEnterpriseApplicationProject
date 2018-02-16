@@ -14,6 +14,13 @@ public class UserBean {
 		this.emailAddress = email;
 		this.password = pass;
 	}
+	
+	public UserBean(String un, String ea, String pass, String ut) {
+		this.username = un;
+		this.emailAddress = ea;
+		this.password = pass;
+		this.userType = ut;
+	}
 
 /**************************** GETTERS *****************************/
 	public String getUsername() {
