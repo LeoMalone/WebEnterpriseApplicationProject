@@ -1,9 +1,20 @@
 /**********************************************************************
  * Globals
  **********************************************************************/
+html, body {
+  height: 100%;
+}
+
 body {
-	padding-top: 30px;
-	background-color: #343a40!important;
+	background-color: #343a40!important;	
+	background: url("../images/soccer.jpg") no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  
+ 	height: 100%;
+
 }
 
 .my-4{
@@ -18,9 +29,7 @@ body {
  * Classes
  **********************************************************************/
  .main-cover {
- 	height: 100vh;
-    background: url("../images/soccer.jpg") no-repeat scroll;
-    background-size: cover;
+	min-height: 100%;
  }
 
 .cards-container {

@@ -1,20 +1,16 @@
 package dao;
 
+import beans.UserBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login {
 	
-	private static String url = "jdbc:mysql://localhost:3306/";
-    private static String dbName = "lastever";
-    private static String driver = "com.mysql.jdbc.Driver";
-    private static String userName = "admin";
-    private static String dbPassword = "lastever";
-	
-	public static boolean validateLogin(String email, String password) { 
+	public static boolean validateUserLogin(UserBean user) { 
 		
 		boolean status = false;
 	    Connection conn = null;
@@ -22,13 +18,17 @@ public class Login {
 	    ResultSet resultSet = null;
 	
 	    try {
-	        Class.forName(driver).newInstance();
-	        conn = DriverManager.getConnection(url + dbName, userName, dbPassword);
-	        getusers = conn.prepareStatement("select username, emailAddress, password from users where emailAddress=? and password=?");
-	        getusers.setString(1, email);
-	        getusers.setString(2, password);
+	        conn = ConnectionManager.getConnection();
+	        getusers = conn.prepareStatement("select username, userType, emailAddress, password from users where emailAddress=? and password=?");
+	        getusers.setString(1, user.getEmailAddress());
+	        getusers.setString(2, user.getPassword());
 	        resultSet = getusers.executeQuery();
 	        status = resultSet.next();
+	        
+	        if(status) {
+	        	user.setUsername(resultSet.getString(1));
+	        	user.setUserType(resultSet.getString(2));
+	        } 
 	
 	    } catch (Exception e) {
 	        System.out.println(e);

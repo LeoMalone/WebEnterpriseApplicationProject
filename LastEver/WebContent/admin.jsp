@@ -180,7 +180,7 @@
 						<div class="card h-100">
 							<h4 class="card-header">
 								<fmt:message key="logged_in_hello"/>
-        					<%=session.getAttribute("name")%>
+        					<%=session.getAttribute("username")%>
 							</h4>
 							<div class="card-body">
 								<p class="card-text">

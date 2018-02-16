@@ -30,7 +30,6 @@
 				}
 			}
 	%>
-
 </c:if>
 
 <!-- if language is not set to French, set language to English -->
@@ -198,7 +197,7 @@
 							<h4 class="card-header">
 								<fmt:message key="signin_createnew" />
 							</h4>
-							<form action="login" method="POST">
+							<form action="createAccount" method="POST">
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
@@ -242,7 +241,7 @@
 				</div>
 			<!-- /.row -->
 			</fmt:bundle>
-		</div>
+			</div>
 	</div>
 
 	<!-- Footer -->

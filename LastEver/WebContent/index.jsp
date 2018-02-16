@@ -238,9 +238,6 @@
 										rel="nofollow">Forecast</a>
 								</div>
 
-
-
-
 								</p>
 							</div>
 						</div>
@@ -250,7 +247,7 @@
 			<!-- /.row -->
 		</div>
 	</div>
-
+	
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
