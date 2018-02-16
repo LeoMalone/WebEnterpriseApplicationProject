@@ -120,7 +120,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							href="index.jsp"><fmt:message key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -142,7 +142,7 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"><fmt:message key="nav_divisions" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -161,7 +161,7 @@
 							</div>
 						</li>
 						<% if (session.getAttribute("signedIn") != null) {%>
-						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
+						    <li class="nav-item"><a class="nav-link active" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
 						<% } else {%>
 						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
 						<% } %>
@@ -188,7 +188,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					Team Owner
+					<fmt:message key="signin_prop2"/>
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -205,7 +205,7 @@
 							</div>
 							<div class="card-footer">
 								<form action="logout" method="post">
-									<button type="submit" class="btn btn-secondary">Logout</button>
+									<button type="submit" class="btn btn-secondary"><fmt:message key="logged_in_signout"/></button>
 								</form>								
 							</div>
 						</div>
