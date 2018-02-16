@@ -4,7 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<!-- If there is a user logged in redirect to login page -->
+<%
+	if(session.getAttribute("signedIn") != null) {
+		response.sendRedirect("index.jsp");
+	}	
+%>
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
 
@@ -180,12 +188,13 @@
 								</p>
 							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary"><fmt:message key="signin_button1"/></button>	
+									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>				
+				<!-- /.row -->
 				
 				<h1 class="my-4">
 					<fmt:message key="signin_register" />
@@ -205,17 +214,17 @@
 									</div>
 									 <div class="form-group">
 									    <label for="newEmail"><fmt:message key="signin_email" /></label>
-									    <input type="text" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
+									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
 									 </div>
 									 <div class="form-group">
 										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
 									 </div>	
 									 <div class="form-check">
-									  <input class="form-check-input" type="radio" name="createRadio" value="Administrator">
+									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="createRadio" value="Administrator">
 									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop1" />
-									  </label>
+									  </label>									  
 									</div>
 									<div class="form-check">
 									  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
@@ -228,18 +237,20 @@
 									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop3" />
 									  </label>
+									  <small id="emailHelp" class="form-text text-muted">Email Verification Required(Coming Soon)</small>
 									</div>					        										
 								</p>
 							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary"><fmt:message key="signin_button1"/></button>	
+									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-			<!-- /.row -->
-			</fmt:bundle>
+				<!-- /.row -->
+				
+			</fmt:bundle>			
 		</div>
 	</div>
 

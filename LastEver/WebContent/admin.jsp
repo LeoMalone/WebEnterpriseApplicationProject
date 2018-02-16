@@ -4,6 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<!-- If there is no user logged in redirect to login page -->
+<%
+	if(session.getAttribute("signedIn") == null) {
+		response.sendRedirect("login.jsp");
+	}
+
+	String userName = null;
+	String sessionID = null;
+	
+	Cookie[] cookies = request.getCookies();
+	if(cookies !=null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("username")) userName = cookie.getValue();
+		}
+	}		
+%>
+
 
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
@@ -30,7 +50,6 @@
 				}
 			}
 	%>
-
 </c:if>
 
 <!-- if language is not set to French, set language to English -->
@@ -64,45 +83,27 @@
 </head>
 
 <body>
-
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
 
 	<div id="fb-root"></div>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-
-	<sql:query dataSource="${dataSource}" var="div1">
-	select divisionID, divsionName from division
-	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
-
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							href="index.jsp"><fmt:message key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -141,14 +142,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
+						<li class="nav-item"><a class="nav-link active" href="admin.jsp"><%=userName %></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -163,10 +158,9 @@
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
@@ -180,16 +174,17 @@
 						<div class="card h-100">
 							<h4 class="card-header">
 								<fmt:message key="logged_in_hello"/>
-        					<%=session.getAttribute("username")%>
+        					<%=userName %>
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="signin_text1" />
+									
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="logout.jsp" class="btn btn-primary"><fmt:message key="logged_in_signout" /></a>
-
+								<form action="logout" method="post">
+									<button type="submit" class="btn btn-secondary">Logout</button>
+								</form>								
 							</div>
 						</div>
 					</div>

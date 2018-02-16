@@ -4,10 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<!-- If there is no user logged in redirect to login page -->
+<%
+	String userName = null;
+	String sessionID = null;
+	
+	Cookie[] cookies = request.getCookies();
+	if(cookies !=null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("username")) userName = cookie.getValue();
+		}
+	}		
+%>
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
-
 <c:if test="${cookie.language eq null}">
 	<%
 		Cookie cookieLanguage = new Cookie("language", "en");
@@ -30,7 +43,6 @@
 				}
 			}
 	%>
-
 </c:if>
 
 <!-- if language is not set to French, set language to English -->
@@ -140,15 +152,14 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
+							</div>
+						</li>
+						<% if (session.getAttribute("signedIn") != null) {%>
+						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
+						<% } else {%>
+						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						<% } %>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"

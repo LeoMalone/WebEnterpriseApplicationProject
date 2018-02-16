@@ -4,10 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<%
+	String userName = null;
+	String sessionID = null;
+	
+	Cookie[] cookies = request.getCookies();
+	if(cookies !=null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("username")) userName = cookie.getValue();
+		}
+	}		
+%>
 
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
-
 <c:if test="${cookie.language eq null}">
 	<%
 		Cookie cookieLanguage = new Cookie("language", "en");
@@ -125,12 +138,13 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
+							</div>
+						</li>
+						<% if (session.getAttribute("signedIn") != null) {%>
+						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
+						<% } else {%>
+						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						<% } %>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -166,26 +180,60 @@
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
 							<h4 class="card-header">
-								<fmt:message key="rules_summary_head1" />
+								<fmt:message key="rules_summary_text1" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="rules_summary_text1" />
-									<fmt:message key="rules_summary_text2" />
-									<fmt:message key="rules_summary_text3" />
-									<fmt:message key="rules_summary_text4" />
-									<fmt:message key="rules_summary_text5" />
-									<fmt:message key="rules_summary_text6" />
-									<fmt:message key="rules_summary_text7" />
-									<fmt:message key="rules_summary_text8" />
-									<fmt:message key="rules_summary_text9" />
-									<fmt:message key="rules_summary_text10" />
-									<fmt:message key="rules_summary_text11" />
-									<fmt:message key="rules_summary_text12" />
-									<fmt:message key="rules_summary_text13" />
-									<fmt:message key="rules_summary_text14" />
-									<fmt:message key="rules_summary_text15" />
-									<fmt:message key="rules_summary_text16" />
+								<ul class="list-group list-group-flush">
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text2" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text3" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text4" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text5" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text6" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text7" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text8" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text8" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text9" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text10" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text11" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text12" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text13" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text14" />
+								  </li>
+								  <li class="list-group-item list-group-item-secondary">
+								  	<fmt:message key="rules_summary_text15" />
+								  </li>
+								  <li class="list-group-item">
+								  	<fmt:message key="rules_summary_text16" />
+								  </li>
+								</ul>			
 								</p>
 							</div>
 						</div>

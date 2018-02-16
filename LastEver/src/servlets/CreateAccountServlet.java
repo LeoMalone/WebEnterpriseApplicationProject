@@ -33,6 +33,11 @@ private static final long serialVersionUID = 1L;
         String newPassword = request.getParameter("newPass");        
         String userType = request.getParameter("createRadio");
         
+        if(newUsername == null || newEmail == null || newPassword == null || userType == null) {
+        	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        }
+        
         String ut = null;
         if(userType.equals(ADMIN))
         	ut = ADMIN;
@@ -42,7 +47,7 @@ private static final long serialVersionUID = 1L;
         	ut = TEAM_OW;        
         
         UserBean user = new UserBean(newUsername, newEmail, newPassword, ut);
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         
         if(CreateAccount.createNewUser(user)) {
         	
@@ -60,10 +65,7 @@ private static final long serialVersionUID = 1L;
         	
         	RequestDispatcher rd = request.getRequestDispatcher(jsp);
             rd.forward(request, response);
-        }       
-
-        
-
+        }
         out.close();  
     }
 

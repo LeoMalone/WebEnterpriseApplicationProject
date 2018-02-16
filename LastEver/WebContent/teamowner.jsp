@@ -4,10 +4,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<!-- If there is no user logged in redirect to login page -->
+<%
+	if(session.getAttribute("signedIn") == null) {
+		response.sendRedirect("login.jsp");
+	}
+
+	String userName = null;
+	String sessionID = null;
+	
+	Cookie[] cookies = request.getCookies();
+	if(cookies !=null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("username")) userName = cookie.getValue();
+		}
+	}		
+%>
 
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
-
 <c:if test="${cookie.language eq null}">
 	<%
 		Cookie cookieLanguage = new Cookie("language", "en");
@@ -140,15 +158,14 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
+							</div>
+						</li>
+						<% if (session.getAttribute("signedIn") != null) {%>
+						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
+						<% } else {%>
+						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						<% } %>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -163,10 +180,9 @@
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
@@ -180,16 +196,17 @@
 						<div class="card h-100">
 							<h4 class="card-header">
 								<fmt:message key="logged_in_hello"/>
-        					<%=session.getAttribute("username")%>
+        					<%=userName %>
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<fmt:message key="signin_text1" />
+									
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="logout.jsp" class="btn btn-primary"><fmt:message key="logged_in_signout" /></a>
-
+								<form action="logout" method="post">
+									<button type="submit" class="btn btn-secondary">Logout</button>
+								</form>								
 							</div>
 						</div>
 					</div>
