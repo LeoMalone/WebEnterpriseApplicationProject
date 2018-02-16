@@ -142,8 +142,29 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="admin.jsp"><%=userName %></a></li>
+						
+						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
+						<!-- 
+						<li class="nav-item dropdown"><a
+							class="nav-link active dropdown-toggle" href="admin.jsp"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> < %=userName %>
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="about.jsp"><fmt:message
+										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+										key="rules" /></a> <a class="dropdown-item"
+									href="registration.jsp"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="contact.jsp"><fmt:message
+										key="contact" /></a>
+							</div></li>
+							 -->
+						
+						<li class="nav-item"><a class="nav-link active" href="admin.jsp"><%=userName %></a></li>	 
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -166,7 +187,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					Admin
+					<fmt:message key="signin_prop1" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -183,7 +204,7 @@
 							</div>
 							<div class="card-footer">
 								<form action="logout" method="post">
-									<button type="submit" class="btn btn-secondary">Logout</button>
+									<button type="submit" class="btn btn-secondary"><fmt:message key="logged_in_signout"/></button>
 								</form>								
 							</div>
 						</div>

@@ -237,7 +237,7 @@
 									  <label class="form-check-label" for="createRadio">
 									    <fmt:message key="signin_prop3" />
 									  </label>
-									  <small id="emailHelp" class="form-text text-muted">Email Verification Required(Coming Soon)</small>
+									  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
 									</div>					        										
 								</p>
 							</div>
