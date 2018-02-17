@@ -1,12 +1,18 @@
 package beans;
 
+/**
+ * The UserBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class UserBean {
 	
+	// User bean parameters
 	private String username;
 	private String emailAddress;
 	private String password;
 	private String userType;
-	
+
+/**************************** CONTRUCTORS *****************************/	
 	public UserBean() {
 	}
 	

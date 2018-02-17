@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `gamestatistics`;
 CREATE TABLE `gamestatistics` (
   `statisticID` bigint(20) NOT NULL AUTO_INCREMENT,
   `gameID` bigint(20) NOT NULL,
-  `playerID` bigint(20) NOT NULL,
+  `playerID` bigint(20) NOT NULL,	
   `goals` tinyint(4) NOT NULL,
   `yellowCards` tinyint(4) NOT NULL,
   `redCards` tinyint(4) NOT NULL,

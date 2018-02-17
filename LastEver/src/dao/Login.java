@@ -8,15 +8,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The Login class validates a UserBean's credentials
+ * using a SELECT statement to compare credentials
+ */
 public class Login {
 	
+	/**
+	 * The validateUserLogin method validates a UserBeans login credentials
+	 * @param user - UserBean credentials
+	 * @return status - boolean value
+	 */
 	public static boolean validateUserLogin(UserBean user) { 
 		
-		boolean status = false;
-	    Connection conn = null;
-	    PreparedStatement getusers = null;
-	    ResultSet resultSet = null;
+		boolean status = false;				// query status
+	    Connection conn = null;				// DB connection
+	    PreparedStatement getusers = null;	// SQL query
+	    ResultSet resultSet = null;			// returned query result set
 	
+	    // Connect to Database and execute SELECT query with UserBean data
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        getusers = conn.prepareStatement("select username, userType, emailAddress, password from users where emailAddress=? and password=?");
@@ -25,11 +35,13 @@ public class Login {
 	        resultSet = getusers.executeQuery();
 	        status = resultSet.next();
 	        
+	        // if status is true set username and usertype
 	        if(status) {
 	        	user.setUsername(resultSet.getString(1));
 	        	user.setUserType(resultSet.getString(2));
-	        } 
-	
+	        }
+	        
+	    // handle all possible exceptions
 	    } catch (Exception e) {
 	        System.out.println(e);
 	    } finally {

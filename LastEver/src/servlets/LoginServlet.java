@@ -13,24 +13,32 @@ import javax.servlet.http.HttpSession;
 
 import dao.Login;
 
+/**
+ * The LoginServlet class handles the POST from /login to login a user
+ */
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
+    /**
+	 * doPost method mapped to /login
+	 */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {
-
+    	// Set content type and get form data from login.jsp
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();        
         String loginEmail = request.getParameter("loginEmail");  
         String loginPass = request.getParameter("loginPass");
         
+        // Create new userBean
         UserBean user = new UserBean(loginEmail, loginPass);
         
-
+        // If login with given userBean is successful
         if(Login.validateUserLogin(user)) {
         	
+        	// Start session and create use cookie
         	HttpSession session = request.getSession(false);
             if(session!=null) {
             	//Set up user cookie
@@ -40,6 +48,7 @@ public class LoginServlet extends HttpServlet {
     			response.addCookie(cookie);
             	session.setAttribute("signedIn", true);
             	
+            	// Get user home page
             	String jsp = null;
                 if(user.getUserType().equals("Administrator")) {
                 	jsp = "admin.jsp";
@@ -49,6 +58,7 @@ public class LoginServlet extends HttpServlet {
                 	jsp = "teamowner.jsp";
                 }
                 
+                // redirect to correct login page
                 session.setAttribute("userType", jsp);
                 response.sendRedirect(jsp);
             }            
@@ -56,7 +66,6 @@ public class LoginServlet extends HttpServlet {
         	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
             rd.forward(request, response);  
         }
-
         out.close();  
     }  
 }
