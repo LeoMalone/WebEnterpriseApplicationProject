@@ -30,3 +30,7 @@ body {
 .cards-container {
 	padding-top: 100px;
 }
+
+.admin-cards {
+	text-align: center;
+}

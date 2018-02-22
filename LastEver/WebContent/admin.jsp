@@ -9,19 +9,20 @@
 <!-- ----------------------------------------------------------------------------- -->
 <!-- If there is no user logged in redirect to login page -->
 <%
-	if(session.getAttribute("signedIn") == null) {
+	if (session.getAttribute("signedIn") == null) {
 		response.sendRedirect("login.jsp");
 	}
 
 	String userName = null;
 	String sessionID = null;
-	
+
 	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) userName = cookie.getValue();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("username"))
+				userName = cookie.getValue();
 		}
-	}		
+	}
 %>
 
 
@@ -103,8 +104,8 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="index.jsp"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -142,7 +143,7 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						
+
 						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
 						<!-- 
 						<li class="nav-item dropdown"><a
@@ -161,17 +162,20 @@
 										key="contact" /></a>
 							</div></li>
 							 -->
-						
-						<li class="nav-item"><a class="nav-link active" href="admin.jsp"><%=userName %></a></li>	 
+
+						<li class="nav-item"><a class="nav-link active"
+							href="admin.jsp"><%=userName%></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-						
+
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -181,47 +185,114 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<fmt:message key="signin_prop1" />
+					<%=userName%>: Admin Control Panel
 				</h1>
 				<!-- Marketing Icons Section -->
-				<div class="row">
-					<div class="col-lg-12 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="logged_in_hello"/>
-        					<%=userName %>
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-									
-								</p>
-							</div>
-							<div class="card-footer">
-								<form action="logout" method="post">
-									<button type="submit" class="btn btn-secondary"><fmt:message key="logged_in_signout"/></button>
-								</form>								
+				<div class="admin-cards">
+					<div class="row">
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
 							</div>
 						</div>
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
+							</div>
+						</div>				
+					</div>
+					<!-- row -->
+					
+					<div class="row">
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Stuff
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										More stuff
+									</p>
+								</div>
+							</div>
+						</div>				
 					</div>
 				</div>
+				<div class="card-footer">
+						<form action="logout" method="post">
+							<button type="submit" class="btn btn-danger">
+								<fmt:message key="logged_in_signout" />
+							</button>
+						</form>
+				</div>
+				<!-- /row -->
 			</fmt:bundle>
-			<!-- /.row -->
 		</div>
 	</div>
 
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
-	<div class="container-fluid">
-		<p class="m-0 text-center text-white">
-			Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-		</p>
-	</div>
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
