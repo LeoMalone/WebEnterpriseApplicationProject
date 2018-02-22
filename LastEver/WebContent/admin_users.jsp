@@ -191,75 +191,33 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<%=userName%>: Admin Control Panel
+					<%=userName%>: Users
 				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete User profiles
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-secondary">Go To Users</a>
-								</div>
-							</div>
+				<!-- Marketing Icons Section -->				
+				<div class="row">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">				
+							<table class="table">
+								<thead>
+								    <tr>
+								      <th scope="col">Username</th>
+								      <th scope="col">User Type</th>
+								      <th scope="col">Email Address</th>
+								      <th scope="col">Password</th>
+								    </tr>
+								</thead>
+							    <c:forEach items="${userList}" var="user">
+							        <tr>
+							        	<td>${user.username}</td>	
+							        	<td>${user.userType}</td>
+							        	<td>${user.emailAddress}</td>
+							        	<td>${user.password}</td>		            
+							        </tr>
+							    </c:forEach>
+							</table>				
 						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Teams
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										More stuff
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Divisions
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										More stuff
-									</p>
-								</div>
-							</div>
-						</div>				
 					</div>
-					<!-- row -->
-					
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Schedules
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										More stuff
-									</p>
-								</div>
-							</div>
-						</div>				
-					</div>
-				</div>
-				<div>
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>

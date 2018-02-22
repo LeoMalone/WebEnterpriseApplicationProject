@@ -32,6 +32,16 @@
     	<url-pattern>/createAccount</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>AdminUsers</servlet-name>
+        <servlet-class>servlets.AdminUsersServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>AdminUsers</servlet-name>
+    	<url-pattern>/adminUsers</url-pattern>
+    </servlet-mapping>
+    
     <display-name>LastEver</display-name>
 	<welcome-file-list>
 	 	<welcome-file>index.jsp</welcome-file>
