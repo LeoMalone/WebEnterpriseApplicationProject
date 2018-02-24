@@ -7,16 +7,18 @@
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+<!-- TODO: Cookies in Servlet (implemented in other pages) -->
 <%
 	String userName = null;
 	String sessionID = null;
-	
+
 	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) userName = cookie.getValue();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("username"))
+				userName = cookie.getValue();
 		}
-	}		
+	}
 %>
 
 <!-- if language is not set to French, set language to English -->
@@ -61,13 +63,14 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<!-- TODO: Replace with servlet -->
 <sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/lastever" user="admin"
 	password="lastever" />
 
+<!-- TODO: Do in query in Servlet -->
 <sql:query dataSource="${dataSource}" var="div1">
-select divsionName from division where divisionID = ?
+select divsionName, divisionID from division where divisionID = ?
 <sql:param value="${param.id}" />
 </sql:query>
 
@@ -105,6 +108,7 @@ select divsionName from division where divisionID = ?
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
+	<!-- TODO: Do in query in Servlet -->
 	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
@@ -162,13 +166,20 @@ select divsionName from division where divisionID = ?
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div>
-						</li>
-						<% if (session.getAttribute("signedIn") != null) {%>
-						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
-						<% } else {%>
-						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
-						<% } %>
+							</div></li>
+						<%
+							if (session.getAttribute("signedIn") != null) {
+						%>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=session.getAttribute("userType")%>"><%=userName%></a></li>
+						<%
+							} else {
+						%>
+						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
+									key="nav_signin" /></a></li>
+						<%
+							}
+						%>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -216,20 +227,56 @@ select divsionName from division where divisionID = ?
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-
-					<div class="col-lg-12 mb-5">
+					<!-- Crude Navbar for page navigation, needs CSS applied -->
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
+									<ul class="navbar-nav mr-auto">
+										<li class="nav-item active"><c:forEach var="row"
+												items="${div1.rows}">
+												<a class="nav-link" href="division.jsp?id=${row.divisionID}">
+													<c:out value="${row.divsionName}" />
+												</a>
+											</c:forEach></li>
+										<li class="nav-item"><c:forEach var="row"
+												items="${div1.rows}">
+												<a class="nav-link" href="standings?id=${row.divisionID}">
+													Standings </a>
+											</c:forEach></li>
+										<li class="nav-item"><c:forEach var="row"
+												items="${div1.rows}">
+												<a class="nav-link" href="schedule?id=${row.divisionID}">
+													Schedule </a>
+											</c:forEach></li>
+										<li class="nav-item"><c:forEach var="row"
+												items="${div1.rows}">
+												<a class="nav-link" href="results?id=${row.divisionID}">
+													Results </a>
+											</c:forEach></li>
+										<li class="nav-item"><c:forEach var="row"
+												items="${div1.rows}">
+												<a class="nav-link" href="statistics?id=${row.divisionID}">
+													Statistics </a>
+											</c:forEach></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<!-- TODO: Replace with actual content -->
+					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
 
 							<h4 class="card-header">
 								<fmt:message key="div_head1" />
 							</h4>
 							<div class="card-body">
-								<p class="card-text">
-									<sql:query dataSource="${dataSource}" var="result">
+								<sql:query dataSource="${dataSource}" var="result">
 					select t.teamName, t.teamAbbreviation from team t inner join teamxdivision td on td.teamID = t.teamID where td.divisionID = ?
 					<sql:param value="${param.id}" />
-									</sql:query>
-								<table width="100%"
+								</sql:query>
+								<table
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -256,279 +303,9 @@ select divsionName from division where divisionID = ?
 										</c:choose>
 									</tbody>
 								</table>
-								</p>
-
-							</div>
-						</div>
-					</div>
-					<br>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head2" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-
-									<sql:query dataSource="${dataSource}" var="result">
-					select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '') as away from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Scheduled'
-					<sql:param value="${param.id}" />
-									</sql:query>
-								<table width="100%"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text4" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="4" style="text-align: center"><b><fmt:message
-															key="div_nogames" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
-													<tr>
-														<td scope="row" style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
-																	value="${row.gameDate}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
-																	value="${row.gameDate}" />
-															</c:if></td>
-														<td style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="time" pattern="H:mm"
-																	value="${row.gameTime}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="time" pattern="h:mm a"
-																	value="${row.gameTime}" />
-															</c:if></td>
-														<td><c:out value="${row.teamName}" /></td>
-														<td><c:out value="${row.away}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head3" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text"></p>
-
-								<sql:query dataSource="${dataSource}" var="result">
-					select s.gameDate, h.teamName, s.homeScore, concat(a.teamName, '') as away, s.awayScore, s.gameStatus from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Final'
-					<sql:param value="${param.id}" />
-								</sql:query>
-								<table width="100%"
-									class="ttable table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text5" /></th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="6" style="text-align: center"><b><fmt:message
-															key="div_noresults" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
-													<tr>
-														<td scope="row" style="text-align: center"><c:if
-																test="${param.language eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
-																	value="${row.gameDate}" />
-															</c:if> <c:if test="${param.language ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
-																	value="${row.gameDate}" />
-															</c:if></td>
-														<td><c:out value="${row.teamName}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.homescore}" /></td>
-														<td><c:out value="${row.away}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.awayScore}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.gameStatus}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-
-								</table>
-
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head4" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-
-									<sql:query dataSource="${dataSource}" var="result">
-					select team, GP, W, D, L, PTS, GF, GA, GD from standings where divisionID = ? order by PTS desc, W desc, L asc, GD desc
-					<sql:param value="${param.id}" />
-									</sql:query>
-								<table width="100%"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text5" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text6" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text7" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text8" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text9" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text10" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="10" style="text-align: center"><b><fmt:message
-															key="div_noteams" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
-													<tr>
-														<td scope="row" style="text-align: center">
-															<% pageContext.setAttribute("rank", rank++); %> ${rank}
-														</td>
-														<td scope="row"><c:out value="${row.team}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.GP}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.W}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.L}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.D}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.PTS}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.GF}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.GA}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.GD}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head5" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-									<sql:query dataSource="${dataSource}" var="result">
-					select teamName, GP, playerName, goals, yellowCards, redCards from statistics where divisionID = ? order by goals desc, GP asc, playerName asc
-					<sql:param value="${param.id}" />
-									</sql:query>
-									<% rank = 1;
-									pageContext.setAttribute("rank", rank); %>
-								
-								<table width="100%"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text5" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text6" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head5_text7" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="7" style="text-align: center"><b><fmt:message
-															key="no_players" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
-													<tr>
-														<td scope="row" style="text-align: center">
-															<% pageContext.setAttribute("rank", rank++);%> ${rank}
-														</td>
-														<td scope="row"><c:out value="${row.teamName}" /></td>
-														<td><c:out value="${row.playerName}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.GP}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.Goals}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.yellowCards}" /></td>
-														<td style="text-align: center"><c:out
-																value="${row.redCards}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-								</p>
+								<br> I just left this table here so the page wouldn't be so
+								empty! I'm thinking there will be some sort of news/updates and
+								recent scores/upcoming games on the side.
 							</div>
 						</div>
 					</div>
