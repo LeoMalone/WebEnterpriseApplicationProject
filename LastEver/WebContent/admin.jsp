@@ -207,7 +207,7 @@
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-secondary">Go To Users</a>
+								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
 								</div>
 							</div>
 						</div>
@@ -255,7 +255,7 @@
 				</div>
 				<div>
 					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
+						<button type="submit" class="btn btn-outline-danger">
 							<fmt:message key="logged_in_signout" />
 						</button>
 					</form>

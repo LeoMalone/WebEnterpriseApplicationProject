@@ -22,8 +22,7 @@ public class AdminUsers {
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        allUsers = conn.prepareStatement("select username, userType, emailAddress, password from users");
-	        rs = allUsers.executeQuery();
-	        status = rs.next();	              
+	        rs = allUsers.executeQuery();	              
 	        
 	        while(rs.next()) {
 	        	UserBean ub = new UserBean();

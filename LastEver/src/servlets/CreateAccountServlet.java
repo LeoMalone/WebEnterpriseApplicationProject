@@ -15,7 +15,7 @@ import beans.UserBean;
 import dao.CreateAccount;
 
 /**
- * The CreateAccountServlet class handles the POST from /createAccount to
+ * The CreateAccountServlet class handles the POST from /createAccount for
  * creating a new account
  */
 public class CreateAccountServlet extends HttpServlet {

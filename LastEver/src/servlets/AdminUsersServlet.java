@@ -21,7 +21,7 @@ public class AdminUsersServlet extends HttpServlet{
 		response.setContentType("text/html");
 		
 		List<UserBean> ulb = new ArrayList<UserBean>();
-		AdminUsers.getAllUsers(ulb);		
+		AdminUsers.getAllUsers(ulb);	
 		
 		request.setAttribute("userList", ulb);		
 		RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
