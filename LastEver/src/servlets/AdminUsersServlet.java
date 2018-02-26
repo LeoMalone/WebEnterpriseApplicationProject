@@ -23,7 +23,7 @@ public class AdminUsersServlet extends HttpServlet{
 		List<UserBean> ulb = new ArrayList<UserBean>();
 		AdminUsers.getAllUsers(ulb);	
 		
-		request.setAttribute("userList", ulb);		
+		request.setAttribute("userList", ulb);
 		RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
         rd.forward(request, response);		
 	}

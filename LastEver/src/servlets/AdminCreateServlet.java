@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +41,6 @@ public class AdminCreateServlet extends HttpServlet {
 
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
@@ -51,8 +48,7 @@ public class AdminCreateServlet extends HttpServlet {
 
 		// If any parameter is null
 		if (newUsername == null || newEmail == null || newPassword == null || userType == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("./createAccount");
-			rd.forward(request, response);
+			response.sendRedirect("./adminCreate");
 			
 		} else {	
 			// Get user type
@@ -72,7 +68,5 @@ public class AdminCreateServlet extends HttpServlet {
 				response.sendRedirect("./adminUsers");
 			}
 		}
-		
-		out.close();
 	}
 }

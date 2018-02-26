@@ -216,8 +216,8 @@
 									    <fmt:message key="signin_prop3" />
 									  </label>
 									  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
-									</div>					        										
-								</p>
+									</div>
+								</p>							
 							</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	

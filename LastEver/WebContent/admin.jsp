@@ -218,8 +218,11 @@
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										More stuff
+										Create/Edit/Delete Teams
 									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
 								</div>
 							</div>
 						</div>
@@ -230,8 +233,11 @@
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										More stuff
+										Create/Edit/Delete Divisions
 									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
 								</div>
 							</div>
 						</div>				
@@ -246,8 +252,11 @@
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										More stuff
+										Create/Edit/Delete Schedule Information
 									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
 								</div>
 							</div>
 						</div>				
@@ -255,7 +264,7 @@
 				</div>
 				<div>
 					<form action="logout" method="post">
-						<button type="submit" class="btn btn-outline-danger">
+						<button type="submit" class="btn btn-danger">
 							<fmt:message key="logged_in_signout" />
 						</button>
 					</form>

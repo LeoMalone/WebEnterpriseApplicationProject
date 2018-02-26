@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -38,8 +37,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {
     	// Set content type and get form data from login.jsp
-        response.setContentType("text/html");  
-        PrintWriter out = response.getWriter();        
+        response.setContentType("text/html");        
         String loginEmail = request.getParameter("loginEmail");  
         String loginPass = request.getParameter("loginPass");
         
@@ -76,6 +74,5 @@ public class LoginServlet extends HttpServlet {
         } else {
         	 response.sendRedirect("./login");
         }
-        out.close();  
     }  
 }

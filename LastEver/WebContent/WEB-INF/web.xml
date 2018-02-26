@@ -52,6 +52,26 @@
     	<url-pattern>/adminCreate</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>servlets.EditUserServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>EditUserServlet</servlet-name>
+    	<url-pattern>/editUser</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>servlets.DeleteUserServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>DeleteUserServlet</servlet-name>
+    	<url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+    
     <display-name>LastEver</display-name>
 	<welcome-file-list>
 	 	<welcome-file>index.jsp</welcome-file>

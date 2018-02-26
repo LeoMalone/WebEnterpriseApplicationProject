@@ -214,7 +214,7 @@
 							        	<td>${user.emailAddress}</td>
 							        	<td>${user.password}</td>
 							        	<td>
-							        		<a href="./editUser" class="btn btn-secondary btn-sm">
+							        		<a href="./editUser?=${user.id}" class="btn btn-secondary btn-sm">
 							        			<i class="fa fa-edit"></i> 
 											</a>
 										</td>		            

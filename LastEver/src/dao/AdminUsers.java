@@ -21,15 +21,16 @@ public class AdminUsers {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allUsers = conn.prepareStatement("select username, userType, emailAddress, password from users");
+	        allUsers = conn.prepareStatement("select userID, username, userType, emailAddress, password from users");
 	        rs = allUsers.executeQuery();	              
 	        
 	        while(rs.next()) {
 	        	UserBean ub = new UserBean();
-	        	ub.setUsername(rs.getString(1));
-	        	ub.setUserType(rs.getString(2));
-	        	ub.setEmail(rs.getString(3));
-	        	ub.setPassword(rs.getString(4));
+	        	ub.setId(rs.getString(1));
+	        	ub.setUsername(rs.getString(2));
+	        	ub.setUserType(rs.getString(3));
+	        	ub.setEmail(rs.getString(4));
+	        	ub.setPassword(rs.getString(5));
 	        	userList.add(ub);	        	
 	        }
 	        
