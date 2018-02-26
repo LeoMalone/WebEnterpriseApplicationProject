@@ -7,7 +7,7 @@
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
-<!-- If there is no user logged in redirect to login page -->
+<!-- If there is a user logged in redirect to login page -->
 <%
 	if (session.getAttribute("signedIn") == null) {
 		response.sendRedirect("login.jsp");
@@ -24,8 +24,6 @@
 		}
 	}
 %>
-
-
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
 
@@ -74,34 +72,36 @@
 	password="lastever" />
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<!-- Fontawesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - <fmt:message key="login" /></title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
+	<sql:query dataSource="${dataSource}" var="div1">
+	select divisionID, divsionName from division
+	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -145,24 +145,7 @@
 								</c:choose>
 							</div></li>
 
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
 
 						<li class="nav-item"><a class="nav-link active"
 							href="admin.jsp"><%=userName%></a></li>
@@ -172,11 +155,9 @@
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en"
-										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr"
-										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -186,46 +167,68 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="main-cover">
-		<!-- Page Content -->
+		<!-- Page Content
+		- card with information on it
+		- text, form, button to sign in
+		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					<%=userName%>: Users
+					<%=userName%>: Create
 				</h1>
-				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">				
-							<table class="table">
-								<thead>
-								    <tr>
-								      <th scope="col">Username</th>
-								      <th scope="col">User Type</th>
-								      <th scope="col">Email Address</th>
-								      <th scope="col">Password</th>
-								    </tr>
-								</thead>
-							    <c:forEach items="${userList}" var="user">
-							        <tr>
-							        	<td>${user.username}</td>	
-							        	<td>${user.userType}</td>
-							        	<td>${user.emailAddress}</td>
-							        	<td>${user.password}</td>
-							        	<td>
-							        		<a href="./editUser" class="btn btn-secondary btn-sm">
-							        			<i class="fa fa-edit"></i> 
-											</a>
-										</td>		            
-							        </tr>
-							    </c:forEach>
-							</table>				
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								<fmt:message key="signin_createnew" />
+							</h4>
+							<form action="adminCreate" method="POST">
+							<div class="card-body">
+								<p class="card-text">
+									<div class="form-group">
+										<label for="newUsername"><fmt:message key="signin_user" /></label>
+										<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
+									</div>
+									 <div class="form-group">
+									    <label for="newEmail"><fmt:message key="signin_email" /></label>
+									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
+									 </div>
+									 <div class="form-group">
+										<label for="newPass"><fmt:message key="signin_password" /></label>
+										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
+									 </div>	
+									 <div class="form-check">
+									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="createRadio" value="Administrator">
+									  <label class="form-check-label" for="createRadio">
+									    <fmt:message key="signin_prop1" />
+									  </label>									  
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
+									  <label class="form-check-label" for="createRadio">
+									    <fmt:message key="signin_prop2" />
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="createRadio" value="Referee">
+									  <label class="form-check-label" for="createRadio">
+									    <fmt:message key="signin_prop3" />
+									  </label>
+									  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
+									</div>					        										
+								</p>
+							</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
+								</div>
+							</form>
 						</div>
 					</div>
-				</div>					
-				<!-- /row -->
-			</fmt:bundle>
+				</div>
+				<!-- /.row -->
+				
+			</fmt:bundle>			
 		</div>
 	</div>
 
@@ -240,7 +243,9 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
