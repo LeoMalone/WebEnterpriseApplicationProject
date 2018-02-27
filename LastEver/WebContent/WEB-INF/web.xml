@@ -72,8 +72,48 @@
     	<url-pattern>/deleteUser</url-pattern>
     </servlet-mapping>
     
+		<servlet>
+		<servlet-name>StandingsServlet</servlet-name>
+		<servlet-class>servlets.StandingsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>StandingsServlet</servlet-name>
+		<url-pattern>/standings</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ScheduleServlet</servlet-name>
+		<servlet-class>servlets.ScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ScheduleServlet</servlet-name>
+		<url-pattern>/schedule</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultsServlet</servlet-name>
+		<servlet-class>servlets.ResultsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ResultsServlet</servlet-name>
+		<url-pattern>/results</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<servlet-class>servlets.StatisticsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<url-pattern>/statistics</url-pattern>
+	</servlet-mapping>
+	
     <display-name>LastEver</display-name>
 	<welcome-file-list>
-	 	<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>  
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

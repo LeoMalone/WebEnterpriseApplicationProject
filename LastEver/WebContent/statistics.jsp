@@ -4,49 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- TODO: Cookies in Servlet (implemented in other pages) -->
-<%
-	String userName = null;
-	String sessionID = null;
-
-	Cookie[] cookies = request.getCookies();
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("username"))
-				userName = cookie.getValue();
-		}
-	}
-%>
-
-<!-- if language is not set to French, set language to English -->
-<!-- cookie - future development -->
-<c:if test="${cookie.language eq null}">
-	<%
-		Cookie cookieLanguage = new Cookie("language", "en");
-			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
-			response.addCookie(cookieLanguage);
-	%>
-</c:if>
-<c:if test="${cookie.language ne null}">
-	<%
-		String language = request.getParameter("language");
-			Cookie cookieLanguage;
-			Cookie[] theCookies = request.getCookies();
-
-			for (Cookie tempCookie : theCookies) {
-				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
-						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
-				}
-			}
-	%>
-
-</c:if>
 
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
@@ -63,6 +20,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <!-- TODO: Replace with servlet -->
 <sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/lastever" user="admin"
@@ -74,11 +32,6 @@ select divsionName, divisionID from division where divisionID = ?
 <sql:param value="${param.id}" />
 </sql:query>
 
-<%
-	int rank = 1;
-	pageContext.setAttribute("rank", rank);
-%>
-
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
@@ -88,17 +41,15 @@ select divsionName, divisionID from division where divisionID = ?
 	<c:choose>
 		<c:when test="${div1.rowCount == 0}">
 
-			<title>Last Ever - Division</title>
+			<title>Last Ever - Division Schedule</title>
 		</c:when>
 		<c:otherwise>
 			<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
 					<c:out value="${row.divsionName}" />
-				</c:forEach></title>
+				</c:forEach> Statistics
+			</title>
 		</c:otherwise>
 	</c:choose>
-	<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
-			<c:out value="${row.divsionName}" />
-		</c:forEach></title>
 </fmt:bundle>
 </head>
 
@@ -171,7 +122,7 @@ select divsionName, divisionID from division where divisionID = ?
 							if (session.getAttribute("signedIn") != null) {
 						%>
 						<li class="nav-item"><a class="nav-link"
-							href="<%=session.getAttribute("userType")%>"><%=userName%></a></li>
+							href="<%=session.getAttribute("userType")%>">${userName}</a></li>
 						<%
 							} else {
 						%>
@@ -213,17 +164,10 @@ select divsionName, divisionID from division where divisionID = ?
 		-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:choose>
-						<c:when test="${div1.rowCount == 0}">
-						Division
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="row" items="${div1.rows}">
-								<c:out value="${row.divsionName}" />
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-
+					<c:forEach var="row" items="${div1.rows}">
+						<c:out value="${row.divsionName}" />
+					</c:forEach>
+					Statistics
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -233,7 +177,7 @@ select divsionName, divisionID from division where divisionID = ?
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${div1.rows}">
 												<a class="nav-link" href="division.jsp?id=${row.divisionID}">
 													<c:out value="${row.divsionName}" />
@@ -254,7 +198,7 @@ select divsionName, divisionID from division where divisionID = ?
 												<a class="nav-link" href="results?id=${row.divisionID}">
 													Results </a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${div1.rows}">
 												<a class="nav-link" href="statistics?id=${row.divisionID}">
 													Statistics </a>
@@ -264,48 +208,59 @@ select divsionName, divisionID from division where divisionID = ?
 							</div>
 						</div>
 					</div>
-					<!-- TODO: Replace with actual content -->
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
-
 							<h4 class="card-header">
-								<fmt:message key="div_head1" />
+								<fmt:message key="div_head5" />
 							</h4>
 							<div class="card-body">
-								<sql:query dataSource="${dataSource}" var="result">
-					select t.teamName, t.teamAbbreviation from team t inner join teamxdivision td on td.teamID = t.teamID where td.divisionID = ?
-					<sql:param value="${param.id}" />
-								</sql:query>
-								<table
+								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head1_text1" /></th>
+													key="div_head5_text1" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head1_text2" /></th>
+													key="div_head5_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text4" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text5" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text6" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text7" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="2" style="text-align: center"><b><fmt:message
-															key="div_noteams" /></b></td>
+											<c:when test="${empty statistics}">
+												<td colspan=7 style="text-align: center"><b><fmt:message
+															key="div_noplayers" /></b></td>
 											</c:when>
 											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
+												<c:forEach items="${statistics}" var="stats">
 													<tr>
-														<td scope="row"><c:out value="${row.teamName}" /></td>
-														<td><c:out value="${row.teamAbbreviation}" /></td>
+														<td scope="row" style="text-align: center"><c:out
+																value="${stats.rank}" /></td>
+														<td scope="row"><c:out value="${stats.teamName}" /></td>
+														<td><c:out value="${stats.name}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.gamesPlayed}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.goals}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.yellowCard}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.redCard}" /></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
 										</c:choose>
 									</tbody>
 								</table>
-								<br> I just left this table here so the page wouldn't be so
-								empty! I'm thinking there will be some sort of news/updates and
-								recent scores/upcoming games on the side.
 							</div>
 						</div>
 					</div>

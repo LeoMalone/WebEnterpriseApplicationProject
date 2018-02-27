@@ -53,7 +53,7 @@ CREATE TABLE `division` (
 
 LOCK TABLES `division` WRITE;
 /*!40000 ALTER TABLE `division` DISABLE KEYS */;
-INSERT INTO `division` VALUES (1,'Womens',NULL),(2,'Mens',NULL),(3,'Co-ed',NULL);
+INSERT INTO `division` VALUES (1,'Womens',NULL),(2,'Mens',NULL),(3,'Co-Ed',NULL);
 /*!40000 ALTER TABLE `division` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `gamestatistics`;
 CREATE TABLE `gamestatistics` (
   `statisticID` bigint(20) NOT NULL AUTO_INCREMENT,
   `gameID` bigint(20) NOT NULL,
-  `playerID` bigint(20) NOT NULL,	
+  `playerID` bigint(20) NOT NULL,
   `goals` tinyint(4) NOT NULL,
   `yellowCards` tinyint(4) NOT NULL,
   `redCards` tinyint(4) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `gamestatistics` (
   KEY `GameStatisticsToPlayer` (`playerID`),
   CONSTRAINT `GameStaticticsToSchedule` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`),
   CONSTRAINT `GameStatisticsToPlayer` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `gamestatistics` (
 
 LOCK TABLES `gamestatistics` WRITE;
 /*!40000 ALTER TABLE `gamestatistics` DISABLE KEYS */;
-INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,5,13,0,0,0),(14,5,17,0,1,0),(15,5,23,0,1,0),(16,5,15,2,1,0),(17,5,18,0,0,0),(18,5,21,0,0,0),(19,6,14,0,0,0),(20,6,20,1,0,0),(21,6,24,0,0,0),(22,6,16,0,0,0),(23,6,19,1,1,0),(24,6,22,1,0,1),(25,7,16,0,0,0),(26,7,19,0,0,0),(27,7,22,2,0,0),(28,5,15,1,1,0),(29,5,18,0,1,0),(30,5,21,1,0,0),(31,3,4,0,0,0),(32,3,7,2,0,0),(33,3,11,1,1,0),(34,3,1,1,1,0),(35,3,8,1,0,0),(36,3,9,0,1,0);
+INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,3,4,1,0,1),(14,3,7,1,0,0),(15,3,11,1,1,0),(16,3,1,1,0,0),(17,3,8,0,1,0),(18,3,9,0,0,0),(19,4,2,0,0,0),(20,4,3,3,0,0),(21,4,10,0,0,0),(22,4,5,0,0,0),(23,4,6,0,1,0),(24,4,12,1,0,0),(25,5,13,0,0,0),(26,5,17,0,1,0),(27,5,23,0,1,0),(28,5,15,2,1,0),(29,5,18,0,0,0),(30,5,21,0,0,0),(31,6,14,0,0,0),(32,6,20,1,0,0),(33,6,24,0,0,0),(34,6,16,0,0,0),(35,6,19,1,1,0),(36,6,22,1,0,1),(37,7,16,0,0,0),(38,7,19,0,0,0),(39,7,22,2,0,0),(40,7,15,1,1,0),(41,7,18,0,1,0),(42,7,21,1,0,0),(43,8,14,0,0,0),(44,8,20,0,0,0),(45,8,24,0,0,0),(46,8,13,0,0,0),(47,8,17,0,0,0),(48,8,23,0,1,0),(49,9,1,4,1,0),(50,9,8,1,0,0),(51,9,9,0,0,0),(52,9,2,1,2,1),(53,9,3,0,0,1),(54,9,10,2,0,0),(55,10,2,0,1,0),(56,10,3,1,0,0),(57,10,10,1,0,0),(58,10,4,0,0,0),(59,10,7,2,0,0),(60,10,11,2,0,0),(61,11,5,1,0,1),(62,11,6,1,0,0),(63,11,12,1,1,0),(64,11,8,1,0,0),(65,11,9,0,0,0),(66,11,11,1,1,0),(67,12,1,0,0,0),(68,12,8,0,0,0),(69,12,9,0,0,0),(70,12,4,0,2,1),(71,12,7,1,1,0),(72,12,11,0,0,1);
 /*!40000 ALTER TABLE `gamestatistics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,6 +105,60 @@ SET character_set_client = utf8;
  1 AS `yellowCards`,
  1 AS `redCards`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `news` (
+  `newsID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userID` bigint(20) NOT NULL,
+  `newsTitle` varchar(250) NOT NULL,
+  `newsTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `newsContent` varchar(10000) NOT NULL,
+  PRIMARY KEY (`newsID`),
+  KEY `NewsToUser` (`userID`),
+  CONSTRAINT `NewsToUser` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `news`
+--
+
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsxtags`
+--
+
+DROP TABLE IF EXISTS `newsxtags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsxtags` (
+  `newsID` bigint(20) NOT NULL,
+  `tagID` bigint(20) NOT NULL,
+  PRIMARY KEY (`newsID`,`tagID`),
+  KEY `TagToNews` (`tagID`),
+  CONSTRAINT `NewsToTags` FOREIGN KEY (`newsID`) REFERENCES `news` (`newsID`),
+  CONSTRAINT `TagToNews` FOREIGN KEY (`tagID`) REFERENCES `tags` (`tagID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsxtags`
+--
+
+LOCK TABLES `newsxtags` WRITE;
+/*!40000 ALTER TABLE `newsxtags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `newsxtags` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `player`
@@ -233,6 +287,7 @@ CREATE TABLE `schedule` (
   `awayScore` tinyint(4) DEFAULT NULL,
   `gameStatus` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`gameID`),
+  UNIQUE KEY `UC_Teams` (`gameID`,`homeTeam`,`awayTeam`),
   KEY `HomeTeamToTeam` (`homeTeam`),
   KEY `AwayTeamToTeam` (`awayTeam`),
   CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`),
@@ -246,7 +301,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final'),(2,'2018-02-10','16:00:00',1,1,4,1,'Final'),(3,'2018-02-13','18:30:00',3,3,4,2,'Final'),(4,'2018-02-15','19:15:00',2,NULL,1,NULL,'Scheduled'),(5,'2018-02-09','18:45:00',7,0,8,3,'Final'),(6,'2018-02-11','13:30:00',6,1,5,2,'Final'),(7,'2018-02-15','19:15:00',5,2,8,2,'Final'),(8,'2018-02-17','14:00:00',6,NULL,7,NULL,'Scheduled'),(9,'2018-02-18','13:45:00',4,NULL,2,NULL,'Scheduled'),(10,'2018-02-20','19:00:00',2,NULL,3,NULL,'Scheduled'),(11,'2018-02-20','20:30:00',1,NULL,4,NULL,'Scheduled'),(12,'2018-02-24','19:15:00',4,NULL,3,NULL,'Scheduled'),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled'),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled'),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled'),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled'),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled'),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled'),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled'),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled');
+INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final'),(2,'2018-02-10','16:00:00',1,1,4,1,'Final'),(3,'2018-02-13','18:30:00',3,3,4,2,'Final'),(4,'2018-02-15','19:15:00',2,3,1,1,'Final'),(5,'2018-02-09','18:45:00',7,0,8,3,'Final'),(6,'2018-02-11','13:30:00',6,1,5,2,'Final'),(7,'2018-02-15','19:15:00',5,2,8,2,'Final'),(8,'2018-02-17','14:00:00',6,0,7,0,'Final'),(9,'2018-02-18','13:45:00',4,5,2,3,'Final'),(10,'2018-02-20','19:00:00',2,1,3,4,'Final'),(11,'2018-02-20','20:30:00',1,3,4,2,'Final'),(12,'2018-02-24','19:15:00',4,0,3,2,'Final'),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled'),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled'),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled'),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled'),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled'),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled'),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled'),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +328,7 @@ CREATE TABLE `schedulexreferee` (
 
 LOCK TABLES `schedulexreferee` WRITE;
 /*!40000 ALTER TABLE `schedulexreferee` DISABLE KEYS */;
-INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(1,2),(2,3),(3,3),(4,3),(6,4),(7,4);
+INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(1,2),(10,2),(13,2),(14,2),(16,2),(17,2),(19,2),(2,3),(3,3),(4,3),(9,3),(11,3),(12,3),(15,3),(18,3),(20,3),(6,4),(7,4);
 /*!40000 ALTER TABLE `schedulexreferee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,6 +370,29 @@ SET character_set_client = utf8;
  1 AS `redCards`,
  1 AS `divisionID`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tags` (
+  `tagID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tagDescription` varchar(100) NOT NULL,
+  PRIMARY KEY (`tagID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `team`
@@ -379,13 +457,20 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `userID` bigint(20) NOT NULL AUTO_INCREMENT,
   `profilePicture` varchar(200) DEFAULT NULL,
+  `userFirstName` varchar(100) NOT NULL,
+  `userLastName` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `emailAddress` varchar(100) NOT NULL,
   `emailValidated` tinyint(1) NOT NULL,
+  `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `accountUpdated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `lastLogin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `userType` varchar(100) NOT NULL,
   `refereeID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`userID`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `emailAddress` (`emailAddress`),
   KEY `UsersToReferee` (`refereeID`),
   CONSTRAINT `UsersToReferee` FOREIGN KEY (`refereeID`) REFERENCES `referee` (`refereeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -397,7 +482,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'admin','superPassword','admin@example.com',1,'Administrator',NULL),(2,NULL,'referee','ezpass','ref@refcorps.org',1,'Referee',4),(3,NULL,'varsfc','teamOwner','varsfc@varsfc.co.biz',0,'Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Team Owner',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -429,6 +514,64 @@ INSERT INTO `usersxteam` VALUES (3,8);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `venue`
+--
+
+DROP TABLE IF EXISTS `venue`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `venue` (
+  `venueID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `venueName` varchar(200) NOT NULL,
+  `venuePicture` varchar(200) DEFAULT NULL,
+  `venueAddress1` varchar(100) NOT NULL,
+  `venueAddress2` varchar(100) DEFAULT NULL,
+  `venueCity` varchar(100) NOT NULL,
+  `venueProvince` varchar(100) NOT NULL,
+  `venuePostal` varchar(7) NOT NULL,
+  `venueCountry` varchar(100) NOT NULL,
+  PRIMARY KEY (`venueID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `venue`
+--
+
+LOCK TABLES `venue` WRITE;
+/*!40000 ALTER TABLE `venue` DISABLE KEYS */;
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex',NULL,'1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada');
+/*!40000 ALTER TABLE `venue` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `venuexgame`
+--
+
+DROP TABLE IF EXISTS `venuexgame`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `venuexgame` (
+  `venueID` bigint(20) NOT NULL,
+  `gameID` bigint(20) NOT NULL,
+  PRIMARY KEY (`venueID`,`gameID`),
+  KEY `GameToVenue` (`gameID`),
+  CONSTRAINT `GameToVenue` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`),
+  CONSTRAINT `VenueToGame` FOREIGN KEY (`venueID`) REFERENCES `venue` (`venueID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `venuexgame`
+--
+
+LOCK TABLES `venuexgame` WRITE;
+/*!40000 ALTER TABLE `venuexgame` DISABLE KEYS */;
+INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20);
+/*!40000 ALTER TABLE `venuexgame` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Final view structure for view `awayscorers`
 --
 
@@ -440,7 +583,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `awayscorers` AS select `a`.`teamName` AS `teamName`,`s`.`awayScore` AS `awayScore`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards` from ((((`schedule` `s` join `team` `a` on((`a`.`teamID` = `s`.`awayTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `a`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -458,7 +601,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `homescorers` AS select `h`.`teamName` AS `teamName`,`s`.`homeScore` AS `homeScore`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards` from ((((`schedule` `s` join `team` `h` on((`h`.`teamID` = `s`.`homeTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `h`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -476,7 +619,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when (`r`.`gameStatus` = 'Final') then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from ((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`homeTeam`))) join `lastever`.`teamxdivision` `dt` on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from ((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`awayTeam`))) join `lastever`.`teamxdivision` `dt` on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -509,4 +652,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-15 17:23:47
+-- Dump completed on 2018-02-26 19:09:35
