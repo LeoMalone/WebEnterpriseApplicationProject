@@ -232,27 +232,34 @@ select divsionName, divisionID from division where divisionID = ?
 										</tr>
 									</thead>
 									<tbody>
-										<!-- TODO: No Results message -->
-										<c:forEach items="${results}" var="res">
-											<tr>
-												<td scope="row" style="text-align: center"><c:if
-														test="${cookie.language.value eq 'fr'}">
-														<fmt:formatDate type="date" pattern="d MMM y"
-															value="${res.date}" />
-													</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-														<fmt:formatDate type="date" pattern="MMM d y"
-															value="${res.date}" />
-													</c:if></td>
-												<td><c:out value="${res.homeTeam}" /></td>
-												<td style="text-align: center"><c:out
-														value="${res.homeScore}" /></td>
-												<td><c:out value="${res.awayTeam}" /></td>
-												<td style="text-align: center"><c:out
-														value="${res.awayScore}" /></td>
-												<td style="text-align: center"><c:out
-														value="${res.status}" /></td>
-											</tr>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${empty results}">
+												<td colspan=7 style="text-align: center"><b><fmt:message
+															key="div_noresults" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${results}" var="res">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="d MMM y"
+																	value="${res.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="MMM d y"
+																	value="${res.date}" />
+															</c:if></td>
+														<td><c:out value="${res.homeTeam}" /></td>
+														<td style="text-align: center"><c:out
+																value="${res.homeScore}" /></td>
+														<td><c:out value="${res.awayTeam}" /></td>
+														<td style="text-align: center"><c:out
+																value="${res.awayScore}" /></td>
+														<td style="text-align: center"><c:out
+																value="${res.status}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</tbody>
 								</table>
 							</div>

@@ -31,9 +31,10 @@ public class ScheduleResults {
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '')"
-	        		+ " as away from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on "
-	        		+ "a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID"
-	        		+ " = ? and s.gameStatus = 'Scheduled'");
+	        		+ " as away, v.venueName from schedule s inner join team h on h.teamID = s.homeTeam inner join "
+	        		+ "team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID "
+	        		+ "inner join venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID"
+	        		+ " where td.divisionID = ? and s.gameStatus = 'Scheduled'");
 	        getSchedule.setString(1, id);
 	        resultSet = getSchedule.executeQuery();
 	        status = resultSet.next();
@@ -46,6 +47,7 @@ public class ScheduleResults {
 	        	sb.setTime(resultSet.getTime(2));
 	        	sb.setHomeTeam(resultSet.getString(3));
 	        	sb.setAwayTeam(resultSet.getString(4));
+	        	sb.setVenue(resultSet.getString(5));
 	        	sched.add(sb);
 	        }
 	        

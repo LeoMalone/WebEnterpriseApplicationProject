@@ -235,23 +235,30 @@ select divsionName, divisionID from division where divisionID = ?
 										</tr>
 									</thead>
 									<tbody>
-										<!-- TODO: No Results message -->
-										<c:forEach items="${statistics}" var="stats">
-											<tr>
-												<td scope="row" style="text-align: center"><c:out
-														value="${stats.rank}" /></td>
-												<td scope="row"><c:out value="${stats.teamName}" /></td>
-												<td><c:out value="${stats.name}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stats.gamesPlayed}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stats.goals}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stats.yellowCard}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stats.redCard}" /></td>
-											</tr>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${empty statistics}">
+												<td colspan=7 style="text-align: center"><b><fmt:message
+															key="div_noplayers" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${statistics}" var="stats">
+													<tr>
+														<td scope="row" style="text-align: center"><c:out
+																value="${stats.rank}" /></td>
+														<td scope="row"><c:out value="${stats.teamName}" /></td>
+														<td><c:out value="${stats.name}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.gamesPlayed}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.goals}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.yellowCard}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.redCard}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</tbody>
 								</table>
 							</div>

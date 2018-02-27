@@ -52,16 +52,16 @@ public class ResultsServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			response.setContentType("text/html");
 
-			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
-			ScheduleResults.getResults(id, slb);	
+			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();
+			ScheduleResults.getResults(id, rlb);	
 
-			request.setAttribute("results", slb);	
+			request.setAttribute("results", rlb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/results.jsp?id=" + id);  
 			rd.forward(request, response);		
 		}
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

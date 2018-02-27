@@ -241,30 +241,37 @@ select divsionName, divisionID from division where divisionID = ?
 										</tr>
 									</thead>
 									<tbody>
-										<!-- TODO: No Results message -->
-										<c:forEach items="${standings}" var="stand">
-											<tr>
-												<td scope="row" style="text-align: center"><c:out
-														value="${stand.rank}" /></td>
-												<td scope="row"><c:out value="${stand.teamName}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.gamesPlayed}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.wins}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.losses}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.draws}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.points}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.goalsFor}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.goalsAgainst}" /></td>
-												<td style="text-align: center"><c:out
-														value="${stand.goalDiff}" /></td>
-											</tr>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${empty standings}">
+												<td colspan=10 style="text-align: center"><b><fmt:message
+															key="div_noteams" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${standings}" var="stand">
+													<tr>
+														<td scope="row" style="text-align: center"><c:out
+																value="${stand.rank}" /></td>
+														<td scope="row"><c:out value="${stand.teamName}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.gamesPlayed}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.wins}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.losses}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.draws}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.points}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.goalsFor}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.goalsAgainst}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stand.goalDiff}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</tbody>
 								</table>
 							</div>

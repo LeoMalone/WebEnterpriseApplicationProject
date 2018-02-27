@@ -226,32 +226,41 @@ select divsionName, divisionID from division where divisionID = ?
 													key="div_head2_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head2_text4" /></th>
+											<th scope="col" style="text-align: center">Venue</th>
 										</tr>
 									</thead>
 									<tbody>
-										<!-- TODO: No Results message -->
-										<c:forEach items="${schedule}" var="sched">
-											<tr>
-												<td scope="row" style="text-align: center"><c:if
-														test="${cookie.language.value eq 'fr'}">
-														<fmt:formatDate type="date" pattern="d MMM y"
-															value="${sched.date}" />
-													</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-														<fmt:formatDate type="date" pattern="MMM d y"
-															value="${sched.date}" />
-													</c:if></td>
-												<td style="text-align: center"><c:if
-														test="${cookie.language.value eq 'fr'}">
-														<fmt:formatDate type="time" pattern="H:mm"
-															value="${sched.time}" />
-													</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-														<fmt:formatDate type="time" pattern="h:mm a"
-															value="${sched.time}" />
-													</c:if></td>
-												<td><c:out value="${sched.homeTeam}" /></td>
-												<td><c:out value="${sched.awayTeam}" /></td>
-											</tr>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${empty schedule}">
+												<td colspan=5 style="text-align: center"><b><fmt:message
+															key="div_nogames" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${schedule}" var="sched">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="d MMM y"
+																	value="${sched.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="MMM d y"
+																	value="${sched.date}" />
+															</c:if></td>
+														<td style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="time" pattern="H:mm"
+																	value="${sched.time}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="time" pattern="h:mm a"
+																	value="${sched.time}" />
+															</c:if></td>
+														<td><c:out value="${sched.homeTeam}" /></td>
+														<td><c:out value="${sched.awayTeam}" /></td>
+														<td><c:out value="${sched.venue}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</tbody>
 								</table>
 							</div>

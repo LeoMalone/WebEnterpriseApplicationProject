@@ -16,27 +16,30 @@ public class ScheduleResultsBean {
 	private int homeScore;
 	private String awayTeam;
 	private int awayScore;
+	private String venue;
 	private String status;
 
 /**************************** CONTRUCTORS *****************************/	
 	public ScheduleResultsBean() {
 	}
 	
-	public ScheduleResultsBean(Date d, Time t, String ht, String at, String stat) {
+	public ScheduleResultsBean(Date d, Time t, String ht, String at, String stat, String ven) {
 		this.date = d;
 		this.time = t;
 		this.homeTeam = ht;
 		this.awayTeam = at;
+		this.venue = ven;
 		this.status = stat;
 	}
 	
-	public ScheduleResultsBean(Date d, Time t, String ht, int hs, String at, int as, String stat) {
+	public ScheduleResultsBean(Date d, Time t, String ht, int hs, String at, int as, String ven, String stat) {
 		this.date = d;
 		this.time = t;
 		this.homeTeam = ht;
 		this.homeScore = hs;
 		this.awayTeam = at;
 		this.awayScore = as;
+		this.venue = ven;
 		this.status = stat;
 	}
 
@@ -63,6 +66,10 @@ public class ScheduleResultsBean {
 	
 	public int getAwayScore() {
 		return this.awayScore;
+	}
+	
+	public String getVenue() {
+		return this.venue;
 	}
 
 	public String getStatus() {
@@ -92,6 +99,10 @@ public class ScheduleResultsBean {
 	
 	public void setAwayScore(int as) {
 		this.awayScore = as;
+	}
+	
+	public void setVenue(String ven) {
+		this.venue = ven;
 	}
 
 	public void setStatus(String stat) {
