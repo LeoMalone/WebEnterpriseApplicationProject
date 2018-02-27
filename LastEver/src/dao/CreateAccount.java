@@ -37,9 +37,8 @@ public class CreateAccount {
 	        result = insertUser.executeUpdate();
 	        
 	        // Return true if 1 query executes
-	        if(result == 1) {
+	        if(result == 1)
 	        	status = true;
-	        }
 	
 	    // Catch all possible Exceptions
 	    } catch (Exception e) {

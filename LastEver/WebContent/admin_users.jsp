@@ -74,10 +74,11 @@
 	password="lastever" />
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- Fontawesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -193,7 +194,7 @@
 				<h1 class="my-4">
 					<%=userName%>: Users
 				</h1>
-				<!-- Marketing Icons Section -->				
+				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">				
@@ -211,7 +212,12 @@
 							        	<td>${user.username}</td>	
 							        	<td>${user.userType}</td>
 							        	<td>${user.emailAddress}</td>
-							        	<td>${user.password}</td>		            
+							        	<td>${user.password}</td>
+							        	<td>
+							        		<a href="./editUser?=${user.id}" class="btn btn-secondary btn-sm">
+							        			<i class="fa fa-edit"></i> 
+											</a>
+										</td>		            
 							        </tr>
 							    </c:forEach>
 							</table>				
@@ -234,9 +240,7 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

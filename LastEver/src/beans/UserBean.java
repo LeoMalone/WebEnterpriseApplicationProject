@@ -7,6 +7,7 @@ package beans;
 public class UserBean {
 	
 	// User bean parameters
+	private String id;
 	private String username;
 	private String emailAddress;
 	private String password;
@@ -29,6 +30,9 @@ public class UserBean {
 	}
 
 /**************************** GETTERS *****************************/
+	public String getId() {
+		return this.id;
+	}
 	public String getUsername() {
 		return this.username;
 	}
@@ -45,7 +49,11 @@ public class UserBean {
 		return this.userType;
 	}
 	
-/**************************** SETTERS *****************************/
+/**************************** SETTERS *****************************/	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public void setUsername(String un) {
 		this.username = un;
 	}

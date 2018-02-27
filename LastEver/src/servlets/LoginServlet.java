@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -21,14 +20,24 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     /**
+	 * doGet method mapped to /login
+	 */
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)  
+            throws ServletException, IOException {    	
+    	response.setContentType("text/html");	
+		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
+        rd.forward(request, response);
+    }
+    
+    /**
 	 * doPost method mapped to /login
 	 */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {
     	// Set content type and get form data from login.jsp
-        response.setContentType("text/html");  
-        PrintWriter out = response.getWriter();        
+        response.setContentType("text/html");        
         String loginEmail = request.getParameter("loginEmail");  
         String loginPass = request.getParameter("loginPass");
         
@@ -63,9 +72,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(jsp);
             }            
         } else {
-        	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
-            rd.forward(request, response);  
+        	 response.sendRedirect("./login");
         }
-        out.close();  
     }  
 }

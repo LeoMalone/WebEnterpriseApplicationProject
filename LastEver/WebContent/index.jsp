@@ -156,7 +156,7 @@
 						<% if (session.getAttribute("signedIn") != null) {%>
 						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
 						<% } else {%>
-						   <li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="nav_signin" /></a></li>
+						   <li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 						<% } %>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
