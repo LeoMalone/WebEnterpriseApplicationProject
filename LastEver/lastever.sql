@@ -122,7 +122,7 @@ CREATE TABLE `news` (
   PRIMARY KEY (`newsID`),
   KEY `NewsToUser` (`userID`),
   CONSTRAINT `NewsToUser` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,6 +131,7 @@ CREATE TABLE `news` (
 
 LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` VALUES (1,1,'Test Post','2018-02-27 03:43:38','This is a test of the news system. Hopefully it works and everything goes as planned.\r Do the new lines work in MySQL? We\'re about to find out if it does. I have a feeling that it doesn\'t and we may need to store\r some sort of html code in here. It\'ll have to be super specific tags so that it doesn\'t become an issue. <br> <br>\r I put in some <b>html tags</b> and added a new line. How fancy! I wonder if other stuff will work as well, I will add an image\r to this post for testing purposes. It\'ll be something really stupid though so w/e.<br><br> <img src=\"https://cdn.discordapp.com/attachments/375038182674399242/417867279934423041/Screenshot_20180225-190433.png\"\r height=\"315\" width=\"560\">'),(2,1,'Another test post','2018-02-27 04:00:24','<img src=\"https://i.imgur.com/wgBDV15.png\" style=\"text-align:center\"> <br><br>\nThis is another test post how about that! This time the image is at the start of the post and not at the end! Fancy! So I guess I\'ll put\nsome somewhat beliveable content in that the games this week will continue as normal after nothing happened last week. At all. Now\nStop asking about it please. We are getting pretty close to the end and the playoff spots can still be determined. It\'s anyones game.\nNow if you\'ll excuse me I have a website to create. <br><br> Ok, I\'m not being fully serious here but I think it\'s kinda cool.\nHaving to escape the text all the time is getting annoying but what can you do? Well do not do everything from MySQL for starters.\nHopefully nothing breaks and the spacing between the cards is good and I won\'t have to do some fixing. I doubt it but we shall see.\nHave fun this week everyone! ');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,6 +158,7 @@ CREATE TABLE `newsxtags` (
 
 LOCK TABLES `newsxtags` WRITE;
 /*!40000 ALTER TABLE `newsxtags` DISABLE KEYS */;
+INSERT INTO `newsxtags` VALUES (1,1),(2,1),(1,2);
 /*!40000 ALTER TABLE `newsxtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +384,7 @@ CREATE TABLE `tags` (
   `tagID` bigint(20) NOT NULL AUTO_INCREMENT,
   `tagDescription` varchar(100) NOT NULL,
   PRIMARY KEY (`tagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,6 +393,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'Mens'),(2,'Womens'),(3,'Co-Ed'),(4,'Site News');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -652,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-26 19:09:35
+-- Dump completed on 2018-02-27 21:22:00

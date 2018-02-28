@@ -10,13 +10,14 @@
 <%
 	String userName = null;
 	String sessionID = null;
-	
+
 	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) userName = cookie.getValue();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("username"))
+				userName = cookie.getValue();
 		}
-	}		
+	}
 %>
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
@@ -81,26 +82,13 @@
 	- in dropdown, sets active with full bar color
 	-->
 
-	<div id="fb-root"></div>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-
 	<sql:query dataSource="${dataSource}" var="div1">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -114,7 +102,7 @@
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link active"
-							href="index.jsp"><fmt:message key="nav_home" /></a></li>
+							href="index"><fmt:message key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -147,25 +135,34 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div>
-						</li>
-						<% if (session.getAttribute("signedIn") != null) {%>
-						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
-						<% } else {%>
-						   <li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
-						<% } %>
+							</div></li>
+						<%
+							if (session.getAttribute("signedIn") != null) {
+						%>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=session.getAttribute("userType")%>"><%=userName%></a></li>
+						<%
+							} else {
+						%>
+						<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+									key="nav_signin" /></a></li>
+						<%
+							}
+						%>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -190,74 +187,74 @@
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head1" />
-							</h4>
+					<div class="col-lg-12">
+						<div class="card">
 							<div class="card-body">
-								<p class="card-text">
-								<div class="fb-page" data-href="https://fb.me/lasteversports"
-									data-tabs="timeline" data-small-header="false"
-									data-adapt-container-width="true" data-hide-cover="false"
-									data-show-facepile="true">
-									<blockquote cite="https://fb.me/lasteversports"
-										class="fb-xfbml-parse-ignore">
-										<a href="https://fb.me/lasteversports"> LastEver Sports</a>
-									</blockquote>
+								<div id="mainCarousel" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img class="d-block w-100"
+												src="https://cdn.discordapp.com/
+												attachments/245306946284945408/398925812612464640/MAGIC.png"
+												alt="First slide">
+										</div>
+										<div class="carousel-item">
+											<img class="d-block w-100"
+												src="https://cdn.discordapp.com
+												/attachments/375038182674399242/417867279934423041/
+												Screenshot_20180225-190433.png"
+												alt="Second slide">
+										</div>
+									</div>
+									<a class="carousel-control-prev" href="#mainCarousel"
+										role="button" data-slide="prev"> <span
+										class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a> <a class="carousel-control-next" href="#mainCarousel"
+										role="button" data-slide="next"> <span
+										class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
 								</div>
-
-
-								</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head2" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-									<iframe
-										src="https://scorestream.com/widgets/scoreboards/vert?userWidgetId=21758"
-										style="padding: 0px; border: 0px; width: 300px; height: 500px; max-height: 500px;"
-										title="Realtime sports scoreboard widget" scrolling="no"
-										frameBorder="0"></iframe>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head3" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-								<div id="plemx-root"></div>
+					<c:choose>
+						<c:when test="${empty news}">
+							<div class="col-lg-12 mb-5 mt-5">
+								<div class="card">
 
-
-								<div style="width: 320px;">
-									<iframe style="display: block;"
-										src="https://cdnres.willyweather.com/widget/loadView.html?id=81845"
-										width="320" height="500" frameborder="0" scrolling="no"></iframe>
-									<a
-										style="display: block; z-index: 1; height: 20px; text-indent: -9999em; margin: -20px 0 0 0; position: relative"
-										href="https://www.willyweather.com/pa/montour-county/ottawa.html"
-										rel="nofollow">Forecast</a>
+									<h4 class="card-header">No News</h4>
+									<div class="card-body"></div>
+									<b style="text-align: center">No News to be found!</b>
 								</div>
-
-								</p>
 							</div>
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${news}" var="n">
+								<div class="col-lg-12 mb-5 mt-5">
+									<div class="card">
+										<h4 class="card-header">
+											<c:out value="${n.title}" />
+										</h4>
+										<div class="card-body">
+											<c:out value="${n.postedTime}" />
+											| By:
+											<c:out value="${n.userName}" />
+											<br></br>
+											<c:out value="${n.content}" escapeXml="false" />
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
-	
+
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">

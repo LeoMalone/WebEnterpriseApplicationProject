@@ -4,49 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- TODO: Cookies in Servlet (implemented in other pages) -->
-<%
-	String userName = null;
-	String sessionID = null;
-
-	Cookie[] cookies = request.getCookies();
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("username"))
-				userName = cookie.getValue();
-		}
-	}
-%>
-
-<!-- if language is not set to French, set language to English -->
-<!-- cookie - future development -->
-<c:if test="${cookie.language eq null}">
-	<%
-		Cookie cookieLanguage = new Cookie("language", "en");
-			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
-			response.addCookie(cookieLanguage);
-	%>
-</c:if>
-<c:if test="${cookie.language ne null}">
-	<%
-		String language = request.getParameter("language");
-			Cookie cookieLanguage;
-			Cookie[] theCookies = request.getCookies();
-
-			for (Cookie tempCookie : theCookies) {
-				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
-						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
-				}
-			}
-	%>
-
-</c:if>
 
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
@@ -115,7 +72,7 @@ select divsionName, divisionID from division where divisionID = ?
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -128,7 +85,7 @@ select divsionName, divisionID from division where divisionID = ?
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -162,7 +119,7 @@ select divsionName, divisionID from division where divisionID = ?
 									<c:otherwise>
 										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -171,7 +128,7 @@ select divsionName, divisionID from division where divisionID = ?
 							if (session.getAttribute("signedIn") != null) {
 						%>
 						<li class="nav-item"><a class="nav-link"
-							href="<%=session.getAttribute("userType")%>"><%=userName%></a></li>
+							href="<%=session.getAttribute("userType")%>">${userName}</a></li>
 						<%
 							} else {
 						%>
@@ -235,7 +192,7 @@ select divsionName, divisionID from division where divisionID = ?
 									<ul class="navbar-nav mr-auto">
 										<li class="nav-item active"><c:forEach var="row"
 												items="${div1.rows}">
-												<a class="nav-link" href="division.jsp?id=${row.divisionID}">
+												<a class="nav-link" href="division?id=${row.divisionID}">
 													<c:out value="${row.divsionName}" />
 												</a>
 											</c:forEach></li>
@@ -264,56 +221,41 @@ select divsionName, divisionID from division where divisionID = ?
 							</div>
 						</div>
 					</div>
-					<!-- TODO: Replace with actual content -->
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
+					<c:choose>
+						<c:when test="${empty news}">
+							<div class="col-lg-12 mb-5 mt-5">
+								<div class="card">
 
-							<h4 class="card-header">
-								<fmt:message key="div_head1" />
-							</h4>
-							<div class="card-body">
-								<sql:query dataSource="${dataSource}" var="result">
-					select t.teamName, t.teamAbbreviation from team t inner join teamxdivision td on td.teamID = t.teamID where td.divisionID = ?
-					<sql:param value="${param.id}" />
-								</sql:query>
-								<table
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head1_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head1_text2" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${result.rowCount == 0}">
-												<td colspan="2" style="text-align: center"><b><fmt:message
-															key="div_noteams" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="row" items="${result.rows}">
-													<tr>
-														<td scope="row"><c:out value="${row.teamName}" /></td>
-														<td><c:out value="${row.teamAbbreviation}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-								<br> I just left this table here so the page wouldn't be so
-								empty! I'm thinking there will be some sort of news/updates and
-								recent scores/upcoming games on the side.
+									<h4 class="card-header">No News</h4>
+									<div class="card-body"></div>
+									<b style="text-align: center">No News to be found!</b>
+									<!-- /.row -->
+								</div>
 							</div>
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${news}" var="n">
+								<div class="col-lg-12 mb-5 mt-5">
+									<div class="card">
+
+										<h4 class="card-header">
+											<c:out value="${n.title}" />
+										</h4>
+										<div class="card-body">
+											<c:out value="${n.postedTime}" />
+											| By:
+											<c:out value="${n.userName}" />
+											<br></br>
+											<c:out value="${n.content}" escapeXml="false" />
+										</div>
+										<!-- /.row -->
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
-
-				<!-- /.row -->
 			</div>
-
 		</div>
 	</fmt:bundle>
 	<!-- Footer -->
