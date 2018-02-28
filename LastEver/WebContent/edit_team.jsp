@@ -29,17 +29,20 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="login" /></title>
+	<title>Last Ever</title>
 </fmt:bundle>
 </head>
+
 <body>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<sql:query dataSource="${dataSource}" var="div1">
+	<!-- TODO: Do in query in Servlet -->
+	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
@@ -84,33 +87,31 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
 												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+							</div></li>							
+						
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -118,81 +119,60 @@
 					</ul>
 				</fmt:bundle>
 			</div>
+
+
 		</div>
+
 	</nav>
-	<div class="main-cover">
-		<!-- Page Content
-		- card with information on it
-		- text, form, button to sign in
-		-->
+
+
+	<fmt:bundle basename="TestBundle">
+		<div class="main-cover">
+		<!-- Page Content -->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">				
+			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Create
-				</h1>
+					${userName}: ${team.teamName}
+				</h1>				
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_createnew" />
+								Edit Team Credentials
 							</h4>
-							<form action="adminCreate" method="POST">
+							<form action="editTeam?=${team.teamId}" method="POST">
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="newUsername"><fmt:message key="signin_user" /></label>
-										<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
+										<label for="editTeamName">Team Name</label>
+										<input type="text" class="form-control" name="editTeamName" value="${team.teamName}">
 									</div>
 									 <div class="form-group">
-									    <label for="newEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
-									 </div>
-									 <div class="form-group">
-										<label for="newPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
-									 </div>	
-									 <div class="form-check">
-									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="createRadio" value="Administrator">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop1" />
-									  </label>									  
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop2" />
-									  </label>
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="createRadio" value="Referee">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop3" />
-									  </label>
-									  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
-									</div>
+									    <label for="editTeamAbbr">Team Abbreviation</label>
+									    <input type="text" class="form-control" name="editTeamAbbr" value="${team.teamAbbreviation}">
+									 </div>									
 								</p>							
 							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
+									<button type="submit" class="btn btn-outline-success">Save</button>	
 								</div>
 							</form>
 						</div>
 					</div>
-				</div>
-				<!-- /.row -->
-				
-			</fmt:bundle>			
+				</div>					
+				<!-- /row -->
+			</fmt:bundle>
 		</div>
 	</div>
-
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
+	</fmt:bundle>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

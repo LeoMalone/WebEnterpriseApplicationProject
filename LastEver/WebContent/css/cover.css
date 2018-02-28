@@ -34,3 +34,7 @@ body {
 .admin-cards {
 	text-align: center;
 }
+
+.nav-link{
+	color: rgb(0, 0, 0);
+}

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -8,11 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.UserBean;
-import dao.EditUser;
+import beans.TeamBean;
+import dao.EditTeam;
 
-
-public class EditUserServlet extends HttpServlet{
+public class EditTeamServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -58,16 +58,15 @@ public class EditUserServlet extends HttpServlet{
 				//get id from url and set userBean id
 				StringBuilder sb = new StringBuilder(request.getQueryString());
 				sb.deleteCharAt(0);
-				UserBean user = new UserBean();
-				user.setId(sb.toString());
+				TeamBean team = new TeamBean();
+				team.setTeamId(sb.toString());
 				
-				if(EditUser.getUserForEdit(user)) {
-					request.setAttribute("user", user);
+				if(EditTeam.getTeamForEdit(team)) {
+					request.setAttribute("userName", userName);
+					request.setAttribute("team", team);
+					RequestDispatcher rd = request.getRequestDispatcher("edit_team.jsp");  
+			        rd.forward(request, response);					
 				}
-				
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("edit_user.jsp");  
-		        rd.forward(request, response);
 			}
 		}
 	}
@@ -77,23 +76,19 @@ public class EditUserServlet extends HttpServlet{
 		
 		response.setContentType("text/html");
 		
-		UserBean user = new UserBean();
+		TeamBean team = new TeamBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
-		String newUsername = request.getParameter("editUsername");
-		String newEmail = request.getParameter("editEmail");
-		String newPassword = request.getParameter("editPass");
-		String userType = request.getParameter("editRadio");
+		String newName = request.getParameter("editTeamName");
+		String newAbbr = request.getParameter("editTeamAbbr");
 		
-		user.setId(sb.toString());
-		user.setUsername(newUsername);
-		user.setEmail(newEmail);
-		user.setPassword(newPassword);
-		user.setUserType(userType);
+		team.setTeamId(sb.toString());
+		team.setTeamName(newName);
+		team.setTeamAbbreviation(newAbbr);
 		
-		if(EditUser.saveChanges(user)) {
-			response.sendRedirect("./adminUsers");
+		if(EditTeam.saveChanges(team)) {
+			response.sendRedirect("./adminTeams?=1");
 		}
 	}	
 }

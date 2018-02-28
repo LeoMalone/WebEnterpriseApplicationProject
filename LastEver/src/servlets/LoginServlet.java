@@ -25,9 +25,42 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {    	
-    	response.setContentType("text/html");	
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
-        rd.forward(request, response);
+    	response.setContentType("text/html");
+		String language = null;
+		
+		if (request.getSession().getAttribute("signedIn") != null) {
+			response.sendRedirect("./index");
+		} else {		
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("language"))
+						language = cookie.getValue();
+				}
+			}
+			if(language == null) {
+				Cookie cookieLanguage = new Cookie("language", "en");
+				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
+				response.addCookie(cookieLanguage);
+			}
+			else {
+	
+				language = request.getParameter("language");
+				Cookie[] theCookies = request.getCookies();
+	
+				for (Cookie tempCookie : theCookies) {
+					if ("language".equals(tempCookie.getName())) {
+						if (language != null)
+							tempCookie.setValue(language);
+						response.addCookie(tempCookie);
+						break;
+					}
+				}			
+				
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
+		        rd.forward(request, response);	
+			}
+		}
     }
     
     /**
@@ -58,18 +91,18 @@ public class LoginServlet extends HttpServlet {
             	session.setAttribute("signedIn", true);
             	
             	// Get user home page
-            	String jsp = null;
+            	String url = null;
                 if(user.getUserType().equals("Administrator")) {
-                	jsp = "admin.jsp";
+                	url = "./admin";
                 } else if(user.getUserType().equals("Referee")) {
-                	jsp = "referee.jsp";
+                	url = "./referee";
                 } else if(user.getUserType().equals("Team Owner")) {
-                	jsp = "teamowner.jsp";
+                	url = "./teamowner";
                 }
                 
                 // redirect to correct login page
-                session.setAttribute("userType", jsp);
-                response.sendRedirect(jsp);
+                session.setAttribute("userType", url);
+                response.sendRedirect(url);
             }            
         } else {
         	 response.sendRedirect("./login");

@@ -49,7 +49,6 @@ public class UserBean {
 		return this.userType;
 	}
 	
-/**************************** SETTERS *****************************/	
 	public void setId(String id) {
 		this.id = id;
 	}

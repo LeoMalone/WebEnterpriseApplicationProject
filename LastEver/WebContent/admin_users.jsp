@@ -4,55 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- If there is no user logged in redirect to login page -->
-<%
-	if (session.getAttribute("signedIn") == null) {
-		response.sendRedirect("login.jsp");
-	}
-
-	String userName = null;
-	String sessionID = null;
-
-	Cookie[] cookies = request.getCookies();
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("username"))
-				userName = cookie.getValue();
-		}
-	}
-%>
-
-
-<!-- if language is not set to French, set language to English -->
-<!-- cookie - future development -->
-
-<c:if test="${cookie.language eq null}">
-	<%
-		Cookie cookieLanguage = new Cookie("language", "en");
-			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
-			response.addCookie(cookieLanguage);
-	%>
-</c:if>
-<c:if test="${cookie.language ne null}">
-	<%
-		String language = request.getParameter("language");
-			Cookie cookieLanguage;
-			Cookie[] theCookies = request.getCookies();
-
-			for (Cookie tempCookie : theCookies) {
-				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
-						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
-				}
-			}
-	%>
-</c:if>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -165,7 +116,7 @@
 							 -->
 
 						<li class="nav-item"><a class="nav-link active"
-							href="admin.jsp"><%=userName%></a></li>
+							href="./admin">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 						<li class="nav-item">
@@ -192,19 +143,20 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<%=userName%>: Users
+					${userName}: Users
 				</h1>
 				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">				
 							<table class="table">
-								<thead>
+								<thead class="thead-dark">
 								    <tr>
 								      <th scope="col">Username</th>
 								      <th scope="col">User Type</th>
 								      <th scope="col">Email Address</th>
 								      <th scope="col">Password</th>
+								      <th scope="col"></th>
 								    </tr>
 								</thead>
 							    <c:forEach items="${userList}" var="user">
@@ -214,7 +166,7 @@
 							        	<td>${user.emailAddress}</td>
 							        	<td>${user.password}</td>
 							        	<td>
-							        		<a href="./editUser?=${user.id}" class="btn btn-secondary btn-sm">
+							        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
 							        			<i class="fa fa-edit"></i> 
 											</a>
 										</td>		            
