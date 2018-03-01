@@ -70,6 +70,7 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<link href="css/carousel.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -101,8 +102,8 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link active"
-							href="index"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link active" href="index"><fmt:message
+									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -134,8 +135,7 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
-											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+											<a class="dropdown-item" href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -187,22 +187,20 @@
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-8">
 						<div class="card">
 							<div class="card-body">
-								<div id="mainCarousel" class="carousel slide" data-ride="carousel">
+								<div id="mainCarousel" class="carousel slide"
+									data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="carousel-item active">
 											<img class="d-block w-100"
-												src="https://cdn.discordapp.com/
-												attachments/245306946284945408/398925812612464640/MAGIC.png"
+												src="https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080"
 												alt="First slide">
 										</div>
 										<div class="carousel-item">
 											<img class="d-block w-100"
-												src="https://cdn.discordapp.com
-												/attachments/375038182674399242/417867279934423041/
-												Screenshot_20180225-190433.png"
+												src="https://images.pexels.com/photos/17598/pexels-photo.jpg?w=1920&h=1080"
 												alt="Second slide">
 										</div>
 									</div>
@@ -216,6 +214,36 @@
 										<span class="sr-only">Next</span>
 									</a>
 								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-header">Current Weather</h4>
+								<div id="openweathermap-widget-15"></div>
+								<script>
+									window.myWidgetParam ? window.myWidgetParam
+											: window.myWidgetParam = [];
+									window.myWidgetParam
+											.push({
+												id : 15,
+												cityid : '6094817',
+												appid : 'a4e18466ea056cf88f0ca54293678bfc',
+												units : 'metric',
+												containerid : 'openweathermap-widget-15',
+											});
+									(function() {
+										var script = document
+												.createElement('script');
+										script.async = true;
+										script.charset = "utf-8";
+										script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+										var s = document
+												.getElementsByTagName('script')[0];
+										s.parentNode.insertBefore(script, s);
+									})();
+								</script>
 							</div>
 						</div>
 					</div>
