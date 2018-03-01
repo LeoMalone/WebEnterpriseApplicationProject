@@ -143,7 +143,7 @@
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					${userName}: Admin Control Panel
-				</h1>w
+				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
 					<div class="row">

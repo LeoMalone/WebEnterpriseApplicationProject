@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -75,7 +77,8 @@ public class LoginServlet extends HttpServlet {
         String loginPass = request.getParameter("loginPass");
         
         // Create new userBean
-        UserBean user = new UserBean(loginEmail, loginPass);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        UserBean user = new UserBean(loginEmail, loginPass, timestamp);
         
         // If login with given userBean is successful
         if(Login.validateUserLogin(user)) {

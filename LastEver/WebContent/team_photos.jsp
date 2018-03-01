@@ -9,20 +9,20 @@
 <!-- ----------------------------------------------------------------------------- -->
 <!-- If there is no user logged in redirect to login page -->
 <%
-	if(session.getAttribute("signedIn") == null) {
+	if (session.getAttribute("signedIn") == null) {
 		response.sendRedirect("login.jsp");
 	}
 
 	String userName = null;
 	String sessionID = null;
-	
+
 	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) 
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("username"))
 				userName = cookie.getValue();
 		}
-	}		
+	}
 %>
 
 
@@ -74,10 +74,11 @@
 	password="lastever" />
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- Fontawesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -93,7 +94,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index"><img
+			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -104,8 +105,9 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="index"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+									key="nav_home" /></a></li>
+
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -137,7 +139,7 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -163,7 +165,7 @@
 							 -->
 
 						<li class="nav-item"><a class="nav-link active"
-							href="teamowner.jsp"><%=userName%></a></li>
+							href="admin.jsp"><%=userName%></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 						<li class="nav-item">
@@ -185,57 +187,44 @@
 		</div>
 	</nav>
 
-	
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<%=userName%>: 
-					<fmt:message key="signin_prop2"/> Control Panel
+					<%=userName%>: Users
 				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Roster
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Add/Remove/Edit Players on Team Roster
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster" class="btn btn-outline-light">Go To Roster</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Photos
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Add Team Photo and Team Logo
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./teamPhotos" class="btn btn-outline-light">Go To Roster</a>
-								</div>
-							</div>
+				<a href="/createUser" class="btn btn-success">Create New User</a>					
+				<div class="row">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">				
+							<table class="table">
+								<thead>
+								    <tr>
+								      <th scope="col">Username</th>
+								      <th scope="col">User Type</th>
+								      <th scope="col">Email Address</th>
+								      <th scope="col">Password</th>
+								    </tr>
+								</thead>
+							    <c:forEach items="${userList}" var="user">
+							       <c:set var="teamName" value="<%=userName%>"/>
+							        <tr>
+							        	<td>${user.username}</td>	
+							        	<td>${user.userType}</td>
+							        	<td>${user.emailAddress}</td>
+							        	<td>${user.password}</td>
+							        	<td>
+							        		<a href="./rules_summary" class="btn btn-secondary btn-sm">
+							        			<i class="fa fa-edit"></i> 
+											</a>
+										</td>		            
+							        </tr>
+							    </c:forEach>
+							</table>				
 						</div>
 					</div>
-				</div>
-				<div>
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-outline-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
@@ -243,18 +232,16 @@
 
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
-	<div class="container-fluid">
-		<p class="m-0 text-center text-white">
-			Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-		</p>
-	</div>
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

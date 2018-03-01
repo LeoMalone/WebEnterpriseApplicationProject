@@ -152,20 +152,34 @@
 							<table class="table">
 								<thead class="thead-dark">
 								    <tr>
-								      <th scope="col">Username</th>
-								      <th scope="col">User Type</th>
-								      <th scope="col">Email Address</th>
-								      <th scope="col">Password</th>
-								      <th scope="col"></th>
+								    	<th scope="col">User ID</th>
+								    	<th scope="col">Username</th>
+								    	<th scope="col">First Name</th>
+								    	<th scope="col">Last Name</th>
+									    <th scope="col">User Type</th>
+									    <th scope="col">Email Address</th>
+									    <th scope="col">Password</th>
+									    <th scope="col">Email Validated</th>
+									    <th scope="col">Account Created</th>
+									    <th scope="col">Last Account Update</th>
+									    <th scope="col">Last Login</th>
+									    <th scope="col"></th>
 								    </tr>
 								</thead>
 							    <c:forEach items="${userList}" var="user">
 							        <tr>
-							        	<td>${user.username}</td>	
-							        	<td>${user.userType}</td>
-							        	<td>${user.emailAddress}</td>
-							        	<td>${user.password}</td>
-							        	<td>
+							        	<td scope="col">${user.id}</td>
+							        	<td scope="col">${user.username}</td>
+							        	<td scope="col">${user.firstName}</td>
+							        	<td scope="col">${user.lastName}</td>
+							        	<td scope="col">${user.userType}</td>
+							        	<td scope="col">${user.emailAddress}</td>
+							        	<td scope="col">${user.password}</td>
+							        	<td scope="col">${user.emailValidated}</td>
+							        	<td scope="col">${user.accountCreated}</td>
+							        	<td scope="col">${user.accountUpdated}</td>
+							        	<td scope="col">${user.lastLogin}</td>
+							        	<td scope="col">
 							        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
 							        			<i class="fa fa-edit"></i> 
 											</a>

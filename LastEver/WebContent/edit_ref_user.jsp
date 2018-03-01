@@ -4,55 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- If there is no user logged in redirect to login page -->
-<%
-	if(session.getAttribute("signedIn") == null) {
-		response.sendRedirect("login.jsp");
-	}
-
-	String userName = null;
-	String sessionID = null;
-	
-	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) 
-				userName = cookie.getValue();
-		}
-	}		
-%>
-
-
-<!-- if language is not set to French, set language to English -->
-<!-- cookie - future development -->
-
-<c:if test="${cookie.language eq null}">
-	<%
-		Cookie cookieLanguage = new Cookie("language", "en");
-			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
-			response.addCookie(cookieLanguage);
-	%>
-</c:if>
-<c:if test="${cookie.language ne null}">
-	<%
-		String language = request.getParameter("language");
-			Cookie cookieLanguage;
-			Cookie[] theCookies = request.getCookies();
-
-			for (Cookie tempCookie : theCookies) {
-				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
-						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
-				}
-			}
-	%>
-</c:if>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -79,33 +30,37 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>LastEver</title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
+	<sql:query dataSource="${dataSource}" var="div1">
+	select divisionID, divsionName from division
+	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index"><img
+			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="index"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+									key="nav_home" /></a></li>
+
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -137,44 +92,25 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
 
 						<li class="nav-item"><a class="nav-link active"
-							href="teamowner.jsp"><%=userName%></a></li>
+							href="./referee">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en"
-										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr"
-										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -184,70 +120,83 @@
 			</div>
 		</div>
 	</nav>
-
-	
 	<div class="main-cover">
-		<!-- Page Content -->
+		<!-- Page Content
+		- card with information on it
+		- text, form, button to sign in
+		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					<%=userName%>: 
-					<fmt:message key="signin_prop2"/> Control Panel
+					${userName}: Edit ${user.username}
 				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Roster
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Add/Remove/Edit Players on Team Roster
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster" class="btn btn-outline-light">Go To Roster</a>
-								</div>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Edit User Credentials
+							</h4>
+							<form action="editRefUser?=${user.id}" method="POST">
+							<div class="card-body">
+								<p class="card-text">
+									<div class="form-group">
+										<label for="newUsername"><fmt:message key="signin_user" /></label>
+										<input type="text" class="form-control" name="editUsername" value="${user.username}">
+									</div>
+									 <div class="form-group">
+									    <label for="newEmail"><fmt:message key="signin_email" /></label>
+									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
+									 </div>
+									 <div class="form-group">
+										<label for="newPass"><fmt:message key="signin_password" /></label>
+										<input type="password" class="form-control" name="editPass" value="${user.password}">
+									 </div>									 	
+									 <div class="form-check">
+									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>
+									  <label class="form-check-label" for="editRadio">
+									    <fmt:message key="signin_prop1" />
+									  </label>									  
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''}>
+									  <label class="form-check-label" for="editRadio">
+									    <fmt:message key="signin_prop2" />
+									  </label>
+									</div>
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''}>
+									  <label class="form-check-label" for="editRadio">
+									    <fmt:message key="signin_prop3" />
+									  </label>
+									</div>									
+								</p>							
 							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Photos
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Add Team Photo and Team Logo
-									</p>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-outline-success">Save</button>	
 								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./teamPhotos" class="btn btn-outline-light">Go To Roster</a>
+								<div class="card-footer">
+									<button type="submit" formaction="deleteUser?=${user.id}" class="btn btn-outline-success">Delete User</button>	
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
-				<div>
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-outline-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
-				<!-- /row -->
-			</fmt:bundle>
+				<!-- /.row -->
+				
+				<form action="deleteUser?=${user.id}" method="post">
+					<button type="submit" class="btn btn-danger float-right">Delete User</button>
+				</form>				
+			</fmt:bundle>			
 		</div>
 	</div>
 
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
-	<div class="container-fluid">
-		<p class="m-0 text-center text-white">
-			Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-		</p>
-	</div>
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->

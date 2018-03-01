@@ -135,6 +135,47 @@
 	</servlet-mapping>
 
 	<servlet>
+        <servlet-name>RefereeHome</servlet-name>
+        <servlet-class>servlets.RefHomeServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>RefereeHome</servlet-name>
+    	<url-pattern>/referee</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RefereeUsers</servlet-name>
+        <servlet-class>servlets.RefUsersServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>RefereeUsers</servlet-name>
+    	<url-pattern>/refUsers</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EditRefUserServlet</servlet-name>
+        <servlet-class>servlets.EditRefUserServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>EditRefUserServlet</servlet-name>
+    	<url-pattern>/editRefUser</url-pattern>
+    </servlet-mapping>
+    
+    
+     <servlet>
+        <servlet-name>DeleteRefUserServlet</servlet-name>
+        <servlet-class>servlets.DeleteRefUserServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>DeleteRefUserServlet</servlet-name>
+    	<url-pattern>/deleteRefUser</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ResultsServlet</servlet-name>
 		<servlet-class>servlets.ResultsServlet</servlet-class>
 	</servlet>

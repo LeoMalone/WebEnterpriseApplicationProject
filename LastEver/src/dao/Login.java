@@ -24,12 +24,13 @@ public class Login {
 		boolean status = false;				// query status
 	    Connection conn = null;				// DB connection
 	    PreparedStatement getusers = null;	// SQL query
+	    PreparedStatement lastLogin = null;
 	    ResultSet resultSet = null;			// returned query result set
 	
 	    // Connect to Database and execute SELECT query with UserBean data
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getusers = conn.prepareStatement("select username, userType, emailAddress, password from users where emailAddress=? and password=?");
+	        getusers = conn.prepareStatement("select username, userType, emailAddress, userID, password from users where emailAddress=? and password=?");
 	        getusers.setString(1, user.getEmailAddress());
 	        getusers.setString(2, user.getPassword());
 	        resultSet = getusers.executeQuery();
@@ -39,6 +40,11 @@ public class Login {
 	        if(status) {
 	        	user.setUsername(resultSet.getString(1));
 	        	user.setUserType(resultSet.getString(2));
+	        	user.setId(resultSet.getString(4));
+	        	lastLogin = conn.prepareStatement("UPDATE users SET lastLogin=? WHERE userID=?;");
+	        	lastLogin.setTimestamp(1, user.getLastLogin());
+	        	lastLogin.setString(2, user.getId());
+	        	lastLogin.executeUpdate();
 	        }
 	        
 	    // handle all possible exceptions
@@ -62,6 +68,13 @@ public class Login {
 	        if (resultSet != null) {
 	            try {
 	            	resultSet.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (lastLogin != null) {
+	            try {
+	            	lastLogin.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }

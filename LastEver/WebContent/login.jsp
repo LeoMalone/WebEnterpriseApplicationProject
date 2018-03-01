@@ -171,6 +171,14 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
+										<label for="newFirstName">First Name</label>
+										<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+									</div>
+									<div class="form-group">
+										<label for="newLastname">Last Name</label>
+										<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+									</div>
+									<div class="form-group">
 										<label for="newUsername"><fmt:message key="signin_user" /></label>
 										<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
 									</div>

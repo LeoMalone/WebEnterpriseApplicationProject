@@ -251,7 +251,6 @@
 						<c:when test="${empty news}">
 							<div class="col-lg-12 mb-5 mt-5">
 								<div class="card">
-
 									<h4 class="card-header">No News</h4>
 									<div class="card-body"></div>
 									<b style="text-align: center">No News to be found!</b>

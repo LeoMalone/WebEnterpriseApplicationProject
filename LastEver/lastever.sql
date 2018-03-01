@@ -468,7 +468,7 @@ CREATE TABLE `users` (
   `emailValidated` tinyint(1) NOT NULL,
   `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `accountUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `lastLogin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `lastLogin` timestamp NULL DEFAULT NULL,
   `userType` varchar(100) NOT NULL,
   `refereeID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`userID`),
@@ -485,7 +485,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','0000-00-00 00:00:00','0000-00-00 00:00:00','Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-01 20:01:40','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Team Owner',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-01 14:56:02
+-- Dump completed on 2018-03-01 15:09:55
