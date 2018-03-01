@@ -195,8 +195,28 @@
 		<url-pattern>/statistics</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>DivisionServlet</servlet-name>
+		<servlet-class>servlets.DivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DivisionServlet</servlet-name>
+		<url-pattern>/division</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>IndexServlet</servlet-name>
+		<servlet-class>servlets.IndexServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	
     <display-name>LastEver</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index</welcome-file>
 	</welcome-file-list>
 </web-app>

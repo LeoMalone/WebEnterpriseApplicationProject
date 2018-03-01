@@ -10,13 +10,14 @@
 <%
 	String userName = null;
 	String sessionID = null;
-	
+
 	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("username")) userName = cookie.getValue();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("username"))
+				userName = cookie.getValue();
 		}
-	}		
+	}
 %>
 <!-- if language is not set to French, set language to English -->
 <!-- cookie - future development -->
@@ -69,6 +70,7 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<link href="css/carousel.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -81,26 +83,13 @@
 	- in dropdown, sets active with full bar color
 	-->
 
-	<div id="fb-root"></div>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-
 	<sql:query dataSource="${dataSource}" var="div1">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -113,8 +102,8 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link active"
-							href="index.jsp"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link active" href="index"><fmt:message
+									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -146,26 +135,34 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
-											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+											<a class="dropdown-item" href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div>
-						</li>
-						<% if (session.getAttribute("signedIn") != null) {%>
-						    <li class="nav-item"><a class="nav-link" href="<%=session.getAttribute("userType")%>"><%=userName %></a></li>
-						<% } else {%>
-						   <li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
-						<% } %>
+							</div></li>
+						<%
+							if (session.getAttribute("signedIn") != null) {
+						%>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=session.getAttribute("userType")%>"><%=userName%></a></li>
+						<%
+							} else {
+						%>
+						<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+									key="nav_signin" /></a></li>
+						<%
+							}
+						%>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -190,91 +187,101 @@
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head1" />
-							</h4>
+					<div class="col-lg-8">
+						<div class="card">
 							<div class="card-body">
-								<p class="card-text">
-								<div class="fb-page" data-href="https://fb.me/lasteversports"
-									data-tabs="timeline" data-small-header="false"
-									data-adapt-container-width="true" data-hide-cover="false"
-									data-show-facepile="true">
-									<blockquote cite="https://fb.me/lasteversports"
-										class="fb-xfbml-parse-ignore">
-										<a href="https://fb.me/lasteversports"> LastEver Sports</a>
-									</blockquote>
+								<div id="mainCarousel" class="carousel slide"
+									data-ride="carousel">
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img class="d-block w-100"
+												src="https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080"
+												alt="First slide">
+										</div>
+										<div class="carousel-item">
+											<img class="d-block w-100"
+												src="https://images.pexels.com/photos/17598/pexels-photo.jpg?w=1920&h=1080"
+												alt="Second slide">
+										</div>
+									</div>
+									<a class="carousel-control-prev" href="#mainCarousel"
+										role="button" data-slide="prev"> <span
+										class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a> <a class="carousel-control-next" href="#mainCarousel"
+										role="button" data-slide="next"> <span
+										class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
 								</div>
-
-
-								</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head2" />
-							</h4>
+					<div class="col-lg-4">
+						<div class="card">
 							<div class="card-body">
-								<p class="card-text">
-									<iframe
-										src="https://scorestream.com/widgets/scoreboards/vert?userWidgetId=21758"
-										style="padding: 0px; border: 0px; width: 300px; height: 500px; max-height: 500px;"
-										title="Realtime sports scoreboard widget" scrolling="no"
-										frameBorder="0"></iframe>
-								</p>
+								<h4 class="card-header">Current Weather</h4>
+								<div id="openweathermap-widget-15"></div>
+								<script>
+									window.myWidgetParam ? window.myWidgetParam
+											: window.myWidgetParam = [];
+									window.myWidgetParam
+											.push({
+												id : 15,
+												cityid : '6094817',
+												appid : 'a4e18466ea056cf88f0ca54293678bfc',
+												units : 'metric',
+												containerid : 'openweathermap-widget-15',
+											});
+									(function() {
+										var script = document
+												.createElement('script');
+										script.async = true;
+										script.charset = "utf-8";
+										script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+										var s = document
+												.getElementsByTagName('script')[0];
+										s.parentNode.insertBefore(script, s);
+									})();
+								</script>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="home_head3" />
-							</h4>
-							<div class="card-body">
-								<p class="card-text">
-								<div id="plemx-root"></div>
-
-
-								<div style="width: 320px;">
-									  <div id="plemx-root"></div> 
-  <script type="text/javascript"> 
-
-  var _plm = _plm || [];
-  _plm.push(['_btn', 75282]); 
-  _plm.push(['_loc','caon0512']);
-  _plm.push(['location', document.location.host ]);
-   (function(d,e,i) {
-  if (d.getElementById(i)) return;
-  var px = d.createElement(e);
-  px.type = 'text/javascript';
-  px.async = true;
-  px.id = i;
-  px.src = ('https:' == d.location.protocol ? 'https:' : 'http:') + '//widget.twnmm.com/js/btn/pelm.js?orig=en_ca';
-  var s = d.getElementsByTagName('script')[0];
-
-  var py = d.createElement('link');
-  py.rel = 'stylesheet'
-  py.href = ('https:' == d.location.protocol ? 'https:' : 'http:') + '//widget.twnmm.com/styles/btn/styles.css'
-
-  s.parentNode.insertBefore(px, s);
-  s.parentNode.insertBefore(py, s);
-})(document, 'script', 'plmxbtn');</script>
-
+					<c:choose>
+						<c:when test="${empty news}">
+							<div class="col-lg-12 mb-5 mt-5">
+								<div class="card">
+									<h4 class="card-header">No News</h4>
+									<div class="card-body"></div>
+									<b style="text-align: center">No News to be found!</b>
 								</div>
-
-								</p>
 							</div>
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${news}" var="n">
+								<div class="col-lg-12 mb-5 mt-5">
+									<div class="card">
+										<h4 class="card-header">
+											<c:out value="${n.title}" />
+										</h4>
+										<div class="card-body">
+											<c:out value="${n.postedTime}" />
+											| By:
+											<c:out value="${n.userName}" />
+											<br></br>
+											<c:out value="${n.content}" escapeXml="false" />
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
-	
+
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">

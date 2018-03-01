@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 /**
  * The ConnectionManager class is used whenever
@@ -10,25 +11,28 @@ import java.sql.DriverManager;
 public class ConnectionManager {
 	
 	// Database Credentials
-	private static String url = "jdbc:mysql://localhost:3306/";
-    private static String dbName = "lastever";
+	private static String url = "jdbc:mysql://localhost:3306/lastever";
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String userName = "admin";
-    private static String dbPassword = "lastever";
 	
     /**
      * The Connection method uses the database credentials to connect to our database
      * @return Connection - db connection
      */
 	public static Connection getConnection() {
+		Properties info = new Properties();
 		
 		// Connection var to be returned
 		Connection conn = null;		
 		
 		// try connecting to db with given credentials
 		try {
+			info.setProperty("user", "admin");
+			info.setProperty("password", "lastever");
+			info.setProperty("javax.net.ssl.trustStore","/certs/laststore");
+			info.setProperty("javax.net.ssl.trustStorePassword","lastever");
+			info.setProperty("useSSL", "true");
 			Class.forName(driver).newInstance();
-			conn = DriverManager.getConnection(url + dbName, userName, dbPassword);
+			conn = DriverManager.getConnection(url, info);
 		
 		// Catch all possible exceptions
 		} catch(Exception e) {
