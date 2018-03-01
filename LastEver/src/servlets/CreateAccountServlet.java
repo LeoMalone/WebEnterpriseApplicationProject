@@ -33,6 +33,7 @@ public class CreateAccountServlet extends HttpServlet {
 
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
+		
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");

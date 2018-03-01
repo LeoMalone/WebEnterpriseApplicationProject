@@ -2,7 +2,48 @@
 <web-app
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-    version="2.5">    
+    version="2.5">
+    
+    <servlet>
+        <servlet-name>CreatTeam</servlet-name>
+        <servlet-class>servlets.CreatTeamServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>CreatTeam</servlet-name>
+    	<url-pattern>/teamCreate</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EditTeam</servlet-name>
+        <servlet-class>servlets.EditTeamServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>EditTeam</servlet-name>
+    	<url-pattern>/editTeam</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>servlets.AdminHomeServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>AdminHome</servlet-name>
+    	<url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminTeams</servlet-name>
+        <servlet-class>servlets.AdminTeamsServlet</servlet-class>
+    </servlet>     
+    
+    <servlet-mapping>
+    	<servlet-name>AdminTeams</servlet-name>
+    	<url-pattern>/adminTeams</url-pattern>
+    </servlet-mapping>
+      
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlets.LogoutServlet</servlet-class>
@@ -12,6 +53,7 @@
     	<servlet-name>LogoutServlet</servlet-name>
     	<url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
