@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -34,15 +34,16 @@ public class CreateAccountServlet extends HttpServlet {
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
 		
+		String newFirstName = request.getParameter("newFirstName");
+		String newLastName = request.getParameter("newLastName");
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
 		String userType = request.getParameter("createRadio");
 
 		// If any parameter is null
-		if (newUsername == null || newEmail == null || newPassword == null || userType == null) {			
-			RequestDispatcher rd = request.getRequestDispatcher("./login");
-			rd.forward(request, response);
+		if (newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {			
+			response.sendRedirect("./login");
 			
 		} else {
 			// Get user type
@@ -53,9 +54,11 @@ public class CreateAccountServlet extends HttpServlet {
 				ut = REF;
 			if (userType.equals(TEAM_OW))
 				ut = TEAM_OW;
-
+			
+			
 			// Create new userBean
-			UserBean user = new UserBean(newUsername, newEmail, newPassword, ut);
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, newPassword, ut, timestamp);
 
 			// If createNewUser method returns true
 			if (CreateAccount.createNewUser(user)) {
@@ -70,23 +73,21 @@ public class CreateAccountServlet extends HttpServlet {
 					session.setAttribute("signedIn", true);
 
 					// Get userType homepage
-					String jsp = null;
+					String url = null;
 					if (user.getUserType().equals("Administrator")) {
-						jsp = "admin.jsp";
+						url = "./admin";
 					} else if (user.getUserType().equals("Referee")) {
-						jsp = "referee.jsp";
+						url = "./referee";
 					} else if (user.getUserType().equals("Team Owner")) {
-						jsp = "teamowner.jsp";
+						url = "./teamowner";
 					}
 					
 					// redirect to home page
-					session.setAttribute("userType", jsp);
-	                response.sendRedirect(jsp);
-	                
-				} else {
-					response.sendRedirect("./login");
+					session.setAttribute("userType", url);
+	                response.sendRedirect(url);
 		        }
 			}
+			response.sendRedirect("./login");		
 		}		
 	}
 }

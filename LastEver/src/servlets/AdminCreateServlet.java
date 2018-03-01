@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -100,7 +102,7 @@ public class AdminCreateServlet extends HttpServlet {
 				ut = TEAM_OW;
 	
 			// Create new userBean
-			UserBean user = new UserBean(newUsername, newEmail, newPassword, ut);
+			UserBean user = new UserBean(newUsername, newEmail, newPassword, ut, "", "", new Timestamp(55L));
 	
 			// If createNewUser method returns true
 			if(CreateAccount.createNewUser(user)) {

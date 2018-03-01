@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import db.ConnectionManager;
@@ -21,16 +22,22 @@ public class AdminUsers {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allUsers = conn.prepareStatement("select userID, username, userType, emailAddress, password from users");
+	        allUsers = conn.prepareStatement("select userID, userFirstName, userLastName, username, userType, emailAddress, password, emailValidated, accountCreated, accountUpdated, lastLogin from users");
 	        rs = allUsers.executeQuery();	              
 	        
 	        while(rs.next()) {
 	        	UserBean ub = new UserBean();
 	        	ub.setId(rs.getString(1));
-	        	ub.setUsername(rs.getString(2));
-	        	ub.setUserType(rs.getString(3));
-	        	ub.setEmail(rs.getString(4));
-	        	ub.setPassword(rs.getString(5));
+	        	ub.setFirstName(rs.getString(2));
+	        	ub.setLastName(rs.getString(3));
+	        	ub.setUsername(rs.getString(4));
+	        	ub.setUserType(rs.getString(5));
+	        	ub.setEmail(rs.getString(6));
+	        	ub.setPassword(rs.getString(7));
+	        	ub.setEmailValidated(rs.getInt(8));
+	        	ub.setAccountCreated(rs.getString(9));
+	        	ub.setLastAccountUpdate(rs.getString(10));
+	        	ub.setLastLogin(rs.getString(10));	        	
 	        	userList.add(ub);	        	
 	        }
 	        
