@@ -143,7 +143,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Referee Control Panel
+					${userName}: Your Referee Home Page
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -151,7 +151,7 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Users
+									${userName}'s Profile
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
@@ -159,14 +159,14 @@
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./refUsers?=${user.id}" class="btn btn-outline-light">Go To Profile</a>
+								 	<a href="./refUsers?=${id}" class="btn btn-outline-light">Go To Profile</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Your Assignments
+									${userName}'s Assignments
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
@@ -174,7 +174,7 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./refAssignments?=${user.id}" class="btn btn-outline-light">Go To Your Assignments</a>
+								 	<a href="./refAssignments?=${id}" class="btn btn-outline-light">Go To Your Assignments</a>
 								</div>
 							</div>
 						</div>

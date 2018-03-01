@@ -30,6 +30,13 @@ public class RefHomeServlet extends HttpServlet {
 						userName = cookie.getValue();
 					else if (cookie.getName().equals("language"))
 						language = cookie.getValue();
+					else if (cookie.getName().equals("userType"))
+					{
+						if (cookie.getValue() != "referee") //if they aren't a referee, don't let them access
+							{
+								response.sendRedirect("./login");
+							}
+					}
 				}
 			}
 			if(language == null) {

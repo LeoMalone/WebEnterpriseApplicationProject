@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -8,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.RefBean;
+import beans.TeamBean;
+import dao.AdminTeams;
 import dao.EditRefUser;
 
 
@@ -55,14 +61,26 @@ public class EditRefUserServlet extends HttpServlet{
 					}
 				}
 			
-				//get id from url and set userBean id
+				List<TeamBean> tbl = new ArrayList<TeamBean>();
+				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
 				StringBuilder sb = new StringBuilder(request.getQueryString());
-				sb.deleteCharAt(0);
+				sb.deleteCharAt(0);				
+				AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
+				
+				request.setAttribute("currentId", sb.toString());
+				request.setAttribute("userName", userName);
+				request.setAttribute("divList", dbl);
+				request.setAttribute("teamList", tbl);
+				
+				
+				//get id from url and set userBean id
+				StringBuilder sbref = new StringBuilder(request.getQueryString());
+				sbref.deleteCharAt(0);
 				RefBean user = new RefBean();
-				user.setId(sb.toString());
+				user.setId(sbref.toString());
 				
 				if(EditRefUser.getUserForEdit(user)) {
-					request.setAttribute("user", user);
+					request.setAttribute("firstName", user.getFirstName());
 				}
 				
 				request.setAttribute("userName", userName);

@@ -128,7 +128,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: Edit ${user.username}
+					${userName}: Edit
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
@@ -141,7 +141,7 @@
 								<p class="card-text">
 									<div class="form-group">
 										<label for="newUsername"><fmt:message key="signin_user" /></label>
-										<input type="text" class="form-control" name="editUsername" value="${user.username}">
+										<input type="text" class="form-control" name="editUsername" value="${userName}">
 									</div>
 									 <div class="form-group">
 									    <label for="newEmail"><fmt:message key="signin_email" /></label>
