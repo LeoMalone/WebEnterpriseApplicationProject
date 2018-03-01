@@ -117,12 +117,12 @@ CREATE TABLE `news` (
   `newsID` bigint(20) NOT NULL AUTO_INCREMENT,
   `userID` bigint(20) NOT NULL,
   `newsTitle` varchar(250) NOT NULL,
-  `newsTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `newsTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `newsContent` varchar(10000) NOT NULL,
   PRIMARY KEY (`newsID`),
   KEY `NewsToUser` (`userID`),
   CONSTRAINT `NewsToUser` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,6 +131,7 @@ CREATE TABLE `news` (
 
 LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` VALUES (1,1,'Test Post','2018-02-26 20:06:54','This is a test of the news system. Hopefully it works and everything goes as planned.\r Do the new lines work in MySQL? We\'re about to find out if it does. I have a feeling that it doesn\'t and we may need to store\r some sort of html code in here. It\'ll have to be super specific tags so that it doesn\'t become an issue. <br> <br>\r I put in some <b>html tags</b> and added a new line. How fancy! I wonder if other stuff will work as well, I will add an image\r to this post for testing purposes. It\'ll be something really stupid though so w/e.<br><br> <img src=\"https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg\"\r height=\"315\" width=\"560\">'),(2,1,'Another test post','2018-03-01 19:40:42','<center><img src=\"https://images.pexels.com/photos/17598/pexels-photo.jpg\" width=\"560\" height=\"315\"></center> <br><br>\r This is another test post how about that! This time the image is at the start of the post and not at the end! Fancy! So I guess I\'ll put\r some somewhat beliveable content in that the games this week will continue as normal after nothing happened last week. At all. Now\r Stop asking about it please. We are getting pretty close to the end and the playoff spots can still be determined. It\'s anyones game.\r Now if you\'ll excuse me I have a website to create. <br><br> Ok, I\'m not being fully serious here but I think it\'s kinda cool.\r Having to escape the text all the time is getting annoying but what can you do? Well do not do everything from MySQL for starters.\r Hopefully nothing breaks and the spacing between the cards is good and I won\'t have to do some fixing. I doubt it but we shall see.\r Have fun this week everyone! ');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,6 +158,7 @@ CREATE TABLE `newsxtags` (
 
 LOCK TABLES `newsxtags` WRITE;
 /*!40000 ALTER TABLE `newsxtags` DISABLE KEYS */;
+INSERT INTO `newsxtags` VALUES (1,1),(2,1),(1,2);
 /*!40000 ALTER TABLE `newsxtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +384,7 @@ CREATE TABLE `tags` (
   `tagID` bigint(20) NOT NULL AUTO_INCREMENT,
   `tagDescription` varchar(100) NOT NULL,
   PRIMARY KEY (`tagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,6 +393,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'Mens'),(2,'Womens'),(3,'Co-Ed'),(4,'Site News');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,8 +466,8 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `emailAddress` varchar(100) NOT NULL,
   `emailValidated` tinyint(1) NOT NULL,
-  `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `accountUpdated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `accountUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lastLogin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `userType` varchar(100) NOT NULL,
   `refereeID` bigint(20) DEFAULT NULL,
@@ -652,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-26 19:09:35
+-- Dump completed on 2018-03-01 14:56:02
