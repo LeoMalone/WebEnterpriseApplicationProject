@@ -31,11 +31,6 @@ select divsionName, divisionID from division where divisionID = ?
 <sql:param value="${param.id}" />
 </sql:query>
 
-<%
-	int rank = 1;
-	pageContext.setAttribute("rank", rank);
-%>
-
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
