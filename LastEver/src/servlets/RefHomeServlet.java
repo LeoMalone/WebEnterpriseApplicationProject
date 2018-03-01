@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.DivisionBean;
+import beans.RefBean;
+import beans.TeamBean;
+import dao.AdminTeams;
+import dao.EditRefUser;
 
 public class RefHomeServlet extends HttpServlet {
 
@@ -57,8 +65,21 @@ public class RefHomeServlet extends HttpServlet {
 						break;
 					}
 				}		
-					
+				
+				
+				
+				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
+				
 				request.setAttribute("userName", userName);
+				request.setAttribute("divList", dbl);
+
+				//get id from url and set userBean id
+				RefBean user = new RefBean();
+				
+				if(EditRefUser.getUserForEdit(user)) {
+					request.setAttribute("firstName", user.getFirstName());
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("referee.jsp");  
 		        rd.forward(request, response);	
 			}
