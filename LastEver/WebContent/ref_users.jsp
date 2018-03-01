@@ -25,10 +25,11 @@
 	password="lastever" />
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- Fontawesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -93,8 +94,7 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div>
-						</li>
+							</div></li>
 
 						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
 						<!-- 
@@ -143,51 +143,38 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Referee Control Panel
-				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										View and Edit Your Referee Profile
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./refUsers?=${user.id}" class="btn btn-outline-light">Go To Profile</a>
-								</div>
-							</div>
+					${userName}: Users
+				</h1>					
+				<div class="row">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">				
+							<table class="table">
+								<thead class="thead-dark">
+								    <tr>
+								      <th scope="col">Username</th>
+								      <th scope="col">User Type</th>
+								      <th scope="col">Email Address</th>
+								      <th scope="col">Password</th>
+								      <th scope="col"></th>
+								    </tr>
+								</thead>
+							    <c:forEach items="${refUserList}" var="user">
+							        <tr>
+							        	<td>${user.username}</td>	
+							        	<td>${user.userType}</td>
+							        	<td>${user.emailAddress}</td>
+							        	<td>${user.password}</td>
+							        	<td>
+							        		<a href="./editRefUser?=${user.id}" class="btn btn-dark btn-sm">
+							        			<i class="fa fa-edit"></i> 
+											</a>
+										</td>		            
+							        </tr>
+							    </c:forEach>
+							</table>				
 						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Your Assignments
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										View Your Referee Assignments
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./refAssignments?=${user.id}" class="btn btn-outline-light">Go To Your Assignments</a>
-								</div>
-							</div>
-						</div>
-							
 					</div>
-				</div>
-				<div>
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
@@ -204,9 +191,7 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
