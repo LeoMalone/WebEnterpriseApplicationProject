@@ -4,10 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- If there is a user logged in redirect to login page -->
 
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
@@ -50,7 +46,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -63,7 +59,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -97,7 +93,7 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
