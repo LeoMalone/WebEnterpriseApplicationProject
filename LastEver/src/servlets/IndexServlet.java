@@ -19,7 +19,7 @@ public class IndexServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
-		String language = "en";
+		String language = null;
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -36,7 +36,6 @@ public class IndexServlet extends HttpServlet {
 			response.addCookie(cookieLanguage);
 		}
 		else {
-
 			language = request.getParameter("language");
 			Cookie[] theCookies = request.getCookies();
 

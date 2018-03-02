@@ -54,6 +54,9 @@ public class NewsBean {
 	
 	public void setPostedTime(Timestamp pt, String lang) {
 		PrettyTime p = new PrettyTime();
+		if(lang == null) {
+			lang = "en";
+		}
 		p.setLocale(new Locale(lang));
 		this.postedTime = p.format(pt);
 	}
