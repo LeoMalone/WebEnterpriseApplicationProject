@@ -21,8 +21,9 @@ public class AdminUsers {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allUsers = conn.prepareStatement("select userID, userFirstName, userLastName, username, userType, emailAddress, password, emailValidated, accountCreated, accountUpdated, lastLogin from users");
-	        rs = allUsers.executeQuery();	              
+	        allUsers = conn.prepareStatement("SELECT userID, userFirstName, userLastName, username, userType, emailAddress, password, emailValidated, accountCreated, accountUpdated, lastLogin from users");
+	        rs = allUsers.executeQuery();
+	        
 	        
 	        while(rs.next()) {
 	        	UserBean ub = new UserBean();
@@ -35,9 +36,11 @@ public class AdminUsers {
 	        	ub.setPassword(rs.getString(7));
 	        	ub.setEmailValidated(rs.getInt(8));
 	        	ub.setAccountCreated(rs.getTimestamp(9));
-	        	ub.setLastAccountUpdate(rs.getTimestamp(10));
-	        	ub.setLastLogin(rs.getTimestamp(10));	        	
-	        	userList.add(ub);	        	
+	        	ub.setAccountUpdated(rs.getTimestamp(10));
+	        	ub.setLastLogin(rs.getTimestamp(11));	        	
+	        	userList.add(ub);
+	        	
+	        	status = true;
 	        }
 	        
 	        

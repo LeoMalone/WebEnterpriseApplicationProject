@@ -25,13 +25,13 @@
 	password="lastever" />
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever</title>
 </fmt:bundle>
 </head>
 
@@ -82,41 +82,20 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
 												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 						<li class="nav-item">
@@ -178,8 +157,8 @@
 								        	<td scope="col">${user.password}</td>
 								        	<td scope="col">${user.emailValidated}</td>
 								        	<td scope="col">${user.accountCreated.toString()}</td>
+								        	<td scope="col">${user.accountUpdated}</td>
 								        	<td scope="col">${user.lastLogin.toString()}</td>
-								        	<td scope="col">${user.accountCreated.toString()}</td>
 								        	<td scope="col">
 								        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
 								        			<i class="fa fa-edit"></i> 

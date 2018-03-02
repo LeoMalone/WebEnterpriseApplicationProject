@@ -79,7 +79,7 @@ public class UserBean {
 		return this.lastLogin;
 	}
 	
-	public Timestamp getLastAccountUpdate() {
+	public Timestamp getAccountUpdated() {
 		return this.accountUpdated;
 	}
 	
@@ -128,7 +128,7 @@ public class UserBean {
 		this.accountCreated = ac;
 	}
 	
-	public void setLastAccountUpdate(Timestamp au) {
+	public void setAccountUpdated(Timestamp au) {
 		this.accountUpdated = au;
 	}
 }

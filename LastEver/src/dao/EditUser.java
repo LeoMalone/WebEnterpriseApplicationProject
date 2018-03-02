@@ -76,7 +76,7 @@ public class EditUser {
 	        updateUser.setInt(5, 1);
 	        updateUser.setString(6, user.getFirstName());
 	        updateUser.setString(7, user.getLastName());
-	        updateUser.setTimestamp(8, user.getLastAccountUpdate());
+	        updateUser.setTimestamp(8, user.getAccountUpdated());
 	        updateUser.setString(9, user.getId());
 	        
 	        result = updateUser.executeUpdate();	        

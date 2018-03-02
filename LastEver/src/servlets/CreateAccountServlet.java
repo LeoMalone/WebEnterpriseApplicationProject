@@ -86,8 +86,9 @@ public class CreateAccountServlet extends HttpServlet {
 					session.setAttribute("userType", url);
 	                response.sendRedirect(url);
 		        }
+			} else {
+				response.sendRedirect("./login");
 			}
-			response.sendRedirect("./login");
 		}
 	}
 }

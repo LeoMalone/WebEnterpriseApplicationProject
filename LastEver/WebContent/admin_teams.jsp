@@ -95,12 +95,11 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>							
-						
+							</div></li>
 						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">

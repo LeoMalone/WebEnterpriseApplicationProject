@@ -94,7 +94,7 @@ public class EditUserServlet extends HttpServlet{
 			response.sendRedirect("./adminUsers");
 		} else {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			user.setLastAccountUpdate(timestamp);
+			user.setAccountUpdated(timestamp);
 			user.setFirstName(newFirstName);
 			user.setLastName(newLastName);
 			user.setId(sb.toString());

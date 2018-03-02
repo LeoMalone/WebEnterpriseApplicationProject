@@ -57,12 +57,12 @@ public class AdminUsersServlet extends HttpServlet{
 				}
 			
 				List<UserBean> ulb = new ArrayList<UserBean>();
-				AdminUsers.getAllUsers(ulb);	
-				
-				request.setAttribute("userList", ulb);
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
-			    rd.forward(request, response);
+				if(AdminUsers.getAllUsers(ulb)) {				
+					request.setAttribute("userList", ulb);
+					request.setAttribute("userName", userName);
+					RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
+				    rd.forward(request, response);
+				}
 			}
 		}
 	}
