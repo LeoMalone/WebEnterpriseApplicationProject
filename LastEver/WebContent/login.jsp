@@ -40,7 +40,7 @@
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<sql:query dataSource="${dataSource}" var="div1">
+	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
@@ -97,8 +97,8 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-							</div></li>						
-						<li class="nav-item"><a class="nav-link active" href="./login">Sign In</a></li>
+							</div></li>
+						<li class="nav-item"><a class="nav-link active"	href="./login">Sign in</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
