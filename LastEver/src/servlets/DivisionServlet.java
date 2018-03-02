@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.NewsBean;
 import dao.Division;
 
@@ -53,8 +54,16 @@ public class DivisionServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<NewsBean> nlb = new ArrayList<NewsBean>();
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 			Division.getNews(id, nlb, language);	
+			Division.getAllDivisions(dlb);
+			
+			request.setAttribute("allDiv", dlb);
+			
+			dlb = new ArrayList<DivisionBean>();	
+			Division.getSpecificDivision(dlb, id);
 
+			request.setAttribute("currDiv", dlb);
 			request.setAttribute("news", nlb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/division.jsp?id=" + id);  
