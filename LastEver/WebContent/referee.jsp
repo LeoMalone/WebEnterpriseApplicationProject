@@ -40,11 +40,13 @@
 	- in dropdown, sets active with full bar color
 	-->
 
-	<div id="fb-root"></div>
+	<sql:query dataSource="${dataSource}" var="div1">
+	select divisionID, divsionName from division
+	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -55,9 +57,8 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
-									key="nav_home" /></a></li>
-
+						<li class="nav-item"><a class="nav-link"
+							href="index"><fmt:message key="nav_home" /></a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -89,7 +90,7 @@
 									<c:otherwise>
 										<c:forEach var="row" items="${div1.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="divisionid=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
