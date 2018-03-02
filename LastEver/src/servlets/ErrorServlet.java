@@ -59,6 +59,9 @@ public class ErrorServlet extends HttpServlet {
 			if(statusCode == 404) {
 				request.setAttribute("error", "The specified page: " + requestUri + " could not be found.");
 			}
+			else if(statusCode == 405) {
+				request.setAttribute("error", requestUri + " does not support this request method.");
+			}
 			else {
 				request.setAttribute("error", servletName + " has encountered error: " + throwable.getClass().getName()
 						+ " with error message: " + throwable.getMessage());
