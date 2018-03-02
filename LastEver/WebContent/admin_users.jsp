@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -29,17 +30,18 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever</title>
+	<title>Last Ever - Users</title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
+	<!-- TODO: Do in query in Servlet -->
 	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
@@ -66,18 +68,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -130,8 +132,8 @@
 				<div class="row">
 					<div class="col mt-5">
 						<div class="card">
-							<div class="table-responsive table-striped">										
-								<table class="table">
+							<div class="table-responsive">										
+								<table class="table table-striped">
 									<thead class="thead-dark">
 									    <tr>
 									    	<th scope="col">User ID</th>

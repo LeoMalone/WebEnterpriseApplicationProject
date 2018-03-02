@@ -45,7 +45,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -58,25 +58,25 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -84,33 +84,30 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./referee">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -120,6 +117,7 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it

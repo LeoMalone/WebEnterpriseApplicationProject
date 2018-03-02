@@ -68,18 +68,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -136,21 +136,24 @@
 							<h4 class="card-header">
 								Edit Team Credentials
 							</h4>
-							<form action="editTeam?=${team.teamId}" method="POST">
 							<div class="card-body">
 								<p class="card-text">
-									<div class="form-group">
-										<label for="editTeamName">Team Name</label>
-										<input type="text" class="form-control" name="editTeamName" value="${team.teamName}">
-									</div>
-									 <div class="form-group">
-									    <label for="editTeamAbbr">Team Abbreviation</label>
-									    <input type="text" class="form-control" name="editTeamAbbr" value="${team.teamAbbreviation}">
-									 </div>									
+									<form action="editTeam?=${team.teamId}" method="POST">								
+										<div class="form-group">
+											<label for="editTeamName">Team Name</label>
+											<input type="text" class="form-control" name="editTeamName" value="${team.teamName}">
+										</div>
+										 <div class="form-group">
+										    <label for="editTeamAbbr">Team Abbreviation</label>
+										    <input type="text" class="form-control" name="editTeamAbbr" value="${team.teamAbbreviation}">
+										 </div>
+										<button type="submit" class="btn btn-outline-success">Save</button>	
+									</form>								
 								</p>							
 							</div>
+							<form action="deleteTeam?=${team.teamId}" method="POST">
 								<div class="card-footer">
-									<button type="submit" class="btn btn-outline-success">Save</button>	
+									<button type="submit" class="btn btn-danger">Delete Team</button>
 								</div>
 							</form>
 						</div>

@@ -35,7 +35,6 @@
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
 </head>
-
 <body>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
@@ -43,7 +42,7 @@
 	- in dropdown, sets active with full bar color
 	-->
 
-	<sql:query dataSource="${dataSource}" var="div1">
+	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
@@ -62,25 +61,25 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link active" href="index"><fmt:message
+						<li class="nav-item active"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -88,31 +87,27 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
-											<a class="dropdown-item" href="division?id=${row.divisionID}">${row.divsionName}</a>
+										<c:forEach var="row" items="${div2.rows}">
+											<a class="dropdown-item"
+												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<%
-							if (session.getAttribute("signedIn") != null) {
-						%>
-						<li class="nav-item"><a class="nav-link"
-							href="<%=session.getAttribute("userType")%>">${userName}</a></li>
-						<%
-							} else {
-						%>
-						<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
-									key="nav_signin" /></a></li>
-						<%
-							}
-						%>
+						<c:choose>
+							<c:when test="${signedIn == null}">
+								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -130,11 +125,9 @@
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
-
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content
 		- cards with information on them

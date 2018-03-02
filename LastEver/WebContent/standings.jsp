@@ -86,20 +86,20 @@ select divsionName, divisionID from division where divisionID = ?
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle active" href="#"
+							</div>
+						</li>
+						<li class="nav-item dropdown active"><a
+							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> Divisions </a>
 							<div class="dropdown-menu dropdown-menu-right"
@@ -118,19 +118,14 @@ select divsionName, divisionID from division where divisionID = ?
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<%
-							if (session.getAttribute("signedIn") != null) {
-						%>
-						<li class="nav-item"><a class="nav-link"
-							href="<%=session.getAttribute("userType")%>">${userName}</a></li>
-						<%
-							} else {
-						%>
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
-						<%
-							}
-						%>
+						<c:choose>
+							<c:when test="${signedIn == null}">
+								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -148,12 +143,8 @@ select divsionName, divisionID from division where divisionID = ?
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
-
 	</nav>
-
 
 	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">

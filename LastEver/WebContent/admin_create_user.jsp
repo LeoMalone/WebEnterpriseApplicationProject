@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -30,7 +31,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="login" /></title>
+	<title>Last Ever - Create User</title>
 </fmt:bundle>
 </head>
 <body>
@@ -39,7 +40,8 @@
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<sql:query dataSource="${dataSource}" var="div1">
+	<!-- TODO: Do in query in Servlet -->
+	<sql:query dataSource="${dataSource}" var="div2">
 	select divisionID, divsionName from division
 	</sql:query>
 	<nav
@@ -65,18 +67,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -84,33 +86,30 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
 												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -120,6 +119,7 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it

@@ -65,18 +65,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -84,33 +84,30 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${div2.rowCount == 0}">
 
-										<a class="dropdown-item" href=""><fmt:message
+										<a class="dropdown-item active" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="row" items="${div2.rows}">
 											<a class="dropdown-item"
 												href="division?id=${row.divisionID}">${row.divsionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
-									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
+									<option value="en"
+										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
-									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
+									<option value="fr"
+										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
 											key="french" /></option>
 								</select>
 							</form>
@@ -120,6 +117,7 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it
@@ -136,61 +134,61 @@
 							<h4 class="card-header">
 								Edit User Credentials
 							</h4>
-							<form action="editUser?=${user.id}" method="POST">
 							<div class="card-body">
 								<p class="card-text">
-									<div class="form-group">
-										<label for="editFirstName">First Name</label>
-										<input type="text" class="form-control" name="editFirstName" value="${user.firstName}">
-									</div>
-									<div class="form-group">
-										<label for="editLastName">Last Name</label>
-										<input type="text" class="form-control" name="editLastName" value="${user.lastName}">
-									</div>
-									<div class="form-group">
-										<label for="newUsername"><fmt:message key="signin_user" /></label>
-										<input type="text" class="form-control" name="editUsername" value="${user.username}">
-									</div>
-									 <div class="form-group">
-									    <label for="newEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
-									 </div>
-									 <div class="form-group">
-										<label for="newPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="editPass" value="${user.password}">
-									 </div>									 	
-									 <div class="form-check">
-									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop1" />
-									  </label>									  
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''}>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop2" />
-									  </label>
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''}>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop3" />
-									  </label>
-									</div>									
+									<form action="editUser?=${user.id}" method="POST">
+										<div class="form-group">
+											<label for="editFirstName">First Name</label>
+											<input type="text" class="form-control" name="editFirstName" value="${user.firstName}">
+										</div>
+										<div class="form-group">
+											<label for="editLastName">Last Name</label>
+											<input type="text" class="form-control" name="editLastName" value="${user.lastName}">
+										</div>
+										<div class="form-group">
+											<label for="newUsername"><fmt:message key="signin_user" /></label>
+											<input type="text" class="form-control" name="editUsername" value="${user.username}">
+										</div>
+										 <div class="form-group">
+										    <label for="newEmail"><fmt:message key="signin_email" /></label>
+										    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
+										 </div>
+										 <div class="form-group">
+											<label for="newPass"><fmt:message key="signin_password" /></label>
+											<input type="password" class="form-control" name="editPass" value="${user.password}">
+										 </div>									 	
+										 <div class="form-check">
+										  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>
+										  <label class="form-check-label" for="editRadio">
+										    <fmt:message key="signin_prop1" />
+										  </label>									  
+										</div>
+										<div class="form-check">
+										  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''}>
+										  <label class="form-check-label" for="editRadio">
+										    <fmt:message key="signin_prop2" />
+										  </label>
+										</div>
+										<div class="form-check">
+										  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''}>
+										  <label class="form-check-label" for="editRadio">
+										    <fmt:message key="signin_prop3" />
+										  </label>
+										</div>
+										<br />										
+										<button type="submit" class="btn btn-outline-success">Save</button>	
+									</form>									
 								</p>							
 							</div>
-								<div class="card-footer">
-									<button type="submit" class="btn btn-outline-success">Save</button>	
-								</div>
-							</form>
+							<div class="card-footer">
+								<form action="deleteUser?=${user.id}" method="post">
+									<button type="submit" class="btn btn-danger">Delete User</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /.row -->
-				
-				<form action="deleteUser?=${user.id}" method="post">
-					<button type="submit" class="btn btn-danger float-right">Delete User</button>
-				</form>				
+				<!-- /.row -->				
 			</fmt:bundle>			
 		</div>
 	</div>
