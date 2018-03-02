@@ -130,7 +130,7 @@
 				</h1>
 				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
-					<div class="col mt-5">
+					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
 							<div class="table-responsive">										
 								<table class="table table-striped">

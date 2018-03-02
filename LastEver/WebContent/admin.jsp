@@ -198,7 +198,7 @@
 						</div>				
 					</div>
 				</div>
-				<div>
+				<div class="mb-4">
 					<form action="logout" method="post">
 						<button type="submit" class="btn btn-danger">
 							<fmt:message key="logged_in_signout" />
