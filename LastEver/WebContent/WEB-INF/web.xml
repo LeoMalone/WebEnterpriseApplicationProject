@@ -1,120 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-    version="2.5">
-    
-    <servlet>
-        <servlet-name>CreatTeam</servlet-name>
-        <servlet-class>servlets.CreatTeamServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>CreatTeam</servlet-name>
-    	<url-pattern>/teamCreate</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>EditTeam</servlet-name>
-        <servlet-class>servlets.EditTeamServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>EditTeam</servlet-name>
-    	<url-pattern>/editTeam</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdminHome</servlet-name>
-        <servlet-class>servlets.AdminHomeServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>AdminHome</servlet-name>
-    	<url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdminTeams</servlet-name>
-        <servlet-class>servlets.AdminTeamsServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>AdminTeams</servlet-name>
-    	<url-pattern>/adminTeams</url-pattern>
-    </servlet-mapping>
-      
-    <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>servlets.LogoutServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>LogoutServlet</servlet-name>
-    	<url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>LoginServlet</servlet-name>
-    	<url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>CreateAccountServlet</servlet-name>
-        <servlet-class>servlets.CreateAccountServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>CreateAccountServlet</servlet-name>
-    	<url-pattern>/createAccount</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdminUsers</servlet-name>
-        <servlet-class>servlets.AdminUsersServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>AdminUsers</servlet-name>
-    	<url-pattern>/adminUsers</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdminCreate</servlet-name>
-        <servlet-class>servlets.AdminCreateServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>AdminCreate</servlet-name>
-    	<url-pattern>/adminCreate</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>EditUserServlet</servlet-name>
-        <servlet-class>servlets.EditUserServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>EditUserServlet</servlet-name>
-    	<url-pattern>/editUser</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>servlets.DeleteUserServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>DeleteUserServlet</servlet-name>
-    	<url-pattern>/deleteUser</url-pattern>
-    </servlet-mapping>
-    
-		<servlet>
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	version="2.5">
+
+	<servlet>
+		<servlet-name>CreatTeam</servlet-name>
+		<servlet-class>servlets.CreatTeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreatTeam</servlet-name>
+		<url-pattern>/teamCreate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EditTeam</servlet-name>
+		<servlet-class>servlets.EditTeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditTeam</servlet-name>
+		<url-pattern>/editTeam</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminHome</servlet-name>
+		<servlet-class>servlets.AdminHomeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminHome</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminTeams</servlet-name>
+		<servlet-class>servlets.AdminTeamsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminTeams</servlet-name>
+		<url-pattern>/adminTeams</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>servlets.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlets.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CreateAccountServlet</servlet-name>
+		<servlet-class>servlets.CreateAccountServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateAccountServlet</servlet-name>
+		<url-pattern>/createAccount</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminUsers</servlet-name>
+		<servlet-class>servlets.AdminUsersServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminUsers</servlet-name>
+		<url-pattern>/adminUsers</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminCreate</servlet-name>
+		<servlet-class>servlets.AdminCreateServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminCreate</servlet-name>
+		<url-pattern>/adminCreate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EditUserServlet</servlet-name>
+		<servlet-class>servlets.EditUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditUserServlet</servlet-name>
+		<url-pattern>/editUser</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<servlet-class>servlets.DeleteUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<url-pattern>/deleteUser</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>StandingsServlet</servlet-name>
 		<servlet-class>servlets.StandingsServlet</servlet-class>
 	</servlet>
@@ -135,46 +135,46 @@
 	</servlet-mapping>
 
 	<servlet>
-        <servlet-name>RefereeHome</servlet-name>
-        <servlet-class>servlets.RefHomeServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>RefereeHome</servlet-name>
-    	<url-pattern>/referee</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>RefereeUsers</servlet-name>
-        <servlet-class>servlets.RefUsersServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>RefereeUsers</servlet-name>
-    	<url-pattern>/refUsers</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>EditRefUserServlet</servlet-name>
-        <servlet-class>servlets.EditRefUserServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>EditRefUserServlet</servlet-name>
-    	<url-pattern>/editRefUser</url-pattern>
-    </servlet-mapping>
-    
-    
-     <servlet>
-        <servlet-name>DeleteRefUserServlet</servlet-name>
-        <servlet-class>servlets.DeleteRefUserServlet</servlet-class>
-    </servlet>     
-    
-    <servlet-mapping>
-    	<servlet-name>DeleteRefUserServlet</servlet-name>
-    	<url-pattern>/deleteRefUser</url-pattern>
-    </servlet-mapping>
-	
+		<servlet-name>RefereeHome</servlet-name>
+		<servlet-class>servlets.RefHomeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RefereeHome</servlet-name>
+		<url-pattern>/referee</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RefereeUsers</servlet-name>
+		<servlet-class>servlets.RefUsersServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RefereeUsers</servlet-name>
+		<url-pattern>/refUsers</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EditRefUserServlet</servlet-name>
+		<servlet-class>servlets.EditRefUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditRefUserServlet</servlet-name>
+		<url-pattern>/editRefUser</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>DeleteRefUserServlet</servlet-name>
+		<servlet-class>servlets.DeleteRefUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteRefUserServlet</servlet-name>
+		<url-pattern>/deleteRefUser</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>ResultsServlet</servlet-name>
 		<servlet-class>servlets.ResultsServlet</servlet-class>
@@ -184,7 +184,7 @@
 		<servlet-name>ResultsServlet</servlet-name>
 		<url-pattern>/results</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>StatisticsServlet</servlet-name>
 		<servlet-class>servlets.StatisticsServlet</servlet-class>
@@ -194,7 +194,7 @@
 		<servlet-name>StatisticsServlet</servlet-name>
 		<url-pattern>/statistics</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>DivisionServlet</servlet-name>
 		<servlet-class>servlets.DivisionServlet</servlet-class>
@@ -204,7 +204,7 @@
 		<servlet-name>DivisionServlet</servlet-name>
 		<url-pattern>/division</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>IndexServlet</servlet-name>
 		<servlet-class>servlets.IndexServlet</servlet-class>
@@ -214,8 +214,28 @@
 		<servlet-name>IndexServlet</servlet-name>
 		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
-	
-    <display-name>LastEver</display-name>
+
+	<servlet>
+		<servlet-name>ErrorServlet</servlet-name>
+		<servlet-class>servlets.ErrorServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ErrorServlet</servlet-name>
+		<url-pattern>/error</url-pattern>
+	</servlet-mapping>
+
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error</location>
+	</error-page>
+
+	<display-name>LastEver</display-name>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>
 	</welcome-file-list>
