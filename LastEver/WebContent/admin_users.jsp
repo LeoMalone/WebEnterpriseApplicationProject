@@ -40,19 +40,22 @@
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
+	<sql:query dataSource="${dataSource}" var="div2">
+	select divisionID, divsionName from division
+	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -97,7 +100,6 @@
 							</div></li>
 						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"

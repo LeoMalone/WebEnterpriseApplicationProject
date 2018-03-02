@@ -117,10 +117,7 @@
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
-
 	</nav>
 
 
