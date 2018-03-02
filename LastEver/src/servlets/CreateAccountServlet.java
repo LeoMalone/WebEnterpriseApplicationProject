@@ -42,10 +42,10 @@ public class CreateAccountServlet extends HttpServlet {
 		String userType = request.getParameter("createRadio");
 
 		// If any parameter is null
-		if (newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {			
+		if(newFirstName == null || newLastName== null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./login");
 			
-		} else {
+		} else {		
 			// Get user type
 			String ut = null;
 			if (userType.equals(ADMIN))
@@ -87,7 +87,7 @@ public class CreateAccountServlet extends HttpServlet {
 	                response.sendRedirect(url);
 		        }
 			}
-			response.sendRedirect("./login");		
-		}		
+			response.sendRedirect("./login");
+		}
 	}
 }

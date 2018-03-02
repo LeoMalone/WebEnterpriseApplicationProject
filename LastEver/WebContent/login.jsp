@@ -179,7 +179,7 @@
 										<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
 									</div>
 									<div class="form-group">
-										<label for="newLastname">Last Name</label>
+										<label for="newLastName">Last Name</label>
 										<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
 									</div>
 									<div class="form-group">

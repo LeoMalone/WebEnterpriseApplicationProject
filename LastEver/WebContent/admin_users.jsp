@@ -140,53 +140,55 @@
 
 	<div class="main-cover">
 		<!-- Page Content -->
-		<div class="cards-container container">
+		<div class="cards-container container-fluid">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					${userName}: Users
 				</h1>
 				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">				
-							<table class="table">
-								<thead class="thead-dark">
-								    <tr>
-								    	<th scope="col">User ID</th>
-								    	<th scope="col">Username</th>
-								    	<th scope="col">First Name</th>
-								    	<th scope="col">Last Name</th>
-									    <th scope="col">User Type</th>
-									    <th scope="col">Email Address</th>
-									    <th scope="col">Password</th>
-									    <th scope="col">Email Validated</th>
-									    <th scope="col">Account Created</th>
-									    <th scope="col">Last Account Update</th>
-									    <th scope="col">Last Login</th>
-									    <th scope="col"></th>
-								    </tr>
-								</thead>
-							    <c:forEach items="${userList}" var="user">
-							        <tr>
-							        	<td scope="col">${user.id}</td>
-							        	<td scope="col">${user.username}</td>
-							        	<td scope="col">${user.firstName}</td>
-							        	<td scope="col">${user.lastName}</td>
-							        	<td scope="col">${user.userType}</td>
-							        	<td scope="col">${user.emailAddress}</td>
-							        	<td scope="col">${user.password}</td>
-							        	<td scope="col">${user.emailValidated}</td>
-							        	<td scope="col">${user.accountCreated}</td>
-							        	<td scope="col">${user.accountUpdated}</td>
-							        	<td scope="col">${user.lastLogin}</td>
-							        	<td scope="col">
-							        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
-							        			<i class="fa fa-edit"></i> 
-											</a>
-										</td>		            
-							        </tr>
-							    </c:forEach>
-							</table>				
+					<div class="col mt-5">
+						<div class="card">
+							<div class="table-responsive table-striped">										
+								<table class="table">
+									<thead class="thead-dark">
+									    <tr>
+									    	<th scope="col">User ID</th>
+									    	<th scope="col">Username</th>
+									    	<th scope="col">First Name</th>
+									    	<th scope="col">Last Name</th>
+										    <th scope="col">User Type</th>
+										    <th scope="col">Email Address</th>
+										    <th scope="col">Password</th>
+										    <th scope="col">Email Validated</th>
+										    <th scope="col">Account Created</th>
+										    <th scope="col">Last Account Update</th>
+										    <th scope="col">Last Login</th>
+										    <th scope="col">Edit</th>
+									    </tr>
+									</thead>
+								    <c:forEach items="${userList}" var="user">
+								        <tr>
+								        	<td scope="col">${user.id}</td>
+								        	<td scope="col">${user.username}</td>
+								        	<td scope="col">${user.firstName}</td>
+								        	<td scope="col">${user.lastName}</td>
+								        	<td scope="col">${user.userType}</td>
+								        	<td scope="col">${user.emailAddress}</td>
+								        	<td scope="col">${user.password}</td>
+								        	<td scope="col">${user.emailValidated}</td>
+								        	<td scope="col">${user.accountCreated.toString()}</td>
+								        	<td scope="col">${user.lastLogin.toString()}</td>
+								        	<td scope="col">${user.accountCreated.toString()}</td>
+								        	<td scope="col">
+								        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
+								        			<i class="fa fa-edit"></i> 
+												</a>
+											</td>		            
+								        </tr>
+								    </c:forEach>
+								</table>
+							</div>				
 						</div>
 					</div>
 				</div>					

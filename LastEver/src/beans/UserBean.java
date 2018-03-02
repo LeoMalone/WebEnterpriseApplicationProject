@@ -2,10 +2,6 @@ package beans;
 
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * The UserBean class is meant for passing user information
@@ -124,29 +120,15 @@ public class UserBean {
 		this.userType = ut;
 	}
 	
-	public void setLastLogin(String ll) {		
-		this.lastLogin = convertTimestamp(ll);
+	public void setLastLogin(Timestamp ll) {		
+		this.lastLogin = ll;
 	}
 	
-	public void setAccountCreated(String ac) {
-		this.accountCreated = convertTimestamp(ac);
+	public void setAccountCreated(Timestamp ac) {
+		this.accountCreated = ac;
 	}
 	
-	public void setLastAccountUpdate(String au) {
-		this.accountUpdated = convertTimestamp(au);
-	}
-	
-	private Timestamp convertTimestamp(String ts) {
-		try {
-		      DateFormat formatter;
-		      formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		      Date date = (Date) formatter.parse(ts);
-		      Timestamp timeStampDate = new Timestamp(date.getTime());
-
-		      return timeStampDate;
-		    } catch (ParseException e) {
-		      System.out.println("Exception :" + e);
-		      return null;
-		    }
+	public void setLastAccountUpdate(Timestamp au) {
+		this.accountUpdated = au;
 	}
 }

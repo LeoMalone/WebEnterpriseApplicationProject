@@ -82,13 +82,15 @@ public class AdminCreateServlet extends HttpServlet {
 
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
+		String newFirstName = request.getParameter("newFirstName");
+		String newLastName = request.getParameter("newLastName");
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
 		String userType = request.getParameter("createRadio");
 
 		// If any parameter is null
-		if (newUsername == null || newEmail == null || newPassword == null || userType == null) {
+		if (newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./adminCreate");
 			
 		} else {	
@@ -102,7 +104,8 @@ public class AdminCreateServlet extends HttpServlet {
 				ut = TEAM_OW;
 	
 			// Create new userBean
-			UserBean user = new UserBean(newUsername, newEmail, newPassword, ut, "", "", new Timestamp(55L));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, newPassword, ut, timestamp);
 	
 			// If createNewUser method returns true
 			if(CreateAccount.createNewUser(user)) {

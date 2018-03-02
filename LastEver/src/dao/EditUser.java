@@ -20,7 +20,7 @@ public class EditUser {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password from users where userID=?");
+	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password, userFirstName, userLastName from users where userID=?");
 	        getUser.setString(1, user.getId());
 	        rs = getUser.executeQuery();	              
 	        
@@ -30,6 +30,8 @@ public class EditUser {
 	        	user.setUserType(rs.getString(3));
 	        	user.setEmail(rs.getString(4));
 	        	user.setPassword(rs.getString(5));
+	        	user.setFirstName(rs.getString(6));
+	        	user.setLastName(rs.getString(7));
 	        	status = true;
 	        }
 	        
@@ -66,13 +68,16 @@ public class EditUser {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=? WHERE userID=?");
+	        updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=?, userFirstName=?, userLastName=?, accountUpdated=? WHERE userID=?");
 	        updateUser.setString(1, user.getUsername());
 	        updateUser.setString(2, user.getUserType());
 	        updateUser.setString(3, user.getEmailAddress());
 	        updateUser.setString(4, user.getPassword());
 	        updateUser.setInt(5, 1);
-	        updateUser.setInt(6, Integer.parseInt(user.getId()));
+	        updateUser.setString(6, user.getFirstName());
+	        updateUser.setString(7, user.getLastName());
+	        updateUser.setTimestamp(8, user.getLastAccountUpdate());
+	        updateUser.setString(9, user.getId());
 	        
 	        result = updateUser.executeUpdate();	        
 	        if(result == 1) {

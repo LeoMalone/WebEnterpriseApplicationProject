@@ -140,6 +140,14 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
+										<label for="editFirstName">First Name</label>
+										<input type="text" class="form-control" name="editFirstName" value="${user.firstName}">
+									</div>
+									<div class="form-group">
+										<label for="editLastName">Last Name</label>
+										<input type="text" class="form-control" name="editLastName" value="${user.lastName}">
+									</div>
+									<div class="form-group">
 										<label for="newUsername"><fmt:message key="signin_user" /></label>
 										<input type="text" class="form-control" name="editUsername" value="${user.username}">
 									</div>

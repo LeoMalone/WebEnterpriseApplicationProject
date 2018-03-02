@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -81,19 +83,29 @@ public class EditUserServlet extends HttpServlet{
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
+		String newFirstName = request.getParameter("editFirstName");
+		String newLastName = request.getParameter("editLastName");
 		String newUsername = request.getParameter("editUsername");
 		String newEmail = request.getParameter("editEmail");
 		String newPassword = request.getParameter("editPass");
 		String userType = request.getParameter("editRadio");
 		
-		user.setId(sb.toString());
-		user.setUsername(newUsername);
-		user.setEmail(newEmail);
-		user.setPassword(newPassword);
-		user.setUserType(userType);
-		
-		if(EditUser.saveChanges(user)) {
+		if(newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./adminUsers");
+		} else {
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			user.setLastAccountUpdate(timestamp);
+			user.setFirstName(newFirstName);
+			user.setLastName(newLastName);
+			user.setId(sb.toString());
+			user.setUsername(newUsername);
+			user.setEmail(newEmail);
+			user.setPassword(newPassword);
+			user.setUserType(userType);
+			
+			if(EditUser.saveChanges(user)) {
+				response.sendRedirect("./adminUsers");
+			}
 		}
 	}	
 }
