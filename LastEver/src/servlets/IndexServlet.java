@@ -19,7 +19,7 @@ public class IndexServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
-		String language = null;
+		String language = "en";
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -52,7 +52,7 @@ public class IndexServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<NewsBean> nlb = new ArrayList<NewsBean>();
-			Index.getNews(nlb);	
+			Index.getNews(nlb, language);	
 
 			request.setAttribute("news", nlb);	
 			request.setAttribute("userName", userName);

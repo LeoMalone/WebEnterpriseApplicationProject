@@ -19,7 +19,7 @@ public class DivisionServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
-		String language = null;
+		String language = "en";
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -53,7 +53,7 @@ public class DivisionServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<NewsBean> nlb = new ArrayList<NewsBean>();
-			Division.getNews(id, nlb);	
+			Division.getNews(id, nlb, language);	
 
 			request.setAttribute("news", nlb);	
 			request.setAttribute("userName", userName);

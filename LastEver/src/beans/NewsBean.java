@@ -3,6 +3,7 @@ package beans;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.sql.Timestamp;
+import java.util.Locale;
 
 public class NewsBean {
 	
@@ -16,8 +17,9 @@ public class NewsBean {
 	public NewsBean() {
 	}
 	
-	public NewsBean(String un, String t, Timestamp pt, String con) {
+	public NewsBean(String un, String t, Timestamp pt, String con, String lang) {
 		PrettyTime p = new PrettyTime();
+		p.setLocale(new Locale(lang));
 		this.userName = un;
 		this.title = t;
 		this.postedTime = p.format(pt);
@@ -50,8 +52,9 @@ public class NewsBean {
 		this.title = t;
 	}
 	
-	public void setPostedTime(Timestamp pt) {
+	public void setPostedTime(Timestamp pt, String lang) {
 		PrettyTime p = new PrettyTime();
+		p.setLocale(new Locale(lang));
 		this.postedTime = p.format(pt);
 	}
 	
