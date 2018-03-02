@@ -106,21 +106,32 @@ public class EditUser {
 	    return status;
 	}
 	
-	public static boolean deleteUser(int id) {
+	public static boolean deleteUser(String id) {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
+	    PreparedStatement deleteNews = null;
+	    PreparedStatement deleteTeam = null;
 	    PreparedStatement deleteUser = null;
-	    int result = 0;	    
+	    int result = 0;   
 	    
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        deleteUser = conn.prepareStatement("DELETE FROM users WHERE userID=?");
-	        deleteUser.setInt(1, id);
-	        
-	        result = deleteUser.executeUpdate();	        
-	        if(result == 1) {
-	        	status = true;
+	        deleteNews = conn.prepareStatement("DELETE FROM news USING news, users WHERE `users`.`userID` = `news`.`userID` AND users.userID=?");
+	        deleteNews.setString(1, id);
+	        result = deleteNews.executeUpdate();
+	        if(result >= 0) {
+	        	deleteTeam = conn.prepareStatement("DELETE FROM usersxteam USING usersxteam, users WHERE `users`.`userID` = `usersxteam`.`userID` AND users.userID=?");
+	        	deleteTeam.setString(1, id);
+	        	result = deleteTeam.executeUpdate();
+	        	if(result == 1 || result == 0) {
+	        		deleteUser = conn.prepareStatement("DELETE FROM users USING users WHERE users.userID=?");
+			        deleteUser.setString(1, id);
+			        result = deleteUser.executeUpdate();
+			        if(result == 1) {
+			        	status = true;
+			        }
+	        	}
 	        }
 	        
 	    // Catch all possible Exceptions
@@ -137,6 +148,20 @@ public class EditUser {
 	        if (deleteUser != null) {
 	            try {
 	            	deleteUser.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteNews != null) {
+	            try {
+	            	deleteNews.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteTeam != null) {
+	            try {
+	            	deleteTeam.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }

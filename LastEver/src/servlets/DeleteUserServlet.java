@@ -20,8 +20,10 @@ public class DeleteUserServlet extends HttpServlet {
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
-		if(EditUser.deleteUser(Integer.parseInt(sb.toString()))) {
+		if(EditUser.deleteUser(sb.toString())) {
 			response.sendRedirect("./adminUsers");
+		} else {
+			response.sendRedirect("./index");
 		}
 	}	
 }
