@@ -21,10 +21,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
-
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
@@ -40,10 +36,7 @@
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<!-- TODO: Do in query in Servlet -->
-	<sql:query dataSource="${dataSource}" var="div2">
-	select divisionID, divsionName from division
-	</sql:query>
+
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">

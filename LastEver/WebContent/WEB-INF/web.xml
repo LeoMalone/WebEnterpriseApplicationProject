@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
 	version="2.5">
-	
+
 	<servlet>
 		<servlet-name>RulesSummaryServlet</servlet-name>
 		<servlet-class>servlets.RulesSummaryServlet</servlet-class>
@@ -13,7 +13,7 @@
 		<servlet-name>RulesSummaryServlet</servlet-name>
 		<url-pattern>/rulesSummary</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ContactServlet</servlet-name>
 		<servlet-class>servlets.ContactServlet</servlet-class>
@@ -23,7 +23,7 @@
 		<servlet-name>ContactServlet</servlet-name>
 		<url-pattern>/contact</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>RegistrationServlet</servlet-name>
 		<servlet-class>servlets.RegistrationServlet</servlet-class>
@@ -33,7 +33,7 @@
 		<servlet-name>RegistrationServlet</servlet-name>
 		<url-pattern>/registration</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>RulesServlet</servlet-name>
 		<servlet-class>servlets.RulesServlet</servlet-class>
@@ -43,7 +43,7 @@
 		<servlet-name>RulesServlet</servlet-name>
 		<url-pattern>/rules</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>AboutServlet</servlet-name>
 		<servlet-class>servlets.AboutServlet</servlet-class>
@@ -55,12 +55,12 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>CreatTeam</servlet-name>
-		<servlet-class>servlets.CreatTeamServlet</servlet-class>
+		<servlet-name>CreateTeam</servlet-name>
+		<servlet-class>servlets.CreateTeamServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>CreatTeam</servlet-name>
+		<servlet-name>CreateTeam</servlet-name>
 		<url-pattern>/teamCreate</url-pattern>
 	</servlet-mapping>
 
@@ -275,6 +275,36 @@
 		<url-pattern>/error</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>TeamOwnerServlet</servlet-name>
+		<servlet-class>servlets.TeamOwnerServet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamOwnerServlet</servlet-name>
+		<url-pattern>/teamOwner</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeamPhotoServlet</servlet-name>
+		<servlet-class>servlets.TeamPhotoServet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamPhotoServlet</servlet-name>
+		<url-pattern>/teamPhoto</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeamRosterServlet</servlet-name>
+		<servlet-class>servlets.TeamRosterServet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamRosterServlet</servlet-name>
+		<url-pattern>/teamRoster</url-pattern>
+	</servlet-mapping>
+
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error</location>
@@ -299,7 +329,7 @@
 		<error-code>405</error-code>
 		<location>/error</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>408</error-code>
 		<location>/error</location>

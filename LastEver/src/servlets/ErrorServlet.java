@@ -1,12 +1,18 @@
 package servlets;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.DivisionBean;
+import dao.Division;
 
 
 public class ErrorServlet extends HttpServlet {
@@ -66,6 +72,10 @@ public class ErrorServlet extends HttpServlet {
 				request.setAttribute("error", servletName + " has encountered error: " + throwable.getClass().getName()
 						+ " with error message: " + throwable.getMessage());
 			}
+			
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
 			
 			request.setAttribute("errorcode", statusCode);
 			request.setAttribute("userName", userName);

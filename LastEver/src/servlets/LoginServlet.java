@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.DivisionBean;
 import beans.UserBean;
+import dao.Division;
 import dao.Login;
 
 /**
@@ -29,6 +33,10 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {    	
     	response.setContentType("text/html");
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") != null) {
 			response.sendRedirect("./index");
@@ -75,6 +83,10 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");        
         String loginEmail = request.getParameter("loginEmail");  
         String loginPass = request.getParameter("loginPass");
+        
+        List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
         
         // Create new userBean
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

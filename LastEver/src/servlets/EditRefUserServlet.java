@@ -15,6 +15,7 @@ import beans.DivisionBean;
 import beans.RefBean;
 import beans.TeamBean;
 import dao.AdminTeams;
+import dao.Division;
 import dao.EditRefUser;
 
 
@@ -28,6 +29,10 @@ public class EditRefUserServlet extends HttpServlet{
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null && request.getSession().getAttribute("userType") == "referee" ) {
 			response.sendRedirect("./login");
@@ -109,6 +114,10 @@ public class EditRefUserServlet extends HttpServlet{
 		user.setEmail(newEmail);
 		user.setPassword(newPassword);
 		user.setUserType(userType);
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if(EditRefUser.saveChanges(user)) {
 			response.sendRedirect("./refUsers");

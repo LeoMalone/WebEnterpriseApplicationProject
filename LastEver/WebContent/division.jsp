@@ -38,9 +38,6 @@
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
-	<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
-			<c:out value="${row.divsionName}" />
-		</c:forEach></title>
 </fmt:bundle>
 </head>
 

@@ -21,16 +21,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- TODO: Replace with servlet -->
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
-
-<!-- TODO: Do in query in Servlet -->
-<sql:query dataSource="${dataSource}" var="div1">
-select divsionName, divisionID from division where divisionID = ?
-<sql:param value="${param.id}" />
-</sql:query>
 
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
@@ -49,10 +39,6 @@ select divsionName, divisionID from division where divisionID = ?
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<!-- TODO: Do in query in Servlet -->
-	<sql:query dataSource="${dataSource}" var="div2">
-	select divisionID, divsionName from division
-	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -95,15 +81,15 @@ select divsionName, divisionID from division where divisionID = ?
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div2.rowCount == 0}">
+									<c:when test="${empty allDiv}">
 
-										<a class="dropdown-item active" href=""><fmt:message
+										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div2.rows}">
+										<c:forEach var="div1" items="${allDiv}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>

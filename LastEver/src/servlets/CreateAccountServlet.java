@@ -2,6 +2,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
+import dao.Division;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
@@ -41,6 +46,10 @@ public class CreateAccountServlet extends HttpServlet {
 		String newPassword = request.getParameter("newPass");
 		String userType = request.getParameter("createRadio");
 
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
+		
 		// If any parameter is null
 		if(newFirstName == null || newLastName== null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./login");
@@ -54,7 +63,6 @@ public class CreateAccountServlet extends HttpServlet {
 				ut = REF;
 			if (userType.equals(TEAM_OW))
 				ut = TEAM_OW;
-			
 			
 			// Create new userBean
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
