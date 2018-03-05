@@ -1,8 +1,9 @@
 package servlets;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
-import beans.NewsBean;
 import dao.Division;
 
-public class DivisionServlet extends HttpServlet {
+
+public class ErrorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +38,6 @@ public class DivisionServlet extends HttpServlet {
 			response.addCookie(cookieLanguage);
 		}
 		else {
-
 			language = request.getParameter("language");
 			Cookie[] theCookies = request.getCookies();
 
@@ -50,23 +50,36 @@ public class DivisionServlet extends HttpServlet {
 				}
 			}
 
-			String id = request.getParameter("id");
 			response.setContentType("text/html");
 
-			List<NewsBean> nlb = new ArrayList<NewsBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getNews(id, nlb, language);	
-			Division.getAllDivisions(dlb);
+
+			Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
+			Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+			String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
 			
+			if(servletName == null)
+				servletName = "Not Available";
+			
+			String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
+			
+			if(statusCode == 404) {
+				request.setAttribute("error", "The specified page: " + requestUri + " could not be found.");
+			}
+			else if(statusCode == 405) {
+				request.setAttribute("error", requestUri + " does not support this request method.");
+			}
+			else {
+				request.setAttribute("error", servletName + " has encountered error: " + throwable.getClass().getName()
+						+ " with error message: " + throwable.getMessage());
+			}
+			
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
 			request.setAttribute("allDiv", dlb);
 			
-			dlb = new ArrayList<DivisionBean>();	
-			Division.getSpecificDivision(dlb, id);
-
-			request.setAttribute("currDiv", dlb);
-			request.setAttribute("news", nlb);	
+			request.setAttribute("errorcode", statusCode);
 			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("/division.jsp?id=" + id);  
+			RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");  
 			rd.forward(request, response);		
 		}
 	}

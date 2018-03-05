@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.StatisticsBean;
+import dao.Division;
 import dao.Statistics;
 
 public class StatisticsServlet extends HttpServlet {
@@ -55,6 +57,14 @@ public class StatisticsServlet extends HttpServlet {
 			List<StatisticsBean> slb = new ArrayList<StatisticsBean>();
 			Statistics.getStatistics(id, slb);	
 
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			dlb = new ArrayList<DivisionBean>();	
+			Division.getSpecificDivision(dlb, id);
+			request.setAttribute("currDiv", dlb);
+			
 			request.setAttribute("statistics", slb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/statistics.jsp?id=" + id);  

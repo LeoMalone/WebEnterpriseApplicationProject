@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.DivisionBean;
 import beans.TeamBean;
 import dao.AdminTeams;
+import dao.Division;
 
 public class AdminTeamsServlet extends HttpServlet {
 
@@ -24,6 +25,10 @@ public class AdminTeamsServlet extends HttpServlet {
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.NewsBean;
+import dao.Division;
 import dao.Index;
 
 public class IndexServlet extends HttpServlet {
@@ -36,7 +38,6 @@ public class IndexServlet extends HttpServlet {
 			response.addCookie(cookieLanguage);
 		}
 		else {
-
 			language = request.getParameter("language");
 			Cookie[] theCookies = request.getCookies();
 
@@ -52,9 +53,12 @@ public class IndexServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<NewsBean> nlb = new ArrayList<NewsBean>();
-			Index.getNews(nlb);	
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Index.getNews(nlb, language);
+			Division.getAllDivisions(dlb);
 
-			request.setAttribute("news", nlb);	
+			request.setAttribute("news", nlb);
+			request.setAttribute("allDiv", dlb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
 			rd.forward(request, response);		

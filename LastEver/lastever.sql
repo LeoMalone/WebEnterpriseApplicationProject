@@ -467,7 +467,7 @@ CREATE TABLE `users` (
   `emailAddress` varchar(100) NOT NULL,
   `emailValidated` tinyint(1) NOT NULL,
   `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `accountUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `accountUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastLogin` timestamp NULL DEFAULT NULL,
   `userType` varchar(100) NOT NULL,
   `refereeID` bigint(20) DEFAULT NULL,
@@ -655,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-01 15:09:55
+-- Dump completed on 2018-03-01 19:17:58

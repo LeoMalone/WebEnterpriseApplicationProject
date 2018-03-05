@@ -1,19 +1,15 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
-import dao.Division;
-import dao.EditUser;
+import dao.EditTeam;
 
-public class DeleteUserServlet extends HttpServlet {
+public class DeleteTeamServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -25,14 +21,10 @@ public class DeleteUserServlet extends HttpServlet {
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
-		if(EditUser.deleteUser(sb.toString())) {
-			response.sendRedirect("./adminUsers");
+		if(EditTeam.deleteTeam(sb.toString())) {
+			response.sendRedirect("./adminTeams?=1");
 		} else {
-			response.sendRedirect("./index");
+			response.sendRedirect("./editTeam?=" + sb.toString());
 		}
-	}	
+	}
 }

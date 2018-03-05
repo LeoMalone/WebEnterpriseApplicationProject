@@ -16,11 +16,12 @@ public class Index {
 
 	/**
 	 * The validateUserLogin method validates a UserBeans login credentials
+	 * @param lang 
 	 * @param <NewsBean>
 	 * @param user - NewsBean credentials
 	 * @return status - boolean value
 	 */
-	public static boolean getNews(List<NewsBean> news) { 
+	public static boolean getNews(List<NewsBean> news, String lang) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -42,7 +43,7 @@ public class Index {
 				NewsBean nb = new NewsBean();
 				nb.setUserName(rs.getString(1));
 				nb.setTitle(rs.getString(2));
-				nb.setPostedTime(rs.getTimestamp(3));
+				nb.setPostedTime(rs.getTimestamp(3), lang);
 				nb.setContent(rs.getString(4));
 				news.add(nb);
 			}

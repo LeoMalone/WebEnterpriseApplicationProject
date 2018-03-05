@@ -4,55 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ------------------------------  COOKIE LOGIC  ------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<!-- If there is no user logged in redirect to login page -->
-<%
-	if (session.getAttribute("signedIn") == null) {
-		response.sendRedirect("login.jsp");
-	}
-
-	String userName = null;
-	String sessionID = null;
-
-	Cookie[] cookies = request.getCookies();
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("username"))
-				userName = cookie.getValue();
-		}
-	}
-%>
-
-
-<!-- if language is not set to French, set language to English -->
-<!-- cookie - future development -->
-
-<c:if test="${cookie.language eq null}">
-	<%
-		Cookie cookieLanguage = new Cookie("language", "en");
-			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
-			response.addCookie(cookieLanguage);
-	%>
-</c:if>
-<c:if test="${cookie.language ne null}">
-	<%
-		String language = request.getParameter("language");
-			Cookie cookieLanguage;
-			Cookie[] theCookies = request.getCookies();
-
-			for (Cookie tempCookie : theCookies) {
-				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
-						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
-				}
-			}
-	%>
-</c:if>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -68,10 +19,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
 
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -89,8 +36,6 @@
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -131,15 +76,15 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${empty allDiv}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="div1" items="${allDiv}">
 											<a class="dropdown-item"
-												href="division.jsp?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -164,8 +109,15 @@
 							</div></li>
 							 -->
 
-						<li class="nav-item"><a class="nav-link active"
-							href="admin.jsp"><%=userName%></a></li>
+						<c:choose>
+							<c:when test="${signedIn == null}">
+								<li class="nav-item"><a class="nav-link" href="./login">Sign
+										In</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 
 						<li class="nav-item">
@@ -192,7 +144,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<%=userName%>: Users
+					${userName}: Users
 				</h1>
 				<a href="/createUser" class="btn btn-success">Create New User</a>					
 				<div class="row">
@@ -208,7 +160,7 @@
 								    </tr>
 								</thead>
 							    <c:forEach items="${userList}" var="user">
-							       <c:set var="teamName" value="<%=userName%>"/>
+							       <c:set var="teamName" value="${userName}"/>
 							        <tr>
 							        	<td>${user.username}</td>	
 							        	<td>${user.userType}</td>

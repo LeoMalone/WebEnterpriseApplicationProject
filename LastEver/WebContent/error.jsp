@@ -1,3 +1,4 @@
+<%@ page isErrorPage="true"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -27,17 +28,8 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<c:choose>
-		<c:when test="${empty currDiv}">
 
-			<title>Last Ever - Division</title>
-		</c:when>
-		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
-					<c:out value="${row.divisionName}" />
-				</c:forEach></title>
-		</c:otherwise>
-	</c:choose>
+	<title>Last Ever - ${errorcode} Error</title>
 </fmt:bundle>
 </head>
 
@@ -76,11 +68,13 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
-										key="registration" /></a> <a class="dropdown-item"
-									href="./contact"><fmt:message key="contact" /></a>
-							</div></li>
-						<li class="nav-item dropdown active"><a
+										key="rules" /></a> <a class="dropdown-item"
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
+										key="contact" /></a>
+							</div>
+						</li>
+						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> Divisions </a>
@@ -102,8 +96,7 @@
 							</div></li>
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign
-										In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
@@ -137,125 +130,17 @@
 		- calls from database 'LastEver' to get all information
 		-->
 			<div class="cards-container container">
-				<h1 class="my-4">
-					<c:forEach var="row" items="${currDiv}">
-						<c:out value="${row.divisionName}" />
-					</c:forEach>
-					Standings
-				</h1>
+				<h1 class="my-4">${errorcode} Error</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<!-- Crude Navbar for page navigation, needs CSS applied -->
 					<div class="col-lg-12">
 						<div class="card">
-							<div class="card-body">
-								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
-									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="division?id=${row.divisionId}">
-													<c:out value="${row.divisionName}" />
-												</a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
-											</c:forEach></li>
-									</ul>
-								</nav>
-							</div>
+							<div class="card-body">${error}</div>
 						</div>
 					</div>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head4" />
-							</h4>
-							<div class="card-body">
-								<table id="standings"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text5" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text6" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text7" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text8" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text9" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text10" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${empty standings}">
-												<td colspan=10 style="text-align: center"><b><fmt:message
-															key="div_noteams" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${standings}" var="stand">
-													<tr>
-														<td scope="row" style="text-align: center"><c:out
-																value="${stand.rank}" /></td>
-														<td scope="row"><c:out value="${stand.teamName}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.gamesPlayed}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.wins}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.losses}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.draws}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.points}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalsFor}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalsAgainst}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalDiff}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
+
 				</div>
-
-				<!-- /.row -->
 			</div>
-
 		</div>
 	</fmt:bundle>
 	<!-- Footer -->

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.StandingsBean;
+import dao.Division;
 import dao.Standings;
 
 public class StandingsServlet extends HttpServlet {
@@ -55,6 +57,14 @@ public class StandingsServlet extends HttpServlet {
 			List<StandingsBean> slb = new ArrayList<StandingsBean>();
 			Standings.getStandings(id, slb);	
 
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			dlb = new ArrayList<DivisionBean>();	
+			Division.getSpecificDivision(dlb, id);
+			request.setAttribute("currDiv", dlb);
+			
 			request.setAttribute("standings", slb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/standings.jsp?id=" + id);  

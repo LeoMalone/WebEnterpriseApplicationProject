@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
-import beans.RefBean;
 import dao.Division;
-import dao.EditRefUser;
 
-public class RefHomeServlet extends HttpServlet {
+public class TeamOwnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -41,13 +39,6 @@ public class RefHomeServlet extends HttpServlet {
 						userName = cookie.getValue();
 					else if (cookie.getName().equals("language"))
 						language = cookie.getValue();
-					else if (cookie.getName().equals("userType"))
-					{
-						if (cookie.getValue() != "referee") //if they aren't a referee, don't let them access
-							{
-								response.sendRedirect("./login");
-							}
-					}
 				}
 			}
 			if(language == null) {
@@ -69,21 +60,8 @@ public class RefHomeServlet extends HttpServlet {
 					}
 				}		
 				
-				
-				
-				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
-				
 				request.setAttribute("userName", userName);
-				request.setAttribute("divList", dbl);
-
-				//get id from url and set userBean id
-				RefBean user = new RefBean();
-				
-				if(EditRefUser.getUserForEdit(user)) {
-					request.setAttribute("firstName", user.getFirstName());
-				}
-				
-				RequestDispatcher rd = request.getRequestDispatcher("referee.jsp");  
+				RequestDispatcher rd = request.getRequestDispatcher("teamowner.jsp");  
 		        rd.forward(request, response);	
 			}
 		}

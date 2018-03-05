@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,17 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
-import beans.NewsBean;
 import dao.Division;
 
-public class DivisionServlet extends HttpServlet {
-
+public class RulesServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+	@Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		response.setContentType("text/html");
+		
 		String userName = null;
-		String language = null;
-
+		String language = null;		
+		
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -48,30 +51,15 @@ public class DivisionServlet extends HttpServlet {
 					response.addCookie(tempCookie);
 					break;
 				}
-			}
-
-			String id = request.getParameter("id");
-			response.setContentType("text/html");
-
-			List<NewsBean> nlb = new ArrayList<NewsBean>();
+			}		
+				
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getNews(id, nlb, language);	
 			Division.getAllDivisions(dlb);
-			
 			request.setAttribute("allDiv", dlb);
 			
-			dlb = new ArrayList<DivisionBean>();	
-			Division.getSpecificDivision(dlb, id);
-
-			request.setAttribute("currDiv", dlb);
-			request.setAttribute("news", nlb);	
 			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("/division.jsp?id=" + id);  
-			rd.forward(request, response);		
+			RequestDispatcher rd = request.getRequestDispatcher("rules.jsp");  
+	        rd.forward(request, response);	
 		}
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		doGet(request, response);
 	}
 }

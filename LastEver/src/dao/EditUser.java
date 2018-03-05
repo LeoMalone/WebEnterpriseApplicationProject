@@ -20,7 +20,7 @@ public class EditUser {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password from users where userID=?");
+	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password, userFirstName, userLastName from users where userID=?");
 	        getUser.setString(1, user.getId());
 	        rs = getUser.executeQuery();	              
 	        
@@ -30,6 +30,8 @@ public class EditUser {
 	        	user.setUserType(rs.getString(3));
 	        	user.setEmail(rs.getString(4));
 	        	user.setPassword(rs.getString(5));
+	        	user.setFirstName(rs.getString(6));
+	        	user.setLastName(rs.getString(7));
 	        	status = true;
 	        }
 	        
@@ -66,13 +68,16 @@ public class EditUser {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=? WHERE userID=?");
+	        updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=?, userFirstName=?, userLastName=?, accountUpdated=? WHERE userID=?");
 	        updateUser.setString(1, user.getUsername());
 	        updateUser.setString(2, user.getUserType());
 	        updateUser.setString(3, user.getEmailAddress());
 	        updateUser.setString(4, user.getPassword());
 	        updateUser.setInt(5, 1);
-	        updateUser.setInt(6, Integer.parseInt(user.getId()));
+	        updateUser.setString(6, user.getFirstName());
+	        updateUser.setString(7, user.getLastName());
+	        updateUser.setTimestamp(8, user.getAccountUpdated());
+	        updateUser.setString(9, user.getId());
 	        
 	        result = updateUser.executeUpdate();	        
 	        if(result == 1) {
@@ -101,21 +106,32 @@ public class EditUser {
 	    return status;
 	}
 	
-	public static boolean deleteUser(int id) {
+	public static boolean deleteUser(String id) {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
+	    PreparedStatement deleteNews = null;
+	    PreparedStatement deleteTeam = null;
 	    PreparedStatement deleteUser = null;
-	    int result = 0;	    
+	    int result = 0;   
 	    
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        deleteUser = conn.prepareStatement("DELETE FROM users WHERE userID=?");
-	        deleteUser.setInt(1, id);
-	        
-	        result = deleteUser.executeUpdate();	        
-	        if(result == 1) {
-	        	status = true;
+	        deleteNews = conn.prepareStatement("DELETE FROM news USING news, users WHERE `users`.`userID` = `news`.`userID` AND users.userID=?");
+	        deleteNews.setString(1, id);
+	        result = deleteNews.executeUpdate();
+	        if(result >= 0) {
+	        	deleteTeam = conn.prepareStatement("DELETE FROM usersxteam USING usersxteam, users WHERE `users`.`userID` = `usersxteam`.`userID` AND users.userID=?");
+	        	deleteTeam.setString(1, id);
+	        	result = deleteTeam.executeUpdate();
+	        	if(result == 1 || result == 0) {
+	        		deleteUser = conn.prepareStatement("DELETE FROM users USING users WHERE users.userID=?");
+			        deleteUser.setString(1, id);
+			        result = deleteUser.executeUpdate();
+			        if(result == 1) {
+			        	status = true;
+			        }
+	        	}
 	        }
 	        
 	    // Catch all possible Exceptions
@@ -132,6 +148,20 @@ public class EditUser {
 	        if (deleteUser != null) {
 	            try {
 	            	deleteUser.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteNews != null) {
+	            try {
+	            	deleteNews.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteTeam != null) {
+	            try {
+	            	deleteTeam.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }
