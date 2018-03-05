@@ -63,18 +63,9 @@ public class CreateTeamServlet extends HttpServlet {
 					}
 				}
 			
-				//get id from url and set userBean id
-				StringBuilder sb = new StringBuilder(request.getQueryString());
-				sb.deleteCharAt(0);
-				TeamBean team = new TeamBean();
-				team.setTeamId(sb.toString());
-				
-				if(EditTeam.getTeamForEdit(team)) {
-					request.setAttribute("userName", userName);
-					request.setAttribute("team", team);
-					RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
-			        rd.forward(request, response);					
-				}
+				request.setAttribute("userName", userName);
+				RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
+				rd.forward(request, response);					
 			}
 		}
 	}

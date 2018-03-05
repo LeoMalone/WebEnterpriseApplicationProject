@@ -5,6 +5,16 @@
 	version="2.5">
 
 	<servlet>
+		<servlet-name>DeleteTeamServlet</servlet-name>
+		<servlet-class>servlets.DeleteTeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteTeamServlet</servlet-name>
+		<url-pattern>/deleteTeam</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>RulesSummaryServlet</servlet-name>
 		<servlet-class>servlets.RulesSummaryServlet</servlet-class>
 	</servlet>
