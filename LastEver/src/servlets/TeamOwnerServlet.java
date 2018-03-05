@@ -12,23 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.UserBean;
 import dao.Division;
+import dao.EditTeamUser;
 
 public class TeamOwnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
+
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
@@ -47,10 +49,10 @@ public class TeamOwnerServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -59,10 +61,12 @@ public class TeamOwnerServlet extends HttpServlet {
 						break;
 					}
 				}		
-				
+
 				request.setAttribute("userName", userName);
+				request.setAttribute("divList", dlb);
+
 				RequestDispatcher rd = request.getRequestDispatcher("teamowner.jsp");  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
 	}

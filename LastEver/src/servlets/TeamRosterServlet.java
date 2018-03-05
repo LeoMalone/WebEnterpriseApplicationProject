@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.UserBean;
 import dao.Division;
 
 public class TeamRosterServlet extends HttpServlet {
@@ -24,11 +25,11 @@ public class TeamRosterServlet extends HttpServlet {
 		
 		String userName = null;
 		String language = null;
-		
+
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
@@ -47,10 +48,10 @@ public class TeamRosterServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -59,8 +60,9 @@ public class TeamRosterServlet extends HttpServlet {
 						break;
 					}
 				}		
-				
+
 				request.setAttribute("userName", userName);
+				request.setAttribute("divList", dlb);
 				RequestDispatcher rd = request.getRequestDispatcher("team_roster.jsp");  
 		        rd.forward(request, response);	
 			}

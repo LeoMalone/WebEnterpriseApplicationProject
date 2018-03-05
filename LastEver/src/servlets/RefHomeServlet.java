@@ -69,12 +69,8 @@ public class RefHomeServlet extends HttpServlet {
 					}
 				}		
 				
-				
-				
-				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
-				
 				request.setAttribute("userName", userName);
-				request.setAttribute("divList", dbl);
+				request.setAttribute("divList", dlb);
 
 				//get id from url and set userBean id
 				RefBean user = new RefBean();
