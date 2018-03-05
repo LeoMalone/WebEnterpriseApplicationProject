@@ -174,14 +174,13 @@
 								</p>							
 							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
+									<button type="submit" class="btn btn-success"><fmt:message key="signin_button1"/></button>	
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-				<!-- /.row -->
-				
+				<!-- /.row -->				
 			</fmt:bundle>			
 		</div>
 	</div>

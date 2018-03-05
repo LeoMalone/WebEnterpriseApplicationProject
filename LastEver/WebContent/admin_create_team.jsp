@@ -77,7 +77,7 @@
 							aria-haspopup="true" aria-expanded="false"> Divisions </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-																<c:choose>
+								<c:choose>
 									<c:when test="${empty allDiv}">
 
 										<a class="dropdown-item" href=""><fmt:message
@@ -113,7 +113,49 @@
 	</nav>
 
 	<div class="main-cover">
-		
+		<fmt:bundle basename="TestBundle">
+		<div class="cards-container container">		
+				<h1 class="my-4">
+					${userName}: Create Team
+				</h1>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Create New Team
+							</h4>
+							<form action="teamCreate" method="POST">
+							<div class="card-body">
+								<p class="card-text">
+									<div class="form-group">
+										<label for="newTeamName">Team Name</label>
+										<input type="text" class="form-control" name="newTeamName" placeholder="Enter Team Name">
+									</div>
+									<div class="form-group">
+										<label for="newTeamAbbr">Team Abbreviation</label>
+										<input type="text" class="form-control" name="newTeamAbbr" placeholder="Enter Team Abbreviation">
+									</div>	
+									<label for="divRadio">Select Division</label>								 
+									 <c:forEach var="div1" items="${allDiv}">
+											<div class="form-check">
+											  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
+												  <label class="form-check-label" for="divRadio">
+												    ${div1.divisionName}
+												  </label>
+											  </div>
+									</c:forEach>
+								</p>
+							</div>
+							<div class="card-footer">
+								<button type="submit" class="btn btn-success">Save</button>	
+							</div>
+							</form>
+						</div>							
+					</div>
+				</div>
+			</div>
+		<!-- /.row -->
+		</fmt:bundle>
 	</div>
 
 	<!-- Footer -->

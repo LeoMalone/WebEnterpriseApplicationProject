@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.DivisionBean;
 import beans.TeamBean;
+import dao.CreateAccount;
+import dao.CreateTeam;
 import dao.Division;
 import dao.EditTeam;
 
@@ -66,6 +70,36 @@ public class CreateTeamServlet extends HttpServlet {
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
 				rd.forward(request, response);					
+			}
+		}
+	}
+	
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// set response type and get post data from jsp form
+		response.setContentType("text/html");
+		
+		String newTeamName	 = request.getParameter("newTeamName");
+		String newTeamAbbr = request.getParameter("newTeamAbbr");
+		String newDiv = request.getParameter("divRadio");
+		
+		// If any parameter is null
+		if(newTeamName == null || newTeamAbbr== null || newDiv == null) {
+			response.sendRedirect("./adminTeams");
+			
+		} else {
+			TeamBean team = new TeamBean();
+			team.setTeamName(newTeamName);
+			team.setTeamAbbreviation(newTeamAbbr);
+			team.setDivisionId(newDiv);
+
+			// If createNewUser method returns true
+			if (CreateTeam.createNewTeam(team)) {
+				response.sendRedirect("./adminTeams?=" + team.getDividionId());
+				
+			} else {
+				response.sendRedirect("./teamCreate");
 			}
 		}
 	}
