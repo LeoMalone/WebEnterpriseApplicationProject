@@ -74,7 +74,7 @@ CREATE TABLE `gamestatistics` (
   PRIMARY KEY (`statisticID`),
   KEY `GameStaticticsToSchedule` (`gameID`),
   KEY `GameStatisticsToPlayer` (`playerID`),
-  CONSTRAINT `GameStaticticsToSchedule` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`),
+  CONSTRAINT `GameStaticticsToSchedule` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`) ON DELETE CASCADE,
   CONSTRAINT `GameStatisticsToPlayer` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -205,7 +205,7 @@ CREATE TABLE `playerxteam` (
   PRIMARY KEY (`playerID`,`teamID`),
   KEY `TeamToPlayer` (`teamID`),
   CONSTRAINT `PlayerToTeam` FOREIGN KEY (`playerID`) REFERENCES `player` (`playerID`),
-  CONSTRAINT `TeamToPlayer` FOREIGN KEY (`teamID`) REFERENCES `team` (`teamID`)
+  CONSTRAINT `TeamToPlayer` FOREIGN KEY (`teamID`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -292,8 +292,8 @@ CREATE TABLE `schedule` (
   UNIQUE KEY `UC_Teams` (`gameID`,`homeTeam`,`awayTeam`),
   KEY `HomeTeamToTeam` (`homeTeam`),
   KEY `AwayTeamToTeam` (`awayTeam`),
-  CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`),
-  CONSTRAINT `HomeTeamToTeam` FOREIGN KEY (`homeTeam`) REFERENCES `team` (`teamID`)
+  CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE,
+  CONSTRAINT `HomeTeamToTeam` FOREIGN KEY (`homeTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -320,7 +320,7 @@ CREATE TABLE `schedulexreferee` (
   PRIMARY KEY (`gameID`,`refereeID`),
   KEY `RefereeToSchedule` (`refereeID`),
   CONSTRAINT `RefereeToSchedule` FOREIGN KEY (`refereeID`) REFERENCES `referee` (`refereeID`),
-  CONSTRAINT `ScheduleToReferee` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`)
+  CONSTRAINT `ScheduleToReferee` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -436,7 +436,7 @@ CREATE TABLE `teamxdivision` (
   PRIMARY KEY (`teamID`,`divisionID`),
   KEY `DivisionToTeam` (`divisionID`),
   CONSTRAINT `DivisionToTeam` FOREIGN KEY (`divisionID`) REFERENCES `division` (`divisionID`),
-  CONSTRAINT `TeamToDivision` FOREIGN KEY (`teamID`) REFERENCES `team` (`teamID`)
+  CONSTRAINT `TeamToDivision` FOREIGN KEY (`teamID`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -559,7 +559,7 @@ CREATE TABLE `venuexgame` (
   `gameID` bigint(20) NOT NULL,
   PRIMARY KEY (`venueID`,`gameID`),
   KEY `GameToVenue` (`gameID`),
-  CONSTRAINT `GameToVenue` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`),
+  CONSTRAINT `GameToVenue` FOREIGN KEY (`gameID`) REFERENCES `schedule` (`gameID`) ON DELETE CASCADE,
   CONSTRAINT `VenueToGame` FOREIGN KEY (`venueID`) REFERENCES `venue` (`venueID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -655,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-01 19:17:58
+-- Dump completed on 2018-03-05 17:06:14
