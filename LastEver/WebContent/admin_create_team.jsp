@@ -147,7 +147,7 @@
 								</p>
 							</div>
 							<div class="card-footer">
-								<button type="submit" class="btn btn-success">Save</button>	
+								<button type="submit" class="btn btn-success">Submit!</button>	
 							</div>
 							</form>
 						</div>							

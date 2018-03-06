@@ -26,8 +26,9 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Admin CP</title>
+	<title>Last Ever - Divisions</title>
 </fmt:bundle>
 </head>
 <body>
@@ -112,104 +113,59 @@
 		</div>
 	</nav>
 
-
 	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Admin Control Panel
+					${userName}: Divisions
 				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete User profiles
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
-								</div>
-							</div>
+				<a href="./divisionCreate" class="btn btn-success">Create New Division</a>					
+				<div class="row">
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card bg-light">				
+							<div class="card-header">						 	
+							    <h3>List of Divisions</h3>
+							 </div>
+							 <div class="card-body">							 	
+							 	<table class="table table-striped">
+								 	<thead class="thead-dark">
+									    <tr>
+									      <th scope="col">Division Id</th>
+									      <th scope="col">Division Name</th>
+									      <th></th>
+									    </tr>
+									 </thead>
+								 	<c:forEach  items="${allDiv}" var="division">
+										<tr>
+											<td scope="col">${division.divisionId}</td>
+											<td scope="col">${division.divisionName}</td>
+											<td scope="col">
+								        		<a href="./editDivision?=${division.divisionId}" class="btn btn-dark btn-sm">
+								        			<i class="fa fa-edit"></i> 
+												</a>
+											</td>
+										</tr>
+								    </c:forEach>
+							 	</table>							 	
+							 </div>							 			
 						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Teams
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Teams
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Divisions
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Divisions
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
-								</div>
-							</div>
-						</div>				
 					</div>
-					<!-- row -->
-					
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Schedules
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Schedule Information
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
-								</div>
-							</div>
-						</div>				
-					</div>
-				</div>
-				<div class="mb-4">
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
 	</div>
 	</fmt:bundle>
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

@@ -139,6 +139,16 @@
 										    <label for="editTeamAbbr">Team Abbreviation</label>
 										    <input type="text" class="form-control" name="editTeamAbbr" value="${team.teamAbbreviation}">
 										 </div>
+										 <label for="divRadio">Select Division</label>								 
+										 <c:forEach var="div1" items="${allDiv}">
+												<div class="form-check">
+												  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
+													  <label class="form-check-label" for="divRadio">
+													    ${div1.divisionName}
+													  </label>
+												  </div>
+										</c:forEach>
+										<br />
 										<button type="submit" class="btn btn-outline-success">Save</button>	
 									</form>								
 								</p>							

@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -26,10 +25,12 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Admin CP</title>
+	<title>Last Ever</title>
 </fmt:bundle>
 </head>
+
 <body>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
@@ -119,97 +120,46 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Admin Control Panel
-				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete User profiles
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
-								</div>
+					${userName}: ${division.divisionName}
+				</h1>				
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Edit Division Credentials
+							</h4>
+							<div class="card-body">
+								<p class="card-text">
+									<form action="editDivision?=${division.divisionId}" method="POST">								
+										<div class="form-group">
+											<label for="editDivisionName">Division Name</label>
+											<input type="text" class="form-control" name="editDivisionName" value="${division.divisionName}">
+										</div>
+										<button type="submit" class="btn btn-outline-success">Save</button>	
+									</form>								
+								</p>							
 							</div>
+							<form action="deleteDivision?=${division.divisionId}" method="POST">
+								<div class="card-footer">
+									<button type="submit" class="btn btn-danger">Delete Division</button>
+								</div>
+							</form>
 						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Teams
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Teams
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Divisions
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Divisions
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
-								</div>
-							</div>
-						</div>				
 					</div>
-					<!-- row -->
-					
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Schedules
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Schedule Information
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
-								</div>
-							</div>
-						</div>				
-					</div>
-				</div>
-				<div class="mb-4">
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
 	</div>
 	</fmt:bundle>
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

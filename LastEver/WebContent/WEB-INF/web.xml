@@ -3,6 +3,46 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
 	version="2.5">
+	
+	<servlet>
+		<servlet-name>DeleteDivisionServlet</servlet-name>
+		<servlet-class>servlets.DeleteDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteDivisionServlet</servlet-name>
+		<url-pattern>/deleteDivision</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditDivisionServlet</servlet-name>
+		<servlet-class>servlets.EditDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditDivisionServlet</servlet-name>
+		<url-pattern>/editDivision</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateDivisionServlet</servlet-name>
+		<servlet-class>servlets.CreateDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateDivisionServlet</servlet-name>
+		<url-pattern>/divisionCreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminDivisionsServlet</servlet-name>
+		<servlet-class>servlets.AdminDivisionsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminDivisionsServlet</servlet-name>
+		<url-pattern>/adminDivisions</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>DeleteTeamServlet</servlet-name>

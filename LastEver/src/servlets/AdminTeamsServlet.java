@@ -63,16 +63,20 @@ public class AdminTeamsServlet extends HttpServlet {
 				
 				List<TeamBean> tbl = new ArrayList<TeamBean>();
 				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
-				StringBuilder sb = new StringBuilder(request.getQueryString());
-				sb.deleteCharAt(0);				
-				AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
+				if(request.getQueryString() == null) {
+					AdminTeams.getAllTeams(null, dbl, tbl);
+				} else {
+					StringBuilder sb = new StringBuilder(request.getQueryString());
+					sb.deleteCharAt(0);
+					AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
+					request.setAttribute("currentId", sb.toString());
+				}				
 				
-				request.setAttribute("currentId", sb.toString());
-				request.setAttribute("userName", userName);
 				request.setAttribute("divList", dbl);
 				request.setAttribute("teamList", tbl);
+				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("admin_teams.jsp");  
-		        rd.forward(request, response);	
+		        rd.forward(request, response);
 			}
 		}
 	}

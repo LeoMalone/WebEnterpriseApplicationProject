@@ -27,7 +27,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Admin CP</title>
+	<title>Last Ever - Create Division</title>
 </fmt:bundle>
 </head>
 <body>
@@ -112,96 +112,39 @@
 		</div>
 	</nav>
 
-
-	<fmt:bundle basename="TestBundle">
-		<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+	<div class="main-cover">
+		<fmt:bundle basename="TestBundle">
+		<div class="cards-container container">		
 				<h1 class="my-4">
-					${userName}: Admin Control Panel
+					${userName}: Create Division
 				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete User profiles
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
-								</div>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Create New Division
+							</h4>
+							<form action="divisionCreate" method="POST">
+							<div class="card-body">
+								<p class="card-text">
+									<div class="form-group">
+										<label for="newDivisionName">Division Name</label>
+										<input type="text" class="form-control" name="newDivisionName" placeholder="Enter Division Name">
+									</div>
+								</p>
 							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Teams
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Teams
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
-								</div>
+							<div class="card-footer">
+								<button type="submit" class="btn btn-success">Submit!</button>	
 							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Divisions
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Divisions
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
-								</div>
-							</div>
-						</div>				
-					</div>
-					<!-- row -->
-					
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Schedules
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Schedule Information
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
-								</div>
-							</div>
-						</div>				
+							</form>
+						</div>							
 					</div>
 				</div>
-				<div class="mb-4">
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
-				<!-- /row -->
-			</fmt:bundle>
-		</div>
+			</div>
+		<!-- /.row -->
+		</fmt:bundle>
 	</div>
-	</fmt:bundle>
+
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
@@ -224,5 +167,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjvCeJFzEnkShiIgO4gTBEVF1UqDwWfwc&callback=myMap"></script>
 </body>
 </html>

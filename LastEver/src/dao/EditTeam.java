@@ -57,6 +57,7 @@ public static boolean getTeamForEdit(TeamBean team) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
 	    PreparedStatement updateTeam = null;
+	    PreparedStatement updateTeamDiv = null;
 	    int result = 0;
 	
 	    // Connect to Database 
@@ -65,12 +66,15 @@ public static boolean getTeamForEdit(TeamBean team) {
 	        updateTeam = conn.prepareStatement("UPDATE team SET teamName=?, teamAbbreviation=? WHERE teamID=?");
 	        updateTeam.setString(1, team.getTeamName());
 	        updateTeam.setString(2, team.getTeamAbbreviation());
-	        updateTeam.setString(3, team.getTeamId());
-	        
-	        
+	        updateTeam.setString(3, team.getTeamId());	        
 	        result = updateTeam.executeUpdate();	        
 	        if(result == 1) {
-	        	status = true;
+	        	updateTeamDiv = conn.prepareStatement("UPDATE teamxdivision SET divisionID=? WHERE teamID=?");
+	        	updateTeamDiv.setString(1, team.getDividionId());
+	        	updateTeamDiv.setString(2, team.getTeamId());
+	        	result = updateTeamDiv.executeUpdate();
+	        	if(result >= 0)
+	        		status = true;
 	        }
 	        
 	    // Catch all possible Exceptions
@@ -91,18 +95,14 @@ public static boolean getTeamForEdit(TeamBean team) {
 	                e.printStackTrace();
 	            }
 	        }
+	        if (updateTeamDiv != null) {
+	            try {
+	            	updateTeamDiv.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }	    
-	    return status;
-	}
-	
-	public static boolean createTeam(TeamBean bean) {
-		boolean status = false;					// Status of createNewUser
-	    Connection conn = null;					// DB Connection
-	    PreparedStatement deleteDivision = null;
-	    PreparedStatement deleteUser = null;
-	    PreparedStatement deleteTeam = null;
-	    int result = 0;
-	    
 	    return status;
 	}
 	

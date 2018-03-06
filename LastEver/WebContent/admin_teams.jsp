@@ -127,6 +127,9 @@
 						<div class="card bg-light">				
 							<div class="card-header">
 							    <ul class="nav nav-tabs card-header-tabs">
+							    	<li class="nav-item">
+							    		<a class="nav-link ${currentId==null?'active':''}" href="./adminTeams">No Division</a>
+							    	</li>
 							    	<c:forEach  items="${divList}" var="division">
 							    		<li class="nav-item">
 							        		<a class="nav-link ${division.divisionId==currentId?'active':''}" href="./adminTeams?=${division.divisionId}">${division.divisionName}</a>
