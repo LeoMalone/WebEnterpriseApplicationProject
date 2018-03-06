@@ -153,11 +153,23 @@
 									<c:otherwise>
 										<c:forEach items="${venue}" var="v">
 											<c:if test="${not empty v.venuePicture }">
-												<img src="${v.venuePicture}" />
+												<center><img src="${v.venuePicture}" width="500" height="300" /></center>
 											</c:if>
 											<table>
 												<tr>
-													<td>Address</td>
+												<td><b>Contact</b></td>
+												<td>Not Available</td>
+												</tr>
+												<tr>
+												<td><b>Phone Number</b></td>
+												<td>Not Available</td>
+												</tr>
+												<tr>
+												<td><b>Website</b></td>
+												<td>Not Available</td>
+												</tr>
+												<tr>
+													<td><b>Address</b></td>
 													<td><c:out value="${v.address1}" /> <c:out
 															value="${v.address2}" /> <br> <c:out
 															value="${v.city}" />, <c:out value="${v.province}" /> <c:out
@@ -165,41 +177,126 @@
 															value="${v.postal}" /></td>
 												</tr>
 												<tr>
-													<td></td>
-													<td><div id="map"></div>
-														<script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: {lat: 25, lng: 25}
-        });
-        var geocoder = new google.maps.Geocoder();
+													<td>Map</td>
+													<td><div id="map"></div> <script>
+														function initMap() {
+															var map = new google.maps.Map(
+																	document
+																			.getElementById('map'),
+																	{
+																		zoom : 15,
+																		center : {
+																			lat : 25,
+																			lng : 25
+																		}
+																	});
+															var geocoder = new google.maps.Geocoder();
 
-          geocodeAddress(geocoder, map);
-      }
+															geocodeAddress(
+																	geocoder,
+																	map);
+														}
 
-      function geocodeAddress(geocoder, resultsMap) {
-    	var address = <c:forEach items="${venue}" var="v">
-			    "${v.venueAddress}"
-			  </c:forEach>;
-    	  
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          }
-        });
-      }
-    </script> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGUmrbP4bA8jEkouNt9KIRFlBzpyT5oUA&callback=initMap"></script>
+														function geocodeAddress(
+																geocoder,
+																resultsMap) {
+															var address = <c:forEach items="${venue}" var="v">
+															"${v.venueAddress}"
+															</c:forEach>;
+
+															geocoder
+																	.geocode(
+																			{
+																				'address' : address
+																			},
+																			function(
+																					results,
+																					status) {
+																				if (status === 'OK') {
+																					resultsMap
+																							.setCenter(results[0].geometry.location);
+																					var marker = new google.maps.Marker(
+																							{
+																								map : resultsMap,
+																								position : results[0].geometry.location
+																							});
+																				}
+																			});
+														}
+													</script> <script
+															src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGUmrbP4bA8jEkouNt9KIRFlBzpyT5oUA&callback=initMap"></script>
 													</td>
 												</tr>
 											</table>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card bg-light">
+							<div class="card-header">
+							<h4 class="card-header">
+								<fmt:message key="div_head2" />
+							</h4>
+								<ul class="nav nav-tabs card-header-tabs">
+									<c:forEach items="${allDiv}" var="division">
+										<li class="nav-item"><a
+											class="nav-link ${division.divisionId==divID?'active':''}"
+											href="venue?id=${venID}&div=${division.divisionId}#standings">${division.divisionName}</a>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+							<div class="card-body">
+								<table id="standings"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text4" /></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty schedule}">
+												<td colspan=5 style="text-align: center"><b><fmt:message
+															key="div_nogames" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${schedule}" var="sched">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="d MMM y"
+																	value="${sched.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="MMM d y"
+																	value="${sched.date}" />
+															</c:if></td>
+														<td style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="time" pattern="H:mm"
+																	value="${sched.time}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="time" pattern="h:mm a"
+																	value="${sched.time}" />
+															</c:if></td>
+														<td><c:out value="${sched.homeTeam}" /></td>
+														<td><c:out value="${sched.awayTeam}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

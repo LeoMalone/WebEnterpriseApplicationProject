@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
+import beans.ScheduleResultsBean;
 import beans.VenueBean;
+import dao.Division;
+import dao.ScheduleResults;
 import dao.Venue;
 
 public class VenuePageServlet extends HttpServlet {
@@ -54,10 +58,25 @@ public class VenuePageServlet extends HttpServlet {
 			}		
 			
 			String id = request.getParameter("id");
+			String div = request.getParameter("div");
+			
+			if(div == null)
+				div = "1";
+			
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
+			ScheduleResults.getScheduleWithVenue(id, div, slb);	
 			
 			List<VenueBean> vlb = new ArrayList<VenueBean>();
 			Venue.getVenue(id, vlb);
+			
+			request.setAttribute("venID", id);
+			request.setAttribute("divID", div);
 			request.setAttribute("venue", vlb);
+			request.setAttribute("schedule", slb);
 			request.setAttribute("map", vlb.get(0).getVenueAddress());
 			
 			request.setAttribute("userName", userName);

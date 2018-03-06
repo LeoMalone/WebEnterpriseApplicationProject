@@ -287,7 +287,7 @@
 
 	<servlet>
 		<servlet-name>TeamOwnerServlet</servlet-name>
-		<servlet-class>servlets.TeamOwnerServet</servlet-class>
+		<servlet-class>servlets.TeamOwnerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -297,7 +297,7 @@
 
 	<servlet>
 		<servlet-name>TeamPhotoServlet</servlet-name>
-		<servlet-class>servlets.TeamPhotoServet</servlet-class>
+		<servlet-class>servlets.TeamPhotoServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -307,7 +307,7 @@
 
 	<servlet>
 		<servlet-name>TeamRosterServlet</servlet-name>
-		<servlet-class>servlets.TeamRosterServet</servlet-class>
+		<servlet-class>servlets.TeamRosterServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
