@@ -21,12 +21,13 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- Fontawesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - Team Schedule</title>
 </fmt:bundle>
 </head>
 
@@ -38,7 +39,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index"><img
+			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -49,8 +50,9 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="index"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
+									key="nav_home" /></a></li>
+
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -87,7 +89,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-												<c:choose>
+
+						<c:choose>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login">Sign
 										In</a></li>
@@ -134,74 +137,71 @@
 		</div>
 	</nav>
 
-	
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}: 
-					<fmt:message key="signin_prop2"/> Control Panel
-				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Roster
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										View Players on Team Roster
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster?id=${userName}" class="btn btn-outline-light">Go To Roster</a>
-								</div>
+					${teamName}'s Schedule
+				</h1>				
+									<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
+							<h4 class="card-header">
+								<fmt:message key="div_head2" />
+							</h4>
+							<div class="card-body">
+								<table id="standings"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text4" /></th>
+											<th scope="col" style="text-align: center">Venue</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty schedule}">
+												<td colspan=5 style="text-align: center"><b><fmt:message
+															key="div_nogames" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${schedule}" var="sched">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="d MMM y"
+																	value="${sched.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="MMM d y"
+																	value="${sched.date}" />
+															</c:if></td>
+														<td style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="time" pattern="H:mm"
+																	value="${sched.time}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="time" pattern="h:mm a"
+																	value="${sched.time}" />
+															</c:if></td>
+														<td><c:out value="${sched.homeTeam}" /></td>
+														<td><c:out value="${sched.awayTeam}" /></td>
+														<td><c:out value="${sched.venue}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
 							</div>
 						</div>
-						<!-- 
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Photos
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Add Team Photo and Team Logo
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./teamPhotos" class="btn btn-outline-light">Go To Roster</a>
-								</div>
-							</div>
-						</div>
-						 -->
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Team Schedule
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										View Your Team Schedule
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./teamSchedule" class="btn btn-outline-light">Go To Schedule</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div>
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+					</div>			
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
@@ -209,18 +209,16 @@
 
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
-	<div class="container-fluid">
-		<p class="m-0 text-center text-white">
-			Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-		</p>
-	</div>
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

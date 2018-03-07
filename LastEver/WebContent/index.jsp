@@ -76,7 +76,8 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+										key="nav_divisions" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -95,7 +96,8 @@
 							</div></li>
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
