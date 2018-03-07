@@ -5,6 +5,16 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<servlet-class>servlets.CalendarJsonServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<url-pattern>/calendarJson</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>AdminScheduleServlet</servlet-name>
 		<servlet-class>servlets.AdminScheduleServlet</servlet-class>
 	</servlet>
@@ -404,7 +414,7 @@
 		<error-code>408</error-code>
 		<location>/error</location>
 	</error-page>
-
+	
 	<display-name>LastEver</display-name>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>

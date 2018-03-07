@@ -125,10 +125,7 @@
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">				
-							<div class="card-header">						 	
-							    <h3>List of Divisions</h3>
-							 </div>
-							 <div class="card-body">							 	
+							<div class="card-body">							 	
 							 	<table class="table table-striped">
 								 	<thead class="thead-dark">
 									    <tr>
