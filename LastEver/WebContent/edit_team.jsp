@@ -32,6 +32,27 @@
 </head>
 
 <body>
+	<div class="modal fade" id="deleteTeam" tabindex="-1" role="dialog" aria-labelledby="deleteTeamLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="deleteTeamLabel">Delete: ${team.teamName}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	Are You sure you want to delete this Team?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form action="deleteTeam?=${team.teamId}" method="POST">
+	        	<button type="submit" class="btn btn-danger">Delete Team</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
@@ -139,15 +160,23 @@
 										    <label for="editTeamAbbr">Team Abbreviation</label>
 										    <input type="text" class="form-control" name="editTeamAbbr" value="${team.teamAbbreviation}">
 										 </div>
+										 <label for="divRadio">Select Division</label>								 
+										 <c:forEach var="div1" items="${allDiv}">
+												<div class="form-check">
+												  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
+													  <label class="form-check-label" for="divRadio">
+													    ${div1.divisionName}
+													  </label>
+												  </div>
+										</c:forEach>
+										<br />
 										<button type="submit" class="btn btn-outline-success">Save</button>	
 									</form>								
 								</p>							
 							</div>
-							<form action="deleteTeam?=${team.teamId}" method="POST">
-								<div class="card-footer">
-									<button type="submit" class="btn btn-danger">Delete Team</button>
-								</div>
-							</form>
+							<div class="card-footer">
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTeam">Delete Team</button>
+							</div>							
 						</div>
 					</div>
 				</div>					

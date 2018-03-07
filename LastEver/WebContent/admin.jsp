@@ -150,7 +150,7 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams?=1" class="btn btn-outline-light">Go To Teams</a>
+								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
 								</div>
 							</div>
 						</div>

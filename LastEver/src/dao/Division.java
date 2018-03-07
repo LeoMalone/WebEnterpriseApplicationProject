@@ -63,8 +63,6 @@ public class Division {
 				}
 			}
 
-
-
 			// handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
@@ -191,5 +189,188 @@ public class Division {
 			}
 		}	    
 		return status;
+	}
+	
+	public static boolean createNewDiv(String newDiv) {
+		
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement insertNewDiv = null;
+		int result = 0;
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			insertNewDiv = conn.prepareStatement("INSERT INTO division (divisionName) VALUE (?)");
+			insertNewDiv.setString(1, newDiv);
+			result = insertNewDiv.executeUpdate();
+			if(result == 1) {
+				status = true;
+			}			
+
+		// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (insertNewDiv != null) {
+				try {
+					insertNewDiv.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
+	public static boolean getDivisionForEdit(DivisionBean div) {
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement getDivision = null;
+		ResultSet rs = null;
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			getDivision = conn.prepareStatement("SELECT divisionID, divisionName from division WHERE divisionID=?");
+			getDivision.setString(1, div.getDivisionId());
+			rs = getDivision.executeQuery();
+
+			if(rs.next()) {
+				div.setDivisionName(rs.getString(2));
+				status = true;
+			}
+
+		// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getDivision != null) {
+				try {
+					getDivision.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
+	public static boolean saveChanges(DivisionBean div) {
+		
+		boolean status = false;					// Status of createNewUser
+	    Connection conn = null;					// DB Connection
+	    PreparedStatement updateDivision = null;
+	    int result = 0;
+	
+	    // Connect to Database 
+	    try {
+	        conn = ConnectionManager.getConnection();
+	        updateDivision = conn.prepareStatement("UPDATE division SET divisionName=? WHERE divisionID=?");
+	        updateDivision.setString(1, div.getDivisionName());
+	        updateDivision.setString(2, div.getDivisionId());	        
+	        result = updateDivision.executeUpdate();	        
+	        if(result == 1) {
+	        	status = true;
+	        }
+	        
+	    // Catch all possible Exceptions
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (updateDivision != null) {
+	            try {
+	            	updateDivision.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }	    
+	    return status;
+	}
+	
+	public static boolean deleteDivision(String divId) {
+		boolean status = false;					// Status of createNewUser
+	    Connection conn = null;					// DB Connection
+	    PreparedStatement deleteRefs = null;
+	    PreparedStatement deleteTeams = null;
+	    PreparedStatement deleteDivs = null;
+	    int result = 0;
+	
+	    // Connect to Database 
+	    try {
+	        conn = ConnectionManager.getConnection();
+	        deleteRefs = conn.prepareStatement("DELETE FROM refereexdivision USING refereexdivision, division WHERE `division`.`divisionID` = `refereexdivision`.`divisionID` AND division.divisionID=?");
+	        deleteRefs.setString(1, divId);
+	        result = deleteRefs.executeUpdate();
+	        if(result >= 0) {
+	        	deleteTeams = conn.prepareStatement("DELETE FROM teamxdivision USING teamxdivision, division WHERE `division`.`divisionID` = `teamxdivision`.`divisionID` AND division.divisionID=?");
+	        	deleteTeams.setString(1, divId);
+		        result = deleteTeams.executeUpdate();	        
+		        if(result >= 0) {
+		        	deleteDivs = conn.prepareStatement("DELETE FROM division USING division WHERE division.divisionID=?");
+		        	deleteDivs.setString(1, divId);
+		        	result = deleteDivs.executeUpdate();
+	        		if(result == 1) {
+	        			status = true;
+	        		}
+	        	}
+	        }
+	        
+	    // Catch all possible Exceptions
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteRefs != null) {
+	            try {
+	            	deleteRefs.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteTeams != null) {
+	            try {
+	            	deleteTeams.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteDivs != null) {
+	            try {
+	            	deleteDivs.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }	    
+	    return status;
 	}
 }

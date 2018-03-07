@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.PlayerBean;
+import beans.TeamBean;
 import dao.Division;
+import dao.EditTeamUser;
+import dao.TeamScheduleResults;
 
 public class TeamRosterServlet extends HttpServlet {
 
@@ -32,6 +36,7 @@ public class TeamRosterServlet extends HttpServlet {
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
+			
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -59,11 +64,27 @@ public class TeamRosterServlet extends HttpServlet {
 						break;
 					}
 				}		
+
 				
+				String teamId = EditTeamUser.getTeamForEdit(userName);
+				List<PlayerBean> pb = new ArrayList<PlayerBean>();
+				EditTeamUser.getPlayersFromRoster(pb, teamId);
+				
+				TeamBean tb = new TeamBean();
+				String teamName = TeamScheduleResults.getTeamName(tb, userName);
+				
+				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
+				request.setAttribute("divList", dlb);
+				request.setAttribute("playerList", pb);
+
 				RequestDispatcher rd = request.getRequestDispatcher("team_roster.jsp");  
 		        rd.forward(request, response);	
 			}
 		}
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+		doGet(request, response);
 	}
 }

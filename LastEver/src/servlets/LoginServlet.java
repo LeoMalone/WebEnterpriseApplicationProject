@@ -23,21 +23,21 @@ import dao.Login;
  */
 public class LoginServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * doGet method mapped to /login
 	 */
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)  
-            throws ServletException, IOException {    	
-    	response.setContentType("text/html");
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response)  
+			throws ServletException, IOException {    	
+		response.setContentType("text/html");
 		String language = null;
-		
+
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+
 		if (request.getSession().getAttribute("signedIn") != null) {
 			response.sendRedirect("./index");
 		} else {		
@@ -54,10 +54,10 @@ public class LoginServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -66,61 +66,90 @@ public class LoginServlet extends HttpServlet {
 						break;
 					}
 				}			
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
-    }
-    
-    /**
+	}
+
+	/**
 	 * doPost method mapped to /login
 	 */
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)  
-            throws ServletException, IOException {
-    	// Set content type and get form data from login.jsp
-        response.setContentType("text/html");        
-        String loginEmail = request.getParameter("loginEmail");  
-        String loginPass = request.getParameter("loginPass");
-        
-        List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response)  
+			throws ServletException, IOException {
+		// Set content type and get form data from login.jsp
+		response.setContentType("text/html");
+
+		String loginEmail = request.getParameter("loginEmail");  
+		String loginPass = request.getParameter("loginPass");
+		String language = null;
+
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-        
-        // Create new userBean
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        UserBean user = new UserBean(loginEmail, loginPass, timestamp);
-        
-        // If login with given userBean is successful
-        if(Login.validateUserLogin(user)) {
-        	
-        	// Start session and create use cookie
-        	HttpSession session = request.getSession(false);
-            if(session!=null) {
-            	//Set up user cookie
-    			Cookie cookie = new Cookie("username", user.getUsername());
-    			session.setMaxInactiveInterval(30*60);
-    			cookie.setMaxAge(30*60);
-    			response.addCookie(cookie);
-            	session.setAttribute("signedIn", true);
-            	
-            	// Get user home page
-            	String url = null;
-                if(user.getUserType().equals("Administrator")) {
-                	url = "./admin";
-                } else if(user.getUserType().equals("Referee")) {
-                	url = "./referee";
-                } else if(user.getUserType().equals("Team Owner")) {
-                	url = "./teamowner";
-                }
-                
-                // redirect to correct login page
-                session.setAttribute("userType", url);
-                response.sendRedirect(url);
-            }            
-        } else {
-        	 response.sendRedirect("./login");
-        }
-    }  
+
+		// Create new userBean
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		UserBean user = new UserBean(loginEmail, loginPass, timestamp);
+
+		// If login with given userBean is successful
+		if(Login.validateUserLogin(user)) {
+
+			// Start session and create use cookie
+			HttpSession session = request.getSession(false);
+			if(session!=null) {
+				//Set up user cookie
+				Cookie cookie = new Cookie("username", user.getUsername());
+				session.setMaxInactiveInterval(30*60);
+				cookie.setMaxAge(30*60);
+				response.addCookie(cookie);
+				session.setAttribute("signedIn", true);
+
+				// Get user home page
+				String url = null;
+				if(user.getUserType().equals("Administrator")) {
+					url = "./admin";
+				} else if(user.getUserType().equals("Referee")) {
+					url = "./referee";
+				} else if(user.getUserType().equals("Team Owner")) {
+					url = "./teamowner";
+				}
+
+				// redirect to correct login page
+				session.setAttribute("userType", url);
+				response.sendRedirect(url);
+			}            
+		} else {
+
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("language"))
+						language = cookie.getValue();
+				}
+			}
+			if(language == null) {
+				Cookie cookieLanguage = new Cookie("language", "en");
+				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
+				response.addCookie(cookieLanguage);
+			}
+			else {
+				language = request.getParameter("language");
+				Cookie[] theCookies = request.getCookies();
+
+				for (Cookie tempCookie : theCookies) {
+					if ("language".equals(tempCookie.getName())) {
+						if (language != null)
+							tempCookie.setValue(language);
+						response.addCookie(tempCookie);
+						break;
+					}
+				}			
+
+				response.sendRedirect("./login");
+			}
+		}  
+	}
 }
