@@ -392,6 +392,7 @@ CREATE TABLE `team` (
   `teamName` varchar(100) DEFAULT NULL,
   `teamAbbreviation` char(3) DEFAULT NULL,
   `teamLogo` varchar(200) DEFAULT NULL,
+  `teamAbout` text NOT NULL,
   PRIMARY KEY (`teamID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -402,7 +403,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL),(2,'Manotick Quick Men','MQM',NULL),(3,'Osgoode Never Reads','ONR',NULL),(4,'Barrhaven Vicious Scorers','BVS',NULL),(5,'Carleton Passive Players','CPP',NULL),(6,'Almonte Good Gals','AGG',NULL),(7,'Kanata Soccer Team','KST',NULL),(8,'Vars FC','VFC',NULL);
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +469,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-01 20:01:40','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-07 04:14:06','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02','2018-03-07 04:15:12','Team Owner',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,6 +517,10 @@ CREATE TABLE `venue` (
   `venueProvince` varchar(100) NOT NULL,
   `venuePostal` varchar(7) NOT NULL,
   `venueCountry` varchar(100) NOT NULL,
+  `venueContactName` varchar(200) DEFAULT NULL,
+  `venuePhoneNumber` varchar(14) DEFAULT NULL,
+  `venueEmail` varchar(100) DEFAULT NULL,
+  `venueAbout` text NOT NULL,
   PRIMARY KEY (`venueID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -526,7 +531,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada');
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -647,4 +652,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-06 21:13:43
+-- Dump completed on 2018-03-07 17:03:30
