@@ -74,7 +74,8 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+												key="nav_divisions" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -91,7 +92,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"	href="./login">Sign in</a></li>
+						<li class="nav-item"><a class="nav-link active"	href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -164,12 +166,12 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="newFirstName">First Name</label>
-										<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
+										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key='signin_enter_fname' />">
 									</div>
 									<div class="form-group">
-										<label for="newLastName">Last Name</label>
-										<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+										<label for="newLastName"><fmt:message key="signin_lname" /></label>
+										<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key='signin_enter_lname' />">
 									</div>
 									<div class="form-group">
 										<label for="newUsername"><fmt:message key="signin_user" /></label>

@@ -50,7 +50,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -62,11 +62,11 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="contact"><fmt:message
 										key="contact" /></a>
 							</div></li>
 						<li class="nav-item dropdown"><a
@@ -90,32 +90,30 @@
 								</c:choose>
 							</div></li>
 
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
 						<c:choose>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login">Sign
 										In</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+								
+								
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+								
+								<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName}
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
+								<a class="dropdown-item" href="teamRoster">View Roster</a>
+								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
+								<a class="dropdown-item" href="logout" method="post">Logout</a>
+							</div></li>
+								
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
@@ -144,36 +142,48 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Team Roster
+					${teamName}: Team Roster
 				</h1>
-				<a href="/createPlayer" class="btn btn-success">Create New Player</a>					
+				
+				<!-- Future development
+				<a href="/createPlayer" class="btn btn-success">Create New Player</a>		
+				 -->			
+				 
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">				
-							<table class="table">
-								<thead>
-								    <tr>
-								      <th scope="col">#</th>
-								      <th scope="col">First Name</th>
-								      <th scope="col">Last Name</th>
-								    </tr>
-								</thead>
-							    <c:set var="teamName" value="${userName}"/>
-							    <c:forEach items="${playerList}" var="player">
-							        <c:if test="(player.playerID = playerxteam.playerID) && (playerxTeam.teamID = team.teamID)">
-							        <tr>							        	
-							        		<td>${player.playerNumber}</td>	
-							        		<td>${player.playerFirstName}</td>
-							        		<td>${player.playerLastName}</td>
-							        		<td>
-							        			<a href="./rules_summary" class="btn btn-secondary btn-sm">
-							        				<i class="fa fa-edit"></i> 
+							<div class="table-responsive">										
+								<table class="table table-striped">
+									<thead class="thead-dark">
+									    <tr>
+									    	<th scope="col">#</th>
+									    	<th scope="col">First Name</th>
+									    	<th scope="col">Last Name</th>
+										    <th scope="col">Position</th>
+										    
+										    <!-- <th scope="col">Edit</th> -->
+										    
+									    </tr>
+									</thead>
+								    <c:forEach items="${playerList}" var="player">
+								        <tr>
+								        	<td scope="col">${player.playerNumber}</td>
+								        	<td scope="col">${player.playerFirstName}</td>
+								        	<td scope="col">${player.playerLastName}</td>
+								        	<td scope="col">${player.playerPosition}</td>
+								        	
+								        	<!-- 
+								        	<td scope="col">
+								        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
+								        			<i class="fa fa-edit"></i> 
 												</a>
-											</td>		            
-							        </tr>
-							        </c:if>
-							    </c:forEach>
-							</table>				
+											</td>	
+											 -->
+											 	            
+								        </tr>
+								    </c:forEach>
+								</table>
+							</div>			
 						</div>
 					</div>
 				</div>					
