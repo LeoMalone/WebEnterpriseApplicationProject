@@ -14,8 +14,8 @@ import beans.DivisionBean;
 import beans.RefBean;
 import beans.TeamBean;
 import dao.AdminTeams;
+import dao.Division;
 import dao.EditRefUser;
-import dao.RefUsers;
 
 public class RefUsersServlet extends HttpServlet{
 	
@@ -27,6 +27,10 @@ public class RefUsersServlet extends HttpServlet{
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");

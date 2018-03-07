@@ -21,17 +21,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- TODO: Replace with servlet -->
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
-
-<!-- TODO: Do in query in Servlet -->
-<sql:query dataSource="${dataSource}" var="div1">
-select divsionName, divisionID from division where divisionID = ?
-<sql:param value="${param.id}" />
-</sql:query>
-
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
@@ -39,15 +28,14 @@ select divsionName, divisionID from division where divisionID = ?
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<c:choose>
-		<c:when test="${div1.rowCount == 0}">
+		<c:when test="${empty currDiv}">
 
-			<title>Last Ever - Division Schedule</title>
+			<title>Last Ever - Division</title>
 		</c:when>
 		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${div1.rows}">
-					<c:out value="${row.divsionName}" />
-				</c:forEach> Statistics
-			</title>
+			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
+					<c:out value="${row.divisionName}" />
+				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
 </fmt:bundle>
@@ -59,10 +47,6 @@ select divsionName, divisionID from division where divisionID = ?
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<!-- TODO: Do in query in Servlet -->
-	<sql:query dataSource="${dataSource}" var="div2">
-	select divisionID, divsionName from division
-	</sql:query>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -86,51 +70,46 @@ select divsionName, divisionID from division where divisionID = ?
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle active" href="#"
+							</div>
+						</li>
+						<li class="nav-item dropdown active"><a
+							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> Divisions </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div2.rowCount == 0}">
+									<c:when test="${empty allDiv}">
 
-										<a class="dropdown-item active" href=""><fmt:message
+										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div2.rows}">
+										<c:forEach var="div1" items="${allDiv}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<%
-							if (session.getAttribute("signedIn") != null) {
-						%>
-						<li class="nav-item"><a class="nav-link"
-							href="<%=session.getAttribute("userType")%>">${userName}</a></li>
-						<%
-							} else {
-						%>
-						<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message
-									key="nav_signin" /></a></li>
-						<%
-							}
-						%>
+						<c:choose>
+							<c:when test="${signedIn == null}">
+								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -148,10 +127,7 @@ select divsionName, divisionID from division where divisionID = ?
 					</ul>
 				</fmt:bundle>
 			</div>
-
-
 		</div>
-
 	</nav>
 
 
@@ -164,8 +140,8 @@ select divsionName, divisionID from division where divisionID = ?
 		-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:forEach var="row" items="${div1.rows}">
-						<c:out value="${row.divsionName}" />
+					<c:forEach var="row" items="${currDiv}">
+						<c:out value="${row.divisionName}" />
 					</c:forEach>
 					Statistics
 				</h1>
@@ -177,30 +153,30 @@ select divsionName, divisionID from division where divisionID = ?
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item"><c:forEach var="row"
-												items="${div1.rows}">
-												<a class="nav-link" href="division?id=${row.divisionID}">
-													<c:out value="${row.divsionName}" />
+										<li class="nav-item active"><c:forEach var="row"
+												items="${currDiv}">
+												<a class="nav-link" href="division?id=${row.divisionId}">
+													<c:out value="${row.divisionName}" />
 												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
-												items="${div1.rows}">
-												<a class="nav-link" href="standings?id=${row.divisionID}">
+												items="${currDiv}">
+												<a class="nav-link" href="standings?id=${row.divisionId}">
 													Standings </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
-												items="${div1.rows}">
-												<a class="nav-link" href="schedule?id=${row.divisionID}">
+												items="${currDiv}">
+												<a class="nav-link" href="schedule?id=${row.divisionId}">
 													Schedule </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
-												items="${div1.rows}">
-												<a class="nav-link" href="results?id=${row.divisionID}">
+												items="${currDiv}">
+												<a class="nav-link" href="results?id=${row.divisionId}">
 													Results </a>
 											</c:forEach></li>
-										<li class="nav-item active"><c:forEach var="row"
-												items="${div1.rows}">
-												<a class="nav-link" href="statistics?id=${row.divisionID}">
+										<li class="nav-item"><c:forEach var="row"
+												items="${currDiv}">
+												<a class="nav-link" href="statistics?id=${row.divisionId}">
 													Statistics </a>
 											</c:forEach></li>
 									</ul>

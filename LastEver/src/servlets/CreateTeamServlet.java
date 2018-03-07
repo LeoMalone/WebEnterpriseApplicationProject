@@ -1,7 +1,8 @@
 package servlets;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.TeamBean;
-import dao.EditTeam;
+import dao.CreateTeam;
+import dao.Division;
 
 public class CreateTeamServlet extends HttpServlet {
 
@@ -22,6 +25,10 @@ public class CreateTeamServlet extends HttpServlet {
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
@@ -55,18 +62,39 @@ public class CreateTeamServlet extends HttpServlet {
 					}
 				}
 			
-				//get id from url and set userBean id
-				StringBuilder sb = new StringBuilder(request.getQueryString());
-				sb.deleteCharAt(0);
-				TeamBean team = new TeamBean();
-				team.setTeamId(sb.toString());
+				request.setAttribute("userName", userName);
+				RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
+				rd.forward(request, response);					
+			}
+		}
+	}
+	
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// set response type and get post data from jsp form
+		response.setContentType("text/html");
+		
+		String newTeamName	 = request.getParameter("newTeamName");
+		String newTeamAbbr = request.getParameter("newTeamAbbr");
+		String newDiv = request.getParameter("divRadio");
+		
+		// If any parameter is null
+		if(newTeamName == null || newTeamAbbr == null || newDiv == null) {
+			response.sendRedirect("./teamCreate");
+			
+		} else {
+			TeamBean team = new TeamBean();
+			team.setTeamName(newTeamName);
+			team.setTeamAbbreviation(newTeamAbbr);
+			team.setDivisionId(newDiv);
+
+			// If createNewUser method returns true
+			if (CreateTeam.createNewTeam(team)) {
+				response.sendRedirect("./adminTeams?=" + team.getDividionId());
 				
-				if(EditTeam.getTeamForEdit(team)) {
-					request.setAttribute("userName", userName);
-					request.setAttribute("team", team);
-					RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
-			        rd.forward(request, response);					
-				}
+			} else {
+				response.sendRedirect("./teamCreate");
 			}
 		}
 	}

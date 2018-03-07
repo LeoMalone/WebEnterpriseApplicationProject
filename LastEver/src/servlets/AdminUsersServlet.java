@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.UserBean;
 import dao.AdminUsers;
+import dao.Division;
 
 public class AdminUsersServlet extends HttpServlet{
 	
@@ -23,6 +25,10 @@ public class AdminUsersServlet extends HttpServlet{
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
@@ -57,12 +63,13 @@ public class AdminUsersServlet extends HttpServlet{
 				}
 			
 				List<UserBean> ulb = new ArrayList<UserBean>();
-				AdminUsers.getAllUsers(ulb);	
 				
-				request.setAttribute("userList", ulb);
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
-			    rd.forward(request, response);
+				if(AdminUsers.getAllUsers(ulb)) {				
+					request.setAttribute("userList", ulb);
+					request.setAttribute("userName", userName);
+					RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
+				    rd.forward(request, response);
+				}
 			}
 		}
 	}

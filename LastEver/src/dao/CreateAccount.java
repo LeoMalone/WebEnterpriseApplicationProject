@@ -23,23 +23,12 @@ public class CreateAccount {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
-	    PreparedStatement usernamesEmails = null;
 	    PreparedStatement insertUser = null;	// # of executed queries
-	    ResultSet rs = null;
 	    int result = 0;	    
 	
 	    // Connect to Database and execute INSERT query with UserBean data
 	    try {
-	        conn = ConnectionManager.getConnection();
-	        usernamesEmails = conn.prepareStatement("SELECT username FROM users WHERE username=? OR emailAddress=?");
-	        usernamesEmails.setString(1, user.getUsername());
-	        usernamesEmails.setString(2, user.getEmailAddress());
-	        rs = usernamesEmails.executeQuery();
-	        
-	        if(rs.getMetaData().getColumnCount() != 0) {
-	        	return false;
-	        }	        
-	        
+	        conn = ConnectionManager.getConnection();        
 	        insertUser = conn.prepareStatement("INSERT INTO users (username, userFirstName, userLastName, password, emailAddress, userType, lastLogin, emailValidated) VALUES (?, ?, ?, ?, ?, ?, ?, 1);");
 	        insertUser.setString(1, user.getUsername());
 	        insertUser.setString(2, user.getFirstName());
@@ -68,13 +57,6 @@ public class CreateAccount {
 	        if (insertUser != null) {
 	            try {
 	            	insertUser.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        if (usernamesEmails != null) {
-	            try {
-	            	usernamesEmails.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }

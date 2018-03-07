@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.ScheduleResultsBean;
+import dao.Division;
 import dao.ScheduleResults;
 
 public class ScheduleServlet extends HttpServlet {
@@ -55,6 +57,14 @@ public class ScheduleServlet extends HttpServlet {
 			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
 			ScheduleResults.getSchedule(id, slb);	
 
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			dlb = new ArrayList<DivisionBean>();	
+			Division.getSpecificDivision(dlb, id);
+			request.setAttribute("currDiv", dlb);
+			
 			request.setAttribute("schedule", slb);	
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/schedule.jsp?id=" + id);  

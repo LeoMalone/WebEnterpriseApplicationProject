@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -20,38 +21,34 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
-
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - Admin CP</title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -62,18 +59,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -81,43 +78,21 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${empty allDiv}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="div1" items="${allDiv}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -137,7 +112,9 @@
 		</div>
 	</nav>
 
-	<div class="main-cover">
+
+	<fmt:bundle basename="TestBundle">
+		<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
@@ -173,7 +150,7 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams?=1" class="btn btn-outline-light">Go To Teams</a>
+								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
 								</div>
 							</div>
 						</div>
@@ -213,7 +190,7 @@
 						</div>				
 					</div>
 				</div>
-				<div>
+				<div class="mb-4">
 					<form action="logout" method="post">
 						<button type="submit" class="btn btn-danger">
 							<fmt:message key="logged_in_signout" />
@@ -224,7 +201,7 @@
 			</fmt:bundle>
 		</div>
 	</div>
-
+	</fmt:bundle>
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">

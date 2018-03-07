@@ -2,7 +2,7 @@ package beans;
 
 public class TeamBean {
 	
-	private String divisionID;
+	private String divisionId;
 	private String teamId;
 	private String teamName;
 	private String teamAbbreviation;
@@ -13,7 +13,7 @@ public class TeamBean {
 	
 /**************************** GETTERS *****************************/
 	public String getDividionId() {
-		return this.divisionID;
+		return this.divisionId;
 	}
 
 	public String getTeamId() {
@@ -30,7 +30,7 @@ public class TeamBean {
 
 /**************************** SETTERS *****************************/
 	public void setDivisionId(String divID) {
-		this.divisionID = divID;
+		this.divisionId = divID;
 	}
 	
 	public void setTeamId(String id) {

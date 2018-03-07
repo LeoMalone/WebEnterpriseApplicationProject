@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -20,39 +21,35 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/lastever" user="admin"
-	password="lastever" />
-
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<!-- Fontawesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - Users</title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-
-	<div id="fb-root"></div>
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -63,18 +60,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -82,43 +79,21 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${div1.rowCount == 0}">
+									<c:when test="${empty allDiv}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="row" items="${div1.rows}">
+										<c:forEach var="div1" items="${allDiv}">
 											<a class="dropdown-item"
-												href="division?id=${row.divisionID}">${row.divsionName}</a>
+												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
-						<li class="nav-item"><a class="nav-link active"
-							href="./admin">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -140,7 +115,7 @@
 
 	<div class="main-cover">
 		<!-- Page Content -->
-		<div class="cards-container container">
+		<div class="cards-container container-fluid">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					${userName}: Users
@@ -148,45 +123,47 @@
 				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">				
-							<table class="table">
-								<thead class="thead-dark">
-								    <tr>
-								    	<th scope="col">User ID</th>
-								    	<th scope="col">Username</th>
-								    	<th scope="col">First Name</th>
-								    	<th scope="col">Last Name</th>
-									    <th scope="col">User Type</th>
-									    <th scope="col">Email Address</th>
-									    <th scope="col">Password</th>
-									    <th scope="col">Email Validated</th>
-									    <th scope="col">Account Created</th>
-									    <th scope="col">Last Account Update</th>
-									    <th scope="col">Last Login</th>
-									    <th scope="col"></th>
-								    </tr>
-								</thead>
-							    <c:forEach items="${userList}" var="user">
-							        <tr>
-							        	<td scope="col">${user.id}</td>
-							        	<td scope="col">${user.username}</td>
-							        	<td scope="col">${user.firstName}</td>
-							        	<td scope="col">${user.lastName}</td>
-							        	<td scope="col">${user.userType}</td>
-							        	<td scope="col">${user.emailAddress}</td>
-							        	<td scope="col">${user.password}</td>
-							        	<td scope="col">${user.emailValidated}</td>
-							        	<td scope="col">${user.accountCreated}</td>
-							        	<td scope="col">${user.accountUpdated}</td>
-							        	<td scope="col">${user.lastLogin}</td>
-							        	<td scope="col">
-							        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
-							        			<i class="fa fa-edit"></i> 
-											</a>
-										</td>		            
-							        </tr>
-							    </c:forEach>
-							</table>				
+						<div class="card">
+							<div class="table-responsive">										
+								<table class="table table-striped">
+									<thead class="thead-dark">
+									    <tr>
+									    	<th scope="col">User ID</th>
+									    	<th scope="col">Username</th>
+									    	<th scope="col">First Name</th>
+									    	<th scope="col">Last Name</th>
+										    <th scope="col">User Type</th>
+										    <th scope="col">Email Address</th>
+										    <th scope="col">Password</th>
+										    <th scope="col">Email Validated</th>
+										    <th scope="col">Account Created</th>
+										    <th scope="col">Last Account Update</th>
+										    <th scope="col">Last Login</th>
+										    <th scope="col">Edit</th>
+									    </tr>
+									</thead>
+								    <c:forEach items="${userList}" var="user">
+								        <tr>
+								        	<td scope="col">${user.id}</td>
+								        	<td scope="col">${user.username}</td>
+								        	<td scope="col">${user.firstName}</td>
+								        	<td scope="col">${user.lastName}</td>
+								        	<td scope="col">${user.userType}</td>
+								        	<td scope="col">${user.emailAddress}</td>
+								        	<td scope="col">${user.password}</td>
+								        	<td scope="col">${user.emailValidated}</td>
+								        	<td scope="col">${user.accountCreated.toString()}</td>
+								        	<td scope="col">${user.accountUpdated}</td>
+								        	<td scope="col">${user.lastLogin.toString()}</td>
+								        	<td scope="col">
+								        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
+								        			<i class="fa fa-edit"></i> 
+												</a>
+											</td>		            
+								        </tr>
+								    </c:forEach>
+								</table>
+							</div>				
 						</div>
 					</div>
 				</div>					

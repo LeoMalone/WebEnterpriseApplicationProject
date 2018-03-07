@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.TeamBean;
+import dao.Division;
 import dao.EditTeam;
 
 public class EditTeamServlet extends HttpServlet {
@@ -22,6 +26,10 @@ public class EditTeamServlet extends HttpServlet {
 		
 		String userName = null;
 		String language = null;
+		
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
 		
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
@@ -82,13 +90,23 @@ public class EditTeamServlet extends HttpServlet {
 		
 		String newName = request.getParameter("editTeamName");
 		String newAbbr = request.getParameter("editTeamAbbr");
+		String newDiv = request.getParameter("divRadio");
 		
-		team.setTeamId(sb.toString());
-		team.setTeamName(newName);
-		team.setTeamAbbreviation(newAbbr);
-		
-		if(EditTeam.saveChanges(team)) {
-			response.sendRedirect("./adminTeams?=1");
+		if(newName == null || newAbbr == null || newDiv == null) {
+			response.sendRedirect("./adminTeams?=" + sb.toString());
+		} else {
+			team.setTeamId(sb.toString());
+			team.setTeamName(newName);
+			team.setTeamAbbreviation(newAbbr);
+			team.setDivisionId(newDiv);
+			
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			if(EditTeam.saveChanges(team)) {
+				response.sendRedirect("./adminTeams");
+			}
 		}
 	}	
 }
