@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.ScheduleResultsBean;
 import beans.StandingsBean;
 import beans.TeamBean;
 import dao.Division;
+import dao.ScheduleResults;
 import dao.Standings;
 import dao.Team;
 
@@ -59,8 +61,13 @@ public class TeamServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<StandingsBean> slb = new ArrayList<StandingsBean>();
-			Standings.getStandings(div, slb);	
-
+			List<ScheduleResultsBean> srlb = new ArrayList<ScheduleResultsBean>();
+			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();
+			
+			Standings.getStandings(div, slb);
+			ScheduleResults.getScheduleWithTeam(id, div, srlb);
+			ScheduleResults.getResultsWithTeam(id, div, rlb);
+			
 			List<TeamBean> tlb = new ArrayList<TeamBean>();
 			Team.getTeamInfo(id, tlb);
 			
@@ -69,7 +76,9 @@ public class TeamServlet extends HttpServlet {
 			
 			request.setAttribute("allDiv", dlb);
 			request.setAttribute("team", tlb);
-			request.setAttribute("standings", slb);	
+			request.setAttribute("standings", slb);
+			request.setAttribute("schedule", srlb);
+			request.setAttribute("results", rlb);
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/team.jsp?id=" + id);  
 			rd.forward(request, response);		

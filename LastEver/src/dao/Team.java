@@ -29,9 +29,9 @@ public class Team {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getTeam = conn.prepareStatement("select t.teamLogo, t.teamName, t.teamAbbreviation, d.divisionName from team t"
-					+ " inner join teamxdivision td on td.teamID = t.teamID inner join division d on d.divisionID = "
-					+ "td.divisionID where t.teamID = ?");
+			getTeam = conn.prepareStatement("select t.teamLogo, t.teamName, t.teamAbbreviation, d.divisionName, t.teamAbout"
+					+ " from team t inner join teamxdivision td on td.teamID = t.teamID inner join division d on "
+					+ "d.divisionID = td.divisionID where t.teamID = ?");
 			getTeam.setString(1, id);
 			resultSet = getTeam.executeQuery();
 			status = resultSet.next();
@@ -44,6 +44,7 @@ public class Team {
 				tb.setTeamName(resultSet.getString(2));
 				tb.setTeamAbbreviation(resultSet.getString(3));
 				tb.setDivisionName(resultSet.getString(4));
+				tb.setTeamAbout(resultSet.getString(5));
 				team.add(tb);
 			}
 
