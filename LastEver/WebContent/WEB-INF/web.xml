@@ -5,6 +5,16 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>AdminScheduleServlet</servlet-name>
+		<servlet-class>servlets.AdminScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminScheduleServlet</servlet-name>
+		<url-pattern>/adminSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>DeleteDivisionServlet</servlet-name>
 		<servlet-class>servlets.DeleteDivisionServlet</servlet-class>
 	</servlet>
