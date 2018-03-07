@@ -374,6 +374,26 @@
 		<servlet-name>TeamRosterServlet</servlet-name>
 		<url-pattern>/teamRoster</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<servlet-class>servlets.VenuePageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<url-pattern>/venue</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TeamServlet</servlet-name>
+		<servlet-class>servlets.TeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamServlet</servlet-name>
+		<url-pattern>/team</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>TeamScheduleServlet</servlet-name>

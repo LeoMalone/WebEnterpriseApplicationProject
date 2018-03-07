@@ -118,15 +118,18 @@ public static boolean getTeamForEdit(TeamBean team) {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        deleteSchedule = conn.prepareStatement("DELETE FROM schedule USING schedule, team WHERE `team`.`teamID` = `schedule`.`homeTeam` AND `team`.`teamID` = `schedule`.`awayTeam` AND `team`.`teamID`=?");
+	        deleteSchedule = conn.prepareStatement("DELETE FROM schedule USING schedule, team, gamestatistics "
+	        		+ "WHERE (team.teamID = schedule.homeTeam OR team.teamID = schedule.awayTeam) AND team.teamID=?");
 	        deleteSchedule.setString(1, id);
 	        result = deleteSchedule.executeUpdate();
 	        if(result >= 0) {
-	        	deleteDivision = conn.prepareStatement("DELETE FROM teamxdivision USING teamxdivision, team WHERE team.teamID = teamxdivision.teamID AND team.teamID=?");
+	        	deleteDivision = conn.prepareStatement("DELETE FROM teamxdivision USING teamxdivision, team "
+	        			+ "WHERE team.teamID = teamxdivision.teamID AND team.teamID=?");
 		        deleteDivision.setString(1, id);
 		        result = deleteDivision.executeUpdate();	        
 		        if(result == 0 || result == 1) {
-		        	deleteUser = conn.prepareStatement("DELETE FROM usersxteam USING usersxteam, team WHERE team.teamID = usersxteam.teamID AND team.teamID=?");
+		        	deleteUser = conn.prepareStatement("DELETE FROM usersxteam USING usersxteam, team "
+		        			+ "WHERE team.teamID = usersxteam.teamID AND team.teamID=?");
 		        	deleteUser.setString(1, id);
 		        	result = deleteUser.executeUpdate();
 		        	if(result >= 0) {
