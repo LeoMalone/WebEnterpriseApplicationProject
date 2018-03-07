@@ -30,7 +30,27 @@
 </fmt:bundle>
 </head>
 <body>
-
+	<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="deleteUserLabel">Delete: ${user.username}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	Are You sure you want to delete this User?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form action="deleteUser?=${user.id}" method="post">	
+	        	<button type="submit" class="btn btn-danger">Delete User</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -174,9 +194,7 @@
 								</p>							
 							</div>
 							<div class="card-footer">
-								<form action="deleteUser?=${user.id}" method="post">
-									<button type="submit" class="btn btn-danger">Delete User</button>
-								</form>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete User</button>
 							</div>
 						</div>
 					</div>

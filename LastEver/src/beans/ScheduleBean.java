@@ -4,6 +4,7 @@ public class ScheduleBean {
 	
 	private String title;			// gameID
 	private String start;			// gameStart
+	private String url;
 	
 	private String gameTime;
 	private String homeTeam;
@@ -21,6 +22,10 @@ public class ScheduleBean {
 	
 	public String getStart() {
 		return this.start;
+	}
+	
+	public String getUrl() {
+		return this.url;
 	}
 	
 	public String getGameTime() {
@@ -56,6 +61,10 @@ public class ScheduleBean {
 	
 	public void setStart(String gd) {
 		this.start = gd;
+	}
+	
+	public void setUrl(String URL) {
+		this.url = URL;
 	}
 	
 	public void setGameTime(String gt) {

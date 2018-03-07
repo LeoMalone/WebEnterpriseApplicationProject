@@ -26,7 +26,7 @@ public static boolean getSchedule(List<ScheduleBean> schedule) {
 	        
 	        while(rs.next()) {
 	        	ScheduleBean sb = new ScheduleBean();
-	        	sb.setTitle(rs.getString(1));
+	        	sb.setTitle("Game ID: " + rs.getString(1));
 	        	sb.setStart(rs.getString(2));
 	        	sb.setGameTime(rs.getString(3));
 	        	sb.setHomeTeam(rs.getString(4));
@@ -34,6 +34,7 @@ public static boolean getSchedule(List<ScheduleBean> schedule) {
 	        	sb.setAwayTeam(rs.getString(6));
 	        	sb.setAwayScore(rs.getString(7));
 	        	sb.setGameStatus(rs.getString(8));
+	        	sb.setUrl("./editSchedule?=" + rs.getString(1));
 	        	schedule.add(sb);
 	        	status = true;
 	        }     

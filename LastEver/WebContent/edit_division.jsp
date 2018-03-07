@@ -32,7 +32,27 @@
 </head>
 
 <body>
-
+	<div class="modal fade" id="deleteDivision" tabindex="-1" role="dialog" aria-labelledby="deleteDivisionLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="deleteDivisionLabel">Delete: ${division.divisionName}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	Are You sure you want to delete this Division?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form action="deleteDivision?=${division.divisionId}" method="POST">
+	        	<button type="submit" class="btn btn-danger">Delete Division</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -138,12 +158,10 @@
 										<button type="submit" class="btn btn-outline-success">Save</button>	
 									</form>								
 								</p>							
-							</div>
-							<form action="deleteDivision?=${division.divisionId}" method="POST">
-								<div class="card-footer">
-									<button type="submit" class="btn btn-danger">Delete Division</button>
-								</div>
-							</form>
+							</div>							
+							<div class="card-footer">
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDivision">Delete Division</button>
+							</div>							
 						</div>
 					</div>
 				</div>					
