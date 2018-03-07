@@ -187,54 +187,83 @@
 								<fmt:message key="div_head3" />
 							</h4>
 							<div class="card-body">
-								<table id="standings"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text5" /></th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${empty results}">
-												<td colspan=7 style="text-align: center"><b><fmt:message
-															key="div_noresults" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${results}" var="res">
+								<c:choose>
+									<c:when test="${empty results}">
+										<center>
+											<b><fmt:message key="div_noresults" /></b>
+										</center>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${results}" var="res">
+											<table id="standings"
+												class="table table-bordered table-striped table-dark table-hover table-sm"
+												style="width: 100%; max-width: 500px;">
+												<thead>
 													<tr>
-														<td scope="row" style="text-align: center"><c:if
+														<th scope="col" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
 																<fmt:formatDate type="date" pattern="d MMM y"
 																	value="${res.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
 																<fmt:formatDate type="date" pattern="MMM d y"
 																	value="${res.date}" />
-															</c:if></td>
+															</c:if></th>
+														<th scope="col" style="text-align: center"><c:out
+																value="${res.status}" /></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
 														<td><c:out value="${res.homeTeam}" /></td>
 														<td style="text-align: center"><c:out
 																value="${res.homeScore}" /></td>
+													</tr>
+													<tr>
 														<td><c:out value="${res.awayTeam}" /></td>
 														<td style="text-align: center"><c:out
 																value="${res.awayScore}" /></td>
-														<td style="text-align: center"><c:out
-																value="${res.status}" /></td>
 													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
+													<tr>
+														<td colspan="2"><b>Home Scorers</b> <br> <c:choose>
+																<c:when test="${res.homeScore eq 0}">
+																	No Scorers
+																</c:when>
+																<c:otherwise>
+																	<c:forEach items="${res.homeScorer}" var="hs">
+																		<c:if test="${hs.goals eq 1}">
+																			<c:out value="${hs.name}" /><br>
+																		</c:if>
+																		<c:if test="${hs.goals gt 1}">
+																			<c:out value="${hs.name}" /> 
+																(<c:out value="${hs.goals}" />)<br>
+																</c:if>
+																	</c:forEach>
+																</c:otherwise>
+															</c:choose></td>
+													</tr>
+													<tr>
+														<td colspan="2"><b>Away Scorers</b> <br> <c:choose>
+																<c:when test="${res.awayScore eq 0}">
+																	No Scorers
+																</c:when>
+																<c:otherwise>
+																	<c:forEach items="${res.awayScorer}" var="as">
+																		<c:if test="${as.goals eq 1}">
+																			<c:out value="${as.name}" /><br>
+																		</c:if>
+																		<c:if test="${as.goals gt 1}">
+																			<c:out value="${as.name}" /> 
+																(<c:out value="${as.goals}" />)<br>
+																</c:if>
+																	</c:forEach>
+																</c:otherwise>
+															</c:choose></td>
+													</tr>
+												</tbody>
+											</table>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
