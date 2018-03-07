@@ -16,23 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Temporary table structure for view `awayscorers`
---
-
-DROP TABLE IF EXISTS `awayscorers`;
-/*!50001 DROP VIEW IF EXISTS `awayscorers`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE VIEW `awayscorers` AS SELECT 
- 1 AS `teamName`,
- 1 AS `awayScore`,
- 1 AS `playerName`,
- 1 AS `goals`,
- 1 AS `yellowCards`,
- 1 AS `redCards`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `division`
 --
 
@@ -41,7 +24,7 @@ DROP TABLE IF EXISTS `division`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `division` (
   `divisionID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `divsionName` varchar(100) NOT NULL,
+  `divisionName` varchar(100) NOT NULL,
   `divisionLogo` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`divisionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -85,26 +68,9 @@ CREATE TABLE `gamestatistics` (
 
 LOCK TABLES `gamestatistics` WRITE;
 /*!40000 ALTER TABLE `gamestatistics` DISABLE KEYS */;
-INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,3,4,1,0,1),(14,3,7,1,0,0),(15,3,11,1,1,0),(16,3,1,1,0,0),(17,3,8,0,1,0),(18,3,9,0,0,0),(19,4,2,0,0,0),(20,4,3,3,0,0),(21,4,10,0,0,0),(22,4,5,0,0,0),(23,4,6,0,1,0),(24,4,12,1,0,0),(25,5,13,0,0,0),(26,5,17,0,1,0),(27,5,23,0,1,0),(28,5,15,2,1,0),(29,5,18,0,0,0),(30,5,21,0,0,0),(31,6,14,0,0,0),(32,6,20,1,0,0),(33,6,24,0,0,0),(34,6,16,0,0,0),(35,6,19,1,1,0),(36,6,22,1,0,1),(37,7,16,0,0,0),(38,7,19,0,0,0),(39,7,22,2,0,0),(40,7,15,1,1,0),(41,7,18,0,1,0),(42,7,21,1,0,0),(43,8,14,0,0,0),(44,8,20,0,0,0),(45,8,24,0,0,0),(46,8,13,0,0,0),(47,8,17,0,0,0),(48,8,23,0,1,0),(49,9,1,4,1,0),(50,9,8,1,0,0),(51,9,9,0,0,0),(52,9,2,1,2,1),(53,9,3,0,0,1),(54,9,10,2,0,0),(55,10,2,0,1,0),(56,10,3,1,0,0),(57,10,10,1,0,0),(58,10,4,0,0,0),(59,10,7,2,0,0),(60,10,11,2,0,0),(61,11,5,1,0,1),(62,11,6,1,0,0),(63,11,12,1,1,0),(64,11,8,1,0,0),(65,11,9,0,0,0),(66,11,11,1,1,0),(67,12,1,0,0,0),(68,12,8,0,0,0),(69,12,9,0,0,0),(70,12,4,0,2,1),(71,12,7,1,1,0),(72,12,11,0,0,1);
+INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,3,4,1,0,1),(14,3,7,1,0,0),(15,3,11,1,1,0),(16,3,1,1,0,0),(17,3,8,0,1,0),(18,3,9,0,0,0),(19,4,2,0,0,0),(20,4,3,3,0,0),(21,4,10,0,0,0),(22,4,5,0,0,0),(23,4,6,0,1,0),(24,4,12,1,0,0),(25,5,13,0,0,0),(26,5,17,0,1,0),(27,5,23,0,1,0),(28,5,15,2,1,0),(29,5,18,0,0,0),(30,5,21,0,0,0),(31,6,14,0,0,0),(32,6,20,1,0,0),(33,6,24,0,0,0),(34,6,16,0,0,0),(35,6,19,1,1,0),(36,6,22,1,0,1),(37,7,16,0,0,0),(38,7,19,0,0,0),(39,7,22,2,0,0),(40,7,15,1,1,0),(41,7,18,0,1,0),(42,7,21,1,0,0),(43,8,14,0,0,0),(44,8,20,0,0,0),(45,8,24,0,0,0),(46,8,13,0,0,0),(47,8,17,0,0,0),(48,8,23,0,1,0),(49,9,1,4,1,0),(50,9,8,1,0,0),(51,9,9,0,0,0),(52,9,2,1,2,1),(53,9,3,0,0,1),(54,9,10,2,0,0),(55,10,2,0,1,0),(56,10,3,1,0,0),(57,10,10,1,0,0),(58,10,4,0,0,0),(59,10,7,2,0,0),(60,10,11,2,0,0),(61,11,5,1,0,1),(62,11,6,1,0,0),(63,11,12,1,1,0),(64,11,8,1,0,0),(65,11,9,0,0,0),(66,11,1,1,1,0),(67,12,1,0,0,0),(68,12,8,0,0,0),(69,12,9,0,0,0),(70,12,4,1,2,1),(71,12,7,1,1,0),(72,12,11,0,0,1);
 /*!40000 ALTER TABLE `gamestatistics` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Temporary table structure for view `homescorers`
---
-
-DROP TABLE IF EXISTS `homescorers`;
-/*!50001 DROP VIEW IF EXISTS `homescorers`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE VIEW `homescorers` AS SELECT 
- 1 AS `teamName`,
- 1 AS `homeScore`,
- 1 AS `playerName`,
- 1 AS `goals`,
- 1 AS `yellowCards`,
- 1 AS `redCards`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `news`
@@ -335,6 +301,23 @@ INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(1,2),(10,2),(13,2),(14,2),(16
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `scorers`
+--
+
+DROP TABLE IF EXISTS `scorers`;
+/*!50001 DROP VIEW IF EXISTS `scorers`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `scorers` AS SELECT 
+ 1 AS `teamName`,
+ 1 AS `playerName`,
+ 1 AS `goals`,
+ 1 AS `yellowCards`,
+ 1 AS `redCards`,
+ 1 AS `id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `standings`
 --
 
@@ -543,7 +526,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'Nepean Sportsplex',NULL,'1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada');
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,10 +558,37 @@ INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),
 UNLOCK TABLES;
 
 --
--- Final view structure for view `awayscorers`
+-- Dumping routines for database 'lastever'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `update_team` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_team`(In x varchar(1), In y varchar(1))
+begin
+  IF EXISTS (select teamID from teamxdivision where teamID = x) THEN
+    UPDATE teamxdivision SET divisionID=y WHERE teamID=x;
+  ELSE 
+    insert into teamxdivision (teamId, divisionID) values (x, y);
+  END IF;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `scorers`
 --
 
-/*!50001 DROP VIEW IF EXISTS `awayscorers`*/;
+/*!50001 DROP VIEW IF EXISTS `scorers`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -587,25 +597,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `awayscorers` AS select `a`.`teamName` AS `teamName`,`s`.`awayScore` AS `awayScore`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards` from ((((`schedule` `s` join `team` `a` on((`a`.`teamID` = `s`.`awayTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `a`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `homescorers`
---
-
-/*!50001 DROP VIEW IF EXISTS `homescorers`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `homescorers` AS select `h`.`teamName` AS `teamName`,`s`.`homeScore` AS `homeScore`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards` from ((((`schedule` `s` join `team` `h` on((`h`.`teamID` = `s`.`homeTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `h`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
+/*!50001 VIEW `scorers` AS select `a`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id` from ((((`schedule` `s` join `team` `a` on((`a`.`teamID` = `s`.`awayTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `a`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -655,4 +647,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-05 17:06:14
+-- Dump completed on 2018-03-06 21:13:43

@@ -142,6 +142,67 @@ public class ScheduleResults {
 		return status;
 	}
 
+	public static boolean getScheduleWithTeam(String team, String div, List<ScheduleResultsBean> sched) { 
+
+		boolean status = false;					// query status
+		Connection conn = null;					// DB connection
+		PreparedStatement getSchedule = null;	// SQL query
+		ResultSet resultSet = null;				// returned query result set
+
+		// Connect to Database and execute SELECT query with UserBean data
+		try {
+			conn = ConnectionManager.getConnection();
+			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '')"
+					+ " as away, v.venueName from schedule s inner join team h on h.teamID = s.homeTeam inner join "
+					+ "team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID "
+					+ "inner join venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID"
+					+ " where td.divisionID = ? and s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
+			getSchedule.setString(1, div);
+			getSchedule.setString(2, team);
+			getSchedule.setString(3, team);
+			resultSet = getSchedule.executeQuery();
+			status = resultSet.next();
+
+			resultSet.beforeFirst();
+
+			while(resultSet.next()) {
+				ScheduleResultsBean sb = new ScheduleResultsBean();
+				sb.setDate(resultSet.getDate(1));
+				sb.setTime(resultSet.getTime(2));
+				sb.setHomeTeam(resultSet.getString(3));
+				sb.setAwayTeam(resultSet.getString(4));
+				sched.add(sb);
+			}
+
+			// handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getSchedule != null) {
+				try {
+					getSchedule.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return status;
+	}
+	
 	public static boolean getResults(String id, List<ScheduleResultsBean> sched) { 
 
 		boolean status = false;					// query status

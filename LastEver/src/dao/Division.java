@@ -34,7 +34,7 @@ public class Division {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getDivision = conn.prepareStatement("select divsionName from division where divisionID = ?");
+			getDivision = conn.prepareStatement("select divisionName from division where divisionID = ?");
 			getDivision.setString(1, id);
 
 			resultSet = getDivision.executeQuery();
@@ -118,7 +118,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			allDivisions = conn.prepareStatement("SELECT divisionID, divsionName from division");
+			allDivisions = conn.prepareStatement("SELECT divisionID, divisionName from division");
 			rs = allDivisions.executeQuery();
 
 			while(rs.next()) {
@@ -160,7 +160,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			specificDiv = conn.prepareStatement("SELECT divisionID, divsionName from division WHERE divisionID=?");
+			specificDiv = conn.prepareStatement("SELECT divisionID, divisionName from division WHERE divisionID=?");
 			specificDiv.setString(1, id);
 			rs = specificDiv.executeQuery();
 

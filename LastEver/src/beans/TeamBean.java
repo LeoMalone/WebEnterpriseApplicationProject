@@ -3,6 +3,8 @@ package beans;
 public class TeamBean {
 	
 	private String divisionID;
+	private String divisionName;
+	private String teamLogo;
 	private String teamId;
 	private String teamName;
 	private String teamAbbreviation;
@@ -14,6 +16,14 @@ public class TeamBean {
 /**************************** GETTERS *****************************/
 	public String getDividionId() {
 		return this.divisionID;
+	}
+	
+	public String getDivisionName() {
+		return this.divisionName;
+	}
+	
+	public String getTeamLogo() {
+		return this.teamLogo;
 	}
 
 	public String getTeamId() {
@@ -35,6 +45,14 @@ public class TeamBean {
 	
 	public void setTeamId(String id) {
 		this.teamId = id;
+	}
+	
+	public void setDivisionName(String divN) {
+		this.divisionName = divN;
+	}
+	
+	public void setTeamLogo(String logo) {
+		this.teamLogo = logo;
 	}
 	
 	public void setTeamName(String name) {
