@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.TeamBean;
+import beans.UserBean;
 import dao.Division;
+import dao.EditTeamUser;
+import dao.TeamScheduleResults;
 
 public class TeamOwnerServlet extends HttpServlet {
 
@@ -59,11 +63,19 @@ public class TeamOwnerServlet extends HttpServlet {
 						break;
 					}
 				}		
+
+				TeamBean tb = new TeamBean();
+				String teamName = TeamScheduleResults.getTeamName(tb, userName);
 				
+				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("teamowner.jsp");  
 		        rd.forward(request, response);	
 			}
 		}
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+		doGet(request, response);
 	}
 }

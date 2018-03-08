@@ -21,38 +21,17 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever</title>
+	<title>Last Ever - Team Schedule</title>
 </fmt:bundle>
 </head>
 
 <body>
-	<div class="modal fade" id="deleteDivision" tabindex="-1" role="dialog" aria-labelledby="deleteDivisionLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteDivisionLabel">Delete: ${division.divisionName}</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	Are You sure you want to delete this Division?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <form action="deleteDivision?=${division.divisionId}" method="POST">
-	        	<button type="submit" class="btn btn-danger">Delete Division</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -60,16 +39,14 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index"><img
+			<a class="navbar-brand" href="index.jsp"><img
 				src="images/logo_sm4.png" /></a>
-
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -80,18 +57,18 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="./about"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
+								<a class="dropdown-item" href="about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
+									href="registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="contact"><fmt:message
 										key="contact" /></a>
-							</div>
-						</li>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -112,8 +89,35 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+
+						<c:choose>
+							<c:when test="${signedIn == null}">
+								<li class="nav-item"><a class="nav-link" href="./login">Sign
+										In</a></li>
+							</c:when>
+							<c:otherwise>
+								
+								
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+								
+								<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName}
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
+								<a class="dropdown-item" href="teamRoster">View Roster</a>
+								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
+								<a class="dropdown-item" href="logout" method="post">Logout</a>
+							</div></li>
+								
+							</c:otherwise>
+						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
+
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -133,57 +137,88 @@
 		</div>
 	</nav>
 
-
-	<fmt:bundle basename="TestBundle">
-		<div class="main-cover">
+	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: ${division.divisionName}
+					${teamName}'s Schedule
 				</h1>				
-				<div class="row">
-					<div class="col-lg-12 mb-4">
-						<div class="card h-100">
+									<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
 							<h4 class="card-header">
-								Edit Division Credentials
+								<fmt:message key="div_head2" />
 							</h4>
 							<div class="card-body">
-								<p class="card-text">
-									<form action="editDivision?=${division.divisionId}" method="POST">								
-										<div class="form-group">
-											<label for="editDivisionName">Division Name</label>
-											<input type="text" class="form-control" name="editDivisionName" value="${division.divisionName}">
-										</div>
-										<button type="submit" class="btn btn-outline-success">Save</button>	
-									</form>								
-								</p>							
-							</div>							
-							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDivision">Delete Division</button>
-							</div>							
+								<table id="standings"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text4" /></th>
+											<th scope="col" style="text-align: center">Venue</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty schedule}">
+												<td colspan=5 style="text-align: center"><b><fmt:message
+															key="div_nogames" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${schedule}" var="sched">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="d MMM y"
+																	value="${sched.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="MMM d y"
+																	value="${sched.date}" />
+															</c:if></td>
+														<td style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="time" pattern="H:mm"
+																	value="${sched.time}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="time" pattern="h:mm a"
+																	value="${sched.time}" />
+															</c:if></td>
+														<td><c:out value="${sched.homeTeam}" /></td>
+														<td><c:out value="${sched.awayTeam}" /></td>
+														<td><c:out value="${sched.venue}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
-				</div>					
+					</div>			
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
 	</div>
-	</fmt:bundle>
-		<!-- Footer -->
-		<footer class="page-footer py-3 bg-dark">
-			<div class="container-fluid">
-				<p class="m-0 text-center text-white">
-					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-				</p>
-			</div>
-		</footer>
+
+	<!-- Footer -->
+	<footer class="page-footer py-3 bg-dark">
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
+	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

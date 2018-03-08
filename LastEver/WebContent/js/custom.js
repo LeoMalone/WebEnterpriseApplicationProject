@@ -1,11 +1,9 @@
 $(document).ready(function() {
+// page is now ready, initialize the calendar...
 
-  // page is now ready, initialize the calendar...
-
-  $('#calendar').fullCalendar({
-	  dayClick: function() {
-		    alert('a day has been clicked!');
-		  }
-  })
-
+	$('#calendar').fullCalendar({
+		events: "/LastEver/calendarJson"
+	});
+	
 });
+

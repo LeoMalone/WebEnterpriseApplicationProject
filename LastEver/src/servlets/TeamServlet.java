@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -12,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.StandingsBean;
+import beans.TeamBean;
 import dao.Division;
+import dao.Standings;
+import dao.Team;
 
-public class ContactServlet extends HttpServlet {
-	
+public class TeamServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
-		String language = null;		
-		
+		String language = null;
+
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -51,15 +51,28 @@ public class ContactServlet extends HttpServlet {
 					response.addCookie(tempCookie);
 					break;
 				}
-			}		
+			}
+
+			String id = request.getParameter("id");
+			String div = Team.getTeamDivision(id);
+			
+			response.setContentType("text/html");
+
+			List<StandingsBean> slb = new ArrayList<StandingsBean>();
+			Standings.getStandings(div, slb);	
+
+			List<TeamBean> tlb = new ArrayList<TeamBean>();
+			Team.getTeamInfo(id, tlb);
 			
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
 			
+			request.setAttribute("allDiv", dlb);
+			request.setAttribute("team", tlb);
+			request.setAttribute("standings", slb);	
 			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("contact.jsp");  
-	        rd.forward(request, response);	
+			RequestDispatcher rd = request.getRequestDispatcher("/team.jsp?id=" + id);  
+			rd.forward(request, response);		
 		}
 	}
 

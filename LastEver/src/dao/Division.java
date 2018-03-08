@@ -34,7 +34,7 @@ public class Division {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getDivision = conn.prepareStatement("select divsionName from division where divisionID = ?");
+			getDivision = conn.prepareStatement("select divisionName from division where divisionID = ?");
 			getDivision.setString(1, id);
 
 			resultSet = getDivision.executeQuery();
@@ -62,8 +62,6 @@ public class Division {
 					news.add(nb);
 				}
 			}
-
-
 
 			// handle all possible exceptions
 		} catch (Exception e) {
@@ -118,7 +116,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			allDivisions = conn.prepareStatement("SELECT divisionID, divsionName from division");
+			allDivisions = conn.prepareStatement("SELECT divisionID, divisionName from division");
 			rs = allDivisions.executeQuery();
 
 			while(rs.next()) {
@@ -160,7 +158,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			specificDiv = conn.prepareStatement("SELECT divisionID, divsionName from division WHERE divisionID=?");
+			specificDiv = conn.prepareStatement("SELECT divisionID, divisionName from division WHERE divisionID=?");
 			specificDiv.setString(1, id);
 			rs = specificDiv.executeQuery();
 
@@ -203,7 +201,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			insertNewDiv = conn.prepareStatement("INSERT INTO division (divsionName) VALUE (?)");
+			insertNewDiv = conn.prepareStatement("INSERT INTO division (divisionName) VALUE (?)");
 			insertNewDiv.setString(1, newDiv);
 			result = insertNewDiv.executeUpdate();
 			if(result == 1) {
@@ -241,7 +239,7 @@ public class Division {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			getDivision = conn.prepareStatement("SELECT divisionID, divsionName from division WHERE divisionID=?");
+			getDivision = conn.prepareStatement("SELECT divisionID, divisionName from division WHERE divisionID=?");
 			getDivision.setString(1, div.getDivisionId());
 			rs = getDivision.executeQuery();
 
@@ -282,7 +280,7 @@ public class Division {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        updateDivision = conn.prepareStatement("UPDATE division SET divsionName=? WHERE divisionID=?");
+	        updateDivision = conn.prepareStatement("UPDATE division SET divisionName=? WHERE divisionID=?");
 	        updateDivision.setString(1, div.getDivisionName());
 	        updateDivision.setString(2, div.getDivisionId());	        
 	        result = updateDivision.executeUpdate();	        

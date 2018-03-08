@@ -24,7 +24,7 @@ public class AdminTeams {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allDivisions = conn.prepareStatement("SELECT divisionID, divsionName from division");
+	        allDivisions = conn.prepareStatement("SELECT divisionID, divisionName from division");
 	        rs = allDivisions.executeQuery();
 	        
 	        while(rs.next()) {

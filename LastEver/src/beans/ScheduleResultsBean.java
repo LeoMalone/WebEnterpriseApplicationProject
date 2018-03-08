@@ -2,6 +2,7 @@ package beans;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The ScheduleBean class is meant for passing user information
@@ -18,6 +19,8 @@ public class ScheduleResultsBean {
 	private int awayScore;
 	private String venue;
 	private String status;
+	private List<ScorerBean> homeScorer;
+	private List<ScorerBean> awayScorer;
 
 /**************************** CONTRUCTORS *****************************/	
 	public ScheduleResultsBean() {
@@ -76,6 +79,14 @@ public class ScheduleResultsBean {
 		return this.status;
 	}
 	
+	public List<ScorerBean> getHomeScorer(){
+		return this.homeScorer;
+	}
+	
+	public List<ScorerBean> getAwayScorer(){
+		return this.awayScorer;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setDate(Date d) {
 		this.date = d;
@@ -107,5 +118,13 @@ public class ScheduleResultsBean {
 
 	public void setStatus(String stat) {
 		this.status = stat;
+	}
+	
+	public void setHomeScorer(List<ScorerBean> hlb){
+		this.homeScorer = hlb;
+	}
+	
+	public void setAwayScorer(List<ScorerBean> a){
+		this.awayScorer = a;
 	}
 }

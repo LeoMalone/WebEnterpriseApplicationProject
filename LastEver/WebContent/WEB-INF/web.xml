@@ -5,6 +5,16 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<servlet-class>servlets.CalendarJsonServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<url-pattern>/calendarJson</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>AdminScheduleServlet</servlet-name>
 		<servlet-class>servlets.AdminScheduleServlet</servlet-class>
 	</servlet>
@@ -337,17 +347,17 @@
 
 	<servlet>
 		<servlet-name>TeamOwnerServlet</servlet-name>
-		<servlet-class>servlets.TeamOwnerServet</servlet-class>
+		<servlet-class>servlets.TeamOwnerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TeamOwnerServlet</servlet-name>
-		<url-pattern>/teamOwner</url-pattern>
+		<url-pattern>/teamowner</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>TeamPhotoServlet</servlet-name>
-		<servlet-class>servlets.TeamPhotoServet</servlet-class>
+		<servlet-class>servlets.TeamPhotoServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -357,12 +367,42 @@
 
 	<servlet>
 		<servlet-name>TeamRosterServlet</servlet-name>
-		<servlet-class>servlets.TeamRosterServet</servlet-class>
+		<servlet-class>servlets.TeamRosterServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>TeamRosterServlet</servlet-name>
 		<url-pattern>/teamRoster</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<servlet-class>servlets.VenuePageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<url-pattern>/venue</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TeamServlet</servlet-name>
+		<servlet-class>servlets.TeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamServlet</servlet-name>
+		<url-pattern>/team</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeamScheduleServlet</servlet-name>
+		<servlet-class>servlets.TeamScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamScheduleServlet</servlet-name>
+		<url-pattern>/teamSchedule</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
@@ -394,7 +434,7 @@
 		<error-code>408</error-code>
 		<location>/error</location>
 	</error-page>
-
+	
 	<display-name>LastEver</display-name>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>
