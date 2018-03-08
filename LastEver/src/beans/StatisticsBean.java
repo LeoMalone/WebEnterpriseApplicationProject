@@ -9,11 +9,13 @@ public class StatisticsBean {
 	// User bean parameters
 	private String rank;
 	private String teamName;
+	private String teamID;
 	private String name;
 	private int gamesPlayed;
 	private int goals;
 	private int redCard;
 	private int yellowCard;
+	private String playerID;
 
 /**************************** CONTRUCTORS *****************************/	
 	public StatisticsBean() {
@@ -38,6 +40,10 @@ public class StatisticsBean {
 		return this.teamName;
 	}
 	
+	public String getTeamID() {
+		return this.teamID;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
@@ -58,6 +64,10 @@ public class StatisticsBean {
 		return this.yellowCard;
 	}
 	
+	public String getPlayerID() {
+		return this.playerID;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setRank(String r) {
 		this.rank = r;
@@ -65,6 +75,10 @@ public class StatisticsBean {
 	
 	public void setTeamName(String tn) {
 		this.teamName = tn;
+	}
+	
+	public void setTeamID(String tID) {
+		this.teamID = tID;
 	}
 	
 	public void setName(String n) {
@@ -85,5 +99,9 @@ public class StatisticsBean {
 
 	public void setYellowCard(int yc) {
 		this.yellowCard = yc;
+	}
+	
+	public void setPlayerID(String pID) {
+		this.playerID = pID;
 	}
 }

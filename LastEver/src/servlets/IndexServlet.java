@@ -22,6 +22,7 @@ public class IndexServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
 		String language = null;
+		String newLang = null;
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -38,31 +39,36 @@ public class IndexServlet extends HttpServlet {
 			response.addCookie(cookieLanguage);
 		}
 		else {
-			language = request.getParameter("language");
+			newLang = request.getParameter("language");
 			Cookie[] theCookies = request.getCookies();
 
 			for (Cookie tempCookie : theCookies) {
 				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
+					if (newLang != null)
+						tempCookie.setValue(newLang);
+					else
 						tempCookie.setValue(language);
-					response.addCookie(tempCookie);
-					break;
 				}
+				response.addCookie(tempCookie);
+				break;
 			}
-
-			response.setContentType("text/html");
-
-			List<NewsBean> nlb = new ArrayList<NewsBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Index.getNews(nlb, language);
-			Division.getAllDivisions(dlb);
-
-			request.setAttribute("news", nlb);
-			request.setAttribute("allDiv", dlb);	
-			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
-			rd.forward(request, response);		
 		}
+
+		response.setContentType("text/html");
+
+		List<NewsBean> nlb = new ArrayList<NewsBean>();
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		if(newLang != null)
+			Index.getNews(nlb, newLang);
+		else
+			Index.getNews(nlb, language);
+		Division.getAllDivisions(dlb);
+
+		request.setAttribute("news", nlb);
+		request.setAttribute("allDiv", dlb);	
+		request.setAttribute("userName", userName);
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
+		rd.forward(request, response);		
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{

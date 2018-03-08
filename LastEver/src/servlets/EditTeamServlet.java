@@ -90,17 +90,23 @@ public class EditTeamServlet extends HttpServlet {
 		
 		String newName = request.getParameter("editTeamName");
 		String newAbbr = request.getParameter("editTeamAbbr");
+		String newDiv = request.getParameter("divRadio");
 		
-		team.setTeamId(sb.toString());
-		team.setTeamName(newName);
-		team.setTeamAbbreviation(newAbbr);
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
-		if(EditTeam.saveChanges(team)) {
-			response.sendRedirect("./adminTeams?=1");
+		if(newName == null || newAbbr == null || newDiv == null) {
+			response.sendRedirect("./adminTeams?=" + sb.toString());
+		} else {
+			team.setTeamId(sb.toString());
+			team.setTeamName(newName);
+			team.setTeamAbbreviation(newAbbr);
+			team.setDivisionId(newDiv);
+			
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			Division.getAllDivisions(dlb);
+			request.setAttribute("allDiv", dlb);
+			
+			if(EditTeam.saveChanges(team)) {
+				response.sendRedirect("./adminTeams");
+			}
 		}
 	}	
 }

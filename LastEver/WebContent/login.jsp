@@ -74,7 +74,8 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+												key="nav_divisions" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -91,7 +92,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"	href="./login">Sign in</a></li>
+						<li class="nav-item"><a class="nav-link active"	href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -131,16 +133,14 @@
 							</h4>
 							<form action="login" method="POST">
 							<div class="card-body">
-								<p class="card-text">
-									 <div class="form-group">
-									    <label for="loginEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="loginEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
-									 </div>
-									 <div class="form-group">
-										<label for="loginPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="loginPass" placeholder="<fmt:message key='signin_enter_password' />">
-									 </div>						        										
-								</p>
+								 <div class="form-group">
+								    <label for="loginEmail"><fmt:message key="signin_email" /></label>
+								    <input type="email" class="form-control" name="loginEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
+								 </div>
+								 <div class="form-group">
+									<label for="loginPass"><fmt:message key="signin_password" /></label>
+									<input type="password" class="form-control" name="loginPass" placeholder="<fmt:message key='signin_enter_password' />">
+								 </div>						        										
 							</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
@@ -162,47 +162,45 @@
 							</h4>
 							<form action="createAccount" method="POST">
 							<div class="card-body">
-								<p class="card-text">
-									<div class="form-group">
-										<label for="newFirstName">First Name</label>
-										<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
-									</div>
-									<div class="form-group">
-										<label for="newLastName">Last Name</label>
-										<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
-									</div>
-									<div class="form-group">
-										<label for="newUsername"><fmt:message key="signin_user" /></label>
-										<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
-									</div>
-									 <div class="form-group">
-									    <label for="newEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
-									 </div>
-									 <div class="form-group">
-										<label for="newPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
-									 </div>	
-									 <div class="form-check">
-									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="createRadio" value="Administrator">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop1" />
-									  </label>									  
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop2" />
-									  </label>
-									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="createRadio" value="Referee">
-									  <label class="form-check-label" for="createRadio">
-									    <fmt:message key="signin_prop3" />
-									  </label>
-									  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
-									</div>					        										
-								</p>
+								<div class="form-group">
+									<label for="newFirstName"><fmt:message key="signin_fname" /></label>
+									<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key='signin_enter_fname' />">
+								</div>
+								<div class="form-group">
+									<label for="newLastName"><fmt:message key="signin_lname" /></label>
+									<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key='signin_enter_lname' />">
+								</div>
+								<div class="form-group">
+									<label for="newUsername"><fmt:message key="signin_user" /></label>
+									<input type="text" class="form-control" name="newUsername" placeholder="<fmt:message key='signin_enter_user' />">
+								</div>
+								 <div class="form-group">
+								    <label for="newEmail"><fmt:message key="signin_email" /></label>
+								    <input type="email" class="form-control" name="newEmail" aria-describedby="emailHelp" placeholder="<fmt:message key='signin_enter_email' />">
+								 </div>
+								 <div class="form-group">
+									<label for="newPass"><fmt:message key="signin_password" /></label>
+									<input type="password" class="form-control" name="newPass" placeholder="<fmt:message key='signin_enter_password' />">
+								 </div>	
+								 <div class="form-check">
+								  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="createRadio" value="Administrator">
+								  <label class="form-check-label" for="createRadio">
+								    <fmt:message key="signin_prop1" />
+								  </label>									  
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="createRadio" value="Team Owner">
+								  <label class="form-check-label" for="createRadio">
+								    <fmt:message key="signin_prop2" />
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="createRadio" value="Referee">
+								  <label class="form-check-label" for="createRadio">
+								    <fmt:message key="signin_prop3" />
+								  </label>
+								  <small id="emailHelp" class="form-text text-muted"><fmt:message key="sign_in_verify"/></small>
+								</div>					        										
 							</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
@@ -227,17 +225,8 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
 </body>
 </html>

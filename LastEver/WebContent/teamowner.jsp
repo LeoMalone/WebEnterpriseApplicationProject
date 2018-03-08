@@ -60,11 +60,11 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
+								<a class="dropdown-item" href="about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
+									href="registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="contact"><fmt:message
 										key="contact" /></a>
 							</div></li>
 						<li class="nav-item dropdown"><a
@@ -87,33 +87,30 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
-						<c:choose>
+												<c:choose>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login">Sign
 										In</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+								
+								
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+								
+								<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName}
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
+								<a class="dropdown-item" href="teamRoster">View Roster</a>
+								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
+								<a class="dropdown-item" href="logout" method="post">Logout</a>
+							</div></li>
+								
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
@@ -143,7 +140,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: 
+					${teamName}: 
 					<fmt:message key="signin_prop2"/> Control Panel
 				</h1>
 				<!-- Marketing Icons Section -->
@@ -156,14 +153,15 @@
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Add/Remove/Edit Players on Team Roster
+										View Players on Team Roster
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster" class="btn btn-outline-light">Go To Roster</a>
+								 	<a href="./teamRoster?id=${userName}" class="btn btn-outline-light">Go To Roster</a>
 								</div>
 							</div>
 						</div>
+						<!-- 
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -179,11 +177,27 @@
 								</div>
 							</div>
 						</div>
+						 -->
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Team Schedule
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										View Your Team Schedule
+									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./teamSchedule" class="btn btn-outline-light">Go To Schedule</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div>
 					<form action="logout" method="post">
-						<button type="submit" class="btn btn-outline-danger">
+						<button type="submit" class="btn btn-danger">
 							<fmt:message key="logged_in_signout" />
 						</button>
 					</form>
@@ -203,17 +217,8 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
 </body>
 </html>

@@ -76,16 +76,16 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown active"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_divisions" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -104,7 +104,8 @@
 							</div></li>
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
@@ -153,7 +154,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -162,22 +163,26 @@
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+													<fmt:message key="div_head4" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
+													<fmt:message key="div_head2" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
+													<fmt:message key="div_head3" />
+												</a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
+													<fmt:message key="div_head5" />
+												</a>
 											</c:forEach></li>
 									</ul>
 								</nav>
@@ -221,8 +226,8 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:out
 																value="${stats.rank}" /></td>
-														<td scope="row"><c:out value="${stats.teamName}" /></td>
-														<td><c:out value="${stats.name}" /></td>
+														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
+														<td><a href="player?id=${stats.playerID}">${stats.name}</a></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out
@@ -257,17 +262,11 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

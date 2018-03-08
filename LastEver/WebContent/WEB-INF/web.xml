@@ -3,6 +3,96 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
 	version="2.5">
+	
+	<servlet>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<servlet-class>servlets.DeleteScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<url-pattern>/deleteSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateScheduleServlet</servlet-name>
+		<servlet-class>servlets.CreateScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CreateScheduleServlet</servlet-name>
+		<url-pattern>/scheduleCreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditScheduleServlet</servlet-name>
+		<servlet-class>servlets.EditScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EditScheduleServlet</servlet-name>
+		<url-pattern>/editSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<servlet-class>servlets.CalendarJsonServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CalendarJsonServlet</servlet-name>
+		<url-pattern>/calendarJson</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminScheduleServlet</servlet-name>
+		<servlet-class>servlets.AdminScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminScheduleServlet</servlet-name>
+		<url-pattern>/adminSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteDivisionServlet</servlet-name>
+		<servlet-class>servlets.DeleteDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteDivisionServlet</servlet-name>
+		<url-pattern>/deleteDivision</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditDivisionServlet</servlet-name>
+		<servlet-class>servlets.EditDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditDivisionServlet</servlet-name>
+		<url-pattern>/editDivision</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateDivisionServlet</servlet-name>
+		<servlet-class>servlets.CreateDivisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateDivisionServlet</servlet-name>
+		<url-pattern>/divisionCreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminDivisionsServlet</servlet-name>
+		<servlet-class>servlets.AdminDivisionsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminDivisionsServlet</servlet-name>
+		<url-pattern>/adminDivisions</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>DeleteTeamServlet</servlet-name>
@@ -295,6 +385,42 @@
 		<url-pattern>/teamowner</url-pattern>
 	</servlet-mapping>
 	
+	
+	
+	
+	<servlet>
+		<servlet-name>TeamOwnerNewServlet</servlet-name>
+		<servlet-class>servlets.TeamOwnerNewServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamOwnerNewServlet</servlet-name>
+		<url-pattern>/teamOwnerNew</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>TeamOwnerSelectServlet</servlet-name>
+		<servlet-class>servlets.TeamOwnerSelectServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamOwnerSelectServlet</servlet-name>
+		<url-pattern>/teamOwnerSelect</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TeamCreateTeamServlet</servlet-name>
+		<servlet-class>servlets.TeamCreateTeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamCreateTeamServlet</servlet-name>
+		<url-pattern>/teamCreateTeam</url-pattern>
+	</servlet-mapping>
+	
+	
+		
+
 	<servlet>
 		<servlet-name>TeamPhotoServlet</servlet-name>
 		<servlet-class>servlets.TeamPhotoServlet</servlet-class>
@@ -313,6 +439,46 @@
 	<servlet-mapping>
 		<servlet-name>TeamRosterServlet</servlet-name>
 		<url-pattern>/teamRoster</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<servlet-class>servlets.VenuePageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VenuePageServlet</servlet-name>
+		<url-pattern>/venue</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TeamPageServlet</servlet-name>
+		<servlet-class>servlets.TeamPageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamPageServlet</servlet-name>
+		<url-pattern>/team</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeamScheduleServlet</servlet-name>
+		<servlet-class>servlets.TeamScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamScheduleServlet</servlet-name>
+		<url-pattern>/teamSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PlayerPageServlet</servlet-name>
+		<servlet-class>servlets.PlayerPageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PlayerPageServlet</servlet-name>
+		<url-pattern>/player</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
@@ -344,7 +510,7 @@
 		<error-code>408</error-code>
 		<location>/error</location>
 	</error-page>
-
+	
 	<display-name>LastEver</display-name>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>

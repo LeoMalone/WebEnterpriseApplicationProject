@@ -1,33 +1,43 @@
 package dao;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import beans.PlayerBean;
 import beans.TeamBean;
 import db.ConnectionManager;
 
 public class EditTeamUser {
 	
-public static boolean getTeamForEdit(TeamBean team) {
+public static String getTeamForEdit(String userName) {
 		
-		boolean status = false;					// Status of createNewUser
+		String returnTeamId = null;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
+	    PreparedStatement userStatement = null;
+	    ResultSet userRs = null;
 	    PreparedStatement getTeam = null;
 	    ResultSet rs = null;
+	    String userId = null;
 	
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getTeam = conn.prepareStatement("select teamName, teamAbbreviation from team where teamID=?");
-	        getTeam.setString(1, team.getTeamId());
+	        userStatement = conn.prepareStatement("select userID from users where username = ?");
+	        userStatement.setNString(1, userName);
+	        userRs = userStatement.executeQuery();
+	        
+	        if(userRs.next()) {
+	        	userId = (userRs.getString(1));
+	        }	 
+	              
+	        getTeam = conn.prepareStatement("select teamID from usersxteam where userID = ?");
+	        getTeam.setString(1, userId);
 	        rs = getTeam.executeQuery();	              
 	        
 	        if(rs.next()) {
-	        	team.setTeamName(rs.getString(1));
-	        	team.setTeamAbbreviation(rs.getString(2));
-	        	status = true;
+	        	returnTeamId = rs.getString(1);
 	        }	        
 	        
 	    // Catch all possible Exceptions
@@ -49,8 +59,62 @@ public static boolean getTeamForEdit(TeamBean team) {
 	            }
 	        }
 	    }	    
-	    return status;
+	    return returnTeamId;
 	}
+
+
+public static boolean getPlayersFromRoster(List<PlayerBean> player, String teamId) {
+	
+	boolean status = false;					// Status of createNewUser
+    Connection conn = null;					// DB Connection
+    PreparedStatement viewTeamRoster = null;
+    ResultSet rs = null;
+    int result = 0;
+
+    // Connect to Database 
+    try {
+        conn = ConnectionManager.getConnection();
+        viewTeamRoster = conn.prepareStatement("SELECT p.playerFirstName, p.playerLastName, p.playerNumber, p.playerPosition from player p "
+        		+ "inner join playerxteam pxt "
+        		+ "on pxt.playerID = p.playerID "
+        		+ "where pxt.teamID = ?");
+        viewTeamRoster.setString(1,teamId);
+        rs = viewTeamRoster.executeQuery();
+        
+        while(rs.next()) {
+        	PlayerBean ub = new PlayerBean();
+        	ub.setPlayerFirstName(rs.getString(1));
+        	ub.setPlayerLastName(rs.getString(2));
+        	ub.setPlayerNumber(rs.getString(3));
+        	ub.setPlayerPosition(rs.getString(4));      	
+        	//ub.setId(rs.getString(5));
+        	player.add(ub);
+        	
+        	status = true;
+        } 
+        
+    // Catch all possible Exceptions
+    } catch (Exception e) {
+        System.out.println(e);
+    } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (viewTeamRoster != null) {
+            try {
+            	viewTeamRoster.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }	    
+    return status;
+}
+
 
 	public static boolean saveChanges(TeamBean team) {
 		
@@ -95,7 +159,7 @@ public static boolean getTeamForEdit(TeamBean team) {
 	    return status;
 	}
 	
-	public static boolean createTeam(TeamBean bean) {
+	public static boolean createTeamPlayer(PlayerBean bean) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
 	    PreparedStatement deleteDivision = null;

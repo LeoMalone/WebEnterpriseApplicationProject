@@ -16,6 +16,7 @@ import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
 import dao.Division;
+import dao.Team;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
@@ -29,7 +30,7 @@ public class CreateAccountServlet extends HttpServlet {
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";
-	
+
 	/**
 	 * doPost method mapped to /createAccount
 	 */
@@ -38,7 +39,7 @@ public class CreateAccountServlet extends HttpServlet {
 
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
-		
+
 		String newFirstName = request.getParameter("newFirstName");
 		String newLastName = request.getParameter("newLastName");
 		String newUsername = request.getParameter("newUsername");
@@ -49,11 +50,11 @@ public class CreateAccountServlet extends HttpServlet {
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+
 		// If any parameter is null
 		if(newFirstName == null || newLastName== null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./login");
-			
+
 		} else {		
 			// Get user type
 			String ut = null;
@@ -63,7 +64,7 @@ public class CreateAccountServlet extends HttpServlet {
 				ut = REF;
 			if (userType.equals(TEAM_OW))
 				ut = TEAM_OW;
-			
+
 			// Create new userBean
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, newPassword, ut, timestamp);
@@ -87,16 +88,24 @@ public class CreateAccountServlet extends HttpServlet {
 					} else if (user.getUserType().equals("Referee")) {
 						url = "./referee";
 					} else if (user.getUserType().equals("Team Owner")) {
-						url = "./teamowner";
+						boolean hasTeam = Team.hasTeam(newUsername);
+						if (!hasTeam){
+							url = "./teamCreateTeam";
+						}
+						else {
+							url = "./teamowner";
+						}
 					}
-					
+
 					// redirect to home page
 					session.setAttribute("userType", url);
-	                response.sendRedirect(url);
-		        }
+					response.sendRedirect(url);
+				}
 			} else {
 				response.sendRedirect("./login");
 			}
 		}
 	}
+
+
 }

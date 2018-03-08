@@ -150,7 +150,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -159,22 +159,26 @@
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+													<fmt:message key="div_head4" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
+													<fmt:message key="div_head2" />
+												</a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
+													<fmt:message key="div_head3" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
+													<fmt:message key="div_head5" />
+												</a>
 											</c:forEach></li>
 									</ul>
 								</nav>
@@ -187,54 +191,86 @@
 								<fmt:message key="div_head3" />
 							</h4>
 							<div class="card-body">
-								<table id="standings"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head3_text5" /></th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${empty results}">
-												<td colspan=7 style="text-align: center"><b><fmt:message
-															key="div_noresults" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${results}" var="res">
+								<c:choose>
+									<c:when test="${empty results}">
+										<center>
+											<b><fmt:message key="div_noresults" /></b>
+										</center>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${results}" var="res">
+											<table id="standings"
+												class="table table-bordered table-striped table-dark table-hover table-sm"
+												style="width: 100%; max-width: 500px;">
+												<thead>
 													<tr>
-														<td scope="row" style="text-align: center"><c:if
+														<th scope="col" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
 																<fmt:formatDate type="date" pattern="d MMM y"
 																	value="${res.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
 																<fmt:formatDate type="date" pattern="MMM d y"
 																	value="${res.date}" />
-															</c:if></td>
-														<td><c:out value="${res.homeTeam}" /></td>
+															</c:if></th>
+														<th scope="col" style="text-align: center"><c:out
+																value="${res.status}" /></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href="team?id=${res.homeID}">${res.homeTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.homeScore}" /></td>
-														<td><c:out value="${res.awayTeam}" /></td>
+													</tr>
+													<tr>
+														<td><a href="team?id=${res.awayID}">${res.awayTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.awayScore}" /></td>
-														<td style="text-align: center"><c:out
-																value="${res.status}" /></td>
 													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
+													<tr>
+														<td colspan="2"><b>Home Scorers</b> <br> <c:choose>
+																<c:when test="${res.homeScore eq 0}">
+																	<fmt:message key="div_no_scorers" />
+																</c:when>
+																<c:otherwise>
+																	<c:forEach items="${res.homeScorer}" var="hs">
+																		<c:if test="${hs.goals eq 1}">
+																			<a href="player?id=${hs.ID}">${hs.name}</a>
+																			<br>
+																		</c:if>
+																		<c:if test="${hs.goals gt 1}">
+																			<a href="player?id=${hs.ID}">${hs.name}</a> 
+																			(<c:out value="${hs.goals}" />) 
+																<br>
+																		</c:if>
+																	</c:forEach>
+																</c:otherwise>
+															</c:choose></td>
+													</tr>
+													<tr>
+														<td colspan="2"><b>Away Scorers</b> <br> <c:choose>
+																<c:when test="${res.awayScore eq 0}">
+																	<fmt:message key="div_no_scorers" />
+																</c:when>
+																<c:otherwise>
+																	<c:forEach items="${res.awayScorer}" var="as">
+																		<c:if test="${as.goals eq 1}">
+																			<a href="player?id=${hs.ID}">${as.name}</a>
+																			<br>
+																		</c:if>
+																		<c:if test="${as.goals gt 1}">
+																			<a href="player?id=${as.ID}">${as.name}</a> 
+																(<c:out value="${as.goals}" />)<br>
+																		</c:if>
+																	</c:forEach>
+																</c:otherwise>
+															</c:choose></td>
+													</tr>
+												</tbody>
+											</table>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -255,17 +291,11 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
