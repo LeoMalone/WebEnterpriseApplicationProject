@@ -150,7 +150,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -166,7 +166,7 @@
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
 													Schedule </a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
 													Results </a>
@@ -214,12 +214,12 @@
 												</thead>
 												<tbody>
 													<tr>
-														<td><c:out value="${res.homeTeam}" /></td>
+														<td><a href="team?id=${res.homeID}">${res.homeTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.homeScore}" /></td>
 													</tr>
 													<tr>
-														<td><c:out value="${res.awayTeam}" /></td>
+														<td><a href="team?id=${res.awayID}">${res.awayTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.awayScore}" /></td>
 													</tr>
@@ -231,11 +231,12 @@
 																<c:otherwise>
 																	<c:forEach items="${res.homeScorer}" var="hs">
 																		<c:if test="${hs.goals eq 1}">
-																			<c:out value="${hs.name}" /><br>
+																			<a href="player?id=${hs.ID}">${hs.name}</a><br>
 																		</c:if>
 																		<c:if test="${hs.goals gt 1}">
-																			<c:out value="${hs.name}" /> 
-																(<c:out value="${hs.goals}" />)<br>
+																			<a href="player?id=${hs.ID}">${hs.name}</a> 
+																			(<c:out value="${hs.goals}" />) 
+																<br>
 																</c:if>
 																	</c:forEach>
 																</c:otherwise>
@@ -249,10 +250,10 @@
 																<c:otherwise>
 																	<c:forEach items="${res.awayScorer}" var="as">
 																		<c:if test="${as.goals eq 1}">
-																			<c:out value="${as.name}" /><br>
+																			<a href="player?id=${hs.ID}">${as.name}</a><br>
 																		</c:if>
 																		<c:if test="${as.goals gt 1}">
-																			<c:out value="${as.name}" /> 
+																			<a href="player?id=${as.ID}">${as.name}</a> 
 																(<c:out value="${as.goals}" />)<br>
 																</c:if>
 																	</c:forEach>

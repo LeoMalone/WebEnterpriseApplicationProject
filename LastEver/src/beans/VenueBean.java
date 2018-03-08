@@ -2,6 +2,7 @@ package beans;
 
 public class VenueBean {
 	
+	private String venueID;
 	private String venueName;
 	private String venuePicture;
 	private String address1;
@@ -21,6 +22,10 @@ public class VenueBean {
 	}
 	
 /**************************** GETTERS *****************************/
+	public String getVenueID() {
+		return this.venueID;
+	}
+	
 	public String getVenueName() {
 		return this.venueName;
 	}
@@ -74,6 +79,10 @@ public class VenueBean {
 	}
 
 /**************************** SETTERS *****************************/
+	public void setVenueID(String vID) {
+		this.venueID = vID;
+	}
+	
 	public void setVenueName(String venue) {
 		this.venueName = venue;
 	}

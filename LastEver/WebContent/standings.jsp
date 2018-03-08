@@ -151,7 +151,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -159,8 +159,8 @@
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
-												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+												<a class="nav-link active"
+													href="standings?id=${row.divisionId}"> Standings </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
@@ -225,7 +225,8 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:out
 																value="${stand.rank}" /></td>
-														<td scope="row"><c:out value="${stand.teamName}" /></td>
+														<td scope="row"><a href="team?id=${stand.teamID}">
+																${stand.teamName}</a></td>
 														<td style="text-align: center"><c:out
 																value="${stand.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out
@@ -269,7 +270,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

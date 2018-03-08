@@ -153,7 +153,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -164,7 +164,7 @@
 												<a class="nav-link" href="standings?id=${row.divisionId}">
 													Standings </a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
 													Schedule </a>
@@ -230,9 +230,9 @@
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${sched.time}" />
 															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
-														<td><c:out value="${sched.venue}" /></td>
+														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
+														<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

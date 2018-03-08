@@ -204,9 +204,9 @@
 													</c:when>
 													<c:otherwise>
 														<tr>
-													<td><b>Abbreviation</b></td>
-													<td><c:out value="${t.teamAbbreviation}" /></td>
-												</tr>
+															<td><b>Abbreviation</b></td>
+															<td><c:out value="${t.teamAbbreviation}" /></td>
+														</tr>
 													</c:otherwise>
 												</c:choose>
 												<c:choose>
@@ -312,7 +312,8 @@
 																<tr>
 																	<td scope="row" style="text-align: center"><c:out
 																			value="${stand.rank}" /></td>
-																	<td scope="row"><c:out value="${stand.teamName}" /></td>
+																	<td scope="row"><a href="team?id=${stand.teamID}">
+																	${stand.teamName}</a></td>
 																	<td style="text-align: center"><c:out
 																			value="${stand.gamesPlayed}" /></td>
 																	<td style="text-align: center"><c:out
@@ -386,9 +387,9 @@
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${sched.time}" />
 															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
-														<td><c:out value="${sched.venue}" /></td>
+														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
+														<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
@@ -436,10 +437,10 @@
 																<fmt:formatDate type="date" pattern="MMM d y"
 																	value="${res.date}" />
 															</c:if></td>
-														<td><c:out value="${res.homeTeam}" /></td>
+														<td><a href="team?id=${res.homeID}">${res.homeTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.homeScore}" /></td>
-														<td><c:out value="${res.awayTeam}" /></td>
+														<td><a href="team?id=${res.awayID}">${res.awayTeam}</a></td>
 														<td style="text-align: center"><c:out
 																value="${res.awayScore}" /></td>
 														<td style="text-align: center"><c:out
@@ -489,7 +490,7 @@
 														<td scope="row" style="text-align: center"><c:out
 																value="${stats.rank}" /></td>
 														<td scope="row"><c:out value="${stats.teamName}" /></td>
-														<td><c:out value="${stats.name}" /></td>
+														<td><a href="player?id=${stats.playerID}">${stats.name}</a></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out
@@ -524,7 +525,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -33,7 +33,8 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards from statistics where divisionID = ? order by goals desc, GP asc, playerName asc");
+					+ " redCards, playerID, teamID from statistics where divisionID = ? order by goals desc, GP asc,"
+					+ " playerName asc");
 			getStatistics.setString(1, id);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -64,6 +65,8 @@ public class Statistics {
 				sb.setGoals(resultSet.getInt(4));
 				sb.setYellowCard(resultSet.getInt(5));
 				sb.setRedCard(resultSet.getInt(6));
+				sb.setPlayerID(resultSet.getString(7));
+				sb.setTeamID(resultSet.getString(8));
 				statistics.add(sb);
 			}
 
@@ -109,7 +112,7 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards from statistics s inner join team t on t.teamName = s.teamName"
+					+ " s.redCards, s.playerID from statistics s inner join team t on t.teamName = s.teamName"
 					+ " where s.divisionID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
 					+ " s.GP asc, s.playerName asc");
 			getStatistics.setString(1, div);
@@ -143,6 +146,7 @@ public class Statistics {
 				sb.setGoals(resultSet.getInt(4));
 				sb.setYellowCard(resultSet.getInt(5));
 				sb.setRedCard(resultSet.getInt(6));
+				sb.setPlayerID(resultSet.getString(7));
 				statistics.add(sb);
 			}
 
@@ -186,7 +190,7 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards from statistics s where s.playerName = ? group by s.teamName");
+					+ " s.redCards, s.teamID from statistics s where s.playerName = ? group by s.teamName");
 			getStatistics.setString(1, pName);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -201,6 +205,7 @@ public class Statistics {
 				sb.setGoals(resultSet.getInt(4));
 				sb.setYellowCard(resultSet.getInt(5));
 				sb.setRedCard(resultSet.getInt(6));
+				sb.setTeamID(resultSet.getString(7));
 				statistics.add(sb);
 			}
 
