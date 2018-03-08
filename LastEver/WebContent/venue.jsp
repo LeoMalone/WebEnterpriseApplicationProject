@@ -29,7 +29,16 @@
 <link href="css/carousel.css" rel="stylesheet">
 <link href="css/maps.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - <c:choose>
+			<c:when test="${empty venue}">
+				Venue
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${venue}" var="v">
+					<c:out value="${v.venueName}" />
+				</c:forEach>
+			</c:otherwise>
+		</c:choose></title>
 </fmt:bundle>
 </head>
 <body>
@@ -128,23 +137,22 @@
 		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">Venue</h1>
+				<h1 class="my-4">
+					<c:choose>
+						<c:when test="${empty venue}">
+							Venue
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${venue}" var="v">
+								<c:out value="${v.venueName}" />
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
-							<h4 class="card-header">
-								<c:choose>
-									<c:when test="${empty venue}">
-									Venue
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${venue}" var="v">
-											<c:out value="${v.venueName}" />
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</h4>
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty venue}">
@@ -153,21 +161,59 @@
 									<c:otherwise>
 										<c:forEach items="${venue}" var="v">
 											<c:if test="${not empty v.venuePicture }">
-												<center><img src="${v.venuePicture}" width="500" height="300" /></center>
+												<center>
+													<img src="${v.venuePicture}"
+														style="width: 100%; max-width: 500px; height: auto" />
+												</center>
 											</c:if>
 											<table>
-												<tr>
-												<td><b>Contact</b></td>
-												<td>Not Available</td>
-												</tr>
-												<tr>
-												<td><b>Phone Number</b></td>
-												<td>Not Available</td>
-												</tr>
-												<tr>
-												<td><b>Website</b></td>
-												<td>Not Available</td>
-												</tr>
+												<c:choose>
+													<c:when test="${empty v.venueContact}">
+														<tr>
+															<td><b>Contact</b></td>
+															<td>Not Available</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Contact</b></td>
+															<td><c:out value="${v.venueContact}" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty v.venuePhoneNumber}">
+														<tr>
+															<td><b>Phone Number</b></td>
+															<td>Not Available</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Phone Number</b></td>
+															<td><a
+																href="tel:+<c:out value="${v.venuePhoneNumber}" />">
+																	<c:out value="${v.venuePhoneNumber}" />
+															</a></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty v.venueEmail}">
+														<tr>
+															<td><b>Email Address</b></td>
+															<td>Not Available</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Email Address</b></td>
+															<td><a
+																href="mailto:<c:out value="${v.venueEmail}" />">
+																	Email Us</a></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
 												<tr>
 													<td><b>Address</b></td>
 													<td><c:out value="${v.address1}" /> <c:out
@@ -237,9 +283,9 @@
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
 							<div class="card-header">
-							<h4 class="card-header">
-								<fmt:message key="div_head2" />
-							</h4>
+								<h4 class="card-header">
+									<fmt:message key="div_head2" />
+								</h4>
 								<ul class="nav nav-tabs card-header-tabs">
 									<c:forEach items="${allDiv}" var="division">
 										<li class="nav-item"><a

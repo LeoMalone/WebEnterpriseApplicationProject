@@ -29,7 +29,16 @@
 <link href="css/carousel.css" rel="stylesheet">
 <link href="css/maps.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Team</title>
+	<title>Last Ever - <c:choose>
+			<c:when test="${empty team}">
+				Team
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${team}" var="t">
+					<c:out value="${t.teamName}" />
+				</c:forEach>
+			</c:otherwise>
+		</c:choose></title>
 </fmt:bundle>
 </head>
 <body>
@@ -153,7 +162,8 @@
 										<c:forEach items="${team}" var="t">
 											<c:if test="${not empty t.teamLogo }">
 												<center>
-													<img src="${t.teamLogo}" width="500" height="300" />
+													<img src="${t.teamLogo}"
+														style="width: 100%; max-width: 500px; height: auto" />
 												</center>
 											</c:if>
 											<table>
@@ -191,7 +201,7 @@
 																<td><b>Contact</b></td>
 																<td><a
 																	href="mailto:<c:out value="${to.emailAddress}" />">
-																Contact Team Owner</a></td>
+																		Contact Team Owner</a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>

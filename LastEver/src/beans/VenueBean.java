@@ -11,6 +11,10 @@ public class VenueBean {
 	private String province;
 	private String country;
 	private String venueAddress;
+	private String venueAbout;
+	private String venueContact;
+	private String venuePhoneNumber;
+	private String venueEmail;
 	
 /**************************** CONTRUCTORS *****************************/
 	public VenueBean() {
@@ -52,6 +56,22 @@ public class VenueBean {
 	public String getVenueAddress() {
 		return this.venueAddress;
 	}
+	
+	public String getVenueAbout() {
+		return this.venueAbout;
+	}
+	
+	public String getVenueContact() {
+		return this.venueContact;
+	}
+	
+	public String getVenueEmail() {
+		return this.venueEmail;
+	}
+	
+	public String getVenuePhoneNumber() {
+		return this.venuePhoneNumber;
+	}
 
 /**************************** SETTERS *****************************/
 	public void setVenueName(String venue) {
@@ -88,5 +108,21 @@ public class VenueBean {
 	
 	public void setVenueAddress(String add1, String add2, String city, String prov, String postal, String country) {
 		this.venueAddress = add1 + " " + add2 + " " + city + " " + prov + " " + postal + " " + country;
+	}
+	
+	public void setVenueAbout(String ab) {
+		this.venueAbout = ab;
+	}
+	
+	public void setVenueContact(String con) {
+		this.venueContact = con;
+	}
+	
+	public void setVenueEmail(String em) {
+		this.venueEmail = em;
+	}
+	
+	public void setVenuePhoneNumber(String pn) {
+		this.venuePhoneNumber = pn;
 	}
 }

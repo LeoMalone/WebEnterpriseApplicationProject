@@ -77,7 +77,6 @@ public class VenuePageServlet extends HttpServlet {
 			request.setAttribute("divID", div);
 			request.setAttribute("venue", vlb);
 			request.setAttribute("schedule", slb);
-			request.setAttribute("map", vlb.get(0).getVenueAddress());
 			
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("venue.jsp?id=" + id);  
