@@ -5,11 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import beans.PlayerBean;
 import beans.TeamBean;
-import beans.UserBean;
 import db.ConnectionManager;
 
 public class EditTeamUser {

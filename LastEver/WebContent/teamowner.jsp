@@ -173,7 +173,7 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./teamPhotos" class="btn btn-outline-light">Go To Roster</a>
+								 	<a href="./teamPhotos" class="btn btn-outline-light">Go To Photos</a>
 								</div>
 							</div>
 						</div>
