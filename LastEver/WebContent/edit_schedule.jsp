@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -22,15 +21,38 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="date-picker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<link href="clockpicker/css/clockpicker.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Admin CP</title>
+	<title>Last Ever - Schedule</title>
 </fmt:bundle>
 </head>
+
 <body>
+	<div class="modal fade" id="deleteSchedule" tabindex="-1" role="dialog" aria-labelledby="deleteScheduleLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="deleteScheduleLabel">Delete: GameID ${schedule.title}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	Are You sure you want to delete this Game?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <form action="deleteSchedule?=${schedule.title}" method="POST">
+	        	<button type="submit" class="btn btn-danger">Delete Game</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
@@ -118,90 +140,69 @@
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">
-					${userName}: Admin Control Panel
-				</h1>
-				<!-- Marketing Icons Section -->
-				<div class="admin-cards">
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Users
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete User profiles
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
-								</div>
+				<h1 class="my-4">${userName}: Game ID ${schedule.title}</h1>				
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
+							<h4 class="card-header">
+								Edit Schedule
+							</h4>
+							<div class="card-body">
+								<form action="editSchedule?=${schedule.title}" method="POST">								
+									<div class="form-group">
+										<label for="editGameDate">Game Date</label>
+									    <input type="text" class="form-control"  id="datePickInput" name="editGameDate" value="${schedule.start}">
+									</div>
+									<div class="form-group clockpicker">
+										<label for="editGameDate">Game Time</label>
+									    <input type="text" class="form-control" name="editGameTime" value="${schedule.gameTime}">
+									</div>
+									<div class="form-group">
+										<label for="editHomeTeam">Home Team</label>
+									  	<select class="custom-select my-1 mr-sm-2" id="editHomeTeam" name="editHomeTeam">
+									    	<c:forEach items="${teamList}" var="team">
+												<option value="${team.teamId}" ${team.teamId == schedule.homeTeam ?'selected':''}>${team.teamName}</option>
+											</c:forEach>
+									  	</select>
+									</div>
+									<div class="form-group">
+										<label for="editAwayTeam">Away Team</label>
+									  	<select class="custom-select my-1 mr-sm-2" id="editAwayTeam" name="editAwayTeam">
+									    	<c:forEach items="${teamList}" var="team">
+												<option value="${team.teamId}" ${team.teamId == schedule.awayTeam ?'selected':''}>${team.teamName}</option>
+											</c:forEach>
+									  	</select>
+									</div>
+									<div class="form-group">
+										<label for="editHomeScore">Home Score</label>
+										<input type="text" class="form-control" name="editHomeScore" value="${schedule.homeScore}">
+									</div>
+									<div class="form-group">
+										<label for="editAwayScore">Away Score</label>
+										<input type="text" class="form-control" name="editAwayScore" value="${schedule.awayScore}">
+									</div>
+									<div class="form-group">
+										<label for="editGameStatus">GameStatus</label>
+									  	<select class="custom-select my-1 mr-sm-2" id="editGameStatus" name="editGameStatus">
+									  		<option value="Final" ${schedule.gameStatus == 'Final' ?'selected':''}>Final</option>
+									  		<option value="Scheduled" ${schedule.gameStatus == 'Scheduled' ?'selected':''}>Scheduled</option>												
+									  	</select>
+									</div>								 
+									<button type="submit" class="btn btn-outline-success">Save</button>	
+								</form>															
 							</div>
+							<div class="card-footer">
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteSchedule">Delete Schedule</button>
+							</div>							
 						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Teams
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Teams
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Divisions
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Divisions
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
-								</div>
-							</div>
-						</div>				
 					</div>
-					<!-- row -->
-					
-					<div class="row">
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									Schedules
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										Create/Edit/Delete Schedule Information
-									</p>
-								</div>
-								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
-								</div>
-							</div>
-						</div>				
-					</div>
-				</div>
-				<div class="mb-4">
-					<form action="logout" method="post">
-						<button type="submit" class="btn btn-danger">
-							<fmt:message key="logged_in_signout" />
-						</button>
-					</form>
-				</div>
+				</div>					
 				<!-- /row -->
 			</fmt:bundle>
 		</div>
 	</div>
 	</fmt:bundle>
+	
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
@@ -215,5 +216,8 @@
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="date-picker/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
+	<script type="text/javascript" src="js/edit_schedule.js"></script>
 </body>
 </html>

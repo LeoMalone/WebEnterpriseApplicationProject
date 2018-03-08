@@ -120,7 +120,7 @@
 				<h1 class="my-4">
 					${userName}: Schedule
 				</h1>
-				<a href="./" class="btn btn-success">Add Entry</a>					
+				<a href="./scheduleCreate" class="btn btn-success">Add Entry</a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">				
@@ -145,16 +145,15 @@
 			</div>
 		</footer>
 
-<!-- Bootstrap core JavaScript -->	
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"	crossorigin="anonymous"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- FullCalendar Scripts -->
-<script type="text/javascript" src="fullcalendar/js/jquery.min.js"></script>
-<script type="text/javascript" src="fullcalendar/js/moment.min.js"></script>
-<script type="text/javascript" src="fullcalendar/js/fullcalendar.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-</body>
+	<!-- Bootstrap core JavaScript and JQuery-->	
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- FullCalendar Scripts -->
+	<script type="text/javascript" src="fullcalendar/js/jquery.min.js"></script>
+	<script type="text/javascript" src="fullcalendar/js/moment.min.js"></script>
+	<script type="text/javascript" src="fullcalendar/js/fullcalendar.js"></script>
+	<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	</body>
 </html>

@@ -5,6 +5,36 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<servlet-class>servlets.DeleteScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<url-pattern>/deleteSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateScheduleServlet</servlet-name>
+		<servlet-class>servlets.CreateScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CreateScheduleServlet</servlet-name>
+		<url-pattern>/scheduleCreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditScheduleServlet</servlet-name>
+		<servlet-class>servlets.EditScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EditScheduleServlet</servlet-name>
+		<url-pattern>/editSchedule</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>CalendarJsonServlet</servlet-name>
 		<servlet-class>servlets.CalendarJsonServlet</servlet-class>
 	</servlet>

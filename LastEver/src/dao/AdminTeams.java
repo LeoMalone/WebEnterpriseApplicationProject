@@ -91,4 +91,47 @@ public class AdminTeams {
 	    }	    
 	    return status;
 	}
+	
+	public static boolean teamsForEditSchedule(List<TeamBean> teamList) {
+		boolean status = false;					// Status of createNewUser
+	    Connection conn = null;					// DB Connection
+	    PreparedStatement allTeams = null;
+	    ResultSet rs = null;
+	
+	    // Connect to Database 
+	    try {
+	        conn = ConnectionManager.getConnection();
+	        allTeams = conn.prepareStatement("SELECT teamID, teamName, teamAbbreviation from team");
+	        rs = allTeams.executeQuery();
+	        
+	        while(rs.next()) {
+	        	TeamBean tb = new TeamBean();
+	        	tb.setTeamId(rs.getString(1));
+	        	tb.setTeamName(rs.getString(2));
+	        	tb.setTeamAbbreviation(rs.getString(3));
+	        	teamList.add(tb);
+	        	status = true;
+	        }
+	        
+	    // Catch all possible Exceptions
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (allTeams != null) {
+	            try {
+	            	allTeams.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }	    
+	    return status;
+	}
 }

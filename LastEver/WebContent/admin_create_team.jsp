@@ -126,25 +126,23 @@
 							</h4>
 							<form action="teamCreate" method="POST">
 							<div class="card-body">
-								<p class="card-text">
-									<div class="form-group">
-										<label for="newTeamName">Team Name</label>
-										<input type="text" class="form-control" name="newTeamName" placeholder="Enter Team Name">
-									</div>
-									<div class="form-group">
-										<label for="newTeamAbbr">Team Abbreviation</label>
-										<input type="text" class="form-control" name="newTeamAbbr" placeholder="Enter Team Abbreviation">
-									</div>	
-									<label for="divRadio">Select Division</label>								 
-									 <c:forEach var="div1" items="${allDiv}">
-											<div class="form-check">
-											  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
-												  <label class="form-check-label" for="divRadio">
-												    ${div1.divisionName}
-												  </label>
-											  </div>
-									</c:forEach>
-								</p>
+								<div class="form-group">
+									<label for="newTeamName">Team Name</label>
+									<input type="text" class="form-control" name="newTeamName" placeholder="Enter Team Name">
+								</div>
+								<div class="form-group">
+									<label for="newTeamAbbr">Team Abbreviation</label>
+									<input type="text" class="form-control" name="newTeamAbbr" placeholder="Enter Team Abbreviation">
+								</div>	
+								<label for="divRadio">Select Division</label>								 
+								 <c:forEach var="div1" items="${allDiv}">
+										<div class="form-check">
+										  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
+											  <label class="form-check-label" for="divRadio">
+											    ${div1.divisionName}
+											  </label>
+										  </div>
+								</c:forEach>
 							</div>
 							<div class="card-footer">
 								<button type="submit" class="btn btn-success">Submit!</button>	
@@ -168,19 +166,8 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjvCeJFzEnkShiIgO4gTBEVF1UqDwWfwc&callback=myMap"></script>
 </body>
 </html>

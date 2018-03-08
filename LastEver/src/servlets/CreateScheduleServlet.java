@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.ScheduleBean;
 import beans.TeamBean;
+import dao.AdminSchedule;
+import dao.AdminTeams;
 import dao.Division;
-import dao.TeamDao;
 
-public class TeamOwnerServlet extends HttpServlet {
-
+public class CreateScheduleServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -33,6 +35,7 @@ public class TeamOwnerServlet extends HttpServlet {
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
+
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -59,23 +62,48 @@ public class TeamOwnerServlet extends HttpServlet {
 						response.addCookie(tempCookie);
 						break;
 					}
-				}		
-
-				String teamName = (String) request.getAttribute("teamName");
-				if (teamName == null) {
-					TeamBean tb = new TeamBean();
-					teamName = TeamDao.getTeamName(tb, userName);
 				}
 				
-				request.setAttribute("teamName", teamName);
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("teamowner.jsp");  
-		        rd.forward(request, response);	
+				List<TeamBean> teamList = new ArrayList<TeamBean>();
+				if(AdminTeams.teamsForEditSchedule(teamList)) {						
+					request.setAttribute("teamList", teamList);
+					request.setAttribute("userName", userName);
+					RequestDispatcher rd = request.getRequestDispatcher("admin_create_sched.jsp");  
+			        rd.forward(request, response);	
+				}				
+				
 			}
 		}
 	}
 	
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		doGet(request, response);
+	@Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		
+		response.setContentType("text/html");
+		
+		ScheduleBean schedule = new ScheduleBean();		
+		String newDate = request.getParameter("newGameDate");
+		String newTime = request.getParameter("newGameTime");		
+		String newHomeTeam = request.getParameter("newHomeTeam");
+		String newAwayTeam = request.getParameter("newAwayTeam");
+		String newHomeScore = request.getParameter("newHomeScore");
+		String newAwayScore = request.getParameter("newAwayScore");
+		String newGameStatus = request.getParameter("newGameStatus");
+		
+		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null || newAwayScore == "" || newGameStatus == null) {
+			response.sendRedirect("./scheduleCreate");
+		} else {
+			schedule.setStart(newDate);
+			schedule.setGameTime(newTime);
+			schedule.setHomeTeam(newHomeTeam);
+			schedule.setAwayTeam(newAwayTeam);
+			schedule.setHomeScore(newHomeScore);
+			schedule.setAwayScore(newAwayScore);
+			schedule.setGameStatus(newGameStatus);
+			
+			if(AdminSchedule.createNewGame(schedule)) {
+				response.sendRedirect("./adminSchedule");
+			}
+		}
 	}
 }
