@@ -354,6 +354,42 @@
 		<servlet-name>TeamOwnerServlet</servlet-name>
 		<url-pattern>/teamowner</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+	
+	<servlet>
+		<servlet-name>TeamOwnerNewServlet</servlet-name>
+		<servlet-class>servlets.TeamOwnerNewServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamOwnerNewServlet</servlet-name>
+		<url-pattern>/teamOwnerNew</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>TeamOwnerSelectServlet</servlet-name>
+		<servlet-class>servlets.TeamOwnerSelectServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamOwnerSelectServlet</servlet-name>
+		<url-pattern>/teamOwnerSelect</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TeamCreateTeamServlet</servlet-name>
+		<servlet-class>servlets.TeamCreateTeamServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TeamCreateTeamServlet</servlet-name>
+		<url-pattern>/teamCreateTeam</url-pattern>
+	</servlet-mapping>
+	
+	
+		
 
 	<servlet>
 		<servlet-name>TeamPhotoServlet</servlet-name>

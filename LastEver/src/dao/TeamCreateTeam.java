@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import beans.TeamBean;
 import db.ConnectionManager;
 
-public class CreateTeam {
+public class TeamCreateTeam {
 	
 	public static boolean getTeamId(TeamBean team) {
 		boolean status = false;					// Status of createNewUser
@@ -55,12 +55,13 @@ public class CreateTeam {
 	 * @param user - UserBean object to get create account credentials
 	 * @return status 
 	 */
-	public static boolean createNewTeam(TeamBean team) { 
+	public static boolean createNewTeam(TeamBean team, String userName) { 
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
 	    PreparedStatement insertTeam = null;	// # of executed queries
 	    PreparedStatement insertIntoDiv = null;	// # of executed queries
+	    PreparedStatement insertIntoUserXTeam = null;	// # of executed queries
 	    int result = 0;	    
 	
 	    // Connect to Database and execute INSERT query with UserBean data
@@ -77,8 +78,22 @@ public class CreateTeam {
 	        	insertIntoDiv.setString(1, team.getTeamId());
 	        	insertIntoDiv.setString(2, team.getDivisionId());
 	        	result = insertIntoDiv.executeUpdate();
-	        	if(result == 1)
-	        		status = true;
+	        	if(result == 1) {
+	        		
+	        		insertIntoUserXTeam = conn.prepareStatement("INSERT INTO usersxteam (userID, teamID) VALUE (?, ?)");
+	        		insertIntoUserXTeam.setString(1, userName);
+	        		insertIntoUserXTeam.setString(2, team.getTeamId());
+		        	result = insertIntoUserXTeam.executeUpdate();
+	        		
+	        		
+	        		if(result == 1) {
+	        			status = true;
+	        		}
+	        	}
+	        		
+	        		
+	        		
+	        		
 	        }
 	
 	    // Catch all possible Exceptions
