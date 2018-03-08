@@ -91,7 +91,7 @@ public class CreateTeamServlet extends HttpServlet {
 
 			// If createNewUser method returns true
 			if (CreateTeam.createNewTeam(team)) {
-				response.sendRedirect("./adminTeams?=" + team.getDividionId());
+				response.sendRedirect("./adminTeams?=" + team.getDivisionId());
 				
 			} else {
 				response.sendRedirect("./teamCreate");

@@ -75,7 +75,7 @@ public class CreateTeam {
 	        	getTeamId(team);
 	        	insertIntoDiv = conn.prepareStatement("INSERT INTO teamxdivision (teamID, divisionID) VALUE (?, ?)");
 	        	insertIntoDiv.setString(1, team.getTeamId());
-	        	insertIntoDiv.setString(2, team.getDividionId());
+	        	insertIntoDiv.setString(2, team.getDivisionId());
 	        	result = insertIntoDiv.executeUpdate();
 	        	if(result == 1)
 	        		status = true;

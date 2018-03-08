@@ -71,7 +71,7 @@ public static boolean getTeamForEdit(TeamBean team) {
 	        if(result == 1) {
 	        	updateTeamDiv = conn.prepareStatement("CALL update_team(?, ?)");
 	        	updateTeamDiv.setString(1, team.getTeamId());
-	        	updateTeamDiv.setString(2, team.getDividionId());
+	        	updateTeamDiv.setString(2, team.getDivisionId());
 	        	result = updateTeamDiv.executeUpdate();
 	        	if(result >= 0)
 	        		status = true;

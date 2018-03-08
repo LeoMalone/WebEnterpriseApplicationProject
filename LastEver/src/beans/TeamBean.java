@@ -15,7 +15,7 @@ public class TeamBean {
 	}
 	
 /**************************** GETTERS *****************************/
-	public String getDividionId() {
+	public String getDivisionId() {
 		return this.divisionId;
 	}
 	
