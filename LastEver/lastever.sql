@@ -97,7 +97,7 @@ CREATE TABLE `news` (
 
 LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
-INSERT INTO `news` VALUES (1,1,'Test Post','2018-02-26 20:06:54','This is a test of the news system. Hopefully it works and everything goes as planned.\r Do the new lines work in MySQL? We\'re about to find out if it does. I have a feeling that it doesn\'t and we may need to store\r some sort of html code in here. It\'ll have to be super specific tags so that it doesn\'t become an issue. <br> <br>\r I put in some <b>html tags</b> and added a new line. How fancy! I wonder if other stuff will work as well, I will add an image\r to this post for testing purposes. It\'ll be something really stupid though so w/e.<br><br> <img src=\"https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg\"\r height=\"315\" width=\"560\">'),(2,1,'Another test post','2018-03-01 19:40:42','<center><img src=\"https://images.pexels.com/photos/17598/pexels-photo.jpg\" width=\"560\" height=\"315\"></center> <br><br>\r This is another test post how about that! This time the image is at the start of the post and not at the end! Fancy! So I guess I\'ll put\r some somewhat beliveable content in that the games this week will continue as normal after nothing happened last week. At all. Now\r Stop asking about it please. We are getting pretty close to the end and the playoff spots can still be determined. It\'s anyones game.\r Now if you\'ll excuse me I have a website to create. <br><br> Ok, I\'m not being fully serious here but I think it\'s kinda cool.\r Having to escape the text all the time is getting annoying but what can you do? Well do not do everything from MySQL for starters.\r Hopefully nothing breaks and the spacing between the cards is good and I won\'t have to do some fixing. I doubt it but we shall see.\r Have fun this week everyone! ');
+INSERT INTO `news` VALUES (1,1,'Test Post','2018-02-26 20:06:54','This is a test of the news system. Hopefully it works and everything goes as planned.\r Do the new lines work in MySQL? We\'re about to find out if it does. I have a feeling that it doesn\'t and we may need to store\r some sort of html code in here. It\'ll have to be super specific tags so that it doesn\'t become an issue. <br> <br>\r I put in some <b>html tags</b> and added a new line. How fancy! I wonder if other stuff will work as well, I will add an image\r to this post for testing purposes. It\'ll be something really stupid though so w/e.<br><br> <img src=\"https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg\"\r style=\"width: 100%; max-width: 560px; height: auto\">'),(2,1,'Another test post','2018-03-01 19:40:42','<center><img src=\"https://images.pexels.com/photos/17598/pexels-photo.jpg\" style=\"width: 100%; max-width: 560px; height: auto\"></center> <br><br>\r This is another test post how about that! This time the image is at the start of the post and not at the end! Fancy! So I guess I\'ll put\r some somewhat beliveable content in that the games this week will continue as normal after nothing happened last week. At all. Now\r Stop asking about it please. We are getting pretty close to the end and the playoff spots can still be determined. It\'s anyones game.\r Now if you\'ll excuse me I have a website to create. <br><br> Ok, I\'m not being fully serious here but I think it\'s kinda cool.\r Having to escape the text all the time is getting annoying but what can you do? Well do not do everything from MySQL for starters.\r Hopefully nothing breaks and the spacing between the cards is good and I won\'t have to do some fixing. I doubt it but we shall see.\r Have fun this week everyone! ');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,6 +137,7 @@ DROP TABLE IF EXISTS `player`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `player` (
   `playerID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `playerPhoto` varchar(200) DEFAULT NULL,
   `playerFirstName` varchar(100) NOT NULL,
   `playerLastName` varchar(100) NOT NULL,
   `playerNumber` tinyint(4) DEFAULT NULL,
@@ -154,7 +155,7 @@ CREATE TABLE `player` (
 
 LOCK TABLES `player` WRITE;
 /*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES (1,'Emery','Forrest',21,'Forward',NULL,NULL,NULL),(2,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL),(3,'Trent','Garry',67,'Forward',NULL,NULL,NULL),(4,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL),(5,'Hoyt','Braidy',72,'Goalkeeper',NULL,NULL,NULL),(6,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL),(7,'Wilmer','Hector',10,'Forward',NULL,NULL,NULL),(8,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL),(9,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL),(10,'Jed','Leonard',86,'Forward',NULL,NULL,NULL),(11,'Alva','Darwin',23,'Forward',NULL,NULL,NULL),(12,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL),(13,'Iona','Renae',25,'Forward',NULL,NULL,NULL),(14,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL),(15,'Shae','Joy',3,'Forward',NULL,NULL,NULL),(16,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL),(17,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL),(18,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL),(19,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL),(20,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL),(21,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL),(22,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL),(23,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL),(24,'Christi','Lana',4,'Forward',NULL,NULL,NULL);
+INSERT INTO `player` VALUES (1,NULL,'Emery','Forrest',21,'Forward','Canada',176.64,78.44),(2,NULL,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL),(3,NULL,'Trent','Garry',67,'Forward','United States',187,86.34),(4,NULL,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL),(5,NULL,'Hoyt','Braidy',72,'Goalkeeper',NULL,167.3,NULL),(6,NULL,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL),(7,NULL,'Wilmer','Hector',10,'Forward','Canada',NULL,NULL),(8,NULL,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL),(9,NULL,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL),(10,NULL,'Jed','Leonard',86,'Forward',NULL,NULL,NULL),(11,NULL,'Alva','Darwin',23,'Forward',NULL,NULL,NULL),(12,NULL,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL),(13,NULL,'Iona','Renae',25,'Forward',NULL,NULL,NULL),(14,NULL,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL),(15,NULL,'Shae','Joy',3,'Forward',NULL,NULL,NULL),(16,NULL,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL),(17,NULL,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL),(18,NULL,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL),(19,NULL,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL),(20,NULL,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL),(21,NULL,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL),(22,NULL,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL),(23,NULL,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL),(24,NULL,'Christi','Lana',4,'Forward',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,6 +393,7 @@ CREATE TABLE `team` (
   `teamName` varchar(100) DEFAULT NULL,
   `teamAbbreviation` char(3) DEFAULT NULL,
   `teamLogo` varchar(200) DEFAULT NULL,
+  `teamAbout` text,
   PRIMARY KEY (`teamID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -402,7 +404,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL),(2,'Manotick Quick Men','MQM',NULL),(3,'Osgoode Never Reads','ONR',NULL),(4,'Barrhaven Vicious Scorers','BVS',NULL),(5,'Carleton Passive Players','CPP',NULL),(6,'Almonte Good Gals','AGG',NULL),(7,'Kanata Soccer Team','KST',NULL),(8,'Vars FC','VFC',NULL);
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +470,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-01 20:01:40','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-07 04:14:06','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02','2018-03-07 04:15:12','Team Owner',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,6 +518,10 @@ CREATE TABLE `venue` (
   `venueProvince` varchar(100) NOT NULL,
   `venuePostal` varchar(7) NOT NULL,
   `venueCountry` varchar(100) NOT NULL,
+  `venueContactName` varchar(200) DEFAULT NULL,
+  `venuePhoneNumber` varchar(14) DEFAULT NULL,
+  `venueEmail` varchar(100) DEFAULT NULL,
+  `venueAbout` text,
   PRIMARY KEY (`venueID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -526,7 +532,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada');
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -633,7 +639,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName` */;
+/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName`,`t`.`teamName` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -647,4 +653,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-06 21:13:43
+-- Dump completed on 2018-03-07 23:17:48
