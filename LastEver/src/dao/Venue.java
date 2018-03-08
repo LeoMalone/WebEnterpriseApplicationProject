@@ -31,7 +31,8 @@ public class Venue {
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        getVenue = conn.prepareStatement("select venueName, venuePicture, venueAddress1, venueAddress2,"
-	        		+ " venueCity, venueProvince, venuePostal, venueCountry from venue where venueID=?");
+	        		+ " venueCity, venueProvince, venuePostal, venueCountry, venueAbout, venueContactName,"
+	        		+ "venuePhoneNumber, venueEmail, venueAbout from venue where venueID=?");
 	        getVenue.setString(1, id);
 	        resultSet = getVenue.executeQuery();
 	        status = resultSet.next();
@@ -50,6 +51,11 @@ public class Venue {
 	        	vb.setCountry(resultSet.getString(8));
 	        	vb.setVenueAddress(resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), 
 	        			resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+	        	vb.setVenueAbout(resultSet.getString(9));
+	        	vb.setVenueContact(resultSet.getString(10));
+	        	vb.setVenuePhoneNumber(resultSet.getString(11));
+	        	vb.setVenueEmail(resultSet.getString(12));
+	        	vb.setVenueAbout(resultSet.getString(13));
 	        	venue.add(vb);
 	        }
 	        

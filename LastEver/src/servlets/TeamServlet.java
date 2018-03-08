@@ -11,10 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.ScheduleResultsBean;
 import beans.StandingsBean;
+import beans.StatisticsBean;
 import beans.TeamBean;
+import beans.UserBean;
 import dao.Division;
+import dao.ScheduleResults;
 import dao.Standings;
+import dao.Statistics;
 import dao.Team;
 
 public class TeamServlet extends HttpServlet {
@@ -59,17 +64,28 @@ public class TeamServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			List<StandingsBean> slb = new ArrayList<StandingsBean>();
-			Standings.getStandings(div, slb);	
-
+			List<ScheduleResultsBean> srlb = new ArrayList<ScheduleResultsBean>();
+			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();
 			List<TeamBean> tlb = new ArrayList<TeamBean>();
-			Team.getTeamInfo(id, tlb);
-			
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
+			List<UserBean> ulb = new ArrayList<UserBean>();
+			
+			Standings.getStandings(div, slb);
+			ScheduleResults.getScheduleWithTeam(id, div, srlb);
+			ScheduleResults.getResultsWithTeam(id, div, rlb);
+			Statistics.getStatisticsWithTeam(id, div, stlb);
+			Team.getTeamInfo(id, tlb);
 			Division.getAllDivisions(dlb);
+			Team.getTeamOwner(id, ulb);
 			
 			request.setAttribute("allDiv", dlb);
 			request.setAttribute("team", tlb);
-			request.setAttribute("standings", slb);	
+			request.setAttribute("standings", slb);
+			request.setAttribute("schedule", srlb);
+			request.setAttribute("statistics", stlb);
+			request.setAttribute("results", rlb);
+			request.setAttribute("teamowner", ulb);
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/team.jsp?id=" + id);  
 			rd.forward(request, response);		

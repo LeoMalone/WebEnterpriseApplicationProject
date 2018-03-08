@@ -30,12 +30,13 @@
 <link href="css/maps.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <c:choose>
-			<c:when test="${empty venue}">
-				Venue
+			<c:when test="${empty player}">
+				Player
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${venue}" var="v">
-					<c:out value="${v.venueName}" />
+				<c:forEach items="${player}" var="p">
+					<c:out value="${p.playerFirstName}" /> 
+					<c:out value="${p.playerLastName}" />
 				</c:forEach>
 			</c:otherwise>
 		</c:choose></title>
@@ -139,12 +140,13 @@
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					<c:choose>
-						<c:when test="${empty venue}">
-							Venue
+						<c:when test="${empty player}">
+							Player
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${venue}" var="v">
-								<c:out value="${v.venueName}" />
+							<c:forEach items="${player}" var="p">
+								<c:out value="${p.playerFirstName}" /> 
+								<c:out value="${p.playerLastName}" />
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -155,149 +157,116 @@
 						<div class="card">
 							<div class="card-body">
 								<c:choose>
-									<c:when test="${empty venue}">
-									No venue information
+									<c:when test="${empty player}">
+									No player information
 									</c:when>
 									<c:otherwise>
-										<c:forEach items="${venue}" var="v">
-											<c:if test="${not empty v.venuePicture }">
+										<c:forEach items="${player}" var="p">
+											<c:if test="${not empty p.playerPhoto }">
 												<center>
-													<img src="${v.venuePicture}"
+													<img src="${p.playerPhoto}"
 														style="width: 100%; max-width: 500px; height: auto" />
-												</center>
+												</center> 
 											</c:if>
 											<table>
 												<c:choose>
-													<c:when test="${empty v.venueAbout}">
+													<c:when test="${empty team}">
 														<tr>
-															<td><b>About Venue</b></td>
-															<td>No description given</td>
+															<td><b>Current Team</b></td>
+															<td>Not on a team</td>
 														</tr>
 													</c:when>
 													<c:otherwise>
 														<tr>
-															<td><b>About Venue</b></td>
-															<td><c:out value="${v.venueAbout}" /></td>
+															<td><b>Current Team</b></td>
+															<td><c:out value="${team}" /></td>
 														</tr>
 													</c:otherwise>
 												</c:choose>
 												<c:choose>
-													<c:when test="${empty v.venueContact}">
+													<c:when test="${empty division}">
 														<tr>
-															<td><b>Contact</b></td>
+															<td><b>Division</b></td>
+															<td>No division</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Division</b></td>
+															<td><c:out value="${division}" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty p.playerNumber}">
+														<tr>
+															<td><b>Player Number</b></td>
+															<td>No number</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Player Number</b></td>
+															<td>#<c:out value="${p.playerNumber}" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty p.playerPosition}">
+														<tr>
+															<td><b>Player Position</b></td>
+															<td>No position</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Player Position</b></td>
+															<td><c:out value="${p.playerPosition}" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty p.playerCountry}">
+														<tr>
+															<td><b>Country</b></td>
 															<td>Not Available</td>
 														</tr>
 													</c:when>
 													<c:otherwise>
 														<tr>
-															<td><b>Contact</b></td>
-															<td><c:out value="${v.venueContact}" /></td>
+															<td><b>Country</b></td>
+															<td><c:out value="${p.playerCountry}" /></td>
 														</tr>
 													</c:otherwise>
 												</c:choose>
 												<c:choose>
-													<c:when test="${empty v.venuePhoneNumber}">
+													<c:when test="${p.playerHeight eq 0.0}">
 														<tr>
-															<td><b>Phone Number</b></td>
+															<td><b>Height</b></td>
 															<td>Not Available</td>
 														</tr>
 													</c:when>
 													<c:otherwise>
 														<tr>
-															<td><b>Phone Number</b></td>
-															<td><a
-																href="tel:+<c:out value="${v.venuePhoneNumber}" />">
-																	<c:out value="${v.venuePhoneNumber}" />
-															</a></td>
+															<td><b>Height</b></td>
+															<td><c:out value="${p.playerHeight}" /> cm</td>
 														</tr>
 													</c:otherwise>
 												</c:choose>
 												<c:choose>
-													<c:when test="${empty v.venueEmail}">
+													<c:when test="${p.playerWeight eq 0.0}">
 														<tr>
-															<td><b>Email Address</b></td>
+															<td><b>Weight</b></td>
 															<td>Not Available</td>
 														</tr>
 													</c:when>
 													<c:otherwise>
 														<tr>
-															<td><b>Email Address</b></td>
-															<td><a
-																href="mailto:<c:out value="${v.venueEmail}" />">
-																	Email Us</a></td>
+															<td><b>Weight</b></td>
+															<td><c:out value="${p.playerWeight}" /> kg</td>
 														</tr>
 													</c:otherwise>
 												</c:choose>
-												<tr>
-													<c:choose>
-														<c:when test="${empty v.venueAddress}">
-															<tr>
-																<td><b>Address</b></td>
-																<td>No address available</td>
-															</tr>
-														</c:when>
-														<c:otherwise>
-															<tr>
-																<td><b>Address</b></td>
-																<td><c:out value="${v.address1}" /> <c:out
-																		value="${v.address2}" /> <br> <c:out
-																		value="${v.city}" />, <c:out value="${v.province}" />
-																	<c:out value="${v.country}" /><br> <c:out
-																		value="${v.postal}" /></td>
-															</tr>
-														</c:otherwise>
-													</c:choose>
-												<tr>
-													<td><b>Map</b></td>
-													<td><div id="map"></div> <script>
-														function initMap() {
-															var map = new google.maps.Map(
-																	document
-																			.getElementById('map'),
-																	{
-																		zoom : 15,
-																		center : {
-																			lat : 25,
-																			lng : 25
-																		}
-																	});
-															var geocoder = new google.maps.Geocoder();
-
-															geocodeAddress(
-																	geocoder,
-																	map);
-														}
-
-														function geocodeAddress(
-																geocoder,
-																resultsMap) {
-															var address = <c:forEach items="${venue}" var="v">
-															"${v.venueAddress}"
-															</c:forEach>;
-
-															geocoder
-																	.geocode(
-																			{
-																				'address' : address
-																			},
-																			function(
-																					results,
-																					status) {
-																				if (status === 'OK') {
-																					resultsMap
-																							.setCenter(results[0].geometry.location);
-																					var marker = new google.maps.Marker(
-																							{
-																								map : resultsMap,
-																								position : results[0].geometry.location
-																							});
-																				}
-																			});
-														}
-													</script> <script
-															src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGUmrbP4bA8jEkouNt9KIRFlBzpyT5oUA&callback=initMap"></script>
-													</td>
-												</tr>
 											</table>
 										</c:forEach>
 									</c:otherwise>
@@ -307,61 +276,44 @@
 					</div>
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
-							<div class="card-header">
-								<h4 class="card-header">
-									<fmt:message key="div_head2" />
-								</h4>
-								<ul class="nav nav-tabs card-header-tabs">
-									<c:forEach items="${allDiv}" var="division">
-										<li class="nav-item"><a
-											class="nav-link ${division.divisionId==divID?'active':''}"
-											href="venue?id=${venID}&div=${division.divisionId}#standings">${division.divisionName}</a>
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
 							<div class="card-body">
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text1" /></th>
+													key="div_head5_text2" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text2" /></th>
+													key="div_head5_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text3" /></th>
+													key="div_head5_text4" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text4" /></th>
+													key="div_head5_text5" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text6" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text7" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:choose>
-											<c:when test="${empty schedule}">
-												<td colspan=5 style="text-align: center"><b><fmt:message
-															key="div_nogames" /></b></td>
+											<c:when test="${empty statistics}">
+												<td colspan=6 style="text-align: center"><b><fmt:message
+															key="div_noplayers" /></b></td>
 											</c:when>
 											<c:otherwise>
-												<c:forEach items="${schedule}" var="sched">
+												<c:forEach items="${statistics}" var="stats">
 													<tr>
-														<td scope="row" style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
-																	value="${sched.date}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
-																	value="${sched.date}" />
-															</c:if></td>
-														<td style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="time" pattern="H:mm"
-																	value="${sched.time}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="time" pattern="h:mm a"
-																	value="${sched.time}" />
-															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
+														<td scope="row"><c:out value="${stats.teamName}" /></td>
+														<td><c:out value="${stats.name}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.gamesPlayed}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.goals}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.yellowCard}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.redCard}" /></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

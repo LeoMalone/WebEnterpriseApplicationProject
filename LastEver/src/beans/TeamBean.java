@@ -8,6 +8,7 @@ public class TeamBean {
 	private String teamId;
 	private String teamName;
 	private String teamAbbreviation;
+	private String teamAbout;
 	
 /**************************** CONTRUCTORS *****************************/
 	public TeamBean() {
@@ -37,6 +38,10 @@ public class TeamBean {
 	public String getTeamAbbreviation() {
 		return this.teamAbbreviation;
 	}
+	
+	public String getTeamAbout() {
+		return this.teamAbout;
+	}
 
 /**************************** SETTERS *****************************/
 	public void setDivisionId(String divID) {
@@ -63,4 +68,7 @@ public class TeamBean {
 		this.teamAbbreviation = ta;
 	}
 
+	public void setTeamAbout(String ab) {
+		this.teamAbout = ab;
+	}
 }

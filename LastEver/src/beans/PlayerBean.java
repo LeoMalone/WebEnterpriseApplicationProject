@@ -1,11 +1,5 @@
 package beans;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * The RefBean class is meant for passing user information
  * between DAOs and Servlets
@@ -18,6 +12,10 @@ public class PlayerBean {
 	private String playerLastName;
 	private String playerNumber;
 	private String playerPosition;
+	private String playerCountry;
+	private float playerHeight;
+	private float playerWeight;
+	private String playerPhoto;
 
 /**************************** CONTRUCTORS *****************************/	
 	public PlayerBean() {
@@ -51,7 +49,22 @@ public class PlayerBean {
 		return this.playerPosition;
 	}
 
+	public String getPlayerCountry() {
+		return this.playerCountry;
+	}
+	
+	public float getPlayerHeight() {
+		return this.playerHeight;
+	}
+	
+	public float getPlayerWeight() {
+		return this.playerWeight;
+	}
 
+	public String getPlayerPhoto() {
+		return this.playerPhoto;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setId(String id) {
 		this.id = id;
@@ -71,5 +84,21 @@ public class PlayerBean {
 	
 	public void setPlayerPosition(String pp) {
 		this.playerPosition = pp;
+	}
+	
+	public void setPlayerCountry(String ctry) {
+		this.playerCountry = ctry;
+	}
+	
+	public void setPlayerHeight(float he) {
+		this.playerHeight = he;
+	}
+	
+	public void setPlayerWeight(float we) {
+		this.playerWeight = we;
+	}
+	
+	public void setPlayerPhoto(String ph) {
+		this.playerPhoto = ph;
 	}
 }
