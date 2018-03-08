@@ -167,18 +167,48 @@
 												</center>
 											</c:if>
 											<table>
-												<tr>
-													<td><b>About Team</b></td>
-													<td><c:out value="${t.teamAbout}" escapeXml="false" /></td>
-												</tr>
-												<tr>
-													<td><b>Division</b></td>
-													<td><c:out value="${t.divisionName}" /></td>
-												</tr>
-												<tr>
+												<c:choose>
+													<c:when test="${empty t.teamAbout}">
+														<tr>
+															<td><b>About Team</b></td>
+															<td>No information given</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>About Team</b></td>
+															<td><c:out value="${t.teamAbout}" escapeXml="false" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty t.divisionName}">
+														<tr>
+															<td><b>Division</b></td>
+															<td>No division</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td><b>Division</b></td>
+															<td><c:out value="${t.divisionName}" /></td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${empty t.teamAbbreviation}">
+														<tr>
+															<td><b>Abbreviation</b></td>
+															<td>NAB</td>
+														</tr>
+													</c:when>
+													<c:otherwise>
+														<tr>
 													<td><b>Abbreviation</b></td>
 													<td><c:out value="${t.teamAbbreviation}" /></td>
 												</tr>
+													</c:otherwise>
+												</c:choose>
 												<c:choose>
 													<c:when test="${empty teamowner}">
 														<tr>

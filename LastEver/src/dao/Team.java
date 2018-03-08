@@ -80,7 +80,6 @@ public class Team {
 
 	public static String getTeamDivision(String id) { 
 
-		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
 		PreparedStatement getTeam = null;		// SQL query
 		ResultSet resultSet = null;				// returned query result set
@@ -94,9 +93,6 @@ public class Team {
 					+ " t.teamID=?");
 			getTeam.setString(1, id);
 			resultSet = getTeam.executeQuery();
-			status = resultSet.next();
-
-			resultSet.beforeFirst();
 
 			while(resultSet.next())
 				div = resultSet.getString(1);
@@ -128,6 +124,53 @@ public class Team {
 			}
 		}
 		return div;
+	}
+	
+	public static String getPlayerTeam(String id) { 
+
+		Connection conn = null;					// DB connection
+		PreparedStatement getTeam = null;		// SQL query
+		ResultSet resultSet = null;				// returned query result set
+		String team = null;
+
+		// Connect to Database and execute SELECT query with UserBean data
+		try {
+			conn = ConnectionManager.getConnection();
+			getTeam = conn.prepareStatement("select t.teamName from team t inner join playerxteam pt on"
+					+ " t.teamID = pt.teamID inner join player p on p.playerID = pt.playerID where p.playerID = ?");
+			getTeam.setString(1, id);
+			resultSet = getTeam.executeQuery();
+
+			while(resultSet.next())
+				team = resultSet.getString(1);
+
+			// handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getTeam != null) {
+				try {
+					getTeam.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return team;
 	}
 	
 	public static boolean getTeamOwner(String id, List<UserBean> user) { 

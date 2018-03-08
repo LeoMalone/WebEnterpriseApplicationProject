@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,23 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
-import beans.ScheduleResultsBean;
-import beans.VenueBean;
+import beans.PlayerBean;
+import beans.StatisticsBean;
 import dao.Division;
-import dao.ScheduleResults;
-import dao.Venue;
+import dao.Player;
+import dao.Statistics;
+import dao.Team;
 
-public class VenuePageServlet extends HttpServlet {
+public class PlayerPageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
-
+	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
-		String language = null;		
+		String language = null;
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -55,36 +51,31 @@ public class VenuePageServlet extends HttpServlet {
 					response.addCookie(tempCookie);
 					break;
 				}
-			}		
+			}
 
 			String id = request.getParameter("id");
-			String div = request.getParameter("div");
+			String div = Division.getPlayerDivision(id);
+			String team = Team.getPlayerTeam(id);
+			
+			response.setContentType("text/html");
 
-			if(div == null)
-				div = "1";
-
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
-
-			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
-			ScheduleResults.getScheduleWithVenue(id, div, slb);	
-
-			List<VenueBean> vlb = new ArrayList<VenueBean>();
-			Venue.getVenue(id, vlb);
-
-			request.setAttribute("venID", id);
-			request.setAttribute("divID", div);
-			request.setAttribute("venue", vlb);
-			request.setAttribute("schedule", slb);
-
+			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
+			List<PlayerBean> plb = new ArrayList<PlayerBean>();
+			
+			Player.getPlayerInfo(id, plb);
+			Statistics.getStatisticsWithPlayer(Player.getPlayerName(id), stlb);
+			
+			request.setAttribute("division", div);
+			request.setAttribute("player", plb);
+			request.setAttribute("team", team);
+			request.setAttribute("statistics", stlb);
 			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("venue.jsp?id=" + id);  
-			rd.forward(request, response);	
+			RequestDispatcher rd = request.getRequestDispatcher("/player.jsp?id=" + id);  
+			rd.forward(request, response);		
 		}
 	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}
 }

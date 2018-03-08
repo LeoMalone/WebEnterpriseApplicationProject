@@ -137,6 +137,7 @@ DROP TABLE IF EXISTS `player`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `player` (
   `playerID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `playerPhoto` varchar(200) DEFAULT NULL,
   `playerFirstName` varchar(100) NOT NULL,
   `playerLastName` varchar(100) NOT NULL,
   `playerNumber` tinyint(4) DEFAULT NULL,
@@ -154,7 +155,7 @@ CREATE TABLE `player` (
 
 LOCK TABLES `player` WRITE;
 /*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES (1,'Emery','Forrest',21,'Forward',NULL,NULL,NULL),(2,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL),(3,'Trent','Garry',67,'Forward',NULL,NULL,NULL),(4,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL),(5,'Hoyt','Braidy',72,'Goalkeeper',NULL,NULL,NULL),(6,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL),(7,'Wilmer','Hector',10,'Forward',NULL,NULL,NULL),(8,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL),(9,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL),(10,'Jed','Leonard',86,'Forward',NULL,NULL,NULL),(11,'Alva','Darwin',23,'Forward',NULL,NULL,NULL),(12,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL),(13,'Iona','Renae',25,'Forward',NULL,NULL,NULL),(14,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL),(15,'Shae','Joy',3,'Forward',NULL,NULL,NULL),(16,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL),(17,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL),(18,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL),(19,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL),(20,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL),(21,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL),(22,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL),(23,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL),(24,'Christi','Lana',4,'Forward',NULL,NULL,NULL);
+INSERT INTO `player` VALUES (1,NULL,'Emery','Forrest',21,'Forward','Canada',176.64,78.44),(2,NULL,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL),(3,NULL,'Trent','Garry',67,'Forward','United States',187,86.34),(4,NULL,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL),(5,NULL,'Hoyt','Braidy',72,'Goalkeeper',NULL,167.3,NULL),(6,NULL,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL),(7,NULL,'Wilmer','Hector',10,'Forward','Canada',NULL,NULL),(8,NULL,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL),(9,NULL,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL),(10,NULL,'Jed','Leonard',86,'Forward',NULL,NULL,NULL),(11,NULL,'Alva','Darwin',23,'Forward',NULL,NULL,NULL),(12,NULL,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL),(13,NULL,'Iona','Renae',25,'Forward',NULL,NULL,NULL),(14,NULL,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL),(15,NULL,'Shae','Joy',3,'Forward',NULL,NULL,NULL),(16,NULL,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL),(17,NULL,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL),(18,NULL,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL),(19,NULL,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL),(20,NULL,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL),(21,NULL,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL),(22,NULL,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL),(23,NULL,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL),(24,NULL,'Christi','Lana',4,'Forward',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +393,7 @@ CREATE TABLE `team` (
   `teamName` varchar(100) DEFAULT NULL,
   `teamAbbreviation` char(3) DEFAULT NULL,
   `teamLogo` varchar(200) DEFAULT NULL,
-  `teamAbout` text NOT NULL,
+  `teamAbout` text,
   PRIMARY KEY (`teamID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -520,7 +521,7 @@ CREATE TABLE `venue` (
   `venueContactName` varchar(200) DEFAULT NULL,
   `venuePhoneNumber` varchar(14) DEFAULT NULL,
   `venueEmail` varchar(100) DEFAULT NULL,
-  `venueAbout` text NOT NULL,
+  `venueAbout` text,
   PRIMARY KEY (`venueID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -638,7 +639,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName` */;
+/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName`,`t`.`teamName` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -652,4 +653,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-07 20:52:11
+-- Dump completed on 2018-03-07 23:17:48
