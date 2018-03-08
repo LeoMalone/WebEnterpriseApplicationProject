@@ -167,22 +167,22 @@
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+													<fmt:message key="div_head4" /> </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
+													<fmt:message key="div_head2" /> </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
+													<fmt:message key="div_head3" /> </a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
+													<fmt:message key="div_head5" /> </a>
 											</c:forEach></li>
 									</ul>
 								</nav>

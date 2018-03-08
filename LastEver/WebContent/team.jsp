@@ -171,7 +171,7 @@
 													<c:when test="${empty t.teamAbout}">
 														<tr>
 															<td><b>About Team</b></td>
-															<td>No information given</td>
+															<td><fmt:message key="not_available" /></td>
 														</tr>
 													</c:when>
 													<c:otherwise>
@@ -181,25 +181,24 @@
 														</tr>
 													</c:otherwise>
 												</c:choose>
-												<c:choose>
-													<c:when test="${empty t.divisionName}">
-														<tr>
-															<td><b>Division</b></td>
-															<td>No division</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Division</b></td>
+
+												<tr>
+													<td><b>Division</b></td>
+													<c:choose>
+														<c:when test="${empty t.divisionName}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${t.divisionName}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+
 												<c:choose>
 													<c:when test="${empty t.teamAbbreviation}">
 														<tr>
 															<td><b>Abbreviation</b></td>
-															<td>NAB</td>
+															<td><fmt:message key="not_available" /></td>
 														</tr>
 													</c:when>
 													<c:otherwise>
@@ -213,11 +212,11 @@
 													<c:when test="${empty teamowner}">
 														<tr>
 															<td><b>Team Owner</b></td>
-															<td>Not Available</td>
+															<td><fmt:message key="not_available" /></td>
 														</tr>
 														<tr>
 															<td><b>Contact</b></td>
-															<td>Not Available</td>
+															<td><fmt:message key="not_available" /></td>
 														</tr>
 													</c:when>
 													<c:otherwise>
@@ -246,7 +245,7 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header">Current Standings</h4>
+								<h4 class="card-header"><fmt:message key="div_head4" /></h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -313,7 +312,7 @@
 																	<td scope="row" style="text-align: center"><c:out
 																			value="${stand.rank}" /></td>
 																	<td scope="row"><a href="team?id=${stand.teamID}">
-																	${stand.teamName}</a></td>
+																			${stand.teamName}</a></td>
 																	<td style="text-align: center"><c:out
 																			value="${stand.gamesPlayed}" /></td>
 																	<td style="text-align: center"><c:out
@@ -346,7 +345,7 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header">Upcoming Games</h4>
+								<h4 class="card-header"><fmt:message key="div_head2" /></h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -359,7 +358,8 @@
 													key="div_head2_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head2_text4" /></th>
-											<th scope="col" style="text-align: center">Venue</th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="venue_head1" /></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -402,7 +402,7 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header">Recent Results</h4>
+								<h4 class="card-header"><fmt:message key="div_head4" /></h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -457,7 +457,7 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header">Team Statistics</h4>
+								<h4 class="card-header"><fmt:message key="div_head5" /></h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>

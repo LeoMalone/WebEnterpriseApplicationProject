@@ -76,12 +76,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown active"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -104,7 +102,8 @@
 							</div></li>
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login">Sign
+										In</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
@@ -162,22 +161,26 @@
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+													<fmt:message key="div_head4" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
+													<fmt:message key="div_head2" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
+													<fmt:message key="div_head3" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
+													<fmt:message key="div_head5" />
+												</a>
 											</c:forEach></li>
 									</ul>
 								</nav>
@@ -202,7 +205,7 @@
 													key="div_head2_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head2_text4" /></th>
-											<th scope="col" style="text-align: center">Venue</th>
+											<th scope="col" style="text-align: center"><fmt:message key="venue_head1" /></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -260,7 +263,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

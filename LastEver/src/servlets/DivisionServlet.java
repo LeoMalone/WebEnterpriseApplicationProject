@@ -21,6 +21,7 @@ public class DivisionServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
 		String language = null;
+		String newLang = null;
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -37,13 +38,14 @@ public class DivisionServlet extends HttpServlet {
 			response.addCookie(cookieLanguage);
 		}
 		else {
-
-			language = request.getParameter("language");
+			newLang = request.getParameter("language");
 			Cookie[] theCookies = request.getCookies();
 
 			for (Cookie tempCookie : theCookies) {
 				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
+					if (newLang != null)
+						tempCookie.setValue(newLang);
+					else
 						tempCookie.setValue(language);
 					response.addCookie(tempCookie);
 					break;
@@ -55,14 +57,18 @@ public class DivisionServlet extends HttpServlet {
 
 			List<NewsBean> nlb = new ArrayList<NewsBean>();
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getNews(id, nlb, language);	
+			if(newLang != null)
+				Division.getNews(id, nlb, newLang);
+			else
+				Division.getNews(id, nlb, language);	
 			Division.getAllDivisions(dlb);
-			
+
 			request.setAttribute("allDiv", dlb);
-			
+
 			dlb = new ArrayList<DivisionBean>();	
 			Division.getSpecificDivision(dlb, id);
 
+			
 			request.setAttribute("currDiv", dlb);
 			request.setAttribute("news", nlb);	
 			request.setAttribute("userName", userName);

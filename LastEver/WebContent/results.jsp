@@ -159,22 +159,26 @@
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="standings?id=${row.divisionId}">
-													Standings </a>
+													<fmt:message key="div_head4" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													Schedule </a>
+													<fmt:message key="div_head2" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="results?id=${row.divisionId}">
-													Results </a>
+													<fmt:message key="div_head3" />
+												</a>
 											</c:forEach></li>
 										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													Statistics </a>
+													<fmt:message key="div_head5" />
+												</a>
 											</c:forEach></li>
 									</ul>
 								</nav>
@@ -226,18 +230,19 @@
 													<tr>
 														<td colspan="2"><b>Home Scorers</b> <br> <c:choose>
 																<c:when test="${res.homeScore eq 0}">
-																	No Scorers
+																	<fmt:message key="div_no_scorers" />
 																</c:when>
 																<c:otherwise>
 																	<c:forEach items="${res.homeScorer}" var="hs">
 																		<c:if test="${hs.goals eq 1}">
-																			<a href="player?id=${hs.ID}">${hs.name}</a><br>
+																			<a href="player?id=${hs.ID}">${hs.name}</a>
+																			<br>
 																		</c:if>
 																		<c:if test="${hs.goals gt 1}">
 																			<a href="player?id=${hs.ID}">${hs.name}</a> 
 																			(<c:out value="${hs.goals}" />) 
 																<br>
-																</c:if>
+																		</c:if>
 																	</c:forEach>
 																</c:otherwise>
 															</c:choose></td>
@@ -245,17 +250,18 @@
 													<tr>
 														<td colspan="2"><b>Away Scorers</b> <br> <c:choose>
 																<c:when test="${res.awayScore eq 0}">
-																	No Scorers
+																	<fmt:message key="div_no_scorers" />
 																</c:when>
 																<c:otherwise>
 																	<c:forEach items="${res.awayScorer}" var="as">
 																		<c:if test="${as.goals eq 1}">
-																			<a href="player?id=${hs.ID}">${as.name}</a><br>
+																			<a href="player?id=${hs.ID}">${as.name}</a>
+																			<br>
 																		</c:if>
 																		<c:if test="${as.goals gt 1}">
 																			<a href="player?id=${as.ID}">${as.name}</a> 
 																(<c:out value="${as.goals}" />)<br>
-																</c:if>
+																		</c:if>
 																	</c:forEach>
 																</c:otherwise>
 															</c:choose></td>
@@ -286,7 +292,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <c:choose>
 			<c:when test="${empty venue}">
-				Venue
+				<fmt:message key="venue_head1" />
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${venue}" var="v">
@@ -140,7 +140,7 @@
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty venue}">
-							Venue
+							<fmt:message key="venue_head1" />
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${venue}" var="v">
@@ -156,7 +156,7 @@
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty venue}">
-									No venue information
+										<fmt:message key="venue_no_info" />
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${venue}" var="v">
@@ -167,88 +167,71 @@
 												</center>
 											</c:if>
 											<table>
-												<c:choose>
-													<c:when test="${empty v.venueAbout}">
-														<tr>
-															<td><b>About Venue</b></td>
-															<td>No description given</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>About Venue</b></td>
+												<tr>
+													<td><b><fmt:message key="venue_about" /></b></td>
+													<c:choose>
+														<c:when test="${empty v.venueAbout}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${v.venueAbout}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty v.venueContact}">
-														<tr>
-															<td><b>Contact</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Contact</b></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="venue_contact" /></b></td>
+													<c:choose>
+														<c:when test="${empty v.venueContact}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${v.venueContact}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty v.venuePhoneNumber}">
-														<tr>
-															<td><b>Phone Number</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Phone Number</b></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="venue_phone_number" /></b></td>
+													<c:choose>
+														<c:when test="${empty v.venuePhoneNumber}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><a
 																href="tel:+<c:out value="${v.venuePhoneNumber}" />">
 																	<c:out value="${v.venuePhoneNumber}" />
 															</a></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty v.venueEmail}">
-														<tr>
-															<td><b>Email Address</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Email Address</b></td>
-															<td><a
-																href="mailto:<c:out value="${v.venueEmail}" />">
-																	Email Us</a></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<tr>
-													<c:choose>
-														<c:when test="${empty v.venueAddress}">
-															<tr>
-																<td><b>Address</b></td>
-																<td>No address available</td>
-															</tr>
-														</c:when>
-														<c:otherwise>
-															<tr>
-																<td><b>Address</b></td>
-																<td><c:out value="${v.address1}" /> <c:out
-																		value="${v.address2}" /> <br> <c:out
-																		value="${v.city}" />, <c:out value="${v.province}" />
-																	<c:out value="${v.country}" /><br> <c:out
-																		value="${v.postal}" /></td>
-															</tr>
 														</c:otherwise>
 													</c:choose>
 												<tr>
-													<td><b>Map</b></td>
+													<td><b><fmt:message key="venue_email" /></b></td>
+													<c:choose>
+														<c:when test="${empty v.venueEmail}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><a
+																href="mailto:<c:out value="${v.venueEmail}" />"> <fmt:message
+																		key="venue_email_us" /></a></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="venue_address" /></b></td>
+													<c:choose>
+														<c:when test="${empty v.venueAddress}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${v.address1}" /> <c:out
+																	value="${v.address2}" /> <br> <c:out
+																	value="${v.city}" />, <c:out value="${v.province}" />
+																<c:out value="${v.country}" /><br> <c:out
+																	value="${v.postal}" /></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="venue_map" /></b></td>
 													<td><div id="map"></div> <script>
 														function initMap() {
 															var map = new google.maps.Map(
@@ -388,7 +371,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

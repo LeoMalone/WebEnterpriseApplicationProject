@@ -168,7 +168,7 @@
 					<div class="col-lg-4">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header">Current Weather</h4>
+								<h4 class="card-header"><fmt:message key="home_head" /></h4>
 								<div id="openweathermap-widget-15"></div>
 								<script>
 									window.myWidgetParam ? window.myWidgetParam
