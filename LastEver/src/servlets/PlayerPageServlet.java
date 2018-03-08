@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.PlayerBean;
 import beans.StatisticsBean;
 import dao.Division;
@@ -61,10 +62,13 @@ public class PlayerPageServlet extends HttpServlet {
 
 			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
 			List<PlayerBean> plb = new ArrayList<PlayerBean>();
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 			
 			Player.getPlayerInfo(id, plb);
 			Statistics.getStatisticsWithPlayer(Player.getPlayerName(id), stlb);
-			
+			Division.getAllDivisions(dlb);
+
+			request.setAttribute("allDiv", dlb);
 			request.setAttribute("division", div);
 			request.setAttribute("player", plb);
 			request.setAttribute("team", team);

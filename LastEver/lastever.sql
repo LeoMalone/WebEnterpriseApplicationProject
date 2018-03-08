@@ -68,7 +68,7 @@ CREATE TABLE `gamestatistics` (
 
 LOCK TABLES `gamestatistics` WRITE;
 /*!40000 ALTER TABLE `gamestatistics` DISABLE KEYS */;
-INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,3,4,1,0,1),(14,3,7,1,0,0),(15,3,11,1,1,0),(16,3,1,1,0,0),(17,3,8,0,1,0),(18,3,9,0,0,0),(19,4,2,0,0,0),(20,4,3,3,0,0),(21,4,10,0,0,0),(22,4,5,0,0,0),(23,4,6,0,1,0),(24,4,12,1,0,0),(25,5,13,0,0,0),(26,5,17,0,1,0),(27,5,23,0,1,0),(28,5,15,2,1,0),(29,5,18,0,0,0),(30,5,21,0,0,0),(31,6,14,0,0,0),(32,6,20,1,0,0),(33,6,24,0,0,0),(34,6,16,0,0,0),(35,6,19,1,1,0),(36,6,22,1,0,1),(37,7,16,0,0,0),(38,7,19,0,0,0),(39,7,22,2,0,0),(40,7,15,1,1,0),(41,7,18,0,1,0),(42,7,21,1,0,0),(43,8,14,0,0,0),(44,8,20,0,0,0),(45,8,24,0,0,0),(46,8,13,0,0,0),(47,8,17,0,0,0),(48,8,23,0,1,0),(49,9,1,4,1,0),(50,9,8,1,0,0),(51,9,9,0,0,0),(52,9,2,1,2,1),(53,9,3,0,0,1),(54,9,10,2,0,0),(55,10,2,0,1,0),(56,10,3,1,0,0),(57,10,10,1,0,0),(58,10,4,0,0,0),(59,10,7,2,0,0),(60,10,11,2,0,0),(61,11,5,1,0,1),(62,11,6,1,0,0),(63,11,12,1,1,0),(64,11,8,1,0,0),(65,11,9,0,0,0),(66,11,1,1,1,0),(67,12,1,0,0,0),(68,12,8,0,0,0),(69,12,9,0,0,0),(70,12,4,1,2,1),(71,12,7,1,1,0),(72,12,11,0,0,1);
+INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(4,1,4,0,0,0),(5,1,7,0,2,1),(6,1,11,0,0,0),(7,2,5,0,0,0),(8,2,6,0,1,0),(9,2,12,1,0,0),(10,2,1,0,0,0),(11,2,8,1,0,0),(12,2,9,0,0,0),(13,3,4,1,0,1),(14,3,7,1,0,0),(15,3,11,1,1,0),(16,3,1,1,0,0),(17,3,8,0,1,0),(18,3,9,1,0,0),(19,4,2,0,0,0),(20,4,3,3,0,0),(21,4,10,0,0,0),(22,4,5,0,0,0),(23,4,6,0,1,0),(24,4,12,1,0,0),(25,5,13,0,0,0),(26,5,17,0,1,0),(27,5,23,0,1,0),(28,5,15,2,1,0),(29,5,18,1,0,0),(30,5,21,0,0,0),(31,6,14,0,0,0),(32,6,20,1,0,0),(33,6,24,0,0,0),(34,6,16,0,0,0),(35,6,19,1,1,0),(36,6,22,1,0,1),(37,7,16,0,0,0),(38,7,19,0,0,0),(39,7,22,2,0,0),(40,7,15,1,1,0),(41,7,18,0,1,0),(42,7,21,1,0,0),(43,8,14,0,0,0),(44,8,20,0,0,0),(45,8,24,0,0,0),(46,8,13,0,0,0),(47,8,17,0,0,0),(48,8,23,0,1,0),(49,9,1,4,1,0),(50,9,8,1,0,0),(51,9,9,0,0,0),(52,9,2,1,2,1),(53,9,3,0,0,1),(54,9,10,2,0,0),(55,10,2,0,1,0),(56,10,3,1,0,0),(57,10,10,0,1,0),(58,10,4,0,0,0),(59,10,7,2,0,0),(60,10,11,2,0,0),(61,11,5,1,0,1),(62,11,6,1,0,0),(63,11,12,1,1,0),(64,11,8,1,0,0),(65,11,9,0,0,0),(66,11,1,1,1,0),(67,12,1,0,0,0),(68,12,8,0,0,0),(69,12,9,0,0,0),(70,12,4,1,2,1),(71,12,7,1,1,0),(72,12,11,0,0,1);
 /*!40000 ALTER TABLE `gamestatistics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,9 +313,9 @@ SET character_set_client = utf8;
  1 AS `teamName`,
  1 AS `playerName`,
  1 AS `goals`,
- 1 AS `yellowCards`,
  1 AS `redCards`,
- 1 AS `id`*/;
+ 1 AS `id`,
+ 1 AS `playerID`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -354,7 +354,9 @@ SET character_set_client = utf8;
  1 AS `goals`,
  1 AS `yellowCards`,
  1 AS `redCards`,
- 1 AS `divisionID`*/;
+ 1 AS `divisionID`,
+ 1 AS `playerID`,
+ 1 AS `teamID`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -603,7 +605,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `scorers` AS select `a`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id` from ((((`schedule` `s` join `team` `a` on((`a`.`teamID` = `s`.`awayTeam`))) join `playerxteam` `pt` on((`pt`.`teamID` = `a`.`teamID`))) join `player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') */;
+/*!50001 VIEW `scorers` AS select `sc`.`teamName` AS `teamName`,`sc`.`playerName` AS `playerName`,`sc`.`goals` AS `goals`,`sc`.`redCards` AS `redCards`,`sc`.`id` AS `id`,`sc`.`playerID` AS `playerID` from (select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`homeTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') union all select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`awayTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final')) `sc` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -639,7 +641,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName`,`t`.`teamName` */;
+/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`td`.`divisionID` AS `divisionID`,`p`.`playerID` AS `playerID`,`t`.`teamID` AS `teamID` from ((((`gamestatistics` `g` join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) group by `playerName`,`t`.`teamName` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -653,4 +655,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-07 23:17:48
+-- Dump completed on 2018-03-08 12:39:24

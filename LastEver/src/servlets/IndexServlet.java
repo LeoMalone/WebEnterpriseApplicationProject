@@ -43,8 +43,9 @@ public class IndexServlet extends HttpServlet {
 
 			for (Cookie tempCookie : theCookies) {
 				if ("language".equals(tempCookie.getName())) {
-					if (language != null)
+					if (language != null) {
 						tempCookie.setValue(language);
+					}
 					response.addCookie(tempCookie);
 					break;
 				}

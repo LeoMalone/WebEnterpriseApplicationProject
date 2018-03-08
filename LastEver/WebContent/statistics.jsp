@@ -155,7 +155,7 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
+										<li class="nav-item"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="division?id=${row.divisionId}">
 													<c:out value="${row.divisionName}" />
@@ -176,7 +176,7 @@
 												<a class="nav-link" href="results?id=${row.divisionId}">
 													Results </a>
 											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
+										<li class="nav-item active"><c:forEach var="row"
 												items="${currDiv}">
 												<a class="nav-link" href="statistics?id=${row.divisionId}">
 													Statistics </a>
@@ -223,8 +223,8 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:out
 																value="${stats.rank}" /></td>
-														<td scope="row"><c:out value="${stats.teamName}" /></td>
-														<td><c:out value="${stats.name}" /></td>
+														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
+														<td><a href="player?id=${stats.playerID}">${stats.name}</a></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out

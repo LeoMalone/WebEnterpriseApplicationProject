@@ -304,7 +304,7 @@
 											<c:otherwise>
 												<c:forEach items="${statistics}" var="stats">
 													<tr>
-														<td scope="row"><c:out value="${stats.teamName}" /></td>
+														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
 														<td><c:out value="${stats.name}" /></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>

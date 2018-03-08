@@ -32,11 +32,12 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '')"
-					+ " as away, v.venueName from schedule s inner join team h on h.teamID = s.homeTeam inner join "
-					+ "team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID "
-					+ "inner join venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID"
-					+ " where td.divisionID = ? and s.gameStatus = 'Scheduled'");
+			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
+					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join venuexgame vg on s.gameID"
+					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
+					+ " s.gameStatus = 'Scheduled'");
 			getSchedule.setString(1, id);
 			resultSet = getSchedule.executeQuery();
 			status = resultSet.next();
@@ -48,8 +49,11 @@ public class ScheduleResults {
 				sb.setDate(resultSet.getDate(1));
 				sb.setTime(resultSet.getTime(2));
 				sb.setHomeTeam(resultSet.getString(3));
-				sb.setAwayTeam(resultSet.getString(4));
-				sb.setVenue(resultSet.getString(5));
+				sb.setHomeID(resultSet.getString(4));
+				sb.setAwayTeam(resultSet.getString(5));
+				sb.setAwayID(resultSet.getString(6));
+				sb.setVenue(resultSet.getString(7));
+				sb.setVenueID(resultSet.getString(8));
 				sched.add(sb);
 			}
 
@@ -92,11 +96,11 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '')"
-					+ " as away, v.venueName from schedule s inner join team h on h.teamID = s.homeTeam inner join "
-					+ "team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID "
-					+ "inner join venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID"
-					+ " where td.divisionID = ? and s.gameStatus = 'Scheduled' and v.venueID=?");
+			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
+					+ " concat(a.teamName, '') as away, s.awayTeam, from schedule s inner join team h on h.teamID"
+					+ " = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on"
+					+ " td.teamID = h.teamID inner join venuexgame vg on s.gameID = vg.gameID inner join venue"
+					+ " v on vg.venueID = v.venueIDwhere td.divisionID = ? and s.gameStatus = 'Scheduled' and v.venueID=?");
 			getSchedule.setString(1, div);
 			getSchedule.setString(2, venue);
 			resultSet = getSchedule.executeQuery();
@@ -109,7 +113,9 @@ public class ScheduleResults {
 				sb.setDate(resultSet.getDate(1));
 				sb.setTime(resultSet.getTime(2));
 				sb.setHomeTeam(resultSet.getString(3));
-				sb.setAwayTeam(resultSet.getString(4));
+				sb.setHomeID(resultSet.getString(4));
+				sb.setAwayTeam(resultSet.getString(5));
+				sb.setAwayID(resultSet.getString(6));
 				sched.add(sb);
 			}
 
@@ -152,11 +158,13 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, concat(a.teamName, '')"
-					+ " as away, v.venueName from schedule s inner join team h on h.teamID = s.homeTeam inner join "
-					+ "team a on a.teamID = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID "
-					+ "inner join venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID"
-					+ " where td.divisionID = ? and s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
+			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
+					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join venuexgame vg on s.gameID"
+					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
+					+ " s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
+			
 			getSchedule.setString(1, div);
 			getSchedule.setString(2, team);
 			getSchedule.setString(3, team);
@@ -170,8 +178,11 @@ public class ScheduleResults {
 				sb.setDate(resultSet.getDate(1));
 				sb.setTime(resultSet.getTime(2));
 				sb.setHomeTeam(resultSet.getString(3));
-				sb.setAwayTeam(resultSet.getString(4));
-				sb.setVenue(resultSet.getString(5));
+				sb.setHomeID(resultSet.getString(4));
+				sb.setAwayTeam(resultSet.getString(5));
+				sb.setAwayID(resultSet.getString(6));
+				sb.setVenue(resultSet.getString(7));
+				sb.setVenueID(resultSet.getString(8));
 				sched.add(sb);
 			}
 
@@ -277,10 +288,11 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getResults = conn.prepareStatement("select s.gameDate, h.teamName, s.homeScore, concat(a.teamName, '')"
-					+ " as away, s.awayScore, s.gameStatus, s.gameID from schedule s inner join team h on h.teamID = "
-					+ "s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on "
-					+ "td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Final'");
+			getResults = conn.prepareStatement("select s.gameDate, h.teamName, s.homeTeam, s.homeScore,"
+					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID"
+					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
+					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = ?"
+					+ " and s.gameStatus = 'Final'");
 			getResults.setString(1, id);
 			resultSet = getResults.executeQuery();
 			status = resultSet.next();
@@ -293,13 +305,15 @@ public class ScheduleResults {
 				List<ScorerBean> alb = new ArrayList<ScorerBean>();
 				srb.setDate(resultSet.getDate(1));
 				srb.setHomeTeam(resultSet.getString(2));
-				srb.setHomeScore(resultSet.getInt(3));
-				srb.setAwayTeam(resultSet.getString(4));
-				srb.setAwayScore(resultSet.getInt(5));
-				srb.setStatus(resultSet.getString(6));
-				getHomeScorers(resultSet.getString(7), resultSet.getString(2), hlb);
+				srb.setHomeID(resultSet.getString(3));
+				srb.setHomeScore(resultSet.getInt(4));
+				srb.setAwayTeam(resultSet.getString(5));
+				srb.setAwayID(resultSet.getString(6));
+				srb.setAwayScore(resultSet.getInt(7));
+				srb.setStatus(resultSet.getString(8));
+				getHomeScorers(resultSet.getString(9), resultSet.getString(2), hlb);
 				srb.setHomeScorer(hlb);
-				getAwayScorers(resultSet.getString(7), resultSet.getString(4), alb);
+				getAwayScorers(resultSet.getString(9), resultSet.getString(5), alb);
 				srb.setAwayScorer(alb);
 				sched.add(srb);
 			}
@@ -343,7 +357,7 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerName, goals from scorers where teamName=? and "
+			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and "
 					+ "id=? group by id, playerName");
 			getScorers.setString(1, home);
 			getScorers.setString(2, id);
@@ -354,8 +368,9 @@ public class ScheduleResults {
 
 			while(resultSet.next()) {
 				ScorerBean sb = new ScorerBean();
-				sb.setName(resultSet.getString(1));
-				sb.setGoals(resultSet.getInt(2));
+				sb.setID(resultSet.getString(1));
+				sb.setName(resultSet.getString(2));
+				sb.setGoals(resultSet.getInt(3));
 				hb.add(sb);
 			}
 
@@ -398,7 +413,7 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerName, goals from scorers where teamName=? and"
+			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and"
 					+ " id=? group by id, playerName");
 
 			getScorers.setString(1, away);
@@ -410,8 +425,9 @@ public class ScheduleResults {
 
 			while(resultSet.next()) {
 				ScorerBean sb = new ScorerBean();
-				sb.setName(resultSet.getString(1));
-				sb.setGoals(resultSet.getInt(2));
+				sb.setID(resultSet.getString(1));
+				sb.setName(resultSet.getString(2));
+				sb.setGoals(resultSet.getInt(3));
 				ab.add(sb);
 			}
 

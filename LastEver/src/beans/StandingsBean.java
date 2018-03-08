@@ -17,6 +17,7 @@ public class StandingsBean {
 	private int goalsFor;
 	private int goalsAgainst;
 	private int goalDiff;
+	private String teamID;
 
 /**************************** CONTRUCTORS *****************************/	
 	public StandingsBean() {
@@ -76,6 +77,10 @@ public class StandingsBean {
 		return this.goalDiff;
 	}
 	
+	public String getTeamID() {
+		return this.teamID;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setRank(int r) {
 		this.rank = r;
@@ -115,5 +120,9 @@ public class StandingsBean {
 	
 	public void setGoalDiff(int gd) {
 		this.goalDiff = gd;
+	}
+	
+	public void setTeamID(String tID) {
+		this.teamID = tID;
 	}
 }
