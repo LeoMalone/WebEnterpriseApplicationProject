@@ -120,6 +120,7 @@
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
 					<div class="row">
+						<!-- 1st Card -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -135,6 +136,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- 2nd Card -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -148,6 +150,83 @@
 								<div class="card-footer bg-transparent">
 								 	<a href="./refAssignments?=${id}" class="btn btn-outline-light">Go To Your Assignments</a>
 								</div>
+							</div>
+						</div>
+						<!-- NEW - 3rd Card  -->
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-black bg-dark">
+								<h4 class="card-header">
+									<font color="white"> ${userName}'s *** Status</font>
+								</h4>
+								<div class="card-body">
+									<ul class="list-group">
+									  <li class="list-group-item d-flex justify-content-between align-items-center">
+									    Upcoming Games
+									    <span class="badge badge-primary badge-pill">14</span>
+									  </li>
+									  <li class="list-group-item d-flex justify-content-between align-items-center">
+									    Pending Games Result(s)
+									    <span class="badge badge-primary badge-pill">2</span>
+									  </li>
+									  <li class="list-group-item d-flex justify-content-between align-items-center">
+									    Admin Notification(s)
+									    <span class="badge badge-primary badge-pill">1</span>
+									  </li>
+									</ul>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./refAssignments?=${id}" class="btn btn-outline-light">Open Notifications</a>
+								</div>
+							</div>
+						</div>
+						<!-- NEW - 4th Card -->
+						<div class="col-lg-12 mb-5 mt-5">
+							<div class="card h-100 text-white bg-dark">
+								<div class="card-body">
+									<h4 class="card-header"> Your Recent Games </h4>
+								 	<table class="table table-striped table-dark">
+									  <thead>
+									    <tr>
+									      <th scope="col">#</th>
+									      <th scope="col">Game ID#</th>
+									      <th scope="col">Home Team</th>
+									      <th scope="col">Home Team Goal</th>
+									      <th scope="col">Away Team</th>
+									      <th scope="col">Away Team Goal</th>
+									      <th scope="col">Result</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <tr>
+									      <th scope="row">1</th>
+									      <td>123</td>
+									      <td>Barcelona</td>
+									      <td>2</td>
+									      <td>Aesenal</td>
+									      <td>1</td>
+									      <td>Barcelona</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">2</th>
+									      <td>456</td>
+									      <td>Real Madrid</td>
+									      <td>3</td>
+									      <td>MC United</td>
+									      <td>2</td>
+									      <td>Real Madrid</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">3</th>
+									     <td>789</td>
+									      <td>PSG</td>
+									      <td>1</td>
+									      <td>AC Milan</td>
+									      <td>1</td>
+									      <td>Draw</td>
+									    </tr>
+									  </tbody>
+									</table>
+							 </div>							 		
 							</div>
 						</div>
 							

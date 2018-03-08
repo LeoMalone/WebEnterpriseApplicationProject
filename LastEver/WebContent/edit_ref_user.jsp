@@ -119,13 +119,13 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: Edit
+					${userName}: <fmt:message key="signin_prop3" /> Edit
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Edit User Credentials
+								<fmt:message key="signin_prop3" /> <fmt:message key="reg_head1" />
 							</h4>
 							<form action="editRefUser?=${user.id}" method="POST">
 							<div class="card-body">
@@ -135,27 +135,27 @@
 										<input type="text" class="form-control" name="editUsername" value="${userName}">
 									</div>
 									 <div class="form-group">
-									    <label for="newEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
+									    <label for="staticEmail"><fmt:message key="signin_email" /></label>
+									    <input type="email" readonly class="form-control-plaintext" name="editEmail" aria-describedby="emailHelp" value="administrator@example.com">
 									 </div>
 									 <div class="form-group">
 										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="editPass" value="${user.password}">
 									 </div>									 	
-									 <div class="form-check">
-									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>
+									 <div class="form-check disabled">
+									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''} disabled>
 									  <label class="form-check-label" for="editRadio">
 									    <fmt:message key="signin_prop1" />
 									  </label>									  
 									</div>
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''}>
+									<div class="form-check disabled">
+									  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''} disabled>
 									  <label class="form-check-label" for="editRadio">
 									    <fmt:message key="signin_prop2" />
 									  </label>
 									</div>
 									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''}>
+									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''} checked>
 									  <label class="form-check-label" for="editRadio">
 									    <fmt:message key="signin_prop3" />
 									  </label>
