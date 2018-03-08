@@ -452,12 +452,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>TeamServlet</servlet-name>
-		<servlet-class>servlets.TeamServlet</servlet-class>
+		<servlet-name>TeamPageServlet</servlet-name>
+		<servlet-class>servlets.TeamPageServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>TeamServlet</servlet-name>
+		<servlet-name>TeamPageServlet</servlet-name>
 		<url-pattern>/team</url-pattern>
 	</servlet-mapping>
 

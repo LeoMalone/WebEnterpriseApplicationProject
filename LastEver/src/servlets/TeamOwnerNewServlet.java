@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.DivisionBean;
 import beans.TeamBean;
 import dao.Division;
-import dao.TeamDao;
+import dao.Team;
 
 public class TeamOwnerNewServlet extends HttpServlet {
 
@@ -135,7 +135,7 @@ public class TeamOwnerNewServlet extends HttpServlet {
 				tb.setTeamAbbreviation(teamAbv);
 				tb.setDivisionId(divRadio);
 				
-				TeamDao.insertNewTeam(tb, userName, aboutTeam);
+				Team.insertNewTeam(tb, userName, aboutTeam);
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher(url);  

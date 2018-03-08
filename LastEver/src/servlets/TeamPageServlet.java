@@ -20,9 +20,9 @@ import dao.Division;
 import dao.ScheduleResults;
 import dao.Standings;
 import dao.Statistics;
-import dao.Team;
+import dao.TeamPage;
 
-public class TeamServlet extends HttpServlet {
+public class TeamPageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class TeamServlet extends HttpServlet {
 			}
 
 			String id = request.getParameter("id");
-			String div = Team.getTeamDivision(id);
+			String div = TeamPage.getTeamDivision(id);
 			
 			response.setContentType("text/html");
 
@@ -75,9 +75,9 @@ public class TeamServlet extends HttpServlet {
 			ScheduleResults.getScheduleWithTeam(id, div, srlb);
 			ScheduleResults.getResultsWithTeam(id, div, rlb);
 			Statistics.getStatisticsWithTeam(id, div, stlb);
-			Team.getTeamInfo(id, tlb);
+			TeamPage.getTeamInfo(id, tlb);
 			Division.getAllDivisions(dlb);
-			Team.getTeamOwner(id, ulb);
+			TeamPage.getTeamOwner(id, ulb);
 			
 			request.setAttribute("allDiv", dlb);
 			request.setAttribute("team", tlb);

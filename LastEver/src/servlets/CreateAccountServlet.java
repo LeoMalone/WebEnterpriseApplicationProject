@@ -16,7 +16,7 @@ import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
 import dao.Division;
-import dao.TeamDao;
+import dao.Team;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
@@ -88,7 +88,7 @@ public class CreateAccountServlet extends HttpServlet {
 					} else if (user.getUserType().equals("Referee")) {
 						url = "./referee";
 					} else if (user.getUserType().equals("Team Owner")) {
-						boolean hasTeam = TeamDao.hasTeam(newUsername);
+						boolean hasTeam = Team.hasTeam(newUsername);
 						if (!hasTeam){
 							url = "./teamCreateTeam";
 						}

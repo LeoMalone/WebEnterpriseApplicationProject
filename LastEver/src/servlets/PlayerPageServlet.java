@@ -15,7 +15,7 @@ import beans.StatisticsBean;
 import dao.Division;
 import dao.Player;
 import dao.Statistics;
-import dao.Team;
+import dao.TeamPage;
 
 public class PlayerPageServlet extends HttpServlet {
 
@@ -55,7 +55,7 @@ public class PlayerPageServlet extends HttpServlet {
 
 			String id = request.getParameter("id");
 			String div = Division.getPlayerDivision(id);
-			String team = Team.getPlayerTeam(id);
+			String team = TeamPage.getPlayerTeam(id);
 			
 			response.setContentType("text/html");
 

@@ -14,7 +14,7 @@ import beans.DivisionBean;
 import beans.TeamBean;
 import beans.UserBean;
 import dao.TeamCreateTeam;
-import dao.TeamDao;
+import dao.Team;
 import dao.Division;
 
 public class TeamCreateTeamServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		request.setAttribute("allDiv", dlb);
 
 		List<TeamBean> tb = new ArrayList<TeamBean>();
-		TeamDao.getAllTeams(tb);
+		Team.getAllTeams(tb);
 		request.setAttribute("allTeam", tb);
 
 		if (request.getSession().getAttribute("signedIn") == null) {
@@ -71,7 +71,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 				}
 
 				request.setAttribute("userName", userName);
-				if (TeamDao.hasTeam(userName)) {
+				if (Team.hasTeam(userName)) {
 					response.sendRedirect("teamowner");
 				}
 				else {
@@ -95,7 +95,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		String language = null;
 		String teamName = request.getParameter("selectTeam");
 		
-		if (TeamDao.hasTeam(userName)) {
+		if (Team.hasTeam(userName)) {
 			response.sendRedirect("login");
 		}
 		

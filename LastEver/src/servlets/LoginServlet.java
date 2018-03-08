@@ -17,7 +17,7 @@ import beans.DivisionBean;
 import beans.UserBean;
 import dao.Division;
 import dao.Login;
-import dao.TeamDao;
+import dao.Team;
 
 /**
  * The LoginServlet class handles the POST from /login to login a user
@@ -115,7 +115,7 @@ public class LoginServlet extends HttpServlet {
 				} else if(user.getUserType().equals("Referee")) {
 					url = "./referee";
 				} else if(user.getUserType().equals("Team Owner")) {
-					boolean hasTeam = TeamDao.hasTeamByEmail(loginEmail);
+					boolean hasTeam = Team.hasTeamByEmail(loginEmail);
 					if (!hasTeam){
 						url = "./teamCreateTeam";
 					}
