@@ -123,6 +123,9 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 				else {
 					url = "teamowner";
 				}
+				
+				TeamBean tb = new TeamBean();
+				TeamDao.insertTeamByUser(tb, teamName, userName);
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher(url);  

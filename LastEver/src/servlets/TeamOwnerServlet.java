@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
 import beans.TeamBean;
-import beans.UserBean;
 import dao.Division;
-import dao.EditTeamUser;
-import dao.TeamScheduleResults;
+import dao.TeamDao;
 
 public class TeamOwnerServlet extends HttpServlet {
 
@@ -64,8 +62,11 @@ public class TeamOwnerServlet extends HttpServlet {
 					}
 				}		
 
-				TeamBean tb = new TeamBean();
-				String teamName = TeamScheduleResults.getTeamName(tb, userName);
+				String teamName = (String) request.getAttribute("teamName");
+				if (teamName == null) {
+					TeamBean tb = new TeamBean();
+					teamName = TeamDao.getTeamName(tb, userName);
+				}
 				
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
