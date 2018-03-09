@@ -105,51 +105,7 @@ public class Division {
 		}
 		return status;
 	}
-	
-	
-	public static String getPlayerDivision(String pID) {
-
-		String divName = null;
-		Connection conn = null;					// DB Connection
-		PreparedStatement playerDiv = null;
-		ResultSet rs = null;
-
-		// Connect to Database 
-		try {
-			conn = ConnectionManager.getConnection();
-			playerDiv = conn.prepareStatement("select divisionName from division d inner join teamxdivision td"
-					+ " on td.divisionID = d.divisionID inner join team t on t.teamID = td.teamID inner join"
-					+ " playerxteam pt on pt.teamID = t.teamID inner join player p on p.playerID = pt.playerID"
-					+ " where p.playerID = ?");
-			playerDiv.setString(1, pID);
-			rs = playerDiv.executeQuery();
-
-			while(rs.next()) {
-				divName = rs.getString(1);
-			}
-
-		// Catch all possible Exceptions
-		} catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (playerDiv != null) {
-				try {
-					playerDiv.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}	    
-		return divName;
-	}
-	
+		
 	public static boolean getAllDivisions(List<DivisionBean> divisionList) {
 
 		boolean status = false;					// Status of createNewUser

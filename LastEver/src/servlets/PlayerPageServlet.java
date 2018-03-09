@@ -16,7 +16,6 @@ import beans.StatisticsBean;
 import dao.Division;
 import dao.Player;
 import dao.Statistics;
-import dao.TeamPage;
 
 public class PlayerPageServlet extends HttpServlet {
 
@@ -55,9 +54,6 @@ public class PlayerPageServlet extends HttpServlet {
 			}
 
 			String id = request.getParameter("id");
-			String div = Division.getPlayerDivision(id);
-			String team = TeamPage.getPlayerTeam(id);
-			
 			response.setContentType("text/html");
 
 			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
@@ -65,13 +61,11 @@ public class PlayerPageServlet extends HttpServlet {
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 			
 			Player.getPlayerInfo(id, plb);
-			Statistics.getStatisticsWithPlayer(Player.getPlayerName(id), stlb);
+			Statistics.getStatisticsWithPlayer(id, stlb);
 			Division.getAllDivisions(dlb);
 
 			request.setAttribute("allDiv", dlb);
-			request.setAttribute("division", div);
 			request.setAttribute("player", plb);
-			request.setAttribute("team", team);
 			request.setAttribute("statistics", stlb);
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("/player.jsp?id=" + id);  

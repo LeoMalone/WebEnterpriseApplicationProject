@@ -158,32 +158,35 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item active"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="division?id=${row.divisionId}">
-													<c:out value="${row.divisionName}" />
-												</a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="standings?id=${row.divisionId}">
-													<fmt:message key="div_head4" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													<fmt:message key="div_head2" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="results?id=${row.divisionId}">
-													<fmt:message key="div_head3" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													<fmt:message key="div_head5" /> </a>
-											</c:forEach></li>
+										<c:choose>
+											<c:when test="${empty currDiv }">
+												Division
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="row" items="${currDiv}">
+													<li class="nav-item active"><a class="nav-link"
+														href="division?id=${row.divisionId}"> <c:out
+																value="${row.divisionName}" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="standings?id=${row.divisionId}"> <fmt:message
+																key="div_head4" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="schedule?id=${row.divisionId}"> <fmt:message
+																key="div_head2" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="results?id=${row.divisionId}"> <fmt:message
+																key="div_head3" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="statistics?id=${row.divisionId}"> <fmt:message
+																key="div_head5" />
+													</a></li>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</ul>
 								</nav>
 							</div>
@@ -194,9 +197,13 @@
 							<div class="col-lg-12 mb-5 mt-5">
 								<div class="card">
 
-									<h4 class="card-header">No News</h4>
-									<div class="card-body"></div>
-									<b style="text-align: center">No News to be found!</b>
+									<h4 class="card-header">
+										<fmt:message key="news_no_news" />
+									</h4>
+									<div class="card-body">
+										<b style="text-align: center"><fmt:message
+												key="news_no_news_message" /></b>
+									</div>
 									<!-- /.row -->
 								</div>
 							</div>
@@ -237,7 +244,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

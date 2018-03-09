@@ -343,8 +343,8 @@
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${sched.time}" />
 															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
+														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

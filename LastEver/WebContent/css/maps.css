@@ -1,6 +1,7 @@
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-	height: 500px;
-	width: 500px;
+	height: 400px;
+	width: 100%;
+	max-width: 400px;
 }

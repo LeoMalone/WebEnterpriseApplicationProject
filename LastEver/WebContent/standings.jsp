@@ -151,32 +151,35 @@
 							<div class="card-body">
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="division?id=${row.divisionId}">
-													<c:out value="${row.divisionName}" />
-												</a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="standings?id=${row.divisionId}">
-													<fmt:message key="div_head4" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="schedule?id=${row.divisionId}">
-													<fmt:message key="div_head2" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="results?id=${row.divisionId}">
-													<fmt:message key="div_head3" /> </a>
-											</c:forEach></li>
-										<li class="nav-item"><c:forEach var="row"
-												items="${currDiv}">
-												<a class="nav-link" href="statistics?id=${row.divisionId}">
-													<fmt:message key="div_head5" /> </a>
-											</c:forEach></li>
+										<c:choose>
+											<c:when test="${empty currDiv }">
+												Division
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="row" items="${currDiv}">
+													<li class="nav-item"><a class="nav-link"
+														href="division?id=${row.divisionId}"> <c:out
+																value="${row.divisionName}" />
+													</a></li>
+													<li class="nav-item active"><a class="nav-link"
+														href="standings?id=${row.divisionId}"> <fmt:message
+																key="div_head4" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="schedule?id=${row.divisionId}"> <fmt:message
+																key="div_head2" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="results?id=${row.divisionId}"> <fmt:message
+																key="div_head3" />
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														href="statistics?id=${row.divisionId}"> <fmt:message
+																key="div_head5" />
+													</a></li>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</ul>
 								</nav>
 							</div>

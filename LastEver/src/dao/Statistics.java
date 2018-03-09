@@ -179,7 +179,7 @@ public class Statistics {
 		return status;
 	}
 	
-	public static boolean getStatisticsWithPlayer(String pName, List<StatisticsBean> statistics) { 
+	public static boolean getStatisticsWithPlayer(String pID, List<StatisticsBean> statistics) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -189,9 +189,9 @@ public class Statistics {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards, s.teamID from statistics s where s.playerName = ? group by s.teamName");
-			getStatistics.setString(1, pName);
+			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
+					+ " redCards, teamID from statistics where playerID = ? group by teamName");
+			getStatistics.setString(1, pID);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
 

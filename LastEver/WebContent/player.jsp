@@ -31,11 +31,11 @@
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <c:choose>
 			<c:when test="${empty player}">
-				Player
+				<fmt:message key="player" />
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${player}" var="p">
-					<c:out value="${p.playerFirstName}" /> 
+					<c:out value="${p.playerFirstName}" />
 					<c:out value="${p.playerLastName}" />
 				</c:forEach>
 			</c:otherwise>
@@ -141,11 +141,11 @@
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty player}">
-							Player
+							<fmt:message key="player" />
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${player}" var="p">
-								<c:out value="${p.playerFirstName}" /> 
+								<c:out value="${p.playerFirstName}" />
 								<c:out value="${p.playerLastName}" />
 							</c:forEach>
 						</c:otherwise>
@@ -158,7 +158,7 @@
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty player}">
-									No player information
+										<fmt:message key="player_no_info" />
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${player}" var="p">
@@ -166,107 +166,90 @@
 												<center>
 													<img src="${p.playerPhoto}"
 														style="width: 100%; max-width: 500px; height: auto" />
-												</center> 
+												</center>
 											</c:if>
 											<table>
-												<c:choose>
-													<c:when test="${empty team}">
-														<tr>
-															<td><b>Current Team</b></td>
-															<td>Not on a team</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Current Team</b></td>
-															<td><c:out value="${team}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty division}">
-														<tr>
-															<td><b>Division</b></td>
-															<td>No division</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Division</b></td>
-															<td><c:out value="${division}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty p.playerNumber}">
-														<tr>
-															<td><b>Player Number</b></td>
-															<td>No number</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Player Number</b></td>
+												<tr>
+													<td><b><fmt:message key="player_current_team" /></b></td>
+													<c:choose>
+														<c:when test="${empty p.teamName}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${p.teamName}" /></td>
+
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_division" /></b></td>
+													<c:choose>
+														<c:when test="${empty p.divisionName}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${p.divisionName}" /></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_number" /></b></td>
+													<c:choose>
+														<c:when test="${empty p.playerNumber}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td>#<c:out value="${p.playerNumber}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty p.playerPosition}">
-														<tr>
-															<td><b>Player Position</b></td>
-															<td>No position</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Player Position</b></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_position" /></b></td>
+													<c:choose>
+														<c:when test="${empty p.playerPosition}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${p.playerPosition}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${empty p.playerCountry}">
-														<tr>
-															<td><b>Country</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Country</b></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_country" /></b></td>
+													<c:choose>
+														<c:when test="${empty p.playerCountry}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${p.playerCountry}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${p.playerHeight eq 0.0}">
-														<tr>
-															<td><b>Height</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Height</b></td>
-															<td><c:out value="${p.playerHeight}" /> cm</td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-												<c:choose>
-													<c:when test="${p.playerWeight eq 0.0}">
-														<tr>
-															<td><b>Weight</b></td>
-															<td>Not Available</td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Weight</b></td>
-															<td><c:out value="${p.playerWeight}" /> kg</td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
+
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_height" /></b></td>
+													<c:choose>
+														<c:when test="${p.playerHeight eq 0.0}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><fmt:formatNumber value="${p.playerHeight}"
+																	groupingUsed="true" /> cm</td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="player_weight" /></b></td>
+													<c:choose>
+														<c:when test="${p.playerWeight eq 0.0}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><fmt:formatNumber value="${p.playerWeight}"
+																	groupingUsed="true" /> kg</td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
 											</table>
 										</c:forEach>
 									</c:otherwise>
@@ -340,7 +323,10 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

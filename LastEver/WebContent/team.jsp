@@ -31,7 +31,7 @@
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <c:choose>
 			<c:when test="${empty team}">
-				Team
+				<fmt:message key="team_head" />
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${team}" var="t">
@@ -140,7 +140,7 @@
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty team}">
-									Team
+									<fmt:message key="team_head" />
 									</c:when>
 						<c:otherwise>
 							<c:forEach items="${team}" var="t">
@@ -163,27 +163,23 @@
 											<c:if test="${not empty t.teamLogo }">
 												<center>
 													<img src="${t.teamLogo}"
-														style="width: 100%; max-width: 500px; height: auto" />
+														style="width: 100%; max-width: 300px; height: auto" />
 												</center>
 											</c:if>
 											<table>
-												<c:choose>
-													<c:when test="${empty t.teamAbout}">
-														<tr>
-															<td><b>About Team</b></td>
-															<td><fmt:message key="not_available" /></td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>About Team</b></td>
-															<td><c:out value="${t.teamAbout}" escapeXml="false" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
-
 												<tr>
-													<td><b>Division</b></td>
+													<td><b><fmt:message key="team_about" /></b></td>
+													<c:choose>
+														<c:when test="${empty t.teamAbout}">
+															<td><fmt:message key="not_available" /></td>
+														</c:when>
+														<c:otherwise>
+															<td><c:out value="${t.teamAbout}" escapeXml="false" /></td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+												<tr>
+													<td><b><fmt:message key="team_division" /></b></td>
 													<c:choose>
 														<c:when test="${empty t.divisionName}">
 															<td><fmt:message key="not_available" /></td>
@@ -193,44 +189,40 @@
 														</c:otherwise>
 													</c:choose>
 												</tr>
-
-												<c:choose>
-													<c:when test="${empty t.teamAbbreviation}">
-														<tr>
-															<td><b>Abbreviation</b></td>
+												<tr>
+													<td><b><fmt:message key="team_abbreviation" /></b></td>
+													<c:choose>
+														<c:when test="${empty t.teamAbbreviation}">
 															<td><fmt:message key="not_available" /></td>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td><b>Abbreviation</b></td>
+														</c:when>
+														<c:otherwise>
 															<td><c:out value="${t.teamAbbreviation}" /></td>
-														</tr>
-													</c:otherwise>
-												</c:choose>
+														</c:otherwise>
+													</c:choose>
+												</tr>
 												<c:choose>
 													<c:when test="${empty teamowner}">
 														<tr>
-															<td><b>Team Owner</b></td>
+															<td><b><fmt:message key="team_owner" /></b></td>
 															<td><fmt:message key="not_available" /></td>
 														</tr>
 														<tr>
-															<td><b>Contact</b></td>
+															<td><b><fmt:message key="team_contact" /></b></td>
 															<td><fmt:message key="not_available" /></td>
 														</tr>
 													</c:when>
 													<c:otherwise>
 														<c:forEach items="${teamowner}" var="to">
 															<tr>
-																<td><b>Team Owner</b></td>
+																<td><b><fmt:message key="team_owner" /></b></td>
 																<td><c:out value="${to.firstName}" /> <c:out
 																		value="${to.lastName}" /></td>
 															</tr>
 															<tr>
-																<td><b>Contact</b></td>
+																<td><b><fmt:message key="team_contact" /></b></td>
 																<td><a
 																	href="mailto:<c:out value="${to.emailAddress}" />">
-																		Contact Team Owner</a></td>
+																		<fmt:message key="team_contact_owner" /></a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>
@@ -245,7 +237,9 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header"><fmt:message key="div_head4" /></h4>
+								<h4 class="card-header">
+									<fmt:message key="div_head4" />
+								</h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -345,7 +339,9 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header"><fmt:message key="div_head2" /></h4>
+								<h4 class="card-header">
+									<fmt:message key="div_head2" />
+								</h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -402,7 +398,9 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header"><fmt:message key="div_head4" /></h4>
+								<h4 class="card-header">
+									<fmt:message key="div_head4" />
+								</h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
@@ -457,7 +455,9 @@
 					<div class="col-lg-12 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-header"><fmt:message key="div_head5" /></h4>
+								<h4 class="card-header">
+									<fmt:message key="div_head5" />
+								</h4>
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>

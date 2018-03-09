@@ -24,7 +24,7 @@ public class Venue {
 		
 		boolean status = false;					// query status
 	    Connection conn = null;					// DB connection
-	    PreparedStatement getVenue = null;	// SQL query
+	    PreparedStatement getVenue = null;		// SQL query
 	    ResultSet resultSet = null;				// returned query result set
 	
 	    // Connect to Database and execute SELECT query with UserBean data

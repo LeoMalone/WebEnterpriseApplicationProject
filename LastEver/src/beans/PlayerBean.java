@@ -16,6 +16,8 @@ public class PlayerBean {
 	private float playerHeight;
 	private float playerWeight;
 	private String playerPhoto;
+	private String divisionName;
+	private String teamName;
 
 /**************************** CONTRUCTORS *****************************/	
 	public PlayerBean() {
@@ -65,6 +67,14 @@ public class PlayerBean {
 		return this.playerPhoto;
 	}
 	
+	public String getDivisionName() {
+		return this.divisionName;
+	}
+	
+	public String getTeamName() {
+		return this.teamName;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setId(String id) {
 		this.id = id;
@@ -100,5 +110,13 @@ public class PlayerBean {
 	
 	public void setPlayerPhoto(String ph) {
 		this.playerPhoto = ph;
+	}
+
+	public void setDivisionName(String dn) {
+		this.divisionName = dn;	
+	}
+	
+	public void setTeamName(String tn) {
+		this.teamName = tn;	
 	}
 }
