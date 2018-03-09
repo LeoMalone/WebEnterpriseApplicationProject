@@ -72,7 +72,7 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message key="nav_divisions" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -92,8 +92,7 @@
 
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign
-										In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								
@@ -108,10 +107,10 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
-								<a class="dropdown-item" href="teamRoster">View Roster</a>
-								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
-								<a class="dropdown-item" href="logout" method="post">Logout</a>
+								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
+								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
+								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								
 							</c:otherwise>
@@ -142,7 +141,8 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}'s Schedule
+					${teamName}:<br />
+					<fmt:message key="team_view_schedule1" />
 				</h1>				
 									<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
@@ -162,7 +162,7 @@
 													key="div_head2_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head2_text4" /></th>
-											<th scope="col" style="text-align: center">Venue</th>
+											<th scope="col" style="text-align: center"><fmt:message key="team_view_schedule2" /></th>
 										</tr>
 									</thead>
 									<tbody>

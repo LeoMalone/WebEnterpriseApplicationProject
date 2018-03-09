@@ -70,7 +70,7 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message key="nav_divisions" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -89,8 +89,7 @@
 							</div></li>
 												<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign
-										In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								
@@ -105,10 +104,10 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
-								<a class="dropdown-item" href="teamRoster">View Roster</a>
-								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
-								<a class="dropdown-item" href="logout" method="post">Logout</a>
+								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
+								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
+								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								
 							</c:otherwise>
@@ -140,8 +139,8 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}: 
-					<fmt:message key="signin_prop2"/> Control Panel
+					${teamName}:<br /> 
+					<fmt:message key="signin_prop2"/> <fmt:message key="team_signedin_home1"/>
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -149,15 +148,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Team Roster
+									<fmt:message key="team_signedin_home2"/>
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View Players on Team Roster
+										<fmt:message key="team_signedin_home3"/>
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster?id=${userName}" class="btn btn-outline-light">Go To Roster</a>
+								 	<a href="./teamRoster" class="btn btn-outline-light"><fmt:message key="team_signedin_home4"/></a>
 								</div>
 							</div>
 						</div>
@@ -181,15 +180,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Team Schedule
+									<fmt:message key="team_signedin_home5"/>
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View Your Team Schedule
+										<fmt:message key="team_signedin_home6"/>
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./teamSchedule" class="btn btn-outline-light">Go To Schedule</a>
+								 	<a href="./teamSchedule" class="btn btn-outline-light"><fmt:message key="team_signedin_home7"/></a>
 								</div>
 							</div>
 						</div>

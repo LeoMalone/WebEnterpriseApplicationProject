@@ -72,7 +72,8 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+												key="nav_divisions" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -92,8 +93,7 @@
 
 						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign
-										In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								
@@ -108,10 +108,10 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}'s Home</a>
-								<a class="dropdown-item" href="teamRoster">View Roster</a>
-								<a class="dropdown-item" href="teamSchedule">View Schedule</a>
-								<a class="dropdown-item" href="logout" method="post">Logout</a>
+								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
+								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
+								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								
 							</c:otherwise>
@@ -142,11 +142,12 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}: Team Roster
+					${teamName}:<br />
+					<fmt:message key="team_view_roster1" />
 				</h1>
 				
 				<!-- Future development
-				<a href="/createPlayer" class="btn btn-success">Create New Player</a>		
+				<a href="/createPlayer" class="btn btn-success"><fmt:message key="team_view_roster6" /></a>		
 				 -->			
 				 
 				<div class="row">
@@ -157,11 +158,11 @@
 									<thead class="thead-dark">
 									    <tr>
 									    	<th scope="col">#</th>
-									    	<th scope="col">First Name</th>
-									    	<th scope="col">Last Name</th>
-										    <th scope="col">Position</th>
+									    	<th scope="col"><fmt:message key="team_view_roster2" /></th>
+									    	<th scope="col"><fmt:message key="team_view_roster3" /></th>
+										    <th scope="col"><fmt:message key="team_view_roster4" /></th>
 										    
-										    <!-- <th scope="col">Edit</th> -->
+										    <!-- <th scope="col"><fmt:message key="team_view_roster5" /></th> -->
 										    
 									    </tr>
 									</thead>
