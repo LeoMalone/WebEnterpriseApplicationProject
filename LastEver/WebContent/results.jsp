@@ -227,7 +227,8 @@
 																value="${res.awayScore}" /></td>
 													</tr>
 													<tr>
-														<td colspan="2"><b>Home Scorers</b> <br> <c:choose>
+														<td colspan="2"><b><fmt:message
+																	key="home_scorers" /></b> <br> <c:choose>
 																<c:when test="${res.homeScore eq 0}">
 																	<fmt:message key="div_no_scorers" />
 																</c:when>
@@ -247,7 +248,8 @@
 															</c:choose></td>
 													</tr>
 													<tr>
-														<td colspan="2"><b>Away Scorers</b> <br> <c:choose>
+														<td colspan="2"><b><fmt:message key="away_scorers" /></b>
+															<br> <c:choose>
 																<c:when test="${res.awayScore eq 0}">
 																	<fmt:message key="div_no_scorers" />
 																</c:when>

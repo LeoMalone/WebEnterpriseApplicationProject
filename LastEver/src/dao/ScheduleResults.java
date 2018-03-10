@@ -411,7 +411,7 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and "
-					+ "id=? group by id, playerName");
+					+ "id=? group by id, playerName order by goals desc");
 			getScorers.setString(1, home);
 			getScorers.setString(2, id);
 			resultSet = getScorers.executeQuery();
@@ -478,7 +478,7 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and"
-					+ " id=? group by id, playerName");
+					+ " id=? group by id, playerName order by goals desc");
 
 			getScorers.setString(1, away);
 			getScorers.setString(2, id);

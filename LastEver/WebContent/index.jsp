@@ -218,7 +218,7 @@
 										</h4>
 										<div class="card-body">
 											<c:out value="${n.postedTime}" />
-											| By:
+											| <fmt:message key="news_by" />:
 											<c:out value="${n.userName}" />
 											<br></br>
 											<c:out value="${n.content}" escapeXml="false" />
