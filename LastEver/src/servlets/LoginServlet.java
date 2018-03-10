@@ -153,8 +153,7 @@ public class LoginServlet extends HttpServlet {
 						response.addCookie(tempCookie);
 						break;
 					}
-				}			
-
+				}
 				response.sendRedirect("./login");
 			}
 		}  

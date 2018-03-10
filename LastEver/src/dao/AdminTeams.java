@@ -10,8 +10,18 @@ import db.ConnectionManager;
 import beans.TeamBean;
 import beans.DivisionBean;
 
+/**
+ * The AdminUsers class handles all db operation relating to editing a Team by an Admin
+ */
 public class AdminTeams {
 	
+	/**
+	 * The getAllTeams methods get all teams from the db
+	 * @param divId divisionId from servlet
+	 * @param divisionList DvivisionBean list from servlet
+	 * @param teamList TeamBean list from servlet
+	 * @return boolean status 
+	 */
 	public static boolean getAllTeams(String divId, List<DivisionBean> divisionList, List<TeamBean> teamList) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -92,6 +102,11 @@ public class AdminTeams {
 	    return status;
 	}
 	
+	/**
+	 * The teamsForEditSchedule gets all teams from the db for the schedule forms
+	 * @param teamList TeamBean list
+	 * @return boolean status
+	 */
 	public static boolean teamsForEditSchedule(List<TeamBean> teamList) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection

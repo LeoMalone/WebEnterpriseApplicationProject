@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,25 +19,36 @@ import dao.Division;
 import dao.EditUser;
 
 
+/**
+ * The EditUserServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option edit User.
+ * @author Liam Maloney
+ */
 public class EditUserServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /editUser
+	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
-
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -46,13 +58,14 @@ public class EditUserServlet extends HttpServlet{
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -66,31 +79,35 @@ public class EditUserServlet extends HttpServlet{
 				}
 			
 				//get id from url and set userBean id
-				StringBuilder sb = new StringBuilder(request.getQueryString());
+				StringBuilder sb = new StringBuilder(URLDecoder.decode(request.getQueryString(), "UTF-8"));
 				sb.deleteCharAt(0);
+				
 				UserBean user = new UserBean();
 				user.setId(sb.toString());
-				
+				// If query is successful
 				if(EditUser.getUserForEdit(user)) {
 					request.setAttribute("user", user);
+					request.setAttribute("userName", userName);
+					response.setContentType("text/html");
+					RequestDispatcher rd = request.getRequestDispatcher("edit_user.jsp");  
+			        rd.forward(request, response);
 				}
-				
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("edit_user.jsp");  
-		        rd.forward(request, response);
 			}
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /editUser
+	 */
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html");
-		
+		// Get id from url and add it to UserBean
 		UserBean user = new UserBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
+		// Get all schedule parameters from jsp inputs
 		String newFirstName = request.getParameter("editFirstName");
 		String newLastName = request.getParameter("editLastName");
 		String newUsername = request.getParameter("editUsername");
@@ -98,13 +115,11 @@ public class EditUserServlet extends HttpServlet{
 		String newPassword = request.getParameter("editPass");
 		String userType = request.getParameter("editRadio");
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+		// If any parameter is null
 		if(newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
 			response.sendRedirect("./adminUsers");
 		} else {
+			// Set UserBean parameters
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			user.setAccountUpdated(timestamp);
 			user.setFirstName(newFirstName);
@@ -115,6 +130,7 @@ public class EditUserServlet extends HttpServlet{
 			user.setPassword(newPassword);
 			user.setUserType(userType);
 			
+			// If query is successful
 			if(EditUser.saveChanges(user)) {
 				response.sendRedirect("./adminUsers");
 			}

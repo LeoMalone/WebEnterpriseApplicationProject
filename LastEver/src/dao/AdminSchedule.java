@@ -9,8 +9,16 @@ import java.util.List;
 import beans.ScheduleBean;
 import db.ConnectionManager;
 
+/**
+ * The AdminSchedule class handles all db operation relating to editing a Schedule entry by an Admin
+ */
 public class AdminSchedule {
 	
+	/**
+	 * The getSchedule gets all schedule entries from the db
+	 * @param schedule ScheduleBean list
+	 * @return boolean status
+	 */
 	public static boolean getSchedule(List<ScheduleBean> schedule) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -61,7 +69,11 @@ public class AdminSchedule {
 	    return status;
 	}
 
-	
+	/**
+	 * The getScheduleById gets one schedue enntry by id
+	 * @param schedule ScheduleBean
+	 * @return boolean status
+	 */
 	public static boolean getScheduleById(ScheduleBean schedule) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -109,6 +121,11 @@ public class AdminSchedule {
 	    return status;
 	}
 	
+	/**
+	 * The updateSchedule method saves any changes made to one schedule entry
+	 * @param schedule ScheduleBean
+	 * @return boolean status
+	 */
 	public static boolean updateSchedule(ScheduleBean schedule) {		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -154,6 +171,11 @@ public class AdminSchedule {
 	    return status;
 	}
 	
+	/**
+	 * The createNewGame creates one new schedule entry in the db
+	 * @param schedule ScheduleBean
+	 * @return boolean status
+	 */
 	public static boolean createNewGame(ScheduleBean schedule) {		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -198,6 +220,11 @@ public class AdminSchedule {
 	    return status;
 	}
 	
+	/**
+	 * The deleteSchedule deletes one schedule entry from the db
+	 * @param id GameId from servlet
+	 * @return boolean status
+	 */
 	public static boolean deleteSchedule(String id) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection

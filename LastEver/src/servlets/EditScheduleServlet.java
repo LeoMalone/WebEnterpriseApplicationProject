@@ -17,25 +17,36 @@ import dao.AdminSchedule;
 import dao.AdminTeams;
 import dao.Division;
 
+/**
+ * The EditScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option edit Schedule.
+ * @author Liam Maloney
+ */
 public class EditScheduleServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /editSchedule	
+	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
-
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -45,13 +56,14 @@ public class EditScheduleServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -70,12 +82,15 @@ public class EditScheduleServlet extends HttpServlet {
 				ScheduleBean schedule = new ScheduleBean();
 				schedule.setTitle(sb.toString());
 				
+				// If query is successful
 				if(AdminSchedule.getScheduleById(schedule)) {
 					List<TeamBean> teamList = new ArrayList<TeamBean>();
+					// If query is successful
 					if(AdminTeams.teamsForEditSchedule(teamList)) {						
 						request.setAttribute("teamList", teamList);
 						request.setAttribute("userName", userName);
 						request.setAttribute("schedule", schedule);
+						response.setContentType("text/html");
 						RequestDispatcher rd = request.getRequestDispatcher("edit_schedule.jsp");  
 				        rd.forward(request, response);	
 					}				
@@ -84,15 +99,18 @@ public class EditScheduleServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /editSchedule	
+	 */
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
-		response.setContentType("text/html");
-		
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Get id from url and add it to ScheduleBean
 		ScheduleBean schedule = new ScheduleBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
+		// Get all schedule parameters from jsp inputs
 		String newDate = request.getParameter("editGameDate");
 		String newTime = request.getParameter("editGameTime");		
 		String newHomeTeam = request.getParameter("editHomeTeam");
@@ -101,9 +119,11 @@ public class EditScheduleServlet extends HttpServlet {
 		String newAwayScore = request.getParameter("editAwayScore");
 		String newGameStatus = request.getParameter("editGameStatus");
 		
+		// If any parameter is null
 		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null || newAwayScore == "" || newGameStatus == null) {
 			response.sendRedirect("./editSchedule?=" + sb.toString());
 		} else {
+			// Set ScheduleBean parameters
 			schedule.setTitle(sb.toString());
 			schedule.setStart(newDate);
 			schedule.setGameTime(newTime);
@@ -113,6 +133,7 @@ public class EditScheduleServlet extends HttpServlet {
 			schedule.setAwayScore(newAwayScore);
 			schedule.setGameStatus(newGameStatus);
 			
+			// If query is successful
 			if(AdminSchedule.updateSchedule(schedule)) {
 				response.sendRedirect("./adminSchedule");
 			}

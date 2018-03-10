@@ -100,9 +100,9 @@
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
-							<form action="" method="post">
+							<form>
 								<select class="form-control form-control-sm" name="language"
-									onchange="this.form.submit()">
+									onchange="submit()">
 									<option value="en"
 										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>

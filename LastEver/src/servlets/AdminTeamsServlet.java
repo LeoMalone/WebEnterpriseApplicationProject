@@ -15,24 +15,36 @@ import beans.TeamBean;
 import dao.AdminTeams;
 import dao.Division;
 
+/**
+ * The AdminTeamsServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option View Teams.
+ * @author Liam Maloney
+ */
 public class AdminTeamsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /adminTeams
+	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
-		} else {		
+		} else {
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -42,13 +54,14 @@ public class AdminTeamsServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en 
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -61,27 +74,30 @@ public class AdminTeamsServlet extends HttpServlet {
 					}
 				}
 				
+				// Team and Divisions lists for display on page
 				List<TeamBean> tbl = new ArrayList<TeamBean>();
 				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
+				
+				// If id is null, get teams with no div
 				if(request.getQueryString() == null) {
 					AdminTeams.getAllTeams(null, dbl, tbl);
-				} else {
+				} 
+				// Else get teams in division from url
+				else {
 					StringBuilder sb = new StringBuilder(request.getQueryString());
 					sb.deleteCharAt(0);
 					AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
 					request.setAttribute("currentId", sb.toString());
-				}				
+				}
 				
+				// Set content type, username, teamList, divisionList and dispatch to jsp
 				request.setAttribute("divList", dbl);
 				request.setAttribute("teamList", tbl);
 				request.setAttribute("userName", userName);
+				response.setContentType("text/html");
 				RequestDispatcher rd = request.getRequestDispatcher("admin_teams.jsp");  
 		        rd.forward(request, response);
 			}
 		}
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		doGet(request, response);
 	}
 }

@@ -18,31 +18,41 @@ import dao.CreateAccount;
 import dao.Division;
 
 /**
- * 
+ * The AdminCreateServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option Create User.
+ * @author Liam Maloney
  */
 public class AdminCreateServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	// User Types
+	// User Type Strings
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";
 	
 	
 	/**
-	 * goGet method mapped to /adminCreate
+	 * doGet method mapped to /adminCreate
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		Division.getAllDivisions(dlb);
+		request.setAttribute("allDiv", dlb);
+		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -52,13 +62,14 @@ public class AdminCreateServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en 
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -71,7 +82,9 @@ public class AdminCreateServlet extends HttpServlet {
 					}
 				}
 				
+				// Set content type and username and dispatch to jsp
 				request.setAttribute("userName", userName);
+				response.setContentType("text/html");
 				RequestDispatcher rd = request.getRequestDispatcher("admin_create_user.jsp"); 
 		        rd.forward(request, response);
 			}

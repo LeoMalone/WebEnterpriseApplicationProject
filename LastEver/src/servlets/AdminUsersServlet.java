@@ -15,25 +15,36 @@ import beans.UserBean;
 import dao.AdminUsers;
 import dao.Division;
 
+/**
+ * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option View Users.
+ * @author Liam Maloney
+ */
 public class AdminUsersServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /adminUsers	
+	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
-
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -43,13 +54,14 @@ public class AdminUsersServlet extends HttpServlet{
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -62,19 +74,19 @@ public class AdminUsersServlet extends HttpServlet{
 					}
 				}
 			
+				// User list for display on page
 				List<UserBean> ulb = new ArrayList<UserBean>();
 				
-				if(AdminUsers.getAllUsers(ulb)) {				
+				// If query is successful
+				if(AdminUsers.getAllUsers(ulb)) {
+					// Set content type, username, userList and dispatch to jsp
 					request.setAttribute("userList", ulb);
 					request.setAttribute("userName", userName);
+					response.setContentType("text/html");
 					RequestDispatcher rd = request.getRequestDispatcher("admin_users.jsp");  
 				    rd.forward(request, response);
 				}
 			}
 		}
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		doGet(request, response);
 	}
 }

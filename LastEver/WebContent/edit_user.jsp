@@ -113,15 +113,10 @@
 						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
-							<form action="" method="post">
-								<select class="form-control form-control-sm" name="language"
-									onchange="this.form.submit()">
-									<option value="en"
-										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
-											key="english" /></option>
-									<option value="fr"
-										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
-											key="french" /></option>
+							<form action="./editUser?=${user.id}" method="GET">
+								<select class="form-control form-control-sm" name="language" onchange="submit()">
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message key="english" /></option>
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message key="french" /></option>
 								</select>
 							</form>
 						</li>

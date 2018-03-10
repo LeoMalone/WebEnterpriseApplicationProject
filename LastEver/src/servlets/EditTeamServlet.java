@@ -16,25 +16,36 @@ import beans.TeamBean;
 import dao.Division;
 import dao.EditTeam;
 
+/**
+ * The EditTeamServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option edit Team.
+ * @author Liam Maloney
+ */
 public class EditTeamServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * doGet method mapped to /editTeam	
+	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
+		// Set divisions for navbar
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("./login");
 		} else {
-
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -44,13 +55,14 @@ public class EditTeamServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -69,9 +81,11 @@ public class EditTeamServlet extends HttpServlet {
 				TeamBean team = new TeamBean();
 				team.setTeamId(sb.toString());
 				
+				// If query is successful
 				if(EditTeam.getTeamForEdit(team)) {
 					request.setAttribute("userName", userName);
 					request.setAttribute("team", team);
+					response.setContentType("text/html");
 					RequestDispatcher rd = request.getRequestDispatcher("edit_team.jsp");  
 			        rd.forward(request, response);					
 				}
@@ -79,31 +93,33 @@ public class EditTeamServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /editTeam	
+	 */
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html");
-		
+		// Get id from url and add it to TeamBean
 		TeamBean team = new TeamBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
+		// Get all schedule parameters from jsp inputs
 		String newName = request.getParameter("editTeamName");
 		String newAbbr = request.getParameter("editTeamAbbr");
 		String newDiv = request.getParameter("divRadio");
 		
+		// If any parameter is null
 		if(newName == null || newAbbr == null || newDiv == null) {
 			response.sendRedirect("./adminTeams?=" + sb.toString());
 		} else {
+			// Set TeamBean parameters
 			team.setTeamId(sb.toString());
 			team.setTeamName(newName);
 			team.setTeamAbbreviation(newAbbr);
 			team.setDivisionId(newDiv);
 			
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
-			
+			// If query is successful
 			if(EditTeam.saveChanges(team)) {
 				response.sendRedirect("./adminTeams");
 			}

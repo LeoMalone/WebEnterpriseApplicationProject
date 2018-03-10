@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
 import beans.TeamBean;
-import beans.UserBean;
 import dao.TeamCreateTeam;
 import dao.Team;
 import dao.Division;

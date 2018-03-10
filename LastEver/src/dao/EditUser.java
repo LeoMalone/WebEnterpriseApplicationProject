@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import beans.UserBean;
 import db.ConnectionManager;
 
+/**
+ * The EditUser class handles all db operation relating to editing a user
+ */
 public class EditUser {
 	
+	/**
+	 * The get UsersforEdit method gets one users credentials to drisplay for edit
+	 * @param user User Bean from servlet
+	 * @return boolean status
+	 */
 	public static boolean getUserForEdit(UserBean user) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -58,6 +66,11 @@ public class EditUser {
 	    return status;
 	}
 	
+	/**
+	 * The saveChanges method saves the changes for 1 user into the db
+	 * @param User Bean from servlet 
+	 * @return boolean status
+	 */
 	public static boolean saveChanges(UserBean user) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -106,6 +119,11 @@ public class EditUser {
 	    return status;
 	}
 	
+	/**
+	 * The deleteUser method delete a user from the db based on id
+	 * @param id user if from servlet
+	 * @return boolean status
+	 */
 	public static boolean deleteUser(String id) {
 		
 		boolean status = false;					// Status of createNewUser

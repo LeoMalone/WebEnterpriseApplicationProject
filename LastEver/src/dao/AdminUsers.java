@@ -9,8 +9,16 @@ import java.util.List;
 import db.ConnectionManager;
 import beans.UserBean;
 
+/**
+ * The AdminUsers class handles all db operation relating to editing a User by an Admin
+ */
 public class AdminUsers {
 	
+	/**
+	 * The getAllUsers methods get all users from the db
+	 * @param userList UserBean list from servlet
+	 * @return boolean status
+	 */
 	public static boolean getAllUsers(List<UserBean> userList) {
 		
 		boolean status = false;					// Status of createNewUser

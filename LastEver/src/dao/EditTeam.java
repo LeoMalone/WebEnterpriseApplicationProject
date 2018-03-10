@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import beans.TeamBean;
 import db.ConnectionManager;
 
+/**
+ * The EditTeam class handles all db operation relating to editing a team
+ */
 public class EditTeam {
 	
-public static boolean getTeamForEdit(TeamBean team) {
+	public static boolean getTeamForEdit(TeamBean team) {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -51,7 +54,12 @@ public static boolean getTeamForEdit(TeamBean team) {
 	    }	    
 	    return status;
 	}
-
+	
+	/**
+	 * The saveChanges method saves the changes for 1 team into the db
+	 * @param team TeamBean from servlet
+	 * @return boolean status
+	 */
 	public static boolean saveChanges(TeamBean team) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -106,6 +114,11 @@ public static boolean getTeamForEdit(TeamBean team) {
 	    return status;
 	}
 	
+	/**
+	 * The deleteUser method delete a team from the db based on id
+	 * @param id TeamId from servlet
+	 * @return
+	 */
 	public static boolean deleteTeam(String id) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
