@@ -120,7 +120,7 @@
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
 					<div class="row">
-						<!-- 1st Card -->
+						<!-- View and edit referee profiles -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -136,7 +136,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- 2nd Card -->
+						<!-- Referee Assignments -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -152,7 +152,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- NEW - 3rd Card  -->
+						<!-- Referee Status  -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-black bg-dark">
 								<h4 class="card-header">
