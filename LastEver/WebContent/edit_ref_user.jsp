@@ -122,6 +122,7 @@
 					${userName}: <fmt:message key="signin_prop3" /> Edit
 				</h1>
 				<div class="row">
+				<!-- Edit referee profile form -->
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
