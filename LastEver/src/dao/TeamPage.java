@@ -10,14 +10,14 @@ import java.util.List;
 import beans.TeamBean;
 import beans.UserBean;
 /**
- * The Standings class gets the standings for the current division
+ * The TeamPage class gets the standings for the current division
  */
 public class TeamPage {
 
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
-	 * @param <StandingsBean>
-	 * @param user - UserBean credentials
+	 * The getTeamInfo gets all information about the team
+	 * @param <TeamBean>
+	 * @param id - The current teams id
 	 * @return status - boolean value
 	 */
 	public static boolean getTeamInfo(String id, List<TeamBean> team) { 
@@ -27,7 +27,7 @@ public class TeamPage {
 		PreparedStatement getTeam = null;		// SQL query
 		ResultSet resultSet = null;				// returned query result set
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with TeamBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getTeam = conn.prepareStatement("select t.teamID, t.teamLogo, t.teamName, t.teamAbbreviation,"
@@ -37,8 +37,10 @@ public class TeamPage {
 			resultSet = getTeam.executeQuery();
 			status = resultSet.next();
 
+			//return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a TeamBean then add it to the list
 			while(resultSet.next()) {
 				TeamBean tb = new TeamBean();
 				tb.setTeamId(resultSet.getString(1));
@@ -79,12 +81,17 @@ public class TeamPage {
 		return status;
 	}
 
+	/**
+	 * The getTeamDivision gets the division associated with the team
+	 * @param id - The current id of the team
+	 * @return div - String value
+	 */
 	public static String getTeamDivision(String id) { 
 
 		Connection conn = null;					// DB connection
 		PreparedStatement getTeam = null;		// SQL query
 		ResultSet resultSet = null;				// returned query result set
-		String div = null;
+		String div = null;						// name of the teams division
 
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
@@ -95,10 +102,11 @@ public class TeamPage {
 			getTeam.setString(1, id);
 			resultSet = getTeam.executeQuery();
 
+			//Loop through and set div to be the teams division
 			while(resultSet.next())
 				div = resultSet.getString(1);
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -127,6 +135,12 @@ public class TeamPage {
 		return div;
 	}
 
+		/**
+	 * The getTeamOwner gets the owner of the team
+	 * @param <UserBean>
+	 * @param id - The current id of the team
+	 * @return status - boolean value
+	 */
 	public static boolean getTeamOwner(String id, List<UserBean> user) { 
 
 		boolean status = false;					// query status
@@ -143,8 +157,10 @@ public class TeamPage {
 			resultSet = getTeam.executeQuery();
 			status = resultSet.next();
 
+			//return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a UserBean then add it to the list
 			while(resultSet.next()) {
 				UserBean ub = new UserBean();
 				ub.setFirstName(resultSet.getString(1));
@@ -153,7 +169,7 @@ public class TeamPage {
 				user.add(ub);
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

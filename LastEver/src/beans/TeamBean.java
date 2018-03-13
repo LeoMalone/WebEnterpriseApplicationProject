@@ -1,5 +1,9 @@
 package beans;
 
+/**
+ * The TeamBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class TeamBean {
 	
 	private String divisionId;

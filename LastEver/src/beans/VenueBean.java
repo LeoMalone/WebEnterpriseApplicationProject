@@ -1,7 +1,12 @@
 package beans;
 
+/**
+ * The VenueBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class VenueBean {
 	
+	//Venue bean parameters
 	private String venueID;
 	private String venueName;
 	private String venuePicture;

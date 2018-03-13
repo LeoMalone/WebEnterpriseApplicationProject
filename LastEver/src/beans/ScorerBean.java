@@ -1,8 +1,12 @@
 package beans;
 
+/**
+ * The ScorerBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class ScorerBean {
 	
-	// User bean parameters
+	// Scorer bean parameters
 	private String ID;
 	private String name;
 	private int goals;

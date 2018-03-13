@@ -1,12 +1,12 @@
 package beans;
 
 /**
- * The UserBean class is meant for passing user information
+ * The StatndingsBean class is meant for passing user information
  * between DAOs and Servlets
  */
 public class StandingsBean {
 	
-	// User bean parameters
+	// Standings bean parameters
 	private int rank;
 	private String teamName;
 	private int gamesPlayed;

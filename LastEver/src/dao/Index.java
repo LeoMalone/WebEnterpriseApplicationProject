@@ -10,15 +10,15 @@ import java.util.List;
 import beans.NewsBean;
 
 /**
- * The Division class gets the standings for the current division
+ * The Index class gets all the news in the database regardless of what tags the news has
  */
 public class Index {
 
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
+	 * The getNews method gets all news in the database
 	 * @param lang 
 	 * @param <NewsBean>
-	 * @param user - NewsBean credentials
+	 * @param lang - The current language of the website
 	 * @return status - boolean value
 	 */
 	public static boolean getNews(List<NewsBean> news, String lang) { 
@@ -28,7 +28,7 @@ public class Index {
 		PreparedStatement getNews = null;		// SQL query
 		ResultSet rs = null;					// returned query result set
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with NewsBean data
 		try {
 			conn = ConnectionManager.getConnection();
 
@@ -37,8 +37,10 @@ public class Index {
 			rs = getNews.executeQuery();
 			status = rs.next();
 
+			//return to the start of the result set
 			rs.beforeFirst();
 
+			//Loop through and add the results of the query to a NewsBean then add it to the list
 			while(rs.next()) {
 				NewsBean nb = new NewsBean();
 				nb.setUserName(rs.getString(1));
@@ -48,7 +50,7 @@ public class Index {
 				news.add(nb);
 			}
 
-		// handle all possible exceptions
+		// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

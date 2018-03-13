@@ -10,14 +10,14 @@ import java.util.List;
 import beans.StatisticsBean;
 
 /**
- * The Standings class gets the standings for the current division
+ * The Statistics class gets the statistics for the current division
  */
 public class Statistics {
 
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
-	 * @param <StandingsBean>
-	 * @param user - UserBean credentials
+	 * The getStatistics method gets the divisions statistics
+	 * @param <StatisticsBean>
+	 * @param id - The current id of the division
 	 * @return status - boolean value
 	 */
 	public static boolean getStatistics(String id, List<StatisticsBean> statistics) { 
@@ -27,9 +27,9 @@ public class Statistics {
 		PreparedStatement getStatistics = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
 		int rank = 1;							// overall ranking in the statistics
-		int increase = 1;
+		int increase = 1;						// the amount to increase the rank by
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
@@ -39,19 +39,28 @@ public class Statistics {
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
 
+			//return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a StatisticsBean then add it to the list
 			while(resultSet.next()) {
 				StatisticsBean sb = new StatisticsBean();
+				
+				// if there is no statistics in the list then set the rank to be the first rank
 				if(statistics.size() == 0) {
 					sb.setRank("" + rank);	
 				}
 				else {
+					/* if the current player has the same goals as the one before it add a T (tied) to the rank
+					   and keep the rank the same and increase the value to increase the rank by the next time
+					   there is a difference in the number of goals  */
 					if(resultSet.getInt(4) == statistics.get(statistics.size()-1).getGoals()) {
 						statistics.get(statistics.size()-1).setRank("T" + rank);
 						sb.setRank("T" + rank);
 						increase++;
 					}
+					// if goals are not the same then add the amount of increase to the rank and set the rank to the current value
+					// reset increase to be one
 					else {
 						rank += increase;
 						sb.setRank("" + rank);
@@ -70,7 +79,7 @@ public class Statistics {
 				statistics.add(sb);
 			}
 
-			// handle all possible exceptions
+			// close all connections handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -99,6 +108,14 @@ public class Statistics {
 		return status;
 	}
 
+	
+	/**
+	 * The getStatisticsWithTeam method gets the teams statistics
+	 * @param <StatisticsBean>
+	 * @param id - The current id of the team
+	 * @param div - The id of the division
+	 * @return status - boolean value
+	 */
 	public static boolean getStatisticsWithTeam(String id, String div, List<StatisticsBean> statistics) { 
 
 		boolean status = false;					// query status
@@ -106,9 +123,9 @@ public class Statistics {
 		PreparedStatement getStatistics = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
 		int rank = 1;							// overall ranking in the statistics
-		int increase = 1;
+		int increase = 1;						// the amount to increase the rank by
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
@@ -120,19 +137,28 @@ public class Statistics {
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
 
+			//return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a StatisticsBean then add it to the list
 			while(resultSet.next()) {
 				StatisticsBean sb = new StatisticsBean();
+				
+				// if there is no statistics in the list then set the rank to be the first rank
 				if(statistics.size() == 0) {
 					sb.setRank("" + rank);	
 				}
 				else {
+					/* if the current player has the same goals as the one before it add a T (tied) to the rank
+					   and keep the rank the same and increase the value to increase the rank by the next time
+					   there is a difference in the number of goals  */
 					if(resultSet.getInt(4) == statistics.get(statistics.size()-1).getGoals()) {
 						statistics.get(statistics.size()-1).setRank("T" + rank);
 						sb.setRank("T" + rank);
 						increase++;
 					}
+					// if goals are not the same then add the amount of increase to the rank and set the rank to the current value
+					// reset increase to be one
 					else {
 						rank += increase;
 						sb.setRank("" + rank);
@@ -150,7 +176,7 @@ public class Statistics {
 				statistics.add(sb);
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -178,7 +204,13 @@ public class Statistics {
 		}
 		return status;
 	}
-	
+		
+	/**
+	 * The getStatisticsWithPlayer method gets the players statistics
+	 * @param <StatisticsBean>
+	 * @param pID - The current id of the player
+	 * @return status - boolean value
+	 */
 	public static boolean getStatisticsWithPlayer(String pID, List<StatisticsBean> statistics) { 
 
 		boolean status = false;					// query status
@@ -186,7 +218,7 @@ public class Statistics {
 		PreparedStatement getStatistics = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
@@ -195,8 +227,10 @@ public class Statistics {
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
 
+			//return the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a StatisticsBean then add it to the list
 			while(resultSet.next()) {
 				StatisticsBean sb = new StatisticsBean();
 				sb.setTeamName(resultSet.getString(1));
@@ -209,7 +243,7 @@ public class Statistics {
 				statistics.add(sb);
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

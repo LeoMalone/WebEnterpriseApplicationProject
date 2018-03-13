@@ -5,9 +5,13 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.sql.Timestamp;
 import java.util.Locale;
 
+/**
+ * The NewsBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class NewsBean {
 	
-	// User bean parameters
+	// News bean parameters
 	private String userName;
 	private String title;
 	private String postedTime;
@@ -54,6 +58,8 @@ public class NewsBean {
 	
 	public void setPostedTime(Timestamp pt, String lang) {
 		PrettyTime p = new PrettyTime();
+		
+		//if there is no set language default to English
 		if(lang == null) {
 			lang = "en";
 		}

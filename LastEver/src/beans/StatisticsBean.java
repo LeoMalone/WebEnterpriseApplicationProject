@@ -1,12 +1,12 @@
 package beans;
 
 /**
- * The ScheduleBean class is meant for passing user information
+ * The StatisticsBean class is meant for passing user information
  * between DAOs and Servlets
  */
 public class StatisticsBean {
 	
-	// User bean parameters
+	// Statistics bean parameters
 	private String rank;
 	private String teamName;
 	private String teamID;

@@ -5,12 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The ScheduleBean class is meant for passing user information
+ * The ScheduleResultsBean class is meant for passing user information
  * between DAOs and Servlets
  */
 public class ScheduleResultsBean {
 	
-	// User bean parameters
+	// ScheduleResults bean parameters
 	private Date date;
 	private Time time;
 	private String homeTeam;

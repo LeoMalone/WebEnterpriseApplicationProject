@@ -1,7 +1,12 @@
 package beans;
 
+/**
+ * The ScheduleBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class ScheduleBean {
 	
+	//Schedule bean parameters
 	private String title;			// gameID
 	private String start;			// gameStart
 	private String url;

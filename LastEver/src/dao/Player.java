@@ -17,7 +17,7 @@ public class Player {
 	/**
 	 * The getPlayerInfo gets the current players information
 	 * @param <PlayerBean>
-	 * @param pID - UserBean credentials
+	 * @param pID - The id of the current player
 	 * @return status - boolean value
 	 */
 	public static boolean getPlayerInfo(String pID, List<PlayerBean> player) { 
@@ -27,7 +27,7 @@ public class Player {
 		PreparedStatement getPlayer = null;	// SQL query
 		ResultSet resultSet = null;			// returned query result set
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with PlayerBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getPlayer = conn.prepareStatement("select p.playerFirstName, p.playerLastName, p.playerNumber, p.playerPosition,"
@@ -39,8 +39,10 @@ public class Player {
 			resultSet = getPlayer.executeQuery();
 			status = resultSet.next();
 
+			//return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a PlayerBean then add it to the list
 			while(resultSet.next()) {
 				PlayerBean pb = new PlayerBean();
 				pb.setPlayerFirstName(resultSet.getString(1));
@@ -56,7 +58,7 @@ public class Player {
 				player.add(pb);
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

@@ -15,9 +15,9 @@ import beans.StandingsBean;
 public class Standings {
 
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
+	 * The getStandings gets the current standings of a division
 	 * @param <StandingsBean>
-	 * @param user - UserBean credentials
+	 * @param id - The id of the current division
 	 * @return status - boolean value
 	 */
 	public static boolean getStandings(String id, List<StandingsBean> standings) { 
@@ -30,7 +30,7 @@ public class Standings {
 		ResultSet rs = null;					// returned query result set
 		int rank = 1;							// overall ranking in the standings
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query with StandingsBean data
 		try {
 			conn = ConnectionManager.getConnection();
 			getStandings = conn.prepareStatement("select team, GP, W, D, L, PTS, GF, GA, GD from standings"
@@ -40,12 +40,17 @@ public class Standings {
 			resultSet = getStandings.executeQuery();
 			status = resultSet.next();
 
+			// return to the start of the result set
 			resultSet.beforeFirst();
 
+			//Loop through and add the results of the query to a StandingsBean then add it to the list
 			while(resultSet.next()) {
 				StandingsBean sb = new StandingsBean();
+				
+				// gets a teams id to be able to link to their team page
 				getTeamID.setString(1, resultSet.getString(1));
 				rs = getTeamID.executeQuery();
+				
 				sb.setRank(rank++);
 				sb.setTeamName(resultSet.getString(1));
 				sb.setGamesPlayed(resultSet.getInt(2));
@@ -56,12 +61,14 @@ public class Standings {
 				sb.setGoalsFor(resultSet.getInt(7));
 				sb.setGoalsAgainst(resultSet.getInt(8));
 				sb.setGoalDiff(resultSet.getInt(9));
+				
+				//Loop through and add the teamID to the StandingsBean
 				while(rs.next())
 					sb.setTeamID(rs.getString(1));
 				standings.add(sb);
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

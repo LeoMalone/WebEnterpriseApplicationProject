@@ -10,14 +10,14 @@ import java.util.List;
 import beans.VenueBean;
 
 /**
- * The Standings class gets the standings for the current division
+ * The Venue class gets the information about the venue
  */
 public class Venue {
 	
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
-	 * @param <StandingsBean>
-	 * @param user - UserBean credentials
+	 * The getVenue gets all the relevant information about the venue
+	 * @param <VenueBean>
+	 * @param id - The id of the current venue
 	 * @return status - boolean value
 	 */
 	public static boolean getVenue(String id, List<VenueBean> venue) { 
@@ -27,7 +27,7 @@ public class Venue {
 	    PreparedStatement getVenue = null;		// SQL query
 	    ResultSet resultSet = null;				// returned query result set
 	
-	    // Connect to Database and execute SELECT query with UserBean data
+	    // Connect to Database
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        getVenue = conn.prepareStatement("select venueName, venuePicture, venueAddress1, venueAddress2,"
@@ -37,8 +37,10 @@ public class Venue {
 	        resultSet = getVenue.executeQuery();
 	        status = resultSet.next();
 	        
+	        //return to the start of the result set
 	        resultSet.beforeFirst();
 	        
+	      //Loop through and add the results of the query to a VenueBean then add it to the list
 	        while(resultSet.next()) {
 	        	VenueBean vb = new VenueBean();
 	        	vb.setVenueName(resultSet.getString(1));
@@ -59,7 +61,7 @@ public class Venue {
 	        	venue.add(vb);
 	        }
 	        
-	    // handle all possible exceptions
+	    // close all connections and handle all possible exceptions
 	    } catch (Exception e) {
 	        System.out.println(e);
 	    } finally {

@@ -11,21 +11,23 @@ import beans.DivisionBean;
 import beans.NewsBean;
 
 /**
- * The Division class gets the standings for the current division
+ * The Division class gets all the divisions in the database, allows the user to create a new division, get the news associated
+ * with the division, allow the user to delete a division, and get a specific division
  */
 public class Division {
 
 	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
+	 * The getNews method gets all the news associated with the division
 	 * @param <NewsBean>
-	 * @param user - NewsBean credentials
+	 * @param id - The current division id
+	 * @param lang - The current language of the website
 	 * @return status - boolean value
 	 */
 	public static boolean getNews(String id, List<NewsBean> news, String lang) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
-		PreparedStatement getDivision = null;	// SQL query for DivisionName
+		PreparedStatement getDivision = null;	// SQL query
 		PreparedStatement getNews = null;		// SQL query
 		ResultSet resultSet = null;				// returned query result set
 		ResultSet rs = null;					// returned query result set
@@ -40,10 +42,11 @@ public class Division {
 			resultSet = getDivision.executeQuery();
 			status = resultSet.next();
 
+			//gets the divisionName in order to get the news associated with the division
 			divisionName = resultSet.getString(1);
 
+			//if there is a result then get the news
 			if(status) {
-
 				getNews = conn.prepareStatement("select u.userName, n.newsTitle, n.newsTime, n.newsContent from news n"
 						+ " inner join users u on u.userID = n.userID inner join newsxtags nt on nt.newsID = n.newsID"
 						+ " inner join tags t on nt.tagID = t.tagID where tagDescription = ? order by n.newsTime desc");
@@ -51,8 +54,10 @@ public class Division {
 				rs = getNews.executeQuery();
 				status = rs.next();
 
+				//return to the start of the result set
 				rs.beforeFirst();
 
+				//Loop through and add the results of the query to a NewsBean then add it to the list
 				while(rs.next()) {
 					NewsBean nb = new NewsBean();
 					nb.setUserName(rs.getString(1));
@@ -63,7 +68,7 @@ public class Division {
 				}
 			}
 
-			// handle all possible exceptions
+			// close all connections and handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -105,20 +110,30 @@ public class Division {
 		}
 		return status;
 	}
-		
+	
+	/**
+	 * The getAllDivisions method gets all the divisions in the database
+	 * @param <DivisionBean>
+	 * @return status - boolean value
+	 */	
 	public static boolean getAllDivisions(List<DivisionBean> divisionList) {
 
-		boolean status = false;					// Status of createNewUser
+		boolean status = false;					// query status
 		Connection conn = null;					// DB Connection
-		PreparedStatement allDivisions = null;
-		ResultSet rs = null;
+		PreparedStatement allDivisions = null;	// SQL query
+		ResultSet rs = null;					// returned query result set
 
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
 			allDivisions = conn.prepareStatement("SELECT divisionID, divisionName from division");
 			rs = allDivisions.executeQuery();
-
+			status = rs.next();
+			
+			//return to the start of the result set
+			rs.beforeFirst();
+			
+			//Loop through and add the results of the query to a DivisionBean then add it to the list
 			while(rs.next()) {
 				DivisionBean db = new DivisionBean();
 				db.setDivisionId(rs.getString(1));
@@ -126,7 +141,7 @@ public class Division {
 				divisionList.add(db);
 			}
 
-		// Catch all possible Exceptions
+		// close all connections and catch all possible Exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -148,12 +163,18 @@ public class Division {
 		return status;
 	}
 	
+	/**
+	 * The getSpecificDivision gets information of a specific division
+	 * @param <DivisionBean>
+	 * @param id - The id of the current database
+	 * @return status - boolean value
+	 */	
 	public static boolean getSpecificDivision(List<DivisionBean> divisionList, String id) {
 
-		boolean status = false;					// Status of createNewUser
+		boolean status = false;					// query status
 		Connection conn = null;					// DB Connection
-		PreparedStatement specificDiv = null;
-		ResultSet rs = null;
+		PreparedStatement specificDiv = null;	// SQL query
+		ResultSet rs = null;					// returned query result set
 
 		// Connect to Database 
 		try {
@@ -161,7 +182,12 @@ public class Division {
 			specificDiv = conn.prepareStatement("SELECT divisionID, divisionName from division WHERE divisionID=?");
 			specificDiv.setString(1, id);
 			rs = specificDiv.executeQuery();
-
+			status = rs.next();
+			
+			//return to the start of the result set
+			rs.beforeFirst();
+			
+			//Loop through and add the results of the query to a DivisionBean then add it to the list
 			while(rs.next()) {
 				DivisionBean db = new DivisionBean();
 				db.setDivisionId(rs.getString(1));
@@ -169,7 +195,7 @@ public class Division {
 				divisionList.add(db);
 			}
 
-		// Catch all possible Exceptions
+		// close all connections and catch all possible Exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -233,8 +259,8 @@ public class Division {
 	public static boolean getDivisionForEdit(DivisionBean div) {
 		boolean status = false;					// Status of createNewUser
 		Connection conn = null;					// DB Connection
-		PreparedStatement getDivision = null;
-		ResultSet rs = null;
+		PreparedStatement getDivision = null;	// SQL query
+		ResultSet rs = null;					// returned query result set
 
 		// Connect to Database 
 		try {
@@ -272,9 +298,9 @@ public class Division {
 	
 	public static boolean saveChanges(DivisionBean div) {
 		
-		boolean status = false;					// Status of createNewUser
-	    Connection conn = null;					// DB Connection
-	    PreparedStatement updateDivision = null;
+		boolean status = false;						// Status of createNewUser
+	    Connection conn = null;						// DB Connection
+	    PreparedStatement updateDivision = null;	// SQL query
 	    int result = 0;
 	
 	    // Connect to Database 

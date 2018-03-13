@@ -1,7 +1,12 @@
 package beans;
 
+/**
+ * The DivisionBean class is meant for passing user information
+ * between DAOs and Servlets
+ */
 public class DivisionBean {
 	
+	//Division bean parameters
 	private String divisionId;
 	private String divisionName;	
 	
