@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `lastever`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `lastever` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `lastever`;
+
+--
 -- Table structure for table `division`
 --
 
@@ -261,7 +269,7 @@ CREATE TABLE `schedule` (
   KEY `AwayTeamToTeam` (`awayTeam`),
   CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE,
   CONSTRAINT `HomeTeamToTeam` FOREIGN KEY (`homeTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,7 +278,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final'),(2,'2018-02-10','16:00:00',1,1,4,1,'Final'),(3,'2018-02-13','18:30:00',3,3,4,2,'Final'),(4,'2018-02-15','19:15:00',2,3,1,1,'Final'),(5,'2018-02-09','18:45:00',7,0,8,3,'Final'),(6,'2018-02-11','13:30:00',6,1,5,2,'Final'),(7,'2018-02-15','19:15:00',5,2,8,2,'Final'),(8,'2018-02-17','14:00:00',6,0,7,0,'Final'),(9,'2018-02-18','13:45:00',4,5,2,3,'Final'),(10,'2018-02-20','19:00:00',2,1,3,4,'Final'),(11,'2018-02-20','20:30:00',1,3,4,2,'Final'),(12,'2018-02-24','19:15:00',4,0,3,2,'Final'),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled'),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled'),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled'),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled'),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled'),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled'),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled'),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled');
+INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final'),(2,'2018-02-10','16:00:00',1,1,4,1,'Final'),(3,'2018-02-13','18:30:00',3,3,4,2,'Final'),(4,'2018-02-15','19:15:00',2,3,1,1,'Final'),(5,'2018-02-09','18:45:00',7,0,8,3,'Final'),(6,'2018-02-11','13:30:00',6,1,5,2,'Final'),(7,'2018-02-15','19:15:00',5,2,8,2,'Final'),(8,'2018-02-17','14:00:00',6,0,7,0,'Final'),(9,'2018-02-18','13:45:00',4,5,2,3,'Final'),(10,'2018-02-20','19:00:00',2,1,3,4,'Final'),(11,'2018-02-20','20:30:00',1,3,4,2,'Final'),(12,'2018-02-24','19:15:00',4,0,3,2,'Final'),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled'),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled'),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled'),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled'),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled'),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled'),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled'),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled'),(21,'2018-03-14','18:45:00',6,0,8,0,'Scheduled');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +405,7 @@ CREATE TABLE `team` (
   `teamLogo` varchar(200) DEFAULT NULL,
   `teamAbout` text,
   PRIMARY KEY (`teamID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,7 +414,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS');
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +441,7 @@ CREATE TABLE `teamxdivision` (
 
 LOCK TABLES `teamxdivision` WRITE;
 /*!40000 ALTER TABLE `teamxdivision` DISABLE KEYS */;
-INSERT INTO `teamxdivision` VALUES (5,1),(6,1),(7,1),(8,1),(1,2),(2,2),(3,2),(4,2);
+INSERT INTO `teamxdivision` VALUES (5,1),(6,1),(7,1),(8,1),(1,2),(2,2),(3,2),(4,2),(9,3);
 /*!40000 ALTER TABLE `teamxdivision` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,7 +480,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-07 04:14:06','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02','2018-03-07 04:15:12','Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','superPassword','admin@example.com',1,'2018-02-26 23:14:02','2018-03-01 20:01:40','2018-03-13 22:42:59','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','ezpass','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-02-26 23:14:02',NULL,'Referee',4),(3,NULL,'Marge','Walters','varsfc','teamOwner','varsfc@varsfc.co.biz',0,'2018-02-26 23:14:02','2018-02-26 23:14:02','2018-03-07 04:15:12','Team Owner',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,6 +601,12 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Current Database: `lastever`
+--
+
+USE `lastever`;
+
+--
 -- Final view structure for view `scorers`
 --
 
@@ -623,7 +637,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when (`r`.`gameStatus` = 'Final') then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from ((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`homeTeam`))) join `lastever`.`teamxdivision` `dt` on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from ((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`awayTeam`))) join `lastever`.`teamxdivision` `dt` on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
+/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when (`r`.`gameStatus` = 'Final') then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`homeTeam`))) on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`awayTeam`))) on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -655,4 +669,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-08 12:39:24
+-- Dump completed on 2018-03-13 19:36:46

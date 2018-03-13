@@ -35,8 +35,8 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
 					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
-					+ " inner join teamxdivision td on td.teamID = h.teamID inner join venuexgame vg on s.gameID"
-					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
+					+ " inner join teamxdivision td on td.teamID = h.teamID left outer join venuexgame vg on s.gameID"
+					+ " = vg.gameID left outer join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
 					+ " s.gameStatus = 'Scheduled'");
 			getSchedule.setString(1, id);
 			resultSet = getSchedule.executeQuery();
@@ -180,8 +180,8 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
 					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
-					+ " inner join teamxdivision td on td.teamID = h.teamID inner join venuexgame vg on s.gameID"
-					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
+					+ " inner join teamxdivision td on td.teamID = h.teamID left outer join venuexgame vg on s.gameID"
+					+ " = vg.gameID left outer join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
 					+ " s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
 			
 			getSchedule.setString(1, div);

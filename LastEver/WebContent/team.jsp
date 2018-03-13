@@ -156,7 +156,7 @@
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty team}">
-									No team information
+									<fmt:message key="team_no_info" />
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${team}" var="t">
@@ -385,7 +385,14 @@
 															</c:if></td>
 														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
 														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
-														<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
+														<c:choose>
+															<c:when test="${empty v.venue}">
+																<td><fmt:message key="div_novenue" /></td>
+															</c:when>
+															<c:otherwise>
+																<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
+															</c:otherwise>
+														</c:choose>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
