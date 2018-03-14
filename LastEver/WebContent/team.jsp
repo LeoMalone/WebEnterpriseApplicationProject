@@ -386,7 +386,7 @@
 														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
 														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
 														<c:choose>
-															<c:when test="${empty v.venue}">
+															<c:when test="${empty sched.venue}">
 																<td><fmt:message key="div_novenue" /></td>
 															</c:when>
 															<c:otherwise>
