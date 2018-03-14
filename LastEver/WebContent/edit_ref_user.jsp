@@ -132,29 +132,18 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="newUsername"><fmt:message key="signin_user" /></label>
-										<input type="text" class="form-control" name="editUsername" value="${userName}">
+										<label for="staticEmail"><fmt:message key="signin_user" /></label>
+										<input type="text" readonly class="form-control" name="editUsername" value="${userName}">
 									</div>
 									 <div class="form-group">
-									    <label for="staticEmail"><fmt:message key="signin_email" /></label>
-									    <input type="email" readonly class="form-control-plaintext" name="editEmail" aria-describedby="emailHelp" value="administrator@example.com">
+									    <label for="newEmailAddress"><fmt:message key="signin_email" /></label>
+									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
 									 </div>
 									 <div class="form-group">
 										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="editPass" value="${user.password}">
 									 </div>									 	
-									 <div class="form-check disabled">
-									  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''} disabled>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop1" />
-									  </label>									  
-									</div>
-									<div class="form-check disabled">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Team Owner" ${user.userType=='Team Owner'?'checked':''} disabled>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop2" />
-									  </label>
-									</div>
+									 <!-- Pre-checked radio button for referee-profie-edit  -->
 									<div class="form-check">
 									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''} checked>
 									  <label class="form-check-label" for="editRadio">

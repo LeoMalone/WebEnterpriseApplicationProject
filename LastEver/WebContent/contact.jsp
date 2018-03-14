@@ -167,7 +167,7 @@
 							<h4 class="card-header">
 								<fmt:message key="ab_head4" />
 							</h4>
-					<form action="getInTouch" method="POST"> <!-- Need to create getInTouch page-->
+					<form action="./getInTouch" method="POST"> <!-- Need to create getInTouch page-->
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group" align="left">
