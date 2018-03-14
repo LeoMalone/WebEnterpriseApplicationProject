@@ -115,7 +115,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName} ***: Your Referee Home Page<br \>*** THIS PULLS USERNAME INSTEAD OF FIRSTNAME
+					${userName}: Your Referee Home Page<br \>
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -124,11 +124,11 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									${userName}'s *** Profile
+									${userName}'s Profile
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View and Edit Your Referee Profile <br \> <b>DOESN'T PULL USER'S ID IN URL</b>
+										View and Edit Your Referee Profile <br \>
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
@@ -140,15 +140,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									${userName}'s *** Assignments
+									${userName}'s Assignments
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View Your Referee Assignments <br \> <b>NOT YET FUNCTIONAL</b><br \><b> DOESN'T PULL USER'S ID IN URL</b>
+										View Your Referee Assignments <br \>
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./refAssignments?=${id}" class="btn btn-outline-light">Go To Your Assignments</a>
+								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Your Assignments</a>
 								</div>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-black bg-dark">
 								<h4 class="card-header">
-									<font color="white"> ${userName}'s *** Status</font>
+									<font color="white"> ${userName}'s Status</font>
 								</h4>
 								<div class="card-body">
 									<ul class="list-group">
