@@ -125,7 +125,7 @@ public class EditScheduleServlet extends HttpServlet {
 		} else {
 			// Set ScheduleBean parameters
 			schedule.setTitle(sb.toString());
-			schedule.setStart(newDate);
+			schedule.setGameDate(newDate);
 			schedule.setGameTime(newTime);
 			schedule.setHomeTeam(newHomeTeam);
 			schedule.setAwayTeam(newAwayTeam);

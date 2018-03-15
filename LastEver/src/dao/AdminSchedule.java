@@ -29,19 +29,23 @@ public class AdminSchedule {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getSchedule = conn.prepareStatement("SELECT gameID, gameDate, gameTime, homeTeam, homeScore, awayTeam, awayScore, gameStatus from schedule");
+	        getSchedule = conn.prepareStatement("select s.gameID, s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
+	        		+ " s.homeScore, concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus from"
+	        		+ " schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID ="
+	        		+ " s.awayTeam inner join teamxdivision td on td.teamID = h.teamID");
 	        rs = getSchedule.executeQuery();
 	        
 	        while(rs.next()) {
 	        	ScheduleBean sb = new ScheduleBean();
-	        	sb.setTitle("Game ID: " + rs.getString(1));
-	        	sb.setStart(rs.getString(2));
+	        	sb.setTitle(rs.getString(4) + " vs " + rs.getString(7));
+	        	sb.setStart(rs.getString(2), rs.getString(3));
+	        	sb.setGameDate(rs.getString(2));
 	        	sb.setGameTime(rs.getString(3));
-	        	sb.setHomeTeam(rs.getString(4));
-	        	sb.setHomeScore(rs.getString(5));
-	        	sb.setAwayTeam(rs.getString(6));
-	        	sb.setAwayScore(rs.getString(7));
-	        	sb.setGameStatus(rs.getString(8));
+	        	sb.setHomeTeam(rs.getString(5));
+	        	sb.setHomeScore(rs.getString(6));
+	        	sb.setAwayTeam(rs.getString(8));
+	        	sb.setAwayScore(rs.getString(9));
+	        	sb.setGameStatus(rs.getString(10));
 	        	sb.setUrl("./editSchedule?=" + rs.getString(1));
 	        	schedule.add(sb);
 	        	status = true;
@@ -89,7 +93,7 @@ public class AdminSchedule {
 	        rs = getSchedule.executeQuery();
 	        
 	        if(rs.next()) {
-	        	schedule.setStart(rs.getString(2));
+	        	schedule.setGameDate(rs.getString(2));
 	        	schedule.setGameTime(rs.getString(3));
 	        	schedule.setHomeTeam(rs.getString(4));
 	        	schedule.setHomeScore(rs.getString(5));
@@ -136,7 +140,7 @@ public class AdminSchedule {
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        updateSchedule = conn.prepareStatement("UPDATE schedule SET gameDate=?, gameTime=?, homeTeam=?, homeScore=?, awayTeam=?, awayScore=?, gameStatus=? WHERE gameID=?");
-	        updateSchedule.setString(1, schedule.getStart());
+	        updateSchedule.setString(1, schedule.getGameDate());
 	        updateSchedule.setString(2, schedule.getGameTime());
 	        updateSchedule.setString(3, schedule.getHomeTeam());
 	        updateSchedule.setString(4, schedule.getHomeScore());
@@ -186,7 +190,7 @@ public class AdminSchedule {
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        createSchedule = conn.prepareStatement("INSERT INTO schedule (gameDate, gameTime, homeTeam, homeScore, awayTeam, awayScore, gameStatus) VALUES (?, ?, ?, ?, ?, ?, ?)");
-	        createSchedule.setString(1, schedule.getStart());
+	        createSchedule.setString(1, schedule.getGameDate());
 	        createSchedule.setString(2, schedule.getGameTime());
 	        createSchedule.setString(3, schedule.getHomeTeam());
 	        createSchedule.setString(4, schedule.getHomeScore());

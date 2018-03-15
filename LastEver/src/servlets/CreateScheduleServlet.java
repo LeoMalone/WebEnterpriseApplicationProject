@@ -112,7 +112,7 @@ public class CreateScheduleServlet extends HttpServlet {
 		} else {
 			//Create Schedule bean and set parameters
 			ScheduleBean schedule = new ScheduleBean();	
-			schedule.setStart(newDate);
+			schedule.setGameDate(newDate);
 			schedule.setGameTime(newTime);
 			schedule.setHomeTeam(newHomeTeam);
 			schedule.setAwayTeam(newAwayTeam);
