@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
@@ -46,6 +48,7 @@ public class CreateAccountServlet extends HttpServlet {
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
 		String userType = request.getParameter("createRadio");
+		String hashedpw = null;
 
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
@@ -65,9 +68,12 @@ public class CreateAccountServlet extends HttpServlet {
 			if (userType.equals(TEAM_OW))
 				ut = TEAM_OW;
 
+			//Using BCrypt hash the users password with a new generated salt
+	        hashedpw = BCrypt.hashpw(newPassword, BCrypt.gensalt(13));
+			
 			// Create new userBean
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, newPassword, ut, timestamp);
+			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, hashedpw, ut, timestamp);
 
 			// If createNewUser method returns true
 			if (CreateAccount.createNewUser(user)) {

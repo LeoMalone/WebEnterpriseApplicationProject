@@ -134,7 +134,6 @@
 									    	<th scope="col">Last Name</th>
 										    <th scope="col">User Type</th>
 										    <th scope="col">Email Address</th>
-										    <th scope="col">Password</th>
 										    <th scope="col">Email Validated</th>
 										    <th scope="col">Account Created</th>
 										    <th scope="col">Last Account Update</th>
@@ -150,7 +149,6 @@
 								        	<td scope="col">${user.lastName}</td>
 								        	<td scope="col">${user.userType}</td>
 								        	<td scope="col">${user.emailAddress}</td>
-								        	<td scope="col">${user.password}</td>
 								        	<td scope="col">${user.emailValidated}</td>
 								        	<td scope="col">${user.accountCreated.toString()}</td>
 								        	<td scope="col">${user.accountUpdated}</td>

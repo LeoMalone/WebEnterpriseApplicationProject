@@ -162,7 +162,7 @@
 										 </div>
 										 <div class="form-group">
 											<label for="newPass"><fmt:message key="signin_password" /></label>
-											<input type="password" class="form-control" name="editPass" value="${user.password}">
+											<input type="password" class="form-control" name="editPass" placeholder="Keep blank to not change password">
 										 </div>									 	
 										 <div class="form-check">
 										  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>

@@ -29,7 +29,7 @@ public class AdminUsers {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allUsers = conn.prepareStatement("SELECT userID, userFirstName, userLastName, username, userType, emailAddress, password, emailValidated, accountCreated, accountUpdated, lastLogin from users");
+	        allUsers = conn.prepareStatement("SELECT userID, userFirstName, userLastName, username, userType, emailAddress, emailValidated, accountCreated, accountUpdated, lastLogin from users");
 	        rs = allUsers.executeQuery();
 	        
 	        
@@ -41,11 +41,10 @@ public class AdminUsers {
 	        	ub.setUsername(rs.getString(4));
 	        	ub.setUserType(rs.getString(5));
 	        	ub.setEmail(rs.getString(6));
-	        	ub.setPassword(rs.getString(7));
-	        	ub.setEmailValidated(rs.getInt(8));
-	        	ub.setAccountCreated(rs.getTimestamp(9));
-	        	ub.setAccountUpdated(rs.getTimestamp(10));
-	        	ub.setLastLogin(rs.getTimestamp(11));	        	
+	        	ub.setEmailValidated(rs.getInt(7));
+	        	ub.setAccountCreated(rs.getTimestamp(8));
+	        	ub.setAccountUpdated(rs.getTimestamp(9));
+	        	ub.setLastLogin(rs.getTimestamp(10));	        	
 	        	userList.add(ub);
 	        	
 	        	status = true;

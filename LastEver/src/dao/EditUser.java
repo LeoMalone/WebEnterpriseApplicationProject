@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import beans.UserBean;
 import db.ConnectionManager;
 
@@ -77,20 +79,37 @@ public class EditUser {
 	    Connection conn = null;					// DB Connection
 	    PreparedStatement updateUser = null;
 	    int result = 0;
+	    String hashedpw = null;
 	
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=?, userFirstName=?, userLastName=?, accountUpdated=? WHERE userID=?");
-	        updateUser.setString(1, user.getUsername());
-	        updateUser.setString(2, user.getUserType());
-	        updateUser.setString(3, user.getEmailAddress());
-	        updateUser.setString(4, user.getPassword());
-	        updateUser.setInt(5, 1);
-	        updateUser.setString(6, user.getFirstName());
-	        updateUser.setString(7, user.getLastName());
-	        updateUser.setTimestamp(8, user.getAccountUpdated());
-	        updateUser.setString(9, user.getId());
+	        
+	        if(user.getPassword() == "") {
+	        	updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, emailValidated=?, userFirstName=?, userLastName=?, accountUpdated=? WHERE userID=?");
+	        	updateUser.setString(1, user.getUsername());
+		        updateUser.setString(2, user.getUserType());
+		        updateUser.setString(3, user.getEmailAddress());
+		        updateUser.setInt(4, 1);
+		        updateUser.setString(5, user.getFirstName());
+		        updateUser.setString(6, user.getLastName());
+		        updateUser.setTimestamp(7, user.getAccountUpdated());
+		        updateUser.setString(8, user.getId());
+	        
+	        } else {
+	        	updateUser = conn.prepareStatement("UPDATE users SET username=?, userType=?, emailAddress=?, password=?, emailValidated=?, userFirstName=?, userLastName=?, accountUpdated=? WHERE userID=?");
+	        	//Using BCrypt hash the users password with a new generated salt
+		        hashedpw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(13));
+		        updateUser.setString(1, user.getUsername());
+		        updateUser.setString(2, user.getUserType());
+		        updateUser.setString(3, user.getEmailAddress());
+		        updateUser.setString(4, hashedpw);
+		        updateUser.setInt(5, 1);
+		        updateUser.setString(6, user.getFirstName());
+		        updateUser.setString(7, user.getLastName());
+		        updateUser.setTimestamp(8, user.getAccountUpdated());
+		        updateUser.setString(9, user.getId());
+	        }
 	        
 	        result = updateUser.executeUpdate();	        
 	        if(result == 1) {
