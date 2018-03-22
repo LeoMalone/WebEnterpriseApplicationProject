@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
@@ -139,8 +142,8 @@
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty team}">
-									<fmt:message key="team_head" />
-									</c:when>
+							<fmt:message key="team_head" />
+						</c:when>
 						<c:otherwise>
 							<c:forEach items="${team}" var="t">
 								<c:out value="${t.teamName}" />
@@ -155,7 +158,7 @@
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty team}">
-									<fmt:message key="team_no_info" />
+										<fmt:message key="team_no_info" />
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${team}" var="t">
@@ -221,7 +224,8 @@
 																<td><b><fmt:message key="team_contact" /></b></td>
 																<td><a
 																	href="mailto:<c:out value="${to.emailAddress}" />">
-																		<fmt:message key="team_contact_owner" /></a></td>
+																		<fmt:message key="team_contact_owner" />
+																</a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>
@@ -341,7 +345,7 @@
 								<h4 class="card-header">
 									<fmt:message key="div_head2" />
 								</h4>
-								<table id="standings"
+								<table id="schedule"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -368,10 +372,10 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
+																<fmt:formatDate type="date" pattern="yyyy-dd-MM"
 																	value="${sched.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if></td>
 														<td style="text-align: center"><c:if
@@ -407,7 +411,7 @@
 								<h4 class="card-header">
 									<fmt:message key="div_head3" />
 								</h4>
-								<table id="standings"
+								<table id="results"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -435,10 +439,10 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
+																<fmt:formatDate type="date" pattern="YYYY-dd-MM"
 																	value="${res.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${res.date}" />
 															</c:if></td>
 														<td><a href="team?id=${res.homeID}">${res.homeTeam}</a></td>
@@ -464,7 +468,7 @@
 								<h4 class="card-header">
 									<fmt:message key="div_head5" />
 								</h4>
-								<table id="standings"
+								<table id="statistics"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -536,5 +540,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/team.js"></script>
 </body>
 </html>

@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
@@ -193,7 +196,7 @@
 								<fmt:message key="div_head5" />
 							</h4>
 							<div class="card-body table-responsive">
-								<table id="standings"
+								<table id="statistics"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -266,5 +269,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/statistics.js"></script>
 </body>
 </html>

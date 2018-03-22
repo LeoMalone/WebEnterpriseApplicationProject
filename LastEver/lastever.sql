@@ -81,6 +81,60 @@ INSERT INTO `gamestatistics` VALUES (1,1,2,0,0,0),(2,1,3,1,1,0),(3,1,10,1,0,0),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `league`
+--
+
+DROP TABLE IF EXISTS `league`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `league` (
+  `leagueID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `leagueName` varchar(100) NOT NULL,
+  `leaguePlayoffs` tinyint(1) NOT NULL DEFAULT '1',
+  `leaguePlayoffTeams` smallint(5) unsigned DEFAULT NULL,
+  `leagueStatus` varchar(100) NOT NULL DEFAULT 'Newly Created',
+  PRIMARY KEY (`leagueID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `league`
+--
+
+LOCK TABLES `league` WRITE;
+/*!40000 ALTER TABLE `league` DISABLE KEYS */;
+INSERT INTO `league` VALUES (1,'Mens League',1,2,'In Progress'),(2,'Womens League',1,2,'In Progress'),(3,'Co-Ed League',1,4,'Newly Created');
+/*!40000 ALTER TABLE `league` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `leaguexdivision`
+--
+
+DROP TABLE IF EXISTS `leaguexdivision`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `leaguexdivision` (
+  `leagueID` bigint(20) NOT NULL,
+  `divisionID` bigint(20) NOT NULL,
+  PRIMARY KEY (`leagueID`,`divisionID`),
+  KEY `divisionID_idx` (`divisionID`),
+  CONSTRAINT `divisionID` FOREIGN KEY (`divisionID`) REFERENCES `division` (`divisionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `leagueID` FOREIGN KEY (`leagueID`) REFERENCES `league` (`leagueID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `leaguexdivision`
+--
+
+LOCK TABLES `leaguexdivision` WRITE;
+/*!40000 ALTER TABLE `leaguexdivision` DISABLE KEYS */;
+INSERT INTO `leaguexdivision` VALUES (2,1),(1,2),(3,3);
+/*!40000 ALTER TABLE `leaguexdivision` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `news`
 --
 
@@ -460,7 +514,8 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `emailAddress` varchar(100) NOT NULL,
-  `emailValidated` tinyint(1) NOT NULL,
+  `emailValidated` tinyint(1) NOT NULL DEFAULT '0',
+  `adminActivated` tinyint(1) NOT NULL DEFAULT '0',
   `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `accountUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastLogin` timestamp NULL DEFAULT NULL,
@@ -480,7 +535,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,'2018-02-26 23:14:02','2018-03-21 20:46:44','2018-03-21 20:47:05','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,'2018-02-26 23:14:02','2018-03-21 20:17:31','2018-03-21 20:26:45','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-03-21 20:25:43','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,'2018-03-14 20:09:12','2018-03-21 20:21:56','2018-03-14 21:45:43','Referee',NULL),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-03-14 20:09:51','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-03-15 02:20:31','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-03-21 20:46:44','2018-03-22 00:32:30','Administrator',NULL),(2,NULL,'Kevin','Johnson','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-03-21 20:17:31','2018-03-21 20:26:45','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-03-21 20:25:43','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-03-21 20:21:56','2018-03-14 21:45:43','Referee',NULL),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-03-14 20:09:51','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-03-15 02:20:31','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -669,4 +724,4 @@ USE `lastever`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-21 16:52:09
+-- Dump completed on 2018-03-22 14:03:42
