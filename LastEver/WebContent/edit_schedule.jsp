@@ -150,7 +150,7 @@
 								<form action="editSchedule?=${schedule.title}" method="POST">								
 									<div class="form-group">
 										<label for="editGameDate">Game Date</label>
-									    <input type="text" class="form-control"  id="datePickInput" name="editGameDate" value="${schedule.start}">
+									    <input type="text" class="form-control"  id="datePickInput" name="editGameDate" value="${schedule.gameDate}">
 									</div>
 									<div class="form-group clockpicker">
 										<label for="editGameDate">Game Time</label>
