@@ -258,7 +258,7 @@
 					</div>
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>

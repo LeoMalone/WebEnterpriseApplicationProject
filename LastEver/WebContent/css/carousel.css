@@ -1,3 +1,4 @@
 .carousel-inner{
-    height: 385px;
+    max-height: 385px;
+    overflow: hidden;
 }

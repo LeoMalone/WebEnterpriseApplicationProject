@@ -133,7 +133,7 @@
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-8 mb-5">
 						<div class="card">
 							<div class="card-body">
 								<div id="mainCarousel" class="carousel slide"
@@ -163,7 +163,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 mb-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-header">
@@ -197,7 +197,7 @@
 					</div>
 					<c:choose>
 						<c:when test="${empty news}">
-							<div class="col-lg-12 mb-5 mt-5">
+							<div class="col-lg-12 mb-10">
 								<div class="card">
 									<h4 class="card-header">
 										<fmt:message key="news_no_news" />

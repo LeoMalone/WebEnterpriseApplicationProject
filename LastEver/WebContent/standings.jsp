@@ -189,7 +189,7 @@
 							<h4 class="card-header">
 								<fmt:message key="div_head4" />
 							</h4>
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>

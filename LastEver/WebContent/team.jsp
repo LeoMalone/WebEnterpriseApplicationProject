@@ -235,7 +235,7 @@
 					</div>
 					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<h4 class="card-header">
 									<fmt:message key="div_head4" />
 								</h4>
@@ -337,7 +337,7 @@
 					-->
 					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<h4 class="card-header">
 									<fmt:message key="div_head2" />
 								</h4>
@@ -403,7 +403,7 @@
 					</div>
 					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<h4 class="card-header">
 									<fmt:message key="div_head3" />
 								</h4>
@@ -460,7 +460,7 @@
 					</div>
 					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-body table-responsive">
 								<h4 class="card-header">
 									<fmt:message key="div_head5" />
 								</h4>
