@@ -19,9 +19,11 @@ public class Index {
 	 * @param lang 
 	 * @param <NewsBean>
 	 * @param lang - The current language of the website
+	 * @param offset - The offset to get the news from (for pagination)
+	 * @param maxRows - The number of news articles to be fetched each time
 	 * @return status - boolean value
 	 */
-	public static boolean getNews(List<NewsBean> news, String lang) { 
+	public static boolean getNews(List<NewsBean> news, String lang, int offset, int maxRows) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -33,7 +35,9 @@ public class Index {
 			conn = ConnectionManager.getConnection();
 
 			getNews = conn.prepareStatement("select u.userName, n.newsTitle, n.newsTime, n.newsContent from news n"
-					+ " inner join users u on u.userID = n.userID order by n.newsTime desc");
+					+ " inner join users u on u.userID = n.userID order by n.newsTime desc limit ?,?");
+			getNews.setInt(1, offset);
+			getNews.setInt(2, maxRows);
 			rs = getNews.executeQuery();
 			status = rs.next();
 
@@ -78,4 +82,56 @@ public class Index {
 		}
 		return status;
 	}
+	
+	/**
+	 * The getNews method gets the number of articles
+	 * @param dId - The current division id
+	 * @return number - int value
+	 */
+	public static int numberOfArticles() { 
+
+		int number = 0;							// number of news articles in database
+		Connection conn = null;					// DB connection
+		PreparedStatement getNews = null;		// SQL query
+		ResultSet rs = null;					// returned query result set
+
+		// Connect to Database and execute SELECT query
+		try {
+			conn = ConnectionManager.getConnection();
+
+			getNews = conn.prepareStatement("select count(newsID) from news");
+			rs = getNews.executeQuery();
+			rs.next();
+			//store the number of articles
+			number = rs.getInt(1);
+
+		// close all connections and handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getNews != null) {
+				try {
+					getNews.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return number;
+	}
+	
 }

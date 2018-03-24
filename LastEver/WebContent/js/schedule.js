@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	$('#statistics').DataTable({ 
+	$('#schedule').DataTable({ 
 		searching: false,
-		order: [[4, "desc"]],
+		order: [[0, "asc"]],
 		pageLength: 25,
 		lengthChange: false
-		});
+	});
 });

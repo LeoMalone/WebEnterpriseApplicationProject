@@ -197,14 +197,15 @@
 					</div>
 					<c:choose>
 						<c:when test="${empty news}">
-							<div class="col-lg-12 mb-10">
+							<div class="col-lg-12 mb-5">
 								<div class="card">
 									<h4 class="card-header">
 										<fmt:message key="news_no_news" />
 									</h4>
-									<div class="card-body"></div>
-									<b style="text-align: center"><fmt:message
-											key="news_no_news_message" /></b>
+									<div class="card-body">
+										<b style="text-align: center"><fmt:message
+												key="news_no_news_message" /></b>
+									</div>
 								</div>
 							</div>
 						</c:when>
@@ -217,7 +218,9 @@
 										</h4>
 										<div class="card-body">
 											<c:out value="${n.postedTime}" />
-											| <fmt:message key="news_by" />:
+											|
+											<fmt:message key="news_by" />
+											:
 											<c:out value="${n.userName}" />
 											<br></br>
 											<c:out value="${n.content}" escapeXml="false" />
@@ -227,6 +230,36 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+					<div class="col-lg-12 mt-5 mb-5">
+						<div class="card">
+							<div class="card-body">
+								<ul class="pagination justify-content-center">
+									<c:choose>
+										<c:when test="${currPage eq 1}">
+											<li class="page-item disabled"><a class="page-link"
+												href="#" tabindex="-1">Previous</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="index?page=${currPage - 1}">Previous</a></li>
+										</c:otherwise>
+									</c:choose>
+									<li class="page-item active"><a class="page-link"
+										href="index?page=${currPage}"><c:out value="${currPage}" /></a></li>
+									<c:choose>
+										<c:when test="${currPage + 1 gt totalPages}">
+											<li class="page-item disabled"><a class="page-link"
+												href="#" tabindex="-1">Next</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="index?page=${currPage + 1}">Next</a></li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</fmt:bundle>
 			<!-- /.row -->

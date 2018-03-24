@@ -8,6 +8,9 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -34,6 +37,8 @@ public class IndexServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
+		int page = 1;
+		int newsArticles = 5;
 		
 		/****************** COOKIE LOGIC ****************/
 
@@ -79,15 +84,26 @@ public class IndexServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
+		//determines what page the site is on and displays the news from the range
+		if(request.getParameter("page") != null) {
+			Pattern p = Pattern.compile("^[1-9][0-9]*$");
+			Matcher m1;
+			
+			m1 = p.matcher((String)request.getParameter("page"));
+			
+			if(m1.matches()) {
+				page = Integer.parseInt((String)request.getParameter("page"));
+			}
+		}
 		
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
-			Index.getNews(nlb, newLang);
+			Index.getNews(nlb, newLang, (page-1)*newsArticles, newsArticles);
 		else
-			Index.getNews(nlb, language);
+			Index.getNews(nlb, language, (page-1)*newsArticles, newsArticles);
 		
 		//get divisions for the nav bar
 		Division.getAllDivisions(dlb);
@@ -96,6 +112,8 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("news", nlb);
 		request.setAttribute("allDiv", dlb);	
 		request.setAttribute("userName", userName);
+		request.setAttribute("currPage", page);
+		request.setAttribute("totalPages", (int) Math.ceil(Index.numberOfArticles() * 1.0 / newsArticles));
 		
 		//forwards to the index page
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  

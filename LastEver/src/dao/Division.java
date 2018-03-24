@@ -21,9 +21,11 @@ public class Division {
 	 * @param <NewsBean>
 	 * @param id - The current division id
 	 * @param lang - The current language of the website
+	 * @param offset - The offset to get the news from (for pagination)
+	 * @param maxRows - The number of news articles to be fetched each time
 	 * @return status - boolean value
 	 */
-	public static boolean getNews(String id, List<NewsBean> news, String lang) { 
+	public static boolean getNews(String id, List<NewsBean> news, String lang, int offset, int maxRows) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -33,12 +35,12 @@ public class Division {
 		ResultSet rs = null;					// returned query result set
 		String divisionName = null;				// division name to be used in second query
 
-		// Connect to Database and execute SELECT query with UserBean data
+		// Connect to Database and execute SELECT query
 		try {
 			conn = ConnectionManager.getConnection();
 			getDivision = conn.prepareStatement("select divisionName from division where divisionID = ?");
 			getDivision.setString(1, id);
-
+			
 			resultSet = getDivision.executeQuery();
 			status = resultSet.next();
 
@@ -49,8 +51,11 @@ public class Division {
 			if(status) {
 				getNews = conn.prepareStatement("select u.userName, n.newsTitle, n.newsTime, n.newsContent from news n"
 						+ " inner join users u on u.userID = n.userID inner join newsxtags nt on nt.newsID = n.newsID"
-						+ " inner join tags t on nt.tagID = t.tagID where tagDescription = ? order by n.newsTime desc");
+						+ " inner join tags t on nt.tagID = t.tagID where tagDescription = ? order by n.newsTime desc"
+						+ " LIMIT ?,?");
 				getNews.setString(1, divisionName);
+				getNews.setInt(2, offset);
+				getNews.setInt(3, maxRows);
 				rs = getNews.executeQuery();
 				status = rs.next();
 
@@ -109,6 +114,89 @@ public class Division {
 			}
 		}
 		return status;
+	}
+	
+	/**
+	 * The getNews method gets the number of articles associated with each division
+	 * @param dID - The current division id
+	 * @return number - int value
+	 */
+	public static int numberOfArticles(String dID) { 
+
+		boolean status = false;					// query status
+		Connection conn = null;					// DB connection
+		PreparedStatement getDivision = null;	// SQL query
+		PreparedStatement getNews = null;		// SQL query
+		ResultSet resultSet = null;				// returned query result set
+		ResultSet rs = null;					// returned query result set
+		String divisionName = null;				// division name to be used in second query
+		int number = 0;							// number of news articles
+
+		// Connect to Database and execute SELECT query
+		try {
+			conn = ConnectionManager.getConnection();
+			getDivision = conn.prepareStatement("select divisionName from division where divisionID = ?");
+			getDivision.setString(1, dID);
+			
+			resultSet = getDivision.executeQuery();
+			status = resultSet.next();
+
+			//gets the divisionName in order to get the news associated with the division
+			divisionName = resultSet.getString(1);
+
+			//if there is a result then get the news amount
+			if(status) {
+				getNews = conn.prepareStatement("select count(n.newsID) from news n inner join newsxtags nt on nt.newsID"
+						+ " = n.newsID inner join tags t on nt.tagID = t.tagID where t.tagDescription = ?");
+				getNews.setString(1, divisionName);
+				rs = getNews.executeQuery();
+				status = rs.next();
+				
+				number = rs.getInt(1);
+				
+			}
+
+			// close all connections and handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getDivision != null) {
+				try {
+					getDivision.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getNews != null) {
+				try {
+					getNews.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return number;
 	}
 	
 	/**
