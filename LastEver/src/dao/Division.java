@@ -117,7 +117,7 @@ public class Division {
 	}
 	
 	/**
-	 * The getNews method gets the number of articles associated with each division
+	 * The numberOfArticles method gets the number of articles associated with each division
 	 * @param dID - The current division id
 	 * @return number - int value
 	 */

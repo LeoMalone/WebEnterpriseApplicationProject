@@ -144,7 +144,7 @@
 					<c:forEach var="row" items="${currDiv}">
 						<c:out value="${row.divisionName}" />
 					</c:forEach>
-					Schedule
+					<fmt:message key="div_head2" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">

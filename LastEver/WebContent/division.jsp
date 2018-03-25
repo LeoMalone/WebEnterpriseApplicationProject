@@ -238,24 +238,26 @@
 										<c:choose>
 											<c:when test="${currPage eq 1}">
 												<li class="page-item disabled"><a class="page-link"
-													href="#" tabindex="-1">Previous</a></li>
+													href="#" tabindex="-1"><fmt:message key="prev_page" /></a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="division?id=${d.divisionId}?page=${currPage - 1}">Previous</a></li>
+													href="division?id=${d.divisionId}&page=${currPage - 1}"><fmt:message
+															key="prev_page" /></a></li>
 											</c:otherwise>
 										</c:choose>
 										<li class="page-item active"><a class="page-link"
-											href="division?id=${d.divisionId}?page=${currPage}"><c:out
+											href="division?id=${d.divisionId}&page=${currPage}"><c:out
 													value="${currPage}" /></a></li>
 										<c:choose>
 											<c:when test="${currPage + 1 gt totalPages}">
 												<li class="page-item disabled"><a class="page-link"
-													href="#" tabindex="-1">Next</a></li>
+													href="#" tabindex="-1"><fmt:message key="next_page" /></a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="division?id=${d.divisionId}?page=${currPage + 1}">Next</a></li>
+													href="division?id=${d.divisionId}&page=${currPage + 1}"><fmt:message
+															key="next_page" /></a></li>
 											</c:otherwise>
 										</c:choose>
 									</ul>
