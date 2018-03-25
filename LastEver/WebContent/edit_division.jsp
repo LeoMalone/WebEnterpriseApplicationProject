@@ -24,53 +24,65 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever</title>
-</fmt:bundle>
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<title>LastEver</title>
 </head>
 
 <body>
-	<div class="modal fade" id="deleteDivision" tabindex="-1" role="dialog" aria-labelledby="deleteDivisionLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteDivisionLabel">Delete: ${division.divisionName}</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	Are You sure you want to delete this Division?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <form action="deleteDivision?=${division.divisionId}" method="POST">
-	        	<button type="submit" class="btn btn-danger">Delete Division</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+	<fmt:bundle basename="TestBundle">
+		<div class="modal fade" id="deleteDivision" tabindex="-1"
+			role="dialog" aria-labelledby="deleteDivisionLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteDivisionLabel">
+							<fmt:message key="admin_eu_model_del" />
+							: ${division.divisionName}
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<fmt:message key="admin_ed_modal_body" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">
+							<fmt:message key="admin_eu_model_cls" />
+						</button>
+						<form action="deleteDivision?=${division.divisionId}"
+							method="POST">
+							<button type="submit" class="btn btn-danger">
+								<fmt:message key="admin_ed_del" />
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -85,12 +97,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -111,10 +121,11 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
-							<form action="" method="post">
+							<form action="./adminDivisions" method="GET">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
 									<option value="en"
@@ -127,48 +138,49 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-
-	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">
-					${userName}: ${division.divisionName}
-				</h1>				
+			<!-- Page Content -->
+			<div class="cards-container container">
+				<h1 class="my-4">${userName}: ${division.divisionName}</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Edit Division Credentials
+								<fmt:message key="admin_ed_title" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-									<form action="editDivision?=${division.divisionId}" method="POST">								
-										<div class="form-group">
-											<label for="editDivisionName">Division Name</label>
-											<input type="text" class="form-control" name="editDivisionName" value="${division.divisionName}">
-										</div>
-										<button type="submit" class="btn btn-outline-success">Save</button>	
-									</form>								
-								</p>							
-							</div>							
+								<form action="editDivision?=${division.divisionId}"
+									method="POST">
+									<div class="form-group">
+										<label for="editDivisionName"><fmt:message
+												key="admin_cd_name" /></label> <input type="text"
+											class="form-control" name="editDivisionName"
+											value="${division.divisionName}">
+									</div>
+									<button type="submit" class="btn btn-outline-success">
+										<fmt:message key="admin_eu_save" />
+									</button>
+								</form>
+								</p>
+							</div>
 							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDivision">Delete Division</button>
-							</div>							
+								<button type="button" class="btn btn-danger" data-toggle="modal"
+									data-target="#deleteDivision">
+									<fmt:message key="admin_ed_del" />
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>					
+				</div>
 				<!-- /row -->
-			</fmt:bundle>
+			</div>
 		</div>
-	</div>
-	</fmt:bundle>
+		
 		<!-- Footer -->
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
@@ -178,9 +190,13 @@
 			</div>
 		</footer>
 
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	</fmt:bundle>
 </body>
 </html>

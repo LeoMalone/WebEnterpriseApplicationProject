@@ -21,35 +21,34 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<link href="fullcalendar/css/fullcalendar.css" rel="stylesheet"/>
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - Divisions</title>
-</fmt:bundle>
+<link href="fullcalendar/css/fullcalendar.css" rel="stylesheet" />
+<title>LastEver</title>
 </head>
 <body>
+	<fmt:bundle basename="TestBundle">
 
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -64,12 +63,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -90,7 +87,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form>
@@ -106,35 +104,27 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>	
+		</nav>
 
-	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">
-					${userName}: Schedule
-				</h1>
-				<a href="./scheduleCreate" class="btn btn-success">Add Entry</a>					
+			<!-- Page Content -->
+			<div class="cards-container container">
+				<h1 class="my-4">${userName}: <fmt:message key="as_head" /></h1>
+				<a href="./scheduleCreate" class="btn btn-success"><fmt:message key="as_add" /></a>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card bg-light">				
-							 <div class="card-body">
-							 	<div id='calendar'>
-							 	</div>							 							 	
-							 </div>							 			
+						<div class="card bg-light">
+							<div class="card-body">
+								<div id='calendar'></div>
+							</div>
 						</div>
 					</div>
-				</div>					
+				</div>
 				<!-- /row -->
-			</fmt:bundle>
+			</div>
 		</div>
-	</div>
-	</fmt:bundle>
 		<!-- Footer -->
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
@@ -144,15 +134,20 @@
 			</div>
 		</footer>
 
-	<!-- Bootstrap core JavaScript and JQuery-->	
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- FullCalendar Scripts -->
-	<script type="text/javascript" src="fullcalendar/js/jquery.min.js"></script>
-	<script type="text/javascript" src="fullcalendar/js/moment.min.js"></script>
-	<script type="text/javascript" src="fullcalendar/js/fullcalendar.js"></script>
-	<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	</body>
+		<!-- Bootstrap core JavaScript and JQuery-->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<!-- FullCalendar Scripts + Other -->
+		<script type="text/javascript" src="fullcalendar/js/jquery.min.js"></script>
+		<script type="text/javascript" src="fullcalendar/js/moment.min.js"></script>
+		<script type="text/javascript" src="fullcalendar/js/fullcalendar.js"></script>
+		<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
+		<script defer
+			src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	</fmt:bundle>
+</body>
 </html>

@@ -25,31 +25,29 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - Create Division</title>
-</fmt:bundle>
+<title>Last Ever</title>
 </head>
 <body>
+	<fmt:bundle basename="TestBundle">
 
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -64,12 +62,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -90,7 +86,8 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form>
@@ -106,54 +103,52 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-	<div class="main-cover">
-		<fmt:bundle basename="TestBundle">
-		<div class="cards-container container">		
-				<h1 class="my-4">
-					${userName}: Create Division
-				</h1>
+		<div class="main-cover">
+			<div class="cards-container container">
+				<h1 class="my-4">${userName}: <fmt:message key="admin_cd_title" /></h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
-							<h4 class="card-header">
-								Create New Division
-							</h4>
+							<h4 class="card-header"><fmt:message key="admin_cd_create" /></h4>
 							<form action="divisionCreate" method="POST">
-							<div class="card-body">
-								<div class="form-group">
-									<label for="newDivisionName">Division Name</label>
-									<input type="text" class="form-control" name="newDivisionName" placeholder="Enter Division Name">
+								<div class="card-body">
+									<div class="form-group">
+										<label for="newDivisionName"><fmt:message key="admin_cd_name" /></label> <input
+											type="text" class="form-control" name="newDivisionName"
+											placeholder="<fmt:message key="admin_cd_ph" />">
+									</div>
 								</div>
-							</div>
-							<div class="card-footer">
-								<button type="submit" class="btn btn-success">Submit!</button>	
-							</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success"><fmt:message key="signin_button1" /></button>
+								</div>
 							</form>
-						</div>							
+						</div>
 					</div>
 				</div>
 			</div>
-		<!-- /.row -->
-		</fmt:bundle>
-	</div>
-
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
+			<!-- /.row -->
 		</div>
-	</footer>
 
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	</fmt:bundle>
 </body>
 </html>
