@@ -99,22 +99,24 @@ public class LoginServlet extends HttpServlet {
 		if(Login.validateUserLogin(user)) {
 
 			// Start session and create use cookie
-			HttpSession session = request.getSession(false);
+			HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
 			if(session!=null) {
 				//Set up user cookie
 				Cookie cookie = new Cookie("username", user.getUsername());
 				session.setMaxInactiveInterval(30*60);
 				cookie.setMaxAge(30*60);
 				response.addCookie(cookie);
-				session.setAttribute("signedIn", true);
 
 				// Get user home page
 				String url = null;
 				if(user.getUserType().equals("Administrator")) {
+					session.setAttribute("signedIn", "Administrator");
 					url = "./admin";
 				} else if(user.getUserType().equals("Referee")) {
+					session.setAttribute("signedIn", "Referee");
 					url = "./referee";
 				} else if(user.getUserType().equals("Team Owner")) {
+					session.setAttribute("signedIn", "Team Owner");
 					boolean hasTeam = Team.hasTeamByEmail(loginEmail);
 					if (!hasTeam){
 						url = "./teamCreateTeam";

@@ -36,8 +36,8 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		Team.getAllTeams(tb);
 		request.setAttribute("allTeam", tb);
 
-		if (request.getSession().getAttribute("signedIn") == null) {
-			response.sendRedirect("./login");
+		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
+			response.sendRedirect("./index");
 		} else {
 
 			Cookie[] cookies = request.getCookies();

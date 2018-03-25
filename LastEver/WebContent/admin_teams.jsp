@@ -116,18 +116,17 @@
 		<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Teams
+					${userName}: <fmt:message key="at_title" />
 				</h1>
-				<a href="./teamCreate" class="btn btn-success">Create New Team</a>					
+				<a href="./teamCreate" class="btn btn-success"><fmt:message key="at_create" /></a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">				
 							<div class="card-header">
 							    <ul class="nav nav-tabs card-header-tabs">
 							    	<li class="nav-item">
-							    		<a class="nav-link ${currentId==null?'active':''}" href="./adminTeams">No Division</a>
+							    		<a class="nav-link ${currentId==null?'active':''}" href="./adminTeams"><fmt:message key="at_nodiv" /></a>
 							    	</li>
 							    	<c:forEach  items="${divList}" var="division">
 							    		<li class="nav-item">
@@ -140,10 +139,10 @@
 							 	<table class="table table-striped">
 								 	<thead class="thead-dark">
 									    <tr>
-									      <th scope="col">Team Id</th>
-									      <th scope="col">Team Name</th>
-									      <th scope="col">Team Abbreviation</th>
-									      <th></th>
+									      <th scope="col">Id</th>
+									      <th scope="col"><fmt:message key="at_name" /></th>
+									      <th scope="col"><fmt:message key="at_abbr" /></th>
+									      <th scope="col"><fmt:message key="at_edit" /></th>
 									    </tr>
 									 </thead>
 								 	<c:forEach  items="${teamList}" var="team">
@@ -164,7 +163,6 @@
 					</div>
 				</div>					
 				<!-- /row -->
-			</fmt:bundle>
 		</div>
 	</div>
 	</fmt:bundle>

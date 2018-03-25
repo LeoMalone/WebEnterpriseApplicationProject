@@ -111,14 +111,13 @@
 		</div>
 	</nav>
 
-
 	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Admin Control Panel
+					${userName}: <fmt:message key="admin_cp" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -126,45 +125,45 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Users
+									<fmt:message key="ah_user_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Create/Edit/Delete User profiles
+										<fmt:message key="ah_user_body" />
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./adminUsers" class="btn btn-outline-light">Go To Users</a>
+								 	<a href="./adminUsers" class="btn btn-outline-light"><fmt:message key="ah_user_goto" /></a>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Teams
+									<fmt:message key="ah_team_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Create/Edit/Delete Teams
+										<fmt:message key="ah_team_body" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminTeams" class="btn btn-outline-light">Go To Teams</a>
+								 	<a href="./adminTeams" class="btn btn-outline-light"><fmt:message key="ah_team_goto" /></a>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Divisions
+									<fmt:message key="ah_div_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Create/Edit/Delete Divisions
+										<fmt:message key="ah_div_body" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminDivisions" class="btn btn-outline-light">Go To Divisions</a>
+								 	<a href="./adminDivisions" class="btn btn-outline-light"><fmt:message key="ah_div_goto" /></a>
 								</div>
 							</div>
 						</div>				
@@ -175,15 +174,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Schedules
+									<fmt:message key="ah_sched_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Create/Edit/Delete Schedule Information
+										<fmt:message key="ah_sched_body" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Schedule</a>
+								 	<a href="./adminSchedule" class="btn btn-outline-light"><fmt:message key="ah_sched_goto" /></a>
 								</div>
 							</div>
 						</div>				

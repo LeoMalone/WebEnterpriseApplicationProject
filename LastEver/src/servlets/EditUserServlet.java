@@ -44,9 +44,8 @@ public class EditUserServlet extends HttpServlet{
 		request.setAttribute("allDiv", dlb);
 		
 		// If User is not signed In redirect to sign in page
-		// TODO: distinguish between user types
-		if (request.getSession().getAttribute("signedIn") == null) {
-			response.sendRedirect("./login");
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+			response.sendRedirect("./index");
 		} else {
 			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();

@@ -25,9 +25,7 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - Create Team</title>
-</fmt:bundle>
+<title>LastEver</title>
 </head>
 <body>
 
@@ -115,25 +113,25 @@
 		<fmt:bundle basename="TestBundle">
 		<div class="cards-container container">		
 				<h1 class="my-4">
-					${userName}: Create Team
+					${userName}: <fmt:message key="admin_ct_head"/>
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Create New Team
+								<fmt:message key="admin_ct_title"/>
 							</h4>
 							<form action="teamCreate" method="POST">
 							<div class="card-body">
 								<div class="form-group">
-									<label for="newTeamName">Team Name</label>
-									<input type="text" class="form-control" name="newTeamName" placeholder="Enter Team Name">
+									<label for="newTeamName"><fmt:message key="admin_ct_tn"/></label>
+									<input type="text" class="form-control" name="newTeamName" placeholder="<fmt:message key="admin_ct_tnplace"/>">
 								</div>
 								<div class="form-group">
-									<label for="newTeamAbbr">Team Abbreviation</label>
-									<input type="text" class="form-control" name="newTeamAbbr" placeholder="Enter Team Abbreviation">
+									<label for="newTeamAbbr"><fmt:message key="admin_ct_ta"/></label>
+									<input type="text" class="form-control" name="newTeamAbbr" placeholder="<fmt:message key="admin_ct_taplace"/>">
 								</div>	
-								<label for="divRadio">Select Division</label>								 
+								<label for="divRadio"><fmt:message key="admin_ct_div"/></label>								 
 								 <c:forEach var="div1" items="${allDiv}">
 										<div class="form-check">
 										  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
@@ -144,7 +142,7 @@
 								</c:forEach>
 							</div>
 							<div class="card-footer">
-								<button type="submit" class="btn btn-success">Submit!</button>	
+								<button type="submit" class="btn btn-success"><fmt:message key="signin_button1"/></button>	
 							</div>
 							</form>
 						</div>							
