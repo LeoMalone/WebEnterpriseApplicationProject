@@ -183,7 +183,7 @@ public class ScheduleResults {
 					+ " inner join teamxdivision td on td.teamID = h.teamID left outer join venuexgame vg on s.gameID"
 					+ " = vg.gameID left outer join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
 					+ " s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
-			
+
 			getSchedule.setString(1, div);
 			getSchedule.setString(2, team);
 			getSchedule.setString(3, team);
@@ -236,7 +236,7 @@ public class ScheduleResults {
 		}
 		return status;
 	}
-	
+
 	/**
 	 * The getSchedule method gets a Teams resent results ordered by recent games first
 	 * @param <ScheduleResultsBean>
@@ -311,14 +311,16 @@ public class ScheduleResults {
 		}
 		return status;
 	}
-	
+
 	/**
 	 * The getSchedule method gets a Divisions results
 	 * @param <ScheduleResultsBean>
 	 * @param id - Current division id
+	 * @param offset - The offset to get the news from (for pagination)
+	 * @param maxRows - The number of results to be fetched each time
 	 * @return status - boolean value
 	 */
-	public static boolean getResults(String id, List<ScheduleResultsBean> sched) { 
+	public static boolean getResults(String id, List<ScheduleResultsBean> sched, int offset, int maxRows) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -332,8 +334,12 @@ public class ScheduleResults {
 					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID"
 					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
 					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = ?"
-					+ " and s.gameStatus = 'Final'");
+					+ " and s.gameStatus = 'Final' order by s.gameDate desc limit ?,?");
+
 			getResults.setString(1, id);
+			getResults.setInt(2, offset);
+			getResults.setInt(3, maxRows);
+
 			resultSet = getResults.executeQuery();
 			status = resultSet.next();
 
@@ -391,6 +397,61 @@ public class ScheduleResults {
 			}
 		}
 		return status;
+	}
+
+	/**
+	 * The numberOfResults method gets the number of results associated with each division
+	 * @param dID - The current division id
+	 * @return number - int value
+	 */
+	public static int numberOfResults(String dID) { 
+
+		boolean status = false;					// query status
+		Connection conn = null;					// DB connection
+		PreparedStatement getResult = null;		// SQL query
+		ResultSet resultSet = null;				// returned query result set
+		int number = 0;							// number of news articles
+
+		// Connect to Database and execute SELECT query
+		try {
+			conn = ConnectionManager.getConnection();
+			getResult = conn.prepareStatement("select count(s.gameID) from schedule s inner join team h"
+					+ " on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision"
+					+ " td on td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Final'");
+			getResult.setString(1, dID);
+			resultSet = getResult.executeQuery();
+			status = resultSet.next();
+
+			number = resultSet.getInt(1);
+
+
+			// close all connections and handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getResult != null) {
+				try {
+					getResult.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return number;
 	}
 
 	/**
@@ -459,7 +520,7 @@ public class ScheduleResults {
 		return status;
 	}
 
-	
+
 	/**
 	 * The getSchedule method gets a games away scorers
 	 * @param <ScorerBean>

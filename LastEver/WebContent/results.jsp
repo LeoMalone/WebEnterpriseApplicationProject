@@ -139,7 +139,7 @@
 					<c:forEach var="row" items="${currDiv}">
 						<c:out value="${row.divisionName}" />
 					</c:forEach>
-					Results
+					<fmt:message key="div_head3" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -247,8 +247,8 @@
 															</c:choose></td>
 													</tr>
 													<tr>
-														<td colspan="2"><b><fmt:message key="away_scorers" /></b>
-															<br> <c:choose>
+														<td colspan="2"><b><fmt:message
+																	key="away_scorers" /></b> <br> <c:choose>
 																<c:when test="${res.awayScore eq 0}">
 																	<fmt:message key="div_no_scorers" />
 																</c:when>
@@ -271,6 +271,41 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 mt-5 mb-5">
+						<div class="card">
+							<div class="card-body">
+								<c:forEach var="d" items="${currDiv}">
+									<ul class="pagination justify-content-center">
+										<c:choose>
+											<c:when test="${currPage eq 1}">
+												<li class="page-item disabled"><a class="page-link"
+													href="#" tabindex="-1"><fmt:message key="prev_page" /></a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="results?id=${d.divisionId}&page=${currPage - 1}"><fmt:message
+															key="prev_page" /></a></li>
+											</c:otherwise>
+										</c:choose>
+										<li class="page-item active"><a class="page-link"
+											href="results?id=${d.divisionId}&page=${currPage}"><c:out
+													value="${currPage}" /></a></li>
+										<c:choose>
+											<c:when test="${currPage + 1 gt totalPages}">
+												<li class="page-item disabled"><a class="page-link"
+													href="#" tabindex="-1"><fmt:message key="next_page" /></a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="results?id=${d.divisionId}&page=${currPage + 1}"><fmt:message
+															key="next_page" /></a></li>
+											</c:otherwise>
+										</c:choose>
+									</ul>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

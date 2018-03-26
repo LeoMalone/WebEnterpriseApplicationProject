@@ -27,7 +27,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Users</title>
+	<title>Last Ever - <fmt:message key="admin_title_user" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -117,9 +117,9 @@
 		<div class="cards-container container-fluid">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Users
+					${userName}: <fmt:message key="admin_title_user" />
 				</h1>
-				<a href="./adminCreate" class="btn btn-success">Create New User</a>					
+				<a href="./adminCreate" class="btn btn-success"><fmt:message key="au_create" /></a>					
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">
@@ -128,17 +128,17 @@
 								<table class="table table-striped">
 									<thead class="thead-dark">
 									    <tr>
-									    	<th scope="col">User ID</th>
-									    	<th scope="col">Username</th>
-									    	<th scope="col">First Name</th>
-									    	<th scope="col">Last Name</th>
-										    <th scope="col">User Type</th>
-										    <th scope="col">Email Address</th>
-										    <th scope="col">Email Validated</th>
-										    <th scope="col">Account Created</th>
-										    <th scope="col">Last Account Update</th>
-										    <th scope="col">Last Login</th>
-										    <th scope="col">Edit</th>
+									    	<th scope="col">ID</th>
+									    	<th scope="col"><fmt:message key="au_username" /></th>
+									    	<th scope="col"><fmt:message key="au_firtname" /></th>
+									    	<th scope="col"><fmt:message key="au_lastname" /></th>
+										    <th scope="col"><fmt:message key="au_usertype" /></th>
+										    <th scope="col"><fmt:message key="au_email" /></th>
+										    <th scope="col"><fmt:message key="au_email_val" /></th>
+										    <th scope="col"><fmt:message key="au_account_created" /></th>
+										    <th scope="col"><fmt:message key="au_last_up" /></th>
+										    <th scope="col"><fmt:message key="au_last_log" /></th>
+										    <th scope="col"><fmt:message key="au_edit" /></th>
 									    </tr>
 									</thead>
 								    <c:forEach items="${userList}" var="user">

@@ -26,7 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Create User</title>
+	<title>Last Ever - <fmt:message key="admin_title_cu" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -96,12 +96,8 @@
 							<form>
 								<select class="form-control form-control-sm" name="language"
 									onchange="submit()">
-									<option value="en"
-										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
-											key="english" /></option>
-									<option value="fr"
-										${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message
-											key="french" /></option>
+									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message key="english" /></option>
+									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message key="french" /></option>
 								</select>
 							</form>
 						</li>
@@ -119,8 +115,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: Create
-				</h1>
+					${userName} <fmt:message key="admin_title_cu" /></h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
@@ -130,12 +125,12 @@
 							<form action="adminCreate" method="POST">
 							<div class="card-body">
 								<div class="form-group">
-									<label for="newFirstName">First Name</label>
-									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+									<label for="newFirstName"><fmt:message key="signin_fname" /></label>
+									<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="admin_cu_fnplace" />">
 								</div>
 								<div class="form-group">
-									<label for="newLastName">Last Name</label>
-									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+									<label for="newLastName"><fmt:message key="signin_lname" /></label>
+									<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="admin_cu_fnplace" />">
 								</div>
 								<div class="form-group">
 									<label for="newUsername"><fmt:message key="signin_user" /></label>

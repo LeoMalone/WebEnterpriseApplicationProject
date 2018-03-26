@@ -140,7 +140,7 @@
 					<c:forEach var="row" items="${currDiv}">
 						<c:out value="${row.divisionName}" />
 					</c:forEach>
-					Standings
+					<fmt:message key="div_head4" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">

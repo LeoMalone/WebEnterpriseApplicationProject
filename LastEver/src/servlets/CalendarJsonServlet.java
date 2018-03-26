@@ -28,6 +28,11 @@ public class CalendarJsonServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// if user does not have Admin privileges redirect
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+			response.sendRedirect("./index");
+		}
+		
 		// List of Schedule beans to pass to FullCallendar
 		List<ScheduleBean> sbl = new ArrayList<ScheduleBean>();
 		

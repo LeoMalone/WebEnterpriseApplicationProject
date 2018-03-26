@@ -26,8 +26,6 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		response.setContentType("text/html");
 		
 		// invalidate current session if it exists
 		HttpSession session = request.getSession(false);
@@ -35,28 +33,7 @@ public class LogoutServlet extends HttpServlet {
 			session.invalidate();
 		}
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("./index");
-        rd.forward(request, response);
-	}
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		response.setContentType("text/html");
-		
-		// invalidate current session if it exists
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
-		}
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("./index");
         rd.forward(request, response);
 	}

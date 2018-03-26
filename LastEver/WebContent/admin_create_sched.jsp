@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -26,11 +25,10 @@
 <link href="clockpicker/css/clockpicker.css" rel="stylesheet" type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - Create Schedule</title>
-</fmt:bundle>
+<title>LastEver</title>
 </head>
 <body>
+<fmt:bundle basename="TestBundle">
 
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
@@ -50,7 +48,6 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -107,35 +104,33 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
 			</div>
 		</div>
 	</nav>
 
 	<div class="main-cover">
-		<fmt:bundle basename="TestBundle">
 		<div class="cards-container container">		
 				<h1 class="my-4">
-					${userName}: Create Game
+					${userName}: <fmt:message key="admin_cs_title" />
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Create New Game
+								<fmt:message key="admin_cs_head" />
 							</h4>
 							<form action="scheduleCreate" method="POST">
 							<div class="card-body">																
 								<div class="form-group">
-									<label for="editGameDate">Game Date</label>
+									<label for="editGameDate"><fmt:message key="admin_cs_date" /></label>
 								    <input type="text" class="form-control"  id="datePickInput" name="newGameDate" placeholder="yyyy-mm-dd">
 								</div>
 								<div class="form-group clockpicker">
-									<label for="newGameTime">Game Time</label>
+									<label for="newGameTime"><fmt:message key="admin_cs_time" /></label>
 								    <input type="text" class="form-control" name="newGameTime" placeholder="hh:mm">
 								</div>
 								<div class="form-group">
-									<label for="newHomeTeam">Home Team</label>
+									<label for="newHomeTeam"><fmt:message key="admin_cs_ht" /></label>
 								  	<select class="custom-select my-1 mr-sm-2" id="newHomeTeam" name="newHomeTeam">
 								    	<c:forEach items="${teamList}" var="team">
 											<option value="${team.teamId}">${team.teamName}</option>
@@ -143,7 +138,7 @@
 								  	</select>
 								</div>
 								<div class="form-group">
-									<label for="newAwayTeam">Away Team</label>
+									<label for="newAwayTeam"><fmt:message key="admin_cs_at" /></label>
 								  	<select class="custom-select my-1 mr-sm-2" id="newAwayTeam" name="newAwayTeam">
 								    	<c:forEach items="${teamList}" var="team">
 											<option value="${team.teamId}">${team.teamName}</option>
@@ -151,15 +146,15 @@
 								  	</select>
 								</div>
 								<div class="form-group">
-									<label for="newHomeScore">Home Score</label>
-									<input type="text" class="form-control" name="newHomeScore" placeholder="Set 0 if New Game">
+									<label for="newHomeScore"><fmt:message key="admin_cs_hs" /></label>
+									<input type="text" class="form-control" name="newHomeScore" placeholder="<fmt:message key="admin_cs_ph" />">
 								</div>
 								<div class="form-group">
-									<label for="newAwayScore">Away Score</label>
-									<input type="text" class="form-control" name="newAwayScore" placeholder="Set 0 if New Game">
+									<label for="newAwayScore"><fmt:message key="admin_cs_as" /></label>
+									<input type="text" class="form-control" name="newAwayScore" placeholder="<fmt:message key="admin_cs_ph" />">
 								</div>
 								<div class="form-group">
-									<label for="newGameStatus">GameStatus</label>
+									<label for="newGameStatus"><fmt:message key="admin_cs_gs" /></label>
 								  	<select class="custom-select my-1 mr-sm-2" id="newGameStatus" name="newGameStatus">
 								  		<option value="Final">Final</option>
 								  		<option value="Scheduled" selected>Scheduled</option>												
@@ -167,7 +162,7 @@
 								</div>							
 							</div>
 							<div class="card-footer">
-								<button type="submit" class="btn btn-success">Submit!</button>	
+								<button type="submit" class="btn btn-success"><fmt:message key="signin_button1" /></button>	
 							</div>
 							</form>
 						</div>							
@@ -175,7 +170,6 @@
 				</div>
 			</div>
 		<!-- /.row -->
-		</fmt:bundle>
 	</div>
 
 	<!-- Footer -->
@@ -194,5 +188,6 @@
 	<script type="text/javascript" src="date-picker/js/bootstrap-datepicker.min.js"></script>
 	<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
 	<script type="text/javascript" src="js/edit_schedule.js"></script>
+	</fmt:bundle>
 </body>
 </html>

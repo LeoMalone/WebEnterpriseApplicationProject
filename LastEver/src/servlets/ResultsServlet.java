@@ -8,6 +8,9 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -33,6 +36,8 @@ public class ResultsServlet extends HttpServlet {
 		//cookie variables
 		String userName = null;
 		String language = null;
+		int page = 1;
+		int numResults = 7;
 
 		/****************** COOKIE LOGIC ****************/
 
@@ -77,6 +82,18 @@ public class ResultsServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			response.setContentType("text/html");
 
+			//get the current page that the user is on and validate for a number greater than 0
+			if(request.getParameter("page") != null) {
+				Pattern p = Pattern.compile("^[1-9][0-9]*$");
+				Matcher m1;
+				
+				m1 = p.matcher((String)request.getParameter("page"));
+				
+				if(m1.matches()) {
+					page = Integer.parseInt((String)request.getParameter("page"));
+				}
+			}
+			
 			//bean list variables used to set data on the page
 			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
@@ -86,7 +103,7 @@ public class ResultsServlet extends HttpServlet {
 			request.setAttribute("allDiv", dlb);
 			
 			//get the results from the division
-			ScheduleResults.getResults(id, rlb);	
+			ScheduleResults.getResults(id, rlb, (page-1)*numResults, numResults);	
 
 			//make a new DivisionBean to get the current division
 			dlb = new ArrayList<DivisionBean>();	
@@ -98,6 +115,8 @@ public class ResultsServlet extends HttpServlet {
 			//set request attributes
 			request.setAttribute("results", rlb);	
 			request.setAttribute("userName", userName);
+			request.setAttribute("currPage", page);
+			request.setAttribute("totalPages", (int) Math.ceil(ScheduleResults.numberOfResults(id) * 1.0 / numResults));
 			
 			//forward to results page
 			RequestDispatcher rd = request.getRequestDispatcher("/results.jsp?id=" + id);  

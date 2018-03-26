@@ -20,58 +20,62 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="date-picker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-<link href="clockpicker/css/clockpicker.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="date-picker/css/bootstrap-datepicker3.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="clockpicker/css/clockpicker.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - Schedule</title>
-</fmt:bundle>
+<title>Last Ever</title>
 </head>
 
 <body>
-	<div class="modal fade" id="deleteSchedule" tabindex="-1" role="dialog" aria-labelledby="deleteScheduleLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteScheduleLabel">Delete: GameID ${schedule.title}</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	Are You sure you want to delete this Game?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <form action="deleteSchedule?=${schedule.title}" method="POST">
-	        	<button type="submit" class="btn btn-danger">Delete Game</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	<fmt:bundle basename="TestBundle">
+		<div class="modal fade" id="deleteSchedule" tabindex="-1"
+			role="dialog" aria-labelledby="deleteScheduleLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteScheduleLabel"><fmt:message key="admin_es_modal_title" /> ${schedule.title}</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"><fmt:message key="admin_es_modal_body" /></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal"><fmt:message key="admin_eu_model_cls" /></button>
+						<form action="deleteSchedule?=${schedule.title}" method="POST">
+							<button type="submit" class="btn btn-danger"><fmt:message key="admin_es_del" /></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -86,12 +90,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -112,10 +114,11 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
-							<form action="" method="post">
+							<form action="./adminSchedule" method="GET">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
 									<option value="en"
@@ -128,95 +131,104 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-
-	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">${userName}: Game ID ${schedule.title}</h1>				
+			<!-- Page Content -->
+			<div class="cards-container container">
+				<h1 class="my-4">${userName}: <fmt:message key="admin_es_title" /> ${schedule.title}</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
-							<h4 class="card-header">
-								Edit Schedule
-							</h4>
+							<h4 class="card-header"><fmt:message key="admin_es_head" /></h4>
 							<div class="card-body">
-								<form action="editSchedule?=${schedule.title}" method="POST">								
+								<form action="editSchedule?=${schedule.title}" method="POST">
 									<div class="form-group">
-										<label for="editGameDate">Game Date</label>
-									    <input type="text" class="form-control"  id="datePickInput" name="editGameDate" value="${schedule.gameDate}">
+										<label for="editGameDate"><fmt:message key="admin_cs_date" /></label> <input type="text"
+											class="form-control" id="datePickInput" name="editGameDate"
+											value="${schedule.gameDate}">
 									</div>
 									<div class="form-group clockpicker">
-										<label for="editGameDate">Game Time</label>
-									    <input type="text" class="form-control" name="editGameTime" value="${schedule.gameTime}">
+										<label for="editGameDate"><fmt:message key="admin_cs_time" /></label> <input type="text"
+											class="form-control" name="editGameTime"
+											value="${schedule.gameTime}">
 									</div>
 									<div class="form-group">
-										<label for="editHomeTeam">Home Team</label>
-									  	<select class="custom-select my-1 mr-sm-2" id="editHomeTeam" name="editHomeTeam">
-									    	<c:forEach items="${teamList}" var="team">
-												<option value="${team.teamId}" ${team.teamId == schedule.homeTeam ?'selected':''}>${team.teamName}</option>
+										<label for="editHomeTeam"><fmt:message key="admin_cs_ht" /></label> <select
+											class="custom-select my-1 mr-sm-2" id="editHomeTeam"
+											name="editHomeTeam">
+											<c:forEach items="${teamList}" var="team">
+												<option value="${team.teamId}"
+													${team.teamId == schedule.homeTeam ?'selected':''}>${team.teamName}</option>
 											</c:forEach>
-									  	</select>
+										</select>
 									</div>
 									<div class="form-group">
-										<label for="editAwayTeam">Away Team</label>
-									  	<select class="custom-select my-1 mr-sm-2" id="editAwayTeam" name="editAwayTeam">
-									    	<c:forEach items="${teamList}" var="team">
-												<option value="${team.teamId}" ${team.teamId == schedule.awayTeam ?'selected':''}>${team.teamName}</option>
+										<label for="editAwayTeam"><fmt:message key="admin_cs_at" /></label> <select
+											class="custom-select my-1 mr-sm-2" id="editAwayTeam"
+											name="editAwayTeam">
+											<c:forEach items="${teamList}" var="team">
+												<option value="${team.teamId}"
+													${team.teamId == schedule.awayTeam ?'selected':''}>${team.teamName}</option>
 											</c:forEach>
-									  	</select>
+										</select>
 									</div>
 									<div class="form-group">
-										<label for="editHomeScore">Home Score</label>
-										<input type="text" class="form-control" name="editHomeScore" value="${schedule.homeScore}">
+										<label for="editHomeScore"><fmt:message key="admin_cs_hs" /></label> <input
+											type="text" class="form-control" name="editHomeScore"
+											value="${schedule.homeScore}">
 									</div>
 									<div class="form-group">
-										<label for="editAwayScore">Away Score</label>
-										<input type="text" class="form-control" name="editAwayScore" value="${schedule.awayScore}">
+										<label for="editAwayScore"><fmt:message key="admin_cs_as" /></label> <input
+											type="text" class="form-control" name="editAwayScore"
+											value="${schedule.awayScore}">
 									</div>
 									<div class="form-group">
-										<label for="editGameStatus">GameStatus</label>
-									  	<select class="custom-select my-1 mr-sm-2" id="editGameStatus" name="editGameStatus">
-									  		<option value="Final" ${schedule.gameStatus == 'Final' ?'selected':''}>Final</option>
-									  		<option value="Scheduled" ${schedule.gameStatus == 'Scheduled' ?'selected':''}>Scheduled</option>												
-									  	</select>
-									</div>								 
-									<button type="submit" class="btn btn-outline-success">Save</button>	
-								</form>															
+										<label for="editGameStatus"><fmt:message key="admin_cs_gs" /></label> <select
+											class="custom-select my-1 mr-sm-2" id="editGameStatus"
+											name="editGameStatus">
+											<option value="Final"
+												${schedule.gameStatus == 'Final' ?'selected':''}>Final</option>
+											<option value="Scheduled"
+												${schedule.gameStatus == 'Scheduled' ?'selected':''}>Scheduled</option>
+										</select>
+									</div>
+									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>
+								</form>
 							</div>
 							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteSchedule">Delete Schedule</button>
-							</div>							
+								<button type="button" class="btn btn-danger" data-toggle="modal"
+									data-target="#deleteSchedule"><fmt:message key="admin_es_del" /></button>
+							</div>
 						</div>
 					</div>
-				</div>					
+				</div>
 				<!-- /row -->
-			</fmt:bundle>
+			</div>
 		</div>
-	</div>
-	</fmt:bundle>
-	
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
 
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="date-picker/js/bootstrap-datepicker.min.js"></script>
-	<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
-	<script type="text/javascript" src="js/edit_schedule.js"></script>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript"
+			src="date-picker/js/bootstrap-datepicker.min.js"></script>
+		<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
+		<script type="text/javascript" src="js/edit_schedule.js"></script>
+	</fmt:bundle>
 </body>
 </html>

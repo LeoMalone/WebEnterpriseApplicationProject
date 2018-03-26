@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
@@ -141,7 +144,7 @@
 					<c:forEach var="row" items="${currDiv}">
 						<c:out value="${row.divisionName}" />
 					</c:forEach>
-					Schedule
+					<fmt:message key="div_head2" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -191,7 +194,7 @@
 								<fmt:message key="div_head2" />
 							</h4>
 							<div class="card-body table-responsive">
-								<table id="standings"
+								<table id="schedule"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -218,10 +221,10 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if></td>
 														<td style="text-align: center"><c:if
@@ -274,5 +277,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/schedule.js"></script>
 </body>
 </html>

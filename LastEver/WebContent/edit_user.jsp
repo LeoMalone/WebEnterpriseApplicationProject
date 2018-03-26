@@ -29,27 +29,30 @@
 </fmt:bundle>
 </head>
 <body>
-	<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteUserLabel">Delete: ${user.username}</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	Are You sure you want to delete this User?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <form action="deleteUser?=${user.id}" method="post">	
-	        	<button type="submit" class="btn btn-danger">Delete User</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+
+	<fmt:bundle basename="TestBundle">
+		<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="deleteUserLabel"><fmt:message key="admin_eu_model_del" />: ${user.username}</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<fmt:message key="admin_eu_model_body" />
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="admin_eu_model_cls" /></button>
+		        <form action="deleteUser?=${user.id}" method="post">	
+		        	<button type="submit" class="btn btn-danger"><fmt:message key="admin_eu_del" /></button>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</fmt:bundle>
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -112,7 +115,7 @@
 						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
-							<form action="./editUser?=${user.id}" method="GET">
+							<form action="./adminUsers" method="GET">
 								<select class="form-control form-control-sm" name="language" onchange="submit()">
 									<option value="en" ${cookie.language.value == "en" ? 'selected' : ''}><fmt:message key="english" /></option>
 									<option value="fr" ${cookie.language.value == "fr" ? 'selected' : ''}><fmt:message key="french" /></option>
@@ -133,23 +136,23 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: Edit ${user.username}
+					${userName}: <fmt:message key="admin_eu_head" /> ${user.username}
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Edit User Credentials
+								<fmt:message key="admin_eu_title" />
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
 									<form action="editUser?=${user.id}" method="POST">
 										<div class="form-group">
-											<label for="editFirstName">First Name</label>
+											<label for="editFirstName"><fmt:message key="signin_fname" /></label>
 											<input type="text" class="form-control" name="editFirstName" value="${user.firstName}">
 										</div>
 										<div class="form-group">
-											<label for="editLastName">Last Name</label>
+											<label for="editLastName"><fmt:message key="signin_lname" /></label>
 											<input type="text" class="form-control" name="editLastName" value="${user.lastName}">
 										</div>
 										<div class="form-group">
@@ -162,7 +165,7 @@
 										 </div>
 										 <div class="form-group">
 											<label for="newPass"><fmt:message key="signin_password" /></label>
-											<input type="password" class="form-control" name="editPass" placeholder="Keep blank to not change password">
+											<input type="password" class="form-control" name="editPass" placeholder="<fmt:message key="admin_eu_pass" />">
 										 </div>									 	
 										 <div class="form-check">
 										  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="editRadio" value="Administrator" ${user.userType=='Administrator'?'checked':''}>
@@ -183,12 +186,12 @@
 										  </label>
 										</div>
 										<br />										
-										<button type="submit" class="btn btn-outline-success">Save</button>	
+										<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>	
 									</form>									
 								</p>							
 							</div>
 							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete User</button>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser"><fmt:message key="admin_eu_del" /></button>
 							</div>
 						</div>
 					</div>

@@ -30,8 +30,8 @@ public class TeamOwnerServlet extends HttpServlet {
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
 		
-		if (request.getSession().getAttribute("signedIn") == null) {
-			response.sendRedirect("./login");
+		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
+			response.sendRedirect("./index");
 		} else {
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {

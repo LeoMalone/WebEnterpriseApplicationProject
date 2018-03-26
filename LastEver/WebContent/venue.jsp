@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
@@ -297,13 +300,13 @@
 									<c:forEach items="${allDiv}" var="division">
 										<li class="nav-item"><a
 											class="nav-link ${division.divisionId==divID?'active':''}"
-											href="venue?id=${venID}&div=${division.divisionId}#standings">${division.divisionName}</a>
+											href="venue?id=${venID}&div=${division.divisionId}#schedule">${division.divisionName}</a>
 										</li>
 									</c:forEach>
 								</ul>
 							</div>
 							<div class="card-body table-responsive">
-								<table id="standings"
+								<table id="schedule"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -328,10 +331,10 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if></td>
 														<td style="text-align: center"><c:if
@@ -375,5 +378,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/venue.js"></script>
 </body>
 </html>
