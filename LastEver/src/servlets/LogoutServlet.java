@@ -37,4 +37,21 @@ public class LogoutServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("./index");
         rd.forward(request, response);
 	}
+	
+	/**
+	 * doPost method mapped to /logout
+	 */
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// invalidate current session if it exists
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		
+		response.setContentType("text/html");
+		RequestDispatcher rd = request.getRequestDispatcher("./index");
+        rd.forward(request, response);
+	}
 }

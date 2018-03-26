@@ -99,12 +99,46 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
+							
+							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
-											key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
+								
+								<c:choose>
+								
+								<%--  IF SIGNED IN AS A TEAM OWNER --%>
+								<c:when test="${userType == './teamowner'}">
+								<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName}
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
+								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
+								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
+							</div></li>
+								</c:when>
+								</c:choose>
+								<c:choose>
+								
+								<%--  IF SIGNED IN AS A REFEREE --%>
+								<c:when test="${userType == './referee'}">
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+								</c:when>
+								</c:choose>
+								<c:choose>
+								
+								<%--  IF SIGNED IN AS ADMIN --%>
+								<c:when test="${userType == './admin'}">
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+								</c:when>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
