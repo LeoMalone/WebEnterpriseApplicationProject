@@ -156,6 +156,7 @@ public class LoginServlet extends HttpServlet {
 						break;
 					}
 				}
+				
 				response.sendRedirect("./login");
 			}
 		}  

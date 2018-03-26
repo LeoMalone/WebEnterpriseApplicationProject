@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.mindrot.jbcrypt.BCrypt;
 
 import beans.DivisionBean;
@@ -32,6 +37,7 @@ public class CreateAccountServlet extends HttpServlet {
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";
+	private static final String SECRET = "LOOK FOR INFO ON DISCORD";
 
 	/**
 	 * doPost method mapped to /createAccount
@@ -50,6 +56,7 @@ public class CreateAccountServlet extends HttpServlet {
 		String passConfirm = request.getParameter("newPassConfirm");
 		String userType = request.getParameter("createRadio");
 		String hashedpw = null;
+		String captcha = request.getParameter("g-recaptcha-response");
 
 
 		// If any parameter is null
@@ -68,14 +75,33 @@ public class CreateAccountServlet extends HttpServlet {
 				ut = TEAM_OW;
 
 			//Using BCrypt hash the users password with a new generated salt
-	        hashedpw = BCrypt.hashpw(newPassword, BCrypt.gensalt(13));
-			
+			hashedpw = BCrypt.hashpw(newPassword, BCrypt.gensalt(13));
+
 			// Create new userBean
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, hashedpw, ut, timestamp);
 
+			String postData = "https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response="
+					+ captcha;
+			URL capURL = new URL(postData);
+			
+			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty(
+					"Content-Type", "application/x-www-form-urlencoded");
+			conn.setRequestProperty(
+					"charset", StandardCharsets.UTF_8.displayName());
+			conn.setRequestProperty(
+					"Content-Length", Integer.toString(postData.length()));
+			conn.setUseCaches(false);
+			conn.getOutputStream()
+			.write(postData.getBytes(StandardCharsets.UTF_8));
+
+			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
+
 			// If createNewUser method returns true
-			if (CreateAccount.createNewUser(user)) {
+			if (CreateAccount.createNewUser(user) && json.getBoolean("success") == true) {
 				// Get session and login newly created user
 				HttpSession session = request.getSession();
 				if (session != null) {

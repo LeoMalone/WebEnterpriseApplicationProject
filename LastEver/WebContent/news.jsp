@@ -27,7 +27,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - News</title>
 </fmt:bundle>
 </head>
 <body>
@@ -93,45 +93,49 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
-								<c:choose>
-								
-								<%--  IF SIGNED IN AS A TEAM OWNER --%>
-								<c:when test="${userType == './teamowner'}">
-								<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
-								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
-								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
-								</c:when>
+								<c:choose>
+
+									<%--  IF SIGNED IN AS A TEAM OWNER --%>
+									<c:when test="${userType == './teamowner'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+														key="team_dd1" /></a> <a class="dropdown-item"
+													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
+													class="dropdown-item" href="teamSchedule"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS A REFEREE --%>
-								<c:when test="${userType == './referee'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS A REFEREE --%>
+									<c:when test="${userType == './referee'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS ADMIN --%>
-								<c:when test="${userType == './admin'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS ADMIN --%>
+									<c:when test="${userType == './admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
@@ -162,73 +166,9 @@
 		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">
-					<fmt:message key="home_header" />
-				</h1>
+				<h1 class="my-4">Current News</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
-					<div class="col-lg-8 mb-5">
-						<div class="card">
-							<div class="card-body">
-								<div id="mainCarousel" class="carousel slide"
-									data-ride="carousel">
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img class="d-block w-100"
-												src="https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080"
-												alt="First slide">
-										</div>
-										<div class="carousel-item">
-											<img class="d-block w-100"
-												src="https://images.pexels.com/photos/17598/pexels-photo.jpg?w=1920&h=1080"
-												alt="Second slide">
-										</div>
-									</div>
-									<a class="carousel-control-prev" href="#mainCarousel"
-										role="button" data-slide="prev"> <span
-										class="carousel-control-prev-icon" aria-hidden="true"></span>
-										<span class="sr-only">Previous</span>
-									</a> <a class="carousel-control-next" href="#mainCarousel"
-										role="button" data-slide="next"> <span
-										class="carousel-control-next-icon" aria-hidden="true"></span>
-										<span class="sr-only">Next</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 mb-5">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="card-header">
-									<fmt:message key="home_head" />
-								</h4>
-								<div id="openweathermap-widget-15"></div>
-								<script>
-									window.myWidgetParam ? window.myWidgetParam
-											: window.myWidgetParam = [];
-									window.myWidgetParam
-											.push({
-												id : 15,
-												cityid : '6094817',
-												appid : 'a4e18466ea056cf88f0ca54293678bfc',
-												units : 'metric',
-												containerid : 'openweathermap-widget-15',
-											});
-									(function() {
-										var script = document
-												.createElement('script');
-										script.async = true;
-										script.charset = "utf-8";
-										script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-										var s = document
-												.getElementsByTagName('script')[0];
-										s.parentNode.insertBefore(script, s);
-									})();
-								</script>
-							</div>
-						</div>
-					</div>
 					<c:choose>
 						<c:when test="${empty news}">
 							<div class="col-lg-12 mb-5">
@@ -268,7 +208,32 @@
 					<div class="col-lg-12 mt-5 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<center><a href="news">View All News</a></center>
+								<ul class="pagination justify-content-center">
+									<c:choose>
+										<c:when test="${currPage eq 1}">
+											<li class="page-item disabled"><a class="page-link"
+												href="#" tabindex="-1"><fmt:message key="prev_page" /></a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="news?page=${currPage - 1}"><fmt:message
+														key="prev_page" /></a></li>
+										</c:otherwise>
+									</c:choose>
+									<li class="page-item active"><a class="page-link"
+										href="news?page=${currPage}"><c:out value="${currPage}" /></a></li>
+									<c:choose>
+										<c:when test="${currPage + 1 gt totalPages}">
+											<li class="page-item disabled"><a class="page-link"
+												href="#" tabindex="-1"><fmt:message key="next_page" /></a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="news?page=${currPage + 1}"><fmt:message
+														key="next_page" /></a></li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
 							</div>
 						</div>
 					</div>

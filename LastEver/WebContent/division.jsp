@@ -100,45 +100,49 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
-								<c:choose>
-								
-								<%--  IF SIGNED IN AS A TEAM OWNER --%>
-								<c:when test="${userType == './teamowner'}">
-								<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
-								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
-								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
-								</c:when>
+								<c:choose>
+
+									<%--  IF SIGNED IN AS A TEAM OWNER --%>
+									<c:when test="${userType == './teamowner'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+														key="team_dd1" /></a> <a class="dropdown-item"
+													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
+													class="dropdown-item" href="teamSchedule"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS A REFEREE --%>
-								<c:when test="${userType == './referee'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS A REFEREE --%>
+									<c:when test="${userType == './referee'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS ADMIN --%>
-								<c:when test="${userType == './admin'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS ADMIN --%>
+									<c:when test="${userType == './admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
@@ -245,17 +249,18 @@
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
 									<div class="card">
-
-										<h4 class="card-header">
-											<c:out value="${n.title}" />
-										</h4>
+										<div
+											class="card-header d-flex flex-row">
+											<h4 class="d-flex">
+												<c:out value="${n.title}" />
+											</h4>
+											<h4 class="ml-auto d-flex">
+												<span class="badge badge badge-info"><c:out
+														value="${n.postedTime}" /> | <fmt:message key="news_by" />
+													<c:out value="${n.userName}" /></span>
+											</h4>
+										</div>
 										<div class="card-body">
-											<c:out value="${n.postedTime}" />
-											|
-											<fmt:message key="news_by" />
-											:
-											<c:out value="${n.userName}" />
-											<br></br>
 											<c:out value="${n.content}" escapeXml="false" />
 										</div>
 										<!-- /.row -->
