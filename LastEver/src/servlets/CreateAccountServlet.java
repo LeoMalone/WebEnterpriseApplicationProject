@@ -47,18 +47,17 @@ public class CreateAccountServlet extends HttpServlet {
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
+		String passConfirm = request.getParameter("newPassConfirm");
 		String userType = request.getParameter("createRadio");
 		String hashedpw = null;
 
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
 
 		// If any parameter is null
-		if(newFirstName == null || newLastName== null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
+		if(newFirstName == "" || newLastName == "" || newUsername == "" || newEmail == "" || newPassword == "" || passConfirm == "" || userType == null) {
+			response.sendRedirect("./login");			
+		} else if(!newPassword.equals(passConfirm)) {
 			response.sendRedirect("./login");
-
-		} else {		
+		} else {
 			// Get user type
 			String ut = null;
 			if (userType.equals(ADMIN))
@@ -85,15 +84,17 @@ public class CreateAccountServlet extends HttpServlet {
 					session.setMaxInactiveInterval(30 * 60);
 					cookie.setMaxAge(30 * 60);
 					response.addCookie(cookie);
-					session.setAttribute("signedIn", true);
 
 					// Get userType homepage
 					String url = null;
 					if (user.getUserType().equals("Administrator")) {
+						session.setAttribute("signedIn", "Administrator");
 						url = "./admin";
 					} else if (user.getUserType().equals("Referee")) {
+						session.setAttribute("signedIn", "Referee");
 						url = "./referee";
 					} else if (user.getUserType().equals("Team Owner")) {
+						session.setAttribute("signedIn", "Team Owner");
 						boolean hasTeam = Team.hasTeam(newUsername);
 						if (!hasTeam){
 							url = "./teamCreateTeam";
