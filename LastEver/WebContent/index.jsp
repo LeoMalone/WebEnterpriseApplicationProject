@@ -123,14 +123,14 @@
 								
 								<%--  IF SIGNED IN AS A REFEREE --%>
 								<c:when test="${userType == './referee'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}${userName}${userName}</a></li>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
 								</c:when>
 								</c:choose>
 								<c:choose>
 								
 								<%--  IF SIGNED IN AS ADMIN --%>
 								<c:when test="${userType == './admin'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}${userName}</a></li>
+								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
 								</c:when>
 								</c:choose>
 							</c:otherwise>
