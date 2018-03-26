@@ -74,20 +74,21 @@ public static boolean getPlayersFromRoster(List<PlayerBean> player, String teamI
     // Connect to Database 
     try {
         conn = ConnectionManager.getConnection();
-        viewTeamRoster = conn.prepareStatement("SELECT p.playerFirstName, p.playerLastName, p.playerNumber, p.playerPosition from player p "
+        viewTeamRoster = conn.prepareStatement("SELECT p.playerFirstName, p.playerLastName, p.playerNumber, p.playerPosition, p.playerID from player p "
         		+ "inner join playerxteam pxt "
         		+ "on pxt.playerID = p.playerID "
         		+ "where pxt.teamID = ?");
         viewTeamRoster.setString(1,teamId);
         rs = viewTeamRoster.executeQuery();
         
+        
         while(rs.next()) {
         	PlayerBean ub = new PlayerBean();
         	ub.setPlayerFirstName(rs.getString(1));
         	ub.setPlayerLastName(rs.getString(2));
         	ub.setPlayerNumber(rs.getString(3));
-        	ub.setPlayerPosition(rs.getString(4));      	
-        	//ub.setId(rs.getString(5));
+        	ub.setPlayerPosition(rs.getString(4));
+        	ub.setId(rs.getString(5));
         	player.add(ub);
         	
         	status = true;

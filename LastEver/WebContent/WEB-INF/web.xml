@@ -173,6 +173,26 @@
 		<servlet-name>EditTeam</servlet-name>
 		<url-pattern>/editTeam</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditTeamPlayer</servlet-name>
+		<servlet-class>servlets.EditTeamPlayerServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EditTeamPlayer</servlet-name>
+		<url-pattern>/editTeamPlayer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteTeamPlayerServlet</servlet-name>
+		<servlet-class>servlets.DeleteTeamPlayerServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteTeamPlayerServlet</servlet-name>
+		<url-pattern>/deleteTeamPlayer</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AdminHome</servlet-name>
@@ -479,6 +499,16 @@
 	<servlet-mapping>
 		<servlet-name>PlayerPageServlet</servlet-name>
 		<url-pattern>/player</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreatePlayerServlet</servlet-name>
+		<servlet-class>servlets.CreatePlayerServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreatePlayerServlet</servlet-name>
+		<url-pattern>/createPlayer</url-pattern>
 	</servlet-mapping>
 
 	<error-page>

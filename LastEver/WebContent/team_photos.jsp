@@ -88,26 +88,6 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
-						<!--  FOR FUTURE DEVELOPMENT - DROPDOWN MENU FOR LOGGED IN USER -->
-						<!-- 
-						<li class="nav-item dropdown"><a
-							class="nav-link active dropdown-toggle" href="admin.jsp"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> < %=userName %>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-
-								<a class="dropdown-item" href="about.jsp"><fmt:message
-										key="my_profile" /></a> <a class="dropdown-item" href="rules.jsp"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration.jsp"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact.jsp"><fmt:message
-										key="contact" /></a>
-							</div></li>
-							 -->
-
 						<c:choose>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login">Sign

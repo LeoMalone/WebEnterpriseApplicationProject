@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -20,17 +21,16 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<!-- Fontawesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Team Schedule</title>
+	<title>Last Ever - Create User</title>
 </fmt:bundle>
 </head>
-
 <body>
+
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -38,14 +38,16 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
+			<a class="navbar-brand" href="index"><img
 				src="images/logo_sm4.png" /></a>
+
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
@@ -56,22 +58,22 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="about"><fmt:message
-										key="about" /></a> <a class="dropdown-item" href="rules"><fmt:message
+								<a class="dropdown-item" href="./about"><fmt:message
+										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
 										key="rules" /></a> <a class="dropdown-item"
-									href="registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact"><fmt:message
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
 										key="contact" /></a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> <fmt:message key="nav_divisions" /> </a>
+							aria-haspopup="true" aria-expanded="false"> Divisions </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -88,18 +90,15 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-
 						<c:choose>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								
-								<c:choose>
-									<c:when test="${userType} != 'teamowner'}"> 
-										<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-									</c:when>
-									<c:otherwise>
+								
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+								
 								<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -113,16 +112,14 @@
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
 								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
-							</c:otherwise>
-								</c:choose>	
+								
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
-							<form action="" method="post">
+							<form>
 								<select class="form-control form-control-sm" name="language"
-									onchange="this.form.submit()">
+									onchange="submit()">
 									<option value="en"
 										${cookie.language.value == "en" ? 'selected' : ''}><fmt:message
 											key="english" /></option>
@@ -137,75 +134,51 @@
 			</div>
 		</div>
 	</nav>
-
+	
 	<div class="main-cover">
-		<!-- Page Content -->
+		<!-- Page Content
+		- card with information on it
+		- text, form, button to sign in
+		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${teamName}:<br />
-					<fmt:message key="team_view_schedule1" />
-				</h1>				
-									<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
+					${userName}: Add a Player To Your Roster
+				</h1>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="div_head2" />
+								Create New Player
 							</h4>
+							<form action="createPlayer?=${teamId}" method="POST">
 							<div class="card-body">
-								<table id="standings"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head2_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message key="team_view_schedule2" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${empty schedule}">
-												<td colspan=5 style="text-align: center"><b><fmt:message
-															key="div_nogames" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${schedule}" var="sched">
-													<tr>
-														<td scope="row" style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
-																	value="${sched.date}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
-																	value="${sched.date}" />
-															</c:if></td>
-														<td style="text-align: center"><c:if
-																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="time" pattern="H:mm"
-																	value="${sched.time}" />
-															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="time" pattern="h:mm a"
-																	value="${sched.time}" />
-															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
-														<td><c:out value="${sched.venue}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
-							</div>
+								<div class="form-group">
+									<label for="newFirstName">First Name</label>
+									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+								</div>
+								<div class="form-group">
+									<label for="newLastName">Last Name</label>
+									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+								</div>
+								<div class="form-group">
+									<label for="newUsername">#</label>
+									<input type="text" class="form-control" name="newNumber" placeholder="Enter Player Number">
+								</div>
+								 <div class="form-group">
+								    <label for="newEmail">Player Position</label>
+								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position">
+								 </div>
+								
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success"><fmt:message key="signin_button1"/></button>	
+								</div>
+							</form>
 						</div>
-					</div>			
-				<!-- /row -->
-			</fmt:bundle>
+					</div>
+				</div>
+				<!-- /.row -->				
+			</fmt:bundle>			
 		</div>
 	</div>
 

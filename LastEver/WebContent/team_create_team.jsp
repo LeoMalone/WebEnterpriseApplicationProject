@@ -116,7 +116,7 @@
 		<fmt:bundle basename="TestBundle">
 		<div class="cards-container container">		
 				<h1 class="my-4">
-					${userName}: Select or Create Your Team
+					${userName}: <fmt:message key="team_selectCreate" />
 				</h1>
 				
 				<!--  first section - select a team -->
@@ -125,7 +125,7 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Select Your Team
+								<fmt:message key="team_select" />
 							</h4>
 							<form action="teamOwnerSelect" method="POST" id="selectTeam">
 							<div class="card-body">
@@ -158,24 +158,24 @@
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Create New Team
+								<fmt:message key="team_createTeam" />
 							</h4>
 							<form action="teamOwnerNew" method="POST">
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group">
-										<label for="newTeamName">Team Name</label>
+										<label for="newTeamName"><fmt:message key="team_teamName" /></label>
 										<input type="text" class="form-control" name="newTeamName" placeholder="Enter Team Name">
 									</div>
 									<div class="form-group">
-										<label for="newTeamAbbr">Team Abbreviation</label>
+										<label for="newTeamAbbr"><fmt:message key="team_abb" /></label>
 										<input type="text" class="form-control" name="newTeamAbbr" placeholder="Enter Team Abbreviation">
 									</div>	
 									<div class="form-group">
-										<label for="aboutTeam">About the Team</label>
+										<label for="aboutTeam"><fmt:message key="team_aboutTeam" /></label>
 										<input type="text" class="form-control" name="aboutTeam" placeholder="Enter Team Information">
 									</div>
-									<label for="divRadio">Select Division</label>								 
+									<label for="divRadio"><fmt:message key="team_selectDivision" /></label>								 
 									 <c:forEach var="div1" items="${allDiv}">
 											<div class="form-check">
 											  <input aria-describedby="adminHelp" class="form-check-input" type="radio" name="divRadio" value="${div1.divisionId}">
@@ -187,7 +187,7 @@
 								</p>
 							</div>
 							<div class="card-footer">
-								<button type="submit" class="btn btn-success">Submit!</button>	
+								<button type="submit" class="btn btn-success"><fmt:message key="team_submit" /></button>	
 							</div>
 							</form>
 						</div>							

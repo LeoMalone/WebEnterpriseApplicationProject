@@ -145,10 +145,8 @@
 					<fmt:message key="team_view_roster1" />
 				</h1>
 				
-				<!-- Future development
-				<a href="/createPlayer" class="btn btn-success"><fmt:message key="team_view_roster6" /></a>		
-				 -->			
-				 
+				<a href="./createPlayer?=${teamId}" class="btn btn-success"><fmt:message key="team_view_roster6" /></a>		
+		
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card">				
@@ -161,7 +159,7 @@
 									    	<th scope="col"><fmt:message key="team_view_roster3" /></th>
 										    <th scope="col"><fmt:message key="team_view_roster4" /></th>
 										    
-										    <!-- <th scope="col"><fmt:message key="team_view_roster5" /></th> -->
+										    <th scope="col"><fmt:message key="team_view_roster5" /></th>
 										    
 									    </tr>
 									</thead>
@@ -172,13 +170,13 @@
 								        	<td scope="col">${player.playerLastName}</td>
 								        	<td scope="col">${player.playerPosition}</td>
 								        	
-								        	<!-- 
 								        	<td scope="col">
-								        		<a href="./editUser?=${user.id}" class="btn btn-dark btn-sm">
+								        		<a href="./editTeamPlayer?=${player.id}" class="btn btn-dark btn-sm">
 								        			<i class="fa fa-edit"></i> 
 												</a>
 											</td>	
-											 -->
+											 
+											 
 											 	            
 								        </tr>
 								    </c:forEach>
