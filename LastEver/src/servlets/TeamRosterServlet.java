@@ -74,6 +74,7 @@ public class TeamRosterServlet extends HttpServlet {
 				String teamName = TeamScheduleResults.getTeamName(tb, userName);
 				
 				request.setAttribute("teamName", teamName);
+				request.setAttribute("teamId", teamId);
 				request.setAttribute("userName", userName);
 				request.setAttribute("divList", dlb);
 				request.setAttribute("playerList", pb);

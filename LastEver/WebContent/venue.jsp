@@ -100,10 +100,10 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<c:choose>
+						<<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login">Sign
-										In</a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
