@@ -119,7 +119,7 @@
 								</c:choose>
 								<c:choose>
 								
-								<%--  IF SIGNED IN AS A REFEREE --%>
+								<%--  IF SIGNED IN AS REFEREE --%>
 								<c:when test="${userType == './referee'}">
 								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
 								</c:when>
