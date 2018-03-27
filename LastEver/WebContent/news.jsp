@@ -27,7 +27,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - News</title>
+	<title>Last Ever - <fmt:message key="news_header" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -166,7 +166,7 @@
 		-->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
-				<h1 class="my-4">Current News</h1>
+				<h1 class="my-4"><fmt:message key="current_news_header" /></h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
 					<c:choose>

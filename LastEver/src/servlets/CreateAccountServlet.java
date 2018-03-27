@@ -37,7 +37,7 @@ public class CreateAccountServlet extends HttpServlet {
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";
-	private static final String SECRET = "LOOK FOR INFO ON DISCORD";
+	private static final String SECRET = "ITS A SECRET";
 
 	/**
 	 * doPost method mapped to /createAccount
@@ -81,13 +81,21 @@ public class CreateAccountServlet extends HttpServlet {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			UserBean user = new UserBean(newFirstName, newLastName, newUsername, newEmail, hashedpw, ut, timestamp);
 
+			// post the response to the Google reCAPTCHA API
 			String postData = "https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response="
 					+ captcha;
+			// create a new URL with the post data
 			URL capURL = new URL(postData);
 			
+			// open a url connection with the specified url
 			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
+			
+			// set the connection to do output
 			conn.setDoOutput(true);
+			// set request method to post
 			conn.setRequestMethod("POST");
+			
+			// set the content-type, charset, and content-length of the connection
 			conn.setRequestProperty(
 					"Content-Type", "application/x-www-form-urlencoded");
 			conn.setRequestProperty(
@@ -98,9 +106,10 @@ public class CreateAccountServlet extends HttpServlet {
 			conn.getOutputStream()
 			.write(postData.getBytes(StandardCharsets.UTF_8));
 
+			// create a JSON object from the response
 			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
 
-			// If createNewUser method returns true
+			// If createNewUser method returns true and the user passed the CAPTCHA
 			if (CreateAccount.createNewUser(user) && json.getBoolean("success") == true) {
 				// Get session and login newly created user
 				HttpSession session = request.getSession();

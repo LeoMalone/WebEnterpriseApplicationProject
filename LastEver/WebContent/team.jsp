@@ -406,7 +406,7 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="yyyy-dd-MM"
+																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
 																	value="${sched.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
 																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
