@@ -85,7 +85,7 @@ public class CreatePlayerServlet extends HttpServlet {
 				request.setAttribute("userName", userName);
 				request.setAttribute("teamId", sb.toString());
 				response.setContentType("text/html");
-				RequestDispatcher rd = request.getRequestDispatcher("team_create_player.jsp"); 
+				RequestDispatcher rd = request.getRequestDispatcher("team_create_player.jsp");
 		        rd.forward(request, response);
 			}
 		}
