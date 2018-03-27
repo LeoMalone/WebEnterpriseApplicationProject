@@ -13,6 +13,6 @@ $(document).ready(function() {
 		maxTime: "22:30:00",
 		theme: "bootstrap4",
 		nowIndicator: "true",
-		locale: "en"
+		locale: "fr"
 	});
 });

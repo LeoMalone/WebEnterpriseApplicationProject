@@ -25,7 +25,7 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<link href="fullcalendar/css/fullcalendar.css" rel="stylesheet" />
+<link href="fullcalendar/fullcalendar.css" rel="stylesheet" />
 <title>LastEver</title>
 </head>
 <body>
@@ -111,8 +111,11 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: <fmt:message key="as_head" /></h1>
-				<a href="./scheduleCreate" class="btn btn-success"><fmt:message key="as_add" /></a>
+				<h1 class="my-4">${userName}:
+					<fmt:message key="as_head" />
+				</h1>
+				<a href="./scheduleCreate" class="btn btn-success"><fmt:message
+						key="as_add" /></a>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
@@ -142,10 +145,20 @@
 			crossorigin="anonymous"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<!-- FullCalendar Scripts + Other -->
-		<script type="text/javascript" src="fullcalendar/js/jquery.min.js"></script>
-		<script type="text/javascript" src="fullcalendar/js/moment.min.js"></script>
-		<script type="text/javascript" src="fullcalendar/js/fullcalendar.js"></script>
-		<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
+		<script type="text/javascript" src="fullcalendar/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="fullcalendar/lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="fullcalendar/lib/moment.min.js"></script>
+		<script type="text/javascript" src="fullcalendar/fullcalendar.js"></script>
+		<c:choose>
+			<c:when test="${cookie.language.value eq 'fr'}">
+				<script type="text/javascript" src="fullcalendar/locale/fr.js"></script>
+				<script type="text/javascript" src="js/custom_fullcalendar_fr.js"></script>
+			</c:when>
+			<c:otherwise>
+				<script type="text/javascript" src="fullcalendar/locale/en.js"></script>
+				<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
+			</c:otherwise>
+		</c:choose>
 		<script defer
 			src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 	</fmt:bundle>
