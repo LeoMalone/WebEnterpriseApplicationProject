@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -13,14 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import dao.AdminEmails;
-import dao.Division;
+import dao.League;
 
 /**
  * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option View Users.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class AdminEmailsServlet extends HttpServlet{
 	
@@ -36,10 +37,10 @@ public class AdminEmailsServlet extends HttpServlet{
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
