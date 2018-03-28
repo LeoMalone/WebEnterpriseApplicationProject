@@ -185,6 +185,21 @@
 								 	<a href="./adminSchedule" class="btn btn-outline-light"><fmt:message key="ah_sched_goto" /></a>
 								</div>
 							</div>
+						</div>
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									Send Emails
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										Options for sending emails to users
+									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+								 	<a href="./adminEmails" class="btn btn-outline-light">Go To Emails</a>
+								</div>
+							</div>
 						</div>				
 					</div>
 				</div>

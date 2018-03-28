@@ -5,6 +5,16 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>AdminEmailsServlet</servlet-name>
+		<servlet-class>servlets.AdminEmailsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AdminEmailsServlet</servlet-name>
+		<url-pattern>/adminEmails</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>DeleteScheduleServlet</servlet-name>
 		<servlet-class>servlets.DeleteScheduleServlet</servlet-class>
 	</servlet>

@@ -27,7 +27,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<title>Last Ever - Divisions</title>
+<title>Last Ever - Email</title>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
@@ -77,15 +77,15 @@
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdownPortfolio">
 									<c:choose>
-										<c:when test="${empty league}">
+										<c:when test="${empty allDiv}">
 
 											<a class="dropdown-item" href=""><fmt:message
 													key="nav_divisions" /></a>
 										</c:when>
 										<c:otherwise>
-											<c:forEach var="l" items="${league}">
+											<c:forEach var="div1" items="${allDiv}">
 												<a class="dropdown-item"
-													href="league?id=${l.leagueId}">${l.leagueName}</a>
+													href="division?id=${div1.divisionId}">${div1.divisionName}</a>
 											</c:forEach>
 										</c:otherwise>
 									</c:choose>
@@ -115,32 +115,86 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: Divisions</h1>
-				<a href="./divisionCreate" class="btn btn-success"><fmt:message	key="ad_create" /></a>
+				<h1 class="my-4">${userName}: Emails</h1>
+				<form action="./adminEmails" method="POST">
+					<button type="submit" class="btn btn-success">Email All</button>
+				</form>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card bg-light">
-							<div class="card-body">
-								<table class="table table-striped">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">Id</th>
-											<th scope="col"><fmt:message key="ad_name" /></th>
-											<th scope="col"><fmt:message key="at_edit" /></th>
-										</tr>
-									</thead>
-									<c:forEach items="${allDiv}" var="division">
-										<tr>
-											<td scope="col">${division.divisionId}</td>
-											<td scope="col">${division.divisionName}</td>
-											<td scope="col"><a
-												href="./editDivision?=${division.divisionId}"
-												class="btn btn-dark btn-sm"> <i class="fa fa-edit"></i>
-											</a></td>
-										</tr>
+						<div id="accordion">
+						  <div class="card">
+						    <div class="card-header" id="headingOne">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						         Administrator
+						        </button>
+						      </h5>
+						    </div>						
+						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+						      <div class="card-body">
+						      	<form action="./adminEmails?=1" method="POST">
+						      		<c:forEach items="${admins}" var="admin">
+										<div class="form-check">
+										  <input name="admins" class="form-check-input" type="checkbox" value="${admin}" id="defaultCheck1">
+										  <label class="form-check-label" for="defaultCheck1">${admin}</label>
+										</div>
 									</c:forEach>
-								</table>
-							</div>
+									<hr />
+									<button type="submit" class="btn btn-outline-dark">Send</button>
+						      	</form>						      							      							        
+						      </div>
+						    </div>
+						  </div>
+						  <div class="card">
+						    <div class="card-header" id="headingTwo">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						        	Referees						          
+						        </button>
+						      </h5>
+						    </div>
+						    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+						      <div class="card-body">
+						      	<div class="form-check">
+									<form action="./adminEmails?=2" method="POST">
+							      		<c:forEach items="${refs}" var="ref">
+											<div class="form-check">
+											  <input name="refs" class="form-check-input" type="checkbox" value="${ref}" id="defaultCheck1">
+											  <label class="form-check-label" for="defaultCheck1">${ref}</label>
+											</div>
+										</c:forEach>
+										<hr />
+										<button type="submit" class="btn btn-outline-dark">Send</button>
+						      		</form>
+								</div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="card">
+						    <div class="card-header" id="headingThree">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						          Team Owners
+						        </button>
+						      </h5>
+						    </div>
+						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+						      <div class="card-body">
+						      	<div class="form-check">
+									<form action="./adminEmails?=3" method="POST">
+							      		<c:forEach items="${tos}" var="to">
+											<div class="form-check">
+											  <input name="tos" class="form-check-input" type="checkbox" value="${to}" id="defaultCheck1">
+											  <label class="form-check-label" for="defaultCheck1">${to}</label>
+											</div>
+										</c:forEach>
+										<hr />
+										<button type="submit" class="btn btn-outline-dark">Send</button>
+						      		</form>
+								</div>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					</div>
 				</div>
@@ -163,7 +217,6 @@
 			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 			crossorigin="anonymous"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/admin_emails.js"></script>
 	</fmt:bundle>
 </body>
 </html>
