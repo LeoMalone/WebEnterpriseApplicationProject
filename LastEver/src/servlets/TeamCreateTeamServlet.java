@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.DivisionBean;
 import beans.LeagueBean;
@@ -84,6 +85,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 
 				request.setAttribute("userName", userName);
 				if (Team.hasTeam(userName)) {
+					
 					response.sendRedirect("teamowner");
 				}
 				else {
@@ -156,7 +158,21 @@ public class TeamCreateTeamServlet extends HttpServlet {
 					// If createNewUser method returns true
 					if (TeamCreateTeam.createNewTeam(team, userName)) {
 						response.sendRedirect("teamowner");
+						
+						
+						HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
+						if(session!=null) {
+							
 
+							// redirect to correct login page
+							session.setAttribute("userType", "teamowner");
+						}            
+						
+						
+						
+						
+						
+						
 					} else {
 						response.sendRedirect("teamCreateTeam");
 					}

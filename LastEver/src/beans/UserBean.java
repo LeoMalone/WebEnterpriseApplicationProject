@@ -40,6 +40,7 @@ public class UserBean {
 		this.password = pass;
 		this.userType = ut;
 		this.lastLogin = ll;
+		this.accountCreated = ll;
 	}
 
 /**************************** GETTERS *****************************/
