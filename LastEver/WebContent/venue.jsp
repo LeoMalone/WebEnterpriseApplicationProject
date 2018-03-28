@@ -424,7 +424,7 @@
 						</div>
 					</div>
 				</div>
-			</fmt:bundle>
+
 			<!-- /.row -->
 		</div>
 	</div>
@@ -437,7 +437,7 @@
 			</p>
 		</div>
 	</footer>
-
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

@@ -160,7 +160,6 @@
 					</div>
 				</div>					
 				<!-- /row -->
-			</fmt:bundle>
 		</div>
 	</div>
 
@@ -172,7 +171,7 @@
 			</p>
 		</div>
 	</footer>
-
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
