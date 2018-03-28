@@ -175,19 +175,19 @@
 									<form action="editTeamPlayer?=${player.id}" method="POST">
 										<div class="form-group">
 											<label for="editFirstName"><fmt:message key="team_view_roster2" /></label>
-											<input type="text" class="form-control" name="editPlayerFirstName" value="${player.playerFirstName}">
+											<input type="text" class="form-control" name="editPlayerFirstName" value="${player.playerFirstName}" required>
 										</div>
 										<div class="form-group">
 											<label for="editLastName"><fmt:message key="team_view_roster3" /></label>
-											<input type="text" class="form-control" name="editPlayerLastName" value="${player.playerLastName}">
+											<input type="text" class="form-control" name="editPlayerLastName" value="${player.playerLastName}" required>
 										</div>
 										<div class="form-group">
 											<label for="newUsername">#</label>
-											<input type="text" class="form-control" name="editPlayerNumber" value="${player.playerNumber}">
+											<input type="number" min=0 max=99 class="form-control" name="editPlayerNumber" value="${player.playerNumber}" required>
 										</div>
 										 <div class="form-group">
 										    <label for="newEmail"><fmt:message key="team_view_roster4" /></label>
-										    <input type="text" class="form-control" name="editPlayerPosition" value="${player.playerPosition}">
+										    <input type="text" class="form-control" name="editPlayerPosition" value="${player.playerPosition}" required>
 										 </div>
 										 
 										<br />										

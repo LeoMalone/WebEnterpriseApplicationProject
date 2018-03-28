@@ -155,19 +155,19 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label for="newFirstName">First Name</label>
-									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name" required>
 								</div>
 								<div class="form-group">
 									<label for="newLastName">Last Name</label>
-									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name" required>
 								</div>
 								<div class="form-group">
 									<label for="newUsername">#</label>
-									<input type="text" class="form-control" name="newNumber" placeholder="Enter Player Number">
+									<input type="number" min=0 max=99 class="form-control" name="newNumber" placeholder="Enter Player Number" required>
 								</div>
 								 <div class="form-group">
 								    <label for="newEmail">Player Position</label>
-								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position">
+								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position" required>
 								 </div>
 								
 								<div class="card-footer">
