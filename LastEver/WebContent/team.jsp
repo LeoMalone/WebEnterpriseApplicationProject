@@ -595,7 +595,7 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
