@@ -33,7 +33,7 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards, playerID, teamID from statistics where divisionID = ? order by goals desc, GP asc,"
+					+ " redCards, playerID, teamID from statistics where leagueID = ? order by goals desc, GP asc,"
 					+ " playerName asc");
 			getStatistics.setString(1, id);
 			resultSet = getStatistics.executeQuery();
@@ -113,10 +113,10 @@ public class Statistics {
 	 * The getStatisticsWithTeam method gets the teams statistics
 	 * @param <StatisticsBean>
 	 * @param id - The current id of the team
-	 * @param div - The id of the division
+	 * @param div - The id of the league
 	 * @return status - boolean value
 	 */
-	public static boolean getStatisticsWithTeam(String id, String div, List<StatisticsBean> statistics) { 
+	public static boolean getStatisticsWithTeam(String id, String lID, List<StatisticsBean> statistics) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -130,9 +130,9 @@ public class Statistics {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
 					+ " s.redCards, s.playerID from statistics s inner join team t on t.teamName = s.teamName"
-					+ " where s.divisionID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
+					+ " where s.leagueID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
 					+ " s.GP asc, s.playerName asc");
-			getStatistics.setString(1, div);
+			getStatistics.setString(1, lID);
 			getStatistics.setString(2, id);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();

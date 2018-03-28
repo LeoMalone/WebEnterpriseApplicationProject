@@ -5,10 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import beans.DivisionBean;
 import beans.NewsBean;
+import beans.StandingsBean;
 
 /**
  * The Division class gets all the divisions in the database, allows the user to create a new division, get the news associated
@@ -243,6 +245,58 @@ public class Division {
 			if (allDivisions != null) {
 				try {
 					allDivisions.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
+	public static boolean getDivisionStandings(String lID, List<DivisionBean> divisionList) {
+
+		boolean status = false;							// query status
+		Connection conn = null;							// DB Connection
+		PreparedStatement divisionStandings = null;		// SQL query
+		ResultSet rs = null;							// returned query result set
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			divisionStandings = conn.prepareStatement("SELECT d.divisionID, d.divisionName from division d inner join"
+					+ " leaguexdivision ld on ld.divisionID = d.divisionID where ld.leagueID = ?");
+			divisionStandings.setString(1, lID);
+			rs = divisionStandings.executeQuery();
+			status = rs.next();
+			
+			//return to the start of the result set
+			rs.beforeFirst();
+			
+			//Loop through and add the results of the query to a DivisionBean then add it to the list
+			while(rs.next()) {
+				DivisionBean db = new DivisionBean();
+				List<StandingsBean> standings = new ArrayList<StandingsBean>();
+				db.setDivisionId(rs.getString(1));
+				db.setDivisionName(rs.getString(2));
+				Standings.getStandings(rs.getString(1), standings);
+				db.setStandings(standings);
+				divisionList.add(db);
+			}
+
+		// close all connections and catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (divisionStandings != null) {
+				try {
+					divisionStandings.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

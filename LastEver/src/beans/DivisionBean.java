@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.List;
+
 /**
  * The DivisionBean class is meant for passing user information
  * between DAOs and Servlets
@@ -8,7 +10,8 @@ public class DivisionBean {
 	
 	//Division bean parameters
 	private String divisionId;
-	private String divisionName;	
+	private String divisionName;
+	private List<StandingsBean> standings;
 	
 /**************************** GETTERS *****************************/
 	public String getDivisionId() {
@@ -19,6 +22,10 @@ public class DivisionBean {
 		return this.divisionName;
 	}
 	
+	public List<StandingsBean> getStandings(){
+		return this.standings;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setDivisionId(String string) {
 		this.divisionId = string;
@@ -26,5 +33,9 @@ public class DivisionBean {
 
 	public void setDivisionName(String name) {
 		this.divisionName = name;
+	}
+	
+	public void setStandings(List<StandingsBean> stand) {
+		this.standings = stand;
 	}
 }

@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.StandingsBean;
 import dao.Division;
+import dao.League;
 import dao.Standings;
 
 public class StandingsServlet extends HttpServlet {
@@ -80,6 +82,8 @@ public class StandingsServlet extends HttpServlet {
 			//bean list variables used to set data on the page
 			List<StandingsBean> slb = new ArrayList<StandingsBean>();
 			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
+			
 			
 			//get the current standings in the division
 			Standings.getStandings(id, slb);	
@@ -88,13 +92,16 @@ public class StandingsServlet extends HttpServlet {
 			Division.getAllDivisions(dlb);
 			request.setAttribute("allDiv", dlb);
 
-			//get the division that the page corresponds to
+			//get each divisions standings in the league
 			dlb = new ArrayList<DivisionBean>();	
-			Division.getSpecificDivision(dlb, id);
+			Division.getDivisionStandings(id, dlb);
+			
+			//gets the current league
+			League.getCurrentLeague(id, llb);
 			
 			//set request attributes
-			request.setAttribute("currDiv", dlb);
-			request.setAttribute("standings", slb);	
+			request.setAttribute("league", llb);
+			request.setAttribute("standings", dlb);	
 			request.setAttribute("userName", userName);
 			
 			//forward to the standings page

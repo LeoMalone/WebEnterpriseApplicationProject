@@ -100,45 +100,49 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
-								<c:choose>
-								
-								<%--  IF SIGNED IN AS A TEAM OWNER --%>
-								<c:when test="${userType == './teamowner'}">
-								<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
-								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
-								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
-								</c:when>
+								<c:choose>
+
+									<%--  IF SIGNED IN AS A TEAM OWNER --%>
+									<c:when test="${userType == './teamowner'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+														key="team_dd1" /></a> <a class="dropdown-item"
+													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
+													class="dropdown-item" href="teamSchedule"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS A REFEREE --%>
-								<c:when test="${userType == './referee'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS A REFEREE --%>
+									<c:when test="${userType == './referee'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS ADMIN --%>
-								<c:when test="${userType == './admin'}">
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
-								</c:when>
+
+									<%--  IF SIGNED IN AS ADMIN --%>
+									<c:when test="${userType == './admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="${userType}">${userName}</a></li>
+									</c:when>
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
@@ -171,8 +175,8 @@
 		-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:forEach var="row" items="${currDiv}">
-						<c:out value="${row.divisionName}" />
+					<c:forEach var="row" items="${league}">
+						<c:out value="${row.leagueName}" />
 					</c:forEach>
 					<fmt:message key="div_head4" />
 				</h1>
@@ -185,29 +189,29 @@
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
 										<c:choose>
-											<c:when test="${empty currDiv }">
+											<c:when test="${empty league }">
 												Division
 											</c:when>
 											<c:otherwise>
-												<c:forEach var="row" items="${currDiv}">
+												<c:forEach var="row" items="${league}">
 													<li class="nav-item"><a class="nav-link"
-														href="division?id=${row.divisionId}"> <c:out
-																value="${row.divisionName}" />
+														href="division?id=${row.leagueId}"> <c:out
+																value="${row.leagueName}" />
 													</a></li>
 													<li class="nav-item active"><a class="nav-link"
-														href="standings?id=${row.divisionId}"> <fmt:message
+														href="standings?id=${row.leagueId}"> <fmt:message
 																key="div_head4" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="schedule?id=${row.divisionId}"> <fmt:message
+														href="schedule?id=${row.leagueId}"> <fmt:message
 																key="div_head2" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="results?id=${row.divisionId}"> <fmt:message
+														href="results?id=${row.leagueId}"> <fmt:message
 																key="div_head3" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="statistics?id=${row.divisionId}"> <fmt:message
+														href="statistics?id=${row.leagueId}"> <fmt:message
 																key="div_head5" />
 													</a></li>
 												</c:forEach>
@@ -218,76 +222,79 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head4" />
-							</h4>
-							<div class="card-body table-responsive">
-								<table id="standings"
-									class="table table-bordered table-striped table-dark table-hover table-sm">
-									<thead>
-										<tr>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text1" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text2" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text3" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text5" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text6" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text7" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text8" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text9" /></th>
-											<th scope="col" style="text-align: center"><fmt:message
-													key="div_head4_text10" /></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:choose>
-											<c:when test="${empty standings}">
-												<td colspan=10 style="text-align: center"><b><fmt:message
-															key="div_noteams" /></b></td>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${standings}" var="stand">
-													<tr>
-														<td scope="row" style="text-align: center"><c:out
-																value="${stand.rank}" /></td>
-														<td scope="row"><a href="team?id=${stand.teamID}">
-																${stand.teamName}</a></td>
-														<td style="text-align: center"><c:out
-																value="${stand.gamesPlayed}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.wins}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.losses}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.draws}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.points}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalsFor}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalsAgainst}" /></td>
-														<td style="text-align: center"><c:out
-																value="${stand.goalDiff}" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</tbody>
-								</table>
+					<c:forEach items="${standings}" var="stand">
+						<div class="col-lg-12 mb-5 mt-5">
+							<div class="card">
+								<h4 class="card-header">
+									<c:out value="${stand.divisionName}" />
+									<fmt:message key="div_head4" />
+								</h4>
+								<div class="card-body table-responsive">
+									<table id="standings"
+										class="table table-bordered table-striped table-dark table-hover table-sm">
+										<thead>
+											<tr>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text1" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text2" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text3" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text4" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text5" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text6" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text7" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text8" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text9" /></th>
+												<th scope="col" style="text-align: center"><fmt:message
+														key="div_head4_text10" /></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:choose>
+												<c:when test="${empty stand.standings}">
+													<td colspan=10 style="text-align: center"><b><fmt:message
+																key="div_noteams" /></b></td>
+												</c:when>
+												<c:otherwise>
+													<c:forEach items="${stand.standings}" var="s">
+														<tr>
+															<td scope="row" style="text-align: center"><c:out
+																	value="${s.rank}" /></td>
+															<td scope="row"><a href="team?id=${s.teamID}"> <c:out
+																		value="${s.teamName}" /></a></td>
+															<td style="text-align: center"><c:out
+																	value="${s.gamesPlayed}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.wins}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.losses}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.draws}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.points}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.goalsFor}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.goalsAgainst}" /></td>
+															<td style="text-align: center"><c:out
+																	value="${s.goalDiff}" /></td>
+														</tr>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
 
 				<!-- /.row -->

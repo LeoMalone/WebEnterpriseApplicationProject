@@ -35,9 +35,10 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
 					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
-					+ " inner join teamxdivision td on td.teamID = h.teamID left outer join venuexgame vg on s.gameID"
-					+ " = vg.gameID left outer join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
-					+ " s.gameStatus = 'Scheduled'");
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
+					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
+					+ " left outer join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID ="
+					+ " v.venueID where ld.leagueID = ? and s.gameStatus = 'Scheduled'");
 			getSchedule.setString(1, id);
 			resultSet = getSchedule.executeQuery();
 			status = resultSet.next();
@@ -93,10 +94,10 @@ public class ScheduleResults {
 	 * The getSchedule method gets a Venues schedule
 	 * @param <ScheduleResultsBean>
 	 * @param venue - Current venue id
-	 * @param div - Current division id
+	 * @param lID - Current league id
 	 * @return status - boolean value
 	 */
-	public static boolean getScheduleWithVenue(String venue, String div, List<ScheduleResultsBean> sched) { 
+	public static boolean getScheduleWithVenue(String venue, String lID, List<ScheduleResultsBean> sched) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -109,9 +110,11 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
 					+ " concat(a.teamName, '') as away, s.awayTeam from schedule s inner join team h on h.teamID"
 					+ " = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on"
-					+ " td.teamID = h.teamID inner join venuexgame vg on s.gameID = vg.gameID inner join venue"
-					+ " v on vg.venueID = v.venueID where td.divisionID = ? and s.gameStatus = 'Scheduled' and v.venueID=?");
-			getSchedule.setString(1, div);
+					+ " td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner join"
+					+ " leaguexdivision ld on ld.divisionID = d.divisionID inner join venuexgame vg on s.gameID"
+					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where ld.leagueID = ?"
+					+ " and s.gameStatus = 'Scheduled' and v.venueID=?");
+			getSchedule.setString(1, lID);
 			getSchedule.setString(2, venue);
 			resultSet = getSchedule.executeQuery();
 			status = resultSet.next();
@@ -164,10 +167,10 @@ public class ScheduleResults {
 	 * The getSchedule method gets a Teams schedule
 	 * @param <ScheduleResultsBean>
 	 * @param team - Current team id
-	 * @param div - Current division id
+	 * @param lID - Current league id
 	 * @return status - boolean value
 	 */
-	public static boolean getScheduleWithTeam(String team, String div, List<ScheduleResultsBean> sched) { 
+	public static boolean getScheduleWithTeam(String team, String lID, List<ScheduleResultsBean> sched) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -180,11 +183,12 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
 					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
-					+ " inner join teamxdivision td on td.teamID = h.teamID left outer join venuexgame vg on s.gameID"
-					+ " = vg.gameID left outer join venue v on vg.venueID = v.venueID where td.divisionID = ? and"
-					+ " s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on d.divisionID"
+					+ " = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID left outer"
+					+ " join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID = v.venueID"
+					+ " where ld.leagueID = ? and s.gameStatus = 'Scheduled' and (s.homeTeam=? or s.awayTeam=?)");
 
-			getSchedule.setString(1, div);
+			getSchedule.setString(1, lID);
 			getSchedule.setString(2, team);
 			getSchedule.setString(3, team);
 			resultSet = getSchedule.executeQuery();
@@ -241,10 +245,10 @@ public class ScheduleResults {
 	 * The getSchedule method gets a Teams resent results ordered by recent games first
 	 * @param <ScheduleResultsBean>
 	 * @param team - Current team id
-	 * @param div - Current division id
+	 * @param lID - Current league id
 	 * @return status - boolean value
 	 */
-	public static boolean getResultsWithTeam(String team, String div, List<ScheduleResultsBean> sched) { 
+	public static boolean getResultsWithTeam(String team, String lID, List<ScheduleResultsBean> sched) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -257,9 +261,11 @@ public class ScheduleResults {
 			getSchedule = conn.prepareStatement("select s.gameDate, h.teamName, s.homeTeam, s.homeScore, concat(a.teamName, '')" 
 					+ " as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID from schedule s inner join team h on h.teamID" 
 					+ " = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on" 
-					+ " td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Final' and (s.homeTeam=? or s.awayTeam=?)"
-					+ " order by s.gameDate desc");
-			getSchedule.setString(1, div);
+					+ " td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner join"
+					+ " leaguexdivision ld on ld.divisionID = d.divisionID left outer join venuexgame vg on"
+					+ " s.gameID = vg.gameID left outer join venue v on vg.venueID = v.venueID where ld.leagueID = ?"
+					+ " and s.gameStatus = 'Final' and (s.homeTeam=? or s.awayTeam=?) order by s.gameDate desc");
+			getSchedule.setString(1, lID);
 			getSchedule.setString(2, team);
 			getSchedule.setString(3, team);
 			resultSet = getSchedule.executeQuery();
@@ -315,7 +321,7 @@ public class ScheduleResults {
 	/**
 	 * The getSchedule method gets a Divisions results
 	 * @param <ScheduleResultsBean>
-	 * @param id - Current division id
+	 * @param id - Current league id
 	 * @param offset - The offset to get the news from (for pagination)
 	 * @param maxRows - The number of results to be fetched each time
 	 * @return status - boolean value
@@ -333,8 +339,9 @@ public class ScheduleResults {
 			getResults = conn.prepareStatement("select s.gameDate, h.teamName, s.homeTeam, s.homeScore,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID"
 					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
-					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID where td.divisionID = ?"
-					+ " and s.gameStatus = 'Final' order by s.gameDate desc limit ?,?");
+					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
+					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
+					+ " where ld.leagueID = ? and s.gameStatus = 'Final' order by s.gameDate desc limit ?,?");
 
 			getResults.setString(1, id);
 			getResults.setInt(2, offset);
@@ -401,10 +408,10 @@ public class ScheduleResults {
 
 	/**
 	 * The numberOfResults method gets the number of results associated with each division
-	 * @param dID - The current division id
+	 * @param lID - The current league id
 	 * @return number - int value
 	 */
-	public static int numberOfResults(String dID) { 
+	public static int numberOfResults(String lID) { 
 
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
@@ -417,12 +424,14 @@ public class ScheduleResults {
 			conn = ConnectionManager.getConnection();
 			getResult = conn.prepareStatement("select count(s.gameID) from schedule s inner join team h"
 					+ " on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision"
-					+ " td on td.teamID = h.teamID where td.divisionID = ? and s.gameStatus = 'Final'");
-			getResult.setString(1, dID);
+					+ " td on td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner join"
+					+ " leaguexdivision ld on ld.divisionID = d.divisionID where ld.leagueID = ? and s.gameStatus = 'Final'");
+			getResult.setString(1, lID);
 			resultSet = getResult.executeQuery();
 			status = resultSet.next();
 
-			number = resultSet.getInt(1);
+			if(status)
+				number = resultSet.getInt(1);
 
 
 			// close all connections and handle all possible exceptions
@@ -457,7 +466,7 @@ public class ScheduleResults {
 	/**
 	 * The getSchedule method gets a games home scorers
 	 * @param <ScorerBean>
-	 * @param id - Current division id
+	 * @param id - Current game id
 	 * @param home - ID of the home team
 	 * @return status - boolean value
 	 */
@@ -524,7 +533,7 @@ public class ScheduleResults {
 	/**
 	 * The getSchedule method gets a games away scorers
 	 * @param <ScorerBean>
-	 * @param id - Current division id
+	 * @param id - Current game id
 	 * @param home - ID of the away team
 	 * @return status - boolean value
 	 */
