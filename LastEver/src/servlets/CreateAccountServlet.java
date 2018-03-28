@@ -34,7 +34,7 @@ public class CreateAccountServlet extends HttpServlet {
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";
-	private static final String SECRET = "ITS A SECRET";
+	private static final String SECRET = "6LcxBE8UAAAAAARna7UdEV99zCQzyrCHVWNb8D6n";
 
 	/**
 	 * doPost method mapped to /createAccount
@@ -83,15 +83,15 @@ public class CreateAccountServlet extends HttpServlet {
 					+ captcha;
 			// create a new URL with the post data
 			URL capURL = new URL(postData);
-			
+
 			// open a url connection with the specified url
 			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
-			
+
 			// set the connection to do output
 			conn.setDoOutput(true);
 			// set request method to post
 			conn.setRequestMethod("POST");
-			
+
 			// set the content-type, charset, and content-length of the connection
 			conn.setRequestProperty(
 					"Content-Type", "application/x-www-form-urlencoded");
@@ -137,8 +137,8 @@ public class CreateAccountServlet extends HttpServlet {
 					}
 
 					// redirect to home page
-					session.setAttribute("userType", url);
-					response.sendRedirect(url);
+						session.setAttribute("userType", url);
+						response.sendRedirect(url);
 				}
 			} else {
 				response.sendRedirect("./login");

@@ -98,23 +98,38 @@
 							<c:otherwise>
 								
 								<c:choose>
-								
-								<%--  IF SIGNED IN AS A TEAM OWNER --%>
-								<c:when test="${userType == './teamowner'}">
-								<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
-								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
-								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
-								</c:when>
+									<%--  IF SIGNED IN AS A TEAM OWNER --%>
+									<c:when test="${userType == './teamowner'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+														key="team_dd1" /></a> <a class="dropdown-item"
+													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
+													class="dropdown-item" href="teamSchedule"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
+									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
+									<c:when test="${userType == './teamCreateTeam'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a> 
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
 								
