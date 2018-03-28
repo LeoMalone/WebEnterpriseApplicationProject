@@ -137,18 +137,34 @@
 								</c:choose>
 								<c:choose>
 
-									<%--  IF SIGNED IN AS A REFEREE --%>
+																		<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
-										<li class="nav-item"><a class="nav-link"
-											href="${userType}">${userName}</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
 
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
-										<li class="nav-item"><a class="nav-link"
-											href="${userType}">${userName}</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>

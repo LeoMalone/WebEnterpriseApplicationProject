@@ -88,7 +88,18 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"	href="./referee">${userName}</a></li>
+
+										<li class="nav-item dropdown"><a
+											class="nav-link active dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
+
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
