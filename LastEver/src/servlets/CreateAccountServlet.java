@@ -19,10 +19,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.mindrot.jbcrypt.BCrypt;
 
-import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
-import dao.Division;
 import dao.Team;
 
 /**
