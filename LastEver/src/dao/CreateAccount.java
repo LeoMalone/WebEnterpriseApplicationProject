@@ -92,7 +92,7 @@ public class CreateAccount {
 
 			result = insertPlayer.executeUpdate();
 
-			// Return true if 1 query executes
+			// xReturn true if 1 query executes
 			if(result == 1) {
 				result = 0;
 				id = conn.prepareStatement("SELECT p.playerID FROM player p WHERE p.playerFirstName = ?");
