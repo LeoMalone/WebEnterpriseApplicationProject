@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The IndexServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the index page to get all current news on the website
+ * the index page to get the 5 most recent news stories on the website
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.NewsBean;
-import dao.Division;
 import dao.Index;
+import dao.League;
 
 public class IndexServlet extends HttpServlet {
 
@@ -81,7 +81,7 @@ public class IndexServlet extends HttpServlet {
 		response.setContentType("text/html");
 		
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
@@ -89,12 +89,13 @@ public class IndexServlet extends HttpServlet {
 		else
 			Index.getNews(nlb, language, 0, 5);
 		
-		//get divisions for the nav bar
-		Division.getAllDivisions(dlb);
+		// Set leagues for navbar
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		//sets request attributes
 		request.setAttribute("news", nlb);
-		request.setAttribute("allDiv", dlb);	
+		request.setAttribute("league", llb);	
 		request.setAttribute("userName", userName);
 		
 		//forwards to the index page

@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
-import dao.Division;
+import beans.LeagueBean;
+import dao.League;
 
+/**
+ * TeamPhotoServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamPhotoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -25,9 +29,10 @@ public class TeamPhotoServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");

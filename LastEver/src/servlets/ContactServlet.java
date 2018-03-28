@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
-import dao.Division;
+import beans.LeagueBean;
+import dao.League;
 
+/**
+ * Contact Servlet class
+ * @author Unknown and edited by Kevin Villemaire
+ */
 public class ContactServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -53,9 +57,10 @@ public class ContactServlet extends HttpServlet {
 				}
 			}		
 			
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
+			//get league list
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
+			League.getAllLeagues(llb);
+			request.setAttribute("league", llb);
 			
 			request.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("contact.jsp");  

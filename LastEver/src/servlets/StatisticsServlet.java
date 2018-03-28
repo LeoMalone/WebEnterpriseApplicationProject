@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.StatisticsBean;
-import dao.Division;
+import dao.League;
 import dao.Statistics;
 
 public class StatisticsServlet extends HttpServlet {
@@ -79,21 +79,21 @@ public class StatisticsServlet extends HttpServlet {
 
 			//bean list variables used to set data on the page
 			List<StatisticsBean> slb = new ArrayList<StatisticsBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			
 			//get the statistics associated with the division
 			Statistics.getStatistics(id, slb);	
 			
-			//get all divisions for the nav bar
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
+			// Set leagues for navbar
+			League.getAllLeagues(llb);
+			request.setAttribute("league", llb);
 	
 			//get the division that the page corresponds to
-			dlb = new ArrayList<DivisionBean>();	
-			Division.getSpecificDivision(dlb, id);
+			llb = new ArrayList<LeagueBean>();	
+			League.getCurrentLeague(id, llb);
 			
 			//set request attributes
-			request.setAttribute("currDiv", dlb);
+			request.setAttribute("currLeague", llb);
 			request.setAttribute("statistics", slb);	
 			request.setAttribute("userName", userName);
 			

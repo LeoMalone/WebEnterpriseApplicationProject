@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.PlayerBean;
 import dao.CreateAccount;
-import dao.Division;
+import dao.League;
 
 /**
  * The CreatePlayerServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the team owner control panel option Create User.
- * @author Kevin Read
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class CreatePlayerServlet extends HttpServlet {
 
@@ -37,10 +36,10 @@ public class CreatePlayerServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
 		// TODO: distinguish between user types
@@ -105,9 +104,10 @@ public class CreatePlayerServlet extends HttpServlet {
 		String newPosition = request.getParameter("newPosition");
 		
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		//Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If any parameter is null
 		if (newFirstName == null || newLastName == null || newNumber == null || newPosition == null) {

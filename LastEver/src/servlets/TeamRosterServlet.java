@@ -11,32 +11,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.PlayerBean;
 import beans.TeamBean;
-import dao.Division;
 import dao.EditTeamUser;
+import dao.League;
 import dao.TeamScheduleResults;
 
+/**
+ * TeamRosterServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamRosterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
-			
+
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -52,10 +57,10 @@ public class TeamRosterServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -65,26 +70,25 @@ public class TeamRosterServlet extends HttpServlet {
 					}
 				}		
 
-				
+
 				String teamId = EditTeamUser.getTeamForEdit(userName);
 				List<PlayerBean> pb = new ArrayList<PlayerBean>();
 				EditTeamUser.getPlayersFromRoster(pb, teamId);
-				
+
 				TeamBean tb = new TeamBean();
 				String teamName = TeamScheduleResults.getTeamName(tb, userName);
-				
+
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("teamId", teamId);
 				request.setAttribute("userName", userName);
-				request.setAttribute("divList", dlb);
 				request.setAttribute("playerList", pb);
 
 				RequestDispatcher rd = request.getRequestDispatcher("team_roster.jsp");  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

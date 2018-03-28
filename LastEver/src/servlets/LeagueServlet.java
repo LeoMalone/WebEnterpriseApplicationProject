@@ -1,8 +1,8 @@
 package servlets;
 
 /**
- * The DivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the division page to get the news related to the division
+ * The LeagueServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the league page to get the news related to the league
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -18,16 +18,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.NewsBean;
 import dao.Division;
+import dao.League;
 
-public class DivisionServlet extends HttpServlet {
+public class LeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * doGet mapped to /division
+	 * doGet mapped to /league
 	 * @param request - request parameters
 	 * @param response - response parameters
 	 */
@@ -99,7 +100,7 @@ public class DivisionServlet extends HttpServlet {
 
 		//bean list variables used to set data on the page
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
@@ -108,22 +109,22 @@ public class DivisionServlet extends HttpServlet {
 			Division.getNews(id, nlb, language, (page-1)*newsArticles, newsArticles);	
 
 		//gets the divisions for the nav bar
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 
 		//get the division that the page corresponds to
-		dlb = new ArrayList<DivisionBean>();	
-		Division.getSpecificDivision(dlb, id);
+		llb = new ArrayList<LeagueBean>();	
+		League.getCurrentLeague(id, llb);
 
 		//set request attributes
-		request.setAttribute("currDiv", dlb);
+		request.setAttribute("currLeague", llb);
 		request.setAttribute("news", nlb);	
 		request.setAttribute("userName", userName);
 		request.setAttribute("currPage", page);
 		request.setAttribute("totalPages", (int) Math.ceil(Division.numberOfArticles(id) * 1.0 / newsArticles));
 		
 		//forward to division page
-		RequestDispatcher rd = request.getRequestDispatcher("/division.jsp?id=" + id);  
+		RequestDispatcher rd = request.getRequestDispatcher("/league.jsp?id=" + id);  
 		rd.forward(request, response);		
 	}
 

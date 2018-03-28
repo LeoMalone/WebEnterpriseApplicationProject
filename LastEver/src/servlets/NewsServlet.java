@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.NewsBean;
-import dao.Division;
 import dao.Index;
+import dao.League;
 
 public class NewsServlet extends HttpServlet {
 
@@ -97,7 +97,7 @@ public class NewsServlet extends HttpServlet {
 		}
 		
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
@@ -105,12 +105,12 @@ public class NewsServlet extends HttpServlet {
 		else
 			Index.getNews(nlb, language, (page-1)*newsArticles, newsArticles);
 		
-		//get divisions for the nav bar
-		Division.getAllDivisions(dlb);
+		// Set leagues for navbar
+		League.getAllLeagues(llb);
 		
 		//sets request attributes
 		request.setAttribute("news", nlb);
-		request.setAttribute("allDiv", dlb);	
+		request.setAttribute("league", llb);	
 		request.setAttribute("userName", userName);
 		request.setAttribute("currPage", page);
 		request.setAttribute("totalPages", (int) Math.ceil(Index.numberOfArticles() * 1.0 / newsArticles));

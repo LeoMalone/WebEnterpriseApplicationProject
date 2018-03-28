@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
-import dao.Division;
+import dao.League;
 import dao.Team;
 
+/**
+ * TeamOwnerNewServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamOwnerNewServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -33,9 +37,10 @@ public class TeamOwnerNewServlet extends HttpServlet {
 			teamNameFromParam = "coolTeam";
 		}
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");

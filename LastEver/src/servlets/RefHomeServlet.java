@@ -11,26 +11,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.RefBean;
-import dao.Division;
 import dao.EditRefUser;
+import dao.League;
 
+/**
+ * RefHomeServlet class
+ * @author Neal and edited by Kevin Villemaire and Liam Maloney
+ *
+ */
 public class RefHomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");
 		} else {
@@ -44,9 +50,9 @@ public class RefHomeServlet extends HttpServlet {
 					else if (cookie.getName().equals("userType"))
 					{
 						if (cookie.getValue() != "referee") //if they aren't a referee, don't let them access
-							{
-								response.sendRedirect("./login");
-							}
+						{
+							response.sendRedirect("./login");
+						}
 					}
 				}
 			}
@@ -56,10 +62,10 @@ public class RefHomeServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -68,23 +74,22 @@ public class RefHomeServlet extends HttpServlet {
 						break;
 					}
 				}		
-				
+
 				request.setAttribute("userName", userName);
-				request.setAttribute("divList", dlb);
 
 				//get id from url and set userBean id
 				RefBean user = new RefBean();
-				
+
 				if(EditRefUser.getUserForEdit(user)) {
 					request.setAttribute("firstName", user.getFirstName());
 				}
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("referee.jsp");  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.PlayerBean;
 import beans.StatisticsBean;
-import dao.Division;
+import dao.League;
 import dao.Player;
 import dao.Statistics;
 
@@ -82,16 +82,16 @@ public class PlayerPageServlet extends HttpServlet {
 			//bean list variables used to set data on the page
 			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
 			List<PlayerBean> plb = new ArrayList<PlayerBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			
 			//get the player info and statistics
 			Player.getPlayerInfo(id, plb);
 			Statistics.getStatisticsWithPlayer(id, stlb);
-			//get all the divisions for the navbar
-			Division.getAllDivisions(dlb);
+			// Set leagues for navbar
+			League.getAllLeagues(llb);
 
 			//set the request attributes
-			request.setAttribute("allDiv", dlb);
+			request.setAttribute("league", llb);
 			request.setAttribute("player", plb);
 			request.setAttribute("statistics", stlb);
 			request.setAttribute("userName", userName);

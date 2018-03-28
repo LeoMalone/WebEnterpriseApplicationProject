@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.UserBean;
-import dao.Division;
 import dao.EditUser;
+import dao.League;
 
 
 /**
  * The EditUserServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit User.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class EditUserServlet extends HttpServlet{
 	
@@ -38,10 +38,10 @@ public class EditUserServlet extends HttpServlet{
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {

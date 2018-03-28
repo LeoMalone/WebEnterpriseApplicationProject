@@ -12,14 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
 import dao.Division;
 import dao.EditTeam;
+import dao.League;
 
 /**
  * The EditTeamServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit Team.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class EditTeamServlet extends HttpServlet {
 	
@@ -35,7 +37,12 @@ public class EditTeamServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+		
+		//get division list for teams
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);

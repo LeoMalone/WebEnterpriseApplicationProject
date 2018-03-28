@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.RefBean;
 import beans.TeamBean;
 import dao.AdminTeams;
-import dao.Division;
 import dao.EditRefUser;
+import dao.League;
 
+/**
+ * RefUsersServlet class
+ * @author Neal and edited by Kevin Villemaire and Liam Maloney
+ */
 public class RefUsersServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
@@ -28,9 +33,10 @@ public class RefUsersServlet extends HttpServlet{
 		String userName = null;
 		String language = null;
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");

@@ -90,15 +90,15 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${empty allDiv}">
+									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="div1" items="${allDiv}">
+										<c:forEach var="l" items="${league}">
 											<a class="dropdown-item"
-												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
+												href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -331,10 +331,10 @@
 									<fmt:message key="div_head2" />
 								</h4>
 								<ul class="nav nav-tabs card-header-tabs">
-									<c:forEach items="${allDiv}" var="division">
+									<c:forEach items="${league}" var="l">
 										<li class="nav-item"><a
-											class="nav-link ${division.divisionId==divID?'active':''}"
-											href="venue?id=${venID}&div=${division.divisionId}#schedule">${division.divisionName}</a>
+											class="nav-link ${l.leagueId==leagueID?'active':''}"
+											href="venue?id=${venID}&lID=${l.leagueID}#schedule">${l.leagueName}</a>
 										</li>
 									</c:forEach>
 								</ul>

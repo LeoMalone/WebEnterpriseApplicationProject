@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -10,11 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
-import dao.Division;
+import dao.League;
 import dao.Team;
 
+/**
+ * TeamOwnerServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamOwnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,9 +31,10 @@ public class TeamOwnerServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");

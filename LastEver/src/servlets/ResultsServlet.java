@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.ScheduleResultsBean;
-import dao.Division;
+import dao.League;
 import dao.ScheduleResults;
 
 public class ResultsServlet extends HttpServlet {
@@ -96,21 +96,21 @@ public class ResultsServlet extends HttpServlet {
 			
 			//bean list variables used to set data on the page
 			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			
-			//get all divisions for the nav bar
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
+			// Set leagues for navbar
+			League.getAllLeagues(llb);
+			request.setAttribute("league", llb);
 			
 			//get the results from the division
 			ScheduleResults.getResults(id, rlb, (page-1)*numResults, numResults);	
 
 			//make a new DivisionBean to get the current division
-			dlb = new ArrayList<DivisionBean>();	
+			llb = new ArrayList<LeagueBean>();	
 			
 			//get the division that the page corresponds to
-			Division.getSpecificDivision(dlb, id);
-			request.setAttribute("currDiv", dlb);
+			League.getCurrentLeague(id, llb);
+			request.setAttribute("currLeague", llb);
 
 			//set request attributes
 			request.setAttribute("results", rlb);	

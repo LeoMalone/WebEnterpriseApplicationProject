@@ -13,14 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.UserBean;
 import dao.CreateAccount;
 import dao.Division;
+import dao.League;
 
 /**
  * The AdminCreateServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option Create User.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class AdminCreateServlet extends HttpServlet {
 
@@ -42,7 +44,12 @@ public class AdminCreateServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+		
+		//get division list for a team to join
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
@@ -105,9 +112,9 @@ public class AdminCreateServlet extends HttpServlet {
 		String newPassword = request.getParameter("newPass");
 		String userType = request.getParameter("createRadio");
 
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If any parameter is null
 		if (newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {

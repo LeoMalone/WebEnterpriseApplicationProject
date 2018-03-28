@@ -366,13 +366,13 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>DivisionServlet</servlet-name>
-		<servlet-class>servlets.DivisionServlet</servlet-class>
+		<servlet-name>LeagueServlet</servlet-name>
+		<servlet-class>servlets.LeagueServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>DivisionServlet</servlet-name>
-		<url-pattern>/division</url-pattern>
+		<servlet-name>LeagueServlet</servlet-name>
+		<url-pattern>/league</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

@@ -88,19 +88,22 @@ public class StandingsServlet extends HttpServlet {
 			//get the current standings in the division
 			Standings.getStandings(id, slb);	
 			
-			//gets all divisions for the navbar
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
+			// Set leagues for navbar
+			League.getAllLeagues(llb);
+			request.setAttribute("league", llb);
 
 			//get each divisions standings in the league
 			dlb = new ArrayList<DivisionBean>();	
 			Division.getDivisionStandings(id, dlb);
 			
+			//create a new LeagueBean to get the current league
+			llb = new ArrayList<LeagueBean>();
+			
 			//gets the current league
 			League.getCurrentLeague(id, llb);
 			
 			//set request attributes
-			request.setAttribute("league", llb);
+			request.setAttribute("currLeague", llb);
 			request.setAttribute("standings", dlb);	
 			request.setAttribute("userName", userName);
 			

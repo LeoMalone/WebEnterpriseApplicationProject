@@ -5,8 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -19,15 +17,14 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.mindrot.jbcrypt.BCrypt;
 
-import beans.DivisionBean;
 import beans.UserBean;
 import dao.CreateAccount;
-import dao.Division;
 import dao.Team;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
  * creating a new account
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class CreateAccountServlet extends HttpServlet {
 

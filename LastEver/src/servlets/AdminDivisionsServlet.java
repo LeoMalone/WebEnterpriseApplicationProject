@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import dao.Division;
+import dao.League;
 
 /**
  * The AdminDivisionsServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option view Divisions.
- * @author LiamM
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class AdminDivisionsServlet extends HttpServlet {
 
@@ -32,7 +34,12 @@ public class AdminDivisionsServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+		
+		//get division list for an admin to edit
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);

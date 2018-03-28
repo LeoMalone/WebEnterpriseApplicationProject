@@ -60,6 +60,53 @@ public class League {
 		return status;
 	}
 	
+	public static boolean getAllLeagues(List<LeagueBean> leagueList) {
+
+		boolean status = false;							// query status
+		Connection conn = null;							// DB Connection
+		PreparedStatement league = null;			// SQL query
+		ResultSet rs = null;							// returned query result set
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			league = conn.prepareStatement("SELECT leagueID, leagueName from league");
+			rs = league.executeQuery();
+			status = rs.next();
+			
+			//return to the start of the result set
+			rs.beforeFirst();
+			
+			//Loop through and add the results of the query to a LeagueBean then add it to the list
+			while(rs.next()) {
+				LeagueBean lb = new LeagueBean();
+				lb.setLeagueId(rs.getString(1));
+				lb.setLeagueName(rs.getString(2));
+				leagueList.add(lb);
+			}
+
+		// close all connections and catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (league != null) {
+				try {
+					league.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
 	public static boolean getLeagueDivisions(String lID, List<DivisionBean> divisionList) {
 
 		boolean status = false;							// query status

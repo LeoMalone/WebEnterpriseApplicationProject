@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,11 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.DivisionBean;
-import dao.Division;
-
 /**
  * The LogoutServlet class handles the POST data from /logout to logout a user
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class LogoutServlet extends HttpServlet {
 

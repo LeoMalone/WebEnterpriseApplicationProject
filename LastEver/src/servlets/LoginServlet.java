@@ -13,14 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.UserBean;
-import dao.Division;
+import dao.League;
 import dao.Login;
 import dao.Team;
 
 /**
  * The LoginServlet class handles the POST from /login to login a user
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class LoginServlet extends HttpServlet {
 
@@ -35,9 +36,10 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		String language = null;
 
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 
 		if (request.getSession().getAttribute("signedIn") != null) {
 			response.sendRedirect("./index");
@@ -87,9 +89,10 @@ public class LoginServlet extends HttpServlet {
 		String loginPass = request.getParameter("loginPass");
 		String language = null;
 
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 
 		// Create new userBean
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());

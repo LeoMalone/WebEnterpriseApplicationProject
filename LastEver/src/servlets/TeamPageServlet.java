@@ -9,6 +9,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -16,13 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.ScheduleResultsBean;
 import beans.StandingsBean;
 import beans.StatisticsBean;
 import beans.TeamBean;
 import beans.UserBean;
-import dao.Division;
+import dao.League;
 import dao.ScheduleResults;
 import dao.Standings;
 import dao.Statistics;
@@ -93,7 +94,7 @@ public class TeamPageServlet extends HttpServlet {
 			List<ScheduleResultsBean> srlb = new ArrayList<ScheduleResultsBean>();	//Bean used for team schedule
 			List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();	//Bean used for team results
 			List<TeamBean> tlb = new ArrayList<TeamBean>();
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
 			List<UserBean> ulb = new ArrayList<UserBean>();
 			
@@ -106,11 +107,11 @@ public class TeamPageServlet extends HttpServlet {
 			ScheduleResults.getResultsWithTeam(id, div, rlb);
 			Statistics.getStatisticsWithTeam(id, div, stlb);
 			TeamPage.getTeamInfo(id, tlb);
-			Division.getAllDivisions(dlb);
+			League.getAllLeagues(llb);
 			TeamPage.getTeamOwner(id, ulb);
 			
 			//sets request attributes
-			request.setAttribute("allDiv", dlb);
+			request.setAttribute("league", llb);
 			request.setAttribute("team", tlb);
 			request.setAttribute("standings", slb);
 			request.setAttribute("schedule", srlb);

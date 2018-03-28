@@ -99,15 +99,15 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${empty allDiv}">
+									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="div1" items="${allDiv}">
+										<c:forEach var="l" items="${league}">
 											<a class="dropdown-item"
-												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
+												href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>

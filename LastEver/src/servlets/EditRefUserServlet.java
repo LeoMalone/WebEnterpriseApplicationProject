@@ -12,28 +12,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.RefBean;
 import beans.TeamBean;
 import dao.AdminTeams;
 import dao.Division;
 import dao.EditRefUser;
+import dao.League;
 
-
+/**
+ * EditRefUserServlet class
+ * @author Unknown and edited by Kevin Villemaire
+ */
 public class EditRefUserServlet extends HttpServlet{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");
 		} else {
@@ -53,10 +59,10 @@ public class EditRefUserServlet extends HttpServlet{
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -65,60 +71,60 @@ public class EditRefUserServlet extends HttpServlet{
 						break;
 					}
 				}
-			
+
 				List<TeamBean> tbl = new ArrayList<TeamBean>();
 				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
 				StringBuilder sb = new StringBuilder(request.getQueryString());
 				sb.deleteCharAt(0);				
 				AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
-				
+
 				request.setAttribute("currentId", sb.toString());
 				request.setAttribute("userName", userName);
 				request.setAttribute("divList", dbl);
 				request.setAttribute("teamList", tbl);
-				
-				
+
+
 				//get id from url and set userBean id
 				StringBuilder sbref = new StringBuilder(request.getQueryString());
 				sbref.deleteCharAt(0);
 				RefBean user = new RefBean();
 				user.setId(sbref.toString());
-				
+
 				if(EditRefUser.getUserForEdit(user)) {
 					request.setAttribute("firstName", user.getFirstName());
 				}
-				
+
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("edit_ref_user.jsp");  
-		        rd.forward(request, response);
+				rd.forward(request, response);
 			}
 		}
 	}
-	
+
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+
 		response.setContentType("text/html");
-		
+
 		RefBean user = new RefBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
-		
+
 		String newUsername = request.getParameter("editUsername");
 		String newEmail = request.getParameter("editEmail");
 		String newPassword = request.getParameter("editPass");
 		String userType = request.getParameter("editRadio");
-		
+
 		user.setId(sb.toString());
 		user.setUsername(newUsername);
 		user.setEmail(newEmail);
 		user.setPassword(newPassword);
 		user.setUserType(userType);
-		
+
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+
 		if(EditRefUser.saveChanges(user)) {
 			response.sendRedirect("./refUsers");
 		}

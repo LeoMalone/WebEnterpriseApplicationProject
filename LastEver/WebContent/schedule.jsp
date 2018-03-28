@@ -32,11 +32,11 @@
 	<c:choose>
 		<c:when test="${empty currDiv}">
 
-			<title>Last Ever - Division</title>
+			<title>Last Ever - League</title>
 		</c:when>
 		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
-					<c:out value="${row.divisionName}" />
+			<title>Last Ever - <c:forEach var="row" items="${currLeague}">
+					<c:out value="${row.leagueName}" />
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
@@ -89,15 +89,15 @@
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
-									<c:when test="${empty allDiv}">
+									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
 												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="div1" items="${allDiv}">
+										<c:forEach var="l" items="${league}">
 											<a class="dropdown-item"
-												href="division?id=${div1.divisionId}">${div1.divisionName}</a>
+												href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -175,8 +175,8 @@
 		-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:forEach var="row" items="${currDiv}">
-						<c:out value="${row.divisionName}" />
+					<c:forEach var="row" items="${currLeague}">
+						<c:out value="${row.leagueName}" />
 					</c:forEach>
 					<fmt:message key="div_head2" />
 				</h1>
@@ -189,29 +189,29 @@
 								<nav class="navbar navbar-expand-lg navbar-light bg-faded">
 									<ul class="navbar-nav mr-auto">
 										<c:choose>
-											<c:when test="${empty currDiv }">
-												Division
+											<c:when test="${empty currLeague }">
+												League
 											</c:when>
 											<c:otherwise>
-												<c:forEach var="row" items="${currDiv}">
+												<c:forEach var="row" items="${currLeague}">
 													<li class="nav-item"><a class="nav-link"
-														href="division?id=${row.divisionId}"> <c:out
-																value="${row.divisionName}" />
+														href="league?id=${row.leagueId}"> <c:out
+																value="${row.leagueName}" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="standings?id=${row.divisionId}"> <fmt:message
+														href="standings?id=${row.leagueId}"> <fmt:message
 																key="div_head4" />
 													</a></li>
 													<li class="nav-item active"><a class="nav-link"
-														href="schedule?id=${row.divisionId}"> <fmt:message
+														href="schedule?id=${row.leagueId}"> <fmt:message
 																key="div_head2" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="results?id=${row.divisionId}"> <fmt:message
+														href="results?id=${row.leagueId}"> <fmt:message
 																key="div_head3" />
 													</a></li>
 													<li class="nav-item"><a class="nav-link"
-														href="statistics?id=${row.divisionId}"> <fmt:message
+														href="statistics?id=${row.leagueId}"> <fmt:message
 																key="div_head5" />
 													</a></li>
 												</c:forEach>

@@ -11,11 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.ScheduleResultsBean;
 import beans.TeamBean;
 import dao.Division;
+import dao.League;
 import dao.TeamScheduleResults;
 
+/**
+ * TeamScheduleServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamScheduleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -58,11 +64,12 @@ public class TeamScheduleServlet extends HttpServlet {
 			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
 			String divID = TeamScheduleResults.getSchedule(slb, userName);	
 
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-			Division.getAllDivisions(dlb);
-			request.setAttribute("allDiv", dlb);
+			// Set leagues for navbar
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
+			League.getAllLeagues(llb);
+			request.setAttribute("league", llb);;
 			
-			dlb = new ArrayList<DivisionBean>();	
+			List<DivisionBean> dlb = new ArrayList<DivisionBean>();	
 			Division.getSpecificDivision(dlb, divID);
 			request.setAttribute("currDiv", dlb);
 			

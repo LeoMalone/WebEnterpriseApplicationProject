@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
 import dao.AdminTeams;
-import dao.Division;
+import dao.League;
 
 /**
  * The AdminTeamsServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option View Teams.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class AdminTeamsServlet extends HttpServlet {
 
@@ -34,10 +35,10 @@ public class AdminTeamsServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		
-		// Set divisions for navbar
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
 		// TODO: distinguish between user types

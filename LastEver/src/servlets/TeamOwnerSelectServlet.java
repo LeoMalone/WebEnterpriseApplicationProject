@@ -11,32 +11,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
-import dao.Division;
+import dao.League;
 import dao.Team;
 
+/**
+ * TeamOwnerSelectServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamOwnerSelectServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String teamNameFromParam = null;
 		String userName = null;
 		String language = null;
-		
+
 		teamNameFromParam = (String) request.getAttribute("selectTeam");
 		if (teamNameFromParam == null) {
 			teamNameFromParam = "coolTeam";
 		}
-		
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
@@ -55,10 +60,10 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -68,23 +73,23 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 					}
 				}		
 
-				
+
 				request.setAttribute("teamName", teamNameFromParam);
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("teamowner");  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
+
 		String teamName = request.getParameter("selectTeam");
-		
+
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("teamCreateTeam");
 		} else {
@@ -103,10 +108,10 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -123,13 +128,13 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 				else {
 					url = "teamowner";
 				}
-				
+
 				TeamBean tb = new TeamBean();
 				Team.insertTeamByUser(tb, teamName, userName);
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher(url);  
-		        rd.forward(request, response);	
+				rd.forward(request, response);	
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,11 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.TeamBean;
-import dao.TeamCreateTeam;
-import dao.Team;
 import dao.Division;
+import dao.League;
+import dao.Team;
+import dao.TeamCreateTeam;
 
+/**
+ * TeamCreateTeamServlet class
+ * @author Kevin Read and edited by Kevin Villemaire
+ */
 public class TeamCreateTeamServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7270142539946516086L;
@@ -28,6 +35,12 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		String language = null;
 		String userName = null;
 		
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+		
+		//get division list for a team to join
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
@@ -92,7 +105,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		String newTeamAbbr = request.getParameter("newTeamAbbr");
 		String newDiv = request.getParameter("divRadio");
 		String language = null;
-		String teamName = request.getParameter("selectTeam");
+		//String teamName = request.getParameter("selectTeam");
 		
 		if (Team.hasTeam(userName)) {
 			response.sendRedirect("login");

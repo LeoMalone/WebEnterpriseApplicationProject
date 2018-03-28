@@ -11,32 +11,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
+import beans.LeagueBean;
 import dao.Division;
+import dao.League;
 
 /**
  * The EditDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit division.
- * @author Liam Maloney
+ * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class EditDivisionServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * doGet method mapped to /editDivision	
 	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
-		
-		// Set divisions for navbar
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-		
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+
 		// If User is not signed In redirect to sign in page
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
 			response.sendRedirect("./index");
@@ -61,7 +63,7 @@ public class EditDivisionServlet extends HttpServlet {
 			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -70,40 +72,40 @@ public class EditDivisionServlet extends HttpServlet {
 						break;
 					}
 				}
-			
+
 				//get id from url and set DivisionBean id
 				StringBuilder sb = new StringBuilder(request.getQueryString());
 				sb.deleteCharAt(0);
 				DivisionBean div = new DivisionBean();
 				div.setDivisionId(sb.toString());
-				
+
 				// If query is successful
 				if(Division.getDivisionForEdit(div)) {
 					request.setAttribute("userName", userName);
 					request.setAttribute("division", div);
 					response.setContentType("text/html");
 					RequestDispatcher rd = request.getRequestDispatcher("edit_division.jsp");  
-			        rd.forward(request, response);					
+					rd.forward(request, response);					
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * doPost method mapped to /editDivision	
 	 */
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// Get id from url and add it to divisionBean
 		DivisionBean division = new DivisionBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		division.setDivisionId(sb.toString());
-		
+
 		// Get all schedule parameters from jsp inputs
 		String newDivName = request.getParameter("editDivisionName");
-		
+
 		// If any parameter is null
 		if(newDivName == null || newDivName.equals("")) {
 			response.sendRedirect("./editDivision?=" + sb.toString());			

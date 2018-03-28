@@ -11,13 +11,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
+import beans.LeagueBean;
 import beans.ScheduleResultsBean;
 import beans.VenueBean;
-import dao.Division;
+import dao.League;
 import dao.ScheduleResults;
 import dao.Venue;
 
+/**
+ * The VenuePageServlet class extends HttpServlet for GET/POST requests for the venue page
+ * to get all information about a venue including the upcoming schedule for each league
+ * @author Kevin Villemaire
+ */
 public class VenuePageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -70,28 +75,28 @@ public class VenuePageServlet extends HttpServlet {
 			//get the id from the query string
 			String id = request.getParameter("id");
 			//get the division id from the query string
-			String div = request.getParameter("div");
+			String lID = request.getParameter("lID");
 			response.setContentType("text/html");
 
 			//if the query string is not included then default to division id 1
-			if(div == null)
-				div = "1";
+			if(lID == null)
+				lID = "1";
 
 			//bean list variables used to set data on the page
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			List<VenueBean> vlb = new ArrayList<VenueBean>();
 			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
 						
 			//gets all divisions for the nav bar
-			Division.getAllDivisions(dlb);
+			League.getAllLeagues(llb);
 			//get the venue info and schedule
-			ScheduleResults.getScheduleWithVenue(id, div, slb);	
+			ScheduleResults.getScheduleWithVenue(id, lID, slb);	
 			Venue.getVenue(id, vlb);
 
 			//sets request parameters
-			request.setAttribute("allDiv", dlb);
+			request.setAttribute("league", llb);
 			request.setAttribute("venID", id);
-			request.setAttribute("divID", div);
+			request.setAttribute("leagueID", lID);
 			request.setAttribute("venue", vlb);
 			request.setAttribute("schedule", slb);
 			request.setAttribute("userName", userName);
