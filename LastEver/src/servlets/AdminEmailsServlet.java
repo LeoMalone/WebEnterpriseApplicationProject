@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
+import beans.UserBean;
 import dao.AdminEmails;
 import dao.League;
 
@@ -77,9 +78,9 @@ public class AdminEmailsServlet extends HttpServlet{
 				}
 			
 				// User list for display on page
-				List<String> admins = new ArrayList<String>();
-				List<String> refs = new ArrayList<String>();
-				List<String> tos = new ArrayList<String>();
+				List<UserBean> admins = new ArrayList<UserBean>();
+				List<UserBean> refs = new ArrayList<UserBean>();
+				List<UserBean> tos = new ArrayList<UserBean>();
 				
 				// If query is successful
 				if(AdminEmails.getAllEmails(admins, refs, tos)) {

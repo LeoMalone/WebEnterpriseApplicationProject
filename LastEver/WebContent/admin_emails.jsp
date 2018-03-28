@@ -136,7 +136,7 @@
 						      		<c:forEach items="${admins}" var="admin">
 										<div class="form-check">
 										  <input name="admins" class="form-check-input" type="checkbox" value="${admin}" id="defaultCheck1">
-										  <label class="form-check-label" for="defaultCheck1">${admin}</label>
+										  <label class="form-check-label" for="defaultCheck1"><b>${admin.firstName} ${admin.lastName}:</b> ${admin.emailAddress}</label>
 										</div>
 									</c:forEach>
 									<hr />
@@ -160,7 +160,7 @@
 							      		<c:forEach items="${refs}" var="ref">
 											<div class="form-check">
 											  <input name="refs" class="form-check-input" type="checkbox" value="${ref}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1">${ref}</label>
+											  <label class="form-check-label" for="defaultCheck1"><b>${ref.firstName} ${ref.lastName}:</b> ${ref.emailAddress}</label>
 											</div>
 										</c:forEach>
 										<hr />
@@ -185,7 +185,7 @@
 							      		<c:forEach items="${tos}" var="to">
 											<div class="form-check">
 											  <input name="tos" class="form-check-input" type="checkbox" value="${to}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1">${to}</label>
+											  <label class="form-check-label" for="defaultCheck1"><b>${to.firstName} ${to.lastName}:</b> ${to.emailAddress}</label>
 											</div>
 										</c:forEach>
 										<hr />

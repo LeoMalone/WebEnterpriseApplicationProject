@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import beans.UserBean;
 import db.ConnectionManager;
 
 /**
@@ -18,7 +19,7 @@ public class AdminEmails {
 	 * @param userList UserBean list from servlet
 	 * @return boolean status
 	 */
-	public static boolean getAllEmails(List<String> admins, List<String> refs, List<String> tos) {
+	public static boolean getAllEmails(List<UserBean> admins, List<UserBean> refs, List<UserBean> tos) {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -28,16 +29,22 @@ public class AdminEmails {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allEmails = conn.prepareStatement("SELECT userType, emailAddress from users");
+	        allEmails = conn.prepareStatement("SELECT userType, emailAddress, userFirstName, userLastName from users");
 	        rs = allEmails.executeQuery();	        
 	        
 	        while(rs.next()) {
+	        	UserBean user = new UserBean();
+	        	user.setEmail(rs.getString(2));
+        		user.setFirstName(rs.getString(3));
+        		user.setLastName(rs.getString(4));
+        		
 	        	if(rs.getString(1).equals("Administrator"))
-	        		admins.add(rs.getString(2));
+	        		admins.add(user);
 	        	if(rs.getString(1).equals("Referee"))
-	        		refs.add(rs.getString(2));
+	        		refs.add(user);
 	        	if(rs.getString(1).equals("Team Owner"))
-	        		tos.add(rs.getString(2));
+	        		tos.add(user);
+	        	
 	        	status = true;
 	        }	        
 	        
