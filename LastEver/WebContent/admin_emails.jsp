@@ -135,7 +135,7 @@
 						      	<form action="./adminEmails?=1" method="POST">
 						      		<c:forEach items="${admins}" var="admin">
 										<div class="form-check">
-										  <input name="admins" class="form-check-input" type="checkbox" value="${admin}" id="defaultCheck1">
+										  <input name="admins" class="form-check-input" type="checkbox" value="${admin.emailAddress}" id="defaultCheck1">
 										  <label class="form-check-label" for="defaultCheck1"><b>${admin.firstName} ${admin.lastName}:</b> ${admin.emailAddress}</label>
 										</div>
 									</c:forEach>
@@ -159,7 +159,7 @@
 									<form action="./adminEmails?=2" method="POST">
 							      		<c:forEach items="${refs}" var="ref">
 											<div class="form-check">
-											  <input name="refs" class="form-check-input" type="checkbox" value="${ref}" id="defaultCheck1">
+											  <input name="refs" class="form-check-input" type="checkbox" value="${ref.emailAddress}" id="defaultCheck1">
 											  <label class="form-check-label" for="defaultCheck1"><b>${ref.firstName} ${ref.lastName}:</b> ${ref.emailAddress}</label>
 											</div>
 										</c:forEach>
@@ -184,7 +184,7 @@
 									<form action="./adminEmails?=3" method="POST">
 							      		<c:forEach items="${tos}" var="to">
 											<div class="form-check">
-											  <input name="tos" class="form-check-input" type="checkbox" value="${to}" id="defaultCheck1">
+											  <input name="tos" class="form-check-input" type="checkbox" value="${to.emailAddress}" id="defaultCheck1">
 											  <label class="form-check-label" for="defaultCheck1"><b>${to.firstName} ${to.lastName}:</b> ${to.emailAddress}</label>
 											</div>
 										</c:forEach>
