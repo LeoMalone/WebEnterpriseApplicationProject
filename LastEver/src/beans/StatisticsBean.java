@@ -16,6 +16,7 @@ public class StatisticsBean {
 	private int redCard;
 	private int yellowCard;
 	private String playerID;
+	private boolean hidePage;
 
 /**************************** CONTRUCTORS *****************************/	
 	public StatisticsBean() {
@@ -68,6 +69,10 @@ public class StatisticsBean {
 		return this.playerID;
 	}
 	
+	public boolean getHidePage() {
+		return this.hidePage;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setRank(String r) {
 		this.rank = r;
@@ -103,5 +108,9 @@ public class StatisticsBean {
 	
 	public void setPlayerID(String pID) {
 		this.playerID = pID;
+	}
+	
+	public void setHidePage(boolean hp) {
+		this.hidePage = hp;
 	}
 }

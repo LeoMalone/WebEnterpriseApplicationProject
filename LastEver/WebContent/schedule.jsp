@@ -30,7 +30,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<c:choose>
-		<c:when test="${empty currDiv}">
+		<c:when test="${empty currLeague}">
 
 			<title>Last Ever - League</title>
 		</c:when>

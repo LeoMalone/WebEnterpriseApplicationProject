@@ -27,13 +27,13 @@
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<c:choose>
-		<c:when test="${empty currDiv}">
+		<c:when test="${empty currLeague}">
 
 			<title>Last Ever - Division</title>
 		</c:when>
 		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
-					<c:out value="${row.divisionName}" />
+			<title>Last Ever - <c:forEach var="row" items="${currLeague}">
+					<c:out value="${row.leagueName}" />
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
