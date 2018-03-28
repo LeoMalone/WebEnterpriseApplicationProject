@@ -157,22 +157,12 @@ public class TeamCreateTeamServlet extends HttpServlet {
 
 					// If createNewUser method returns true
 					if (TeamCreateTeam.createNewTeam(team, userName)) {
-						response.sendRedirect("teamowner");
+						
 						
 						
 						HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
-						if(session!=null) {
-							
-
-							// redirect to correct login page
-							session.setAttribute("userType", "teamowner");
-						}            
-						
-						
-						
-						
-						
-						
+						session.setAttribute("userType", "./teamowner");
+						response.sendRedirect("teamowner");
 					} else {
 						response.sendRedirect("teamCreateTeam");
 					}

@@ -127,12 +127,14 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 				}
 				else {
 					url = "teamowner";
+					request.getSession().setAttribute("userType", "./teamowner");
 				}
 
 				TeamBean tb = new TeamBean();
 				Team.insertTeamByUser(tb, teamName, userName);
 				request.setAttribute("teamName", teamName);
 				request.setAttribute("userName", userName);
+				
 				RequestDispatcher rd = request.getRequestDispatcher(url);  
 				rd.forward(request, response);	
 			}
