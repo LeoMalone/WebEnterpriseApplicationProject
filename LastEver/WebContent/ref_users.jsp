@@ -135,10 +135,10 @@
 							<table class="table">
 								<thead class="thead-dark">
 								    <tr>
-								      <th scope="col">Username</th>
-								      <th scope="col">User Type</th>
-								      <th scope="col">Email Address</th>
-								      <th scope="col">Password</th>
+								      <th scope="col"><fmt:message key="au_username" /></th>
+								      <th scope="col"><fmt:message key="au_usertype" /></th>
+								      <th scope="col"><fmt:message key="au_email" /></th>
+								      <th scope="col"><fmt:message key="signin_password" /></th>
 								      <th scope="col"></th>
 								    </tr>
 								</thead>
