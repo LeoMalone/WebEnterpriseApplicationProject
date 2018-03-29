@@ -26,7 +26,7 @@
 <!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Team Schedule</title>
+	<title>Last Ever - <fmt:message key="team_schedule"/></title>
 </fmt:bundle>
 </head>
 
@@ -111,6 +111,7 @@
 								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
 								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
 								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 							</c:otherwise>

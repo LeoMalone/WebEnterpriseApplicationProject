@@ -125,7 +125,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Your Referee Home Page<br \>
+					${userName}: <fmt:message key="signin_prop3" /> <fmt:message key="signin_prop3" /> <fmt:message key="div_head3_text2" /><br \>
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -134,15 +134,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									${userName}'s Profile
+									${userName}'s <fmt:message key="au_profile" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View and Edit Your Referee Profile <br \>
+										 <fmt:message key="ah_user_body" /><br \>
 									</p>
 								</div>
 								 <div class="card-footer bg-transparent">
-								 	<a href="./refUsers?=${id}" class="btn btn-outline-light">Go To Profile</a>
+								 	<a href="./refUsers?=${id}" class="btn btn-outline-light"><fmt:message key="au_edit" /></a>
 								</div>
 							</div>
 						</div>
@@ -150,60 +150,49 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									${userName}'s Assignments
+									${userName}'s <fmt:message key="ah_sched_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										View Your Referee Assignments <br \>
+										<fmt:message key="ah_sched_body" /><br \>
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminSchedule" class="btn btn-outline-light">Go To Your Assignments</a>
+								 	<a href="./refSchedule" class="btn btn-outline-light"><fmt:message key="ah_sched_goto" /></a>
 								</div>
 							</div>
 						</div>
 						<!-- Referee Status  -->
 						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-black bg-dark">
+							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									<font color="white"> ${userName}'s Status</font>
+									<fmt:message key="email_send" />
 								</h4>
 								<div class="card-body">
-									<ul class="list-group">
-									  <li class="list-group-item d-flex justify-content-between align-items-center">
-									    Upcoming Games
-									    <span class="badge badge-primary badge-pill">14</span>
-									  </li>
-									  <li class="list-group-item d-flex justify-content-between align-items-center">
-									    Pending Games Result(s)
-									    <span class="badge badge-primary badge-pill">2</span>
-									  </li>
-									  <li class="list-group-item d-flex justify-content-between align-items-center">
-									    Admin Notification(s)
-									    <span class="badge badge-primary badge-pill">1</span>
-									  </li>
-									</ul>
+									<p class="card-text">
+										<fmt:message key="email_send_options" />
+									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./refAssignments?=${id}" class="btn btn-outline-light">Open Notifications</a>
+								 	<a href="./refEmail" class="btn btn-outline-light"><fmt:message key="email_go" /></a>
 								</div>
 							</div>
-						</div>
+						</div>				
 						<!-- NEW - 4th Card -->
 						<div class="col-lg-12 mb-5 mt-5">
 							<div class="card h-100 text-white bg-dark">
 								<div class="card-body">
-									<h4 class="card-header"> Your Recent Games </h4>
+									<h4 class="card-header"><fmt:message key="admin_cs_gs" /></h4>
 								 	<table class="table table-striped table-dark">
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">Game ID#</th>
-									      <th scope="col">Home Team</th>
-									      <th scope="col">Home Team Goal</th>
-									      <th scope="col">Away Team</th>
-									      <th scope="col">Away Team Goal</th>
-									      <th scope="col">Result</th>
+									      <th scope="col"><fmt:message key="admin_es_title" /></th>
+									      <th scope="col"><fmt:message key="div_head3_text2" /></th>
+									      <th scope="col"><fmt:message key="home_scorers" /></th>
+									      <th scope="col"><fmt:message key="div_head3_text4" /></th>
+									      <th scope="col"><fmt:message key="away_scorers" /></th>
+									      <th scope="col"><fmt:message key="div_head3" /></th>
 									    </tr>
 									  </thead>
 									  <tbody>

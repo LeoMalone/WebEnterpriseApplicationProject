@@ -323,6 +323,26 @@
 		<servlet-name>RefereeHome</servlet-name>
 		<url-pattern>/referee</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RefereeEmail</servlet-name>
+		<servlet-class>servlets.RefereeEmailServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RefereeEmail</servlet-name>
+		<url-pattern>/refEmail</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RefereeSchedule</servlet-name>
+		<servlet-class>servlets.RefereeScheduleServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RefereeSchedule</servlet-name>
+		<url-pattern>/refSchedule</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>RefereeUsers</servlet-name>
@@ -486,6 +506,16 @@
 	<servlet-mapping>
 		<servlet-name>TeamPageServlet</servlet-name>
 		<url-pattern>/team</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeamEmailsServlet</servlet-name>
+		<servlet-class>servlets.TeamEmailsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>TeamEmailsServlet</servlet-name>
+		<url-pattern>/teamEmails</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

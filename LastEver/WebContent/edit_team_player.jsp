@@ -25,26 +25,25 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>LastEver</title>
-</fmt:bundle>
+	<title>LastEver - <fmt:message key="team_edit1"/></title>
 </head>
 <body>
 	<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteUserLabel">Delete: ${player.playerFirstName} ${player.playerLastName}</h5>
+	        <h5 class="modal-title" id="deleteUserLabel"><fmt:message key="team_edit2"/>: ${player.playerFirstName} ${player.playerLastName}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	Are you sure you want to delete this Player: ${player.playerFirstName} ${player.playerLastName}?
+	      	<fmt:message key="team_edit3"/>: ${player.playerFirstName} ${player.playerLastName}?
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="team_edit4"/></button>
 	        <form action="deleteTeamPlayer?=${player.id}" method="post">	
-	        	<button type="submit" class="btn btn-danger">Delete Player</button>
+	        	<button type="submit" class="btn btn-danger"><fmt:message key="team_edit5"/></button>
 	        </form>
 	      </div>
 	    </div>
@@ -68,7 +67,6 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -129,6 +127,7 @@
 								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
 								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
 								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								
@@ -162,13 +161,13 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					Edit Player: ${player.playerFirstName} ${player.playerLastName}
+					<fmt:message key="team_edit6"/>: ${player.playerFirstName} ${player.playerLastName}
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Edit Player Credentials
+								<fmt:message key="team_edit7"/>
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
@@ -191,12 +190,12 @@
 										 </div>
 										 
 										<br />										
-										<button type="submit" class="btn btn-outline-success">Save</button>	
+										<button type="submit" class="btn btn-outline-success"><fmt:message key="team_edit8"/></button>	
 									</form>									
 								</p>							
 							</div>
 							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete Player</button>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUser"><fmt:message key="team_edit9"/></button>
 							</div>
 						</div>
 					</div>

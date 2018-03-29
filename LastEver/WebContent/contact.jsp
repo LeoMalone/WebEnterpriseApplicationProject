@@ -113,8 +113,9 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+														key="team_dd3" /></a> 
+								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
+								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -238,26 +239,26 @@
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group" align="left">
-										<label for="newFirstName">First Name</label>
+										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
 										<input type="text" class="form-control" name="newFirstName" placeholder="You Name">
 									</div>
 									<div class="form-group" align="left">
-										<label for="newLastName">Last Name</label>
+										<label for="newLastName"><fmt:message key="signin_lname" /></label>
 										<input type="text" class="form-control" name="newLastName" placeholder="Your Last Name">
 									</div>
 									<div class="form-group" align="left">
 									<!-- ADD city -->
 										<label for="city">City</label>
 									    <select id="city" name="city">
-									      <option value="ottawa">Ottawa</option>
-									      <option value="nepean">Nepean</option>
-									      <option value="gatineau">Gatineau</option>
-									      <option value="kanata">Kanata</option>
+									      <option value="ottawa"><fmt:message key="au_username" />Ottawa</option>
+									      <option value="nepean"><fmt:message key="au_username" />Nepean</option>
+									      <option value="gatineau"><fmt:message key="au_username" />Gatineau</option>
+									      <option value="kanata"><fmt:message key="au_username" />Kanata</option>
 									   	</select>
 									</div>
 									<div class="form-group" align = "left">
 										<!-- Add subject -->
-										<label for="subject">Subject</label> <br> 
+										<label for="subject"><fmt:message key="email_subject" /></label> <br> 
     									<textarea id="subject" name="subject" style = "width:100%" placeholder="Write something..">
     									</textarea>									
 									</div>

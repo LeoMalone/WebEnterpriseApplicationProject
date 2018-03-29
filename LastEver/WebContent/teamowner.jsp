@@ -25,7 +25,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - <fmt:message key="teamowner_home" /></title>
 </fmt:bundle>
 </head>
 
@@ -48,8 +48,8 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="index"><fmt:message key="nav_home" /></a></li>
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
+									key="nav_home" /></a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -61,15 +61,15 @@
 
 								<a class="dropdown-item" href="about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="contact"><fmt:message
+										key="rules" /></a> <a class="dropdown-item" href="registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item" href="contact"><fmt:message
 										key="contact" /></a>
 							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> <fmt:message key="nav_divisions" /></a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_divisions" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -80,35 +80,38 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-												<c:choose>
+						<c:choose>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
-								
-								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
-								
-								<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
-								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
-								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
-								
+
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="navbarDropdownPortfolio" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+									<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="navbarDropdownPortfolio">
+
+										<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+												key="team_dd1" /></a> <a class="dropdown-item"
+											href="teamRoster"><fmt:message key="team_dd2" /></a> <a
+											class="dropdown-item" href="teamSchedule"><fmt:message
+												key="team_dd3" /></a> 
+												<a class="dropdown-item" href="teamEmails"><fmt:message
+												key="team_dd6" /></a><a class="dropdown-item" href="logout"><fmt:message
+												key="team_dd4" /></a>
+									</div></li>
+
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
@@ -132,14 +135,15 @@
 		</div>
 	</nav>
 
-	
+
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}:<br /> 
-					<fmt:message key="signin_prop2"/> <fmt:message key="team_signedin_home1"/>
+					${teamName}:<br />
+					<fmt:message key="signin_prop2" />
+					<fmt:message key="team_signedin_home1" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -147,15 +151,16 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									<fmt:message key="team_signedin_home2"/>
+									<fmt:message key="team_signedin_home2" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										<fmt:message key="team_signedin_home3"/>
+										<fmt:message key="team_signedin_home3" />
 									</p>
 								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./teamRoster" class="btn btn-outline-light"><fmt:message key="team_signedin_home4"/></a>
+								<div class="card-footer bg-transparent">
+									<a href="./teamRoster" class="btn btn-outline-light"><fmt:message
+											key="team_signedin_home4" /></a>
 								</div>
 							</div>
 						</div>
@@ -179,15 +184,34 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									<fmt:message key="team_signedin_home5"/>
+									<fmt:message key="team_signedin_home5" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										<fmt:message key="team_signedin_home6"/>
+										<fmt:message key="team_signedin_home6" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./teamSchedule" class="btn btn-outline-light"><fmt:message key="team_signedin_home7"/></a>
+									<a href="./teamSchedule" class="btn btn-outline-light"><fmt:message
+											key="team_signedin_home7" /></a>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									<fmt:message key="team_signedin_home8" />
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										<fmt:message key="team_signedin_home9" />
+									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+									<a href="./teamEmails" class="btn btn-outline-light"><fmt:message
+											key="team_signedin_home10" /></a>
 								</div>
 							</div>
 						</div>
@@ -201,22 +225,24 @@
 					</form>
 				</div>
 				<!-- /row -->
-
 		</div>
 	</div>
 
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
-	<div class="container-fluid">
-		<p class="m-0 text-center text-white">
-			Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-		</p>
-	</div>
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
 	</footer>
-</fmt:bundle>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

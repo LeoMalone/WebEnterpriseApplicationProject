@@ -26,7 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Create User</title>
+	<title>Last Ever - <fmt:message key="team_create1"/></title>
 </fmt:bundle>
 </head>
 <body>
@@ -110,6 +110,7 @@
 								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
 								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
 								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								
@@ -143,31 +144,31 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: Add a Player To Your Roster
+					${userName}: <fmt:message key="team_create2"/>
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								Create New Player
+								<fmt:message key="team_create3"/>
 							</h4>
 							<form action="createPlayer?=${teamId}" method="POST">
 							<div class="card-body">
 								<div class="form-group">
-									<label for="newFirstName">First Name</label>
-									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name" required>
+									<label for="newFirstName"><fmt:message key="team_create4"/></label>
+									<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="team_create7"/>" required>
 								</div>
 								<div class="form-group">
-									<label for="newLastName">Last Name</label>
-									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name" required>
+									<label for="newLastName"><fmt:message key="team_create5"/></label>
+									<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="team_create8"/>" required>
 								</div>
 								<div class="form-group">
 									<label for="newUsername">#</label>
-									<input type="number" min=0 max=99 class="form-control" name="newNumber" placeholder="Enter Player Number" required>
+									<input type="number" min=0 max=99 class="form-control" name="newNumber" placeholder="<fmt:message key="team_create9"/>" required>
 								</div>
 								 <div class="form-group">
-								    <label for="newEmail">Player Position</label>
-								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position" required>
+								    <label for="newEmail"><fmt:message key="team_create6"/></label>
+								    <input type="text" class="form-control" name="newPosition" placeholder="<fmt:message key="team_create10"/>" required>
 								 </div>
 								
 								<div class="card-footer">

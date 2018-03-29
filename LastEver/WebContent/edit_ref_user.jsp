@@ -118,7 +118,7 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">				
 				<h1 class="my-4">
-					${userName}: <fmt:message key="signin_prop3" /> Edit
+					${userName}: <fmt:message key="signin_prop3" /> <fmt:message key="au_edit" />
 				</h1>
 				<div class="row">
 				<!-- Edit referee profile form -->
@@ -152,10 +152,10 @@
 								</p>							
 							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-outline-success">Save</button>	
+									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>	
 								</div>
 								<div class="card-footer">
-									<button type="submit" formaction="deleteUser?=${user.id}" class="btn btn-outline-success">Delete User</button>	
+									<button type="submit" formaction="deleteUser?=${user.id}" class="btn btn-outline-success"> <fmt:message key="admin_eu_del" /></button>	
 								</div>
 							</form>
 						</div>
@@ -164,7 +164,7 @@
 				<!-- /.row -->
 				
 				<form action="deleteUser?=${user.id}" method="post">
-					<button type="submit" class="btn btn-danger float-right">Delete User</button>
+					<button type="submit" class="btn btn-danger float-right"><fmt:message key="admin_eu_del" /></button>
 				</form>						
 		</div>
 	</div>
