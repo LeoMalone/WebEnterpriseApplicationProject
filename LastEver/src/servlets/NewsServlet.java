@@ -75,10 +75,11 @@ public class NewsServlet extends HttpServlet {
 					//if the sites language has not changed
 					else
 						tempCookie.setValue(language);
+
+					//add the cookie to the response headers
+					response.addCookie(tempCookie);
+					break;
 				}
-				//add the cookie to the response headers
-				response.addCookie(tempCookie);
-				break;
 			}
 		}
 

@@ -35,12 +35,12 @@ public class IndexServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
-		
+
 		/****************** COOKIE LOGIC ****************/
 
 		//get the cookie list
 		Cookie[] cookies = request.getCookies();
-		
+
 		//if there are cookies then set userName and language to the cookie values if they exist
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -71,10 +71,10 @@ public class IndexServlet extends HttpServlet {
 					//if the sites language has not changed
 					else
 						tempCookie.setValue(language);
+					//add the cookie to the response headers
+					response.addCookie(tempCookie);
+					break;
 				}
-				//add the cookie to the response headers
-				response.addCookie(tempCookie);
-				break;
 			}
 		}
 
@@ -82,22 +82,22 @@ public class IndexServlet extends HttpServlet {
 		
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
-		
+
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
 			Index.getNews(nlb, newLang, 0, 5);
 		else
 			Index.getNews(nlb, language, 0, 5);
-		
+
 		// Set leagues for navbar
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
-		
+
 		//sets request attributes
 		request.setAttribute("news", nlb);
 		request.setAttribute("league", llb);	
 		request.setAttribute("userName", userName);
-		
+
 		//forwards to the index page
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
 		rd.forward(request, response);		
