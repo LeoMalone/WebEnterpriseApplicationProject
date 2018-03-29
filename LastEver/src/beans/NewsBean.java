@@ -14,8 +14,10 @@ public class NewsBean {
 	// News bean parameters
 	private String userName;
 	private String title;
+	private String titleFR;
 	private String postedTime;
 	private String content;
+	private String contentFR;
 
 /**************************** CONTRUCTORS *****************************/	
 	public NewsBean() {
@@ -39,12 +41,20 @@ public class NewsBean {
 		return this.title;
 	}
 	
+	public String getTitleFR() {
+		return this.titleFR;
+	}
+	
 	public String getPostedTime() {
 		return this.postedTime;
 	}
 	
 	public String getContent() {
 		return this.content;
+	}
+	
+	public String getContentFR() {
+		return this.contentFR;
 	}
 
 	/**************************** SETTERS *****************************/
@@ -54,6 +64,10 @@ public class NewsBean {
 	
 	public void setTitle(String t) {
 		this.title = t;
+	}
+	
+	public void setTitleFR(String t) {
+		this.titleFR = t;
 	}
 	
 	public void setPostedTime(Timestamp pt, String lang) {
@@ -69,5 +83,9 @@ public class NewsBean {
 	
 	public void setContent(String con) {
 		this.content = con;
+	}
+	
+	public void setContentFR(String con) {
+		this.contentFR = con;
 	}
 }

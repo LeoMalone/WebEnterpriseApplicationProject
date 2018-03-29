@@ -34,8 +34,9 @@ public class Index {
 		try {
 			conn = ConnectionManager.getConnection();
 
-			getNews = conn.prepareStatement("select u.userName, n.newsTitle, n.newsTime, n.newsContent from news n"
-					+ " inner join users u on u.userID = n.userID order by n.newsTime desc limit ?,?");
+			getNews = conn.prepareStatement("select concat_ws(' ', u.userFirstName, u.userLastName), n.newsTitle,"
+					+ " n.newsTitle_fr, n.newsTime, n.newsContent, n.newsContent_fr from news n inner join users u"
+					+ " on u.userID = n.userID order by n.newsTime desc limit ?,?");
 			getNews.setInt(1, offset);
 			getNews.setInt(2, maxRows);
 			rs = getNews.executeQuery();
@@ -49,8 +50,10 @@ public class Index {
 				NewsBean nb = new NewsBean();
 				nb.setUserName(rs.getString(1));
 				nb.setTitle(rs.getString(2));
-				nb.setPostedTime(rs.getTimestamp(3), lang);
-				nb.setContent(rs.getString(4));
+				nb.setTitleFR(rs.getString(3));;
+				nb.setPostedTime(rs.getTimestamp(4), lang);
+				nb.setContent(rs.getString(5));
+				nb.setContentFR(rs.getString(6));
 				news.add(nb);
 			}
 

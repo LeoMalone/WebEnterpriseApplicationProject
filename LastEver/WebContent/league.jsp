@@ -296,7 +296,14 @@
 									<div class="card">
 										<div class="card-header d-flex flex-row">
 											<h4 class="d-flex">
-												<c:out value="${n.title}" />
+												<c:choose>
+													<c:when test="${cookie.language.value == 'fr' }">
+														<c:out value="${n.titleFR}" />
+													</c:when>
+													<c:otherwise>
+														<c:out value="${n.title}" />
+													</c:otherwise>
+												</c:choose>
 											</h4>
 											<h4 class="ml-auto d-flex">
 												<span class="badge badge badge-info"><c:out
@@ -305,7 +312,14 @@
 											</h4>
 										</div>
 										<div class="card-body">
-											<c:out value="${n.content}" escapeXml="false" />
+											<c:choose>
+												<c:when test="${cookie.language.value == 'fr' }">
+													<c:out value="${n.contentFR}" escapeXml="false" />
+												</c:when>
+												<c:otherwise>
+													<c:out value="${n.content}" escapeXml="false" />
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<!-- /.row -->
 									</div>
