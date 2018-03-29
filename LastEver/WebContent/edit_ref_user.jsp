@@ -130,14 +130,17 @@
 							<form action="editRefUser?=${user.id}" method="POST">
 							<div class="card-body">
 								<p class="card-text">
+								<!-- Uneditable Username -->
 									<div class="form-group">
 										<label for="staticEmail"><fmt:message key="signin_user" /></label>
 										<input type="text" readonly class="form-control" name="editUsername" value="${userName}">
 									</div>
+									<!-- Editable Email Address -->
 									 <div class="form-group">
 									    <label for="newEmailAddress"><fmt:message key="signin_email" /></label>
 									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
 									 </div>
+									 <!-- Editable Password -->
 									 <div class="form-group">
 										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="editPass" value="${user.password}">
@@ -153,19 +156,14 @@
 							</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>	
-								</div>
-								<div class="card-footer">
-									<button type="submit" formaction="deleteUser?=${user.id}" class="btn btn-outline-success"> <fmt:message key="admin_eu_del" /></button>	
-								</div>
+								</div>								
 							</form>
 						</div>
 					</div>
 				</div>
 				<!-- /.row -->
 				
-				<form action="deleteUser?=${user.id}" method="post">
-					<button type="submit" class="btn btn-danger float-right"><fmt:message key="admin_eu_del" /></button>
-				</form>						
+									
 		</div>
 	</div>
 

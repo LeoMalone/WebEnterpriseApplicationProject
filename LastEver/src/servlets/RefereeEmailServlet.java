@@ -79,15 +79,13 @@ public class RefereeEmailServlet extends HttpServlet {
 			
 				// User list for display on page
 				List<UserBean> admins = new ArrayList<UserBean>();
-				List<UserBean> refs = new ArrayList<UserBean>();
-				List<UserBean> tos = new ArrayList<UserBean>();
+				List<UserBean> refs = new ArrayList<UserBean>();				
 				
 				// If query is successful
-				if(RefEmail.getAllEmails(admins, refs, tos)) {
+				if(RefEmail.getAllEmails(admins, refs)) {
 					// Set content type, username, userList and dispatch to jsp
 					request.setAttribute("admins", admins);
-					request.setAttribute("refs", refs);
-					request.setAttribute("tos", tos);
+					request.setAttribute("refs", refs);					
 					request.setAttribute("userName", userName);
 					response.setContentType("text/html");
 					RequestDispatcher rd = request.getRequestDispatcher("ref_email.jsp");  
@@ -121,10 +119,7 @@ public class RefereeEmailServlet extends HttpServlet {
 		}
 		else if(fromURL.equals("2")) {
 			emails = request.getParameterValues("refs");
-		}
-		else if(fromURL.equals("3")) {
-			emails = request.getParameterValues("tos");
-		}
+		}	
 		
 		if(emails == null || emails.length == 0) {
 			response.sendRedirect("./refEmail");

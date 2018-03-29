@@ -19,7 +19,7 @@ public class RefEmail {
 	 * @param userList UserBean list from servlet
 	 * @return boolean status
 	 */
-	public static boolean getAllEmails(List<UserBean> admins, List<UserBean> refs, List<UserBean> tos) {
+	public static boolean getAllEmails(List<UserBean> admins, List<UserBean> refs) {
 		
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -41,9 +41,7 @@ public class RefEmail {
 	        	if(rs.getString(1).equals("Administrator"))
 	        		admins.add(user);
 	        	if(rs.getString(1).equals("Referee"))
-	        		refs.add(user);
-	        	if(rs.getString(1).equals("Team Owner"))
-	        		tos.add(user);
+	        		refs.add(user);     	
 	        	
 	        	status = true;
 	        }	        

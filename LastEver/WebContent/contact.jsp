@@ -245,8 +245,9 @@
 										<label for="newLastName"><fmt:message key="signin_lname" /></label>
 										<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="signin_lname" />">
 									</div>
-									<div class="form-group" align="left">
 									<!-- ADD city -->
+									<br />
+									<div class="form-group" align="left">									
 										<label for="city"><fmt:message key="ab_city" /></label>
 									    <select id="city" name="city">
 									      <option value="ottawa"><fmt:message key="ab_ottawa" /></option>

@@ -170,7 +170,7 @@
 						      </div>
 						    </div>
 						  </div>
-						  <div class="card">
+						  <!--  <div class="card">
 						    <div class="card-header" id="headingThree">
 						      <h5 class="mb-0">
 						        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -194,7 +194,7 @@
 								</div>
 						      </div>
 						    </div>
-						  </div>
+						  </div>-->
 						</div>
 					</div>
 				</div>
