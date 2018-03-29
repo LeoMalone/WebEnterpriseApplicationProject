@@ -10,14 +10,14 @@ import java.util.List;
 import beans.StatisticsBean;
 
 /**
- * The Statistics class gets the statistics for the current division
+ * The Statistics class gets the statistics for the current league
  */
 public class Statistics {
 
 	/**
-	 * The getStatistics method gets the divisions statistics
+	 * The getStatistics method gets the league statistics
 	 * @param <StatisticsBean>
-	 * @param id - The current id of the division
+	 * @param id - The current id of the league
 	 * @return status - boolean value
 	 */
 	public static boolean getStatistics(String id, List<StatisticsBean> statistics) { 
@@ -246,6 +246,102 @@ public class Statistics {
 			}
 
 			// close all connections and handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getStatistics != null) {
+				try {
+					getStatistics.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return status;
+	}
+
+
+	/**
+	 * The getStatistics method gets the leagues playoff statistics
+	 * @param <StatisticsBean>
+	 * @param id - The current id of the league
+	 * @return status - boolean value
+	 */
+	public static boolean getPlayoffStatistics(String id, List<StatisticsBean> statistics) { 
+
+		boolean status = false;					// query status
+		Connection conn = null;					// DB connection
+		PreparedStatement getStatistics = null;	// SQL query
+		ResultSet resultSet = null;				// returned query result set
+		int rank = 1;							// overall ranking in the statistics
+		int increase = 1;						// the amount to increase the rank by
+
+		// Connect to Database and execute SELECT query with StatisticsBean data
+		try {
+			conn = ConnectionManager.getConnection();
+			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
+					+ " redCards, playerID, teamID, playerHidePage from statistics where leagueID = ? and playoffGame = 1"
+					+ " order by goals desc, GP asc, playerName asc");
+			getStatistics.setString(1, id);
+			resultSet = getStatistics.executeQuery();
+			status = resultSet.next();
+
+			//return to the start of the result set
+			resultSet.beforeFirst();
+
+			//Loop through and add the results of the query to a StatisticsBean then add it to the list
+			while(resultSet.next()) {
+				StatisticsBean sb = new StatisticsBean();
+				
+				// if there is no statistics in the list then set the rank to be the first rank
+				if(statistics.size() == 0) {
+					sb.setRank("" + rank);	
+				}
+				else {
+					/* if the current player has the same goals as the one before it add a T (tied) to the rank
+					   and keep the rank the same and increase the value to increase the rank by the next time
+					   there is a difference in the number of goals  */
+					if(resultSet.getInt(4) == statistics.get(statistics.size()-1).getGoals()) {
+						statistics.get(statistics.size()-1).setRank("T" + rank);
+						sb.setRank("T" + rank);
+						increase++;
+					}
+					// if goals are not the same then add the amount of increase to the rank and set the rank to the current value
+					// reset increase to be one
+					else {
+						rank += increase;
+						sb.setRank("" + rank);
+						increase = 1;
+					}
+				}
+
+				sb.setTeamName(resultSet.getString(1));
+				sb.setGamesPlayed(resultSet.getInt(2));
+				sb.setName(resultSet.getString(3));
+				sb.setGoals(resultSet.getInt(4));
+				sb.setYellowCard(resultSet.getInt(5));
+				sb.setRedCard(resultSet.getInt(6));
+				sb.setPlayerID(resultSet.getString(7));
+				sb.setTeamID(resultSet.getString(8));
+				sb.setHidePage(resultSet.getBoolean(9));
+				statistics.add(sb);
+			}
+
+			// close all connections handle all possible exceptions
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

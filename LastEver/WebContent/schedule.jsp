@@ -247,6 +247,12 @@
 														href="statistics?id=${row.leagueId}"> <fmt:message
 																key="div_head5" />
 													</a></li>
+													<c:if test="${row.leagueStatus eq 'Playoffs'}">
+														<li class="nav-item"><a class="nav-link"
+															href="playoffs?id=${row.leagueId}"> <fmt:message
+																	key="div_head6" />
+														</a></li>
+													</c:if>
 												</c:forEach>
 											</c:otherwise>
 										</c:choose>

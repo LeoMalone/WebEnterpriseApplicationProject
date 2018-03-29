@@ -249,6 +249,12 @@
 														href="statistics?id=${row.leagueId}"> <fmt:message
 																key="div_head5" />
 													</a></li>
+													<c:if test="${row.leagueStatus eq 'Playoffs'}">
+														<li class="nav-item"><a class="nav-link"
+															href="playoffs?id=${row.leagueId}"> <fmt:message
+																	key="div_head6" />
+														</a></li>
+													</c:if>
 												</c:forEach>
 											</c:otherwise>
 										</c:choose>
@@ -298,7 +304,7 @@
 																	value="${stats.teamName}" /></a></td>
 														<td><a href="player?id=${stats.playerID}"> <c:choose>
 																	<c:when test="${stats.hidePage eq true }">
-																	Name Witheld
+																	<fmt:message key="name_withheld" />
 																	</c:when>
 																	<c:otherwise>
 																		<c:out value="${stats.name}" />

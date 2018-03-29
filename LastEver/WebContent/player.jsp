@@ -219,7 +219,9 @@
 						<c:otherwise>
 							<c:forEach items="${player}" var="p">
 								<c:choose>
-									<c:when test="${p.hidePage eq true}">Name Witheld</c:when>
+									<c:when test="${p.hidePage eq true}">
+										<fmt:message key="name_withheld" />
+									</c:when>
 									<c:otherwise>
 										<c:out value="${p.playerFirstName}" />
 										<c:out value="${p.playerLastName}" />
@@ -242,7 +244,7 @@
 										<c:forEach items="${player}" var="p">
 											<c:choose>
 												<c:when test="${p.hidePage eq true}">
-										This player has chosen to keep his information private. Sorry for the inconvience.
+												<fmt:message key="player_private_info" />
 										</c:when>
 												<c:otherwise>
 													<c:if test="${not empty p.playerPhoto }">
@@ -376,7 +378,7 @@
 														<td><c:forEach items="${player}" var="p">
 																<c:choose>
 																	<c:when test="${p.hidePage eq true}">
-																	Name Witheld
+																	<fmt:message key="name_withheld" />
 																	</c:when>
 																	<c:otherwise>
 																		<c:out value="${stats.name}" />

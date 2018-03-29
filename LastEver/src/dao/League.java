@@ -22,7 +22,7 @@ public class League {
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
-			league = conn.prepareStatement("SELECT leagueID, leagueName from league where leagueID = ?");
+			league = conn.prepareStatement("SELECT leagueID, leagueName, leagueStatus from league where leagueID = ?");
 			league.setString(1, lID);
 			rs = league.executeQuery();
 			status = rs.next();
@@ -35,6 +35,7 @@ public class League {
 				LeagueBean lb = new LeagueBean();
 				lb.setLeagueId(rs.getString(1));
 				lb.setLeagueName(rs.getString(2));
+				lb.setStatus(rs.getString(3));
 				leagueList.add(lb);
 			}
 

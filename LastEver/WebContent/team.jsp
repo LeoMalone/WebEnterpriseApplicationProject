@@ -571,7 +571,7 @@
 														<td scope="row"><c:out value="${stats.teamName}" /></td>
 														<td><a href="player?id=${stats.playerID}"><c:choose>
 																	<c:when test="${stats.hidePage eq true }">
-																	Name Witheld
+																	<fmt:message key="name_withheld" />
 																	</c:when>
 																	<c:otherwise>
 																		<c:out value="${stats.name}" />

@@ -448,9 +448,6 @@
 		<url-pattern>/teamCreateTeam</url-pattern>
 	</servlet-mapping>
 	
-	
-		
-
 	<servlet>
 		<servlet-name>TeamPhotoServlet</servlet-name>
 		<servlet-class>servlets.TeamPhotoServlet</servlet-class>
@@ -521,7 +518,7 @@
 		<url-pattern>/createPlayer</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>NewsServlet</servlet-name>
 		<servlet-class>servlets.NewsServlet</servlet-class>
 	</servlet>
@@ -529,6 +526,16 @@
 	<servlet-mapping>
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/news</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PlayoffsServlet</servlet-name>
+		<servlet-class>servlets.PlayoffsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PlayoffsServlet</servlet-name>
+		<url-pattern>/playoffs</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
