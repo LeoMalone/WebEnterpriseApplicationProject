@@ -119,7 +119,7 @@ CREATE TABLE `leaguexdivision` (
   `divisionID` bigint(20) NOT NULL,
   PRIMARY KEY (`leagueID`,`divisionID`),
   KEY `divisionID_idx` (`divisionID`),
-  CONSTRAINT `divisionID` FOREIGN KEY (`divisionID`) REFERENCES `division` (`divisionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `divisionID` FOREIGN KEY (`divisionID`) REFERENCES `division` (`divisionID`) ON DELETE CASCADE,
   CONSTRAINT `leagueID` FOREIGN KEY (`leagueID`) REFERENCES `league` (`leagueID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -175,7 +175,7 @@ CREATE TABLE `newsxtags` (
   `tagID` bigint(20) NOT NULL,
   PRIMARY KEY (`newsID`,`tagID`),
   KEY `TagToNews` (`tagID`),
-  CONSTRAINT `NewsToTags` FOREIGN KEY (`newsID`) REFERENCES `news` (`newsID`),
+  CONSTRAINT `NewsToTags` FOREIGN KEY (`newsID`) REFERENCES `news` (`newsID`) ON DELETE CASCADE,
   CONSTRAINT `TagToNews` FOREIGN KEY (`tagID`) REFERENCES `tags` (`tagID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -620,7 +620,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_team`(In x varchar(1), In y varchar(1))
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_team`(In x bigint(20), In y bigint(20))
 begin
   IF EXISTS (select teamID from teamxdivision where teamID = x) THEN
     UPDATE teamxdivision SET divisionID=y WHERE teamID=x;

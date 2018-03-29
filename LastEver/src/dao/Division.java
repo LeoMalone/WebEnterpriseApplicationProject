@@ -359,21 +359,35 @@ public class Division {
 		return status;
 	}
 	
-	public static boolean createNewDiv(String newDiv) {
+	public static boolean createNewDiv(DivisionBean div) {
 		
 		boolean status = false;					// Status of createNewUser
 		Connection conn = null;					// DB Connection
 		PreparedStatement insertNewDiv = null;
+		PreparedStatement getNewDivId = null; 
+		PreparedStatement insertNewLeague = null;
+		ResultSet rs = null;
 		int result = 0;
 
 		// Connect to Database 
 		try {
 			conn = ConnectionManager.getConnection();
 			insertNewDiv = conn.prepareStatement("INSERT INTO division (divisionName) VALUE (?)");
-			insertNewDiv.setString(1, newDiv);
+			insertNewDiv.setString(1, div.getDivisionName());
 			result = insertNewDiv.executeUpdate();
 			if(result == 1) {
-				status = true;
+				getNewDivId = conn.prepareStatement("SELECT divisionID FROM division WHERE divisionName=?");
+				getNewDivId.setString(1, div.getDivisionName());
+				rs = getNewDivId.executeQuery();
+				if(rs.next()) {
+					div.setDivisionId(rs.getString(1));
+					insertNewLeague = conn.prepareStatement("INSERT INTO leaguexdivision (leagueID, divisionID) VALUE (?, ?)");
+					insertNewLeague.setString(1, div.getLeageId());
+					insertNewLeague.setString(2, div.getDivisionId());
+					result = insertNewLeague.executeUpdate();
+					if(result == 1)
+						status = true;
+				}
 			}			
 
 		// Catch all possible Exceptions
@@ -390,6 +404,20 @@ public class Division {
 			if (insertNewDiv != null) {
 				try {
 					insertNewDiv.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getNewDivId != null) {
+				try {
+					getNewDivId.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (insertNewLeague != null) {
+				try {
+					insertNewLeague.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

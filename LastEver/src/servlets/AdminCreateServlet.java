@@ -22,7 +22,7 @@ import dao.League;
 /**
  * The AdminCreateServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option Create User.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminCreateServlet extends HttpServlet {
 
@@ -110,6 +110,7 @@ public class AdminCreateServlet extends HttpServlet {
 		String newUsername = request.getParameter("newUsername");
 		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPass");
+		String passConfirm = request.getParameter("newPassConfirm");
 		String userType = request.getParameter("createRadio");
 
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
@@ -117,9 +118,10 @@ public class AdminCreateServlet extends HttpServlet {
 		request.setAttribute("league", llb);
 		
 		// If any parameter is null
-		if (newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
+		if (newFirstName == "" || newLastName == "" || newUsername == "" || newEmail == "" || newPassword == "" || userType == null) {
 			response.sendRedirect("./adminCreate");
-			
+		} else if(!newPassword.equals(passConfirm)) {
+			response.sendRedirect("./adminCreate");
 		} else {	
 			// Get user type
 			String ut = null;

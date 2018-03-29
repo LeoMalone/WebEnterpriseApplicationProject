@@ -131,6 +131,15 @@
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
+							<div class="card-header">
+							    <ul class="nav nav-tabs card-header-tabs">
+							    	<c:forEach  items="${leagues}" var="league">
+							    		<li class="nav-item">
+							        		<a class="nav-link ${league.leagueId==currentId?'active':''}" href="./adminDivisions?=${league.leagueId}">${league.leagueName}</a>
+							      		</li>
+							    	</c:forEach>							      	
+							    </ul>
+							 </div>
 							<div class="card-body">
 								<table class="table table-striped">
 									<thead class="thead-dark">
@@ -174,7 +183,6 @@
 			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 			crossorigin="anonymous"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/admin_emails.js"></script>
 	</fmt:bundle>
 </body>
 </html>

@@ -113,16 +113,18 @@ public class EditTeamServlet extends HttpServlet {
 		// Get all schedule parameters from jsp inputs
 		String newName = request.getParameter("editTeamName");
 		String newAbbr = request.getParameter("editTeamAbbr");
+		String newAbout = request.getParameter("editTeamAbout");
 		String newDiv = request.getParameter("divRadio");
 		
 		// If any parameter is null
-		if(newName == null || newAbbr == null || newDiv == null) {
+		if(newName == "" || newAbbr == "" || newDiv == null) {
 			response.sendRedirect("./adminTeams?=" + sb.toString());
 		} else {
 			// Set TeamBean parameters
 			team.setTeamId(sb.toString());
 			team.setTeamName(newName);
 			team.setTeamAbbreviation(newAbbr);
+			team.setTeamAbout(newAbout);
 			team.setDivisionId(newDiv);
 			
 			// If query is successful

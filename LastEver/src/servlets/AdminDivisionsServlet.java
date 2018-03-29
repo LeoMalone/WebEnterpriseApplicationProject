@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
 import beans.LeagueBean;
+import dao.AdminTeams;
 import dao.Division;
 import dao.League;
 
@@ -38,11 +39,6 @@ public class AdminDivisionsServlet extends HttpServlet {
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
-		
-		//get division list for an admin to edit
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
 		
 		// If User is not signed In redirect to sign in page
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
@@ -77,12 +73,34 @@ public class AdminDivisionsServlet extends HttpServlet {
 						response.addCookie(tempCookie);
 						break;
 					}
-				}				
-				// Set content type and username and dispatch to jsp
-				request.setAttribute("userName", userName);
-				response.setContentType("text/html");
-				RequestDispatcher rd = request.getRequestDispatcher("admin_divisions.jsp");  
-		        rd.forward(request, response);	
+				}
+				
+				if(request.getQueryString() != null) {
+					StringBuilder sb = new StringBuilder(request.getQueryString());
+					sb.deleteCharAt(0);
+					request.setAttribute("currentId", sb.toString());
+					
+					//get league list for an admin to edit divisions
+					List<LeagueBean> lbl = new ArrayList<LeagueBean>();
+					if(League.getAllLeagues(lbl)) {
+						request.setAttribute("leagues", lbl);
+					}
+					
+					//get division list for an admin to edit
+					List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+					if(League.getDivisionsByLeague(dlb, sb.toString())) {
+						request.setAttribute("allDiv", dlb);
+					}
+					
+					// Set content type and username and dispatch to jsp
+					request.setAttribute("userName", userName);
+					response.setContentType("text/html");
+					RequestDispatcher rd = request.getRequestDispatcher("admin_divisions.jsp");  
+			        rd.forward(request, response);
+			        
+				} else {
+					response.sendRedirect("./adminDivisions?=1");
+				}
 			}
 		}
 	}

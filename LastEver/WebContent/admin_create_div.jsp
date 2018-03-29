@@ -132,6 +132,14 @@
 											type="text" class="form-control" name="newDivisionName"
 											placeholder="<fmt:message key="admin_cd_ph" />">
 									</div>
+									<c:forEach var="league" items="${leagues}">
+										<div class="form-check">
+											<input aria-describedby="adminHelp" class="form-check-input"
+												type="radio" name="divRadio" value="${league.leagueId}">
+											<label class="form-check-label" for="divRadio">
+												${league.leagueName} </label>
+										</div>
+									</c:forEach>
 								</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-success"><fmt:message key="signin_button1" /></button>

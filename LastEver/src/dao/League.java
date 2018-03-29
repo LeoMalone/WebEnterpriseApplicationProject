@@ -156,4 +156,47 @@ public class League {
 		}	    
 		return status;
 	}
+	
+	public static boolean getDivisionsByLeague(List<DivisionBean> divs, String leagueId) {
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement getDivisions = null;	// SQL query
+		ResultSet rs = null;					// returned query result set
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			getDivisions = conn.prepareStatement("SELECT division.divisionID, divisionName from division, leaguexdivision WHERE leagueID=? AND division.divisionID=leaguexdivision.divisionID");
+			getDivisions.setString(1, leagueId);
+			rs = getDivisions.executeQuery();
+
+			while(rs.next()) {
+				DivisionBean div = new DivisionBean();
+				div.setDivisionId(rs.getString(1));
+				div.setDivisionName(rs.getString(2));
+				divs.add(div);
+				status = true;
+			}
+
+		// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getDivisions != null) {
+				try {
+					getDivisions.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
 }

@@ -154,6 +154,7 @@
 									      <th scope="col">Id</th>
 									      <th scope="col"><fmt:message key="at_name" /></th>
 									      <th scope="col"><fmt:message key="at_abbr" /></th>
+									      <th scope="col"><fmt:message key="at_about" /></th>
 									      <th scope="col"><fmt:message key="at_edit" /></th>
 									    </tr>
 									 </thead>
@@ -162,6 +163,7 @@
 											<td scope="col">${team.teamId}</td>
 											<td scope="col">${team.teamName}</td>
 											<td scope="col">${team.teamAbbreviation}</td>
+											<td scope="col">${team.teamAbout}</td>
 											<td scope="col">
 								        		<a href="./editTeam?=${team.teamId}" class="btn btn-dark btn-sm">
 								        			<i class="fa fa-edit"></i> 

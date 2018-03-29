@@ -153,7 +153,7 @@ public class EditUser {
 	    int result = 0;   
 	    
 	    try {
-	        conn = ConnectionManager.getConnection();
+	        conn = ConnectionManager.getConnection();        
 	        deleteNews = conn.prepareStatement("DELETE FROM news USING news, users WHERE `users`.`userID` = `news`.`userID` AND users.userID=?");
 	        deleteNews.setString(1, id);
 	        result = deleteNews.executeUpdate();

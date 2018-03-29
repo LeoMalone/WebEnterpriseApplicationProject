@@ -169,19 +169,25 @@
 										<label for="editTeamName"><fmt:message
 												key="admin_ct_tn" /></label> <input type="text"
 											class="form-control" name="editTeamName"
-											value="${team.teamName}">
+											value="${team.teamName}" required>
 									</div>
 									<div class="form-group">
 										<label for="editTeamAbbr"><fmt:message
 												key="admin_ct_ta" /></label> <input type="text"
 											class="form-control" name="editTeamAbbr"
-											value="${team.teamAbbreviation}">
+											value="${team.teamAbbreviation}" required>
+									</div>
+									<div class="form-group">
+										<label for="editTeamAbout"><fmt:message
+												key="at_about" /></label> <textarea class="form-control"
+											name="editTeamAbout"
+											placeholder="<fmt:message key="admin_ct_tabplace"/>">${team.teamAbout}</textarea>
 									</div>
 									<label for="divRadio"><fmt:message key="admin_ct_div" /></label>
 									<c:forEach var="div1" items="${allDiv}">
 										<div class="form-check">
 											<input aria-describedby="adminHelp" class="form-check-input"
-												type="radio" name="divRadio" value="${div1.divisionId}">
+												type="radio" name="divRadio" value="${div1.divisionId}" ${team.divisionId == div1.divisionId?'checked':''}>
 											<label class="form-check-label" for="divRadio">
 												${div1.divisionName} </label>
 										</div>
