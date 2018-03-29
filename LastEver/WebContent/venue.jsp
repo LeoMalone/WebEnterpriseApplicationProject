@@ -334,7 +334,7 @@
 									<c:forEach items="${league}" var="l">
 										<li class="nav-item"><a
 											class="nav-link ${l.leagueId==leagueID?'active':''}"
-											href="venue?id=${venID}&lID=${l.leagueID}#schedule">${l.leagueName}</a>
+											href="venue?id=${venID}&lID=${l.leagueId}#schedule">${l.leagueName}</a>
 										</li>
 									</c:forEach>
 								</ul>

@@ -480,8 +480,8 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and "
-					+ "id=? group by id, playerName order by goals desc");
+			getScorers = conn.prepareStatement("select playerID, playerName, goals, playerHidePage from scorers"
+					+ " where teamName=? and id=? group by id, playerName order by goals desc");
 			getScorers.setString(1, home);
 			getScorers.setString(2, id);
 			resultSet = getScorers.executeQuery();
@@ -496,6 +496,7 @@ public class ScheduleResults {
 				sb.setID(resultSet.getString(1));
 				sb.setName(resultSet.getString(2));
 				sb.setGoals(resultSet.getInt(3));
+				sb.setHidePage(resultSet.getBoolean(4));
 				hb.add(sb);
 			}
 
@@ -547,8 +548,8 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and"
-					+ " id=? group by id, playerName order by goals desc");
+			getScorers = conn.prepareStatement("select playerID, playerName, goals, playerHidePage from scorers"
+					+ " where teamName=? and id=? group by id, playerName order by goals desc");
 
 			getScorers.setString(1, away);
 			getScorers.setString(2, id);
@@ -564,6 +565,7 @@ public class ScheduleResults {
 				sb.setID(resultSet.getString(1));
 				sb.setName(resultSet.getString(2));
 				sb.setGoals(resultSet.getInt(3));
+				sb.setHidePage(resultSet.getBoolean(4));
 				ab.add(sb);
 			}
 
