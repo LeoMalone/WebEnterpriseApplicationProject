@@ -56,7 +56,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -69,19 +69,20 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -90,16 +91,19 @@
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a>
-								<a class="dropdown-item" href="adminUsers"><fmt:message key="nav_admin_users" /></a>
-								<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-								<a class="dropdown-item" href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
-								<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-								<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
-								<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-							</div>
-						</li>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="adminUsers"><fmt:message
+										key="nav_admin_users" /></a> <a class="dropdown-item"
+									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
+									class="dropdown-item" href="adminDivisions"><fmt:message
+										key="nav_admin_divs" /></a> <a class="dropdown-item"
+									href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+								<a class="dropdown-item" href="adminEmails"><fmt:message
+										key="nav_admin_email" /></a> <a class="dropdown-item"
+									href="logout"><fmt:message key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
 							<form>
 								<select class="form-control form-control-sm" name="language"
@@ -120,16 +124,21 @@
 
 		<div class="main-cover">
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: <fmt:message key="admin_cd_title" /></h1>
+				<h1 class="my-4">${userName}:
+					<fmt:message key="admin_cd_title" />
+				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
-							<h4 class="card-header"><fmt:message key="admin_cd_create" /></h4>
+							<h4 class="card-header">
+								<fmt:message key="admin_cd_create" />
+							</h4>
 							<form action="divisionCreate" method="POST">
 								<div class="card-body">
 									<div class="form-group">
-										<label for="newDivisionName"><fmt:message key="admin_cd_name" /></label> <input
-											type="text" class="form-control" name="newDivisionName"
+										<label for="newDivisionName"><fmt:message
+												key="admin_cd_name" /></label> <input type="text"
+											class="form-control" name="newDivisionName"
 											placeholder="<fmt:message key="admin_cd_ph" />">
 									</div>
 									<c:forEach var="league" items="${leagues}">
@@ -142,7 +151,9 @@
 									</c:forEach>
 								</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success"><fmt:message key="signin_button1" /></button>
+									<button type="submit" class="btn btn-success">
+										<fmt:message key="signin_button1" />
+									</button>
 								</div>
 							</form>
 						</div>
@@ -156,7 +167,8 @@
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
-					<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
 				</p>
 			</div>
 		</footer>

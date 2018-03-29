@@ -57,39 +57,39 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -108,63 +108,78 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it
 		- text, form, button to sign in
 		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">				
+			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: <fmt:message key="signin_prop3" /> <fmt:message key="au_edit" />
+					${userName}:
+					<fmt:message key="signin_prop3" />
+					<fmt:message key="au_edit" />
 				</h1>
 				<div class="row">
-				<!-- Edit referee profile form -->
+					<!-- Edit referee profile form -->
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_prop3" /> <fmt:message key="reg_head1" />
+								<fmt:message key="signin_prop3" />
+								<fmt:message key="reg_head1" />
 							</h4>
 							<form action="editRefUser?=${user.id}" method="POST">
-							<div class="card-body">
-								<p class="card-text">
+								<div class="card-body">
+									<p class="card-text">
 									<div class="form-group">
-										<label for="staticEmail"><fmt:message key="signin_user" /></label>
-										<input type="text" readonly class="form-control" name="editUsername" value="${userName}">
+										<label for="staticEmail"><fmt:message
+												key="signin_user" /></label> <input type="text" readonly
+											class="form-control" name="editUsername" value="${userName}">
 									</div>
-									 <div class="form-group">
-									    <label for="newEmailAddress"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
-									 </div>
-									 <div class="form-group">
-										<label for="newPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="editPass" value="${user.password}">
-									 </div>									 	
-									 <!-- Pre-checked radio button for referee-profie-edit  -->
+									<div class="form-group">
+										<label for="newEmailAddress"><fmt:message
+												key="signin_email" /></label> <input type="email"
+											class="form-control" name="editEmail"
+											aria-describedby="emailHelp" value="${user.emailAddress}">
+									</div>
+									<div class="form-group">
+										<label for="newPass"><fmt:message
+												key="signin_password" /></label> <input type="password"
+											class="form-control" name="editPass" value="${user.password}">
+									</div>
+									<!-- Pre-checked radio button for referee-profie-edit  -->
 									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''} checked>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop3" />
-									  </label>
-									</div>									
-								</p>							
-							</div>
-								<div class="card-footer">
-									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>	
+										<input class="form-check-input" type="radio" name="editRadio"
+											value="Referee" ${user.userType=='Referee'?'checked':''}
+											checked> <label class="form-check-label"
+											for="editRadio"> <fmt:message key="signin_prop3" />
+										</label>
+									</div>
+									</p>
 								</div>
 								<div class="card-footer">
-									<button type="submit" formaction="deleteUser?=${user.id}" class="btn btn-outline-success"> <fmt:message key="admin_eu_del" /></button>	
+									<button type="submit" class="btn btn-outline-success">
+										<fmt:message key="admin_eu_save" />
+									</button>
+								</div>
+								<div class="card-footer">
+									<button type="submit" formaction="deleteUser?=${user.id}"
+										class="btn btn-outline-success">
+										<fmt:message key="admin_eu_del" />
+									</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 				<!-- /.row -->
-				
+
 				<form action="deleteUser?=${user.id}" method="post">
-					<button type="submit" class="btn btn-danger float-right"><fmt:message key="admin_eu_del" /></button>
-				</form>						
+					<button type="submit" class="btn btn-danger float-right">
+						<fmt:message key="admin_eu_del" />
+					</button>
+				</form>
 		</div>
 	</div>
 
@@ -172,14 +187,18 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" />
+				&copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-</fmt:bundle>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

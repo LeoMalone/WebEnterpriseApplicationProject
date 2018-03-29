@@ -29,7 +29,7 @@
 	<c:choose>
 		<c:when test="${empty currLeague}">
 
-			<title>Last Ever - Division</title>
+			<title>Last Ever - <fmt:message key="nav_league" /></title>
 		</c:when>
 		<c:otherwise>
 			<title>Last Ever - <c:forEach var="row" items="${currLeague}">
@@ -59,13 +59,13 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index"><fmt:message
+						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -75,16 +75,18 @@
 										key="registration" /></a> <a class="dropdown-item"
 									href="./contact"><fmt:message key="contact" /></a>
 							</div></li>
-						<li class="nav-item dropdown"><a
+						<li class="nav-item dropdown active"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
@@ -114,9 +116,10 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> 
-								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
-								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
+														key="team_dd3" /></a> <a class="dropdown-item"
+													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
+													class="dropdown-item" href="logout" method="post"><fmt:message
+														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -216,7 +219,7 @@
 									<ul class="navbar-nav mr-auto">
 										<c:choose>
 											<c:when test="${empty currLeague }">
-												League
+												<fmt:message key="nav_league" />
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="row" items="${currLeague}">

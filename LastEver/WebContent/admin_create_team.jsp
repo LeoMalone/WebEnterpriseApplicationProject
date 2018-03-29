@@ -56,7 +56,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -69,14 +69,16 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
@@ -136,20 +138,19 @@
 								<div class="card-body">
 									<div class="form-group">
 										<label for="newTeamName"><fmt:message
-												key="admin_ct_tn" /></label> <input type="text" class="form-control"
-											name="newTeamName"
+												key="admin_ct_tn" /></label> <input type="text"
+											class="form-control" name="newTeamName"
 											placeholder="<fmt:message key="admin_ct_tnplace"/>" required>
 									</div>
 									<div class="form-group">
 										<label for="newTeamAbbr"><fmt:message
-												key="admin_ct_ta" /></label> <input type="text" class="form-control"
-											name="newTeamAbbr"
+												key="admin_ct_ta" /></label> <input type="text"
+											class="form-control" name="newTeamAbbr"
 											placeholder="<fmt:message key="admin_ct_taplace"/>" required>
 									</div>
 									<div class="form-group">
-										<label for="newTeamAbout"><fmt:message
-												key="at_about" /></label> <textarea class="form-control"
-											name="newTeamAbout"
+										<label for="newTeamAbout"><fmt:message key="at_about" /></label>
+										<textarea class="form-control" name="newTeamAbout"
 											placeholder="<fmt:message key="admin_ct_tabplace"/>"></textarea>
 									</div>
 									<label for="divRadio"><fmt:message key="admin_ct_div" /></label>
