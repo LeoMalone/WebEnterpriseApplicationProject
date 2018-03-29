@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
 import beans.UserBean;
-import dao.AdminEmails;
+import dao.RefEmail;
 import dao.League;
 
 /**
@@ -83,14 +83,14 @@ public class RefereeEmailServlet extends HttpServlet {
 				List<UserBean> tos = new ArrayList<UserBean>();
 				
 				// If query is successful
-				if(AdminEmails.getAllEmails(admins, refs, tos)) {
+				if(RefEmail.getAllEmails(admins, refs, tos)) {
 					// Set content type, username, userList and dispatch to jsp
 					request.setAttribute("admins", admins);
 					request.setAttribute("refs", refs);
 					request.setAttribute("tos", tos);
 					request.setAttribute("userName", userName);
 					response.setContentType("text/html");
-					RequestDispatcher rd = request.getRequestDispatcher("admin_emails.jsp");  
+					RequestDispatcher rd = request.getRequestDispatcher("ref_email.jsp");  
 				    rd.forward(request, response);
 				}
 			}
@@ -111,7 +111,7 @@ public class RefereeEmailServlet extends HttpServlet {
 		
 		if(fromURL == null) {
 			List<String> allEmails = new ArrayList<String>();
-			if(AdminEmails.getAllEmailsForPost(allEmails)) {
+			if(RefEmail.getAllEmailsForPost(allEmails)) {
 				emails = new String[allEmails.size()];
 				emails = allEmails.toArray(emails);
 			}
@@ -127,7 +127,7 @@ public class RefereeEmailServlet extends HttpServlet {
 		}
 		
 		if(emails == null || emails.length == 0) {
-			response.sendRedirect("./adminEmails");
+			response.sendRedirect("./refEmail");
 		} else {
 			try {
 				Desktop.getDesktop().mail(new URI("mailto", String.join(",", emails), null));
@@ -137,7 +137,7 @@ public class RefereeEmailServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			response.sendRedirect("./adminEmails");
+			response.sendRedirect("./refEmail");
 		}
 	}
 }

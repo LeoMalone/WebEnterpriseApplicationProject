@@ -27,7 +27,7 @@
 <link href="css/cover.css" rel="stylesheet">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<title>Last Ever - Email</title>
+<title>Last Ever - Referee Email</title>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
@@ -116,8 +116,8 @@
 			<!-- Page Content -->
 			<div class="cards-container container">
 				<h1 class="my-4">${userName}: <fmt:message key="signin_emai" /></h1>
-				<form action="./adminEmails" method="POST">
-					<button type="submit" class="btn btn-success"> <fmt:message key="email_all" /></button>
+				<form action="./refEmail" method="POST">
+					<button type="submit" class="btn btn-success"><fmt:message key="email_all" /></button>
 				</form>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
@@ -126,13 +126,13 @@
 						    <div class="card-header" id="headingOne">
 						      <h5 class="mb-0">
 						        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-						          <fmt:message key="signin_prop1" />
+						         <fmt:message key="signin_prop1" />
 						        </button>
 						      </h5>
 						    </div>						
 						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 						      <div class="card-body">
-						      	<form action="./adminEmails?=1" method="POST">
+						      	<form action="./refEmail?=1" method="POST">
 						      		<c:forEach items="${admins}" var="admin">
 										<div class="form-check">
 										  <input name="admins" class="form-check-input" type="checkbox" value="${admin.emailAddress}" id="defaultCheck1">
@@ -156,7 +156,7 @@
 						    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 						      <div class="card-body">
 						      	<div class="form-check">
-									<form action="./adminEmails?=2" method="POST">
+									<form action="./refEmail?=2" method="POST">
 							      		<c:forEach items="${refs}" var="ref">
 											<div class="form-check">
 											  <input name="refs" class="form-check-input" type="checkbox" value="${ref.emailAddress}" id="defaultCheck1">
@@ -181,7 +181,7 @@
 						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 						      <div class="card-body">
 						      	<div class="form-check">
-									<form action="./adminEmails?=3" method="POST">
+									<form action="./refEmail?=3" method="POST">
 							      		<c:forEach items="${tos}" var="to">
 											<div class="form-check">
 											  <input name="tos" class="form-check-input" type="checkbox" value="${to.emailAddress}" id="defaultCheck1">
