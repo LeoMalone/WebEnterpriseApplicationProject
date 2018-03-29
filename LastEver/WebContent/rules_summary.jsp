@@ -26,7 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="rules" /></title>
+	<title>Last Ever - <fmt:message key="rules_summary" /></title>
 </fmt:bundle>
 </head>
 <body>

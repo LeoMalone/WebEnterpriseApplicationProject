@@ -27,10 +27,11 @@
 <link href="css/cover.css" rel="stylesheet">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<title>Last Ever - Email</title>
+	<fmt:bundle basename="TestBundle">
+<title>Last Ever - <fmt:message key="team_email"/></title>
 </head>
 <body>
-	<fmt:bundle basename="TestBundle">
+
 
 		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active

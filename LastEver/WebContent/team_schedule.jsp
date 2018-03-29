@@ -26,7 +26,7 @@
 <!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Team Schedule</title>
+	<title>Last Ever - <fmt:message key="team_schedule"/></title>
 </fmt:bundle>
 </head>
 

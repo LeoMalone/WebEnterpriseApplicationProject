@@ -26,7 +26,7 @@
 <!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - <fmt:message key="teamroster" /></title>
 </fmt:bundle>
 </head>
 
