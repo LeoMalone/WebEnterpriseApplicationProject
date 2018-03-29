@@ -492,6 +492,16 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>TeamEmailsServlet</servlet-name>
+		<servlet-class>servlets.TeamEmailsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>TeamEmailsServlet</servlet-name>
+		<url-pattern>/teamEmails</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>TeamScheduleServlet</servlet-name>
 		<servlet-class>servlets.TeamScheduleServlet</servlet-class>
 	</servlet>
