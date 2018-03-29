@@ -104,9 +104,9 @@ public class LeagueServlet extends HttpServlet {
 
 		//if the language has changed then get the news with the new language otherwise use the old language
 		if(newLang != null)
-			Division.getNews(id, nlb, newLang, (page-1)*newsArticles, newsArticles);
+			League.getNews(id, nlb, newLang, (page-1)*newsArticles, newsArticles);
 		else
-			Division.getNews(id, nlb, language, (page-1)*newsArticles, newsArticles);	
+			League.getNews(id, nlb, language, (page-1)*newsArticles, newsArticles);	
 
 		//gets the divisions for the nav bar
 		League.getAllLeagues(llb);
