@@ -3,7 +3,7 @@ package servlets;
 /**
  * The TeamPageServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the team page to show everything that is associated with a team
- * Standings, results, schedule, statistics, team info, team owner, and team division are shown
+ * Standings, results, schedule, statistics, team info, team owner, and team league are shown
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -100,7 +100,7 @@ public class TeamPageServlet extends HttpServlet {
 			
 			/*
 			 * Gets ths teams standings, schedule, results, statistics, the team info, the team owner, and the 
-			 * current division of the team to be displayed on the team page
+			 * current league of the team to be displayed on the team page
 			 */
 			Standings.getStandings(div, slb);
 			ScheduleResults.getScheduleWithTeam(id, div, srlb);

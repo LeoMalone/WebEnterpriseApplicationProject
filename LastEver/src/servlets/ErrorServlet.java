@@ -91,15 +91,19 @@ public class ErrorServlet extends HttpServlet {
 			//if 404 error (page not found) occurs then say page not found
 			if(statusCode == 404) {
 				request.setAttribute("error", "The specified page: " + requestUri + " could not be found.");
+				request.setAttribute("error_fr", "La page spécifiée: " + requestUri + " ne peut être trouvé.");
 			}
 			//if 405 error (method not supported) occurs then say the page does not support request method
 			else if(statusCode == 405) {
 				request.setAttribute("error", requestUri + " does not support this request method.");
+				request.setAttribute("error_fr", requestUri + " ne supporte pas cette méthode de requête.");
 			}
 			//if 500 (internal server error) then display the class and the message of the error
 			//This will be changed when the website goes live to a generic error message
 			else {
 				request.setAttribute("error", servletName + " has encountered error: " + throwable.getClass().getName()
+						+ " with error message: " + throwable.getMessage());
+				request.setAttribute("error_fr", servletName + " avec un message d'erreur: " + throwable.getClass().getName()
 						+ " with error message: " + throwable.getMessage());
 			}
 

@@ -78,7 +78,7 @@ public class VenuePageServlet extends HttpServlet {
 			String lID = request.getParameter("lID");
 			response.setContentType("text/html");
 
-			//if the query string is not included then default to division id 1
+			//if the query string is not included then default to league id 1
 			if(lID == null)
 				lID = "1";
 

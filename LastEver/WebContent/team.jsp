@@ -87,7 +87,8 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-												key="nav_league" /> </a>
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -127,9 +128,10 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> 
-								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
-								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
+														key="team_dd3" /></a> <a class="dropdown-item"
+													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
+													class="dropdown-item" href="logout" method="post"><fmt:message
+														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -573,7 +575,7 @@
 														<td scope="row"><c:out value="${stats.teamName}" /></td>
 														<td><a href="player?id=${stats.playerID}"><c:choose>
 																	<c:when test="${stats.hidePage eq true }">
-																	<fmt:message key="name_withheld" />
+																		<fmt:message key="name_withheld" />
 																	</c:when>
 																	<c:otherwise>
 																		<c:out value="${stats.name}" />
@@ -606,8 +608,10 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" />
+				<fmt:bundle basename="TestBundle">
+					<fmt:message key="footer_copyright" />
 				&copy; <img src="images/logo_sm4.png" /> 2018
+				</fmt:bundle>
 			</p>
 		</div>
 	</footer>

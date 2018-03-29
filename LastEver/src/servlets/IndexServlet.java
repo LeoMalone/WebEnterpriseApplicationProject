@@ -80,6 +80,7 @@ public class IndexServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		
+		//bean list variables used to set data on the page
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 
