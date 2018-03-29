@@ -147,7 +147,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- Referee Assignments -->
+						<!-- Referee Schedule - NEEDS TO BE SEPARATED - COMING SOON -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">

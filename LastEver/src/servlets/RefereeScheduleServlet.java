@@ -23,7 +23,8 @@ public class RefereeScheduleServlet extends HttpServlet {
 	
 private static final long serialVersionUID = 1L;
 	
-	/**
+	/**Admin and Referee Schedule separation COMING SOON
+	 * 
 	 * doGet method mapped to /adminSchedule
 	 */
 	@Override

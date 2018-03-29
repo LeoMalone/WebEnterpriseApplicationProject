@@ -234,12 +234,13 @@
 							<h4 class="card-header">
 								<fmt:message key="ab_head4" />
 							</h4>
-					<form action="./getInTouch" method="POST"> <!-- Need to create getInTouch page-->
+					<!-- Need to create getInTouch page - COMING SOON -->
+					<form action="./getInTouch" method="POST"> 
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group" align="left">
 										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
-										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="signin_fname" />e">
+										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="signin_fname" />">
 									</div>
 									<div class="form-group" align="left">
 										<label for="newLastName"><fmt:message key="signin_lname" /></label>
@@ -259,8 +260,7 @@
 									<div class="form-group" align = "left">
 										<!-- Add subject -->
 										<label for="subject"><fmt:message key="email_subject" /></label> <br> 
-    									<textarea id="subject" name="subject" style = "width:100%" placeholder="Write something..">
-    									</textarea>									
+    									<textarea id="subject" name="subject" rows="3%" cols="40%" placeholder="<fmt:message key="email_subject" />..."></textarea>									
 									</div>
 								</p>
 							</div>

@@ -113,9 +113,10 @@
 		</nav>
 
 		<div class="main-cover">
-			<!-- Page Content -->
+			<!-- Referee Email Functionality. Can only send emails to Admin and/or other referees -->
 			<div class="cards-container container">
 				<h1 class="my-4">${userName}: <fmt:message key="signin_emai" /></h1>
+				<!-- Send Email to ALL -->
 				<form action="./refEmail" method="POST">
 					<button type="submit" class="btn btn-success"><fmt:message key="email_all" /></button>
 				</form>
@@ -129,7 +130,8 @@
 						         <fmt:message key="signin_prop1" />
 						        </button>
 						      </h5>
-						    </div>						
+						    </div>
+						    <!-- Send Email to ADMIN  -->						
 						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 						      <div class="card-body">
 						      	<form action="./refEmail?=1" method="POST">
@@ -153,6 +155,7 @@
 						        </button>
 						      </h5>
 						    </div>
+						    <!-- Send Email to Referees  -->
 						    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 						      <div class="card-body">
 						      	<div class="form-check">
@@ -170,31 +173,6 @@
 						      </div>
 						    </div>
 						  </div>
-						  <!--  <div class="card">
-						    <div class="card-header" id="headingThree">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          <fmt:message key="signin_prop2" />
-						        </button>
-						      </h5>
-						    </div>
-						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-						      <div class="card-body">
-						      	<div class="form-check">
-									<form action="./refEmail?=3" method="POST">
-							      		<c:forEach items="${tos}" var="to">
-											<div class="form-check">
-											  <input name="tos" class="form-check-input" type="checkbox" value="${to.emailAddress}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1"><b>${to.firstName} ${to.lastName}:</b> ${to.emailAddress}</label>
-											</div>
-										</c:forEach>
-										<hr />
-										<button type="submit" class="btn btn-outline-dark"><fmt:message key="email_sendd" /></button>
-						      		</form>
-								</div>
-						      </div>
-						    </div>
-						  </div>-->
 						</div>
 					</div>
 				</div>

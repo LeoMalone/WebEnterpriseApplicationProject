@@ -29,7 +29,7 @@ public class RefereeEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * doGet method mapped to /adminUsers	
+	 * doGet method mapped to /refEmail
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,6 +78,7 @@ public class RefereeEmailServlet extends HttpServlet {
 				}
 			
 				// User list for display on page
+				//Only Admin and Referees
 				List<UserBean> admins = new ArrayList<UserBean>();
 				List<UserBean> refs = new ArrayList<UserBean>();				
 				
@@ -114,9 +115,11 @@ public class RefereeEmailServlet extends HttpServlet {
 				emails = allEmails.toArray(emails);
 			}
 		}
+		//For Emailing Admins
 		else if(fromURL.equals("1")) {
 			emails = request.getParameterValues("admins");
 		}
+		//For Emailing Referees
 		else if(fromURL.equals("2")) {
 			emails = request.getParameterValues("refs");
 		}	

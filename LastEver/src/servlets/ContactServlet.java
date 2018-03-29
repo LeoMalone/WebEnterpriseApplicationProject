@@ -16,7 +16,7 @@ import dao.League;
 
 /**
  * Contact Servlet class
- * @author Unknown and edited by Kevin Villemaire
+ * @author Unknown and edited by Neal Sen
  */
 public class ContactServlet extends HttpServlet {
 	
