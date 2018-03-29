@@ -239,20 +239,20 @@
 								<p class="card-text">
 									<div class="form-group" align="left">
 										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
-										<input type="text" class="form-control" name="newFirstName" placeholder="You Name">
+										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="signin_fname" />e">
 									</div>
 									<div class="form-group" align="left">
 										<label for="newLastName"><fmt:message key="signin_lname" /></label>
-										<input type="text" class="form-control" name="newLastName" placeholder="Your Last Name">
+										<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="signin_lname" />">
 									</div>
 									<div class="form-group" align="left">
 									<!-- ADD city -->
-										<label for="city">City</label>
+										<label for="city"><fmt:message key="ab_city" /></label>
 									    <select id="city" name="city">
-									      <option value="ottawa"><fmt:message key="au_username" />Ottawa</option>
-									      <option value="nepean"><fmt:message key="au_username" />Nepean</option>
-									      <option value="gatineau"><fmt:message key="au_username" />Gatineau</option>
-									      <option value="kanata"><fmt:message key="au_username" />Kanata</option>
+									      <option value="ottawa"><fmt:message key="ab_ottawa" /></option>
+									      <option value="nepean"><fmt:message key="ab_nepean" /></option>
+									      <option value="gatineau"><fmt:message key="ab_gatineau" /></option>
+									      <option value="kanata"><fmt:message key="ab_kanata" /></option>
 									   	</select>
 									</div>
 									<div class="form-group" align = "left">
