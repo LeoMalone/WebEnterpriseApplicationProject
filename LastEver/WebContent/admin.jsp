@@ -189,15 +189,15 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									Send Emails
+									<fmt:message key="email_send" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										Options for sending emails to users
+										<fmt:message key="email_send_options" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./adminEmails" class="btn btn-outline-light">Go To Emails</a>
+								 	<a href="./adminEmails" class="btn btn-outline-light"><fmt:message key="email_go" /></a>
 								</div>
 							</div>
 						</div>				
