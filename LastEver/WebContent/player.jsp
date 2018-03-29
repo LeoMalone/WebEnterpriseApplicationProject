@@ -34,8 +34,13 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${player}" var="p">
-					<c:out value="${p.playerFirstName}" />
-					<c:out value="${p.playerLastName}" />
+					<c:choose>
+						<c:when test="${p.hidePage eq true}">Name Witheld</c:when>
+						<c:otherwise>
+							<c:out value="${p.playerFirstName}" />
+							<c:out value="${p.playerLastName}" />
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose></title>
@@ -157,7 +162,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
@@ -173,7 +179,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -212,8 +219,13 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${player}" var="p">
-								<c:out value="${p.playerFirstName}" />
-								<c:out value="${p.playerLastName}" />
+								<c:choose>
+									<c:when test="${p.hidePage eq true}">Name Witheld</c:when>
+									<c:otherwise>
+										<c:out value="${p.playerFirstName}" />
+										<c:out value="${p.playerLastName}" />
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -229,95 +241,102 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${player}" var="p">
-											<c:if test="${not empty p.playerPhoto }">
-												<center>
-													<img src="${p.playerPhoto}"
-														style="width: 100%; max-width: 500px; height: auto" />
-												</center>
-											</c:if>
-											<table>
-												<tr>
-													<td><b><fmt:message key="player_current_team" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.teamName}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.teamName}" /></td>
+											<c:choose>
+												<c:when test="${p.hidePage eq true}">
+										This player has chosen to keep his information private. Sorry for the inconvience.
+										</c:when>
+												<c:otherwise>
+													<c:if test="${not empty p.playerPhoto }">
+														<center>
+															<img src="${p.playerPhoto}"
+																style="width: 100%; max-width: 500px; height: auto" />
+														</center>
+													</c:if>
+													<table>
+														<tr>
+															<td><b><fmt:message key="player_current_team" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.teamName}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.teamName}" /></td>
 
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_division" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.divisionName}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.divisionName}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_number" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerNumber}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td>#<c:out value="${p.playerNumber}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_position" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerPosition}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.playerPosition}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_country" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerCountry}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.playerCountry}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_division" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.divisionName}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.divisionName}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_number" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerNumber}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td>#<c:out value="${p.playerNumber}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_position" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerPosition}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.playerPosition}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_country" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerCountry}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.playerCountry}" /></td>
 
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_height" /></b></td>
-													<c:choose>
-														<c:when test="${p.playerHeight eq 0.0}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><fmt:formatNumber value="${p.playerHeight}"
-																	groupingUsed="true" /> cm</td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_weight" /></b></td>
-													<c:choose>
-														<c:when test="${p.playerWeight eq 0.0}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><fmt:formatNumber value="${p.playerWeight}"
-																	groupingUsed="true" /> kg</td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-											</table>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_height" /></b></td>
+															<c:choose>
+																<c:when test="${p.playerHeight eq 0.0}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><fmt:formatNumber value="${p.playerHeight}"
+																			groupingUsed="true" /> cm</td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_weight" /></b></td>
+															<c:choose>
+																<c:when test="${p.playerWeight eq 0.0}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><fmt:formatNumber value="${p.playerWeight}"
+																			groupingUsed="true" /> kg</td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+													</table>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -355,7 +374,16 @@
 												<c:forEach items="${statistics}" var="stats">
 													<tr>
 														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
-														<td><c:out value="${stats.name}" /></td>
+														<td><c:forEach items="${player}" var="p">
+																<c:choose>
+																	<c:when test="${p.hidePage eq true}">
+																	Name Witheld
+																	</c:when>
+																	<c:otherwise>
+																		<c:out value="${stats.name}" />
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out
@@ -374,7 +402,7 @@
 						</div>
 					</div>
 				</div>
-
+			</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
@@ -383,11 +411,11 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" />
+				&copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

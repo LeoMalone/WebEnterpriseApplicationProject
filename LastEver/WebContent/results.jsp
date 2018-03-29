@@ -27,13 +27,13 @@
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<c:choose>
-		<c:when test="${empty currDiv}">
+		<c:when test="${empty currLeague}">
 
 			<title>Last Ever - Division</title>
 		</c:when>
 		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
-					<c:out value="${row.divisionName}" />
+			<title>Last Ever - <c:forEach var="row" items="${currLeague}">
+					<c:out value="${row.leagueName}" />
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
@@ -61,7 +61,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
+						<li class="nav-item active"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
 
 						<li class="nav-item dropdown"><a
@@ -78,7 +78,7 @@
 										key="registration" /></a> <a class="dropdown-item"
 									href="./contact"><fmt:message key="contact" /></a>
 							</div></li>
-						<li class="nav-item dropdown active"><a
+						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> Divisions </a>
@@ -92,20 +92,20 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
+
 								<c:choose>
 
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
@@ -135,15 +135,15 @@
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a>
-												<a class="dropdown-item" href="logout"><fmt:message
+												<a class="dropdown-item" href="${userType}"><fmt:message
+														key="team_dd5" /></a> <a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-								
-																	<%--  IF SIGNED IN AS A REFEREE --%>
+
+									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
@@ -154,7 +154,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
@@ -170,7 +171,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -302,11 +304,27 @@
 																<c:otherwise>
 																	<c:forEach items="${res.homeScorer}" var="hs">
 																		<c:if test="${hs.goals eq 1}">
-																			<a href="player?id=${hs.ID}">${hs.name}</a>
+																			<c:choose>
+																				<c:when test="${hs.hidePage eq true }">
+																					<a href="player?id=${hs.ID}">Name Witheld</a>
+																				</c:when>
+																				<c:otherwise>
+																					<a href="player?id=${hs.ID}"><c:out
+																							value="${hs.name}" /></a>
+																				</c:otherwise>
+																			</c:choose>
 																			<br>
 																		</c:if>
 																		<c:if test="${hs.goals gt 1}">
-																			<a href="player?id=${hs.ID}">${hs.name}</a> 
+																			<c:choose>
+																				<c:when test="${hs.hidePage eq true }">
+																					<a href="player?id=${hs.ID}">Name Witheld</a>
+																				</c:when>
+																				<c:otherwise>
+																					<a href="player?id=${hs.ID}"><c:out
+																							value="${hs.name}" /></a>
+																				</c:otherwise>
+																			</c:choose>
 																			(<c:out value="${hs.goals}" />) 
 																<br>
 																		</c:if>
@@ -323,12 +341,28 @@
 																<c:otherwise>
 																	<c:forEach items="${res.awayScorer}" var="as">
 																		<c:if test="${as.goals eq 1}">
-																			<a href="player?id=${hs.ID}">${as.name}</a>
+																			<c:choose>
+																				<c:when test="${as.hidePage eq true }">
+																					<a href="player?id=${as.ID}">Name Witheld</a>
+																				</c:when>
+																				<c:otherwise>
+																					<a href="player?id=${as.ID}"><c:out
+																							value="${as.name}" /></a>
+																				</c:otherwise>
+																			</c:choose>
 																			<br>
 																		</c:if>
 																		<c:if test="${as.goals gt 1}">
-																			<a href="player?id=${as.ID}">${as.name}</a> 
-																(<c:out value="${as.goals}" />)<br>
+																			<c:choose>
+																				<c:when test="${as.hidePage eq true }">
+																					<a href="player?id=${as.ID}">Name Witheld</a>
+																				</c:when>
+																				<c:otherwise>
+																					<a href="player?id=${as.ID}"><c:out
+																							value="${as.name}" /></a>
+																(<c:out value="${as.goals}" />)</c:otherwise>
+																			</c:choose>
+																			<br>
 																		</c:if>
 																	</c:forEach>
 																</c:otherwise>
@@ -345,7 +379,7 @@
 					<div class="col-lg-12 mt-5 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<c:forEach var="d" items="${currDiv}">
+								<c:forEach var="l" items="${currLeague}">
 									<ul class="pagination justify-content-center">
 										<c:choose>
 											<c:when test="${currPage eq 1}">
@@ -354,12 +388,12 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="results?id=${d.divisionId}&page=${currPage - 1}"><fmt:message
+													href="results?id=${l.leagueId}&page=${currPage - 1}"><fmt:message
 															key="prev_page" /></a></li>
 											</c:otherwise>
 										</c:choose>
 										<li class="page-item active"><a class="page-link"
-											href="results?id=${d.divisionId}&page=${currPage}"><c:out
+											href="results?id=${l.leagueId}&page=${currPage}"><c:out
 													value="${currPage}" /></a></li>
 										<c:choose>
 											<c:when test="${currPage + 1 gt totalPages}">
@@ -368,7 +402,7 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="results?id=${d.divisionId}&page=${currPage + 1}"><fmt:message
+													href="results?id=${l.leagueId}&page=${currPage + 1}"><fmt:message
 															key="next_page" /></a></li>
 											</c:otherwise>
 										</c:choose>
@@ -383,15 +417,16 @@
 			</div>
 
 		</div>
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
-</fmt:bundle>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

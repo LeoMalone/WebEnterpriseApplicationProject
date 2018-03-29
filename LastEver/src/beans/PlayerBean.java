@@ -18,6 +18,7 @@ public class PlayerBean {
 	private String playerPhoto;
 	private String divisionName;
 	private String teamName;
+	private boolean hidePage;
 
 /**************************** CONTRUCTORS *****************************/	
 	public PlayerBean() {
@@ -75,6 +76,10 @@ public class PlayerBean {
 		return this.teamName;
 	}
 	
+	public boolean getHidePage() {
+		return this.hidePage;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setId(String id) {
 		this.id = id;
@@ -118,5 +123,9 @@ public class PlayerBean {
 	
 	public void setTeamName(String tn) {
 		this.teamName = tn;	
+	}
+	
+	public void setHidePage(boolean hp) {
+		this.hidePage = hp;	
 	}
 }

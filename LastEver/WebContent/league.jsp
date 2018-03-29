@@ -27,13 +27,13 @@
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<c:choose>
-		<c:when test="${empty currDiv}">
+		<c:when test="${empty currLeague}">
 
-			<title>Last Ever - Division</title>
+			<title>Last Ever - League</title>
 		</c:when>
 		<c:otherwise>
-			<title>Last Ever - <c:forEach var="row" items="${currDiv}">
-					<c:out value="${row.divisionName}" />
+			<title>Last Ever - <c:forEach var="row" items="${currLeague}">
+					<c:out value="${row.leagueName}" />
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
@@ -301,7 +301,7 @@
 					<div class="col-lg-12 mt-5 mb-5">
 						<div class="card">
 							<div class="card-body">
-								<c:forEach var="d" items="${currDiv}">
+								<c:forEach var="l" items="${currLeague}">
 									<ul class="pagination justify-content-center">
 										<c:choose>
 											<c:when test="${currPage eq 1}">
@@ -310,12 +310,12 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="division?id=${d.divisionId}&page=${currPage - 1}"><fmt:message
+													href="league?id=${l.leagueId}&page=${currPage - 1}"><fmt:message
 															key="prev_page" /></a></li>
 											</c:otherwise>
 										</c:choose>
 										<li class="page-item active"><a class="page-link"
-											href="division?id=${d.divisionId}&page=${currPage}"><c:out
+											href="league?id=${l.leagueId}&page=${currPage}"><c:out
 													value="${currPage}" /></a></li>
 										<c:choose>
 											<c:when test="${currPage + 1 gt totalPages}">
@@ -324,7 +324,7 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="division?id=${d.divisionId}&page=${currPage + 1}"><fmt:message
+													href="league?id=${l.leagueId}&page=${currPage + 1}"><fmt:message
 															key="next_page" /></a></li>
 											</c:otherwise>
 										</c:choose>

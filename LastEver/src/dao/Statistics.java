@@ -33,8 +33,8 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards, playerID, teamID from statistics where leagueID = ? order by goals desc, GP asc,"
-					+ " playerName asc");
+					+ " redCards, playerID, teamID, playerHidePage from statistics where leagueID = ? and playoffGame = 0"
+					+ " order by goals desc, GP asc, playerName asc");
 			getStatistics.setString(1, id);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -76,6 +76,7 @@ public class Statistics {
 				sb.setRedCard(resultSet.getInt(6));
 				sb.setPlayerID(resultSet.getString(7));
 				sb.setTeamID(resultSet.getString(8));
+				sb.setHidePage(resultSet.getBoolean(9));
 				statistics.add(sb);
 			}
 
@@ -129,8 +130,8 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards, s.playerID from statistics s inner join team t on t.teamName = s.teamName"
-					+ " where s.leagueID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
+					+ " s.redCards, s.playerID, s.playerHidePage from statistics s inner join team t on t.teamName ="
+					+ " s.teamName where s.leagueID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
 					+ " s.GP asc, s.playerName asc");
 			getStatistics.setString(1, lID);
 			getStatistics.setString(2, id);
@@ -173,6 +174,7 @@ public class Statistics {
 				sb.setYellowCard(resultSet.getInt(5));
 				sb.setRedCard(resultSet.getInt(6));
 				sb.setPlayerID(resultSet.getString(7));
+				sb.setHidePage(resultSet.getBoolean(8));
 				statistics.add(sb);
 			}
 

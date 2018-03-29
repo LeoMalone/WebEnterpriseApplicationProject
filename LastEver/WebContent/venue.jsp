@@ -97,20 +97,20 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
+
 								<c:choose>
 
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
@@ -140,15 +140,15 @@
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a>
-												<a class="dropdown-item" href="logout"><fmt:message
+												<a class="dropdown-item" href="${userType}"><fmt:message
+														key="team_dd5" /></a> <a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-								
-																	<%--  IF SIGNED IN AS A REFEREE --%>
+
+									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
@@ -159,7 +159,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
@@ -175,7 +176,8 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -368,7 +370,7 @@
 									<c:forEach items="${league}" var="l">
 										<li class="nav-item"><a
 											class="nav-link ${l.leagueId==leagueID?'active':''}"
-											href="venue?id=${venID}&lID=${l.leagueID}#schedule">${l.leagueName}</a>
+											href="venue?id=${venID}&lID=${l.leagueId}#schedule">${l.leagueName}</a>
 										</li>
 									</c:forEach>
 								</ul>
@@ -425,7 +427,7 @@
 						</div>
 					</div>
 				</div>
-
+			</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
@@ -434,11 +436,11 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" />
+				&copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script
