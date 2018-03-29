@@ -26,7 +26,7 @@
 <!-- Fontawesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - <fmt:message key="teamroster" /></title>
 </fmt:bundle>
 </head>
 
@@ -56,7 +56,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
+									key="nav_info" />
 						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
@@ -72,14 +72,14 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-												key="nav_divisions" /> </a>
+												key="nav_league" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
@@ -110,6 +110,7 @@
 								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
 								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
+								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
 								<a class="dropdown-item" href="logout" method="post"><fmt:message key="team_dd4" /></a>
 							</div></li>
 								

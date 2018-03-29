@@ -8,7 +8,8 @@ public class LeagueBean {
 	
 	//Division bean parameters
 	private String leagueId;
-	private String leagueName;	
+	private String leagueName;
+	private String status;
 	
 /**************************** GETTERS *****************************/
 	public String getLeagueId() {
@@ -19,6 +20,10 @@ public class LeagueBean {
 		return this.leagueName;
 	}
 	
+	public String getLeagueStatus() {
+		return this.status;
+	}
+	
 /**************************** SETTERS *****************************/
 	public void setLeagueId(String string) {
 		this.leagueId = string;
@@ -26,5 +31,9 @@ public class LeagueBean {
 
 	public void setLeagueName(String name) {
 		this.leagueName = name;
+	}
+	
+	public void setStatus(String stat) {
+		this.status = stat;
 	}
 }

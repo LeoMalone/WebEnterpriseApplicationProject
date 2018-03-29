@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.LeagueBean;
 import dao.Division;
 import dao.League;
@@ -73,6 +74,13 @@ private static final long serialVersionUID = 7270142539946516086L;
 						break;
 					}
 				}
+				
+				//get league list for an admin to edit divisions
+				List<LeagueBean> lbl = new ArrayList<LeagueBean>();
+				if(League.getAllLeagues(lbl)) {
+					request.setAttribute("leagues", lbl);
+				}
+				
 				// Set content type and username and dispatch to jsp 
 				request.setAttribute("userName", userName);
 				response.setContentType("text/html");
@@ -89,14 +97,18 @@ private static final long serialVersionUID = 7270142539946516086L;
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//  Get new division name from jsp input
 		String newDivName = request.getParameter("newDivisionName");
+		String newDivLeague = request.getParameter("divRadio");
 		
 		// If any parameter is null
-		if(newDivName == null || newDivName.equals("")) {
+		if(newDivName == null || newDivName == "" || newDivLeague == null) {
 			response.sendRedirect("./divisionCreate");
 			
 		} else {
 			// If division is created
-			if (Division.createNewDiv(newDivName)) {
+			DivisionBean div = new DivisionBean();
+			div.setDivisionName(newDivName);
+			div.setLeagueId(newDivLeague);
+			if (Division.createNewDiv(div)) {
 				response.sendRedirect("./adminDivisions");
 				
 			} else {

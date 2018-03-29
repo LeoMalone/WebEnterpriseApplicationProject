@@ -10,6 +10,7 @@ public class ScorerBean {
 	private String ID;
 	private String name;
 	private int goals;
+	private boolean hidePage;
 
 /**************************** CONTRUCTORS *****************************/	
 	public ScorerBean() {
@@ -28,6 +29,10 @@ public class ScorerBean {
 		return this.goals;
 	}
 	
+	public boolean getHidePage() {
+		return this.hidePage;
+	}
+	
 	/**************************** SETTERS *****************************/
 	public void setID(String id) {
 		this.ID = id;
@@ -39,5 +44,9 @@ public class ScorerBean {
 	
 	public void setGoals(int g) {
 		this.goals = g;
+	}
+
+	public void setHidePage(boolean hp) {
+		this.hidePage = hp;
 	}
 }

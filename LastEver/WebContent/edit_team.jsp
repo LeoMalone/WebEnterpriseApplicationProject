@@ -90,7 +90,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -103,26 +103,41 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"
-							href="${userType}">${userName}</a></li>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle active" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="adminUsers"><fmt:message
+										key="nav_admin_users" /></a> <a class="dropdown-item"
+									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
+									class="dropdown-item" href="adminDivisions"><fmt:message
+										key="nav_admin_divs" /></a> <a class="dropdown-item"
+									href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+								<a class="dropdown-item" href="adminEmails"><fmt:message
+										key="nav_admin_email" /></a> <a class="dropdown-item"
+									href="logout"><fmt:message key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
 							<form action="./adminTeams" method="GET">
 								<select class="form-control form-control-sm" name="language"
@@ -144,7 +159,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: ${team.teamName}</h1>
+				<h1 class="my-4">${userName}:${team.teamName}</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
@@ -158,19 +173,25 @@
 										<label for="editTeamName"><fmt:message
 												key="admin_ct_tn" /></label> <input type="text"
 											class="form-control" name="editTeamName"
-											value="${team.teamName}">
+											value="${team.teamName}" required>
 									</div>
 									<div class="form-group">
 										<label for="editTeamAbbr"><fmt:message
 												key="admin_ct_ta" /></label> <input type="text"
 											class="form-control" name="editTeamAbbr"
-											value="${team.teamAbbreviation}">
+											value="${team.teamAbbreviation}" required>
+									</div>
+									<div class="form-group">
+										<label for="editTeamAbout"><fmt:message key="at_about" /></label>
+										<textarea class="form-control" name="editTeamAbout"
+											placeholder="<fmt:message key="admin_ct_tabplace"/>">${team.teamAbout}</textarea>
 									</div>
 									<label for="divRadio"><fmt:message key="admin_ct_div" /></label>
 									<c:forEach var="div1" items="${allDiv}">
 										<div class="form-check">
 											<input aria-describedby="adminHelp" class="form-check-input"
-												type="radio" name="divRadio" value="${div1.divisionId}">
+												type="radio" name="divRadio" value="${div1.divisionId}"
+												${team.divisionId == div1.divisionId?'checked':''}>
 											<label class="form-check-label" for="divRadio">
 												${div1.divisionName} </label>
 										</div>
@@ -198,7 +219,8 @@
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
-					<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
 				</p>
 			</div>
 		</footer>

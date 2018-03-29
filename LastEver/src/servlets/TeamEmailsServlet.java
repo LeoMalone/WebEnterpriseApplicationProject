@@ -16,20 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
 import beans.UserBean;
-import dao.AdminEmails;
 import dao.League;
+import dao.TeamEmails;
 
 /**
- * The AdminEmailsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option Email Users.
- * @author Liam Maloney, Kevin Villemaire
+ * The TeamEmailsServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the team control panel option send emails.
+ * @author Liam Maloney and edited by Kevin Villemaire, moved to Team by Kevin Read
  */
-public class AdminEmailsServlet extends HttpServlet{
+public class TeamEmailsServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * doGet method mapped to /adminEmails	
+	 * doGet method mapped to /adminUsers	
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class AdminEmailsServlet extends HttpServlet{
 		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
-		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
 			// If user is signed in, get language and username
@@ -77,68 +77,54 @@ public class AdminEmailsServlet extends HttpServlet{
 					}
 				}
 			
-				// Lists of User Beans for emails by user type 
+				// User list for display on page
 				List<UserBean> admins = new ArrayList<UserBean>();
-				List<UserBean> refs = new ArrayList<UserBean>();
 				List<UserBean> tos = new ArrayList<UserBean>();
+				List<UserBean> player = new ArrayList<UserBean>();
 				
 				// If query is successful
-				if(AdminEmails.getAllEmails(admins, refs, tos)) {
-					// Add lists to jsp
+				if(TeamEmails.getAllEmails(admins, tos)) {
+					// Set content type, username, userList and dispatch to jsp
 					request.setAttribute("admins", admins);
-					request.setAttribute("refs", refs);
 					request.setAttribute("tos", tos);
 					request.setAttribute("userName", userName);
 					response.setContentType("text/html");
-					RequestDispatcher rd = request.getRequestDispatcher("admin_emails.jsp");  
+					RequestDispatcher rd = request.getRequestDispatcher("team_emails.jsp");  
 				    rd.forward(request, response);
 				}
 			}
 		}
 	}
 	
-	/**
-	 * doPost method mapped to /adminEmails	
-	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fromURL = null;		//data from string, can stay null
-		String[] emails = null;		//Array of string for emails
+		String fromURL = null;
+		String[] emails = null;
 		
-		// If the url contains data set it to fromURL
 		if(request.getQueryString() != null) {
 			StringBuilder sb = new StringBuilder(request.getQueryString());
 			sb.deleteCharAt(0);
 			fromURL = sb.toString();
 		}
 		
-		// if the url does not contain data send to all available emails
 		if(fromURL == null) {
 			List<String> allEmails = new ArrayList<String>();
-			if(AdminEmails.getAllEmailsForPost(allEmails)) {
+			if(TeamEmails.getAllEmailsForPost(allEmails)) {
 				emails = new String[allEmails.size()];
 				emails = allEmails.toArray(emails);
 			}
 		}
-		// if the email is to admins
 		else if(fromURL.equals("1")) {
 			emails = request.getParameterValues("admins");
 		}
-		// if the email is to Referees
 		else if(fromURL.equals("2")) {
-			emails = request.getParameterValues("refs");
-		}
-		//if the email is to Team Owners
-		else if(fromURL.equals("3")) {
 			emails = request.getParameterValues("tos");
 		}
 		
-		// if the email array is null or has a length of 0, redirect to /adminEmails
 		if(emails == null || emails.length == 0) {
-			response.sendRedirect("./adminEmails");
+			response.sendRedirect("./teamEmails");
 		} else {
-			// Get default mail service and add emails to mailto
 			try {
 				Desktop.getDesktop().mail(new URI("mailto", String.join(",", emails), null));
 			} catch (IOException e) {
@@ -147,7 +133,7 @@ public class AdminEmailsServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-			response.sendRedirect("./adminEmails");
+			response.sendRedirect("./teamEmails");
 		}
 	}
 }

@@ -39,18 +39,27 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="deleteScheduleLabel"><fmt:message key="admin_es_modal_title" /> ${schedule.title}</h5>
+						<h5 class="modal-title" id="deleteScheduleLabel">
+							<fmt:message key="admin_es_modal_title" />
+							${schedule.title}
+						</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body"><fmt:message key="admin_es_modal_body" /></div>
+					<div class="modal-body">
+						<fmt:message key="admin_es_modal_body" />
+					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal"><fmt:message key="admin_eu_model_cls" /></button>
+							data-dismiss="modal">
+							<fmt:message key="admin_eu_model_cls" />
+						</button>
 						<form action="deleteSchedule?=${schedule.title}" method="POST">
-							<button type="submit" class="btn btn-danger"><fmt:message key="admin_es_del" /></button>
+							<button type="submit" class="btn btn-danger">
+								<fmt:message key="admin_es_del" />
+							</button>
 						</form>
 					</div>
 				</div>
@@ -84,7 +93,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -97,26 +106,41 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"
-							href="${userType}">${userName}</a></li>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle active" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="adminUsers"><fmt:message
+										key="nav_admin_users" /></a> <a class="dropdown-item"
+									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
+									class="dropdown-item" href="adminDivisions"><fmt:message
+										key="nav_admin_divs" /></a> <a class="dropdown-item"
+									href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+								<a class="dropdown-item" href="adminEmails"><fmt:message
+										key="nav_admin_email" /></a> <a class="dropdown-item"
+									href="logout"><fmt:message key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
 							<form action="./adminSchedule" method="GET">
 								<select class="form-control form-control-sm" name="language"
@@ -138,25 +162,33 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: <fmt:message key="admin_es_title" /> ${schedule.title}</h1>
+				<h1 class="my-4">${userName}:
+					<fmt:message key="admin_es_title" />
+					${schedule.title}
+				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
-							<h4 class="card-header"><fmt:message key="admin_es_head" /></h4>
+							<h4 class="card-header">
+								<fmt:message key="admin_es_head" />
+							</h4>
 							<div class="card-body">
 								<form action="editSchedule?=${schedule.title}" method="POST">
 									<div class="form-group">
-										<label for="editGameDate"><fmt:message key="admin_cs_date" /></label> <input type="text"
+										<label for="editGameDate"><fmt:message
+												key="admin_cs_date" /></label> <input type="text"
 											class="form-control" id="datePickInput" name="editGameDate"
 											value="${schedule.gameDate}">
 									</div>
 									<div class="form-group clockpicker">
-										<label for="editGameDate"><fmt:message key="admin_cs_time" /></label> <input type="text"
+										<label for="editGameDate"><fmt:message
+												key="admin_cs_time" /></label> <input type="text"
 											class="form-control" name="editGameTime"
 											value="${schedule.gameTime}">
 									</div>
 									<div class="form-group">
-										<label for="editHomeTeam"><fmt:message key="admin_cs_ht" /></label> <select
+										<label for="editHomeTeam"><fmt:message
+												key="admin_cs_ht" /></label> <select
 											class="custom-select my-1 mr-sm-2" id="editHomeTeam"
 											name="editHomeTeam">
 											<c:forEach items="${teamList}" var="team">
@@ -166,7 +198,8 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="editAwayTeam"><fmt:message key="admin_cs_at" /></label> <select
+										<label for="editAwayTeam"><fmt:message
+												key="admin_cs_at" /></label> <select
 											class="custom-select my-1 mr-sm-2" id="editAwayTeam"
 											name="editAwayTeam">
 											<c:forEach items="${teamList}" var="team">
@@ -176,17 +209,20 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="editHomeScore"><fmt:message key="admin_cs_hs" /></label> <input
-											type="text" class="form-control" name="editHomeScore"
+										<label for="editHomeScore"><fmt:message
+												key="admin_cs_hs" /></label> <input type="text"
+											class="form-control" name="editHomeScore"
 											value="${schedule.homeScore}">
 									</div>
 									<div class="form-group">
-										<label for="editAwayScore"><fmt:message key="admin_cs_as" /></label> <input
-											type="text" class="form-control" name="editAwayScore"
+										<label for="editAwayScore"><fmt:message
+												key="admin_cs_as" /></label> <input type="text"
+											class="form-control" name="editAwayScore"
 											value="${schedule.awayScore}">
 									</div>
 									<div class="form-group">
-										<label for="editGameStatus"><fmt:message key="admin_cs_gs" /></label> <select
+										<label for="editGameStatus"><fmt:message
+												key="admin_cs_gs" /></label> <select
 											class="custom-select my-1 mr-sm-2" id="editGameStatus"
 											name="editGameStatus">
 											<option value="Final"
@@ -195,12 +231,16 @@
 												${schedule.gameStatus == 'Scheduled' ?'selected':''}>Scheduled</option>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>
+									<button type="submit" class="btn btn-outline-success">
+										<fmt:message key="admin_eu_save" />
+									</button>
 								</form>
 							</div>
 							<div class="card-footer">
 								<button type="button" class="btn btn-danger" data-toggle="modal"
-									data-target="#deleteSchedule"><fmt:message key="admin_es_del" /></button>
+									data-target="#deleteSchedule">
+									<fmt:message key="admin_es_del" />
+								</button>
 							</div>
 						</div>
 					</div>
@@ -213,7 +253,8 @@
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
-					<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
 				</p>
 			</div>
 		</footer>

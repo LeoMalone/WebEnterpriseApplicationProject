@@ -25,7 +25,8 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - Teams</title>
 </fmt:bundle>
@@ -59,40 +60,54 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle active" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="adminUsers"><fmt:message
+										key="nav_admin_users" /></a> <a class="dropdown-item"
+									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
+									class="dropdown-item" href="adminDivisions"><fmt:message
+										key="nav_admin_divs" /></a> <a class="dropdown-item"
+									href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+								<a class="dropdown-item" href="adminEmails"><fmt:message
+										key="nav_admin_email" /></a> <a class="dropdown-item"
+									href="logout"><fmt:message key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
 							<form>
 								<select class="form-control form-control-sm" name="language"
@@ -114,69 +129,76 @@
 
 	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
+			<!-- Page Content -->
+			<div class="cards-container container">
 				<h1 class="my-4">
-					${userName}: <fmt:message key="at_title" />
+					${userName}:
+					<fmt:message key="at_title" />
 				</h1>
-				<a href="./teamCreate" class="btn btn-success"><fmt:message key="at_create" /></a>					
+				<a href="./teamCreate" class="btn btn-success"><fmt:message
+						key="at_create" /></a>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card bg-light">				
+						<div class="card bg-light">
 							<div class="card-header">
-							    <ul class="nav nav-tabs card-header-tabs">
-							    	<li class="nav-item">
-							    		<a class="nav-link ${currentId==null?'active':''}" href="./adminTeams"><fmt:message key="at_nodiv" /></a>
-							    	</li>
-							    	<c:forEach  items="${divList}" var="division">
-							    		<li class="nav-item">
-							        		<a class="nav-link ${division.divisionId==currentId?'active':''}" href="./adminTeams?=${division.divisionId}">${division.divisionName}</a>
-							      		</li>
-							    	</c:forEach>							      	
-							    </ul>
-							 </div>
-							 <div class="card-body">
-							 	<table class="table table-striped">
-								 	<thead class="thead-dark">
-									    <tr>
-									      <th scope="col">Id</th>
-									      <th scope="col"><fmt:message key="at_name" /></th>
-									      <th scope="col"><fmt:message key="at_abbr" /></th>
-									      <th scope="col"><fmt:message key="at_edit" /></th>
-									    </tr>
-									 </thead>
-								 	<c:forEach  items="${teamList}" var="team">
+								<ul class="nav nav-tabs card-header-tabs">
+									<li class="nav-item"><a
+										class="nav-link ${currentId==null?'active':''}"
+										href="./adminTeams"><fmt:message key="at_nodiv" /></a></li>
+									<c:forEach items="${divList}" var="division">
+										<li class="nav-item"><a
+											class="nav-link ${division.divisionId==currentId?'active':''}"
+											href="./adminTeams?=${division.divisionId}">${division.divisionName}</a>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+							<div class="card-body">
+								<table class="table table-striped">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">Id</th>
+											<th scope="col"><fmt:message key="at_name" /></th>
+											<th scope="col"><fmt:message key="at_abbr" /></th>
+											<th scope="col"><fmt:message key="at_about" /></th>
+											<th scope="col"><fmt:message key="at_edit" /></th>
+										</tr>
+									</thead>
+									<c:forEach items="${teamList}" var="team">
 										<tr>
 											<td scope="col">${team.teamId}</td>
 											<td scope="col">${team.teamName}</td>
 											<td scope="col">${team.teamAbbreviation}</td>
-											<td scope="col">
-								        		<a href="./editTeam?=${team.teamId}" class="btn btn-dark btn-sm">
-								        			<i class="fa fa-edit"></i> 
-												</a>
-											</td>
+											<td scope="col">${team.teamAbout}</td>
+											<td scope="col"><a href="./editTeam?=${team.teamId}"
+												class="btn btn-dark btn-sm"> <i class="fa fa-edit"></i>
+											</a></td>
 										</tr>
-								    </c:forEach>
-							 	</table>
-							 </div>							 			
+									</c:forEach>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>					
+				</div>
 				<!-- /row -->
+			</div>
 		</div>
-	</div>
 		<!-- Footer -->
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
-					<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
 				</p>
 			</div>
 		</footer>
-</fmt:bundle>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

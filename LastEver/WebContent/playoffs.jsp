@@ -44,24 +44,26 @@
 </head>
 
 <body>
-	<fmt:bundle basename="TestBundle">
-		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+
+	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-		<nav
-			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="index"><img
-					src="images/logo_sm4.png" /></a>
-				<button class="navbar-toggler navbar-toggler-right" type="button"
-					data-toggle="collapse" data-target="#navbarResponsive"
-					aria-controls="navbarResponsive" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="index"><img
+				src="images/logo_sm4.png" /></a>
 
-				<div class="collapse navbar-collapse" id="navbarResponsive">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -102,13 +104,16 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
+
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
 											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
+
 								<c:choose>
+
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
 									<c:when test="${userType == './teamowner'}">
 										<li class="nav-item dropdown"><a
@@ -122,9 +127,7 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -144,6 +147,7 @@
 									</c:when>
 								</c:choose>
 								<c:choose>
+
 									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
@@ -160,6 +164,7 @@
 									</c:when>
 								</c:choose>
 								<c:choose>
+
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
@@ -168,16 +173,10 @@
 											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
+
 												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message
-														key="nav_admin_users" /></a> <a class="dropdown-item"
-													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message
-														key="nav_admin_divs" /></a> <a class="dropdown-item"
-													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message
-														key="nav_admin_email" /></a> <a class="dropdown-item"
-													href="logout"><fmt:message key="team_dd4" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -198,11 +197,13 @@
 							</form>
 						</li>
 					</ul>
-				</div>
+				</fmt:bundle>
 			</div>
-		</nav>
+		</div>
+	</nav>
 
 
+	<fmt:bundle basename="TestBundle">
 		<div class="main-cover">
 			<!-- Page Content
 		- cards with information on them
@@ -214,7 +215,7 @@
 					<c:forEach var="row" items="${currLeague}">
 						<c:out value="${row.leagueName}" />
 					</c:forEach>
-					<fmt:message key="div_head5" />
+					<fmt:message key="div_head6" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
@@ -246,12 +247,12 @@
 														href="results?id=${row.leagueId}"> <fmt:message
 																key="div_head3" />
 													</a></li>
-													<li class="nav-item active"><a class="nav-link"
+													<li class="nav-item"><a class="nav-link"
 														href="statistics?id=${row.leagueId}"> <fmt:message
 																key="div_head5" />
 													</a></li>
 													<c:if test="${row.leagueStatus eq 'Playoffs'}">
-														<li class="nav-item"><a class="nav-link"
+														<li class="nav-item active"><a class="nav-link"
 															href="playoffs?id=${row.leagueId}"> <fmt:message
 																	key="div_head6" />
 														</a></li>
@@ -261,6 +262,72 @@
 										</c:choose>
 									</ul>
 								</nav>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 mb-5 mt-5">
+						<div class="card">
+							<h4 class="card-header">
+								<fmt:message key="div_head2" />
+							</h4>
+							<div class="card-body table-responsive">
+								<table id="schedule"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head2_text4" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="venue_head1" /></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty schedule}">
+												<td colspan=5 style="text-align: center"><b><fmt:message
+															key="div_nogames" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${schedule}" var="sched">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
+																	value="${sched.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
+																	value="${sched.date}" />
+															</c:if></td>
+														<td style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="time" pattern="H:mm"
+																	value="${sched.time}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="time" pattern="h:mm a"
+																	value="${sched.time}" />
+															</c:if></td>
+														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
+														<c:choose>
+															<c:when test="${empty sched.venue}">
+																<td><fmt:message key="div_novenue" /></td>
+															</c:when>
+															<c:otherwise>
+																<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
+															</c:otherwise>
+														</c:choose>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -355,6 +422,6 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<!-- DataTables core JavaScript -->
 	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
-	<script type="text/javascript" src="js/statistics.js"></script>
+	<script type="text/javascript" src="js/playoffs.js"></script>
 </body>
 </html>

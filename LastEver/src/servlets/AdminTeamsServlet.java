@@ -41,7 +41,6 @@ public class AdminTeamsServlet extends HttpServlet {
 		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
-		// TODO: distinguish between user types
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
 			response.sendRedirect("./index");
 		} else {

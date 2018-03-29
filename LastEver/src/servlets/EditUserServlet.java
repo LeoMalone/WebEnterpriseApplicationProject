@@ -22,7 +22,7 @@ import dao.League;
 /**
  * The EditUserServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit User.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class EditUserServlet extends HttpServlet{
 	
@@ -115,7 +115,7 @@ public class EditUserServlet extends HttpServlet{
 		String userType = request.getParameter("editRadio");
 		
 		// If any parameter is null
-		if(newFirstName == null || newLastName == null || newUsername == null || newEmail == null || newPassword == null || userType == null) {
+		if(newFirstName == "" || newLastName == "" || newUsername == "" || newEmail == "" || userType == null) {
 			response.sendRedirect("./adminUsers");
 		} else {
 			// Set UserBean parameters

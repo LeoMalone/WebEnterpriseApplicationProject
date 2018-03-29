@@ -66,9 +66,10 @@ public class CreateTeam {
 	    // Connect to Database and execute INSERT query with UserBean data
 	    try {
 	        conn = ConnectionManager.getConnection();        
-	        insertTeam = conn.prepareStatement("INSERT INTO team (teamName, teamAbbreviation) VALUE (?, ?)");
+	        insertTeam = conn.prepareStatement("INSERT INTO team (teamName, teamAbbreviation, teamAbout) VALUE (?, ?, ?)");
 	        insertTeam.setString(1, team.getTeamName());
 	        insertTeam.setString(2, team.getTeamAbbreviation());
+	        insertTeam.setString(3, team.getTeamAbout());
 	        result = insertTeam.executeUpdate();	        
 	        // Return true if 1 query executes
 	        if(result == 1) {

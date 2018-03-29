@@ -45,10 +45,10 @@ public class AdminTeams {
 	        }        
 	        
 	        if(divId == null) {
-	        	allTeams = conn.prepareStatement("SELECT t.teamID, t.teamName, t.teamAbbreviation FROM team t natural left join teamxdivision td WHERE td.divisionID IS NULL;");
+	        	allTeams = conn.prepareStatement("SELECT t.teamID, t.teamName, t.teamAbbreviation, t.teamAbout FROM team t natural left join teamxdivision td WHERE td.divisionID IS NULL;");
 	        	
 	        } else {	        	
-		        allTeams = conn.prepareStatement("SELECT team.teamID, teamName, teamAbbreviation, divisionID FROM team, teamxdivision WHERE divisionID=? AND team.teamID=teamxdivision.teamID");
+		        allTeams = conn.prepareStatement("SELECT team.teamID, teamName, teamAbbreviation, teamAbout, divisionID FROM team, teamxdivision WHERE divisionID=? AND team.teamID=teamxdivision.teamID");
 		        allTeams.setString(1, divId);
 	        }
 	        
@@ -58,8 +58,9 @@ public class AdminTeams {
 	        	tb.setTeamId(rs.getString(1));
 	        	tb.setTeamName(rs.getString(2));
 	        	tb.setTeamAbbreviation(rs.getString(3));
+	        	tb.setTeamAbout(rs.getString(4));
 	        	if(divId != null)
-	        		tb.setDivisionId(rs.getString(4));
+	        		tb.setDivisionId(rs.getString(5));
 	        	else
 	        		tb.setDivisionId("0");
 	        	teamList.add(tb);

@@ -12,12 +12,12 @@ import beans.ScheduleResultsBean;
 import beans.ScorerBean;
 
 /**
- * The ScheduleResultsBean class gets the schedule or results for division or venue
+ * The ScheduleResultsBean class gets the schedule or results for league or venue
  */
 public class ScheduleResults {
 
 	/**
-	 * The getSchedule method gets a Divisions schedule
+	 * The getSchedule method gets a Leagues schedule
 	 * @param <ScheduleResultsBean>
 	 * @param id - Current division id
 	 * @return status - boolean value
@@ -480,8 +480,8 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and "
-					+ "id=? group by id, playerName order by goals desc");
+			getScorers = conn.prepareStatement("select playerID, playerName, goals, playerHidePage from scorers"
+					+ " where teamName=? and id=? group by id, playerName order by goals desc");
 			getScorers.setString(1, home);
 			getScorers.setString(2, id);
 			resultSet = getScorers.executeQuery();
@@ -496,6 +496,7 @@ public class ScheduleResults {
 				sb.setID(resultSet.getString(1));
 				sb.setName(resultSet.getString(2));
 				sb.setGoals(resultSet.getInt(3));
+				sb.setHidePage(resultSet.getBoolean(4));
 				hb.add(sb);
 			}
 
@@ -547,8 +548,8 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getScorers = conn.prepareStatement("select playerID, playerName, goals from scorers where teamName=? and"
-					+ " id=? group by id, playerName order by goals desc");
+			getScorers = conn.prepareStatement("select playerID, playerName, goals, playerHidePage from scorers"
+					+ " where teamName=? and id=? group by id, playerName order by goals desc");
 
 			getScorers.setString(1, away);
 			getScorers.setString(2, id);
@@ -564,6 +565,7 @@ public class ScheduleResults {
 				sb.setID(resultSet.getString(1));
 				sb.setName(resultSet.getString(2));
 				sb.setGoals(resultSet.getInt(3));
+				sb.setHidePage(resultSet.getBoolean(4));
 				ab.add(sb);
 			}
 
@@ -582,6 +584,80 @@ public class ScheduleResults {
 			if (getScorers != null) {
 				try {
 					getScorers.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return status;
+	}
+
+	/**
+	 * The getSchedule method gets a Leagues playoff schedule
+	 * @param <ScheduleResultsBean>
+	 * @param id - Current division id
+	 * @return status - boolean value
+	 */
+	public static boolean getPlayoffSchedule(String id, List<ScheduleResultsBean> sched) { 
+
+		boolean status = false;					// query status
+		Connection conn = null;					// DB connection
+		PreparedStatement getSchedule = null;	// SQL query
+		ResultSet resultSet = null;				// returned query result set
+
+		// Connect to Database and execute SELECT query with ScheduleResultsBean data
+		try {
+			conn = ConnectionManager.getConnection();
+			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
+					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
+					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
+					+ " left outer join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID ="
+					+ " v.venueID where ld.leagueID = ? and s.gameStatus = 'Scheduled' and s.playoffGame = 1");
+			getSchedule.setString(1, id);
+			resultSet = getSchedule.executeQuery();
+			status = resultSet.next();
+
+			//return to the start of the resultSet
+			resultSet.beforeFirst();
+
+			//Loop through and add the results of the query to a ScheduleResultsBean then add it to the list
+			while(resultSet.next()) {
+				ScheduleResultsBean sb = new ScheduleResultsBean();
+				sb.setDate(resultSet.getDate(1));
+				sb.setTime(resultSet.getTime(2));
+				sb.setHomeTeam(resultSet.getString(3));
+				sb.setHomeID(resultSet.getString(4));
+				sb.setAwayTeam(resultSet.getString(5));
+				sb.setAwayID(resultSet.getString(6));
+				sb.setVenue(resultSet.getString(7));
+				sb.setVenueID(resultSet.getString(8));
+				sched.add(sb);
+			}
+
+			// handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			//close all connections and handle exceptions
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getSchedule != null) {
+				try {
+					getSchedule.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

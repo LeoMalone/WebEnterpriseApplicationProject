@@ -31,8 +31,8 @@ public class Player {
 		try {
 			conn = ConnectionManager.getConnection();
 			getPlayer = conn.prepareStatement("select p.playerFirstName, p.playerLastName, p.playerNumber, p.playerPosition,"
-					+ " p.playerCountry, p.playerHeight, p.playerWeight, p.playerPhoto, d.divisionName, t.teamName from"
-					+ " player p inner join playerxteam pt on pt.playerID = p.playerID inner join"
+					+ " p.playerCountry, p.playerHeight, p.playerWeight, p.playerPhoto, d.divisionName, t.teamName,"
+					+ " p.playerHidePage from player p inner join playerxteam pt on pt.playerID = p.playerID inner join"
 					+ " team t on t.teamID = pt.teamID inner join teamxdivision td on td.teamID = t.teamID inner join"
 					+ " division d on d.divisionID = td.divisionID where p.playerID=?");
 			getPlayer.setString(1, pID);
@@ -55,6 +55,7 @@ public class Player {
 				pb.setPlayerPhoto(resultSet.getString(8));
 				pb.setDivisionName(resultSet.getString(9));
 				pb.setTeamName(resultSet.getString(10));
+				pb.setHidePage(resultSet.getBoolean(11));
 				player.add(pb);
 			}
 

@@ -44,27 +44,23 @@
 </fmt:bundle>
 </head>
 <body>
-
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
-
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
-
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+	<fmt:bundle basename="TestBundle">
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -73,7 +69,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -86,33 +82,32 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 						<c:choose>
-							
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
+											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-								
 								<c:choose>
-
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
 									<c:when test="${userType == './teamowner'}">
 										<li class="nav-item dropdown"><a
@@ -126,7 +121,9 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item"
+													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
+													class="dropdown-item" href="logout" method="post"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -139,15 +136,14 @@
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a>
-												<a class="dropdown-item" href="logout"><fmt:message
+												<a class="dropdown-item" href="${userType}"><fmt:message
+														key="team_dd5" /></a> <a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-								
-																	<%--  IF SIGNED IN AS A REFEREE --%>
+									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
@@ -158,11 +154,11 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
@@ -171,10 +167,17 @@
 											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-
 												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+												<a class="dropdown-item" href="adminUsers"><fmt:message
+														key="nav_admin_users" /></a> <a class="dropdown-item"
+													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+												<a class="dropdown-item" href="adminDivisions"><fmt:message
+														key="nav_admin_divs" /></a> <a class="dropdown-item"
+													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+												<a class="dropdown-item" href="adminEmails"><fmt:message
+														key="nav_admin_email" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -194,18 +197,16 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-	<div class="main-cover">
-		<!-- Page Content
-		- cards with information on them
-		- widgets
-		-->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+		<div class="main-cover">
+			<!-- Page Content
+			- cards with information on them
+			- widgets
+			-->
+			<div class="cards-container container">
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty venue}">
@@ -367,7 +368,7 @@
 									<c:forEach items="${league}" var="l">
 										<li class="nav-item"><a
 											class="nav-link ${l.leagueId==leagueID?'active':''}"
-											href="venue?id=${venID}&lID=${l.leagueID}#schedule">${l.leagueName}</a>
+											href="venue?id=${venID}&lID=${l.leagueId}#schedule">${l.leagueName}</a>
 										</li>
 									</c:forEach>
 								</ul>
@@ -424,20 +425,20 @@
 						</div>
 					</div>
 				</div>
-
-			<!-- /.row -->
+				<!-- /.row -->
+			</div>
 		</div>
-	</div>
 
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
-</fmt:bundle>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

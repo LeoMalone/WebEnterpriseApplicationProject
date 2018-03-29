@@ -34,35 +34,41 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${player}" var="p">
-					<c:out value="${p.playerFirstName}" />
-					<c:out value="${p.playerLastName}" />
+					<c:choose>
+						<c:when test="${p.hidePage eq true}">
+							<fmt:message key="name_withheld" />
+						</c:when>
+						<c:otherwise>
+							<c:out value="${p.playerFirstName}" />
+							<c:out value="${p.playerLastName}" />
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose></title>
 </fmt:bundle>
 </head>
 <body>
+	<fmt:bundle basename="TestBundle">
 
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -71,7 +77,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -84,14 +90,16 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
@@ -101,16 +109,13 @@
 								</c:choose>
 							</div></li>
 						<c:choose>
-
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
 								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
 											key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-
 								<c:choose>
-
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
 									<c:when test="${userType == './teamowner'}">
 										<li class="nav-item dropdown"><a
@@ -124,7 +129,9 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item"
+													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
+													class="dropdown-item" href="logout" method="post"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -144,7 +151,6 @@
 									</c:when>
 								</c:choose>
 								<c:choose>
-
 									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
@@ -156,11 +162,11 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
@@ -169,10 +175,17 @@
 											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-
 												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+												<a class="dropdown-item" href="adminUsers"><fmt:message
+														key="nav_admin_users" /></a> <a class="dropdown-item"
+													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+												<a class="dropdown-item" href="adminDivisions"><fmt:message
+														key="nav_admin_divs" /></a> <a class="dropdown-item"
+													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+												<a class="dropdown-item" href="adminEmails"><fmt:message
+														key="nav_admin_email" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -192,18 +205,16 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-	<div class="main-cover">
-		<!-- Page Content
-		- cards with information on them
-		- widgets
-		-->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+		<div class="main-cover">
+			<!-- Page Content
+			- cards with information on them
+			- widgets
+			-->
+			<div class="cards-container container">
 				<h1 class="my-4">
 					<c:choose>
 						<c:when test="${empty player}">
@@ -211,8 +222,15 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${player}" var="p">
-								<c:out value="${p.playerFirstName}" />
-								<c:out value="${p.playerLastName}" />
+								<c:choose>
+									<c:when test="${p.hidePage eq true}">
+										<fmt:message key="name_withheld" />
+									</c:when>
+									<c:otherwise>
+										<c:out value="${p.playerFirstName}" />
+										<c:out value="${p.playerLastName}" />
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -228,95 +246,102 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${player}" var="p">
-											<c:if test="${not empty p.playerPhoto }">
-												<center>
-													<img src="${p.playerPhoto}"
-														style="width: 100%; max-width: 500px; height: auto" />
-												</center>
-											</c:if>
-											<table>
-												<tr>
-													<td><b><fmt:message key="player_current_team" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.teamName}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.teamName}" /></td>
+											<c:choose>
+												<c:when test="${p.hidePage eq true}">
+													<fmt:message key="player_private_info" />
+												</c:when>
+												<c:otherwise>
+													<c:if test="${not empty p.playerPhoto }">
+														<center>
+															<img src="${p.playerPhoto}"
+																style="width: 100%; max-width: 500px; height: auto" />
+														</center>
+													</c:if>
+													<table>
+														<tr>
+															<td><b><fmt:message key="player_current_team" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.teamName}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.teamName}" /></td>
 
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_division" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.divisionName}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.divisionName}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_number" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerNumber}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td>#<c:out value="${p.playerNumber}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_position" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerPosition}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.playerPosition}" /></td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_country" /></b></td>
-													<c:choose>
-														<c:when test="${empty p.playerCountry}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><c:out value="${p.playerCountry}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_division" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.divisionName}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.divisionName}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_number" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerNumber}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td>#<c:out value="${p.playerNumber}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_position" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerPosition}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.playerPosition}" /></td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_country" /></b></td>
+															<c:choose>
+																<c:when test="${empty p.playerCountry}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${p.playerCountry}" /></td>
 
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_height" /></b></td>
-													<c:choose>
-														<c:when test="${p.playerHeight eq 0.0}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><fmt:formatNumber value="${p.playerHeight}"
-																	groupingUsed="true" /> cm</td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-												<tr>
-													<td><b><fmt:message key="player_weight" /></b></td>
-													<c:choose>
-														<c:when test="${p.playerWeight eq 0.0}">
-															<td><fmt:message key="not_available" /></td>
-														</c:when>
-														<c:otherwise>
-															<td><fmt:formatNumber value="${p.playerWeight}"
-																	groupingUsed="true" /> kg</td>
-														</c:otherwise>
-													</c:choose>
-												</tr>
-											</table>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_height" /></b></td>
+															<c:choose>
+																<c:when test="${p.playerHeight eq 0.0}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><fmt:formatNumber value="${p.playerHeight}"
+																			groupingUsed="true" /> cm</td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+														<tr>
+															<td><b><fmt:message key="player_weight" /></b></td>
+															<c:choose>
+																<c:when test="${p.playerWeight eq 0.0}">
+																	<td><fmt:message key="not_available" /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><fmt:formatNumber value="${p.playerWeight}"
+																			groupingUsed="true" /> kg</td>
+																</c:otherwise>
+															</c:choose>
+														</tr>
+													</table>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -354,7 +379,16 @@
 												<c:forEach items="${statistics}" var="stats">
 													<tr>
 														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
-														<td><c:out value="${stats.name}" /></td>
+														<td><c:forEach items="${player}" var="p">
+																<c:choose>
+																	<c:when test="${p.hidePage eq true}">
+																		<fmt:message key="name_withheld" />
+																	</c:when>
+																	<c:otherwise>
+																		<c:out value="${stats.name}" />
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach></td>
 														<td style="text-align: center"><c:out
 																value="${stats.gamesPlayed}" /></td>
 														<td style="text-align: center"><c:out
@@ -373,20 +407,20 @@
 						</div>
 					</div>
 				</div>
-
-			<!-- /.row -->
+				<!-- /.row -->
+			</div>
 		</div>
-	</div>
 
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
-</fmt:bundle>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

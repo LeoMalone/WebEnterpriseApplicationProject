@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.DivisionBean;
 import beans.LeagueBean;
 import beans.TeamBean;
 import dao.CreateTeam;
+import dao.Division;
 import dao.League;
 
 /**
@@ -74,11 +76,16 @@ public class CreateTeamServlet extends HttpServlet {
 						break;
 					}
 				}
-				// Set content type and username and dispatch to jsp 
-				request.setAttribute("userName", userName);
-				response.setContentType("text/html");
-				RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
-				rd.forward(request, response);					
+				
+				List<DivisionBean> dbl = new ArrayList<DivisionBean>();				
+				if(Division.getAllDivisions(dbl)) {
+					// Set content type and username and dispatch to jsp
+					request.setAttribute("allDiv", dbl);
+					request.setAttribute("userName", userName);
+					response.setContentType("text/html");
+					RequestDispatcher rd = request.getRequestDispatcher("admin_create_team.jsp");  
+					rd.forward(request, response);
+				}					
 			}
 		}
 	}
@@ -90,12 +97,13 @@ public class CreateTeamServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Get all team parameters from jsp inputs
-		String newTeamName	 = request.getParameter("newTeamName");
+		String newTeamName = request.getParameter("newTeamName");
 		String newTeamAbbr = request.getParameter("newTeamAbbr");
+		String newTeamAbout = request.getParameter("newTeamAbout");
 		String newDiv = request.getParameter("divRadio");
 		
 		// If any parameter is null
-		if(newTeamName == null || newTeamAbbr == null || newDiv == null) {
+		if(newTeamName == "" || newTeamAbbr == "" || newDiv == null) {
 			response.sendRedirect("./teamCreate");
 			
 		} else {
@@ -103,6 +111,7 @@ public class CreateTeamServlet extends HttpServlet {
 			TeamBean team = new TeamBean();
 			team.setTeamName(newTeamName);
 			team.setTeamAbbreviation(newTeamAbbr);
+			team.setTeamAbout(newTeamAbout);
 			team.setDivisionId(newDiv);
 
 			// If createNewUser method returns true

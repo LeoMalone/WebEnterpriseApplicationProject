@@ -18,18 +18,27 @@ public class EditTeam {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
 	    PreparedStatement getTeam = null;
+	    PreparedStatement getDivId = null;
 	    ResultSet rs = null;
 	
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getTeam = conn.prepareStatement("select teamName, teamAbbreviation from team where teamID=?");
+	        getTeam = conn.prepareStatement("SELECT teamName, teamAbbreviation, teamAbout FROM team WHERE team.teamID=?");
 	        getTeam.setString(1, team.getTeamId());
 	        rs = getTeam.executeQuery();	              
 	        
 	        if(rs.next()) {
 	        	team.setTeamName(rs.getString(1));
 	        	team.setTeamAbbreviation(rs.getString(2));
+	        	team.setTeamAbout(rs.getString(3));
+	        	
+	        	getDivId = conn.prepareStatement("SELECT divisionID FROM team, teamxdivision WHERE team.teamID=? AND team.teamID=teamxdivision.teamID");
+	        	getDivId.setString(1, team.getTeamId());
+	        	rs = getDivId.executeQuery();
+	        	if(rs.next())	        	
+	        		team.setDivisionId(rs.getString(1));
+	        	
 	        	status = true;
 	        }	        
 	        
@@ -47,6 +56,13 @@ public class EditTeam {
 	        if (getTeam != null) {
 	            try {
 	            	getTeam.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (getDivId != null) {
+	            try {
+	            	getDivId.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }
@@ -71,10 +87,11 @@ public class EditTeam {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        updateTeam = conn.prepareStatement("UPDATE team SET teamName=?, teamAbbreviation=? WHERE teamID=?");
+	        updateTeam = conn.prepareStatement("UPDATE team SET teamName=?, teamAbbreviation=?, teamAbout=? WHERE teamID=?");
 	        updateTeam.setString(1, team.getTeamName());
 	        updateTeam.setString(2, team.getTeamAbbreviation());
-	        updateTeam.setString(3, team.getTeamId());	        
+	        updateTeam.setString(3, team.getTeamAbout());
+	        updateTeam.setString(4, team.getTeamId());	        
 	        result = updateTeam.executeUpdate();	        
 	        if(result == 1) {
 	        	updateTeamDiv = conn.prepareStatement("CALL update_team(?, ?)");
