@@ -196,7 +196,7 @@
 				<h1 class="my-4">
 					<fmt:message key="contact_header" />
 				</h1>
-				<!-- Email and Phone Number -->
+				<!-- Contact Info: Email and Phone Number -->
 				<div class="row" align="center">
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
@@ -210,7 +210,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- Google Maps Location -->
+					<!--  Location: Google Maps -->
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
 							<h4 class="card-header">
@@ -228,7 +228,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- Get in Touch! -->
+					<!-- Get in Touch! Form Submission -->
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
 							<h4 class="card-header">

@@ -145,7 +145,7 @@
 										<label for="newPass"><fmt:message key="signin_password" /></label>
 										<input type="password" class="form-control" name="editPass" value="${user.password}">
 									 </div>									 	
-									 <!-- Pre-checked radio button for referee-profie-edit  -->
+									 <!-- Pre-checked radio button - WILL BE REMOVED - COMING SOON  -->
 									<div class="form-check">
 									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''} checked>
 									  <label class="form-check-label" for="editRadio">
