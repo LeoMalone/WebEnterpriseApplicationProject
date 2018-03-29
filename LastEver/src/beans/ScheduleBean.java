@@ -19,9 +19,8 @@ public class ScheduleBean {
 	private String awayScore;
 	private String gameStatus;
 	
-	/**
-	 * Getters
-	 **/
+	
+	/**************************** GETTERS *****************************/
 	public String getTitle() {
 		return this.title;
 	}
@@ -63,9 +62,7 @@ public class ScheduleBean {
 		return this.gameStatus;
 	}
 	
-	/**
-	 * Setters
-	 **/
+	/**************************** SETTERS *****************************/
 	public void setTitle(String id) {
 		this.title = id;
 	}

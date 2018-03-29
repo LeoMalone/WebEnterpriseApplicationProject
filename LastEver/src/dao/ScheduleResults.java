@@ -12,13 +12,13 @@ import beans.ScheduleResultsBean;
 import beans.ScorerBean;
 
 /**
- * The ScheduleResultsBean class gets the schedule or results for league or venue
+ * The ScheduleResults class gets the schedule or results for league or venue
  */
 public class ScheduleResults {
 
 	/**
 	 * The getSchedule method gets a Leagues schedule
-	 * @param <ScheduleResultsBean>
+	 * @param sched - <ScheduleResultsBean>
 	 * @param id - Current division id
 	 * @return status - boolean value
 	 */
@@ -91,8 +91,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a Venues schedule
-	 * @param <ScheduleResultsBean>
+	 * The getScheduleWithVenue method gets a Venue's schedule
+	 * @param sched - <ScheduleResultsBean>
 	 * @param venue - Current venue id
 	 * @param lID - Current league id
 	 * @return status - boolean value
@@ -164,8 +164,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a Teams schedule
-	 * @param <ScheduleResultsBean>
+	 * The getScheduleWithTeam method gets a Teams schedule
+	 * @param sched - <ScheduleResultsBean>
 	 * @param team - Current team id
 	 * @param lID - Current league id
 	 * @return status - boolean value
@@ -242,8 +242,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a Teams resent results ordered by recent games first
-	 * @param <ScheduleResultsBean>
+	 * The getResultsWithTeam method gets a Teams resent results ordered by recent games first
+	 * @param sched - <ScheduleResultsBean>
 	 * @param team - Current team id
 	 * @param lID - Current league id
 	 * @return status - boolean value
@@ -319,8 +319,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a Divisions results
-	 * @param <ScheduleResultsBean>
+	 * The getResults method gets a Divisions results
+	 * @param sched - <ScheduleResultsBean>
 	 * @param id - Current league id
 	 * @param offset - The offset to get the news from (for pagination)
 	 * @param maxRows - The number of results to be fetched each time
@@ -464,8 +464,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a games home scorers
-	 * @param <ScorerBean>
+	 * The getHomeScorers method gets a games home scorers
+	 * @param hb - <ScorerBean>
 	 * @param id - Current game id
 	 * @param home - ID of the home team
 	 * @return status - boolean value
@@ -532,10 +532,10 @@ public class ScheduleResults {
 
 
 	/**
-	 * The getSchedule method gets a games away scorers
-	 * @param <ScorerBean>
+	 * The getAwayScorers method gets a games away scorers
+	 * @param ab - <ScorerBean>
 	 * @param id - Current game id
-	 * @param home - ID of the away team
+	 * @param away - ID of the away team
 	 * @return status - boolean value
 	 */
 	public static boolean getAwayScorers(String id, String away, List<ScorerBean> ab) { 
@@ -600,8 +600,8 @@ public class ScheduleResults {
 	}
 
 	/**
-	 * The getSchedule method gets a Leagues playoff schedule
-	 * @param <ScheduleResultsBean>
+	 * The getPlayoffSchedule method gets a Leagues playoff schedule
+	 * @param sched - <ScheduleResultsBean>
 	 * @param id - Current division id
 	 * @return status - boolean value
 	 */

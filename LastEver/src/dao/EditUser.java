@@ -16,8 +16,8 @@ import db.ConnectionManager;
 public class EditUser {
 	
 	/**
-	 * The get UsersforEdit method gets one users credentials to drisplay for edit
-	 * @param user User Bean from servlet
+	 * The getUsersforEdit method gets one users credentials to display for edit
+	 * @param user - User Bean from servlet
 	 * @return boolean status
 	 */
 	public static boolean getUserForEdit(UserBean user) {
@@ -70,8 +70,8 @@ public class EditUser {
 	
 	/**
 	 * The saveChanges method saves the changes for 1 user into the db
-	 * @param User Bean from servlet 
-	 * @return boolean status
+	 * @param user - User Bean from servlet 
+	 * @return status - boolean value
 	 */
 	public static boolean saveChanges(UserBean user) {
 		
@@ -140,7 +140,7 @@ public class EditUser {
 	
 	/**
 	 * The deleteUser method delete a user from the db based on id
-	 * @param id user if from servlet
+	 * @param id - String userid if from servlet
 	 * @return boolean status
 	 */
 	public static boolean deleteUser(String id) {

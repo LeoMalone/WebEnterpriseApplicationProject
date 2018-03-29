@@ -3,7 +3,7 @@ package beans;
 import java.util.List;
 
 /**
- * The DivisionBean class is meant for passing user information
+ * The DivisionBean class is meant for passing division information
  * between DAOs and Servlets
  */
 public class DivisionBean {

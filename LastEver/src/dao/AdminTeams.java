@@ -11,7 +11,7 @@ import beans.TeamBean;
 import beans.DivisionBean;
 
 /**
- * The AdminUsers class handles all db operation relating to editing a Team by an Admin
+ * The AdminTeams class handles all db operation relating to editing a Team by an Admin
  */
 public class AdminTeams {
 	

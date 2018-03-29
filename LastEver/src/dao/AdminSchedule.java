@@ -74,7 +74,7 @@ public class AdminSchedule {
 	}
 
 	/**
-	 * The getScheduleById gets one schedue enntry by id
+	 * The getScheduleById gets one schedule entry by id
 	 * @param schedule ScheduleBean
 	 * @return boolean status
 	 */
@@ -226,7 +226,7 @@ public class AdminSchedule {
 	
 	/**
 	 * The deleteSchedule deletes one schedule entry from the db
-	 * @param id GameId from servlet
+	 * @param id - String GameId from servlet
 	 * @return boolean status
 	 */
 	public static boolean deleteSchedule(String id) {

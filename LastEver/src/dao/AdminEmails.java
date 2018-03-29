@@ -10,15 +10,17 @@ import beans.UserBean;
 import db.ConnectionManager;
 
 /**
- * The AdminUsers class handles all db operation relating to editing a User by an Admin
+ * The AdminEmails class handles all db operation relating to editing a User by an Admin
  * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminEmails {
 	
 	/**
 	 * The getAllEmails methods get all names and emails from the db
-	 * @param userList UserBean list from servlet
-	 * @return boolean status
+	 * @param admins - List<UserBean>
+	 * @param refs - List<UserBean>
+	 * @param tos - List<UserBean>
+	 * @return status - boolean value
 	 */
 	public static boolean getAllEmails(List<UserBean> admins, List<UserBean> refs, List<UserBean> tos) {
 		
@@ -73,8 +75,8 @@ public class AdminEmails {
 	
 	/**
 	 * The getAllEmailsForPost methods get all emails from the db for the Email All button
-	 * @param emails List of email strings
-	 * @return status
+	 * @param emails - List<String>
+	 * @return status - boolean value
 	 */
 	public static boolean getAllEmailsForPost(List<String> emails) {
 		

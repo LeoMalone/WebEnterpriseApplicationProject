@@ -16,7 +16,7 @@ public class Standings {
 
 	/**
 	 * The getStandings gets the current standings of a division
-	 * @param <StandingsBean>
+	 * @param standings - <StandingsBean>
 	 * @param id - The id of the current division
 	 * @return status - boolean value
 	 */

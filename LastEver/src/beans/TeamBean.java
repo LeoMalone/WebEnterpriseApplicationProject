@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The TeamBean class is meant for passing user information
+ * The TeamBean class is meant for passing team information
  * between DAOs and Servlets
  */
 public class TeamBean {

@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * The RefBean class is meant for passing user information
+ * The RefBean class is meant for passing referee user information
  * between DAOs and Servlets
  */
 public class RefBean {
@@ -26,8 +26,7 @@ public class RefBean {
 	private Timestamp accountCreated;
 
 /**************************** CONTRUCTORS *****************************/	
-	public RefBean() {
-	}
+	public RefBean() {}
 	
 	public RefBean(String email, String pass, Timestamp au) {
 		this.lastLogin = au;

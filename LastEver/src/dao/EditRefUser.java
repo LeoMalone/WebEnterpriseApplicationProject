@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import beans.RefBean;
 import db.ConnectionManager;
 
+/**
+ * The EditRefUser class handles all db operation relating to editing a ref user
+ */
 public class EditRefUser {
 	
+	/**
+	 * The getUserForEdit method gets the referee user
+	 * @param user - RefBean
+	 * @return status - boolean value
+	 */
 	public static boolean getUserForEdit(RefBean user) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -56,6 +64,11 @@ public class EditRefUser {
 	    return status;
 	}
 	
+	/**
+	 * The saveChanges method saves the editing of information about the referee
+	 * @param user - RefBean
+	 * @return status - boolean value
+	 */
 	public static boolean saveChanges(RefBean user) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -101,6 +114,11 @@ public class EditRefUser {
 	    return status;
 	}
 	
+	/**
+	 * The deleteRefUser method deletes the referee user from the DB
+	 * @param id - int
+	 * @return status - boolean value
+	 */
 	public static boolean deleteRefUser(int id) {
 		
 		boolean status = false;					// Status of createNewUser

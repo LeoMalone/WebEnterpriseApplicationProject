@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The DivisionBean class is meant for passing user information
+ * The LeagueBean class is meant for passing league information
  * between DAOs and Servlets
  */
 public class LeagueBean {

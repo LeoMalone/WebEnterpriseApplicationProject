@@ -13,6 +13,11 @@ import db.ConnectionManager;
  */
 public class EditTeam {
 	
+	/**
+	 * The getTeamForEdit method gets the team that is to be edited
+	 * @param team - TeamBean
+	 * @return status - boolean value
+	 */
 	public static boolean getTeamForEdit(TeamBean team) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -73,8 +78,8 @@ public class EditTeam {
 	
 	/**
 	 * The saveChanges method saves the changes for 1 team into the db
-	 * @param team TeamBean from servlet
-	 * @return boolean status
+	 * @param team - TeamBean from servlet
+	 * @return status - boolean value
 	 */
 	public static boolean saveChanges(TeamBean team) {
 		
@@ -132,9 +137,9 @@ public class EditTeam {
 	}
 	
 	/**
-	 * The deleteUser method delete a team from the db based on id
-	 * @param id TeamId from servlet
-	 * @return
+	 * The deleteTeam method delete a team from the db based on id
+	 * @param id - String TeamId from servlet
+	 * @return status - boolean value
 	 */
 	public static boolean deleteTeam(String id) {
 		boolean status = false;					// Status of createNewUser

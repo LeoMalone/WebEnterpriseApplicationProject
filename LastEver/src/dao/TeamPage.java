@@ -137,7 +137,7 @@ public class TeamPage {
 
 		/**
 	 * The getTeamOwner gets the owner of the team
-	 * @param <UserBean>
+	 * @param user - <UserBean>
 	 * @param id - The current id of the team
 	 * @return status - boolean value
 	 */

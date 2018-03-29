@@ -15,8 +15,9 @@ import db.ConnectionManager;
 public class TeamEmails {
 	
 	/**
-	 * The getAllEmails method get all admins and team owners within the division from the db
-	 * @param userList UserBean list from servlet
+	 * The getAllEmails method get all admins and team owners from the db
+	 * @param admins - List<UserBean>
+	 * @param tos - List<UserBean>
 	 * @return boolean status
 	 */
 	public static boolean getAllEmails(List<UserBean> admins, List<UserBean> tos) {
@@ -70,8 +71,9 @@ public class TeamEmails {
 	
 	
 	/**
-	 * The getAdminEmails method get all admins from the db
-	 * @param userList UserBean list from servlet
+	 * The getTeamOwnerEmails method get all teamowner email addresses from the db
+	 * @param tos - List<UserBean>
+	 * @param division - String
 	 * @return boolean status
 	 */
 	public static boolean getTeamOwnerEmails(List<UserBean> tos, String division) {
@@ -122,8 +124,8 @@ public class TeamEmails {
 	
 	
 	/**
-	 * The getAllUsers methods get all users from the db
-	 * @param userList UserBean list from servlet
+	 * The getAllEmailsForPost method gets all team owner and administrator email addresses from the db
+	 * @param emails - List<String>
 	 * @return boolean status
 	 */
 	public static boolean getAllEmailsForPost(List<String> emails) {
