@@ -152,6 +152,12 @@ public class Division {
 		return status;
 	}
 	
+	/**
+	 * The getDivisionStandings method gets the divisional standings based on the leagueID
+	 * @param lID - String of the league's ID
+	 * @param divisionList - List<DivisionBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getDivisionStandings(String lID, List<DivisionBean> divisionList) {
 
 		boolean status = false;							// query status
@@ -206,8 +212,8 @@ public class Division {
 	
 	/**
 	 * The getSpecificDivision gets information of a specific division
-	 * @param <DivisionBean>
-	 * @param id - The id of the current database
+	 * @param divisionList - List<DivisionBean>
+	 * @param id - String id of the current database
 	 * @return status - boolean value
 	 */	
 	public static boolean getSpecificDivision(List<DivisionBean> divisionList, String id) {
@@ -258,6 +264,11 @@ public class Division {
 		return status;
 	}
 	
+	/**
+	 * The createNewDiv method handles the insertion into the DB of a division
+	 * @param div - DivisionBean
+	 * @return status - boolean value
+	 */
 	public static boolean createNewDiv(DivisionBean div) {
 		
 		boolean status = false;					// Status of createNewUser
@@ -325,6 +336,11 @@ public class Division {
 		return status;
 	}
 	
+	/**
+	 * The getDivisionForEdit method gets the divison to be edited
+	 * @param div - DivisionBean
+	 * @return status - boolean value
+	 */
 	public static boolean getDivisionForEdit(DivisionBean div) {
 		boolean status = false;					// Status of createNewUser
 		Connection conn = null;					// DB Connection
@@ -365,6 +381,11 @@ public class Division {
 		return status;
 	}
 	
+	/**
+	 * The saveChanges method saves changes from editing the division
+	 * @param div - DivisionBean
+	 * @return status - boolean value
+	 */
 	public static boolean saveChanges(DivisionBean div) {
 		
 		boolean status = false;						// Status of createNewUser
@@ -405,6 +426,11 @@ public class Division {
 	    return status;
 	}
 	
+	/**
+	 * The deleteDivision method deletes the division recursively
+	 * @param divId - String
+	 * @return status - boolean value
+	 */
 	public static boolean deleteDivision(String divId) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection

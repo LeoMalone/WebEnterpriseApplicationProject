@@ -11,8 +11,17 @@ import beans.LeagueBean;
 import beans.NewsBean;
 import db.ConnectionManager;
 
+/**
+ * The League class gets all the info about the league
+ */
 public class League {
 
+	/**
+	 * The getCurrentLeague method gets the currentLeague
+	 * @param lID - String
+	 * @param leagueList - List<LeagueBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getCurrentLeague(String lID, List<LeagueBean> leagueList) {
 
 		boolean status = false;							// query status
@@ -62,6 +71,11 @@ public class League {
 		return status;
 	}
 
+	/**
+	 * The getAllLeagues method gets all leagues into the List<LeagueBeans>
+	 * @param leagueList - List<LeagueBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getAllLeagues(List<LeagueBean> leagueList) {
 
 		boolean status = false;							// query status
@@ -109,6 +123,12 @@ public class League {
 		return status;
 	}
 
+	/**
+	 * The getLeagueDivisions method gets the division and league names
+	 * @param lID - String
+	 * @param divisionList - List<DivisionBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getLeagueDivisions(String lID, List<DivisionBean> divisionList) {
 
 		boolean status = false;							// query status
@@ -158,6 +178,12 @@ public class League {
 		return status;
 	}
 
+	/**
+	 * The getDivisionsByLeague method gets the divisions based on leagueId
+	 * @param divs - List<DivisionBean
+	 * @param leagueId - String
+	 * @return status - boolean value
+	 */
 	public static boolean getDivisionsByLeague(List<DivisionBean> divs, String leagueId) {
 		boolean status = false;					// Status of createNewUser
 		Connection conn = null;					// DB Connection
@@ -203,7 +229,7 @@ public class League {
 
 	/**
 	 * The getNews method gets all the news associated with the league
-	 * @param <NewsBean>
+	 * @param news - List<NewsBean>
 	 * @param id - The current division id
 	 * @param lang - The current language of the website
 	 * @param offset - The offset to get the news from (for pagination)

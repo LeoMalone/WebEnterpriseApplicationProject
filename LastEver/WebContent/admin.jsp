@@ -212,7 +212,7 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-									<a href="./adminEmails" class="btn btn-outline-light">Go <fmt:message
+									<a href="./adminEmails" class="btn btn-outline-light"><fmt:message
 											key="ah_email_goto" /></a>
 								</div>
 							</div>

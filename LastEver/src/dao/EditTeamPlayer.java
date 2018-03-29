@@ -10,11 +10,15 @@ import org.mindrot.jbcrypt.BCrypt;
 import beans.PlayerBean;
 import db.ConnectionManager;
 
+/**
+ * The EditTeamPlayer class handles all db operation relating to editing a team's player
+ */
 public class EditTeamPlayer {
 	/**
-	 * The get UsersforEdit method gets one users credentials to drisplay for edit
-	 * @param player User Bean from servlet
-	 * @return boolean status
+	 * The getPlayerForEdit method gets one player's credentials to display for edit
+	 * @param player - PlayerBean from servlet
+	 * @param playerId - String
+	 * @return status - boolean value
 	 */
 	public static boolean getPlayerForEdit(PlayerBean player, String playerId) {
 
@@ -63,8 +67,9 @@ public class EditTeamPlayer {
 
 	/**
 	 * The saveChanges method saves the changes for 1 user into the db
-	 * @param User Bean from servlet 
-	 * @return boolean status
+	 * @param player - PlayerBean from servlet
+	 * @param playerId - String
+	 * @return status - boolean value
 	 */
 	public static boolean saveChanges(PlayerBean player, String playerId) {
 
@@ -112,9 +117,9 @@ public class EditTeamPlayer {
 	}
 
 	/**
-	 * The deleteUser method delete a user from the db based on id
-	 * @param id user if from servlet
-	 * @return boolean status
+	 * The deletePlayer method delete a player from the db based on id
+	 * @param id - String playerID from servlet
+	 * @return status - boolean value
 	 */
 	public static boolean deletePlayer(String id) {
 

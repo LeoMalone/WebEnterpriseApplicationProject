@@ -28,6 +28,9 @@ public class TeamCreateTeamServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7270142539946516086L;
 
+	/**
+	 * doGet method mapped to /teamCreateTeam
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -96,6 +99,9 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * doPost method mapped to /teamCreateTeam
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

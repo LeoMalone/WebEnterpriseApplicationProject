@@ -9,8 +9,16 @@ import java.util.List;
 import db.ConnectionManager;
 import beans.RefBean;
 
+/**
+ * The RefUsers class gets info related to a referee
+ */
 public class RefUsers {
 	
+	/**
+	 * The getAllUsers class gets all referee users
+	 * @param userList - List<RefBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getAllUsers(List<RefBean> userList) {
 		
 		boolean status = false;					// Status of createNewUser

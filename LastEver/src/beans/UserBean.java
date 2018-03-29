@@ -23,8 +23,7 @@ public class UserBean {
 	private Timestamp accountCreated;
 
 /**************************** CONTRUCTORS *****************************/	
-	public UserBean() {
-	}
+	public UserBean() {}
 	
 	public UserBean(String email, String pass, Timestamp au) {
 		this.lastLogin = au;

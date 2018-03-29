@@ -22,12 +22,15 @@ import dao.League;
 
 /**
  * EditRefUserServlet class
- * @author Unknown and edited by Kevin Villemaire
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class EditRefUserServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /editRefUser
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -101,6 +104,9 @@ public class EditRefUserServlet extends HttpServlet{
 		}
 	}
 
+	/**
+	 * doPost method mapped to /editRefUser
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 

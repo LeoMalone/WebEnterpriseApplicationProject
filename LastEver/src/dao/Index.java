@@ -87,8 +87,7 @@ public class Index {
 	}
 	
 	/**
-	 * The getNews method gets the number of articles
-	 * @param dId - The current division id
+	 * The numberOfArticles method gets the number of articles
 	 * @return number - int value
 	 */
 	public static int numberOfArticles() { 

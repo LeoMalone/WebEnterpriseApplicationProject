@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import beans.TeamBean;
 import db.ConnectionManager;
 
+/**
+ * The TeamCreateTeam class gets the teamID and creates new team
+ */
 public class TeamCreateTeam {
 	
+	/**
+	 * The getTeamId method gets the teamID
+	 * @param team - TeamBean
+	 * @return status - boolean value
+	 */
 	public static boolean getTeamId(TeamBean team) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -51,9 +59,10 @@ public class TeamCreateTeam {
 	}
 	
 	/**
-	 * The createNewUser method performs the INSERT query to the DB
-	 * @param user - UserBean object to get create account credentials
-	 * @return status 
+	 * The createNewTeam method performs the INSERT query to the DB
+	 * @param team - TeamBean
+	 * @param userName - String
+	 * @return status  - boolean value
 	 */
 	public static boolean createNewTeam(TeamBean team, String userName) { 
 		
@@ -89,11 +98,7 @@ public class TeamCreateTeam {
 	        		if(result == 1) {
 	        			status = true;
 	        		}
-	        	}
-	        		
-	        		
-	        		
-	        		
+	        	}	
 	        }
 	
 	    // Catch all possible Exceptions

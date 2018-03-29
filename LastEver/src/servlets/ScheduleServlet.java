@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The ScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the schedule page to show the upcoming schedule for the division
+ * the schedule page to show the upcoming schedule for the league
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -85,10 +85,10 @@ public class ScheduleServlet extends HttpServlet {
 			League.getAllLeagues(llb);
 			request.setAttribute("league", llb);
 			
-			//get the schedule from the division
+			//get the schedule from the league
 			ScheduleResults.getSchedule(id, slb);	
 
-			//make a new DivisionBean to get the current division
+			//make a new LeagueBean to get the current league
 			llb = new ArrayList<LeagueBean>();	
 			
 			//get the division that the page corresponds to

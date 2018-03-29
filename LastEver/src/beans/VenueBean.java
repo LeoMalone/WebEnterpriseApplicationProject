@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The VenueBean class is meant for passing user information
+ * The VenueBean class is meant for passing venue information
  * between DAOs and Servlets
  */
 public class VenueBean {
@@ -23,8 +23,7 @@ public class VenueBean {
 	private String venueEmail;
 	
 /**************************** CONTRUCTORS *****************************/
-	public VenueBean() {
-	}
+	public VenueBean() {}
 	
 /**************************** GETTERS *****************************/
 	public String getVenueID() {

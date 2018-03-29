@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The RefBean class is meant for passing user information
+ * The PlayerBean class is meant for passing player information
  * between DAOs and Servlets
  */
 public class PlayerBean {

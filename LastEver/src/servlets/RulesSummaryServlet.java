@@ -16,12 +16,15 @@ import dao.League;
 
 /**
  * RulesSummaryServlet class
- * @author Unknown and edited by Kevin Villemaire
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class RulesSummaryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /rulesSummary
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -68,6 +71,9 @@ public class RulesSummaryServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /rulesSummary
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

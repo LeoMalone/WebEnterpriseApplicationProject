@@ -1,10 +1,6 @@
 package servlets;
 
-/**
- * The DeleteUserServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option delete user.
- * @author Liam Maloney, Kevin Villemaire
- */
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.EditUser;
 
+/**
+ * The DeleteUserServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option delete user.
+ * @author Liam Maloney, Kevin Villemaire
+ */
 public class DeleteUserServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

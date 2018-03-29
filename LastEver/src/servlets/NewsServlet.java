@@ -37,8 +37,8 @@ public class NewsServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
-		int page = 1;
-		int newsArticles = 5;
+		int page = 1;					//current user page
+		int newsArticles = 5;			//number of articles per page
 		
 		/****************** COOKIE LOGIC ****************/
 
@@ -75,10 +75,11 @@ public class NewsServlet extends HttpServlet {
 					//if the sites language has not changed
 					else
 						tempCookie.setValue(language);
+
+					//add the cookie to the response headers
+					response.addCookie(tempCookie);
+					break;
 				}
-				//add the cookie to the response headers
-				response.addCookie(tempCookie);
-				break;
 			}
 		}
 
@@ -91,11 +92,13 @@ public class NewsServlet extends HttpServlet {
 			
 			m1 = p.matcher((String)request.getParameter("page"));
 			
+			//if the query string matches then set page to the current page of the user
 			if(m1.matches()) {
 				page = Integer.parseInt((String)request.getParameter("page"));
 			}
 		}
 		
+		//bean list variables used to set data on the page
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		
@@ -113,9 +116,10 @@ public class NewsServlet extends HttpServlet {
 		request.setAttribute("league", llb);	
 		request.setAttribute("userName", userName);
 		request.setAttribute("currPage", page);
+		//set the total pages to be the ceiling of number of articles (converted to float) divided 5
 		request.setAttribute("totalPages", (int) Math.ceil(Index.numberOfArticles() * 1.0 / newsArticles));
 		
-		//forwards to the index page
+		//forwards to the news page
 		RequestDispatcher rd = request.getRequestDispatcher("/news.jsp");  
 		rd.forward(request, response);		
 	}

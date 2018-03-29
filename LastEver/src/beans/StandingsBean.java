@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The StatndingsBean class is meant for passing user information
+ * The StatndingsBean class is meant for passing standings information
  * between DAOs and Servlets
  */
 public class StandingsBean {

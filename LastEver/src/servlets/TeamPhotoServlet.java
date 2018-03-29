@@ -22,6 +22,9 @@ public class TeamPhotoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /teamPhoto
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -71,6 +74,9 @@ public class TeamPhotoServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /teamPhoto
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

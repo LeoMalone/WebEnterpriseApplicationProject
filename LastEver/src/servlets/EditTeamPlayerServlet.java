@@ -28,7 +28,7 @@ public class EditTeamPlayerServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * doGet method mapped to /editUser
+	 * doGet method mapped to /editTeamPlayer
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,7 +98,7 @@ public class EditTeamPlayerServlet extends HttpServlet{
 
 
 	/**
-	 * doPost method mapped to /editUser
+	 * doPost method mapped to /editTeamPlayer
 	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

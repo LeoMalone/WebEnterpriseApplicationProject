@@ -20,12 +20,15 @@ import dao.League;
 
 /**
  * RefUsersServlet class
- * @author Neal and edited by Kevin Villemaire and Liam Maloney
+ * @author Kevin Read and edited by Kevin Villemaire and Liam Maloney
  */
 public class RefUsersServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /refUsers
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -98,6 +101,9 @@ public class RefUsersServlet extends HttpServlet{
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /refUsers
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

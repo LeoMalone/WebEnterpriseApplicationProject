@@ -27,7 +27,7 @@ public class CreatePlayerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * doGet method mapped to /adminCreate
+	 * doGet method mapped to /createPlayer
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

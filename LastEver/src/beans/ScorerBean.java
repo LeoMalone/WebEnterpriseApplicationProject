@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The ScorerBean class is meant for passing user information
+ * The ScorerBean class is meant for passing scorer information
  * between DAOs and Servlets
  */
 public class ScorerBean {
