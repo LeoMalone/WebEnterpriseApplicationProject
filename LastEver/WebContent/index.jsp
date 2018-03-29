@@ -120,21 +120,51 @@
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
+									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
+									<c:when test="${userType == './teamCreateTeam'}">
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
+											</div></li>
+									</c:when>
 								</c:choose>
 								<c:choose>
 
-									<%--  IF SIGNED IN AS A REFEREE --%>
+																		<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
-										<li class="nav-item"><a class="nav-link"
-											href="${userType}">${userName}</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
 
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
-										<li class="nav-item"><a class="nav-link"
-											href="${userType}">${userName}</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#"
+											id="navbarDropdownPortfolio" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											<div class="dropdown-menu dropdown-menu-right"
+												aria-labelledby="navbarDropdownPortfolio">
+
+												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -279,7 +309,6 @@
 						</div>
 					</div>
 				</div>
-			</fmt:bundle>
 			<!-- /.row -->
 		</div>
 	</div>
@@ -288,11 +317,11 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script

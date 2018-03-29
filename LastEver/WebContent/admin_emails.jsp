@@ -135,8 +135,8 @@
 						      	<form action="./adminEmails?=1" method="POST">
 						      		<c:forEach items="${admins}" var="admin">
 										<div class="form-check">
-										  <input name="admins" class="form-check-input" type="checkbox" value="${admin}" id="defaultCheck1">
-										  <label class="form-check-label" for="defaultCheck1">${admin}</label>
+										  <input name="admins" class="form-check-input" type="checkbox" value="${admin.emailAddress}" id="defaultCheck1">
+										  <label class="form-check-label" for="defaultCheck1"><b>${admin.firstName} ${admin.lastName}:</b> ${admin.emailAddress}</label>
 										</div>
 									</c:forEach>
 									<hr />
@@ -159,8 +159,8 @@
 									<form action="./adminEmails?=2" method="POST">
 							      		<c:forEach items="${refs}" var="ref">
 											<div class="form-check">
-											  <input name="refs" class="form-check-input" type="checkbox" value="${ref}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1">${ref}</label>
+											  <input name="refs" class="form-check-input" type="checkbox" value="${ref.emailAddress}" id="defaultCheck1">
+											  <label class="form-check-label" for="defaultCheck1"><b>${ref.firstName} ${ref.lastName}:</b> ${ref.emailAddress}</label>
 											</div>
 										</c:forEach>
 										<hr />
@@ -184,8 +184,8 @@
 									<form action="./adminEmails?=3" method="POST">
 							      		<c:forEach items="${tos}" var="to">
 											<div class="form-check">
-											  <input name="tos" class="form-check-input" type="checkbox" value="${to}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1">${to}</label>
+											  <input name="tos" class="form-check-input" type="checkbox" value="${to.emailAddress}" id="defaultCheck1">
+											  <label class="form-check-label" for="defaultCheck1"><b>${to.firstName} ${to.lastName}:</b> ${to.emailAddress}</label>
 											</div>
 										</c:forEach>
 										<hr />
@@ -205,7 +205,7 @@
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
-					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+					<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
 				</p>
 			</div>
 		</footer>

@@ -155,19 +155,19 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label for="newFirstName">First Name</label>
-									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name">
+									<input type="text" class="form-control" name="newFirstName" placeholder="Enter First Name" required>
 								</div>
 								<div class="form-group">
 									<label for="newLastName">Last Name</label>
-									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name">
+									<input type="text" class="form-control" name="newLastName" placeholder="Enter Last Name" required>
 								</div>
 								<div class="form-group">
 									<label for="newUsername">#</label>
-									<input type="text" class="form-control" name="newNumber" placeholder="Enter Player Number">
+									<input type="number" min=0 max=99 class="form-control" name="newNumber" placeholder="Enter Player Number" required>
 								</div>
 								 <div class="form-group">
 								    <label for="newEmail">Player Position</label>
-								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position">
+								    <input type="text" class="form-control" name="newPosition" placeholder="Enter Player Position" required>
 								 </div>
 								
 								<div class="card-footer">
@@ -178,7 +178,7 @@
 					</div>
 				</div>
 				<!-- /.row -->				
-			</fmt:bundle>			
+		
 		</div>
 	</div>
 
@@ -186,11 +186,11 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

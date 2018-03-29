@@ -175,19 +175,19 @@
 									<form action="editTeamPlayer?=${player.id}" method="POST">
 										<div class="form-group">
 											<label for="editFirstName"><fmt:message key="team_view_roster2" /></label>
-											<input type="text" class="form-control" name="editPlayerFirstName" value="${player.playerFirstName}">
+											<input type="text" class="form-control" name="editPlayerFirstName" value="${player.playerFirstName}" required>
 										</div>
 										<div class="form-group">
 											<label for="editLastName"><fmt:message key="team_view_roster3" /></label>
-											<input type="text" class="form-control" name="editPlayerLastName" value="${player.playerLastName}">
+											<input type="text" class="form-control" name="editPlayerLastName" value="${player.playerLastName}" required>
 										</div>
 										<div class="form-group">
 											<label for="newUsername">#</label>
-											<input type="text" class="form-control" name="editPlayerNumber" value="${player.playerNumber}">
+											<input type="number" min=0 max=99 class="form-control" name="editPlayerNumber" value="${player.playerNumber}" required>
 										</div>
 										 <div class="form-group">
 										    <label for="newEmail"><fmt:message key="team_view_roster4" /></label>
-										    <input type="text" class="form-control" name="editPlayerPosition" value="${player.playerPosition}">
+										    <input type="text" class="form-control" name="editPlayerPosition" value="${player.playerPosition}" required>
 										 </div>
 										 
 										<br />										
@@ -202,7 +202,7 @@
 					</div>
 				</div>
 				<!-- /.row -->				
-			</fmt:bundle>			
+		
 		</div>
 	</div>
 
@@ -210,11 +210,11 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
