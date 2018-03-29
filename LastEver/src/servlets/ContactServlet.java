@@ -15,13 +15,17 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
- * Contact Servlet class
- * @author Unknown and edited by Kevin Villemaire
+ * Contact Servlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the contact page
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class ContactServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /contact
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -68,6 +72,9 @@ public class ContactServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * doGet method mapped to /contact
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

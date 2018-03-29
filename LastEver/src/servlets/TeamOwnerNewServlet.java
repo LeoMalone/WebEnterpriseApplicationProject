@@ -24,6 +24,9 @@ public class TeamOwnerNewServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /teamOwnerNew
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -82,6 +85,9 @@ public class TeamOwnerNewServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /teamOwnerNew
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		response.setContentType("text/html");
 		

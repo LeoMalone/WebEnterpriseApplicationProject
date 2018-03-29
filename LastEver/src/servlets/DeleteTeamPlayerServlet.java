@@ -1,10 +1,6 @@
 package servlets;
 
-/**
- * The DeleteTeamPlayerServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the team control panel option delete user.
- * @author Kevin Read
- */
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.EditTeamPlayer;
 
+/**
+ * The DeleteTeamPlayerServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the team control panel option delete user.
+ * @author Kevin Read
+ */
 public class DeleteTeamPlayerServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
