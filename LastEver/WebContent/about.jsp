@@ -134,7 +134,7 @@
 								</c:choose>
 								<c:choose>
 								
-																	<%--  IF SIGNED IN AS A REFEREE --%>
+								<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
@@ -145,28 +145,32 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+														key="team_dd4" /></a>
+											</div>
+										</li>
 									</c:when>
 								</c:choose>
-								<c:choose>
-
-									<%--  IF SIGNED IN AS ADMIN --%>
-									<c:when test="${userType == './admin'}">
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#"
-											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
-											<div class="dropdown-menu dropdown-menu-right"
-												aria-labelledby="navbarDropdownPortfolio">
-
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
-									</c:when>
+								<c:choose>								
+								<%--  IF SIGNED IN AS ADMIN --%>
+								<c:when test="${userType == './admin'}">
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" href="#"
+										id="navbarDropdownPortfolio" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+											<a class="dropdown-item" href="${userType}">${userName}</a>
+											<a class="dropdown-item" href="adminUsers"><fmt:message key="nav_admin_users" /></a>
+											<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+											<a class="dropdown-item" href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+											<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+											<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+											<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
+										</div>
+									</li>
+								</c:when>
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form>
 								<select class="form-control form-control-sm" name="language"

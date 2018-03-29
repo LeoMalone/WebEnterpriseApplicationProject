@@ -11,11 +11,12 @@ import db.ConnectionManager;
 
 /**
  * The AdminUsers class handles all db operation relating to editing a User by an Admin
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminEmails {
 	
 	/**
-	 * The getAllUsers methods get all users from the db
+	 * The getAllEmails methods get all names and emails from the db
 	 * @param userList UserBean list from servlet
 	 * @return boolean status
 	 */
@@ -71,9 +72,9 @@ public class AdminEmails {
 	}
 	
 	/**
-	 * The getAllUsers methods get all users from the db
-	 * @param userList UserBean list from servlet
-	 * @return boolean status
+	 * The getAllEmailsForPost methods get all emails from the db for the Email All button
+	 * @param emails List of email strings
+	 * @return status
 	 */
 	public static boolean getAllEmailsForPost(List<String> emails) {
 		
@@ -88,6 +89,7 @@ public class AdminEmails {
 	        allEmails = conn.prepareStatement("SELECT emailAddress from users");
 	        rs = allEmails.executeQuery();	        
 	        
+	        // add emails to List
 	        while(rs.next()) {
 	        	emails.add(rs.getString(1));
 	        	status = true;

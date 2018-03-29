@@ -90,7 +90,6 @@
 								</c:choose>
 							</div></li>
 						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"

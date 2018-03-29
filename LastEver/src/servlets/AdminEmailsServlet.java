@@ -20,16 +20,16 @@ import dao.AdminEmails;
 import dao.League;
 
 /**
- * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option View Users.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * The AdminEmailsServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option Email Users.
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminEmailsServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * doGet method mapped to /adminUsers	
+	 * doGet method mapped to /adminEmails	
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,14 +77,14 @@ public class AdminEmailsServlet extends HttpServlet{
 					}
 				}
 			
-				// User list for display on page
+				// Lists of User Beans for emails by user type 
 				List<UserBean> admins = new ArrayList<UserBean>();
 				List<UserBean> refs = new ArrayList<UserBean>();
 				List<UserBean> tos = new ArrayList<UserBean>();
 				
 				// If query is successful
 				if(AdminEmails.getAllEmails(admins, refs, tos)) {
-					// Set content type, username, userList and dispatch to jsp
+					// Add lists to jsp
 					request.setAttribute("admins", admins);
 					request.setAttribute("refs", refs);
 					request.setAttribute("tos", tos);
@@ -97,18 +97,23 @@ public class AdminEmailsServlet extends HttpServlet{
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /adminEmails	
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fromURL = null;
-		String[] emails = null;
+		String fromURL = null;		//data from string, can stay null
+		String[] emails = null;		//Array of string for emails
 		
+		// If the url contains data set it to fromURL
 		if(request.getQueryString() != null) {
 			StringBuilder sb = new StringBuilder(request.getQueryString());
 			sb.deleteCharAt(0);
 			fromURL = sb.toString();
 		}
 		
+		// if the url does not contain data send to all available emails
 		if(fromURL == null) {
 			List<String> allEmails = new ArrayList<String>();
 			if(AdminEmails.getAllEmailsForPost(allEmails)) {
@@ -116,19 +121,24 @@ public class AdminEmailsServlet extends HttpServlet{
 				emails = allEmails.toArray(emails);
 			}
 		}
+		// if the email is to admins
 		else if(fromURL.equals("1")) {
 			emails = request.getParameterValues("admins");
 		}
+		// if the email is to Referees
 		else if(fromURL.equals("2")) {
 			emails = request.getParameterValues("refs");
 		}
+		//if the email is to Team Owners
 		else if(fromURL.equals("3")) {
 			emails = request.getParameterValues("tos");
 		}
 		
+		// if the email array is null or has a length of 0, redirect to /adminEmails
 		if(emails == null || emails.length == 0) {
 			response.sendRedirect("./adminEmails");
 		} else {
+			// Get default mail service and add emails to mailto
 			try {
 				Desktop.getDesktop().mail(new URI("mailto", String.join(",", emails), null));
 			} catch (IOException e) {

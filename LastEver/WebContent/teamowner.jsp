@@ -30,23 +30,23 @@
 </head>
 
 <body>
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
+	<fmt:bundle basename="TestBundle">
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -92,9 +92,6 @@
 							</c:when>
 							<c:otherwise>
 
-
-								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
-
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#"
 									id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -106,16 +103,13 @@
 												key="team_dd1" /></a> <a class="dropdown-item"
 											href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 											class="dropdown-item" href="teamSchedule"><fmt:message
-												key="team_dd3" /></a> 
-												<a class="dropdown-item" href="teamEmails"><fmt:message
-												key="team_dd6" /></a><a class="dropdown-item" href="logout"><fmt:message
+												key="team_dd3" /></a> <a class="dropdown-item"
+											href="teamEmails"><fmt:message key="team_dd6" /></a><a
+											class="dropdown-item" href="logout"><fmt:message
 												key="team_dd4" /></a>
 									</div></li>
-
 							</c:otherwise>
 						</c:choose>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
-
 						<li class="nav-item">
 							<form action="" method="post">
 								<select class="form-control form-control-sm" name="language"
@@ -130,16 +124,14 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
 
-	<div class="main-cover">
-		<!-- Page Content -->
-		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
+		<div class="main-cover">
+			<!-- Page Content -->
+			<div class="cards-container container">
 				<h1 class="my-4">
 					${teamName}:<br />
 					<fmt:message key="signin_prop2" />
@@ -198,7 +190,6 @@
 							</div>
 						</div>
 
-
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -225,17 +216,17 @@
 					</form>
 				</div>
 				<!-- /row -->
+			</div>
 		</div>
-	</div>
 
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					Copyright &copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
 	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
