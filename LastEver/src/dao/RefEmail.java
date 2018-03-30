@@ -11,6 +11,7 @@ import db.ConnectionManager;
 
 /**
  * The AdminUsers class handles all db operation relating to editing a User by an Admin
+ * @author Liam Maloney, Neal Sen
  */
 public class RefEmail {
 	

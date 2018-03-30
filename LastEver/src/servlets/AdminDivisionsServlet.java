@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
 import beans.LeagueBean;
-import dao.AdminTeams;
-import dao.Division;
 import dao.League;
 
 /**

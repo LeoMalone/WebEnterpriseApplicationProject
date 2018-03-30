@@ -15,8 +15,8 @@ import beans.LeagueBean;
 import dao.League;
 
 	/**
- * The AdminScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel page.
+ * The RefereeScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the referee to see their upcoming schedule
  * @author Liam Maloney and edited by Neal Sen
  */
 public class RefereeScheduleServlet extends HttpServlet {
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 1L;
 	
 	/**Admin and Referee Schedule separation COMING SOON
 	 * 
-	 * doGet method mapped to /adminSchedule
+	 * doGet method mapped to /refereeSchedule
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		

@@ -11,6 +11,7 @@ import beans.RefBean;
 
 /**
  * The RefUsers class gets info related to a referee
+ * @author Neal Sen
  */
 public class RefUsers {
 	

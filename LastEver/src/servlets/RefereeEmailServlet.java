@@ -20,8 +20,8 @@ import dao.RefEmail;
 import dao.League;
 
 /**
- * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option View Users.
+ * The RefereeEmailServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the referee to email other referees and administrators
  * @author Liam Maloney and edited by Neal Sen
  */
 public class RefereeEmailServlet extends HttpServlet {
