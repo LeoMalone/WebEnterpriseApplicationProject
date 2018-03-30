@@ -28,7 +28,7 @@ public class AdminCreateServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	// User Type Strings
+	// User Type static Strings
 	private static final String ADMIN = "Administrator";
 	private static final String REF = "Referee";
 	private static final String TEAM_OW = "Team Owner";

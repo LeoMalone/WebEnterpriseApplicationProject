@@ -16,8 +16,8 @@ import dao.League;
 
 /**
  * The AdminHomeServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel page.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * the administrator control panel home page.
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminHomeServlet extends HttpServlet {
 
@@ -39,7 +39,7 @@ public class AdminHomeServlet extends HttpServlet {
 		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
-		if (!request.getSession().getAttribute("signedIn").equals("Administrator")) {
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
 			response.sendRedirect("./index");
 		} else {
 			// If user is signed in, get language and username

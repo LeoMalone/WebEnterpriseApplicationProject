@@ -25,15 +25,21 @@ public class DeleteUserServlet extends HttpServlet {
 	@Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
-		// Get id from url
-		StringBuilder sb = new StringBuilder(request.getQueryString());
-		sb.deleteCharAt(0);
 		
-		// if query is successful redirect to proper page
-		if(EditUser.deleteUser(sb.toString())) {
-			response.sendRedirect("./adminUsers");
-		} else {
+		// If Post is not from logged in Admin
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
 			response.sendRedirect("./index");
+		} else {
+			// Get id from url
+			StringBuilder sb = new StringBuilder(request.getQueryString());
+			sb.deleteCharAt(0);
+			
+			// if query is successful redirect to proper page
+			if(EditUser.deleteUser(sb.toString())) {
+				response.sendRedirect("./adminUsers");
+			} else {
+				response.sendRedirect("./index");
+			}
 		}
 	}	
 }

@@ -12,14 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.DivisionBean;
 import beans.LeagueBean;
-import dao.AdminTeams;
-import dao.Division;
 import dao.League;
 
 /**
  * The AdminDivisionsServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option view Divisions.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminDivisionsServlet extends HttpServlet {
 
@@ -99,6 +97,7 @@ public class AdminDivisionsServlet extends HttpServlet {
 			        rd.forward(request, response);
 			        
 				} else {
+					// if no Id in url, redirect
 					response.sendRedirect("./adminDivisions?=1");
 				}
 			}

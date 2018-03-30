@@ -13,23 +13,23 @@
 
 <fmt:setLocale value="${cookie.language.value}" />
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- Custom styles for this template -->
-<link href="css/cover.css" rel="stylesheet">
-<fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="about" /></title>
-</fmt:bundle>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- Bootstrap core CSS -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" />
+	<!-- Custom styles for this template -->
+	<link href="css/cover.css" rel="stylesheet">
+	<fmt:bundle basename="TestBundle">
+		<title>Last Ever - <fmt:message key="about" /></title>
+	</fmt:bundle>
 </head>
 <body>
-
+	<fmt:bundle basename="TestBundle">
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -48,7 +48,6 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -114,7 +113,7 @@
 													class="dropdown-item" href="teamSchedule"><fmt:message
 														key="team_dd3" /></a> <a class="dropdown-item"
 													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
+													class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -188,7 +187,6 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
 			</div>
 		</div>
 	</nav>
@@ -199,9 +197,7 @@
 		- text, img, iframe
 		-->
 		<div class="cards-container container">
-
 			<!-- Marketing Icons Section -->
-			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					<fmt:message key="ab_header" />
 				</h1>
@@ -268,10 +264,7 @@
 	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"	crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
