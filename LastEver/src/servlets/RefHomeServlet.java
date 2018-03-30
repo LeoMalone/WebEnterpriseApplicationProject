@@ -17,8 +17,9 @@ import dao.EditRefUser;
 import dao.League;
 
 /**
- * RefHomeServlet class
- * @author Kevin Read and edited by Kevin Villemaire and Liam Maloney
+ * RefHomeServlet classextends the HttpServlet class to handle the GET/POST requests for
+ * the referee homepage
+ * @author Kevin Read, Kevin Villemaire, Liam Maloney, Neal Sen
  *
  */
 public class RefHomeServlet extends HttpServlet {
