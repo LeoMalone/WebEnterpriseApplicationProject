@@ -30,10 +30,13 @@ public class TeamScheduleServlet extends HttpServlet {
 	 * doGet method mapped to /teamSchedule
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+		//cookie attributes
 		String userName = null;
 		String language = null;
 
+		//get cookies
 		Cookie[] cookies = request.getCookies();
+		//if there are cookies then set userName and language to the cookie values if they exist
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("username"))
@@ -42,6 +45,7 @@ public class TeamScheduleServlet extends HttpServlet {
 					language = cookie.getValue();
 			}
 		}
+		//if there is no cookies and the language has not been set then create the cookie with English as default language
 		if(language == null) {
 			Cookie cookieLanguage = new Cookie("language", "en");
 			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -60,31 +64,34 @@ public class TeamScheduleServlet extends HttpServlet {
 					break;
 				}
 			}
-
-			
-			response.setContentType("text/html");
-
-			List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
-			String divID = TeamScheduleResults.getSchedule(slb, userName);	
-
-			// Set leagues for navbar
-			List<LeagueBean> llb = new ArrayList<LeagueBean>();
-			League.getAllLeagues(llb);
-			request.setAttribute("league", llb);;
-			
-			List<DivisionBean> dlb = new ArrayList<DivisionBean>();	
-			Division.getSpecificDivision(dlb, divID);
-			request.setAttribute("currDiv", dlb);
-			
-			TeamBean tb = new TeamBean();
-			String teamName = TeamScheduleResults.getTeamName(tb, userName);
-			
-			request.setAttribute("teamName", teamName);
-			request.setAttribute("schedule", slb);	
-			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("team_schedule.jsp");  
-			rd.forward(request, response);		
 		}
+
+
+
+
+		List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
+		String divID = TeamScheduleResults.getSchedule(slb, userName);	
+
+		// Set leagues for navbar
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);;
+
+		List<DivisionBean> dlb = new ArrayList<DivisionBean>();	
+		Division.getSpecificDivision(dlb, divID);
+		request.setAttribute("currDiv", dlb);
+
+		TeamBean tb = new TeamBean();
+		String teamName = TeamScheduleResults.getTeamName(tb, userName);
+
+		//set content type and attributes, and dispatch to jsp
+		response.setContentType("text/html");
+		request.setAttribute("teamName", teamName);
+		request.setAttribute("schedule", slb);	
+		request.setAttribute("userName", userName);
+		RequestDispatcher rd = request.getRequestDispatcher("team_schedule.jsp");  
+		rd.forward(request, response);		
+
 	}
 
 	/**
