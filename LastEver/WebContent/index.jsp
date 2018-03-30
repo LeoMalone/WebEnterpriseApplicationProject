@@ -26,6 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
+<link href="css/weather-icons.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -239,33 +240,39 @@
 					</div>
 					<div class="col-lg-4 mb-5">
 						<div class="card">
+							<h4 class="card-header">
+								<fmt:message key="home_head" />
+							</h4>
 							<div class="card-body">
-								<h4 class="card-header">
-									<fmt:message key="home_head" />
-								</h4>
-								<div id="openweathermap-widget-15"></div>
-								<script>
-									window.myWidgetParam ? window.myWidgetParam
-											: window.myWidgetParam = [];
-									window.myWidgetParam
-											.push({
-												id : 15,
-												cityid : '6094817',
-												appid : 'a4e18466ea056cf88f0ca54293678bfc',
-												units : 'metric',
-												containerid : 'openweathermap-widget-15',
-											});
-									(function() {
-										var script = document
-												.createElement('script');
-										script.async = true;
-										script.charset = "utf-8";
-										script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-										var s = document
-												.getElementsByTagName('script')[0];
-										s.parentNode.insertBefore(script, s);
-									})();
-								</script>
+								<c:choose>
+									<c:when test="${empty weather}">
+										<b style="text-align: center">No weather data</b>
+									</c:when>
+									<c:otherwise>
+										<table style="width: 100%">
+											<tr>
+												<td><b><c:out value="${weather.weatherCity }" />,
+														<c:out value="${weather.weatherCountry }" /> <br></b> <c:out
+														value="${weather.weatherDescription}" />
+												<td id="weather" style="width: 45%"><i
+													class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+											</tr>
+											<tr id="weather-temp">
+												<td><b><fmt:formatNumber maxFractionDigits="1"
+															value="${weather.weatherTemp}" />&deg;C</b></td>
+												<td id="weather-details"><b>Wind Speed</b> <c:out
+														value="${weather.weatherWind}" /> m/s <br> <b>Humidity</b>
+													<c:out value="${weather.weatherHumidity}" />% <br> <b>Pressure</b>
+													<c:out value="${weather.weatherPressure}" /> hPa</td>
+											</tr>
+											<tr>
+												<td><a href="https://openweathermap.org/">OpenWeatherMap</a></td>
+												<td id="weather-update"><fmt:formatDate type="both"
+														pattern="YYYY-MM-d H:mm" value="${weather.updateTime}" /></td>
+											</tr>
+										</table>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -312,7 +319,7 @@
 												<c:otherwise>
 													<c:out value="${n.content}" escapeXml="false" />
 												</c:otherwise>
-											</c:choose>			
+											</c:choose>
 										</div>
 									</div>
 								</div>

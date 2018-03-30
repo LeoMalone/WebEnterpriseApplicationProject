@@ -23,6 +23,7 @@ public class TeamScheduleResults {
  */
 	public static String getSchedule(List<ScheduleResultsBean> sched, String userName) { 
 
+		@SuppressWarnings("unused")
 		boolean status = false;					// query status
 		Connection conn = null;					// DB connection
 		PreparedStatement userStatement = null;

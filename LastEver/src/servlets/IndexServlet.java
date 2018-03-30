@@ -6,6 +6,9 @@ package servlets;
  * @author Kevin Villemaire
  */
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +19,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import beans.LeagueBean;
 import beans.NewsBean;
+import beans.WeatherBean;
 import dao.Index;
 import dao.League;
+import dao.Weather;
 
 public class IndexServlet extends HttpServlet {
 
@@ -35,6 +43,7 @@ public class IndexServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
+		String city = null;				//city to get weather data from
 
 		/****************** COOKIE LOGIC ****************/
 
@@ -79,6 +88,44 @@ public class IndexServlet extends HttpServlet {
 		}
 
 		response.setContentType("text/html");
+
+		
+		
+		if(Weather.checkForUpdate()) {
+
+			// OpenWeatherMap API url to get the weather from
+			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
+					+ "units=metric&APPID=a4e18466ea056cf88f0ca54293678bfc";
+			// create a new URL with the post data
+			URL capURL = new URL(postData);
+
+			// open a url connection with the specified url
+			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
+
+			// set the connection to do output
+			conn.setDoOutput(true);
+			// set request method to post
+			conn.setRequestMethod("POST");
+
+			// set the content-type, charset, and content-length of the connection
+			conn.setRequestProperty(
+					"Content-Type", "application/x-www-form-urlencoded");
+			conn.setRequestProperty(
+					"charset", StandardCharsets.UTF_8.displayName());
+			conn.setRequestProperty(
+					"Content-Length", Integer.toString(postData.length()));
+			conn.setUseCaches(false);
+			conn.getOutputStream()
+			.write(postData.getBytes(StandardCharsets.UTF_8));
+
+			// create a JSON object from the response
+			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
+			
+			Weather.updateWeather(json);
+		}
+		
+		//WeatherBean to store the weather data
+		WeatherBean wb = new WeatherBean();
 		
 		//bean list variables used to set data on the page
 		List<NewsBean> nlb = new ArrayList<NewsBean>();
@@ -90,6 +137,10 @@ public class IndexServlet extends HttpServlet {
 		else
 			Index.getNews(nlb, language, 0, 5);
 
+		//get weather data and then store it as an attribute
+		Weather.getWeather(wb, "Ottawa");
+		request.setAttribute("weather", wb);
+		
 		// Set leagues for navbar
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
