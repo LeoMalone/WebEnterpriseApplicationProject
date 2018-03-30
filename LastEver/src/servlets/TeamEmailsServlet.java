@@ -80,6 +80,7 @@ public class TeamEmailsServlet extends HttpServlet{
 				// User list for display on page
 				List<UserBean> admins = new ArrayList<UserBean>();
 				List<UserBean> tos = new ArrayList<UserBean>();
+				@SuppressWarnings("unused")
 				List<UserBean> player = new ArrayList<UserBean>();
 				
 				// If query is successful

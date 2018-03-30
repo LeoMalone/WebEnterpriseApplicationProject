@@ -12,6 +12,7 @@ import db.ConnectionManager;
 
 /**
  * The EditUser class handles all db operation relating to editing a user
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class EditUser {
 	

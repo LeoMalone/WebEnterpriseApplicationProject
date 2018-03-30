@@ -99,6 +99,7 @@ public class CreatePlayerServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Tracked Cookie variables
+		@SuppressWarnings("unused")
 		String userName = null;
 		String language = null;
 
