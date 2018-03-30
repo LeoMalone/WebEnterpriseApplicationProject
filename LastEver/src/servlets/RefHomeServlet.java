@@ -83,8 +83,9 @@ public class RefHomeServlet extends HttpServlet {
 				//get id from url and set userBean id
 				RefBean user = new RefBean();
 
-				if(EditRefUser.getUserForEdit(user)) {
+				if(EditRefUser.getUserForEdit(user, userName)) {
 					request.setAttribute("firstName", user.getFirstName());
+					request.setAttribute("id", user.getId());
 				}
 
 				RequestDispatcher rd = request.getRequestDispatcher("referee.jsp");  

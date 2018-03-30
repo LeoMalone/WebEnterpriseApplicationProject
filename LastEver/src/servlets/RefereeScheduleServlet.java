@@ -1,7 +1,7 @@
 package servlets;
 
+
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -11,29 +11,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
 import beans.LeagueBean;
-import beans.RefBean;
-import beans.TeamBean;
-import dao.AdminTeams;
-import dao.EditRefUser;
 import dao.League;
 
-/**
- * RefUsersServlet class
- * @author Kevin Read and edited by Kevin Villemaire and Liam Maloney
- */
-public class RefUsersServlet extends HttpServlet{
-	
-	private static final long serialVersionUID = 1L;
-	
 	/**
-	 * doGet method mapped to /refUsers
+ * The AdminScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel page.
+ * @author Liam Maloney and edited by Neal Sen
+ */
+public class RefereeScheduleServlet extends HttpServlet {
+	
+private static final long serialVersionUID = 1L;
+	
+	/**Admin and Referee Schedule separation COMING SOON
+	 * 
+	 * doGet method mapped to /adminSchedule
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
 		
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;
 		
@@ -42,10 +39,12 @@ public class RefUsersServlet extends HttpServlet{
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
 		
+		// If User is not signed In redirect to sign in page
+		// TODO: distinguish between user types
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");
 		} else {
-
+			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
@@ -55,13 +54,14 @@ public class RefUsersServlet extends HttpServlet{
 						language = cookie.getValue();
 				}
 			}
+			// If Language is null, set default language to en
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
-			else {
-	
+			// Set cookie language for users
+			else {	
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 	
@@ -73,39 +73,13 @@ public class RefUsersServlet extends HttpServlet{
 						break;
 					}
 				}
-				List<TeamBean> tbl = new ArrayList<TeamBean>();
-				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
-				StringBuilder sb = new StringBuilder(request.getQueryString());
-				sb.deleteCharAt(0);				
-				AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
-				
-				request.setAttribute("currentId", sb.toString());
+				// Set content type and username and dispatch to jsp
 				request.setAttribute("userName", userName);
-				request.setAttribute("divList", dbl);
-				request.setAttribute("teamList", tbl);
-				
-				//get id from url and set RefBean id
-				StringBuilder sbref = new StringBuilder(URLDecoder.decode(request.getQueryString(), "UTF-8"));
-				sbref.deleteCharAt(0);
-				RefBean user = new RefBean();
-				user.setId(sbref.toString());
-				
-				if(EditRefUser.getUserForEdit(user, userName)) {
-					request.setAttribute("refUser", user);
-				}
-				
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("edit_ref_user.jsp");  
-		        rd.forward(request, response);
-		        
+				response.setContentType("text/html");
+				RequestDispatcher rd = request.getRequestDispatcher("admin_schedule.jsp");  
+		        rd.forward(request, response);	
 			}
 		}
 	}
-	
-	/**
-	 * doPost method mapped to /refUsers
-	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		doGet(request, response);
-	}
 }
+

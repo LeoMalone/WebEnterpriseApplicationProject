@@ -128,7 +128,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}:Email</h1>
+				<h1 class="my-4">${userName}:<fmt:message key="signin_emai" /></h1>
 				<form action="./adminEmails" method="POST">
 					<button type="submit" class="btn btn-success">
 						<fmt:message key="ae_email_all" />
