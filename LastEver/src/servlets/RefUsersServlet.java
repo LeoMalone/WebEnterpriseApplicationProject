@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -20,12 +21,15 @@ import dao.League;
 
 /**
  * RefUsersServlet class
- * @author Neal and edited by Kevin Villemaire and Liam Maloney
+ * @author Kevin Read and edited by Kevin Villemaire and Liam Maloney
  */
 public class RefUsersServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /refUsers
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -80,14 +84,14 @@ public class RefUsersServlet extends HttpServlet{
 				request.setAttribute("divList", dbl);
 				request.setAttribute("teamList", tbl);
 				
-				//get id from url and set userBean id
-				StringBuilder sbref = new StringBuilder(request.getQueryString());
+				//get id from url and set RefBean id
+				StringBuilder sbref = new StringBuilder(URLDecoder.decode(request.getQueryString(), "UTF-8"));
 				sbref.deleteCharAt(0);
 				RefBean user = new RefBean();
 				user.setId(sbref.toString());
 				
-				if(EditRefUser.getUserForEdit(user)) {
-					request.setAttribute("firstName", user.getFirstName());
+				if(EditRefUser.getUserForEdit(user, userName)) {
+					request.setAttribute("refUser", user);
 				}
 				
 				request.setAttribute("userName", userName);
@@ -98,6 +102,9 @@ public class RefUsersServlet extends HttpServlet{
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /refUsers
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

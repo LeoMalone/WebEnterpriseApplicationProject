@@ -63,12 +63,10 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -83,13 +81,13 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active" href="${userType}">${userName}</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${userType}">${userName}</a></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -109,76 +107,78 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it
 		- text, form, button to sign in
 		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">				
+			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: <fmt:message key="signin_prop3" /> <fmt:message key="au_edit" />
+					${userName}:
+					<fmt:message key="signin_prop3" />
+					<fmt:message key="au_edit" />
 				</h1>
 				<div class="row">
-				<!-- Edit referee profile form -->
+					<!-- Edit referee profile form -->
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_prop3" /> <fmt:message key="reg_head1" />
+								<fmt:message key="signin_prop3" />
+								<fmt:message key="reg_head1" />
 							</h4>
-							<form action="editRefUser?=${user.id}" method="POST">
 							<div class="card-body">
-								<p class="card-text">
-								<!-- Uneditable Username -->
+								<form action="editRefUser?=${refUser.id}" method="POST">
+									<!-- Uneditable Username -->
 									<div class="form-group">
-										<label for="staticEmail"><fmt:message key="signin_user" /></label>
-										<input type="text" readonly class="form-control" name="editUsername" value="${userName}">
+										<label for="staticEmail"><fmt:message
+												key="signin_user" /></label><br><label for="editUserName"><c:out
+												value="${refUser.username}" /></label>
 									</div>
 									<!-- Editable Email Address -->
-									 <div class="form-group">
-									    <label for="newEmailAddress"><fmt:message key="signin_email" /></label>
-									    <input type="email" class="form-control" name="editEmail" aria-describedby="emailHelp" value="${user.emailAddress}">
-									 </div>
-									 <!-- Editable Password -->
-									 <div class="form-group">
-										<label for="newPass"><fmt:message key="signin_password" /></label>
-										<input type="password" class="form-control" name="editPass" value="${user.password}">
-									 </div>									 	
-									 <!-- Pre-checked radio button - WILL BE REMOVED - COMING SOON  -->
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="editRadio" value="Referee" ${user.userType=='Referee'?'checked':''} checked>
-									  <label class="form-check-label" for="editRadio">
-									    <fmt:message key="signin_prop3" />
-									  </label>
-									</div>									
-								</p>							
+									<div class="form-group">
+										<label for="newEmailAddress"><fmt:message
+												key="signin_email" /></label> <input type="email"
+											class="form-control" name="editEmail"
+											aria-describedby="emailHelp" value="${refUser.emailAddress}">
+									</div>
+									<!-- Editable Password -->
+									<div class="form-group">
+										<label for="newPass"><fmt:message
+												key="signin_password" /></label> <input type="password"
+											class="form-control" name="editPass"
+											placeholder="<fmt:message key="admin_eu_pass" />">
+									</div>
+									<div class="card-footer">
+										<button type="submit" class="btn btn-outline-success">
+											<fmt:message key="admin_eu_save" />
+										</button>
+									</div>
+								</form>
 							</div>
-								<div class="card-footer">
-									<button type="submit" class="btn btn-outline-success"><fmt:message key="admin_eu_save" /></button>	
-								</div>								
-							</form>
 						</div>
 					</div>
+					<!-- /.row -->
 				</div>
-				<!-- /.row -->
-				
-									
 		</div>
-	</div>
 
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
-</fmt:bundle>
-	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+		</fmt:bundle>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

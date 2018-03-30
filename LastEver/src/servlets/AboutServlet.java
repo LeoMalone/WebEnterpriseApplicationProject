@@ -15,13 +15,17 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
- * AboutServlet class
- * @author Unknown and edited by Kevin Villemaire
+ * AboutServlet class extends the HttpServlet class to handle the GET/POST requests for
+ * the about page.
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class AboutServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * doGet method mapped to /about
+	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -67,6 +71,9 @@ public class AboutServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * doPost method mapped to /about
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

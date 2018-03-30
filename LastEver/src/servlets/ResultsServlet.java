@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The ResultsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the results page to show the divisions results
+ * the results page to show the leagues results
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -89,6 +89,7 @@ public class ResultsServlet extends HttpServlet {
 				
 				m1 = p.matcher((String)request.getParameter("page"));
 				
+				//if the query string matches the format then set the page to be the current page of the user
 				if(m1.matches()) {
 					page = Integer.parseInt((String)request.getParameter("page"));
 				}
@@ -105,7 +106,7 @@ public class ResultsServlet extends HttpServlet {
 			//get the results from the division
 			ScheduleResults.getResults(id, rlb, (page-1)*numResults, numResults);	
 
-			//make a new DivisionBean to get the current division
+			//make a new DivisionBean to get the current league
 			llb = new ArrayList<LeagueBean>();	
 			
 			//get the division that the page corresponds to

@@ -18,13 +18,16 @@ import dao.League;
 
 /**
  * RefHomeServlet class
- * @author Neal and edited by Kevin Villemaire and Liam Maloney
+ * @author Kevin Read and edited by Kevin Villemaire and Liam Maloney
  *
  */
 public class RefHomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /referee
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -80,8 +83,9 @@ public class RefHomeServlet extends HttpServlet {
 				//get id from url and set userBean id
 				RefBean user = new RefBean();
 
-				if(EditRefUser.getUserForEdit(user)) {
+				if(EditRefUser.getUserForEdit(user, userName)) {
 					request.setAttribute("firstName", user.getFirstName());
+					request.setAttribute("id", user.getId());
 				}
 
 				RequestDispatcher rd = request.getRequestDispatcher("referee.jsp");  
@@ -90,6 +94,9 @@ public class RefHomeServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * doGet method mapped to /referee
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

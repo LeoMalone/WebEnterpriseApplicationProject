@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +17,20 @@ import beans.LeagueBean;
 import beans.RefBean;
 import beans.TeamBean;
 import dao.AdminTeams;
-import dao.Division;
 import dao.EditRefUser;
 import dao.League;
 
 /**
  * EditRefUserServlet class
- * @author Unknown and edited by Kevin Villemaire
+ * @author Kevin Read and edited by Kevin Villemaire
  */
 public class EditRefUserServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /editRefUser
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
@@ -90,8 +93,8 @@ public class EditRefUserServlet extends HttpServlet{
 				RefBean user = new RefBean();
 				user.setId(sbref.toString());
 
-				if(EditRefUser.getUserForEdit(user)) {
-					request.setAttribute("firstName", user.getFirstName());
+				if(EditRefUser.getUserForEdit(user, userName)) {
+					request.setAttribute("refUserList", user);
 				}
 
 				request.setAttribute("userName", userName);
@@ -101,6 +104,9 @@ public class EditRefUserServlet extends HttpServlet{
 		}
 	}
 
+	/**
+	 * doPost method mapped to /editRefUser
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 
@@ -110,23 +116,23 @@ public class EditRefUserServlet extends HttpServlet{
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 
-		String newUsername = request.getParameter("editUsername");
 		String newEmail = request.getParameter("editEmail");
 		String newPassword = request.getParameter("editPass");
-		String userType = request.getParameter("editRadio");
 
-		user.setId(sb.toString());
-		user.setUsername(newUsername);
-		user.setEmail(newEmail);
-		user.setPassword(newPassword);
-		user.setUserType(userType);
+		// If any parameter is null
+		if( newEmail == "" || newPassword == null) {
+			response.sendRedirect("./referee");
+		} else {
+			// Set RefBean parameters
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			user.setId(sb.toString());
+			user.setAccountUpdated(timestamp);
+			user.setEmail(newEmail);
+			user.setPassword(newPassword);
 
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-		Division.getAllDivisions(dlb);
-		request.setAttribute("allDiv", dlb);
-
-		if(EditRefUser.saveChanges(user)) {
-			response.sendRedirect("./refUsers");
-		}
-	}	
+			if(EditRefUser.saveChanges(user)) {
+				response.sendRedirect("./referee");
+			}
+		}	
+	}
 }

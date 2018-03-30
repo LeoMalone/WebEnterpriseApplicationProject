@@ -16,7 +16,7 @@ public class Player {
 
 	/**
 	 * The getPlayerInfo gets the current players information
-	 * @param <PlayerBean>
+	 * @param player - <PlayerBean>
 	 * @param pID - The id of the current player
 	 * @return status - boolean value
 	 */

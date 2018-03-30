@@ -1,18 +1,17 @@
 package dao;
 
-import db.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import beans.NewsBean;
 import beans.ScheduleResultsBean;
 import beans.TeamBean;
+import db.ConnectionManager;
 
 /**
- * The Standings class gets the standings for the current division
+ * The Team class gets the information for the team
  */
 public class Team {
 
@@ -297,9 +296,8 @@ public class Team {
 
 
 	/**
-	 * The getTeamName method returns a team name based on a user name
-	 * @param team - TeamBean
-	 * @param userName - String
+	 * The getTeamNameByEmail method returns a team name based on an email address
+	 * @param emailAddress - String
 	 * @return teamName - String
 	 */
 	public static String getTeamNameByEmail(String emailAddress) { 
@@ -315,7 +313,6 @@ public class Team {
 		ResultSet resultSet = null;				// returned query result set
 		String teamID = null;
 		String userId = null;
-		String userName = null;
 		String teamName = null;
 
 		// Connect to Database and execute SELECT query with UserBean data
@@ -377,9 +374,8 @@ public class Team {
 
 	/**
 	 * The hasTeamByEmail method returns a true if the user's loginEmail is associated with a team
-	 * @param team - TeamBean
 	 * @param loginEmail - String
-	 * @return hasTeam - Boolean value
+	 * @return status - Boolean value
 	 */
 	public static boolean hasTeamByEmail(String loginEmail) { 
 
@@ -391,7 +387,7 @@ public class Team {
 		PreparedStatement getSchedule = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
 		String userId = null;
-		boolean hasTeam = false;
+		boolean status = false;
 
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
@@ -410,7 +406,7 @@ public class Team {
 			rs = getTeam.executeQuery();	              
 
 			if(rs.next()) {
-				hasTeam = true;
+				status = true;
 			}	
 
 			// handle all possible exceptions
@@ -439,21 +435,18 @@ public class Team {
 				}
 			}
 		}
-		return hasTeam;
+		return status;
 	}
 
 	/**
 	 * The getAllTeams method returns a true if the user's loginEmail is associated with a team
-	 * @param tb
+	 * @param tb - List<TeamBean>
 	 * @return status - Boolean success value
 	 */
 	public static boolean getAllTeams(List<TeamBean> tb) {
 		Connection conn = null;					// DB connection
 		PreparedStatement userStatement = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
-		String teamID = null;
-		String userId = null;
-		String teamName = null;
 		boolean status = false;
 
 		// Connect to Database and execute SELECT query with UserBean data
@@ -465,7 +458,7 @@ public class Team {
 
 			if (resultSet.next()) {
 				resultSet.beforeFirst();
-
+				status = true;
 				while(resultSet.next()) {
 					TeamBean ntb = new TeamBean();
 					ntb.setTeamName(resultSet.getString(1));
@@ -509,16 +502,14 @@ public class Team {
 
 	/**
 	 * The getUserName method returns a true if it sets the username
-	 * @param tb
+	 * @param userName - String
+	 * @param loginEmail - String
 	 * @return status - Boolean success value
 	 */
 	public static boolean getUserName(String userName, String loginEmail) {
 		Connection conn = null;					// DB connection
 		PreparedStatement userStatement = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
-		String teamID = null;
-		String userId = null;
-		String teamName = null;
 		boolean status = false;
 
 		// Connect to Database and execute SELECT query with UserBean data
@@ -567,11 +558,11 @@ public class Team {
 	}
 
 	/**
-	 * 
-	 * @param tb
-	 * @param teamName
-	 * @param emailAddress
-	 * @return
+	 * The insertTeam method inserts a team into the DB
+	 * @param tb - TeamBean
+	 * @param teamName - String
+	 * @param emailAddress - String
+	 * @return status - Boolean value
 	 */
 	public static boolean insertTeam(TeamBean tb, String teamName, String emailAddress) {
 		Connection conn = null;					// DB connection
@@ -581,7 +572,6 @@ public class Team {
 		ResultSet resultSet = null;				// returned query result set
 		PreparedStatement insertionStatement = null;	// SQL query
 		ResultSet insertionResultSet = null;				// returned query result set
-		String teamID = null;
 		String userId = null;
 		boolean status = false;
 
@@ -674,6 +664,13 @@ public class Team {
 		return status;
 	}
 
+	/**
+	 * The insertTeamByUser method inserts a team based on the username
+	 * @param tb - TeamBean
+	 * @param teamName - String
+	 * @param userName - String
+	 * @return status - boolean value
+	 */
 	public static boolean insertTeamByUser(TeamBean tb, String teamName, String userName) {
 		Connection conn = null;					// DB connection
 		PreparedStatement teamStatement = null;	// SQL query
@@ -772,6 +769,13 @@ public class Team {
 		return status;
 	}
 
+	/**
+	 * The insertNewTeam method inserts a new team into the DB
+	 * @param tb - TeamBean
+	 * @param userName - String
+	 * @param aboutTeam - String
+	 * @return status - boolean value
+	 */
 	public static boolean insertNewTeam(TeamBean tb, String userName, String aboutTeam) {
 		Connection conn = null;					// DB connection
 		PreparedStatement teamStatement = null;	// SQL query
@@ -893,7 +897,12 @@ public class Team {
 		}
 		return status;
 	}
-
+	
+	/**
+	 * The hasTeam method returns true if the userName is associated with a team
+	 * @param userName - String
+	 * @return status - boolean value
+	 */
 	public static boolean hasTeam(String userName) {
 
 		Connection conn = null;					// DB connection
@@ -904,7 +913,7 @@ public class Team {
 		PreparedStatement getSchedule = null;	// SQL query
 		ResultSet resultSet = null;				// returned query result set
 		String userId = null;
-		boolean hasTeam = false;
+		boolean status = false;
 
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
@@ -923,7 +932,7 @@ public class Team {
 			rs = getTeam.executeQuery();	              
 
 			if(rs.next()) {
-				hasTeam = true;
+				status = true;
 			}	
 
 			// handle all possible exceptions
@@ -952,7 +961,7 @@ public class Team {
 				}
 			}
 		}
-		return hasTeam;
+		return status;
 	}
 }
 

@@ -86,7 +86,8 @@ public class CreateAccount {
 	/**
 	 * The createNewPlayer method performs the INSERT query to the DB
 	 * @param player - PlayerBean object to get create a player for the team
-	 * @return status 
+	 * @param teamId - String of the team's ID
+	 * @return status - boolean value
 	 */
 	public static boolean createNewPlayer(PlayerBean player, String teamId) { 
 

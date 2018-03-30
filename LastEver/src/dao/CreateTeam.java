@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import beans.TeamBean;
 import db.ConnectionManager;
 
+/**
+ * The CreateTeam class handles all db operation relating to creating a team
+ */
 public class CreateTeam {
 	
+	/**
+	 * The getTeamId method gets the teamID based on the team's abbreviation
+	 * @param team - TeamBean
+	 * @return status - boolean value
+	 */
 	public static boolean getTeamId(TeamBean team) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
@@ -51,9 +59,9 @@ public class CreateTeam {
 	}
 	
 	/**
-	 * The createNewUser method performs the INSERT query to the DB
-	 * @param user - UserBean object to get create account credentials
-	 * @return status 
+	 * The createNewTeam method performs the INSERT query to the DB
+	 * @param team - TeamBean object to get create account credentials
+	 * @return status - boolean value
 	 */
 	public static boolean createNewTeam(TeamBean team) { 
 		

@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Locale;
 
 /**
- * The NewsBean class is meant for passing user information
+ * The NewsBean class is meant for passing news information
  * between DAOs and Servlets
  */
 public class NewsBean {

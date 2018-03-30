@@ -215,7 +215,16 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
-							<div class="card-body">${error}</div>
+							<div class="card-body">
+								<c:choose>
+									<c:when test="${cookie.language.value == 'fr' }">
+										<c:out value="${error_fr}" />
+									</c:when>
+									<c:otherwise>
+										<c:out value="${error}" />
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
 					</div>
 

@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The StandingsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the standings page to get the divisions standings
+ * the standings page to get the leagues standings
  * @author Kevin Villemaire
  */
 import java.io.IOException;

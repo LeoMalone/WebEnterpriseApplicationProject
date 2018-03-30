@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * The StatisticsBean class is meant for passing user information
+ * The StatisticsBean class is meant for passing statistics information
  * between DAOs and Servlets
  */
 public class StatisticsBean {

@@ -11,16 +11,16 @@ import beans.ScheduleResultsBean;
 import beans.TeamBean;
 
 /**
- * The Standings class gets the standings for the current division
+ * The TeamScheduleResults class gets the schedule, results, and team name for the current logged in team owner
  */
 public class TeamScheduleResults {
 
-	/**
-	 * The validateUserLogin method validates a UserBeans login credentials
-	 * @param <StandingsBean>
-	 * @param user - UserBean credentials
-	 * @return status - boolean value
-	 */
+/**
+ * The getSchedule method gets the schedule for the team based on the user name of the team owner
+ * @param sched - List<ScheduleResultsBean>
+ * @param userName - String
+ * @return divisionID - String
+ */
 	public static String getSchedule(List<ScheduleResultsBean> sched, String userName) { 
 
 		boolean status = false;					// query status
@@ -121,6 +121,12 @@ public class TeamScheduleResults {
 		return divisionID;
 	}
 
+	/**
+	 * The getResults method gets the results for the team based on the division id
+	 * @param id - String division id
+	 * @param sched - List<ScheduleResultsBean>
+	 * @return status - boolean value
+	 */
 	public static boolean getResults(String id, List<ScheduleResultsBean> sched) { 
 
 		boolean status = false;					// query status
@@ -181,6 +187,12 @@ public class TeamScheduleResults {
 		return status;
 	}
 
+	/**
+	 * The getTeamName method gets the team name based on the userName
+	 * @param team - TeamBean
+	 * @param userName - String
+	 * @return teamName - String
+	 */
 	public static String getTeamName(TeamBean team, String userName) { 
 
 		Connection conn = null;					// DB connection

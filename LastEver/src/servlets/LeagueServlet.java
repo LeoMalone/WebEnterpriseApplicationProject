@@ -37,8 +37,8 @@ public class LeagueServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
-		int page = 1;
-		int newsArticles = 5;
+		int page = 1;					//current user page
+		int newsArticles = 5;			//number of articles per page
 
 		/****************** COOKIE LOGIC ****************/
 
@@ -108,11 +108,11 @@ public class LeagueServlet extends HttpServlet {
 		else
 			League.getNews(id, nlb, language, (page-1)*newsArticles, newsArticles);	
 
-		//gets the divisions for the nav bar
+		//gets the leagues for the nav bar
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
 
-		//get the division that the page corresponds to
+		//get the league that the page corresponds to
 		llb = new ArrayList<LeagueBean>();	
 		League.getCurrentLeague(id, llb);
 
@@ -121,6 +121,7 @@ public class LeagueServlet extends HttpServlet {
 		request.setAttribute("news", nlb);	
 		request.setAttribute("userName", userName);
 		request.setAttribute("currPage", page);
+		//set the total pages to be the ceiling of number of articles (converted to float) divided 5
 		request.setAttribute("totalPages", (int) Math.ceil(Division.numberOfArticles(id) * 1.0 / newsArticles));
 		
 		//forward to division page

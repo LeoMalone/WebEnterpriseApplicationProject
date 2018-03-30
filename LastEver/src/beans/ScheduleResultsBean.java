@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The ScheduleResultsBean class is meant for passing user information
+ * The ScheduleResultsBean class is meant for passing schedule information
  * between DAOs and Servlets
  */
 public class ScheduleResultsBean {

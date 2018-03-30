@@ -1,13 +1,9 @@
 package beans;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
- * The RefBean class is meant for passing user information
+ * The RefBean class is meant for passing referee user information
  * between DAOs and Servlets
  */
 public class RefBean {
@@ -22,27 +18,22 @@ public class RefBean {
 	private String password;
 	private String userType;
 	private Timestamp accountUpdated;
-	private Timestamp lastLogin;
-	private Timestamp accountCreated;
 
 /**************************** CONTRUCTORS *****************************/	
-	public RefBean() {
-	}
+	public RefBean() {}
 	
-	public RefBean(String email, String pass, Timestamp au) {
-		this.lastLogin = au;
+	public RefBean(String email, String pass) {
 		this.emailAddress = email;
 		this.password = pass;
 	}
 	
-	public RefBean(String fn, String ln, String un, String ea, String pass, String ut, Timestamp ll) {
+	public RefBean(String fn, String ln, String un, String ea, String pass, String ut) {
 		this.firstName = fn;
 		this.lastName = ln;
 		this.username = un;
 		this.emailAddress = ea;
 		this.password = pass;
 		this.userType = ut;
-		this.lastLogin = ll;
 	}
 
 /**************************** GETTERS *****************************/
@@ -78,17 +69,10 @@ public class RefBean {
 		return this.userType;
 	}
 	
-	public Timestamp getLastLogin() {
-		return this.lastLogin;
-	}
-	
-	public Timestamp getLastAccountUpdate() {
+	public Timestamp getAccountUpdated() {
 		return this.accountUpdated;
 	}
 	
-	public Timestamp getAccountCreated() {
-		return this.accountCreated;
-	}
 
 /**************************** SETTERS *****************************/
 	public void setEmailValidated(int i) {
@@ -123,29 +107,8 @@ public class RefBean {
 		this.userType = ut;
 	}
 	
-	public void setLastLogin(String ll) {		
-		this.lastLogin = convertTimestamp(ll);
+	public void setAccountUpdated(Timestamp au) {
+		this.accountUpdated = au;
 	}
 	
-	public void setAccountCreated(String ac) {
-		this.accountCreated = convertTimestamp(ac);
-	}
-	
-	public void setLastAccountUpdate(String au) {
-		this.accountUpdated = convertTimestamp(au);
-	}
-	
-	private Timestamp convertTimestamp(String ts) {
-		try {
-		      DateFormat formatter;
-		      formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		      Date date = (Date) formatter.parse(ts);
-		      Timestamp timeStampDate = new Timestamp(date.getTime());
-
-		      return timeStampDate;
-		    } catch (ParseException e) {
-		      System.out.println("Exception :" + e);
-		      return null;
-		    }
-	}
 }

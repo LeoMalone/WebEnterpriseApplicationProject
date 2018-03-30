@@ -19,7 +19,7 @@ public class Login {
 	/**
 	 * The validateUserLogin method validates a UserBeans login credentials
 	 * @param user - UserBean credentials
-	 * @return status - boolean value
+	 * @return matched - boolean value
 	 */
 	public static boolean validateUserLogin(UserBean user) { 
 

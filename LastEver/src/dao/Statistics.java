@@ -16,7 +16,7 @@ public class Statistics {
 
 	/**
 	 * The getStatistics method gets the league statistics
-	 * @param <StatisticsBean>
+	 * @param statistics - <StatisticsBean>
 	 * @param id - The current id of the league
 	 * @return status - boolean value
 	 */
@@ -112,9 +112,9 @@ public class Statistics {
 	
 	/**
 	 * The getStatisticsWithTeam method gets the teams statistics
-	 * @param <StatisticsBean>
+	 * @param statistics - <StatisticsBean>
 	 * @param id - The current id of the team
-	 * @param div - The id of the league
+	 * @param lID - The id of the league
 	 * @return status - boolean value
 	 */
 	public static boolean getStatisticsWithTeam(String id, String lID, List<StatisticsBean> statistics) { 
@@ -209,7 +209,7 @@ public class Statistics {
 		
 	/**
 	 * The getStatisticsWithPlayer method gets the players statistics
-	 * @param <StatisticsBean>
+	 * @param statistics - <StatisticsBean>
 	 * @param pID - The current id of the player
 	 * @return status - boolean value
 	 */
@@ -276,8 +276,8 @@ public class Statistics {
 
 
 	/**
-	 * The getStatistics method gets the leagues playoff statistics
-	 * @param <StatisticsBean>
+	 * The getPlayoffStatistics method gets the leagues playoff statistics
+	 * @param statistics - <StatisticsBean>
 	 * @param id - The current id of the league
 	 * @return status - boolean value
 	 */

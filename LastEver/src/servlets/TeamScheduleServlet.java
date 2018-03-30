@@ -26,6 +26,9 @@ public class TeamScheduleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * doGet method mapped to /teamSchedule
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String userName = null;
 		String language = null;
@@ -84,6 +87,9 @@ public class TeamScheduleServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * doPost method mapped to /teamSchedule
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		doGet(request, response);
 	}

@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The StatisticsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the statistics page to show the leading scorers of a division
+ * the statistics page to show the leading scorers of a league
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -88,7 +88,7 @@ public class StatisticsServlet extends HttpServlet {
 			League.getAllLeagues(llb);
 			request.setAttribute("league", llb);
 	
-			//get the division that the page corresponds to
+			//get the league that the page corresponds to
 			llb = new ArrayList<LeagueBean>();	
 			League.getCurrentLeague(id, llb);
 			

@@ -2,7 +2,7 @@ package servlets;
 
 /**
  * The PlayoffsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the schedule page to show the upcoming schedule for the division
+ * the schedule page to show the status of the leagues playoffs
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -95,7 +95,7 @@ public class PlayoffsServlet extends HttpServlet {
 			//make a new LeagueBean to get the current league
 			llb = new ArrayList<LeagueBean>();	
 			
-			//get the division that the page corresponds to
+			//get the league that the page corresponds to
 			League.getCurrentLeague(id, llb);
 			request.setAttribute("currLeague", llb);
 
@@ -104,7 +104,7 @@ public class PlayoffsServlet extends HttpServlet {
 			request.setAttribute("userName", userName);
 			request.setAttribute("statistics", stlb);	
 			
-			//forward to schedule page
+			//forward to playoffs page
 			RequestDispatcher rd = request.getRequestDispatcher("/playoffs.jsp?id=" + id);  
 			rd.forward(request, response);		
 		}
