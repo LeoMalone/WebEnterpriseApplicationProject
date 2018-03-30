@@ -15,7 +15,7 @@ import dao.League;
 
 /**
  * The AdminScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel page.
+ * the administrator control panel Schedule option.
  * @author Liam Maloney and edited by Kevin Villemaire
  */
 public class AdminScheduleServlet extends HttpServlet {
@@ -38,7 +38,6 @@ private static final long serialVersionUID = 1L;
 		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
-		// TODO: distinguish between user types
 		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
 			response.sendRedirect("./index");
 		} else {

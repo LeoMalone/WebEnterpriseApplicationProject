@@ -27,7 +27,9 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<title>LastEver</title>
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="admin_title_ed" /></title>
+</fmt:bundle>
 </head>
 
 <body>

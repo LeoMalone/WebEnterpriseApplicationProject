@@ -28,7 +28,9 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<title>Last Ever</title>
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="admin_title_es" /></title>
+</fmt:bundle>
 </head>
 
 <body>

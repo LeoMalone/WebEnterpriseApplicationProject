@@ -24,14 +24,20 @@ public class DeleteTeamServlet extends HttpServlet {
 	@Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		StringBuilder sb = new StringBuilder(request.getQueryString());
-		sb.deleteCharAt(0);
 		
-		// if query is successful redirect to proper page
-		if(EditTeam.deleteTeam(sb.toString())) {
-			response.sendRedirect("./adminTeams?=1");
+		// If Post is not from logged in Admin
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+			response.sendRedirect("./index");
 		} else {
-			response.sendRedirect("./editTeam?=" + sb.toString());
+			StringBuilder sb = new StringBuilder(request.getQueryString());
+			sb.deleteCharAt(0);
+			
+			// if query is successful redirect to proper page
+			if(EditTeam.deleteTeam(sb.toString())) {
+				response.sendRedirect("./adminTeams?=1");
+			} else {
+				response.sendRedirect("./editTeam?=" + sb.toString());
+			}
 		}
 	}
 }

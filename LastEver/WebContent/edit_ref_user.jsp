@@ -29,7 +29,7 @@
 </fmt:bundle>
 </head>
 <body>
-
+<fmt:bundle basename="TestBundle">
 	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
@@ -48,7 +48,6 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -103,7 +102,6 @@
 							</form>
 						</li>
 					</ul>
-				</fmt:bundle>
 			</div>
 		</div>
 	</nav>
@@ -114,7 +112,6 @@
 		- text, form, button to sign in
 		-->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					${userName}:
 					<fmt:message key="signin_prop3" />
@@ -161,6 +158,7 @@
 					</div>
 					<!-- /.row -->
 				</div>
+			</div>
 		</div>
 
 		<!-- Footer -->
