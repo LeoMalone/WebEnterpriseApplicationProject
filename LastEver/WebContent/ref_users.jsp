@@ -145,10 +145,10 @@
 								</thead>
 							    <c:forEach items="${refUserList}" var="user">
 							        <tr>
-							        	<td>${user.username}</td>	
-							        	<td>${user.userType}</td>
-							        	<td>${user.emailAddress}</td>
-							        	<td>${user.password}</td>
+							        	<td><c:out value="${user.username}" /></td>	
+							        	<td><c:out value="${user.userType}" /></td>
+							        	<td><c:out value="${user.emailAddress}" /></td>
+							        	<td><c:out value="${user.password}" /></td>
 							        	<td>
 							        		<a href="./editRefUser?=${user.id}" class="btn btn-dark btn-sm">
 							        			<i class="fa fa-edit"></i> 

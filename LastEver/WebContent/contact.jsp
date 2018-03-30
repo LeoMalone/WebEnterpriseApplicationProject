@@ -26,29 +26,30 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="contact" /></title>
+	<title>Last Ever - Contact Us<fmt:message key="contact" /></title>
 </fmt:bundle>
 </head>
 <body>
-	<fmt:bundle basename="TestBundle">
-		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-		- sets parent link active
-		- in dropdown, sets active with full bar color
-		-->
-		<nav
-			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="index"><img
-					src="images/logo_sm4.png" /></a>
 
-				<button class="navbar-toggler navbar-toggler-right" type="button"
-					data-toggle="collapse" data-target="#navbarResponsive"
-					aria-controls="navbarResponsive" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+	- sets parent link active
+	- in dropdown, sets active with full bar color
+	-->
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="index"><img
+				src="images/logo_sm4.png" /></a>
 
-				<div class="collapse navbar-collapse" id="navbarResponsive">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<fmt:bundle basename="TestBundle">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -57,46 +58,46 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_info" /></a>
+									key="nav_league" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
-										key="registration" /></a> <a class="dropdown-item"
-									href="./contact"><fmt:message key="contact" /></a>
-							</div></li>
+										key="rules" /></a> <a class="dropdown-item"
+									href="./registration"><fmt:message key="registration" /></a>
+								<a class="dropdown-item" href="./contact"><fmt:message
+										key="contact" /></a>
+							</div>
+						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" />
-						</a>
+							aria-haspopup="true" aria-expanded="false"> Divisions </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_league" /></a>
+												key="nav_divisions" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item"
+												href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 						<c:choose>
-
+							
 							<%--  IF NOT SIGNED IN --%>
 							<c:when test="${signedIn == null}">
-								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message
-											key="nav_signin" /></a></li>
+								<li class="nav-item"><a class="nav-link" href="./login"><fmt:message key="nav_signin" /></a></li>
 							</c:when>
 							<c:otherwise>
-
+								
 								<c:choose>
 
 									<%--  IF SIGNED IN AS A TEAM OWNER --%>
@@ -112,9 +113,7 @@
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
+														key="team_dd3" /></a> <a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -127,15 +126,15 @@
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><fmt:message
-														key="team_dd5" /></a> <a class="dropdown-item" href="logout"><fmt:message
+												<a class="dropdown-item" href="${userType}"><fmt:message key="team_dd5" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
-
-									<%--  IF SIGNED IN AS A REFEREE --%>
+								
+																	<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
@@ -146,11 +145,11 @@
 
 												<a class="dropdown-item" href="${userType}">${userName}</a>
 												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
-											</div></li>
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 								<c:choose>
+
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
@@ -159,17 +158,10 @@
 											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
+
 												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message
-														key="nav_admin_users" /></a> <a class="dropdown-item"
-													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message
-														key="nav_admin_divs" /></a> <a class="dropdown-item"
-													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message
-														key="nav_admin_email" /></a> <a class="dropdown-item"
-													href="logout"><fmt:message key="team_dd4" /></a>
-											</div></li>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -189,20 +181,22 @@
 							</form>
 						</li>
 					</ul>
-				</div>
+				</fmt:bundle>
 			</div>
-		</nav>
-
-		<div class="main-cover">
-			<!-- Page Content
+		</div>
+	</nav>
+	
+	<div class="main-cover">
+		<!-- Page Content
 		- card with information on it
 		- text, mailto link
 		-->
-			<div class="cards-container container">
+		<div class="cards-container container">
+			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					<fmt:message key="contact_header" />
 				</h1>
-				<!-- Email and Phone Number -->
+				<!-- Contact Info: Email and Phone Number -->
 				<div class="row" align="center">
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
@@ -216,7 +210,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- Google Maps Location -->
+					<!--  Location: Google Maps -->
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
 							<h4 class="card-header">
@@ -234,84 +228,67 @@
 							</div>
 						</div>
 					</div>
-					<!-- Get in Touch! -->
+					<!-- Get in Touch! Form Submission -->
 					<div class="col-lg-4 mb-4" align="center">
 						<div class="card h-100">
 							<h4 class="card-header">
 								<fmt:message key="ab_head4" />
 							</h4>
-							<form action="./getInTouch" method="POST">
-								<!-- Need to create getInTouch page-->
-								<div class="card-body">
-									<p class="card-text">
+					<!-- Need to create getInTouch page - COMING SOON -->
+					<form action="./getInTouch" method="POST"> 
+							<div class="card-body">
+								<p class="card-text">
 									<div class="form-group" align="left">
-										<label for="newFirstName"><fmt:message
-												key="signin_fname" /></label> <input type="text"
-											class="form-control" name="newFirstName"
-											placeholder="You Name">
+										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
+										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="signin_fname" />">
 									</div>
 									<div class="form-group" align="left">
-										<label for="newLastName"><fmt:message
-												key="signin_lname" /></label> <input type="text"
-											class="form-control" name="newLastName"
-											placeholder="Your Last Name">
+										<label for="newLastName"><fmt:message key="signin_lname" /></label>
+										<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="signin_lname" />">
 									</div>
-									<div class="form-group" align="left">
-										<!-- ADD city -->
-										<label for="city">City</label> <select id="city" name="city">
-											<option value="ottawa"><fmt:message
-													key="au_username" />Ottawa
-											</option>
-											<option value="nepean"><fmt:message
-													key="au_username" />Nepean
-											</option>
-											<option value="gatineau"><fmt:message
-													key="au_username" />Gatineau
-											</option>
-											<option value="kanata"><fmt:message
-													key="au_username" />Kanata
-											</option>
-										</select>
+									<!-- ADD city -->
+									<br />
+									<div class="form-group" align="left">									
+										<label for="city"><fmt:message key="ab_city" /></label>
+									    <select id="city" name="city">
+									      <option value="ottawa"><fmt:message key="ab_ottawa" /></option>
+									      <option value="nepean"><fmt:message key="ab_nepean" /></option>
+									      <option value="gatineau"><fmt:message key="ab_gatineau" /></option>
+									      <option value="kanata"><fmt:message key="ab_kanata" /></option>
+									   	</select>
 									</div>
-									<div class="form-group" align="left">
+									<div class="form-group" align = "left">
 										<!-- Add subject -->
-										<label for="subject"><fmt:message key="email_subject" /></label>
-										<br>
-										<textarea id="subject" name="subject" style="width: 100%"
-											placeholder="Write something..">
-    									</textarea>
+										<label for="subject"><fmt:message key="email_subject" /></label> <br> 
+    									<textarea id="subject" name="subject" rows="3%" cols="40%" placeholder="<fmt:message key="email_subject" />..."></textarea>									
 									</div>
-									</p>
-								</div>
+								</p>
+							</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-secondary">
-										<fmt:message key="signin_button1" />
-									</button>
+									<button type="submit" class="btn btn-secondary"><fmt:message key="signin_button1"/></button>	
 								</div>
 							</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+
 			<!-- /.row -->
 		</div>
+	</div>
 
-		<!-- Footer -->
-		<footer class="page-footer py-3 bg-dark">
-			<div class="container-fluid">
-				<p class="m-0 text-center text-white">
-					<fmt:message key="footer_copyright" />
-					&copy; <img src="images/logo_sm4.png" /> 2018
-				</p>
-			</div>
-		</footer>
-	</fmt:bundle>
+	<!-- Footer -->
+	<footer class="page-footer py-3 bg-dark">
+		<div class="container-fluid">
+			<p class="m-0 text-center text-white">
+				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+			</p>
+		</div>
+	</footer>
+</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

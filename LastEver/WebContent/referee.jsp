@@ -25,7 +25,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="home" /></title>
+	<title>Last Ever - Referee<fmt:message key="home" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -62,17 +62,16 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-												key="nav_league" /> </a>
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -83,23 +82,22 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 
-										<li class="nav-item dropdown"><a
-											class="nav-link active dropdown-toggle" href="#"
-											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
-											<div class="dropdown-menu dropdown-menu-right"
-												aria-labelledby="navbarDropdownPortfolio">
+						<li class="nav-item dropdown"><a
+							class="nav-link active dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="logout"><fmt:message
+										key="team_dd4" /></a></li>
 
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
@@ -126,7 +124,11 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: <fmt:message key="signin_prop3" /> <fmt:message key="signin_prop3" /> <fmt:message key="div_head3_text2" /><br \>
+					<c:out value="${userName}" />:
+					<fmt:message key="signin_prop3" />
+					<fmt:message key="signin_prop3" />
+					<fmt:message key="div_head3_text2" />
+					<br>
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
@@ -135,35 +137,41 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									${userName}'s <fmt:message key="au_profile" />
+									<c:out value="${userName}" />'s
+									<fmt:message key="au_profile" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										 <fmt:message key="ah_user_body" /><br \>
-									</p>
-								</div>
-								 <div class="card-footer bg-transparent">
-								 	<a href="./refUsers?=${id}" class="btn btn-outline-light"><fmt:message key="au_edit" /></a>
-								</div>
-							</div>
-						</div>
-						<!-- Referee Assignments -->
-						<div class="col-lg-4 mb-4">
-							<div class="card h-100 text-white bg-dark">
-								<h4 class="card-header">
-									${userName}'s <fmt:message key="ah_sched_title" />
-								</h4>
-								<div class="card-body">
-									<p class="card-text">
-										<fmt:message key="ah_sched_body" /><br \>
+										<fmt:message key="ah_user_body" />
+										<br>
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./refSchedule" class="btn btn-outline-light"><fmt:message key="ah_sched_goto" /></a>
+									<a href="./refUsers?=${id}" class="btn btn-outline-light"><fmt:message
+											key="au_edit" /></a>
 								</div>
 							</div>
 						</div>
-						<!-- Referee Status  -->
+						<!-- Referee Schedule - NEEDS TO BE SEPARATED - COMING SOON -->
+						<div class="col-lg-4 mb-4">
+							<div class="card h-100 text-white bg-dark">
+								<h4 class="card-header">
+									<c:out value="${userName}" />'s
+									<fmt:message key="ah_sched_title" />
+								</h4>
+								<div class="card-body">
+									<p class="card-text">
+										<fmt:message key="ah_sched_body" />
+										<br>
+									</p>
+								</div>
+								<div class="card-footer bg-transparent">
+									<a href="./refSchedule" class="btn btn-outline-light"><fmt:message
+											key="ah_sched_goto" /></a>
+								</div>
+							</div>
+						</div>
+						<!-- Referee Email - Only to Admin and other Referees -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
@@ -175,61 +183,11 @@
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-								 	<a href="./refEmail" class="btn btn-outline-light"><fmt:message key="email_go" /></a>
+									<a href="./refEmail" class="btn btn-outline-light"><fmt:message
+											key="email_go" /></a>
 								</div>
 							</div>
-						</div>				
-						<!-- NEW - 4th Card -->
-						<div class="col-lg-12 mb-5 mt-5">
-							<div class="card h-100 text-white bg-dark">
-								<div class="card-body">
-									<h4 class="card-header"><fmt:message key="admin_cs_gs" /></h4>
-								 	<table class="table table-striped table-dark">
-									  <thead>
-									    <tr>
-									      <th scope="col">#</th>
-									      <th scope="col"><fmt:message key="admin_es_title" /></th>
-									      <th scope="col"><fmt:message key="div_head3_text2" /></th>
-									      <th scope="col"><fmt:message key="home_scorers" /></th>
-									      <th scope="col"><fmt:message key="div_head3_text4" /></th>
-									      <th scope="col"><fmt:message key="away_scorers" /></th>
-									      <th scope="col"><fmt:message key="div_head3" /></th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <th scope="row">1</th>
-									      <td>123</td>
-									      <td>Barcelona</td>
-									      <td>2</td>
-									      <td>Aesenal</td>
-									      <td>1</td>
-									      <td>Barcelona</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">2</th>
-									      <td>456</td>
-									      <td>Real Madrid</td>
-									      <td>3</td>
-									      <td>MC United</td>
-									      <td>2</td>
-									      <td>Real Madrid</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">3</th>
-									     <td>789</td>
-									      <td>PSG</td>
-									      <td>1</td>
-									      <td>AC Milan</td>
-									      <td>1</td>
-									      <td>Draw</td>
-									    </tr>
-									  </tbody>
-									</table>
-							 </div>							 		
-							</div>
 						</div>
-							
 					</div>
 				</div>
 				<div>
@@ -240,7 +198,6 @@
 					</form>
 				</div>
 				<!-- /row -->
-
 		</div>
 	</div>
 
@@ -248,14 +205,18 @@
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">
 			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
+				<fmt:message key="footer_copyright" />
+				&copy; <img src="images/logo_sm4.png" /> 2018
 			</p>
 		</div>
 	</footer>
-</fmt:bundle>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
