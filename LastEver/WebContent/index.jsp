@@ -254,12 +254,30 @@
 												<td><b><c:out value="${weather.weatherCity }" />,
 														<c:out value="${weather.weatherCountry }" /> <br></b> <c:out
 														value="${weather.weatherDescription}" />
-												<td id="weather" style="width: 45%"><i
-													class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+												<td id="weather" style="width: 45%"><c:choose>
+														<c:when
+															test="${weather.weatherCode eq 800 or weather.weatherCode eq 801 or weather.weatherCode eq 802 }">
+															<i
+																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+														</c:when>
+														<c:otherwise>
+															<i class="wi wi-owm-${weather.weatherCode}"></i>
+														</c:otherwise>
+													</c:choose>
 											</tr>
 											<tr id="weather-temp">
-												<td><b><fmt:formatNumber maxFractionDigits="1"
-															value="${weather.weatherTemp}" />&deg;C</b></td>
+												<td><b> <c:choose>
+															<c:when
+																test="${weather.weatherTemp gt 10.0 or weather.weatherTemp le -10.0}">
+																<fmt:formatNumber maxFractionDigits="0"
+																	value="${weather.weatherTemp}" />&deg;C
+															</c:when>
+															<c:otherwise>
+																<fmt:formatNumber maxFractionDigits="1"
+																	value="${weather.weatherTemp}" />&deg;C
+															</c:otherwise>
+														</c:choose>
+												</b></td>
 												<td id="weather-details"><b>Wind Speed</b> <c:out
 														value="${weather.weatherWind}" /> m/s <br> <b>Humidity</b>
 													<c:out value="${weather.weatherHumidity}" />% <br> <b>Pressure</b>
