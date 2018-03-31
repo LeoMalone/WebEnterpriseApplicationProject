@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
+import org.joda.time.Seconds;
 import org.json.JSONObject;
 
 import beans.WeatherBean;
@@ -20,14 +22,13 @@ public class Weather {
 	 * @param id - The id of the current venue
 	 * @return status - boolean value
 	 */
-	public static boolean checkForUpdate() { 
+	public static boolean checkForUpdate(DateTime currTime) { 
 		
 		@SuppressWarnings("unused")
 		boolean status = false;					// query status
 	    Connection conn = null;					// DB connection
 	    PreparedStatement getVenue = null;		// SQL query
 	    ResultSet resultSet = null;				// returned query result set
-	    DateTime currTime = new DateTime(System.currentTimeMillis());
 	    DateTime updateTime = null;
 	    boolean update = false;
 	    
@@ -84,12 +85,21 @@ public class Weather {
 	    Connection conn = null;						// DB connection
 	    PreparedStatement updateWeather = null;		// SQL query
 	    int result = 0;					// returned query result set
-	
+	    Timestamp currTime = new Timestamp(System.currentTimeMillis());
+	    DateTime sunrise = new DateTime(json.getJSONObject("sys").getLong("sunrise"));
+	    DateTime sunset = new DateTime(json.getJSONObject("sys").getLong("sunset"));
+	    DateTime dt = new DateTime(currTime);
+	   
+	    Seconds sunSec = Seconds.secondsBetween(sunrise, dt);
+	    Seconds setSec = Seconds.secondsBetween(dt, sunset);
+        Seconds interval = Seconds.seconds(1);
+	    
+	    
 	    // Connect to Database
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        updateWeather = conn.prepareStatement("UPDATE weather SET weatherTemp=?, weatherIcon=?, weatherCode=?,"
-	        		+ " weatherDescription=?, weatherPressure=?, weatherHumidity=?, weatherWind=?, weatherDay=?"
+	        		+ " weatherDescription=?, weatherPressure=?, weatherHumidity=?, weatherWind=?, weatherDay=?, updateTime=?"
 	        		+ " WHERE weatherCity=?");
 	        updateWeather.setDouble(1, json.getJSONObject("main").getDouble("temp"));
 	        updateWeather.setString(2, json.getJSONArray("weather").getJSONObject(0).getString("icon"));
@@ -99,12 +109,13 @@ public class Weather {
 	        updateWeather.setInt(6, json.getJSONObject("main").getInt("humidity"));
 	        updateWeather.setDouble(7, json.getJSONObject("wind").getDouble("speed"));
 	        
-	        if(json.getJSONArray("weather").getJSONObject(0).getString("icon").contains("d"))
-	        	updateWeather.setString(8, "day");
-	        else
+	        if(sunSec.isGreaterThan(interval) && setSec.isLessThan(interval))
 	        	updateWeather.setString(8, "night");
+	        else
+	        	updateWeather.setString(8, "day");
 	        
-	        updateWeather.setString(9, json.getString("name"));
+	        updateWeather.setTimestamp(9, currTime);
+	        updateWeather.setString(10, json.getString("name"));
 	        
 	        result = updateWeather.executeUpdate();	        
 	        if(result == 1) {

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -43,7 +44,6 @@ public class IndexServlet extends HttpServlet {
 		String userName = null;
 		String language = null;
 		String newLang = null;
-		String city = null;				//city to get weather data from
 
 		/****************** COOKIE LOGIC ****************/
 
@@ -89,9 +89,9 @@ public class IndexServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
+		DateTime currTime = new DateTime(System.currentTimeMillis());
 		
-		
-		if(Weather.checkForUpdate()) {
+		if(Weather.checkForUpdate(currTime)) {
 
 			// OpenWeatherMap API url to get the weather from
 			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
