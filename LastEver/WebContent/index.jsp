@@ -256,7 +256,7 @@
 														value="${weather.weatherDescription}" />
 												<td id="weather" style="width: 45%"><c:choose>
 														<c:when
-															test="${weather.weatherCode eq 800 or weather.weatherCode eq 801 or weather.weatherCode eq 802 }">
+															test="${weather.weatherCode gt 799 or weather.weatherCode lt 804}">
 															<i
 																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
 														</c:when>
@@ -272,21 +272,26 @@
 																<fmt:formatNumber maxFractionDigits="0"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:when>
+															<c:when test="${weather.weatherTemp gt -0.05 and weather.weatherTemp le 0 }">
+															<fmt:formatNumber maxFractionDigits="1"
+																	value="${weather.weatherTemp * -1}" />&deg;C
+															</c:when>
 															<c:otherwise>
 																<fmt:formatNumber maxFractionDigits="1"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:otherwise>
 														</c:choose>
 												</b></td>
-												<td id="weather-details"><b>Wind Speed</b> <c:out
-														value="${weather.weatherWind}" /> m/s <br> <b>Humidity</b>
-													<c:out value="${weather.weatherHumidity}" />% <br> <b>Pressure</b>
+												<td id="weather-details"><b>Wind</b> <fmt:formatNumber
+														maxFractionDigits="1" value="${weather.weatherWind * 3.6}" />
+													km/h <br> <b>Humidity</b> <c:out
+														value="${weather.weatherHumidity}" />% <br> <b>Pressure</b>
 													<c:out value="${weather.weatherPressure}" /> hPa</td>
 											</tr>
 											<tr>
 												<td><a href="https://openweathermap.org/">OpenWeatherMap</a></td>
 												<td id="weather-update"><fmt:formatDate type="both"
-														pattern="YYYY-MM-d H:mm" value="${weather.updateTime}" /></td>
+														pattern="YYYY-MM-d H:mm" value="${currtime}" /></td>
 											</tr>
 										</table>
 									</c:otherwise>

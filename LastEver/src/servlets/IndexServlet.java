@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,9 +90,9 @@ public class IndexServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 
-		DateTime currTime = new DateTime(System.currentTimeMillis());
+		Timestamp currTime = new Timestamp(System.currentTimeMillis());
 		
-		if(Weather.checkForUpdate(currTime)) {
+		if(Weather.checkForUpdate(DateTime.now())) {
 
 			// OpenWeatherMap API url to get the weather from
 			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
@@ -140,6 +141,7 @@ public class IndexServlet extends HttpServlet {
 		//get weather data and then store it as an attribute
 		Weather.getWeather(wb, "Ottawa");
 		request.setAttribute("weather", wb);
+		request.setAttribute("currtime", currTime);
 		
 		// Set leagues for navbar
 		League.getAllLeagues(llb);

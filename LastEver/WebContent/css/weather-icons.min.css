@@ -2108,11 +2108,11 @@
 }
 
 .wi-owm-day-802:before {
-	content: "\f000"
+	content: "\f002"
 }
 
 .wi-owm-day-803:before {
-	content: "\f001"
+	content: "\f002"
 }
 
 .wi-owm-day-804:before {
@@ -2336,15 +2336,15 @@
 }
 
 .wi-owm-night-801:before {
-	content: "\f086"
+	content: "\f083"
 }
 
 .wi-owm-night-802:before {
-	content: "\f022"
+	content: "\f086"
 }
 
 .wi-owm-night-803:before {
-	content: "\f012"
+	content: "\f086"
 }
 
 .wi-owm-night-804:before {
