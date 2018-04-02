@@ -20,11 +20,14 @@
 <meta name="author" content="">
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <!-- Fontawesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -65,17 +68,16 @@
 
 								<a class="dropdown-item" href="./about"><fmt:message
 										key="about" /></a> <a class="dropdown-item" href="./rules"><fmt:message
-										key="rules" /></a> <a class="dropdown-item"
-									href="./registration"><fmt:message key="registration" /></a>
-								<a class="dropdown-item" href="./contact"><fmt:message
-										key="contact" /></a>
-							</div>
-						</li>
+										key="rules" /></a> <a class="dropdown-item" href="./registration"><fmt:message
+										key="registration" /></a> <a class="dropdown-item"
+									href="./contact"><fmt:message key="contact" /></a>
+							</div></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-												key="nav_league" /> </a>
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
@@ -86,22 +88,22 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
-											<a class="dropdown-item"
-												href="league?id=${l.leagueId}">${l.leagueName}</a>
+											<a class="dropdown-item" href="league?id=${l.leagueId}">${l.leagueName}</a>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</div></li>
 						<li class="nav-item dropdown"><a
-											class="nav-link active dropdown-toggle" href="#"
-											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
-											<div class="dropdown-menu dropdown-menu-right"
-												aria-labelledby="navbarDropdownPortfolio">
+							class="nav-link active dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="logout"><fmt:message
+										key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
 							<form action="" method="post">
@@ -127,55 +129,59 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}: Users
-				</h1>					
+					<c:out value="${userName}" />
+					: Users
+				</h1>
 				<div class="row">
-				<!-- List of referee profiles  -->
+					<!-- List of referee profiles  -->
 					<div class="col-lg-12 mb-5 mt-5">
-						<div class="card">				
+						<div class="card">
 							<table class="table">
 								<thead class="thead-dark">
-								    <tr>
-								      <th scope="col"><fmt:message key="au_username" /></th>
-								      <th scope="col"><fmt:message key="au_usertype" /></th>
-								      <th scope="col"><fmt:message key="au_email" /></th>
-								      <th scope="col"><fmt:message key="signin_password" /></th>
-								      <th scope="col"></th>
-								    </tr>
+									<tr>
+										<th scope="col"><fmt:message key="au_username" /></th>
+										<th scope="col"><fmt:message key="au_usertype" /></th>
+										<th scope="col"><fmt:message key="au_email" /></th>
+										<th scope="col"><fmt:message key="signin_password" /></th>
+										<th scope="col"></th>
+									</tr>
 								</thead>
-							    <c:forEach items="${refUserList}" var="user">
-							        <tr>
-							        	<td><c:out value="${user.username}" /></td>	
-							        	<td><c:out value="${user.userType}" /></td>
-							        	<td><c:out value="${user.emailAddress}" /></td>
-							        	<td><c:out value="${user.password}" /></td>
-							        	<td>
-							        		<a href="./editRefUser?=${user.id}" class="btn btn-dark btn-sm">
-							        			<i class="fa fa-edit"></i> 
-											</a>
-										</td>		            
-							        </tr>
-							    </c:forEach>
-							</table>				
+								<c:forEach items="${refUserList}" var="user">
+									<tr>
+										<td><c:out value="${user.username}" /></td>
+										<td><c:out value="${user.userType}" /></td>
+										<td><c:out value="${user.emailAddress}" /></td>
+										<td><c:out value="${user.password}" /></td>
+										<td><a href="./editRefUser?=${user.id}"
+											class="btn btn-dark btn-sm"> <i class="fa fa-edit"></i>
+										</a></td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
 					</div>
-				</div>					
+				</div>
 				<!-- /row -->
+			</fmt:bundle>
 		</div>
 	</div>
-
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" /> &copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
-</fmt:bundle>
+	<fmt:bundle basename="TestBundle">
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
+	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

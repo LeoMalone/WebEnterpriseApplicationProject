@@ -42,7 +42,8 @@
 					<div class="modal-header">
 						<h5 class="modal-title" id="deleteDivisionLabel">
 							<fmt:message key="admin_eu_model_del" />
-							: ${division.divisionName}
+							:
+							<c:out value="${division.divisionName}" />
 						</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">

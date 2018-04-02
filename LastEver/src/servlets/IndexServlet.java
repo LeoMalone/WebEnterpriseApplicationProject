@@ -2,13 +2,15 @@ package servlets;
 
 /**
  * The IndexServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the index page to get the 5 most recent news stories on the website
+ * the index page to get the 5 most recent news stories on the website and gets the current weather
+ * from the OpenWeatherMap API
  * @author Kevin Villemaire
  */
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,17 +89,24 @@ public class IndexServlet extends HttpServlet {
 			}
 		}
 
+		//set the response type
 		response.setContentType("text/html");
 
-		DateTime currTime = new DateTime(System.currentTimeMillis());
+		//gets the current time to be displayed for the weather
+		Timestamp currTime = new Timestamp(System.currentTimeMillis());
 		
-		if(Weather.checkForUpdate(currTime)) {
+		//check to see if the weather from the database needs to be updated
+		if(Weather.checkForUpdate(DateTime.now())) {
 
-			// OpenWeatherMap API url to get the weather from
+			// OpenWeatherMap API url to get the weather from: English/French
 			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
 					+ "units=metric&APPID=a4e18466ea056cf88f0ca54293678bfc";
+			String postData_fr = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
+					+ "units=metric&lang=fr&APPID=a4e18466ea056cf88f0ca54293678bfc";
+			
 			// create a new URL with the post data
 			URL capURL = new URL(postData);
+			URL weather_fr = new URL(postData_fr);
 
 			// open a url connection with the specified url
 			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
@@ -121,7 +130,12 @@ public class IndexServlet extends HttpServlet {
 			// create a JSON object from the response
 			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
 			
-			Weather.updateWeather(json);
+			//connect to the OpenWeatherMap API again to get French description
+			conn = (HttpURLConnection) weather_fr.openConnection();
+			JSONObject jsonfr = new JSONObject(new JSONTokener(conn.getInputStream()));
+			
+			//update weather with data from the API and gets the french description of the weather
+			Weather.updateWeather(json, jsonfr.getJSONArray("weather").getJSONObject(0).getString("description"));
 		}
 		
 		//WeatherBean to store the weather data
@@ -140,6 +154,7 @@ public class IndexServlet extends HttpServlet {
 		//get weather data and then store it as an attribute
 		Weather.getWeather(wb, "Ottawa");
 		request.setAttribute("weather", wb);
+		request.setAttribute("currtime", currTime);
 		
 		// Set leagues for navbar
 		League.getAllLeagues(llb);

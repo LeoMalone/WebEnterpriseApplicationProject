@@ -14,23 +14,27 @@ import org.json.JSONObject;
 import beans.WeatherBean;
 import db.ConnectionManager;
 
+/**
+ * The Weather class handles checking to see if the weather from the database needs to be updated,
+ * update the weather from the OpenWeatherMap (OWM) API, and getting the current conditions from the database
+ * @author Kevin Villemaire
+ */
 public class Weather {
 
 	/**
-	 * The getVenue gets all the relevant information about the venue
-	 * @param <VenueBean>
-	 * @param id - The id of the current venue
-	 * @return status - boolean value
+	 * The checkForUpdate checks to see if the weather data needs to be updated
+	 * @param DateTime - current time of the server
+	 * @return update - boolean value: if weather needs to be updated
 	 */
 	public static boolean checkForUpdate(DateTime currTime) { 
 		
-		@SuppressWarnings("unused")
+		@SuppressWarnings("unused")				// suppress warnings that status is unused
 		boolean status = false;					// query status
 	    Connection conn = null;					// DB connection
 	    PreparedStatement getVenue = null;		// SQL query
 	    ResultSet resultSet = null;				// returned query result set
-	    DateTime updateTime = null;
-	    boolean update = false;
+	    DateTime updateTime = null;				// the last update time from the database
+	    boolean update = false;					// if weather needs to be updated or not
 	    
 	    // Connect to Database
 	    try {
@@ -39,11 +43,15 @@ public class Weather {
 	        resultSet = getVenue.executeQuery();
 	        status = resultSet.next();
 	        
+	        //select the update time from the database and convert it to DateTime for comparison
 	        updateTime = new DateTime(resultSet.getTimestamp(1));
 	        
+	        //checks the amount of minutes between the current time and the time of last update
 	        Minutes min = Minutes.minutesBetween(updateTime, currTime);
+	        //sets the interval to be 30 minutes
 	        Minutes interval = Minutes.minutes(30);
 	        
+	        //if 30 minutes has passed since last update then set update to true, otherwise data needs no updating
 	        if(min.isGreaterThan(interval))
 	        	update = true;
 	        else
@@ -78,51 +86,76 @@ public class Weather {
 	    }
 	    return update;
 	}
-	
-	public static boolean updateWeather(JSONObject json) { 
+
+	/**
+	 * The updateWeather updates the weather data with data from the OWM API
+	 * @param json - JSONObject which was returned from the API call
+	 * @param description_fr - the French weather description
+	 * @return status - boolean value
+	 */
+	public static boolean updateWeather(JSONObject json, String description_fr) { 
 		
 		boolean status = false;						// query status
 	    Connection conn = null;						// DB connection
 	    PreparedStatement updateWeather = null;		// SQL query
-	    int result = 0;					// returned query result set
+	    int result = 0;								// returned query result set
 	    Timestamp currTime = new Timestamp(System.currentTimeMillis());
-	    DateTime sunrise = new DateTime(json.getJSONObject("sys").getLong("sunrise"));
-	    DateTime sunset = new DateTime(json.getJSONObject("sys").getLong("sunset"));
-	    DateTime dt = new DateTime(currTime);
-	   
-	    Seconds sunSec = Seconds.secondsBetween(sunrise, dt);
-	    Seconds setSec = Seconds.secondsBetween(dt, sunset);
-        Seconds interval = Seconds.seconds(1);
 	    
 	    
 	    // Connect to Database
 	    try {
 	        conn = ConnectionManager.getConnection();
+	        //upadate the current weather with the data from the API call
 	        updateWeather = conn.prepareStatement("UPDATE weather SET weatherTemp=?, weatherIcon=?, weatherCode=?,"
-	        		+ " weatherDescription=?, weatherPressure=?, weatherHumidity=?, weatherWind=?, weatherDay=?, updateTime=?"
-	        		+ " WHERE weatherCity=?");
+	        		+ " weatherDescription=?, weatherDescriptionFR=?, weatherPressure=?, weatherHumidity=?, weatherWind=?,"
+	        		+ " weatherGust=?, weatherDay=?, updateTime=? WHERE weatherCity=?");
+	        
+	        //gets the main object (which contains temperature information and ) and get current temperature
 	        updateWeather.setDouble(1, json.getJSONObject("main").getDouble("temp"));
+	      
+	         /* Weather is an array of JSONObjects so get the JSONObject at position zero and use that
+	         * JSONObject to get the icon, the weather code, and description */
 	        updateWeather.setString(2, json.getJSONArray("weather").getJSONObject(0).getString("icon"));
 	        updateWeather.setInt(3, json.getJSONArray("weather").getJSONObject(0).getInt("id"));
 	        updateWeather.setString(4, json.getJSONArray("weather").getJSONObject(0).getString("description"));
-	        updateWeather.setInt(5, json.getJSONObject("main").getInt("pressure"));
-	        updateWeather.setInt(6, json.getJSONObject("main").getInt("humidity"));
-	        updateWeather.setDouble(7, json.getJSONObject("wind").getDouble("speed"));
+	        updateWeather.setString(5, description_fr);
+	        //get the main object and get the pressure and humidity
+	        updateWeather.setInt(6, json.getJSONObject("main").getInt("pressure"));
+	        updateWeather.setInt(7, json.getJSONObject("main").getInt("humidity"));
+	        //get the current wind speed from the wind JSONObject
+	        updateWeather.setDouble(8, json.getJSONObject("wind").getDouble("speed"));
 	        
-	        if(sunSec.isGreaterThan(interval) && setSec.isLessThan(interval))
-	        	updateWeather.setString(8, "night");
+	        /*if the JSONObject wind contains the gust property (not always included in the response)
+	        set the wind to the data from the API call. Otherwise set it to zero and it won't show in the current
+	        conditions */
+	        if(json.getJSONObject("wind").has("gust"))
+	        	updateWeather.setDouble(9, json.getJSONObject("wind").getDouble("gust"));
 	        else
-	        	updateWeather.setString(8, "day");
+	        	updateWeather.setDouble(9, 0.0);
 	        
-	        updateWeather.setTimestamp(9, currTime);
-	        updateWeather.setString(10, json.getString("name"));
+	        /*
+	         * Weather Icon Stored as: 04d
+	         * Checks to see if the icon contains a d/n and set the day
+	         * This is used if the weather is codes 800 (clear), 801 (partly cloudy),
+	         * 802 (mostly cloudy), and 803 (broken clouds)
+	         */
+	        if(json.getJSONArray("weather").getJSONObject(0).getString("icon").contains("d"))
+	        	updateWeather.setString(10, "day");
+	        else
+	        	updateWeather.setString(10, "night");
 	        
-	        result = updateWeather.executeUpdate();	        
+	        //get the current time and update the time of weather update
+	        updateWeather.setTimestamp(11, currTime);
+	        updateWeather.setString(12, json.getString("name"));
+	        
+	        //execute query
+	        result = updateWeather.executeUpdate();	      
+	        
+	        //if one row is affected then the query was successful
 	        if(result == 1) {
 	        	status = true;
 	        }
 	      
-	        
 	    // close all connections and handle all possible exceptions
 	    } catch (Exception e) {
 	        System.out.println(e);
@@ -145,25 +178,33 @@ public class Weather {
 	    return status;
 	}
 	
+	/**
+	 * The getWeather gets the current weather conditions for a city
+	 * @param <WeatherBean>
+	 * @param city - the city to get the data from
+	 * @return status - boolean value
+	 */
 	public static boolean getWeather(WeatherBean wb, String city) { 
 		
 		boolean status = false;						// query status
 	    Connection conn = null;						// DB connection
 	    PreparedStatement getWeather = null;		// SQL query
-	    ResultSet resultSet = null;				// returned query result set
+	    ResultSet resultSet = null;					// returned query result set
 	    
 	    // Connect to Database
 	    try {
 	        conn = ConnectionManager.getConnection();
 	        getWeather = conn.prepareStatement("select weatherCity, weatherCountry, weatherTemp, weatherIcon,"
-	        		+ " weatherCode, weatherDescription, weatherPressure, weatherHumidity, weatherWind, weatherDay,"
-	        		+ " updateTime from weather WHERE weatherCity=?");
+	        		+ " weatherCode, weatherDescription, weatherDescriptionFR, weatherPressure, weatherHumidity,"
+	        		+ " weatherWind, weatherGust, weatherDay, updateTime from weather WHERE weatherCity=?");
 	        getWeather.setString(1, city);
 	        resultSet = getWeather.executeQuery();
 	        status = resultSet.next();
 	        
+	        //return to the start of the result set
 	        resultSet.beforeFirst();
 	        
+	        //loop through the result set and add the results to a WeatherBean
 	        while(resultSet.next()) {
 	        	wb.setWeatherCity(resultSet.getString(1));
 	        	wb.setWeatherCountry(resultSet.getString(2));
@@ -171,11 +212,13 @@ public class Weather {
 	        	wb.setWeatherIcon(resultSet.getString(4));
 	        	wb.setWeatherCode(resultSet.getInt(5));
 	        	wb.setWeatherDescription(resultSet.getString(6));
-	        	wb.setWeatherPressure(resultSet.getInt(7));
-	        	wb.setWeatherHumidity(resultSet.getInt(8));
-	        	wb.setWeatherWind(resultSet.getDouble(9));
-	        	wb.setWeatherDay(resultSet.getString(10));
-	        	wb.setUpdateTime(resultSet.getTimestamp(11));
+	        	wb.setWeatherDescriptionFR(resultSet.getString(7));
+	        	wb.setWeatherPressure(resultSet.getInt(8));
+	        	wb.setWeatherHumidity(resultSet.getInt(9));
+	        	wb.setWeatherWind(resultSet.getDouble(10));
+	        	wb.setWeatherGust(resultSet.getDouble(11));
+	        	wb.setWeatherDay(resultSet.getString(12));
+	        	wb.setUpdateTime(resultSet.getTimestamp(13));
 	        }
 	   
 	    // close all connections and handle all possible exceptions

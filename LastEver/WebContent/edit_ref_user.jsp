@@ -29,25 +29,25 @@
 </fmt:bundle>
 </head>
 <body>
-<fmt:bundle basename="TestBundle">
-	<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+	<fmt:bundle basename="TestBundle">
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 	- sets parent link active
 	- in dropdown, sets active with full bar color
 	-->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index"><img
-				src="images/logo_sm4.png" /></a>
+		<nav
+			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="index"><img
+					src="images/logo_sm4.png" /></a>
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarResponsive"
+					aria-controls="navbarResponsive" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index"><fmt:message
 									key="nav_home" /></a></li>
@@ -56,7 +56,7 @@
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <fmt:message
-									key="nav_league" /></a>
+									key="nav_info" /></a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
@@ -69,14 +69,16 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Divisions </a>
+							aria-haspopup="true" aria-expanded="false"> <fmt:message
+									key="nav_league" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 								<c:choose>
 									<c:when test="${empty league}">
 
 										<a class="dropdown-item" href=""><fmt:message
-												key="nav_divisions" /></a>
+												key="nav_league" /></a>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="l" items="${league}">
@@ -85,11 +87,19 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item"><a class="nav-link active"
-							href="${userType}">${userName}</a></li>
-						<li class="nav-item"><a class="nav-link" href=""></a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link active dropdown-toggle" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+
+								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+									class="dropdown-item" href="logout"><fmt:message
+										key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
-							<form action="" method="post">
+							<form action="./adminDivisions" method="GET">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
 									<option value="en"
@@ -102,10 +112,10 @@
 							</form>
 						</li>
 					</ul>
+				</div>
 			</div>
-		</div>
-	</nav>
-
+		</nav>
+	</fmt:bundle>
 	<div class="main-cover">
 		<!-- Page Content
 		- card with information on it
@@ -113,7 +123,8 @@
 		-->
 		<div class="cards-container container">
 				<h1 class="my-4">
-					${userName}:
+					<c:out value="${userName}" />
+					:
 					<fmt:message key="signin_prop3" />
 					<fmt:message key="au_edit" />
 				</h1>
@@ -130,7 +141,7 @@
 									<!-- Uneditable Username -->
 									<div class="form-group">
 										<label for="staticEmail"><fmt:message
-												key="signin_user" /></label><br><label for="editUserName"><c:out
+												key="signin_user" /></label><br> <label for="editUserName"><c:out
 												value="${refUser.username}" /></label>
 									</div>
 									<!-- Editable Email Address -->
@@ -158,9 +169,11 @@
 					</div>
 					<!-- /.row -->
 				</div>
-			</div>
+			</fmt:bundle>
 		</div>
+	</div>
 
+	<fmt:bundle basename="TestBundle">
 		<!-- Footer -->
 		<footer class="page-footer py-3 bg-dark">
 			<div class="container-fluid">
@@ -170,13 +183,13 @@
 				</p>
 			</div>
 		</footer>
-		</fmt:bundle>
-		<!-- Bootstrap core JavaScript -->
-		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	</fmt:bundle>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
