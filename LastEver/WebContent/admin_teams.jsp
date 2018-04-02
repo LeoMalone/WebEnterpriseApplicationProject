@@ -28,7 +28,7 @@
 <script defer
 	src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Teams</title>
+	<title>Last Ever - <fmt:message key="div_head1" /></title>
 </fmt:bundle>
 </head>
 <body>

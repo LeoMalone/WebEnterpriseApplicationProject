@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -14,26 +13,26 @@
 
 <fmt:setLocale value="${cookie.language.value}" />
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- Custom styles for this template -->
-<link href="css/cover.css" rel="stylesheet">
-<title>Last Ever</title>
-</head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">	
+	<!-- Bootstrap core CSS -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" />
+	<!-- Custom styles for this template -->
+	<link href="css/cover.css" rel="stylesheet">
+	<fmt:bundle basename="TestBundle">
+		<title>Last Ever - <fmt:message key="admin_title_cd" /></title>
+	</fmt:bundle>
+	</head>
 <body>
 	<fmt:bundle basename="TestBundle">
-
 		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
 		<nav
 			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">

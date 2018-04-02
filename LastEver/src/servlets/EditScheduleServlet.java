@@ -20,7 +20,7 @@ import dao.League;
 /**
  * The EditScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit Schedule.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class EditScheduleServlet extends HttpServlet {
 	

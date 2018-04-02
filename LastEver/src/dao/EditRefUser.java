@@ -12,6 +12,7 @@ import db.ConnectionManager;
 
 /**
  * The EditRefUser class handles all db operation relating to editing a ref user
+ * @author Neal Sen, Kevin Villemaire
  */
 public class EditRefUser {
 	

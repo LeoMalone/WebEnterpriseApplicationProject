@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -80,6 +79,7 @@ public class TeamEmailsServlet extends HttpServlet{
 				// User list for display on page
 				List<UserBean> admins = new ArrayList<UserBean>();
 				List<UserBean> tos = new ArrayList<UserBean>();
+				@SuppressWarnings("unused")
 				List<UserBean> player = new ArrayList<UserBean>();
 				
 				// If query is successful

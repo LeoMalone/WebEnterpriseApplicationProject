@@ -27,7 +27,9 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<title>LastEver</title>
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="admin_title_ed" /></title>
+</fmt:bundle>
 </head>
 
 <body>
@@ -40,7 +42,8 @@
 					<div class="modal-header">
 						<h5 class="modal-title" id="deleteDivisionLabel">
 							<fmt:message key="admin_eu_model_del" />
-							: ${division.divisionName}
+							:
+							<c:out value="${division.divisionName}" />
 						</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
