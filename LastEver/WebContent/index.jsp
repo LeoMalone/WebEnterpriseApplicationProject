@@ -246,17 +246,25 @@
 							<div class="card-body">
 								<c:choose>
 									<c:when test="${empty weather}">
-										<b style="text-align: center">No weather data</b>
+										<b style="text-align: center"><fmt:message
+												key="weather_no_data" /></b>
 									</c:when>
 									<c:otherwise>
 										<table style="width: 100%">
 											<tr>
 												<td><b><c:out value="${weather.weatherCity }" />,
-														<c:out value="${weather.weatherCountry }" /> <br></b> <c:out
-														value="${weather.weatherDescription}" />
+														<c:out value="${weather.weatherCountry }" /> <br></b> <c:choose>
+														<c:when test="${cookie.language.value == 'en'}">
+															<c:out value="${weather.weatherDescription}" />
+														</c:when>
+														<c:otherwise>
+															<c:out value="${weather.weatherDescriptionFR}" />
+														</c:otherwise>
+													</c:choose></td>
 												<td id="weather" style="width: 45%"><c:choose>
 														<c:when
-															test="${weather.weatherCode gt 799 or weather.weatherCode lt 804}">
+															test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
+															<!-- Show day/night weather icons for codes 800-803 otherwise show generic ones -->
 															<i
 																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
 														</c:when>
@@ -266,32 +274,45 @@
 													</c:choose>
 											</tr>
 											<tr id="weather-temp">
-												<td><b> <c:choose>
+												<td><b> <!-- If temperature not between -10 and 10 then do not show any decimal points
+												This keeps the temp from spilling into the next column --> <c:choose>
 															<c:when
 																test="${weather.weatherTemp gt 10.0 or weather.weatherTemp le -10.0}">
 																<fmt:formatNumber maxFractionDigits="0"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:when>
-															<c:when test="${weather.weatherTemp gt -0.05 and weather.weatherTemp le 0 }">
-															<fmt:formatNumber maxFractionDigits="1"
+															<c:when
+																test="${weather.weatherTemp gt -0.05 and weather.weatherTemp lt 0 }">
+																<!-- To prevent -0 from showing as the current tempreature -->
+																<fmt:formatNumber maxFractionDigits="1"
 																	value="${weather.weatherTemp * -1}" />&deg;C
 															</c:when>
 															<c:otherwise>
+																<!-- Show on decimal point for better accuracy
+															Can show 0 digits if you want -->
 																<fmt:formatNumber maxFractionDigits="1"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:otherwise>
 														</c:choose>
 												</b></td>
-												<td id="weather-details"><b>Wind</b> <fmt:formatNumber
-														maxFractionDigits="1" value="${weather.weatherWind * 3.6}" />
-													km/h <br> <b>Humidity</b> <c:out
-														value="${weather.weatherHumidity}" />% <br> <b>Pressure</b>
-													<c:out value="${weather.weatherPressure}" /> hPa</td>
+												<td id="weather-details"><b><fmt:message
+															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
+													<fmt:formatNumber maxFractionDigits="1"
+														value="${weather.weatherWind * 3.6}" /> km/h <br> <c:if
+														test="${weather.weatherGust gt 0.0}">
+														<b><fmt:message key="weather_gust" /></b>
+														<fmt:formatNumber maxFractionDigits="1"
+															value="${weather.weatherGust * 3.6}" /> km/h
+													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
+														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
+															key="weather_pressure" /></b> <c:out
+														value="${weather.weatherPressure}" /> hPa</td>
 											</tr>
 											<tr>
+												<!-- Link to where the data was fetched from -->
 												<td><a href="https://openweathermap.org/">OpenWeatherMap</a></td>
 												<td id="weather-update"><fmt:formatDate type="both"
-														pattern="YYYY-MM-d H:mm" value="${currtime}" /></td>
+														pattern="YYYY-MM-dd H:mm" value="${currtime}" /></td>
 											</tr>
 										</table>
 									</c:otherwise>

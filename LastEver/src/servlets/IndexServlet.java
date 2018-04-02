@@ -2,7 +2,8 @@ package servlets;
 
 /**
  * The IndexServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the index page to get the 5 most recent news stories on the website
+ * the index page to get the 5 most recent news stories on the website and gets the current weather
+ * from the OpenWeatherMap API
  * @author Kevin Villemaire
  */
 import java.io.IOException;
@@ -88,17 +89,24 @@ public class IndexServlet extends HttpServlet {
 			}
 		}
 
+		//set the response type
 		response.setContentType("text/html");
 
+		//gets the current time to be displayed for the weather
 		Timestamp currTime = new Timestamp(System.currentTimeMillis());
 		
+		//check to see if the weather from the database needs to be updated
 		if(Weather.checkForUpdate(DateTime.now())) {
 
-			// OpenWeatherMap API url to get the weather from
+			// OpenWeatherMap API url to get the weather from: English/French
 			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
 					+ "units=metric&APPID=a4e18466ea056cf88f0ca54293678bfc";
+			String postData_fr = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
+					+ "units=metric&lang=fr&APPID=a4e18466ea056cf88f0ca54293678bfc";
+			
 			// create a new URL with the post data
 			URL capURL = new URL(postData);
+			URL weather_fr = new URL(postData_fr);
 
 			// open a url connection with the specified url
 			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
@@ -122,7 +130,12 @@ public class IndexServlet extends HttpServlet {
 			// create a JSON object from the response
 			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
 			
-			Weather.updateWeather(json);
+			//connect to the OpenWeatherMap API again to get French description
+			conn = (HttpURLConnection) weather_fr.openConnection();
+			JSONObject jsonfr = new JSONObject(new JSONTokener(conn.getInputStream()));
+			
+			//update weather with data from the API and gets the french description of the weather
+			Weather.updateWeather(json, jsonfr.getJSONArray("weather").getJSONObject(0).getString("description"));
 		}
 		
 		//WeatherBean to store the weather data

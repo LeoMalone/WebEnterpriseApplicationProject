@@ -15,9 +15,11 @@ public class WeatherBean {
 	private String weatherIcon;
 	private int weatherCode;
 	private String weatherDescription;
+	private String weatherDescriptionFR;
 	private int weatherPressure;
 	private int weatherHumidity;
 	private Double weatherWind;
+	private Double weatherGust;
 	private String weatherDay;
 	private Timestamp updateTime;
 
@@ -50,6 +52,10 @@ public class WeatherBean {
 		return this.weatherDescription;
 	}
 	
+	public String getWeatherDescriptionFR() {
+		return this.weatherDescriptionFR;
+	}
+	
 	public int getWeatherPressure() {
 		return this.weatherPressure;
 	}
@@ -60,6 +66,10 @@ public class WeatherBean {
 	
 	public Double getWeatherWind() {
 		return this.weatherWind;
+	}
+	
+	public Double getWeatherGust() {
+		return this.weatherGust;
 	}
 	
 	public String getWeatherDay() {
@@ -95,6 +105,10 @@ public class WeatherBean {
 		this.weatherDescription = wd;
 	}
 	
+	public void setWeatherDescriptionFR(String wdfr) {
+		this.weatherDescriptionFR = wdfr;
+	}
+	
 	public void setWeatherPressure(int wp) {
 		this.weatherPressure = wp;
 	}
@@ -105,6 +119,10 @@ public class WeatherBean {
 	
 	public void setWeatherWind(Double ww) {
 		this.weatherWind = ww;
+	}
+	
+	public void setWeatherGust(Double wg) {
+		this.weatherGust = wg;
 	}
 	
 	public void setWeatherDay(String wd) {

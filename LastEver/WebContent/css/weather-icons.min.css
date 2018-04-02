@@ -1875,6 +1875,10 @@
 	content: "\f012"
 }
 
+.wi-owm-804-windy:before {
+	content: "\f012"
+}
+
 .wi-owm-804:before {
 	content: "\f013"
 }
@@ -2336,7 +2340,7 @@
 }
 
 .wi-owm-night-801:before {
-	content: "\f083"
+	content: "\f081"
 }
 
 .wi-owm-night-802:before {
