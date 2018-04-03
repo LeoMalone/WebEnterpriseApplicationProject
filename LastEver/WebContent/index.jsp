@@ -254,11 +254,11 @@
 											<tr>
 												<td><b><c:out value="${weather.weatherCity }" />,
 														<c:out value="${weather.weatherCountry }" /> <br></b> <c:choose>
-														<c:when test="${cookie.language.value == 'en'}">
-															<c:out value="${weather.weatherDescription}" />
+														<c:when test="${cookie.language.value == 'fr'}">
+															<c:out value="${weather.weatherDescriptionFR}" />
 														</c:when>
 														<c:otherwise>
-															<c:out value="${weather.weatherDescriptionFR}" />
+															<c:out value="${weather.weatherDescription}" />
 														</c:otherwise>
 													</c:choose></td>
 												<td id="weather" style="width: 45%"><c:choose>
@@ -338,7 +338,7 @@
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
 									<div class="card">
-										<div class="card-header d-flex flex-row">
+										<div class="card-header d-flex flex-row table-responsive">
 											<h4 class="d-flex">
 												<c:choose>
 													<c:when test="${cookie.language.value == 'fr' }">
