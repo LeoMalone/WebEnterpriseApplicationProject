@@ -624,7 +624,6 @@ CREATE TABLE `weather` (
   `weatherIcon` varchar(3) NOT NULL,
   `weatherCode` int(11) NOT NULL,
   `weatherDescription` varchar(100) NOT NULL,
-  `weatherDescriptionFR` varchar(100) NOT NULL,
   `weatherPressure` int(11) NOT NULL,
   `weatherHumidity` int(11) NOT NULL,
   `weatherWind` double NOT NULL,
@@ -641,7 +640,7 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',4.49,'04d',803,'broken clouds','nuageux',1017,48,6.7,9.8,'day','2018-04-02 21:17:39');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',0.51,'10d',500,'light rain',990,98,3.6,8.2,'day','2018-04-04 15:25:15');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -741,4 +740,4 @@ USE `lastever`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-02 17:34:35
+-- Dump completed on 2018-04-04 11:33:41
