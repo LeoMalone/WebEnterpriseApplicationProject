@@ -122,6 +122,7 @@
 		- text, form, button to sign in
 		-->
 		<div class="cards-container container">
+			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
 					<c:out value="${userName}" />
 					:

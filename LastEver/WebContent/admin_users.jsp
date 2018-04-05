@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <script defer
@@ -142,7 +145,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="table-responsive">
-									<table class="table table-striped">
+									<table class="table table-striped" id="users">
 										<thead class="thead-dark">
 											<tr>
 												<th scope="col">ID</th>
@@ -202,5 +205,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/users.js"></script>
 </body>
 </html>

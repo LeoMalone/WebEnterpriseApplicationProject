@@ -253,14 +253,10 @@
 										<table style="width: 100%">
 											<tr>
 												<td><b><c:out value="${weather.weatherCity }" />,
-														<c:out value="${weather.weatherCountry }" /> <br></b> <c:choose>
-														<c:when test="${cookie.language.value == 'en'}">
-															<c:out value="${weather.weatherDescription}" />
-														</c:when>
-														<c:otherwise>
-															<c:out value="${weather.weatherDescriptionFR}" />
-														</c:otherwise>
-													</c:choose></td>
+														<c:out value="${weather.weatherCountry }" /> <br></b> <fmt:bundle
+														basename="weather">
+														<fmt:message key="${weather.weatherDescription}" />
+													</fmt:bundle></td>
 												<td id="weather" style="width: 45%"><c:choose>
 														<c:when
 															test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
@@ -305,8 +301,9 @@
 															value="${weather.weatherGust * 3.6}" /> km/h
 													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
 														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
-															key="weather_pressure" /></b> <c:out
-														value="${weather.weatherPressure}" /> hPa</td>
+															key="weather_pressure" /></b> <fmt:formatNumber
+														maxFractionDigits="1"
+														value="${weather.weatherPressure / 10}" /> hPa</td>
 											</tr>
 											<tr>
 												<!-- Link to where the data was fetched from -->
@@ -338,7 +335,7 @@
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
 									<div class="card">
-										<div class="card-header d-flex flex-row">
+										<div class="card-header d-flex flex-row table-responsive">
 											<h4 class="d-flex">
 												<c:choose>
 													<c:when test="${cookie.language.value == 'fr' }">

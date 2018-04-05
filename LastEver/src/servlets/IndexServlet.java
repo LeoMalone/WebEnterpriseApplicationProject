@@ -99,17 +99,14 @@ public class IndexServlet extends HttpServlet {
 		if(Weather.checkForUpdate(DateTime.now())) {
 
 			// OpenWeatherMap API url to get the weather from: English/French
-			String postData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
+			String weatherData = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
 					+ "units=metric&APPID=a4e18466ea056cf88f0ca54293678bfc";
-			String postData_fr = "http://api.openweathermap.org/data/2.5/weather?id=6094817&type=accurate&"
-					+ "units=metric&lang=fr&APPID=a4e18466ea056cf88f0ca54293678bfc";
 			
 			// create a new URL with the post data
-			URL capURL = new URL(postData);
-			URL weather_fr = new URL(postData_fr);
+			URL weatherURL = new URL(weatherData);
 
 			// open a url connection with the specified url
-			HttpURLConnection conn = (HttpURLConnection) capURL.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) weatherURL.openConnection();
 
 			// set the connection to do output
 			conn.setDoOutput(true);
@@ -122,20 +119,16 @@ public class IndexServlet extends HttpServlet {
 			conn.setRequestProperty(
 					"charset", StandardCharsets.UTF_8.displayName());
 			conn.setRequestProperty(
-					"Content-Length", Integer.toString(postData.length()));
+					"Content-Length", Integer.toString(weatherData.length()));
 			conn.setUseCaches(false);
 			conn.getOutputStream()
-			.write(postData.getBytes(StandardCharsets.UTF_8));
+			.write(weatherData.getBytes(StandardCharsets.UTF_8));
 
 			// create a JSON object from the response
 			JSONObject json = new JSONObject(new JSONTokener(conn.getInputStream()));
-			
-			//connect to the OpenWeatherMap API again to get French description
-			conn = (HttpURLConnection) weather_fr.openConnection();
-			JSONObject jsonfr = new JSONObject(new JSONTokener(conn.getInputStream()));
-			
-			//update weather with data from the API and gets the french description of the weather
-			Weather.updateWeather(json, jsonfr.getJSONArray("weather").getJSONObject(0).getString("description"));
+	
+			//update weather with data from the API
+			Weather.updateWeather(json);
 		}
 		
 		//WeatherBean to store the weather data
