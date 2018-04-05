@@ -11,7 +11,7 @@ import java.util.Properties;
 public class ConnectionManager {
 	
 	// Database Credentials
-	private static String url = "jdbc:mysql://localhost:3306/lastever?useUnicode=true&characterEncoding=utf-8";
+	private static String url = "jdbc:mysql://localhost:3306/lastever";
     private static String driver = "com.mysql.jdbc.Driver";
 	
     /**
@@ -31,6 +31,7 @@ public class ConnectionManager {
 			info.setProperty("javax.net.ssl.trustStore","/certs/laststore");
 			info.setProperty("javax.net.ssl.trustStorePassword","lastever");
 			info.setProperty("useSSL", "true");
+			info.setProperty("characterEncoding", "UTF-8");
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url, info);
 		

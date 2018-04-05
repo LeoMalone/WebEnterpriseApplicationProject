@@ -48,7 +48,7 @@ public class Weather {
 	        //checks the amount of minutes between the current time and the time of last update
 	        Minutes min = Minutes.minutesBetween(updateTime, currTime);
 	        //sets the interval to be 30 minutes
-	        Minutes interval = Minutes.minutes(30);
+	        Minutes interval = Minutes.minutes(20);
 	        
 	        //if 30 minutes has passed since last update then set update to true, otherwise data needs no updating
 	        if(min.isGreaterThan(interval))
