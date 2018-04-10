@@ -95,11 +95,11 @@
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#"
 									id="navbarDropdownPortfolio" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+									aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 									<div class="dropdown-menu dropdown-menu-right"
 										aria-labelledby="navbarDropdownPortfolio">
 
-										<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+										<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
 												key="team_dd1" /></a> <a class="dropdown-item"
 											href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 											class="dropdown-item" href="teamSchedule"><fmt:message

@@ -99,17 +99,17 @@
 							<c:otherwise>
 								
 								
-								<!-- <li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li> -->
+								<!-- <li class="nav-item"><a class="nav-link" href="${userType}"><c:out value="${userName}"/></a></li> -->
 								
 								<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/>
 						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}<fmt:message key="team_dd1" /></a>
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message key="team_dd1" /></a>
 								<a class="dropdown-item" href="teamRoster"><fmt:message key="team_dd2" /></a>
 								<a class="dropdown-item" href="teamSchedule"><fmt:message key="team_dd3" /></a>
 								<a class="dropdown-item" href="teamEmails"><fmt:message key="team_dd6" /></a>
@@ -141,7 +141,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: <fmt:message key="team_emails1"/></h1>
+				<h1 class="my-4"><c:out value="${userName}"/>: <fmt:message key="team_emails1"/></h1>
 				<form action="./teamEmails" method="POST">
 					<button type="submit" class="btn btn-success"><fmt:message key="team_emails2"/></button>
 				</form>
