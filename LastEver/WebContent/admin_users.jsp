@@ -135,7 +135,7 @@
 		<div class="cards-container container-fluid">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<c:out value="${userName}:" />
+					<c:out value="${userName}" />
 					<fmt:message key="admin_title_user" />
 				</h1>
 				<a href="./adminCreate" class="btn btn-success"><fmt:message
