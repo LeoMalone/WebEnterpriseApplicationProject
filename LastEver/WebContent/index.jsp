@@ -270,27 +270,20 @@
 													</c:choose>
 											</tr>
 											<tr id="weather-temp">
-												<td><b> <!-- If temperature not between -10 and 10 then do not show any decimal points
-												This keeps the temp from spilling into the next column --> <c:choose>
+												<td><b><c:choose>
+
 															<c:when
-																test="${weather.weatherTemp gt 10.0 or weather.weatherTemp le -10.0}">
-																<fmt:formatNumber maxFractionDigits="0"
-																	value="${weather.weatherTemp}" />&deg;C
-															</c:when>
-															<c:when
-																test="${weather.weatherTemp gt -0.05 and weather.weatherTemp lt 0 }">
+																test="${weather.weatherTemp gt -0.5 and weather.weatherTemp lt 0 }">
 																<!-- To prevent -0 from showing as the current tempreature -->
-																<fmt:formatNumber maxFractionDigits="1"
-																	value="${weather.weatherTemp * -1}" />&deg;C
+																0&deg;C
 															</c:when>
 															<c:otherwise>
 																<!-- Show on decimal point for better accuracy
 															Can show 0 digits if you want -->
-																<fmt:formatNumber maxFractionDigits="1"
+																<fmt:formatNumber maxFractionDigits="0"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:otherwise>
-														</c:choose>
-												</b></td>
+														</c:choose> </b></td>
 												<td id="weather-details"><b><fmt:message
 															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
 													<fmt:formatNumber maxFractionDigits="1"
