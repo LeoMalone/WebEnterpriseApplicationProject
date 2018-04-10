@@ -290,12 +290,14 @@
 												</thead>
 												<tbody>
 													<tr>
-														<td><a href="team?id=${res.homeID}">${res.homeTeam}</a></td>
+														<td><a href="team?id=${res.homeID}"><c:out
+																	value="${res.homeTeam}" /></a></td>
 														<td style="text-align: center"><c:out
 																value="${res.homeScore}" /></td>
 													</tr>
 													<tr>
-														<td><a href="team?id=${res.awayID}">${res.awayTeam}</a></td>
+														<td><a href="team?id=${res.awayID}"><c:out
+																	value="${res.awayTeam}" /></a></td>
 														<td style="text-align: center"><c:out
 																value="${res.awayScore}" /></td>
 													</tr>
@@ -375,6 +377,10 @@
 																	</c:forEach>
 																</c:otherwise>
 															</c:choose></td>
+													</tr>
+													<tr style="text-align:center">
+														<td colspan="2"><a href="gamePage?id=${res.gameID}"><fmt:message
+																	key="div_game_page" /></a></td>
 													</tr>
 												</tbody>
 											</table>

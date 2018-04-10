@@ -26,6 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
+<link href="css/weather-icons.min.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
 	<title>Last Ever - <fmt:message key="home" /></title>
 </fmt:bundle>
@@ -239,33 +240,80 @@
 					</div>
 					<div class="col-lg-4 mb-5">
 						<div class="card">
+							<h4 class="card-header">
+								<fmt:message key="home_head" />
+							</h4>
 							<div class="card-body">
-								<h4 class="card-header">
-									<fmt:message key="home_head" />
-								</h4>
-								<div id="openweathermap-widget-15"></div>
-								<script>
-									window.myWidgetParam ? window.myWidgetParam
-											: window.myWidgetParam = [];
-									window.myWidgetParam
-											.push({
-												id : 15,
-												cityid : '6094817',
-												appid : 'a4e18466ea056cf88f0ca54293678bfc',
-												units : 'metric',
-												containerid : 'openweathermap-widget-15',
-											});
-									(function() {
-										var script = document
-												.createElement('script');
-										script.async = true;
-										script.charset = "utf-8";
-										script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-										var s = document
-												.getElementsByTagName('script')[0];
-										s.parentNode.insertBefore(script, s);
-									})();
-								</script>
+								<c:choose>
+									<c:when test="${empty weather}">
+										<b style="text-align: center"><fmt:message
+												key="weather_no_data" /></b>
+									</c:when>
+									<c:otherwise>
+										<table style="width: 100%">
+											<tr>
+												<td><b><c:out value="${weather.weatherCity }" />,
+														<c:out value="${weather.weatherCountry }" /> <br></b> <fmt:bundle
+														basename="weather">
+														<fmt:message key="${weather.weatherDescription}" />
+													</fmt:bundle></td>
+												<td id="weather" style="width: 45%"><c:choose>
+														<c:when
+															test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
+															<!-- Show day/night weather icons for codes 800-803 otherwise show generic ones -->
+															<i
+																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+														</c:when>
+														<c:otherwise>
+															<i class="wi wi-owm-${weather.weatherCode}"></i>
+														</c:otherwise>
+													</c:choose>
+											</tr>
+											<tr id="weather-temp">
+												<td><b> <!-- If temperature not between -10 and 10 then do not show any decimal points
+												This keeps the temp from spilling into the next column --> <c:choose>
+															<c:when
+																test="${weather.weatherTemp gt 10.0 or weather.weatherTemp le -10.0}">
+																<fmt:formatNumber maxFractionDigits="0"
+																	value="${weather.weatherTemp}" />&deg;C
+															</c:when>
+															<c:when
+																test="${weather.weatherTemp gt -0.05 and weather.weatherTemp lt 0 }">
+																<!-- To prevent -0 from showing as the current tempreature -->
+																<fmt:formatNumber maxFractionDigits="1"
+																	value="${weather.weatherTemp * -1}" />&deg;C
+															</c:when>
+															<c:otherwise>
+																<!-- Show on decimal point for better accuracy
+															Can show 0 digits if you want -->
+																<fmt:formatNumber maxFractionDigits="1"
+																	value="${weather.weatherTemp}" />&deg;C
+															</c:otherwise>
+														</c:choose>
+												</b></td>
+												<td id="weather-details"><b><fmt:message
+															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
+													<fmt:formatNumber maxFractionDigits="1"
+														value="${weather.weatherWind * 3.6}" /> km/h <br> <c:if
+														test="${weather.weatherGust gt 0.0}">
+														<b><fmt:message key="weather_gust" /></b>
+														<fmt:formatNumber maxFractionDigits="1"
+															value="${weather.weatherGust * 3.6}" /> km/h
+													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
+														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
+															key="weather_pressure" /></b> <fmt:formatNumber
+														maxFractionDigits="1"
+														value="${weather.weatherPressure / 10}" /> hPa</td>
+											</tr>
+											<tr>
+												<!-- Link to where the data was fetched from -->
+												<td><a href="https://openweathermap.org/">OpenWeatherMap</a></td>
+												<td id="weather-update"><fmt:formatDate type="both"
+														pattern="YYYY-MM-dd H:mm" value="${currtime}" /></td>
+											</tr>
+										</table>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -287,7 +335,7 @@
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
 									<div class="card">
-										<div class="card-header d-flex flex-row">
+										<div class="card-header d-flex flex-row table-responsive">
 											<h4 class="d-flex">
 												<c:choose>
 													<c:when test="${cookie.language.value == 'fr' }">
@@ -312,7 +360,7 @@
 												<c:otherwise>
 													<c:out value="${n.content}" escapeXml="false" />
 												</c:otherwise>
-											</c:choose>			
+											</c:choose>
 										</div>
 									</div>
 								</div>

@@ -5,12 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The ScheduleResultsBean class is meant for passing schedule information
+ * The ScheduleResultsBean class is meant for passing schedule and results information
  * between DAOs and Servlets
  */
 public class ScheduleResultsBean {
 	
 	// ScheduleResults bean parameters
+	private int gameID;
 	private Date date;
 	private Time time;
 	private String homeTeam;
@@ -50,6 +51,10 @@ public class ScheduleResultsBean {
 	}
 
 /**************************** GETTERS *****************************/
+	public int getGameID() {
+		return this.gameID;
+	}
+	
 	public Date getDate() {
 		return this.date;
 	}
@@ -103,6 +108,10 @@ public class ScheduleResultsBean {
 	}
 	
 /**************************** SETTERS *****************************/
+	public void setGameID(int id) {
+		this.gameID = id;
+	}
+	
 	public void setDate(Date d) {
 		this.date = d;
 	}

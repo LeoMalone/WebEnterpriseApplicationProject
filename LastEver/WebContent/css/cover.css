@@ -38,3 +38,15 @@ body {
 .nav-link{
 	color: rgb(0, 0, 0);
 }
+
+.score{
+	font-size: 7vw;
+	font-szie: 30px;
+	font-size: 9.5vmin;
+}
+
+.responsive{
+	height: auto;
+	width: 100%;
+	max-width: 100px;
+}

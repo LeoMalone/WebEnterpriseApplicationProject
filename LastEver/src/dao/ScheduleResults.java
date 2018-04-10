@@ -336,7 +336,7 @@ public class ScheduleResults {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getResults = conn.prepareStatement("select s.gameDate, h.teamName, s.homeTeam, s.homeScore,"
+			getResults = conn.prepareStatement("select s.gameID, s.gameDate, h.teamName, s.homeTeam, s.homeScore,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID"
 					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
 					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
@@ -359,19 +359,20 @@ public class ScheduleResults {
 				ScheduleResultsBean srb = new ScheduleResultsBean();
 				List<ScorerBean> hlb = new ArrayList<ScorerBean>();
 				List<ScorerBean> alb = new ArrayList<ScorerBean>();
-				srb.setDate(resultSet.getDate(1));
-				srb.setHomeTeam(resultSet.getString(2));
-				srb.setHomeID(resultSet.getString(3));
-				srb.setHomeScore(resultSet.getInt(4));
-				srb.setAwayTeam(resultSet.getString(5));
-				srb.setAwayID(resultSet.getString(6));
-				srb.setAwayScore(resultSet.getInt(7));
-				srb.setStatus(resultSet.getString(8));
+				srb.setGameID(resultSet.getInt(1));
+				srb.setDate(resultSet.getDate(2));
+				srb.setHomeTeam(resultSet.getString(3));
+				srb.setHomeID(resultSet.getString(4));
+				srb.setHomeScore(resultSet.getInt(5));
+				srb.setAwayTeam(resultSet.getString(6));
+				srb.setAwayID(resultSet.getString(7));
+				srb.setAwayScore(resultSet.getInt(8));
+				srb.setStatus(resultSet.getString(9));
 				//gets the list of scorers for the home team
-				getHomeScorers(resultSet.getString(9), resultSet.getString(2), hlb);
+				getHomeScorers(resultSet.getString(10), resultSet.getString(3), hlb);
 				srb.setHomeScorer(hlb);
 				//gets the list of scorers for the away team
-				getAwayScorers(resultSet.getString(9), resultSet.getString(5), alb);
+				getAwayScorers(resultSet.getString(10), resultSet.getString(6), alb);
 				srb.setAwayScorer(alb);
 				sched.add(srb);
 			}

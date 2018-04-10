@@ -2,3 +2,19 @@
     max-height: 385px;
     overflow: hidden;
 }
+
+#weather{
+	font-size: 50px;
+}
+
+#weather-temp{
+	font-size: 55px;
+}
+
+#weather-details{
+	font-size: 15px;
+}
+
+#weather-update{
+	font-size: 15px;
+}
