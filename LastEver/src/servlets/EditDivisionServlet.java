@@ -81,11 +81,21 @@ public class EditDivisionServlet extends HttpServlet {
 
 				// If query is successful
 				if(Division.getDivisionForEdit(div)) {
-					request.setAttribute("userName", userName);
-					request.setAttribute("division", div);
-					response.setContentType("text/html");
-					RequestDispatcher rd = request.getRequestDispatcher("edit_division.jsp");  
-					rd.forward(request, response);					
+					//get league list for an admin to edit divisions
+					List<LeagueBean> lbl = new ArrayList<LeagueBean>();
+					if(League.getAllLeagues(lbl)) {
+						if(div.getLeageId() == null) {
+							request.setAttribute("leagueId", 0);
+						} else {
+							request.setAttribute("leagueId", div.getDivisionId());
+						}
+						request.setAttribute("leagues", lbl);
+						request.setAttribute("userName", userName);
+						request.setAttribute("division", div);						
+						response.setContentType("text/html");
+						RequestDispatcher rd = request.getRequestDispatcher("edit_division.jsp");  
+						rd.forward(request, response);
+					}					
 				}
 			}
 		}
@@ -105,13 +115,15 @@ public class EditDivisionServlet extends HttpServlet {
 
 		// Get all schedule parameters from jsp inputs
 		String newDivName = request.getParameter("editDivisionName");
+		String newLeague = request.getParameter("divRadio");
 
 		// If any parameter is null
-		if(newDivName == null || newDivName.equals("")) {
+		if(newDivName == null || newDivName.equals("") || newLeague.equals("") || newLeague == null) {
 			response.sendRedirect("./editDivision?=" + sb.toString());			
 		} else {
 			// Set DivisionBean parameters
 			division.setDivisionName(newDivName);
+			division.setLeagueId(newLeague);
 			// If query is successful
 			if(Division.saveChanges(division)) {
 				response.sendRedirect("./adminDivisions");

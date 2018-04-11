@@ -18,6 +18,7 @@ public class VenueBean {
 	private String country;
 	private String venueAddress;
 	private String venueAbout;
+	private String venueAboutFR;
 	private String venueContact;
 	private String venuePhoneNumber;
 	private String venueEmail;
@@ -68,6 +69,10 @@ public class VenueBean {
 	
 	public String getVenueAbout() {
 		return this.venueAbout;
+	}
+	
+	public String getVenueAboutFR() {
+		return this.venueAboutFR;
 	}
 	
 	public String getVenueContact() {
@@ -125,6 +130,10 @@ public class VenueBean {
 	
 	public void setVenueAbout(String ab) {
 		this.venueAbout = ab;
+	}
+	
+	public void setVenueAboutFR(String ab) {
+		this.venueAboutFR = ab;
 	}
 	
 	public void setVenueContact(String con) {

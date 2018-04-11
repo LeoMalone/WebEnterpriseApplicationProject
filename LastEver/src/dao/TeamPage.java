@@ -31,8 +31,10 @@ public class TeamPage {
 		try {
 			conn = ConnectionManager.getConnection();
 			getTeam = conn.prepareStatement("select t.teamID, t.teamLogo, t.teamName, t.teamAbbreviation,"
-					+ " d.divisionName, t.teamAbout from team t inner join teamxdivision td on td.teamID = t.teamID"
-					+ " inner join division d on d.divisionID = td.divisionID where t.teamID = ?");
+					+ " d.divisionName, t.teamAbout, t.teamAboutFR, l.leagueName from team t inner join teamxdivision"
+					+ " td on td.teamID = t.teamID inner join division d on d.divisionID = td.divisionID inner join"
+					+ " leaguexdivision ld on ld.divisionID = d.divisionID inner join league l on l.leagueID = ld.leagueID"
+					+ " where t.teamID = ?");
 			getTeam.setString(1, id);
 			resultSet = getTeam.executeQuery();
 			status = resultSet.next();
@@ -49,6 +51,8 @@ public class TeamPage {
 				tb.setTeamAbbreviation(resultSet.getString(4));
 				tb.setDivisionName(resultSet.getString(5));
 				tb.setTeamAbout(resultSet.getString(6));
+				tb.setTeamAboutFR(resultSet.getString(7));
+				tb.setLeagueName(resultSet.getString(8));
 				team.add(tb);
 			}
 

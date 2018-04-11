@@ -74,33 +74,35 @@ public class AdminDivisionsServlet extends HttpServlet {
 					}
 				}
 				
+				//get league list for an admin to edit divisions
+				List<LeagueBean> lbl = new ArrayList<LeagueBean>();
+				if(League.getAllLeagues(lbl)) {
+					request.setAttribute("leagues", lbl);
+				}
+				
 				if(request.getQueryString() != null) {
 					StringBuilder sb = new StringBuilder(request.getQueryString());
 					sb.deleteCharAt(0);
 					request.setAttribute("currentId", sb.toString());
 					
-					//get league list for an admin to edit divisions
-					List<LeagueBean> lbl = new ArrayList<LeagueBean>();
-					if(League.getAllLeagues(lbl)) {
-						request.setAttribute("leagues", lbl);
-					}
-					
 					//get division list for an admin to edit
 					List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 					if(League.getDivisionsByLeague(dlb, sb.toString())) {
 						request.setAttribute("allDiv", dlb);
-					}
-					
-					// Set content type and username and dispatch to jsp
-					request.setAttribute("userName", userName);
-					response.setContentType("text/html");
-					RequestDispatcher rd = request.getRequestDispatcher("admin_divisions.jsp");  
-			        rd.forward(request, response);
-			        
+					}				
 				} else {
-					// if no Id in url, redirect
-					response.sendRedirect("./adminDivisions?=1");
+					List<DivisionBean> dlb = new ArrayList<DivisionBean>();
+					if(League.getDivisionsWithNoLeague(dlb)) {
+						request.setAttribute("allDiv", dlb);
+					}
 				}
+				
+				// Set content type and username and dispatch to jsp
+				request.setAttribute("userName", userName);
+				response.setContentType("text/html");
+				RequestDispatcher rd = request.getRequestDispatcher("admin_divisions.jsp");  
+		        rd.forward(request, response);
+				
 			}
 		}
 	}

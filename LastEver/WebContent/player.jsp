@@ -121,18 +121,20 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
-														key="team_dd1" /></a> <a class="dropdown-item"
-													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
-													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /> <fmt:message key="team_dd1" /></a> <a
+													class="dropdown-item" href="teamRoster"><fmt:message
+														key="team_dd2" /></a> <a class="dropdown-item"
+													href="teamSchedule"><fmt:message key="team_dd3" /></a> <a
+													class="dropdown-item" href="teamEmails"><fmt:message
+														key="team_dd6" /></a> <a class="dropdown-item" href="logout"
+													method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -140,7 +142,9 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -156,13 +160,15 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -170,20 +176,24 @@
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#"
+											class="nav-link dropdown-toggle active" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message
-														key="nav_admin_users" /></a> <a class="dropdown-item"
-													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message
-														key="nav_admin_divs" /></a> <a class="dropdown-item"
-													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message
-														key="nav_admin_email" /></a> <a class="dropdown-item"
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="adminUsers"><fmt:message key="nav_admin_users" /></a>
+												<a class="dropdown-item" href="adminTeams"><fmt:message
+														key="nav_admin_teams" /></a> <a class="dropdown-item"
+													href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+												<a class="dropdown-item" href="adminSchedule"><fmt:message
+														key="nav_admin_sched" /></a> <a class="dropdown-item"
+													href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+												<a class="dropdown-item" href="adminLeagues"><fmt:message
+														key="nav_leagues" /></a> <a class="dropdown-item"
 													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
@@ -277,7 +287,9 @@
 																	<td><fmt:message key="not_available" /></td>
 																</c:when>
 																<c:otherwise>
-																	<td><c:out value="${p.divisionName}" /></td>
+																	<td><c:out value="${p.divisionName}" /><c:if test="${not empty p.leagueName}">, <c:out
+																				value="${p.leagueName}" />
+																		</c:if></td>
 																</c:otherwise>
 															</c:choose>
 														</tr>
@@ -350,6 +362,9 @@
 					</div>
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
+							<h4 class="card-header">
+								<fmt:message key="div_head5" />
+							</h4>
 							<div class="card-body table-responsive">
 								<table id="standings"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
@@ -378,7 +393,15 @@
 											<c:otherwise>
 												<c:forEach items="${statistics}" var="stats">
 													<tr>
-														<td><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
+														<td><c:choose>
+																<c:when test="${not empty stats.teamLogo}">
+																	<img class="responsive-sm" src="${stats.teamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${stats.teamID}">${stats.teamName}</a></td>
 														<td><c:forEach items="${player}" var="p">
 																<c:choose>
 																	<c:when test="${p.hidePage eq true}">

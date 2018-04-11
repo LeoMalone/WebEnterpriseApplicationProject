@@ -9,6 +9,7 @@ public class StandingsBean {
 	// Standings bean parameters
 	private int rank;
 	private String teamName;
+	private String teamLogo;
 	private int gamesPlayed;
 	private int wins;
 	private int losses;
@@ -43,6 +44,10 @@ public class StandingsBean {
 	
 	public String getTeamName() {
 		return this.teamName;
+	}
+	
+	public String getTeamLogo() {
+		return this.teamLogo;
 	}
 	
 	public int getGamesPlayed() {
@@ -88,6 +93,10 @@ public class StandingsBean {
 	
 	public void setTeamName(String team) {
 		this.teamName = team;
+	}
+	
+	public void setTeamLogo(String logo) {
+		this.teamLogo = logo;
 	}
 	
 	public void setGamesPlayed(int gp) {

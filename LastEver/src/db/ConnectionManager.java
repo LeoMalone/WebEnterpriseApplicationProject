@@ -31,6 +31,7 @@ public class ConnectionManager {
 			info.setProperty("javax.net.ssl.trustStore","/certs/laststore");
 			info.setProperty("javax.net.ssl.trustStorePassword","lastever");
 			info.setProperty("useSSL", "true");
+			info.setProperty("characterEncoding", "UTF-8");
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url, info);
 		

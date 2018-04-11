@@ -27,12 +27,14 @@ public class RulesSummaryServlet extends HttpServlet {
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
 		
+		//cookie variables
 		String userName = null;
 		String language = null;		
 		
+		//get cookies
 		Cookie[] cookies = request.getCookies();
+		//if there are cookies then set userName and language to the cookie values if they exist
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("username"))
@@ -41,6 +43,7 @@ public class RulesSummaryServlet extends HttpServlet {
 					language = cookie.getValue();
 			}
 		}
+		//if there is no cookies and the language has not been set then create the cookie with English as default language
 		if(language == null) {
 			Cookie cookieLanguage = new Cookie("language", "en");
 			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -60,12 +63,12 @@ public class RulesSummaryServlet extends HttpServlet {
 				}
 			}		
 				
-			// Set leagues for navbar
+			// Set leagues for navbar, set attributes and content type and dispatch to jsp
 			List<LeagueBean> llb = new ArrayList<LeagueBean>();
 			League.getAllLeagues(llb);
 			request.setAttribute("league", llb);
-			
 			request.setAttribute("userName", userName);
+			response.setContentType("text/html");
 			RequestDispatcher rd = request.getRequestDispatcher("rules_summary.jsp");  
 	        rd.forward(request, response);	
 		}

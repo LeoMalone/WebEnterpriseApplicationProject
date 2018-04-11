@@ -26,7 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Contact Us<fmt:message key="contact" /></title>
+	<title>Last Ever - <fmt:message key="contact" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -105,11 +105,11 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
@@ -122,7 +122,7 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -134,16 +134,16 @@
 								</c:choose>
 								<c:choose>
 								
-																	<%--  IF SIGNED IN AS A REFEREE --%>
+									<%--  IF SIGNED IN AS A REFEREE --%>
 									<c:when test="${userType == './referee'}">
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
 												<a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a></li>
 									</c:when>
@@ -153,15 +153,21 @@
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#"
+											class="nav-link dropdown-toggle active" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-
-												<a class="dropdown-item" href="${userType}">${userName}</a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a></li>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a>
+												<a class="dropdown-item" href="adminUsers"><fmt:message	key="nav_admin_users" /></a>
+												<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+												<a class="dropdown-item" href="adminDivisions"><fmt:message	key="nav_admin_divs" /></a>
+												<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+												<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+												<a class="dropdown-item" href="adminLeagues"><fmt:message key="nav_leagues" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
+											</div>
+										</li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>

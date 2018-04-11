@@ -216,14 +216,7 @@
 											name="newPassConfirm"
 											placeholder="<fmt:message key='signin_retype_pass' />"
 											required>
-									</div>
-									<div class="form-check">
-										<input aria-describedby="adminHelp" class="form-check-input"
-											type="radio" name="createRadio" value="Administrator"
-											required> <label class="form-check-label"
-											for="createRadio"> <fmt:message key="signin_prop1" />
-										</label>
-									</div>
+									</div>									
 									<div class="form-check">
 										<input class="form-check-input" type="radio"
 											name="createRadio" value="Team Owner"> <label
@@ -236,10 +229,9 @@
 											name="createRadio" value="Referee"> <label
 											class="form-check-label" for="createRadio"> <fmt:message
 												key="signin_prop3" />
-										</label> <small id="emailHelp" class="form-text text-muted"><fmt:message
-												key="sign_in_verify" /></small>
+										</label>
 									</div>
-
+									<br />
 									<div class="g-recaptcha"
 										data-sitekey="6LcxBE8UAAAAAG51y2iFhJTeUiVYMUC70QhFTbqM"></div>
 

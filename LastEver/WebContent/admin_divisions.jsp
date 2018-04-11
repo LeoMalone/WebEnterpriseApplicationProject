@@ -94,20 +94,19 @@
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle active" href="#"
 								id="navbarDropdownPortfolio" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+								aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdownPortfolio">
-									<a class="dropdown-item" href="${userType}">${userName}</a> <a
-										class="dropdown-item" href="adminUsers"><fmt:message
-											key="nav_admin_users" /></a> <a class="dropdown-item"
-										href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
-										class="dropdown-item" href="adminDivisions"><fmt:message
-											key="nav_admin_divs" /></a> <a class="dropdown-item"
-										href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-									<a class="dropdown-item" href="adminEmails"><fmt:message
-											key="nav_admin_email" /></a> <a class="dropdown-item"
-										href="logout"><fmt:message key="team_dd4" /></a>
-								</div></li>
+									<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a>
+									<a class="dropdown-item" href="adminUsers"><fmt:message	key="nav_admin_users" /></a>
+									<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+									<a class="dropdown-item" href="adminDivisions"><fmt:message	key="nav_admin_divs" /></a>
+									<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+									<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+									<a class="dropdown-item" href="adminLeagues"><fmt:message key="nav_leagues" /></a>
+									<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
+								</div>
+							</li>
 							<li class="nav-item">
 								<form>
 									<select class="form-control form-control-sm" name="language"
@@ -130,7 +129,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}:Divisions</h1>
+				<h1 class="my-4"><c:out value="${userName}:" />Divisions</h1>
 				<a href="./divisionCreate" class="btn btn-success"><fmt:message
 						key="ad_create" /></a>
 				<div class="row">
@@ -138,6 +137,10 @@
 						<div class="card bg-light">
 							<div class="card-header">
 								<ul class="nav nav-tabs card-header-tabs">
+									<li class="nav-item"><a
+											class="nav-link ${currentId==null?'active':''}"
+											href="./adminDivisions">No League</a>										
+									</li>
 									<c:forEach items="${leagues}" var="league">
 										<li class="nav-item"><a
 											class="nav-link ${league.leagueId==currentId?'active':''}"

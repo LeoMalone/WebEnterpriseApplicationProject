@@ -17,6 +17,7 @@ public class PlayerBean {
 	private float playerWeight;
 	private String playerPhoto;
 	private String divisionName;
+	private String leagueName;
 	private String teamName;
 	private boolean hidePage;
 
@@ -72,6 +73,10 @@ public class PlayerBean {
 		return this.divisionName;
 	}
 	
+	public String getLeagueName() {
+		return this.leagueName;
+	}
+	
 	public String getTeamName() {
 		return this.teamName;
 	}
@@ -119,6 +124,10 @@ public class PlayerBean {
 
 	public void setDivisionName(String dn) {
 		this.divisionName = dn;	
+	}
+	
+	public void setLeagueName(String ln) {
+		this.leagueName = ln;	
 	}
 	
 	public void setTeamName(String tn) {

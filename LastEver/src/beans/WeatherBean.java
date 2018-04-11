@@ -15,8 +15,7 @@ public class WeatherBean {
 	private String weatherIcon;
 	private int weatherCode;
 	private String weatherDescription;
-	private String weatherDescriptionFR;
-	private int weatherPressure;
+	private Double weatherPressure;
 	private int weatherHumidity;
 	private Double weatherWind;
 	private Double weatherGust;
@@ -52,11 +51,7 @@ public class WeatherBean {
 		return this.weatherDescription;
 	}
 	
-	public String getWeatherDescriptionFR() {
-		return this.weatherDescriptionFR;
-	}
-	
-	public int getWeatherPressure() {
+	public Double getWeatherPressure() {
 		return this.weatherPressure;
 	}
 
@@ -103,13 +98,10 @@ public class WeatherBean {
 	
 	public void setWeatherDescription(String wd) {
 		this.weatherDescription = wd;
+		this.weatherDescription = this.weatherDescription.replaceAll(" ", "_");
 	}
 	
-	public void setWeatherDescriptionFR(String wdfr) {
-		this.weatherDescriptionFR = wdfr;
-	}
-	
-	public void setWeatherPressure(int wp) {
+	public void setWeatherPressure(Double wp) {
 		this.weatherPressure = wp;
 	}
 

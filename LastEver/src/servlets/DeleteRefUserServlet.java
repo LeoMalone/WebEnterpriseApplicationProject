@@ -28,17 +28,19 @@ public class DeleteRefUserServlet extends HttpServlet {
 	@Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
-		response.setContentType("text/html");
-		
+		// get query string
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
 		
+		// set content type and attributes and redirect to right page
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
 		request.setAttribute("allDiv", dlb);
-		
+		response.setContentType("text/html");
 		if(EditRefUser.deleteRefUser(Integer.parseInt(sb.toString()))) {
 			response.sendRedirect("./refUsers");
 		}
+		else
+			response.sendRedirect("./referee");
 	}	
 }

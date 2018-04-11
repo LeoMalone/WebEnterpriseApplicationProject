@@ -31,8 +31,8 @@ public class EditRefUser {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password from users where"
-	        		+ " userType='referee' and username=?");
+	        getUser = conn.prepareStatement("select userID, username, userType, emailAddress, password, refereeID from users"
+	        		+ " where userType='referee' and username=?");
 	        getUser.setString(1, username);
 	        rs = getUser.executeQuery();	              
 	        
@@ -42,6 +42,7 @@ public class EditRefUser {
 	        	user.setUserType(rs.getString(3));
 	        	user.setEmail(rs.getString(4));
 	        	user.setPassword(rs.getString(5));
+	        	user.setRefId(rs.getString(6));
 	        	status = true;
 	        }
 	        

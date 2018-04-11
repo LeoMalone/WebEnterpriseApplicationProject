@@ -97,7 +97,7 @@
 										In</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="${userType}">${userName}</a></li>
+								<li class="nav-item"><a class="nav-link" href="${userType}"><c:out value="${userName}"/></a></li>
 							</c:otherwise>
 						</c:choose>
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
@@ -123,7 +123,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}: Users</h1>
+				<h1 class="my-4"><c:out value="${userName}"/>: Users</h1>
 				<a href="/createUser" class="btn btn-success">Create New User</a>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">

@@ -94,7 +94,7 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName}
+							aria-haspopup="true" aria-expanded="false"><c:out value="${userName}"/>
 						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
@@ -125,7 +125,7 @@
 		<fmt:bundle basename="TestBundle">
 		<div class="cards-container container">		
 				<h1 class="my-4">
-					${userName}: <fmt:message key="team_selectCreate" />
+					<c:out value="${userName}"/>: <fmt:message key="team_selectCreate" />
 				</h1>
 				
 				<!--  first section - select a team -->

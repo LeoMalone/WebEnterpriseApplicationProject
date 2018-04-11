@@ -11,6 +11,7 @@ import beans.StandingsBean;
 
 /**
  * The Standings class gets the standings for the current division
+ * @author Kevin Villemaire
  */
 public class Standings {
 
@@ -33,7 +34,7 @@ public class Standings {
 		// Connect to Database and execute SELECT query with StandingsBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getStandings = conn.prepareStatement("select team, GP, W, D, L, PTS, GF, GA, GD from standings"
+			getStandings = conn.prepareStatement("select team, GP, W, D, L, PTS, GF, GA, GD, logo from standings"
 					+ " where divisionID=? order by PTS desc, W desc, L asc, GD desc");
 			getTeamID = conn.prepareStatement("select teamID from team where teamName=?");
 			getStandings.setString(1, id);
@@ -61,6 +62,7 @@ public class Standings {
 				sb.setGoalsFor(resultSet.getInt(7));
 				sb.setGoalsAgainst(resultSet.getInt(8));
 				sb.setGoalDiff(resultSet.getInt(9));
+				sb.setTeamLogo(resultSet.getString(10));
 				
 				//Loop through and add the teamID to the StandingsBean
 				while(rs.next())

@@ -25,7 +25,7 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - Referee<fmt:message key="home" /></title>
+	<title>Last Ever - <fmt:message key="ref_home" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -91,13 +91,16 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link active dropdown-toggle" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out
+									value="${userName}" />
+						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
 
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
-									class="dropdown-item" href="logout"><fmt:message
-										key="team_dd4" /></a></li>
+								<a class="dropdown-item" href="${userType}"><c:out
+										value="${userName}" /></a> <a class="dropdown-item" href="logout"><fmt:message
+										key="team_dd4" /></a>
+							</div></li>
 
 						<li class="nav-item"><a class="nav-link" href=""></a></li>
 						<li class="nav-item">
@@ -124,30 +127,60 @@
 		<div class="cards-container container">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					<c:out value="${userName}" />:
-					<fmt:message key="signin_prop3" />
-					<fmt:message key="signin_prop3" />
-					<fmt:message key="div_head3_text2" />
-					<br>
+					<c:out value="${userName}" />
+					:
+					<fmt:message key="ref_home" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="admin-cards">
 					<div class="row">
+
+						<c:if test="${empty ref.refId}">
+							<div class="col-lg-4 mb-4">
+								<div class="card h-100 text-white bg-dark">
+									<h4 class="card-header">
+										<fmt:message key="ref_create_ref" />
+									</h4>
+									<div class="card-body">
+										<p class="card-text">
+											<fmt:message key="ref_create_ref_body" />
+											<br>
+										</p>
+									</div>
+									<div
+										class="card-footer bg-transparent d-flex justify-content-between">
+										<div>
+											<form action="./findReferee" method="post">
+												<input type="hidden" name="refID" value="${ref.id}" /> <input
+													type="submit" class="btn btn-outline-light"
+													value="<fmt:message key="ref_find_ref" />" />
+											</form>
+										</div>
+										<div>
+										<form action="./createReferee" method="post">
+												<input type="hidden" name="refID" value="${ref.id}" /> <input
+													type="submit" class="btn btn-outline-light"
+													value="<fmt:message key="ref_create_ref" />" />
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:if>
 						<!-- View and edit referee profiles -->
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									<c:out value="${userName}" />'s
 									<fmt:message key="au_profile" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										<fmt:message key="ah_user_body" />
+										<fmt:message key="ref_edit_profile_body" />
 										<br>
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
-									<a href="./refUsers?=${id}" class="btn btn-outline-light"><fmt:message
+									<a href="./refUsers?=${ref.id}" class="btn btn-outline-light"><fmt:message
 											key="au_edit" /></a>
 								</div>
 							</div>
@@ -156,12 +189,11 @@
 						<div class="col-lg-4 mb-4">
 							<div class="card h-100 text-white bg-dark">
 								<h4 class="card-header">
-									<c:out value="${userName}" />'s
 									<fmt:message key="ah_sched_title" />
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										<fmt:message key="ah_sched_body" />
+										<fmt:message key="ref_schedule_body" />
 										<br>
 									</p>
 								</div>
@@ -179,7 +211,7 @@
 								</h4>
 								<div class="card-body">
 									<p class="card-text">
-										<fmt:message key="email_send_options" />
+										<fmt:message key="ref_emails_body" />
 									</p>
 								</div>
 								<div class="card-footer bg-transparent">
@@ -198,18 +230,20 @@
 					</form>
 				</div>
 				<!-- /row -->
+			</fmt:bundle>
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<footer class="page-footer py-3 bg-dark">
-		<div class="container-fluid">
-			<p class="m-0 text-center text-white">
-				<fmt:message key="footer_copyright" />
-				&copy; <img src="images/logo_sm4.png" /> 2018
-			</p>
-		</div>
-	</footer>
+	<fmt:bundle basename="TestBundle">
+		<!-- Footer -->
+		<footer class="page-footer py-3 bg-dark">
+			<div class="container-fluid">
+				<p class="m-0 text-center text-white">
+					<fmt:message key="footer_copyright" />
+					&copy; <img src="images/logo_sm4.png" /> 2018
+				</p>
+			</div>
+		</footer>
 	</fmt:bundle>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
