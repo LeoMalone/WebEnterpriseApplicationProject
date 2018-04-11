@@ -226,6 +226,54 @@ public class League {
 		}	    
 		return status;
 	}
+	
+	/**
+	 * The getDivisionsByLeague method gets the divisions based on leagueId
+	 * @param divs - List<DivisionBean
+	 * @param leagueId - String
+	 * @return status - boolean value
+	 */
+	public static boolean getDivisionsWithNoLeague(List<DivisionBean> divs) {
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement getDivisions = null;	// SQL query
+		ResultSet rs = null;					// returned query result set
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			getDivisions = conn.prepareStatement("SELECT d.divisionID, d.divisionName FROM division d natural left join leaguexdivision ld WHERE ld.divisionID IS NULL;");
+			rs = getDivisions.executeQuery();
+
+			while(rs.next()) {
+				DivisionBean div = new DivisionBean();
+				div.setDivisionId(rs.getString(1));
+				div.setDivisionName(rs.getString(2));
+				divs.add(div);
+				status = true;
+			}
+
+			// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getDivisions != null) {
+				try {
+					getDivisions.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
 
 	/**
 	 * The getNews method gets all the news associated with the league
@@ -329,5 +377,205 @@ public class League {
 			}
 		}
 		return status;
+	}
+	
+	/**
+	 * The createNewLeague method handles the insertion into the DB of a League
+	 * @param l - LeagueBean
+	 * @return status - boolean value
+	 */
+	public static boolean createNewLeague(LeagueBean l) {
+		
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement insertNewLeague = null;
+		int result = 0;
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			insertNewLeague = conn.prepareStatement("INSERT INTO league (leagueName, leaguePlayoffs, leaguePlayoffTeams, leagueStatus) VALUE (?,?,?,?)");
+			insertNewLeague.setString(1, l.getLeagueName());
+			insertNewLeague.setString(2, l.getLeaguePlayoffs());
+			insertNewLeague.setString(3, l.getLeaguePlayoffTeams());
+			insertNewLeague.setString(4, l.getLeagueStatus());
+			
+			result = insertNewLeague.executeUpdate();
+			if(result == 1) {
+				status = true;				
+			}			
+
+		// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (insertNewLeague != null) {
+				try {
+					insertNewLeague.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
+	/**
+	 * The getLeagueForEdit method gets the league to be edited
+	 * @param l - LeagueBean
+	 * @return status - boolean value
+	 */
+	public static boolean getLeagueForEdit(LeagueBean l) {
+		boolean status = false;					// Status of createNewUser
+		Connection conn = null;					// DB Connection
+		PreparedStatement getLeague = null;		// SQL query
+		ResultSet rs = null;					// returned query result set
+
+		// Connect to Database 
+		try {
+			conn = ConnectionManager.getConnection();
+			getLeague = conn.prepareStatement("SELECT leagueName, leaguePlayoffs, leaguePlayoffTeams, leagueStatus from league WHERE leagueId=?");
+			getLeague.setString(1, l.getLeagueId());
+			rs = getLeague.executeQuery();
+
+			if(rs.next()) {
+				l.setLeagueName(rs.getString(1));
+				l.setLeaguePlayoffs(rs.getString(2));
+				l.setLeaguePlayoffTeams(rs.getString(3));
+				l.setStatus(rs.getString(4));
+				status = true;
+			}
+
+		// Catch all possible Exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (getLeague != null) {
+				try {
+					getLeague.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	    
+		return status;
+	}
+	
+	/**
+	 * The saveChanges method saves the changes for one league into the db
+	 * @param l - LeagueBean from servlet
+	 * @return status - boolean value
+	 */
+	public static boolean saveChanges(LeagueBean l) {
+		
+		boolean status = false;					// Status of createNewUser
+	    Connection conn = null;					// DB Connection
+	    PreparedStatement updateLeague = null;
+	    int result = 0;
+	
+	    // Connect to Database 
+	    try {
+	        conn = ConnectionManager.getConnection();
+	        updateLeague = conn.prepareStatement("UPDATE league SET leagueName=?, leaguePlayoffs=?, leaguePlayoffTeams=?, leagueStatus=? WHERE leagueID=?");
+	        updateLeague.setString(1, l.getLeagueName());
+	        updateLeague.setString(2, l.getLeaguePlayoffs());
+	        updateLeague.setString(3, l.getLeaguePlayoffTeams());
+	        updateLeague.setString(4, l.getLeagueStatus());
+	        updateLeague.setString(5, l.getLeagueId());
+	        result = updateLeague.executeUpdate();	        
+	        if(result == 1) {
+	        	status = true;
+	        }
+	        
+	    // Catch all possible Exceptions
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (updateLeague != null) {
+	            try {
+	            	updateLeague.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }	    
+	    return status;
+	}
+	
+	/**
+	 * The deleteDivision method deletes the division recursively
+	 * @param divId - String
+	 * @return status - boolean value
+	 */
+	public static boolean deleteLeague(String lId) {
+		boolean status = false;					// Status of createNewUser
+	    Connection conn = null;					// DB Connection
+	    PreparedStatement deleteLXD = null;
+	    PreparedStatement deleteLeague = null;
+	    int result = 0;
+	
+	    // Connect to Database 
+	    try {
+	        conn = ConnectionManager.getConnection();
+	        deleteLXD = conn.prepareStatement("DELETE FROM leaguexdivision USING leaguexdivision, league WHERE `league`.`leagueID` = `leaguexdivision`.`leagueID` AND league.leagueID=?");
+	        deleteLXD.setString(1, lId);
+	        result = deleteLXD.executeUpdate();
+	        if(result >= 0) {
+	        	deleteLeague = conn.prepareStatement("DELETE FROM league USING league WHERE league.leagueID=?");
+	        	deleteLeague.setString(1, lId);
+		        result = deleteLeague.executeUpdate();	        
+		        if(result >= 0) {		        	
+	        		status = true;	        		
+	        	}
+	        }
+	        
+	    // Catch all possible Exceptions
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteLXD != null) {
+	            try {
+	            	deleteLXD.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (deleteLeague != null) {
+	            try {
+	            	deleteLeague.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }	    
+	    return status;
 	}
 }

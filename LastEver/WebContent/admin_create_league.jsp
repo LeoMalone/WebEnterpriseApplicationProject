@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
+
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -25,42 +26,11 @@
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="admin_title_eu" /></title>
+	<title>Last Ever - <fmt:message key="admin_title_ct" /></title>
 </fmt:bundle>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
-		<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog"
-			aria-labelledby="deleteUserLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="deleteUserLabel">
-							<fmt:message key="admin_eu_model_del" />
-							: ${user.username}
-						</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<fmt:message key="admin_eu_model_body" />
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">
-							<fmt:message key="admin_eu_model_cls" />
-						</button>
-						<form action="deleteUser?=${user.id}" method="post">
-							<button type="submit" class="btn btn-danger">
-								<fmt:message key="admin_eu_del" />
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
 		- sets parent link active
@@ -119,7 +89,7 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-							<li class="nav-item dropdown"><a
+						<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle active" href="#"
 								id="navbarDropdownPortfolio" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
@@ -136,7 +106,7 @@
 								</div>
 							</li>
 						<li class="nav-item">
-							<form action="./adminUsers" method="GET">
+							<form>
 								<select class="form-control form-control-sm" name="language"
 									onchange="submit()">
 									<option value="en"
@@ -154,96 +124,54 @@
 		</nav>
 
 		<div class="main-cover">
-			<!-- Page Content
-			- card with information on it
-			- text, form, button to sign in
-			-->
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<c:out value="${userName}" />:
-					<fmt:message key="admin_eu_head" />
-					<c:out value="${user.username}" />
+					<c:out value="${userName}: " />
+					<fmt:message key="admin_cl_title" />
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="admin_eu_title" />
+								<fmt:message key="admin_cl_header" />
 							</h4>
-							<div class="card-body">
-								<p class="card-text">
-								<form action="editUser?=${user.id}" method="POST">
+							<form action="createLeague" method="POST">
+								<div class="card-body">
 									<div class="form-group">
-										<label for="editFirstName"><fmt:message
-												key="signin_fname" /></label> <input type="text"
-											class="form-control" name="editFirstName"
-											value="${user.firstName}" required>
+										<label for="newLeagueName"><fmt:message key="admin_cl_name" /></label>
+										<input type="text" class="form-control" name="newLeagueName" placeholder="<fmt:message key="admin_cl_name_place"/>" required>
 									</div>
 									<div class="form-group">
-										<label for="editLastName"><fmt:message
-												key="signin_lname" /></label> <input type="text"
-											class="form-control" name="editLastName"
-											value="${user.lastName}" required>
+										<label for="newLeaguePlayoffs"><fmt:message key="admin_cl_ph" /></label>
+										<select class="form-control" name="newLeaguePlayoffs" required>
+										  <option value="0"><fmt:message key="admin_cl_ph_1"/></option>
+										  <option value="1"><fmt:message key="admin_cl_ph_2"/></option>										 
+										</select>
 									</div>
 									<div class="form-group">
-										<label for="newUsername"><fmt:message
-												key="signin_user" /></label> <input type="text"
-											class="form-control" name="editUsername"
-											value="${user.username}" required>
+										<label for="leaguePlayoffTeams"><fmt:message key="admin_cl_pt" /></label>
+										<input type="number" class="form-control" name="leaguePlayoffTeams" placeholder="<fmt:message key="admin_cl_pt_place"/>" required>
 									</div>
 									<div class="form-group">
-										<label for="newEmail"><fmt:message key="signin_email" /></label>
-										<input type="email" class="form-control" name="editEmail"
-											aria-describedby="emailHelp" value="${user.emailAddress}"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newPass"><fmt:message
-												key="signin_password" /></label> <input type="password"
-											class="form-control" name="editPass"
-											placeholder="<fmt:message key="admin_eu_pass" />">
-									</div>
-									<div class="form-check">
-										<input aria-describedby="adminHelp" class="form-check-input"
-											type="radio" name="editRadio" value="Administrator"
-											${user.userType=='Administrator'?'checked':''}> <label
-											class="form-check-label" for="editRadio"> <fmt:message
-												key="signin_prop1" />
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="editRadio"
-											value="Team Owner"
-											${user.userType=='Team Owner'?'checked':''}> <label
-											class="form-check-label" for="editRadio"> <fmt:message
-												key="signin_prop2" />
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="editRadio"
-											value="Referee" ${user.userType=='Referee'?'checked':''}>
-										<label class="form-check-label" for="editRadio"> <fmt:message
-												key="signin_prop3" />
-										</label>
-									</div>
-									<br />
-									<button type="submit" class="btn btn-outline-success">
-										<fmt:message key="admin_eu_save" />
+										<label for="newLeagueStatus"><fmt:message key="admin_cl_status" /></label>
+										<select class="form-control" name="newLeagueStatus" required>
+										  <option value="Newly Created"><fmt:message key="admin_cl_status_1"/></option>
+										  <option value="In Progress"><fmt:message key="admin_cl_status_2"/></option>
+										  <option value="Playoffs"><fmt:message key="admin_cl_status_3"/></option>
+										</select>									
+									</div>									
+								</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success">
+										<fmt:message key="signin_button1" />
 									</button>
-								</form>
-								</p>
-							</div>
-							<div class="card-footer">
-								<button type="button" class="btn btn-danger" data-toggle="modal"
-									data-target="#deleteUser">
-									<fmt:message key="admin_eu_del" />
-								</button>
-							</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-				<!-- /.row -->
 			</div>
+			<!-- /.row -->
 		</div>
 
 		<!-- Footer -->

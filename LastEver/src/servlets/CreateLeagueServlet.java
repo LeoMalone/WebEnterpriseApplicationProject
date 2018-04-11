@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,21 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
 import beans.LeagueBean;
 import dao.League;
 
-/**
- * The AdminDivisionsServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option view Divisions.
- * @author Liam Maloney, Kevin Villemaire
- */
-public class AdminDivisionsServlet extends HttpServlet {
+public class CreateLeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * doGet method mapped to /adminDivisions
+	 * doGet method mapped to /createLeague	
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
@@ -74,35 +67,43 @@ public class AdminDivisionsServlet extends HttpServlet {
 					}
 				}
 				
-				//get league list for an admin to edit divisions
-				List<LeagueBean> lbl = new ArrayList<LeagueBean>();
-				if(League.getAllLeagues(lbl)) {
-					request.setAttribute("leagues", lbl);
-				}
-				
-				if(request.getQueryString() != null) {
-					StringBuilder sb = new StringBuilder(request.getQueryString());
-					sb.deleteCharAt(0);
-					request.setAttribute("currentId", sb.toString());
-					
-					//get division list for an admin to edit
-					List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-					if(League.getDivisionsByLeague(dlb, sb.toString())) {
-						request.setAttribute("allDiv", dlb);
-					}				
-				} else {
-					List<DivisionBean> dlb = new ArrayList<DivisionBean>();
-					if(League.getDivisionsWithNoLeague(dlb)) {
-						request.setAttribute("allDiv", dlb);
-					}
-				}
-				
-				// Set content type and username and dispatch to jsp
+				// Set content type and username and dispatch to jsp 
 				request.setAttribute("userName", userName);
 				response.setContentType("text/html");
-				RequestDispatcher rd = request.getRequestDispatcher("admin_divisions.jsp");  
-		        rd.forward(request, response);
-				
+				RequestDispatcher rd = request.getRequestDispatcher("admin_create_league.jsp");  
+				rd.forward(request, response);					
+			}
+		}
+	}
+	
+	/**
+	 * doPost method mapped to /createLeague	
+	 */
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//  Get new division name from jsp input
+		String newLeagueName = request.getParameter("newLeagueName");
+		String newLeaguePlayoffs = request.getParameter("newLeaguePlayoffs");
+		String leaguePlayoffTeams = request.getParameter("leaguePlayoffTeams");
+		String newLeagueStatus = request.getParameter("newLeagueStatus");
+		
+		// If any parameter is null
+		if(newLeagueName == null || newLeagueName == "" || newLeaguePlayoffs == null || newLeaguePlayoffs == "" || 
+				leaguePlayoffTeams == null || leaguePlayoffTeams == "" || newLeagueStatus == null || newLeagueStatus == "") {
+			response.sendRedirect("./createLeague");
+			
+		} else {
+			// If division is created
+			LeagueBean league = new LeagueBean();
+			league.setLeaguePlayoffs(newLeaguePlayoffs);
+			league.setLeagueName(newLeagueName);
+			league.setLeaguePlayoffTeams(leaguePlayoffTeams);
+			league.setStatus(newLeagueStatus);
+			
+			if (League.createNewLeague(league)) {
+				response.sendRedirect("./adminLeagues");				
+			} else {
+				response.sendRedirect("./createLeague");
 			}
 		}
 	}

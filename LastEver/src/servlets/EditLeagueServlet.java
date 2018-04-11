@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -10,22 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.DivisionBean;
 import beans.LeagueBean;
-import dao.Division;
 import dao.League;
 
-/**
- * The EditDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option edit division.
- * @author Liam Maloney, Kevin Villemaire
- */
-public class EditDivisionServlet extends HttpServlet {
+public class EditLeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * doGet method mapped to /editDivision	
+	 * doGet method mapped to /editLeague
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,13 +48,13 @@ public class EditDivisionServlet extends HttpServlet {
 				}
 			}
 			// If Language is null, set default language to en
-			if(language == null) {
+			if (language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
 			// Set cookie language for users
-			else {	
+			else {
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
 
@@ -73,62 +67,60 @@ public class EditDivisionServlet extends HttpServlet {
 					}
 				}
 
-				//get id from url and set DivisionBean id
+				// get id from url and set DivisionBean id
 				StringBuilder sb = new StringBuilder(request.getQueryString());
 				sb.deleteCharAt(0);
-				DivisionBean div = new DivisionBean();
-				div.setDivisionId(sb.toString());
+				LeagueBean league = new LeagueBean();
+				league.setLeagueId(sb.toString());
 
 				// If query is successful
-				if(Division.getDivisionForEdit(div)) {
-					//get league list for an admin to edit divisions
-					List<LeagueBean> lbl = new ArrayList<LeagueBean>();
-					if(League.getAllLeagues(lbl)) {
-						if(div.getLeageId() == null) {
-							request.setAttribute("leagueId", 0);
-						} else {
-							request.setAttribute("leagueId", div.getDivisionId());
-						}
-						request.setAttribute("leagues", lbl);
-						request.setAttribute("userName", userName);
-						request.setAttribute("division", div);						
-						response.setContentType("text/html");
-						RequestDispatcher rd = request.getRequestDispatcher("edit_division.jsp");  
-						rd.forward(request, response);
-					}					
+				if (League.getLeagueForEdit(league)) {
+					// get league list for an admin to edit divisions
+					request.setAttribute("userName", userName);
+					request.setAttribute("editLeague", league);
+					response.setContentType("text/html");
+					RequestDispatcher rd = request.getRequestDispatcher("edit_league.jsp");
+					rd.forward(request, response);
 				}
 			}
 		}
 	}
 
 	/**
-	 * doPost method mapped to /editDivision	
+	 * doPost method mapped to /editLeague
 	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Get id from url and add it to divisionBean
-		DivisionBean division = new DivisionBean();
+		LeagueBean league = new LeagueBean();
 		StringBuilder sb = new StringBuilder(request.getQueryString());
 		sb.deleteCharAt(0);
-		division.setDivisionId(sb.toString());
+		
 
 		// Get all schedule parameters from jsp inputs
-		String newDivName = request.getParameter("editDivisionName");
-		String newLeague = request.getParameter("divRadio");
+		String newLeagueName = request.getParameter("newLeagueName");
+		String newLeaguePlayoffs = request.getParameter("newLeaguePlayoffs");
+		String leaguePlayoffTeams = request.getParameter("leaguePlayoffTeams");
+		String newLeagueStatus = request.getParameter("newLeagueStatus");
 
 		// If any parameter is null
-		if(newDivName == null || newDivName.equals("") || newLeague.equals("") || newLeague == null) {
-			response.sendRedirect("./editDivision?=" + sb.toString());			
+		if(newLeagueName == null || newLeagueName == "" || newLeaguePlayoffs == null || newLeaguePlayoffs == "" || 
+				leaguePlayoffTeams == null || leaguePlayoffTeams == "" || newLeagueStatus == null || newLeagueStatus == "") {
+			response.sendRedirect("./editLeague?="+sb.toString());
+			
 		} else {
-			// Set DivisionBean parameters
-			division.setDivisionName(newDivName);
-			division.setLeagueId(newLeague);
-			// If query is successful
-			if(Division.saveChanges(division)) {
-				response.sendRedirect("./adminDivisions");
+			// If division is created
+			league.setLeagueId(sb.toString());
+			league.setLeaguePlayoffs(newLeaguePlayoffs);
+			league.setLeagueName(newLeagueName);
+			league.setLeaguePlayoffTeams(leaguePlayoffTeams);
+			league.setStatus(newLeagueStatus);
+			
+			if (League.saveChanges(league)) {
+				response.sendRedirect("./adminLeagues");				
 			} else {
-				response.sendRedirect("./editDivision?=" + sb.toString());
+				response.sendRedirect("./editLeague?="+sb.toString());
 			}
 		}
 	}

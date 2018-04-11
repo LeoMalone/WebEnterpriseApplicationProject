@@ -3,6 +3,46 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+	
+	<servlet>
+		<servlet-name>DeleteLeagueServlet</servlet-name>
+		<servlet-class>servlets.DeleteLeagueServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteLeagueServlet</servlet-name>
+		<url-pattern>/deleteLeague</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditLeagueServlet</servlet-name>
+		<servlet-class>servlets.EditLeagueServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EditLeagueServlet</servlet-name>
+		<url-pattern>/editLeague</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateLeagueServlet</servlet-name>
+		<servlet-class>servlets.CreateLeagueServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateLeagueServlet</servlet-name>
+		<url-pattern>/createLeague</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminLeaguesServlet</servlet-name>
+		<servlet-class>servlets.AdminLeaguesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminLeaguesServlet</servlet-name>
+		<url-pattern>/adminLeagues</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AdminEmailsServlet</servlet-name>
