@@ -51,7 +51,3 @@ local.properties
 
 # Class files
 *.class
-
-# IntelliJ files
-*.eml
-*.iml
