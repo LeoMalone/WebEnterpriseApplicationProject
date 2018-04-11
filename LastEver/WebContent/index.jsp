@@ -108,11 +108,11 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
@@ -127,7 +127,7 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -144,10 +144,10 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
 												<a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
@@ -160,10 +160,10 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
 												<a class="dropdown-item" href="adminUsers"><fmt:message
 														key="nav_admin_users" /></a> <a class="dropdown-item"
 													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
@@ -270,40 +270,33 @@
 													</c:choose>
 											</tr>
 											<tr id="weather-temp">
-												<td><b> <!-- If temperature not between -10 and 10 then do not show any decimal points
-												This keeps the temp from spilling into the next column --> <c:choose>
+												<td><b><c:choose>
+
 															<c:when
-																test="${weather.weatherTemp gt 10.0 or weather.weatherTemp le -10.0}">
-																<fmt:formatNumber maxFractionDigits="0"
-																	value="${weather.weatherTemp}" />&deg;C
-															</c:when>
-															<c:when
-																test="${weather.weatherTemp gt -0.05 and weather.weatherTemp lt 0 }">
+																test="${weather.weatherTemp gt -0.5 and weather.weatherTemp lt 0 }">
 																<!-- To prevent -0 from showing as the current tempreature -->
-																<fmt:formatNumber maxFractionDigits="1"
-																	value="${weather.weatherTemp * -1}" />&deg;C
+																0&deg;C
 															</c:when>
 															<c:otherwise>
 																<!-- Show on decimal point for better accuracy
 															Can show 0 digits if you want -->
-																<fmt:formatNumber maxFractionDigits="1"
+																<fmt:formatNumber maxFractionDigits="0"
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:otherwise>
-														</c:choose>
-												</b></td>
+														</c:choose> </b></td>
 												<td id="weather-details"><b><fmt:message
 															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
-													<fmt:formatNumber maxFractionDigits="1"
-														value="${weather.weatherWind * 3.6}" /> km/h <br> <c:if
+													<fmt:formatNumber maxFractionDigits="0"
+														value="${weather.weatherWind}" /> km/h <br> <c:if
 														test="${weather.weatherGust gt 0.0}">
 														<b><fmt:message key="weather_gust" /></b>
-														<fmt:formatNumber maxFractionDigits="1"
-															value="${weather.weatherGust * 3.6}" /> km/h
+														<fmt:formatNumber maxFractionDigits="0"
+															value="${weather.weatherGust}" /> km/h
 													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
 														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
 															key="weather_pressure" /></b> <fmt:formatNumber
 														maxFractionDigits="1"
-														value="${weather.weatherPressure / 10}" /> hPa</td>
+														value="${weather.weatherPressure}" /> hPa</td>
 											</tr>
 											<tr>
 												<!-- Link to where the data was fetched from -->

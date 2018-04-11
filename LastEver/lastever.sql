@@ -352,6 +352,7 @@ SET character_set_client = utf8;
  1 AS `teamName`,
  1 AS `playerName`,
  1 AS `goals`,
+ 1 AS `yellowCards`,
  1 AS `redCards`,
  1 AS `id`,
  1 AS `playerID`,
@@ -376,7 +377,8 @@ SET character_set_client = utf8;
  1 AS `GF`,
  1 AS `GA`,
  1 AS `GD`,
- 1 AS `divisionID`*/;
+ 1 AS `divisionID`,
+ 1 AS `logo`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -438,6 +440,7 @@ CREATE TABLE `team` (
   `teamAbbreviation` char(3) DEFAULT NULL,
   `teamLogo` varchar(200) DEFAULT NULL,
   `teamAbout` text,
+  `teamAboutFR` text,
   PRIMARY KEY (`teamID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -448,7 +451,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL),(10,'Montreal Team','MTL',NULL,NULL),(11,'Ottawa Team','OTT',NULL,NULL),(12,'Rockland Team','ROC',NULL,NULL),(13,'Vanier Team','VAN',NULL,NULL),(14,'Blair Team','BLA',NULL,NULL),(15,'Kemptville Team','KEM',NULL,NULL),(16,'Kingston Team','KIN',NULL,NULL);
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves','Nous sommes des loups en colère'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick','Nous Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about','Ceci est une description de l\'équipe Je n\'ai aucune idée de quoi écrire'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.','Nous marquons beaucoup de buts. Seulement parfois cependant.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game','Nous ne pouvons pas jouer à ce jeu de football'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways','Nous sommes bons, nous pensons de toute façon'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud','Nous jouons au football et nous sommes sacrément fiers'),(8,'Vars FC','VFC',NULL,'GO VARS','GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL,NULL),(10,'Montreal Team','MTL',NULL,NULL,NULL),(11,'Ottawa Team','OTT',NULL,NULL,NULL),(12,'Rockland Team','ROC',NULL,NULL,NULL),(13,'Vanier Team','VAN',NULL,NULL,NULL),(14,'Blair Team','BLA',NULL,NULL,NULL),(15,'Kemptville Team','KEM',NULL,NULL,NULL),(16,'Kingston Team','KIN',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +519,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-03-21 20:46:44','2018-03-29 14:06:58','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-03-21 20:17:31','2018-03-29 20:51:07','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-03-29 14:05:57','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-03-30 00:58:14','2018-04-02 21:18:00','Referee',NULL),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-03-29 14:45:28','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-03-29 20:49:28','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,0,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$h6nx5pO9F..sKc4f110TL.bXFhCjZsFM/wdtWa7GYIVF3YuR7GTRm','leo@malone.org',1,0,'2018-03-26 21:52:05','2018-03-26 21:52:05','2018-03-26 21:52:05','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$VwF1VjEbSqK7hzAL2YDaAO4WA24bSS5ILNZQ0G29VMvBvwbtqSVui','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-03-26 23:16:03','2018-03-26 23:16:02','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,0,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-03-21 20:46:44','2018-04-05 01:15:59','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-03-21 20:17:31','2018-03-29 20:51:07','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-03-29 14:05:57','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-03-30 00:58:14','2018-04-05 00:58:08','Referee',NULL),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-04-05 00:51:33','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-04-06 19:30:22','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,0,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$h6nx5pO9F..sKc4f110TL.bXFhCjZsFM/wdtWa7GYIVF3YuR7GTRm','leo@malone.org',1,0,'2018-03-26 21:52:05','2018-03-26 21:52:05','2018-03-26 21:52:05','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$F/ITktBO6M5342wA6x81Dudiw9sf6Z14hPNqK/urrLVPp/7HEAhVi','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-04-05 01:15:25','2018-04-05 01:15:44','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,0,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,6 +571,7 @@ CREATE TABLE `venue` (
   `venuePhoneNumber` varchar(14) DEFAULT NULL,
   `venueEmail` varchar(100) DEFAULT NULL,
   `venueAbout` text,
+  `venueAboutFR` text,
   PRIMARY KEY (`venueID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -578,7 +582,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.');
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.','Le Sportsplex de Nepean où les champions jouent.');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,7 +628,7 @@ CREATE TABLE `weather` (
   `weatherIcon` varchar(3) NOT NULL,
   `weatherCode` int(11) NOT NULL,
   `weatherDescription` varchar(100) NOT NULL,
-  `weatherPressure` int(11) NOT NULL,
+  `weatherPressure` double NOT NULL,
   `weatherHumidity` int(11) NOT NULL,
   `weatherWind` double NOT NULL,
   `weatherGust` double NOT NULL,
@@ -640,13 +644,36 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',0.51,'10d',500,'light rain',990,98,3.6,8.2,'day','2018-04-04 15:25:15');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',1.49,'04n',803,'broken clouds',101.9,51,11.16,0,'night','2018-04-11 01:06:02');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'lastever'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `update_div` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_div`(In x bigint(20), In y bigint(20))
+begin
+  IF EXISTS (select divisionID from leaguexdivision where divisionID = x) THEN
+    UPDATE leaguexdivision SET leagueID=y WHERE divisionID=x;
+  ELSE 
+    insert into leaguexdivision (divisionID, leagueID) values (x, y);
+  END IF;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `update_team` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -690,7 +717,7 @@ USE `lastever`;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `scorers` AS select `sc`.`teamName` AS `teamName`,`sc`.`playerName` AS `playerName`,`sc`.`goals` AS `goals`,`sc`.`redCards` AS `redCards`,`sc`.`id` AS `id`,`sc`.`playerID` AS `playerID`,`sc`.`playerHidePage` AS `playerHidePage` from (select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID`,`p`.`playerHidePage` AS `playerHidePage` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`homeTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') union all select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID`,`p`.`playerHidePage` AS `playerHidePage` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`awayTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final')) `sc` */;
+/*!50001 VIEW `scorers` AS select `sc`.`teamName` AS `teamName`,`sc`.`playerName` AS `playerName`,`sc`.`goals` AS `goals`,`sc`.`yellowCards` AS `yellowCards`,`sc`.`redCards` AS `redCards`,`sc`.`id` AS `id`,`sc`.`playerID` AS `playerID`,`sc`.`playerHidePage` AS `playerHidePage` from (select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID`,`p`.`playerHidePage` AS `playerHidePage` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`homeTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final') union all select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,`g`.`goals` AS `goals`,`g`.`yellowCards` AS `yellowCards`,`g`.`redCards` AS `redCards`,`g`.`gameID` AS `id`,`p`.`playerID` AS `playerID`,`p`.`playerHidePage` AS `playerHidePage` from ((((`lastever`.`schedule` `s` join `lastever`.`team` `t` on((`t`.`teamID` = `s`.`awayTeam`))) join `lastever`.`playerxteam` `pt` on((`pt`.`teamID` = `t`.`teamID`))) join `lastever`.`player` `p` on((`p`.`playerID` = `pt`.`playerID`))) join `lastever`.`gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) where (`s`.`gameStatus` = 'Final')) `sc` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -708,7 +735,7 @@ USE `lastever`;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when ((`r`.`gameStatus` = 'Final') and (`r`.`playoffGame` = 0)) then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`homeTeam`))) on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`awayTeam`))) on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
+/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when ((`r`.`gameStatus` = 'Final') and (`r`.`playoffGame` = 0)) then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID`,`r`.`logo` AS `logo` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID`,`t`.`teamLogo` AS `logo` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`homeTeam`))) on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID`,`t`.`teamLogo` AS `logo` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`awayTeam`))) on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -740,4 +767,4 @@ USE `lastever`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-04 11:33:41
+-- Dump completed on 2018-04-10 21:25:05

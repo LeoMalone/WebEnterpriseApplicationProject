@@ -10,6 +10,8 @@ public class ScorerBean {
 	private String ID;
 	private String name;
 	private int goals;
+	private int yellowCards;
+	private int redCards;
 	private boolean hidePage;
 
 /**************************** CONTRUCTORS *****************************/	
@@ -29,6 +31,14 @@ public class ScorerBean {
 		return this.goals;
 	}
 	
+	public int getYellowCards() {
+		return this.yellowCards;
+	}
+	
+	public int getRedCards() {
+		return this.redCards;
+	}
+	
 	public boolean getHidePage() {
 		return this.hidePage;
 	}
@@ -44,6 +54,14 @@ public class ScorerBean {
 	
 	public void setGoals(int g) {
 		this.goals = g;
+	}
+	
+	public void setYellowCards(int yc) {
+		this.yellowCards = yc;
+	}
+	
+	public void setRedCards(int rc) {
+		this.redCards = rc;
 	}
 
 	public void setHidePage(boolean hp) {

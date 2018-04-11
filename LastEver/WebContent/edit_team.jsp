@@ -126,10 +126,10 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a> <a
 									class="dropdown-item" href="adminUsers"><fmt:message
 										key="nav_admin_users" /></a> <a class="dropdown-item"
 									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
@@ -161,7 +161,7 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}:${team.teamName}</h1>
+				<h1 class="my-4"><c:out value="${userName}:${team.teamName}"/></h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
@@ -195,7 +195,7 @@
 												type="radio" name="divRadio" value="${div1.divisionId}"
 												${team.divisionId == div1.divisionId?'checked':''}>
 											<label class="form-check-label" for="divRadio">
-												${div1.divisionName} </label>
+												<c:out value="${div1.divisionName}"/></label>
 										</div>
 									</c:forEach>
 									<br />

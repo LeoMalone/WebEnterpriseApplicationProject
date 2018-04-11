@@ -99,15 +99,17 @@ public class TeamEmailsServlet extends HttpServlet{
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fromURL = null;
-		String[] emails = null;
+		String fromURL = null;		//data from string, can stay null
+		String[] emails = null;		//Array of string for emails
 		
+		// If the url contains data set it to fromURL
 		if(request.getQueryString() != null) {
 			StringBuilder sb = new StringBuilder(request.getQueryString());
 			sb.deleteCharAt(0);
 			fromURL = sb.toString();
 		}
 		
+		// if the url does not contain data send to all available emails
 		if(fromURL == null) {
 			List<String> allEmails = new ArrayList<String>();
 			if(TeamEmails.getAllEmailsForPost(allEmails)) {
@@ -115,16 +117,19 @@ public class TeamEmailsServlet extends HttpServlet{
 				emails = allEmails.toArray(emails);
 			}
 		}
+		// if the email is to admins
 		else if(fromURL.equals("1")) {
 			emails = request.getParameterValues("admins");
 		}
+		//if the email is to Team Owners
 		else if(fromURL.equals("2")) {
 			emails = request.getParameterValues("tos");
 		}
-		
+		//if the email array is null or has a length of 0, redirect to /adminEmails
 		if(emails == null || emails.length == 0) {
 			response.sendRedirect("./teamEmails");
 		} else {
+			// Get default mail service and add emails to mailto
 			try {
 				Desktop.getDesktop().mail(new URI("mailto", String.join(",", emails), null));
 			} catch (IOException e) {
@@ -132,7 +137,7 @@ public class TeamEmailsServlet extends HttpServlet{
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
-			
+			// redirect back to team Emails page
 			response.sendRedirect("./teamEmails");
 		}
 	}

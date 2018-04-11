@@ -10,6 +10,7 @@ public class StatisticsBean {
 	private String rank;
 	private String teamName;
 	private String teamID;
+	private String teamLogo;
 	private String name;
 	private int gamesPlayed;
 	private int goals;
@@ -43,6 +44,10 @@ public class StatisticsBean {
 	
 	public String getTeamID() {
 		return this.teamID;
+	}
+	
+	public String getTeamLogo() {
+		return this.teamLogo;
 	}
 	
 	public String getName() {
@@ -84,6 +89,10 @@ public class StatisticsBean {
 	
 	public void setTeamID(String tID) {
 		this.teamID = tID;
+	}
+	
+	public void setTeamLogo(String tl) {
+		this.teamLogo = tl;
 	}
 	
 	public void setName(String n) {

@@ -118,16 +118,17 @@ public class Weather {
 	        updateWeather.setInt(3, json.getJSONArray("weather").getJSONObject(0).getInt("id"));
 	        updateWeather.setString(4, json.getJSONArray("weather").getJSONObject(0).getString("description"));
 	        //get the main object and get the pressure and humidity
-	        updateWeather.setInt(5, json.getJSONObject("main").getInt("pressure"));
+
+	        updateWeather.setDouble(5, json.getJSONObject("main").getDouble("pressure") / 10);
 	        updateWeather.setInt(6, json.getJSONObject("main").getInt("humidity"));
 	        //get the current wind speed from the wind JSONObject
-	        updateWeather.setDouble(7, json.getJSONObject("wind").getDouble("speed"));
+	        updateWeather.setDouble(7, json.getJSONObject("wind").getDouble("speed") * 3.6);
 	        
 	        /*if the JSONObject wind contains the gust property (not always included in the response)
 	        set the wind to the data from the API call. Otherwise set it to zero and it won't show in the current
 	        conditions */
 	        if(json.getJSONObject("wind").has("gust"))
-	        	updateWeather.setDouble(8, json.getJSONObject("wind").getDouble("gust"));
+	        	updateWeather.setDouble(8, json.getJSONObject("wind").getDouble("gust") * 3.6);
 	        else
 	        	updateWeather.setDouble(8, 0.0);
 	        
@@ -210,7 +211,7 @@ public class Weather {
 	        	wb.setWeatherIcon(resultSet.getString(4));
 	        	wb.setWeatherCode(resultSet.getInt(5));
 	        	wb.setWeatherDescription(resultSet.getString(6));
-	        	wb.setWeatherPressure(resultSet.getInt(7));
+	        	wb.setWeatherPressure(resultSet.getDouble(7));
 	        	wb.setWeatherHumidity(resultSet.getInt(8));
 	        	wb.setWeatherWind(resultSet.getDouble(9));
 	        	wb.setWeatherGust(resultSet.getDouble(10));

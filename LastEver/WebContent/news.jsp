@@ -103,11 +103,11 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}<fmt:message
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
 														key="team_dd1" /></a> <a class="dropdown-item"
 													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
 													class="dropdown-item" href="teamSchedule"><fmt:message
@@ -122,7 +122,7 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -138,11 +138,11 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
 												<a class="dropdown-item" href="logout"><fmt:message
 														key="team_dd4" /></a>
 											</div></li>
@@ -154,10 +154,10 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}">${userName}</a>
+												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
 												<a class="dropdown-item" href="adminUsers"><fmt:message
 														key="nav_admin_users" /></a> <a class="dropdown-item"
 													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
@@ -219,7 +219,7 @@
 						<c:otherwise>
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
-									<div class="card">
+									<div class="card table-responsive">
 										<div class="card-header d-flex flex-row">
 											<h4 class="d-flex">
 												<c:choose>

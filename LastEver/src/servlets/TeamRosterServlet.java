@@ -31,7 +31,7 @@ public class TeamRosterServlet extends HttpServlet {
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
+		
 
 		String userName = null;
 		String language = null;
@@ -41,11 +41,13 @@ public class TeamRosterServlet extends HttpServlet {
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
 
+		// if not right signin type redirect to index
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
-
+			//get cookies
 			Cookie[] cookies = request.getCookies();
+			//if there are cookies then set userName and language to the cookie values if they exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
@@ -54,6 +56,7 @@ public class TeamRosterServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			//if there is no cookies and the language has not been set then create the cookie with English as default language
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -73,22 +76,25 @@ public class TeamRosterServlet extends HttpServlet {
 					}
 				}		
 
-
-				String teamId = EditTeamUser.getTeamForEdit(userName);
-				List<PlayerBean> pb = new ArrayList<PlayerBean>();
-				EditTeamUser.getPlayersFromRoster(pb, teamId);
-
-				TeamBean tb = new TeamBean();
-				String teamName = TeamScheduleResults.getTeamName(tb, userName);
-
-				request.setAttribute("teamName", teamName);
-				request.setAttribute("teamId", teamId);
-				request.setAttribute("userName", userName);
-				request.setAttribute("playerList", pb);
-
-				RequestDispatcher rd = request.getRequestDispatcher("team_roster.jsp");  
-				rd.forward(request, response);	
 			}
+			
+			
+			String teamId = EditTeamUser.getTeamForEdit(userName);
+			List<PlayerBean> pb = new ArrayList<PlayerBean>();
+			EditTeamUser.getPlayersFromRoster(pb, teamId);
+
+			TeamBean tb = new TeamBean();
+			String teamName = TeamScheduleResults.getTeamName(tb, userName);
+
+			//set attributes and content type and dispatch to jsp
+			request.setAttribute("teamName", teamName);
+			request.setAttribute("teamId", teamId);
+			request.setAttribute("userName", userName);
+			request.setAttribute("playerList", pb);
+			response.setContentType("text/html");
+			RequestDispatcher rd = request.getRequestDispatcher("team_roster.jsp");  
+			rd.forward(request, response);	
+
 		}
 	}
 

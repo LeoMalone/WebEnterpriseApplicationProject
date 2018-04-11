@@ -33,17 +33,16 @@ public class TeamCreateTeamServlet extends HttpServlet {
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
 
-
+		// tracked cookie attributes
 		String language = null;
 		String userName = null;
-		
+
 		// Set leagues for navbar
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
-		
+
 		//get division list for a team to join
 		List<DivisionBean> dlb = new ArrayList<DivisionBean>();
 		Division.getAllDivisions(dlb);
@@ -53,11 +52,13 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		Team.getAllTeams(tb);
 		request.setAttribute("allTeam", tb);
 
+		// If User is not signed In redirect to sign in page
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
-
+			//get cookies
 			Cookie[] cookies = request.getCookies();
+			//if there are cookies then set userName and language to the cookie values if they exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
@@ -66,6 +67,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			//if there is no cookies and the language has not been set then create the cookie with English as default language
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -85,16 +87,18 @@ public class TeamCreateTeamServlet extends HttpServlet {
 						break;
 					}
 				}
+			}
+			//set content type and attribute
+			response.setContentType("text/html");
+			request.setAttribute("userName", userName);
+			//redirect or dispatch based on if user is already associated with a team
+			if (Team.hasTeam(userName)) {
 
-				request.setAttribute("userName", userName);
-				if (Team.hasTeam(userName)) {
-					
-					response.sendRedirect("teamowner");
-				}
-				else {
+				response.sendRedirect("teamowner");
+			}
+			else {
 				RequestDispatcher rd = request.getRequestDispatcher("team_create_team.jsp");  
 				rd.forward(request, response);
-				}
 			}
 		}
 	}
@@ -114,16 +118,18 @@ public class TeamCreateTeamServlet extends HttpServlet {
 		String newDiv = request.getParameter("divRadio");
 		String language = null;
 		//String teamName = request.getParameter("selectTeam");
-		
+
+		//if they have a team already redirect to their homepage
 		if (Team.hasTeam(userName)) {
 			response.sendRedirect("login");
 		}
-		
+		// If User is not signed In redirect to sign in page
 		if (request.getSession().getAttribute("signedIn") == null) {
 			response.sendRedirect("teamCreateTeam");
 		} else {
-
+			//get cookies
 			Cookie[] cookies = request.getCookies();
+			//if there are cookies then set userName and language to the cookie values if they exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
@@ -132,6 +138,7 @@ public class TeamCreateTeamServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			//if there is no cookies and the language has not been set then create the cookie with English as default language
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -163,9 +170,6 @@ public class TeamCreateTeamServlet extends HttpServlet {
 
 					// If createNewUser method returns true
 					if (TeamCreateTeam.createNewTeam(team, userName)) {
-						
-						
-						
 						HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
 						session.setAttribute("userType", "./teamowner");
 						response.sendRedirect("teamowner");

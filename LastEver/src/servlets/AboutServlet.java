@@ -22,17 +22,19 @@ import dao.League;
 public class AboutServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * doGet method mapped to /about
 	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+
+
+		// Tracked Cookie variables
 		String userName = null;
 		String language = null;		
-		
+
+		// Get cookies
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -42,11 +44,13 @@ public class AboutServlet extends HttpServlet {
 					language = cookie.getValue();
 			}
 		}
+		// If Language is null, set default language to en 
 		if(language == null) {
 			Cookie cookieLanguage = new Cookie("language", "en");
 			cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 			response.addCookie(cookieLanguage);
 		}
+		// Set cookie language for users
 		else {
 
 			language = request.getParameter("language");
@@ -59,18 +63,20 @@ public class AboutServlet extends HttpServlet {
 					response.addCookie(tempCookie);
 					break;
 				}
-			}		
-			
-			List<LeagueBean> llb = new ArrayList<LeagueBean>();
-			League.getAllLeagues(llb);
-			request.setAttribute("league", llb);
-			
-			request.setAttribute("userName", userName);
-			RequestDispatcher rd = request.getRequestDispatcher("about.jsp");  
-	        rd.forward(request, response);	
+			}
 		}
+
+		// Set content type and attributes and dispatch to jsp
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		League.getAllLeagues(llb);
+		request.setAttribute("league", llb);
+		request.setAttribute("userName", userName);
+		response.setContentType("text/html");
+		RequestDispatcher rd = request.getRequestDispatcher("about.jsp");  
+		rd.forward(request, response);	
+
 	}
-	
+
 	/**
 	 * doPost method mapped to /about
 	 */
