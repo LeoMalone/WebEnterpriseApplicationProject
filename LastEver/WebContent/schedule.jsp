@@ -322,8 +322,8 @@
 																</c:otherwise>
 															</c:choose><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
 														<td><c:choose>
-																<c:when test="${not empty sched.homeTeamLogo}">
-																	<img class="responsive-sm" src="${sched.homeTeamLogo}" />
+																<c:when test="${not empty sched.awayTeamLogo}">
+																	<img class="responsive-sm" src="${sched.awayTeamLogo}" />
 																</c:when>
 																<c:otherwise>
 																	<img class="responsive-sm"
