@@ -577,6 +577,26 @@
 		<servlet-name>GamePageServlet</servlet-name>
 		<url-pattern>/gamePage</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FindRefServlet</servlet-name>
+		<servlet-class>servlets.FindRefServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FindRefServlet</servlet-name>
+		<url-pattern>/findReferee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateRefServlet</servlet-name>
+		<servlet-class>servlets.CreateRefServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateRefServlet</servlet-name>
+		<url-pattern>/createReferee</url-pattern>
+	</servlet-mapping>
 
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
