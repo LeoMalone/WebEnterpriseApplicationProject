@@ -218,8 +218,8 @@
 						<c:otherwise>
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
-									<div class="card table-responsive">
-										<div class="card-header d-flex flex-row">
+									<div class="card">
+										<div class="card-header d-flex flex-row table-responsive">
 											<h4 class="d-flex">
 												<c:choose>
 													<c:when test="${cookie.language.value == 'fr' }">
