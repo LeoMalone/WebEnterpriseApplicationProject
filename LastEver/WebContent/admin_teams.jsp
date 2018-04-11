@@ -153,6 +153,7 @@
 								</ul>
 							</div>
 							<div class="card-body">
+								<div class="table-responsive">
 								<table class="table table-striped">
 									<thead class="thead-dark">
 										<tr>
@@ -175,6 +176,7 @@
 										</tr>
 									</c:forEach>
 								</table>
+								</div>								
 							</div>
 						</div>
 					</div>

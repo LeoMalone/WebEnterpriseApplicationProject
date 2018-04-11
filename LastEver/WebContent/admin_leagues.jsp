@@ -134,8 +134,6 @@
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
-							<div class="card-header">
-							</div>
 							<div class="card-body">
 								<table class="table table-striped">
 									<thead class="thead-dark">
