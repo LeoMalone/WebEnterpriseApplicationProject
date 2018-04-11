@@ -113,18 +113,20 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
-														key="team_dd1" /></a> <a class="dropdown-item"
-													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
-													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /> <fmt:message key="team_dd1" /></a> <a
+													class="dropdown-item" href="teamRoster"><fmt:message
+														key="team_dd2" /></a> <a class="dropdown-item"
+													href="teamSchedule"><fmt:message key="team_dd3" /></a> <a
+													class="dropdown-item" href="teamEmails"><fmt:message
+														key="team_dd6" /></a> <a class="dropdown-item" href="logout"
+													method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -132,7 +134,9 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -148,13 +152,15 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -164,19 +170,22 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message
-														key="nav_admin_users" /></a> <a class="dropdown-item"
-													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message
-														key="nav_admin_divs" /></a> <a class="dropdown-item"
-													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message
-														key="nav_admin_email" /></a> <a class="dropdown-item"
-													href="logout"><fmt:message key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="adminUsers"><fmt:message key="nav_admin_users" /></a>
+												<a class="dropdown-item" href="adminTeams"><fmt:message
+														key="nav_admin_teams" /></a> <a class="dropdown-item"
+													href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+												<a class="dropdown-item" href="adminSchedule"><fmt:message
+														key="nav_admin_sched" /></a> <a class="dropdown-item"
+													href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -244,7 +253,14 @@
 															<td><fmt:message key="not_available" /></td>
 														</c:when>
 														<c:otherwise>
-															<td><c:out value="${v.venueAbout}" /></td>
+															<td><c:choose>
+																	<c:when test="${cookie.language.value == 'fr' }">
+																		<c:out value="${v.venueAboutFR}" />
+																	</c:when>
+																	<c:otherwise>
+																		<c:out value="${v.venueAbout}" />
+																	</c:otherwise>
+																</c:choose></td>
 														</c:otherwise>
 													</c:choose>
 												</tr>
@@ -286,7 +302,8 @@
 													</c:choose>
 												</tr>
 												<tr>
-													<td><b><fmt:message key="venue_address" /></b></td>
+													<td style="vertical-align: text-top"><b><fmt:message
+																key="venue_address" /></b></td>
 													<c:choose>
 														<c:when test="${empty v.venueAddress}">
 															<td><fmt:message key="not_available" /></td>
@@ -301,7 +318,8 @@
 													</c:choose>
 												</tr>
 												<tr>
-													<td><b><fmt:message key="venue_map" /></b></td>
+													<td style="vertical-align: text-top"><b><fmt:message
+																key="venue_map" /></b></td>
 													<td><div id="map"></div> <script>
 														function initMap() {
 															var map = new google.maps.Map(
@@ -413,8 +431,24 @@
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${sched.time}" />
 															</c:if></td>
-														<td><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
-														<td><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
+														<td><c:choose>
+																<c:when test="${not empty sched.homeTeamLogo}">
+																	<img class="responsive-sm" src="${sched.homeTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><c:choose>
+																<c:when test="${not empty sched.awayTeamLogo}">
+																	<img class="responsive-sm" src="${sched.awayTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

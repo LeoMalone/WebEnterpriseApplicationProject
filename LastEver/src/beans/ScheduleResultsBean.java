@@ -16,9 +16,11 @@ public class ScheduleResultsBean {
 	private Time time;
 	private String homeTeam;
 	private String homeID;
+	private String homeTeamLogo;
 	private int homeScore;
 	private String awayTeam;
 	private String awayID;
+	private String awayTeamLogo;
 	private int awayScore;
 	private String venue;
 	private String status;
@@ -71,6 +73,10 @@ public class ScheduleResultsBean {
 		return this.homeID;
 	}
 	
+	public String getHomeTeamLogo() {
+		return this.homeTeamLogo;
+	}
+	
 	public int getHomeScore() {
 		return this.homeScore;
 	}
@@ -81,6 +87,10 @@ public class ScheduleResultsBean {
 	
 	public String getAwayID() {
 		return this.awayID;
+	}
+	
+	public String getAwayTeamLogo() {
+		return this.awayTeamLogo;
 	}
 	
 	public int getAwayScore() {
@@ -128,6 +138,10 @@ public class ScheduleResultsBean {
 		this.homeID = hID;
 	}
 	
+	public void setHomeTeamLogo(String htl) {
+		this.homeTeamLogo = htl;
+	}
+	
 	public void setHomeScore(int hs) {
 		this.homeScore = hs;
 	}
@@ -138,6 +152,10 @@ public class ScheduleResultsBean {
 	
 	public void setAwayID(String aID) {
 		this.awayID = aID;
+	}
+	
+	public void setAwayTeamLogo(String atl) {
+		this.awayTeamLogo = atl;
 	}
 	
 	public void setAwayScore(int as) {

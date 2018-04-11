@@ -50,3 +50,9 @@ body {
 	width: 100%;
 	max-width: 100px;
 }
+
+.responsive-sm{
+	height: auto;
+	width: 100%;
+	max-width: 25px;
+}

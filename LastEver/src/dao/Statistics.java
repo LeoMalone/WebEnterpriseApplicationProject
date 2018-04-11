@@ -11,6 +11,7 @@ import beans.StatisticsBean;
 
 /**
  * The Statistics class gets the statistics for the current league
+ * @author Kevin Villemaire
  */
 public class Statistics {
 
@@ -32,9 +33,10 @@ public class Statistics {
 		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards, playerID, teamID, playerHidePage from statistics where leagueID = ? and playoffGame = 0"
-					+ " order by goals desc, GP asc, playerName asc");
+			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
+					+ " s.redCards, s.playerID, s.teamID, s.playerHidePage, t.teamLogo from statistics s inner join"
+					+ " team t on t.teamName = s.teamName where leagueID = ? and playoffGame = 0 order by s.goals desc,"
+					+ " s.GP asc, s.playerName asc");
 			getStatistics.setString(1, id);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -68,6 +70,7 @@ public class Statistics {
 					}
 				}
 
+				//save information from database to a Bean
 				sb.setTeamName(resultSet.getString(1));
 				sb.setGamesPlayed(resultSet.getInt(2));
 				sb.setName(resultSet.getString(3));
@@ -77,6 +80,7 @@ public class Statistics {
 				sb.setPlayerID(resultSet.getString(7));
 				sb.setTeamID(resultSet.getString(8));
 				sb.setHidePage(resultSet.getBoolean(9));
+				sb.setTeamLogo(resultSet.getString(10));
 				statistics.add(sb);
 			}
 
@@ -130,7 +134,7 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards, s.playerID, s.playerHidePage from statistics s inner join team t on t.teamName ="
+					+ " s.redCards, s.playerID, s.playerHidePage, t.teamLogo from statistics s inner join team t on t.teamName ="
 					+ " s.teamName where s.leagueID = ? and t.teamID=? group by s.playerName order by s.goals desc,"
 					+ " s.GP asc, s.playerName asc");
 			getStatistics.setString(1, lID);
@@ -167,6 +171,7 @@ public class Statistics {
 					}
 				}
 
+				//save information to a Bean
 				sb.setTeamName(resultSet.getString(1));
 				sb.setGamesPlayed(resultSet.getInt(2));
 				sb.setName(resultSet.getString(3));
@@ -175,6 +180,7 @@ public class Statistics {
 				sb.setRedCard(resultSet.getInt(6));
 				sb.setPlayerID(resultSet.getString(7));
 				sb.setHidePage(resultSet.getBoolean(8));
+				sb.setTeamLogo(resultSet.getString(9));
 				statistics.add(sb);
 			}
 
@@ -223,8 +229,9 @@ public class Statistics {
 		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards, teamID from statistics where playerID = ? group by teamName");
+			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
+					+ " s.redCards, s.teamID, t.teamLogo from statistics s inner join team t on t.teamID = s.teamID"
+					+ " where s.playerID = ? group by s.teamName");
 			getStatistics.setString(1, pID);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -242,6 +249,7 @@ public class Statistics {
 				sb.setYellowCard(resultSet.getInt(5));
 				sb.setRedCard(resultSet.getInt(6));
 				sb.setTeamID(resultSet.getString(7));
+				sb.setTeamLogo(resultSet.getString(8));
 				statistics.add(sb);
 			}
 
@@ -293,9 +301,10 @@ public class Statistics {
 		// Connect to Database and execute SELECT query with StatisticsBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getStatistics = conn.prepareStatement("select teamName, GP, playerName, goals, yellowCards,"
-					+ " redCards, playerID, teamID, playerHidePage from statistics where leagueID = ? and playoffGame = 1"
-					+ " order by goals desc, GP asc, playerName asc");
+			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
+					+ " s.redCards, s.playerID, s.teamID, s.playerHidePage, t.teamLogo from statistics s inner join team"
+					+ " t on t.teamID = s.teamID where s.leagueID = ? and s.playoffGame = 1 order by s.goals desc, s.GP asc,"
+					+ " s.playerName asc");
 			getStatistics.setString(1, id);
 			resultSet = getStatistics.executeQuery();
 			status = resultSet.next();
@@ -329,6 +338,7 @@ public class Statistics {
 					}
 				}
 
+				//save results to a bean
 				sb.setTeamName(resultSet.getString(1));
 				sb.setGamesPlayed(resultSet.getInt(2));
 				sb.setName(resultSet.getString(3));
@@ -338,6 +348,7 @@ public class Statistics {
 				sb.setPlayerID(resultSet.getString(7));
 				sb.setTeamID(resultSet.getString(8));
 				sb.setHidePage(resultSet.getBoolean(9));
+				sb.setTeamLogo(resultSet.getString(10));
 				statistics.add(sb);
 			}
 

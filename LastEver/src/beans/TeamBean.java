@@ -8,11 +8,13 @@ public class TeamBean {
 	
 	private String divisionId;
 	private String divisionName;
+	private String leagueName;
 	private String teamLogo;
 	private String teamId;
 	private String teamName;
 	private String teamAbbreviation;
 	private String teamAbout;
+	private String teamAboutFR;
 	
 /**************************** CONTRUCTORS *****************************/
 	public TeamBean() {
@@ -25,6 +27,10 @@ public class TeamBean {
 	
 	public String getDivisionName() {
 		return this.divisionName;
+	}
+	
+	public String getLeagueName() {
+		return this.leagueName;
 	}
 	
 	public String getTeamLogo() {
@@ -46,6 +52,10 @@ public class TeamBean {
 	public String getTeamAbout() {
 		return this.teamAbout;
 	}
+	
+	public String getTeamAboutFR() {
+		return this.teamAboutFR;
+	}
 
 /**************************** SETTERS *****************************/
 	public void setDivisionId(String divID) {
@@ -58,6 +68,10 @@ public class TeamBean {
 	
 	public void setDivisionName(String divN) {
 		this.divisionName = divN;
+	}
+	
+	public void setLeagueName(String league) {
+		this.leagueName = league;
 	}
 	
 	public void setTeamLogo(String logo) {
@@ -74,5 +88,9 @@ public class TeamBean {
 
 	public void setTeamAbout(String ab) {
 		this.teamAbout = ab;
+	}
+	
+	public void setTeamAboutFR(String ab) {
+		this.teamAboutFR = ab;
 	}
 }

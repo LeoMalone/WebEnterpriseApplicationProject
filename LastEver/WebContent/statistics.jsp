@@ -301,7 +301,15 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:out
 																value="${stats.rank}" /></td>
-														<td><a href="team?id=${stats.teamID}"><c:out
+														<td><c:choose>
+																<c:when test="${not empty stats.teamLogo}">
+																	<img class="responsive-sm" src="${stats.teamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${stats.teamID}"><c:out
 																	value="${stats.teamName}" /></a></td>
 														<td><a href="player?id=${stats.playerID}"> <c:choose>
 																	<c:when test="${stats.hidePage eq true }">

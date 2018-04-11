@@ -286,17 +286,17 @@
 														</c:choose> </b></td>
 												<td id="weather-details"><b><fmt:message
 															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
-													<fmt:formatNumber maxFractionDigits="1"
-														value="${weather.weatherWind * 3.6}" /> km/h <br> <c:if
+													<fmt:formatNumber maxFractionDigits="0"
+														value="${weather.weatherWind}" /> km/h <br> <c:if
 														test="${weather.weatherGust gt 0.0}">
 														<b><fmt:message key="weather_gust" /></b>
-														<fmt:formatNumber maxFractionDigits="1"
-															value="${weather.weatherGust * 3.6}" /> km/h
+														<fmt:formatNumber maxFractionDigits="0"
+															value="${weather.weatherGust}" /> km/h
 													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
 														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
 															key="weather_pressure" /></b> <fmt:formatNumber
 														maxFractionDigits="1"
-														value="${weather.weatherPressure / 10}" /> hPa</td>
+														value="${weather.weatherPressure}" /> hPa</td>
 											</tr>
 											<tr>
 												<!-- Link to where the data was fetched from -->

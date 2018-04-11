@@ -34,9 +34,9 @@ public class GameResult {
 			conn = ConnectionManager.getConnection();
 			getResults = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam, s.homeScore,"
 					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID, v.venueName,"
-					+ " v.venueID from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
-					+ " = s.awayTeam left outer join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID"
-					+ " = v.venueID where s.gameID = ?");
+					+ " v.venueID, h.teamLogo, a.teamLogo from schedule s inner join team h on h.teamID = s.homeTeam"
+					+ " inner join team a on a.teamID = s.awayTeam left outer join venuexgame vg on s.gameID = vg.gameID"
+					+ " left outer join venue v on vg.venueID = v.venueID where s.gameID = ?");
 
 			getResults.setString(1, id);
 
@@ -68,6 +68,8 @@ public class GameResult {
 				getAwayScorers(resultSet.getString(10), resultSet.getString(6), alb);
 				srb.setVenue(resultSet.getString(11));
 				srb.setVenueID(resultSet.getString(12));
+				srb.setHomeTeamLogo(resultSet.getString(13));
+				srb.setAwayTeamLogo(resultSet.getString(14));
 				srb.setAwayScorer(alb);
 				sched.add(srb);
 			}

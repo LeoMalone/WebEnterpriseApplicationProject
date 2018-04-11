@@ -377,7 +377,8 @@ SET character_set_client = utf8;
  1 AS `GF`,
  1 AS `GA`,
  1 AS `GD`,
- 1 AS `divisionID`*/;
+ 1 AS `divisionID`,
+ 1 AS `logo`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -439,6 +440,7 @@ CREATE TABLE `team` (
   `teamAbbreviation` char(3) DEFAULT NULL,
   `teamLogo` varchar(200) DEFAULT NULL,
   `teamAbout` text,
+  `teamAboutFR` text,
   PRIMARY KEY (`teamID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -449,7 +451,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud'),(8,'Vars FC','VFC',NULL,'GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL),(10,'Montreal Team','MTL',NULL,NULL),(11,'Ottawa Team','OTT',NULL,NULL),(12,'Rockland Team','ROC',NULL,NULL),(13,'Vanier Team','VAN',NULL,NULL),(14,'Blair Team','BLA',NULL,NULL),(15,'Kemptville Team','KEM',NULL,NULL),(16,'Kingston Team','KIN',NULL,NULL);
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves','Nous sommes des loups en colère'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick','Nous Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about','Ceci est une description de l\'équipe Je n\'ai aucune idée de quoi écrire'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.','Nous marquons beaucoup de buts. Seulement parfois cependant.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game','Nous ne pouvons pas jouer à ce jeu de football'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways','Nous sommes bons, nous pensons de toute façon'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud','Nous jouons au football et nous sommes sacrément fiers'),(8,'Vars FC','VFC',NULL,'GO VARS','GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL,NULL),(10,'Montreal Team','MTL',NULL,NULL,NULL),(11,'Ottawa Team','OTT',NULL,NULL,NULL),(12,'Rockland Team','ROC',NULL,NULL,NULL),(13,'Vanier Team','VAN',NULL,NULL,NULL),(14,'Blair Team','BLA',NULL,NULL,NULL),(15,'Kemptville Team','KEM',NULL,NULL,NULL),(16,'Kingston Team','KIN',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -569,6 +571,7 @@ CREATE TABLE `venue` (
   `venuePhoneNumber` varchar(14) DEFAULT NULL,
   `venueEmail` varchar(100) DEFAULT NULL,
   `venueAbout` text,
+  `venueAboutFR` text,
   PRIMARY KEY (`venueID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -579,7 +582,7 @@ CREATE TABLE `venue` (
 
 LOCK TABLES `venue` WRITE;
 /*!40000 ALTER TABLE `venue` DISABLE KEYS */;
-INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.');
+INSERT INTO `venue` VALUES (1,'Nepean Sportsplex','https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=1920&h=1080','1701 Woodroffe Ave',NULL,'Nepean','Ontario','K2G 1W2','Canada','Emma Dean','666-666-6666','sportsplex@venue.org','The Nepean Sportsplex where champions play.','Le Sportsplex de Nepean où les champions jouent.');
 /*!40000 ALTER TABLE `venue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -625,7 +628,7 @@ CREATE TABLE `weather` (
   `weatherIcon` varchar(3) NOT NULL,
   `weatherCode` int(11) NOT NULL,
   `weatherDescription` varchar(100) NOT NULL,
-  `weatherPressure` int(11) NOT NULL,
+  `weatherPressure` double NOT NULL,
   `weatherHumidity` int(11) NOT NULL,
   `weatherWind` double NOT NULL,
   `weatherGust` double NOT NULL,
@@ -641,13 +644,36 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',0.09,'04n',804,'overcast clouds',990,95,1.55,0,'night','2018-04-07 01:12:50');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',1.49,'04n',803,'broken clouds',101.9,51,11.16,0,'night','2018-04-11 01:06:02');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'lastever'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `update_div` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_div`(In x bigint(20), In y bigint(20))
+begin
+  IF EXISTS (select divisionID from leaguexdivision where divisionID = x) THEN
+    UPDATE leaguexdivision SET leagueID=y WHERE divisionID=x;
+  ELSE 
+    insert into leaguexdivision (divisionID, leagueID) values (x, y);
+  END IF;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `update_team` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -709,7 +735,7 @@ USE `lastever`;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when ((`r`.`gameStatus` = 'Final') and (`r`.`playoffGame` = 0)) then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`homeTeam`))) on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`awayTeam`))) on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
+/*!50001 VIEW `standings` AS select `r`.`team` AS `team`,sum((case when ((`r`.`gameStatus` = 'Final') and (`r`.`playoffGame` = 0)) then 1 else 0 end)) AS `GP`,sum((case when (`r`.`homeScore` > `r`.`awayScore`) then 1 else 0 end)) AS `W`,sum((case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end)) AS `D`,sum((case when (`r`.`homeScore` < `r`.`awayScore`) then 1 else 0 end)) AS `L`,sum(((case when (`r`.`homeScore` > `r`.`awayScore`) then 3 else 0 end) + (case when (`r`.`homeScore` = `r`.`awayScore`) then 1 else 0 end))) AS `PTS`,coalesce(sum(`r`.`homeScore`),0) AS `GF`,coalesce(sum(`r`.`awayScore`),0) AS `GA`,(coalesce(sum(`r`.`homeScore`),0) - coalesce(sum(`r`.`awayScore`),0)) AS `GD`,`r`.`divisionID` AS `divisionID`,`r`.`logo` AS `logo` from (select `t`.`teamName` AS `team`,`s`.`homeScore` AS `homeScore`,`s`.`awayScore` AS `awayScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID`,`t`.`teamLogo` AS `logo` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`homeTeam`))) on((`t`.`teamID` = `dt`.`teamID`))) union all select `t`.`teamName` AS `away`,`s`.`awayScore` AS `awayScore`,`s`.`homeScore` AS `homeScore`,`s`.`gameStatus` AS `gameStatus`,`s`.`playoffGame` AS `playoffGame`,`dt`.`divisionID` AS `divisionID`,`t`.`teamLogo` AS `logo` from (`lastever`.`teamxdivision` `dt` left join (`lastever`.`team` `t` left join `lastever`.`schedule` `s` on((`t`.`teamID` = `s`.`awayTeam`))) on((`t`.`teamID` = `dt`.`teamID`)))) `r` group by `r`.`team` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -741,4 +767,4 @@ USE `lastever`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-06 21:31:31
+-- Dump completed on 2018-04-10 21:25:05

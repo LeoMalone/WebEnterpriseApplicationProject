@@ -36,7 +36,9 @@
 		</c:when>
 		<c:otherwise>
 			<title>Last Ever - <c:forEach var="row" items="${result}">
-					<c:out value="${row.homeTeam}" /> <fmt:message key="game_vs" /> <c:out value="${row.awayTeam}" />
+					<c:out value="${row.homeTeam}" />
+					<fmt:message key="game_vs" />
+					<c:out value="${row.awayTeam}" />
 				</c:forEach></title>
 		</c:otherwise>
 	</c:choose>
@@ -114,18 +116,20 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
-														key="team_dd1" /></a> <a class="dropdown-item"
-													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
-													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /> <fmt:message key="team_dd1" /></a> <a
+													class="dropdown-item" href="teamRoster"><fmt:message
+														key="team_dd2" /></a> <a class="dropdown-item"
+													href="teamSchedule"><fmt:message key="team_dd3" /></a> <a
+													class="dropdown-item" href="teamEmails"><fmt:message
+														key="team_dd6" /></a> <a class="dropdown-item" href="logout"
+													method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -133,7 +137,9 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -149,13 +155,15 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -165,19 +173,22 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message
-														key="nav_admin_users" /></a> <a class="dropdown-item"
-													href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message
-														key="nav_admin_divs" /></a> <a class="dropdown-item"
-													href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message
-														key="nav_admin_email" /></a> <a class="dropdown-item"
-													href="logout"><fmt:message key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="adminUsers"><fmt:message key="nav_admin_users" /></a>
+												<a class="dropdown-item" href="adminTeams"><fmt:message
+														key="nav_admin_teams" /></a> <a class="dropdown-item"
+													href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+												<a class="dropdown-item" href="adminSchedule"><fmt:message
+														key="nav_admin_sched" /></a> <a class="dropdown-item"
+													href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+												<a class="dropdown-item" href="logout"><fmt:message
+														key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -228,8 +239,15 @@
 								<div class="d-flex justify-content-center align-items-center">
 									<c:forEach var="row" items="${result}">
 										<div>
-											<img class="responsive"
-												src="https://cdn.discordapp.com/avatars/245306073408471040/87c118743dd5d1e2e13cbb31f36b5bd1.jpg?size=1024" />
+											<c:choose>
+												<c:when test="${not empty row.homeTeamLogo}">
+													<img class="responsive" src="${row.homeTeamLogo}" />
+												</c:when>
+												<c:otherwise>
+													<img class="responsive"
+														src="https://i.imgur.com/zSAVaUJ.png" />
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<span style="display: inline-block; width: 30px;"></span>
 										<div>
@@ -271,8 +289,15 @@
 										</div>
 										<span style="display: inline-block; width: 30px;"></span>
 										<div>
-											<img class="responsive"
-												src="https://cdn.discordapp.com/avatars/245306073408471040/87c118743dd5d1e2e13cbb31f36b5bd1.jpg?size=1024" />
+											<c:choose>
+												<c:when test="${not empty row.awayTeamLogo}">
+													<img class="responsive" src="${row.awayTeamLogo}" />
+												</c:when>
+												<c:otherwise>
+													<img class="responsive"
+														src="https://i.imgur.com/zSAVaUJ.png" />
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</c:forEach>
 								</div>
@@ -291,8 +316,14 @@
 													value="${row.date}" /></td>
 										</tr>
 										<tr>
-											<td><fmt:message key="div_head2_text2" />: <c:out
-													value="${row.time}" /></td>
+											<td><fmt:message key="div_head2_text2" />: <c:if
+													test="${cookie.language.value eq 'fr'}">
+													<fmt:formatDate type="time" pattern="H:mm"
+														value="${row.time}" />
+												</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+													<fmt:formatDate type="time" pattern="h:mm a"
+														value="${row.time}" />
+												</c:if></td>
 										</tr>
 										<tr>
 											<td><fmt:message key="venue_head1" />: <c:choose>

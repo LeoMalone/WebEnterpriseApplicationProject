@@ -13,6 +13,7 @@ import beans.ScorerBean;
 
 /**
  * The ScheduleResults class gets the schedule or results for league or venue
+ * @author Kevin Villemaire
  */
 public class ScheduleResults {
 
@@ -33,8 +34,8 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
-					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
-					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID, h.teamLogo, a.teamLogo"
+					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
 					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
 					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
 					+ " left outer join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID ="
@@ -57,6 +58,8 @@ public class ScheduleResults {
 				sb.setAwayID(resultSet.getString(6));
 				sb.setVenue(resultSet.getString(7));
 				sb.setVenueID(resultSet.getString(8));
+				sb.setHomeTeamLogo(resultSet.getString(9));
+				sb.setAwayTeamLogo(resultSet.getString(10));
 				sched.add(sb);
 			}
 
@@ -108,12 +111,12 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
-					+ " concat(a.teamName, '') as away, s.awayTeam from schedule s inner join team h on h.teamID"
-					+ " = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on"
-					+ " td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner join"
-					+ " leaguexdivision ld on ld.divisionID = d.divisionID inner join venuexgame vg on s.gameID"
-					+ " = vg.gameID inner join venue v on vg.venueID = v.venueID where ld.leagueID = ?"
-					+ " and s.gameStatus = 'Scheduled' and v.venueID=?");
+					+ " concat(a.teamName, '') as away, s.awayTeam, h.teamLogo, a.teamLogo from schedule s"
+					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on d.divisionID"
+					+ " = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID inner join"
+					+ " venuexgame vg on s.gameID = vg.gameID inner join venue v on vg.venueID = v.venueID where"
+					+ " ld.leagueID = ? and s.gameStatus = 'Scheduled' and v.venueID=?");
 			getSchedule.setString(1, lID);
 			getSchedule.setString(2, venue);
 			resultSet = getSchedule.executeQuery();
@@ -130,6 +133,8 @@ public class ScheduleResults {
 				sb.setHomeID(resultSet.getString(4));
 				sb.setAwayTeam(resultSet.getString(5));
 				sb.setAwayID(resultSet.getString(6));
+				sb.setHomeTeamLogo(resultSet.getString(7));
+				sb.setAwayTeamLogo(resultSet.getString(8));
 				sched.add(sb);
 			}
 
@@ -181,8 +186,8 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
-					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
-					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID, h.teamLogo, a.teamLogo"
+					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
 					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on d.divisionID"
 					+ " = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID left outer"
 					+ " join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID = v.venueID"
@@ -208,6 +213,8 @@ public class ScheduleResults {
 				sb.setAwayID(resultSet.getString(6));
 				sb.setVenue(resultSet.getString(7));
 				sb.setVenueID(resultSet.getString(8));
+				sb.setHomeTeamLogo(resultSet.getString(9));
+				sb.setAwayTeamLogo(resultSet.getString(10));
 				sched.add(sb);
 			}
 
@@ -259,10 +266,10 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getSchedule = conn.prepareStatement("select s.gameDate, h.teamName, s.homeTeam, s.homeScore, concat(a.teamName, '')" 
-					+ " as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID from schedule s inner join team h on h.teamID" 
-					+ " = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join teamxdivision td on" 
-					+ " td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner join"
-					+ " leaguexdivision ld on ld.divisionID = d.divisionID left outer join venuexgame vg on"
+					+ " as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID, h.teamLogo, a.teamLogo from schedule s"
+					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam inner join"
+					+ " teamxdivision td on td.teamID = h.teamID inner join division d on d.divisionID = td.divisionID inner"
+					+ " join leaguexdivision ld on ld.divisionID = d.divisionID left outer join venuexgame vg on"
 					+ " s.gameID = vg.gameID left outer join venue v on vg.venueID = v.venueID where ld.leagueID = ?"
 					+ " and s.gameStatus = 'Final' and (s.homeTeam=? or s.awayTeam=?) order by s.gameDate desc");
 			getSchedule.setString(1, lID);
@@ -285,6 +292,9 @@ public class ScheduleResults {
 				srb.setAwayID(resultSet.getString(6));
 				srb.setAwayScore(resultSet.getInt(7));
 				srb.setStatus(resultSet.getString(8));
+				srb.setGameID(resultSet.getInt(9));
+				srb.setHomeTeamLogo(resultSet.getString(10));
+				srb.setAwayTeamLogo(resultSet.getString(11));
 				sched.add(srb);
 			}
 
@@ -337,7 +347,7 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getResults = conn.prepareStatement("select s.gameID, s.gameDate, h.teamName, s.homeTeam, s.homeScore,"
-					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID"
+					+ " concat(a.teamName, '') as away, s.awayTeam, s.awayScore, s.gameStatus, s.gameID, h.teamLogo, a.teamLogo"
 					+ " from schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID"
 					+ " = s.awayTeam inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
 					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
@@ -373,6 +383,8 @@ public class ScheduleResults {
 				srb.setHomeScorer(hlb);
 				//gets the list of scorers for the away team
 				getAwayScorers(resultSet.getString(10), resultSet.getString(6), alb);
+				srb.setHomeTeamLogo(resultSet.getString(11));
+				srb.setAwayTeamLogo(resultSet.getString(12));
 				srb.setAwayScorer(alb);
 				sched.add(srb);
 			}
@@ -617,8 +629,8 @@ public class ScheduleResults {
 		try {
 			conn = ConnectionManager.getConnection();
 			getSchedule = conn.prepareStatement("select s.gameDate, s.gameTime, h.teamName, s.homeTeam,"
-					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID from schedule s"
-					+ " inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
+					+ " concat(a.teamName, '') as away, s.awayTeam, v.venueName, v.venueID, h.teamLogo, a.teamLogo from"
+					+ " schedule s inner join team h on h.teamID = s.homeTeam inner join team a on a.teamID = s.awayTeam"
 					+ " inner join teamxdivision td on td.teamID = h.teamID inner join division d on"
 					+ " d.divisionID = td.divisionID inner join leaguexdivision ld on ld.divisionID = d.divisionID"
 					+ " left outer join venuexgame vg on s.gameID = vg.gameID left outer join venue v on vg.venueID ="
@@ -641,6 +653,8 @@ public class ScheduleResults {
 				sb.setAwayID(resultSet.getString(6));
 				sb.setVenue(resultSet.getString(7));
 				sb.setVenueID(resultSet.getString(8));
+				sb.setAwayTeamLogo(resultSet.getString(9));
+				sb.setHomeTeamLogo(resultSet.getString(10));
 				sched.add(sb);
 			}
 
