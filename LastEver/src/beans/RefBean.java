@@ -18,6 +18,7 @@ public class RefBean {
 	private String password;
 	private String userType;
 	private Timestamp accountUpdated;
+	private String refId;
 
 /**************************** CONTRUCTORS *****************************/	
 	public RefBean() {}
@@ -73,6 +74,10 @@ public class RefBean {
 		return this.accountUpdated;
 	}
 	
+	public String getRefId() {
+		return this.refId;
+	}
+	
 
 /**************************** SETTERS *****************************/
 	public void setEmailValidated(int i) {
@@ -109,6 +114,10 @@ public class RefBean {
 	
 	public void setAccountUpdated(Timestamp au) {
 		this.accountUpdated = au;
+	}
+	
+	public void setRefId(String rID) {
+		this.refId = rID;
 	}
 	
 }

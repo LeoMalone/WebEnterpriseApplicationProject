@@ -345,6 +345,7 @@ public class Division {
 		boolean status = false;					// Status of createNewUser
 		Connection conn = null;					// DB Connection
 		PreparedStatement getDivision = null;	// SQL query
+		PreparedStatement getLeagueId = null;
 		ResultSet rs = null;					// returned query result set
 
 		// Connect to Database 
@@ -356,6 +357,12 @@ public class Division {
 
 			if(rs.next()) {
 				div.setDivisionName(rs.getString(2));
+				
+				getLeagueId = conn.prepareStatement("SELECT leagueID FROM division, leaguexdivision WHERE division.divisionID=? AND division.divisionID=leaguexdivision.divisionID");
+				getLeagueId.setString(1, div.getDivisionId());
+				rs = getLeagueId.executeQuery();
+				if(rs.next())
+					div.setLeagueId(rs.getString(1));				
 				status = true;
 			}
 
@@ -377,6 +384,13 @@ public class Division {
 					e.printStackTrace();
 				}
 			}
+			if (getLeagueId != null) {
+				try {
+					getLeagueId.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}	    
 		return status;
 	}
@@ -391,6 +405,7 @@ public class Division {
 		boolean status = false;						// Status of createNewUser
 	    Connection conn = null;						// DB Connection
 	    PreparedStatement updateDivision = null;	// SQL query
+	    PreparedStatement updateLeague = null;
 	    int result = 0;
 	
 	    // Connect to Database 
@@ -401,7 +416,12 @@ public class Division {
 	        updateDivision.setString(2, div.getDivisionId());	        
 	        result = updateDivision.executeUpdate();	        
 	        if(result == 1) {
-	        	status = true;
+	        	updateLeague = conn.prepareStatement("CALL update_div(?, ?)");
+	        	updateLeague.setString(1, div.getDivisionId());
+	        	updateLeague.setString(2, div.getLeageId());
+	        	result = updateLeague.executeUpdate();
+	        	if(result >= 0)
+	        		status = true;
 	        }
 	        
 	    // Catch all possible Exceptions
@@ -422,6 +442,13 @@ public class Division {
 	                e.printStackTrace();
 	            }
 	        }
+	        if (updateLeague != null) {
+	            try {
+	            	updateLeague.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }	    
 	    return status;
 	}
@@ -434,29 +461,24 @@ public class Division {
 	public static boolean deleteDivision(String divId) {
 		boolean status = false;					// Status of createNewUser
 	    Connection conn = null;					// DB Connection
-	    PreparedStatement deleteRefs = null;
 	    PreparedStatement deleteTeams = null;
 	    PreparedStatement deleteDivs = null;
 	    int result = 0;
 	
 	    // Connect to Database 
 	    try {
-	        conn = ConnectionManager.getConnection();
-	        deleteRefs = conn.prepareStatement("DELETE FROM refereexdivision USING refereexdivision, division WHERE `division`.`divisionID` = `refereexdivision`.`divisionID` AND division.divisionID=?");
-	        deleteRefs.setString(1, divId);
-	        result = deleteRefs.executeUpdate();
+	        conn = ConnectionManager.getConnection();	        
+        	deleteTeams = conn.prepareStatement("DELETE FROM teamxdivision USING teamxdivision, division WHERE `division`.`divisionID` = `teamxdivision`.`divisionID` AND division.divisionID=?");
+        	deleteTeams.setString(1, divId);
+	        result = deleteTeams.executeUpdate();	        
 	        if(result >= 0) {
-	        	deleteTeams = conn.prepareStatement("DELETE FROM teamxdivision USING teamxdivision, division WHERE `division`.`divisionID` = `teamxdivision`.`divisionID` AND division.divisionID=?");
-	        	deleteTeams.setString(1, divId);
-		        result = deleteTeams.executeUpdate();	        
-		        if(result >= 0) {
-		        	deleteDivs = conn.prepareStatement("DELETE FROM division USING division WHERE division.divisionID=?");
-		        	deleteDivs.setString(1, divId);
-		        	result = deleteDivs.executeUpdate();
-	        		if(result == 1) {
-	        			status = true;
-	        		}
-	        	}
+	        	deleteDivs = conn.prepareStatement("DELETE FROM division USING division WHERE division.divisionID=?");
+	        	deleteDivs.setString(1, divId);
+	        	result = deleteDivs.executeUpdate();
+        		if(result == 1) {
+        			status = true;
+        		}
+	        	
 	        }
 	        
 	    // Catch all possible Exceptions
@@ -466,13 +488,6 @@ public class Division {
 	        if (conn != null) {
 	            try {
 	                conn.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        if (deleteRefs != null) {
-	            try {
-	            	deleteRefs.close();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }

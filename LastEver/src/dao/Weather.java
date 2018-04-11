@@ -118,7 +118,6 @@ public class Weather {
 	        updateWeather.setInt(3, json.getJSONArray("weather").getJSONObject(0).getInt("id"));
 	        updateWeather.setString(4, json.getJSONArray("weather").getJSONObject(0).getString("description"));
 	        //get the main object and get the pressure and humidity
-
 	        updateWeather.setDouble(5, json.getJSONObject("main").getDouble("pressure") / 10);
 	        updateWeather.setInt(6, json.getJSONObject("main").getInt("humidity"));
 	        //get the current wind speed from the wind JSONObject

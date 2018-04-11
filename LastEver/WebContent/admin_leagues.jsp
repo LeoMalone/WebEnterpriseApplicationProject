@@ -129,41 +129,26 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4"><c:out value="${userName}:" />Divisions</h1>
-				<a href="./divisionCreate" class="btn btn-success"><fmt:message
-						key="ad_create" /></a>
+				<h1 class="my-4"><c:out value="${userName}: "/><fmt:message key="al_header" /></h1>
+				<a href="./createLeague" class="btn btn-success"><fmt:message key="al_create" /></a>
 				<div class="row">
 					<div class="col-lg-12 mb-5 mt-5">
 						<div class="card bg-light">
-							<div class="card-header">
-								<ul class="nav nav-tabs card-header-tabs">
-									<li class="nav-item"><a
-											class="nav-link ${currentId==null?'active':''}"
-											href="./adminDivisions">No League</a>										
-									</li>
-									<c:forEach items="${leagues}" var="league">
-										<li class="nav-item"><a
-											class="nav-link ${league.leagueId==currentId?'active':''}"
-											href="./adminDivisions?=${league.leagueId}">${league.leagueName}</a>
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
 							<div class="card-body">
 								<table class="table table-striped">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">Id</th>
-											<th scope="col"><fmt:message key="ad_name" /></th>
-											<th scope="col"><fmt:message key="at_edit" /></th>
+											<th scope="col"><fmt:message key="al_name" /></th>
+											<th scope="col"><fmt:message key="au_edit" /></th>
 										</tr>
 									</thead>
-									<c:forEach items="${allDiv}" var="division">
+									<c:forEach items="${leagues}" var="league">
 										<tr>
-											<td scope="col">${division.divisionId}</td>
-											<td scope="col">${division.divisionName}</td>
+											<td scope="col">${league.leagueId}</td>
+											<td scope="col">${league.leagueName}</td>
 											<td scope="col"><a
-												href="./editDivision?=${division.divisionId}"
+												href="./editLeague?=${league.leagueId}"
 												class="btn btn-dark btn-sm"> <i class="fa fa-edit"></i>
 											</a></td>
 										</tr>

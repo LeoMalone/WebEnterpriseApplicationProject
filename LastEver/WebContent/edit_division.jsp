@@ -125,23 +125,22 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle active" href="#"
-							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a> <a
-									class="dropdown-item" href="adminUsers"><fmt:message
-										key="nav_admin_users" /></a> <a class="dropdown-item"
-									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
-									class="dropdown-item" href="adminDivisions"><fmt:message
-										key="nav_admin_divs" /></a> <a class="dropdown-item"
-									href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-								<a class="dropdown-item" href="adminEmails"><fmt:message
-										key="nav_admin_email" /></a> <a class="dropdown-item"
-									href="logout"><fmt:message key="team_dd4" /></a>
-							</div></li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle active" href="#"
+								id="navbarDropdownPortfolio" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownPortfolio">
+									<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a>
+									<a class="dropdown-item" href="adminUsers"><fmt:message	key="nav_admin_users" /></a>
+									<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
+									<a class="dropdown-item" href="adminDivisions"><fmt:message	key="nav_admin_divs" /></a>
+									<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
+									<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+									<a class="dropdown-item" href="adminLeagues"><fmt:message key="nav_leagues" /></a>
+									<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
+								</div>
+							</li>
 						<li class="nav-item">
 							<form action="./adminDivisions" method="GET">
 								<select class="form-control form-control-sm" name="language"
@@ -172,18 +171,27 @@
 							</h4>
 							<div class="card-body">
 								<p class="card-text">
-								<form action="editDivision?=${division.divisionId}"
-									method="POST">
-									<div class="form-group">
-										<label for="editDivisionName"><fmt:message
-												key="admin_cd_name" /></label> <input type="text"
-											class="form-control" name="editDivisionName"
-											value="${division.divisionName}">
-									</div>
-									<button type="submit" class="btn btn-outline-success">
-										<fmt:message key="admin_eu_save" />
-									</button>
-								</form>
+									<form action="editDivision?=${division.divisionId}"
+										method="POST">
+										<div class="form-group">
+											<label for="editDivisionName"><fmt:message
+													key="admin_cd_name" /></label> <input type="text"
+												class="form-control" name="editDivisionName"
+												value="${division.divisionName}">
+										</div>
+										<c:forEach var="league" items="${leagues}">
+											<div class="form-check">
+												<input aria-describedby="adminHelp" class="form-check-input"
+													type="radio" name="divRadio" value="${league.leagueId}" ${league.leagueId == leagueId?'checked':''}>
+												<label class="form-check-label" for="divRadio">
+													${league.leagueName} </label>
+											</div>
+										</c:forEach>
+										<br />
+										<button type="submit" class="btn btn-outline-success">
+											<fmt:message key="admin_eu_save" />
+										</button>
+									</form>
 								</p>
 							</div>
 							<div class="card-footer">

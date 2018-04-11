@@ -128,14 +128,13 @@
 												aria-labelledby="navbarDropdownPortfolio">
 
 												<a class="dropdown-item" href="${userType}"><c:out
-														value="${userName}" />
-													<fmt:message key="team_dd1" /></a> <a class="dropdown-item"
-													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
-													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
-														key="team_dd4" /></a>
+														value="${userName}" /> <fmt:message key="team_dd1" /></a> <a
+													class="dropdown-item" href="teamRoster"><fmt:message
+														key="team_dd2" /></a> <a class="dropdown-item"
+													href="teamSchedule"><fmt:message key="team_dd3" /></a> <a
+													class="dropdown-item" href="teamEmails"><fmt:message
+														key="team_dd6" /></a> <a class="dropdown-item" href="logout"
+													method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -177,7 +176,7 @@
 									<%--  IF SIGNED IN AS ADMIN --%>
 									<c:when test="${userType == './admin'}">
 										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#"
+											class="nav-link dropdown-toggle active" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
 											aria-haspopup="true" aria-expanded="false"> <c:out
 													value="${userName}" />
@@ -193,8 +192,9 @@
 												<a class="dropdown-item" href="adminSchedule"><fmt:message
 														key="nav_admin_sched" /></a> <a class="dropdown-item"
 													href="adminEmails"><fmt:message key="nav_admin_email" /></a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="adminLeagues"><fmt:message
+														key="nav_leagues" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -287,7 +287,9 @@
 																	<td><fmt:message key="not_available" /></td>
 																</c:when>
 																<c:otherwise>
-																	<td><c:out value="${p.divisionName}" /></td>
+																	<td><c:out value="${p.divisionName}" /><c:if test="${not empty p.leagueName}">, <c:out
+																				value="${p.leagueName}" />
+																		</c:if></td>
 																</c:otherwise>
 															</c:choose>
 														</tr>
