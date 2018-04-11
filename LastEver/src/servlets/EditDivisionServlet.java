@@ -18,7 +18,7 @@ import dao.League;
 /**
  * The EditDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit division.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class EditDivisionServlet extends HttpServlet {
 

@@ -18,7 +18,7 @@ import dao.League;
 /**
  * The CreateDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option Create Division.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class CreateDivisionServlet extends HttpServlet {
 	
@@ -40,9 +40,8 @@ private static final long serialVersionUID = 7270142539946516086L;
 		request.setAttribute("league", llb);
 		
 		// If User is not signed In redirect to sign in page
-		// TODO: distinguish between user types
-		if (request.getSession().getAttribute("signedIn") == null) {
-			response.sendRedirect("./login");
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+			response.sendRedirect("./index");
 		} else {
 			// If user is signed in, get language and username
 			Cookie[] cookies = request.getCookies();
@@ -109,8 +108,7 @@ private static final long serialVersionUID = 7270142539946516086L;
 			div.setDivisionName(newDivName);
 			div.setLeagueId(newDivLeague);
 			if (Division.createNewDiv(div)) {
-				response.sendRedirect("./adminDivisions");
-				
+				response.sendRedirect("./adminDivisions");				
 			} else {
 				response.sendRedirect("./divisionCreate");
 			}

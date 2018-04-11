@@ -5,19 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The ScheduleResultsBean class is meant for passing schedule information
+ * The ScheduleResultsBean class is meant for passing schedule and results information
  * between DAOs and Servlets
  */
 public class ScheduleResultsBean {
 	
 	// ScheduleResults bean parameters
+	private int gameID;
 	private Date date;
 	private Time time;
 	private String homeTeam;
 	private String homeID;
+	private String homeTeamLogo;
 	private int homeScore;
 	private String awayTeam;
 	private String awayID;
+	private String awayTeamLogo;
 	private int awayScore;
 	private String venue;
 	private String status;
@@ -50,6 +53,10 @@ public class ScheduleResultsBean {
 	}
 
 /**************************** GETTERS *****************************/
+	public int getGameID() {
+		return this.gameID;
+	}
+	
 	public Date getDate() {
 		return this.date;
 	}
@@ -66,6 +73,10 @@ public class ScheduleResultsBean {
 		return this.homeID;
 	}
 	
+	public String getHomeTeamLogo() {
+		return this.homeTeamLogo;
+	}
+	
 	public int getHomeScore() {
 		return this.homeScore;
 	}
@@ -76,6 +87,10 @@ public class ScheduleResultsBean {
 	
 	public String getAwayID() {
 		return this.awayID;
+	}
+	
+	public String getAwayTeamLogo() {
+		return this.awayTeamLogo;
 	}
 	
 	public int getAwayScore() {
@@ -103,6 +118,10 @@ public class ScheduleResultsBean {
 	}
 	
 /**************************** SETTERS *****************************/
+	public void setGameID(int id) {
+		this.gameID = id;
+	}
+	
 	public void setDate(Date d) {
 		this.date = d;
 	}
@@ -119,6 +138,10 @@ public class ScheduleResultsBean {
 		this.homeID = hID;
 	}
 	
+	public void setHomeTeamLogo(String htl) {
+		this.homeTeamLogo = htl;
+	}
+	
 	public void setHomeScore(int hs) {
 		this.homeScore = hs;
 	}
@@ -129,6 +152,10 @@ public class ScheduleResultsBean {
 	
 	public void setAwayID(String aID) {
 		this.awayID = aID;
+	}
+	
+	public void setAwayTeamLogo(String atl) {
+		this.awayTeamLogo = atl;
 	}
 	
 	public void setAwayScore(int as) {

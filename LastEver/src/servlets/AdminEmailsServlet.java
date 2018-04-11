@@ -147,6 +147,7 @@ public class AdminEmailsServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+			// redirect back to Admin Emails page
 			response.sendRedirect("./adminEmails");
 		}
 	}

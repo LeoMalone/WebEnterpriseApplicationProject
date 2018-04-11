@@ -23,6 +23,9 @@
 <!-- Bootstrap core CSS -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- DataTables core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="DataTables/datatables.min.css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
 <script defer
@@ -94,10 +97,10 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a> <a
 									class="dropdown-item" href="adminUsers"><fmt:message
 										key="nav_admin_users" /></a> <a class="dropdown-item"
 									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
@@ -132,7 +135,7 @@
 		<div class="cards-container container-fluid">
 			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${userName}:
+					<c:out value="${userName}" />
 					<fmt:message key="admin_title_user" />
 				</h1>
 				<a href="./adminCreate" class="btn btn-success"><fmt:message
@@ -142,7 +145,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="table-responsive">
-									<table class="table table-striped">
+									<table class="table table-striped" id="users">
 										<thead class="thead-dark">
 											<tr>
 												<th scope="col">ID</th>
@@ -202,5 +205,8 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables core JavaScript -->
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/users.js"></script>
 </body>
 </html>

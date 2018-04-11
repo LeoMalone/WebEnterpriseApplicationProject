@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
-
 <!-- if language is not set to French, set language to English -->
 <c:if test="${cookie.language.value ne 'fr'}">
 	<html lang="en">
@@ -14,26 +13,26 @@
 
 <fmt:setLocale value="${cookie.language.value}" />
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Bootstrap core CSS -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- Custom styles for this template -->
-<link href="css/cover.css" rel="stylesheet">
-<title>Last Ever</title>
-</head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">	
+	<!-- Bootstrap core CSS -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" />
+	<!-- Custom styles for this template -->
+	<link href="css/cover.css" rel="stylesheet">
+	<fmt:bundle basename="TestBundle">
+		<title>Last Ever - <fmt:message key="admin_title_cd" /></title>
+	</fmt:bundle>
+	</head>
 <body>
 	<fmt:bundle basename="TestBundle">
-
 		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
 		<nav
 			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">
@@ -90,10 +89,10 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a> <a
 									class="dropdown-item" href="adminUsers"><fmt:message
 										key="nav_admin_users" /></a> <a class="dropdown-item"
 									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
@@ -124,7 +123,7 @@
 
 		<div class="main-cover">
 			<div class="cards-container container">
-				<h1 class="my-4">${userName}:
+				<h1 class="my-4"><c:out value="${userName}:" />
 					<fmt:message key="admin_cd_title" />
 				</h1>
 				<div class="row">

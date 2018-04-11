@@ -19,7 +19,7 @@ import dao.League;
 /**
  * The AdminTeamsServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option View Teams.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminTeamsServlet extends HttpServlet {
 

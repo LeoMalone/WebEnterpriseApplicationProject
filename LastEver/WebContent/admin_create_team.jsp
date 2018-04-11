@@ -25,7 +25,9 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<title>LastEver</title>
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="admin_title_ct" /></title>
+</fmt:bundle>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
@@ -90,10 +92,10 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a> <a
 									class="dropdown-item" href="adminUsers"><fmt:message
 										key="nav_admin_users" /></a> <a class="dropdown-item"
 									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
@@ -125,7 +127,7 @@
 		<div class="main-cover">
 			<div class="cards-container container">
 				<h1 class="my-4">
-					${userName}:
+					<c:out value="${userName}:" />
 					<fmt:message key="admin_ct_head" />
 				</h1>
 				<div class="row">

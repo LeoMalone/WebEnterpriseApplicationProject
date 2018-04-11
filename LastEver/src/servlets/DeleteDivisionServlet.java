@@ -10,29 +10,36 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Division;
 
 /**
- * The DeleteDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option delete division.
+ * The DeleteDivisionServlet class extends the HttpServlet class to handle the
+ * GET/POST requests for the administrator control panel option delete division.
+ * 
  * @author Liam Maloney
  */
 public class DeleteDivisionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * doPost method mapped to /deleteDivision	
+	 * doPost method mapped to /deleteDivision
 	 */
 	@Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
-		// Get id from url
-		StringBuilder sb = new StringBuilder(request.getQueryString());
-		sb.deleteCharAt(0);
-		
-		// if query is successful redirect to proper page
-		if(Division.deleteDivision(sb.toString())) {
-			response.sendRedirect("./adminDivisions?=1");
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// If Post is not from logged in Admin
+		if (!(request.getSession().getAttribute("signedIn").equals("Administrator"))) {
+			response.sendRedirect("./index");
 		} else {
-			response.sendRedirect("./editDivision?=" + sb.toString());
+
+			// Get id from url
+			StringBuilder sb = new StringBuilder(request.getQueryString());
+			sb.deleteCharAt(0);
+
+			// if query is successful redirect to proper page
+			if (Division.deleteDivision(sb.toString())) {
+				response.sendRedirect("./adminDivisions?=1");
+			} else {
+				response.sendRedirect("./editDivision?=" + sb.toString());
+			}
 		}
 	}
 }

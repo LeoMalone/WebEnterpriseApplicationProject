@@ -21,26 +21,29 @@ import dao.League;
 public class TeamPhotoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * doGet method mapped to /teamPhoto
 	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		response.setContentType("text/html");
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+
+
 		String userName = null;
 		String language = null;
-		
+
 		// Set leagues for navbar
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
-		
+
+		// if not signed in as team owner, redirect to index
 		if (!(request.getSession().getAttribute("signedIn").equals("Team Owner"))) {
 			response.sendRedirect("./index");
 		} else {
+			//get cookies
 			Cookie[] cookies = request.getCookies();
+			//if username and language cookies exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
@@ -49,16 +52,17 @@ public class TeamPhotoServlet extends HttpServlet {
 						language = cookie.getValue();
 				}
 			}
+			//if language is null
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
 				language = request.getParameter("language");
 				Cookie[] theCookies = request.getCookies();
-	
+
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
 						if (language != null)
@@ -66,14 +70,17 @@ public class TeamPhotoServlet extends HttpServlet {
 						response.addCookie(tempCookie);
 						break;
 					}
-				}		
-				request.setAttribute("userName", userName);
-				RequestDispatcher rd = request.getRequestDispatcher("team_photos.jsp");  
-		        rd.forward(request, response);	
+				}	
 			}
+			//set attribute and content type and dispatch to jsp
+			response.setContentType("text/html");	
+			request.setAttribute("userName", userName);
+			RequestDispatcher rd = request.getRequestDispatcher("team_photos.jsp");  
+			rd.forward(request, response);	
+
 		}
 	}
-	
+
 	/**
 	 * doPost method mapped to /teamPhoto
 	 */

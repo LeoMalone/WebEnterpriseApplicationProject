@@ -24,7 +24,7 @@ import dao.Team;
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
  * creating a new account
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class CreateAccountServlet extends HttpServlet {
 
@@ -41,10 +41,10 @@ public class CreateAccountServlet extends HttpServlet {
 	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		// set response type and get post data from jsp form
 		response.setContentType("text/html");
-
+		
 		String newFirstName = request.getParameter("newFirstName");
 		String newLastName = request.getParameter("newLastName");
 		String newUsername = request.getParameter("newUsername");
@@ -137,8 +137,8 @@ public class CreateAccountServlet extends HttpServlet {
 					}
 
 					// redirect to home page
-						session.setAttribute("userType", url);
-						response.sendRedirect(url);
+					session.setAttribute("userType", url);
+					response.sendRedirect(url);
 				}
 			} else {
 				response.sendRedirect("./login");

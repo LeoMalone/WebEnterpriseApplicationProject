@@ -28,15 +28,16 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
-<title>LastEver</title>
+<fmt:bundle basename="TestBundle">
+	<title>Last Ever - <fmt:message key="admin_title_cs" /></title>
+</fmt:bundle>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
-
 		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
-	- sets parent link active
-	- in dropdown, sets active with full bar color
-	-->
+		- sets parent link active
+		- in dropdown, sets active with full bar color
+		-->
 		<nav
 			class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">
@@ -93,10 +94,10 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle active" href="#"
 							id="navbarDropdownPortfolio" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${userName} </a>
+							aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="${userType}">${userName}</a> <a
+								<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a> <a
 									class="dropdown-item" href="adminUsers"><fmt:message
 										key="nav_admin_users" /></a> <a class="dropdown-item"
 									href="adminTeams"><fmt:message key="nav_admin_teams" /></a> <a
@@ -128,7 +129,7 @@
 		<div class="main-cover">
 			<div class="cards-container container">
 				<h1 class="my-4">
-					${userName}:
+					<c:out value="${userName}:" />
 					<fmt:message key="admin_cs_title" />
 				</h1>
 				<div class="row">
@@ -214,18 +215,17 @@
 				</p>
 			</div>
 		</footer>
-
+		</fmt:bundle>
 		<!-- Bootstrap core JavaScript -->
-		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript"
-			src="date-picker/js/bootstrap-datepicker.min.js"></script>
-		<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
-		<script type="text/javascript" src="js/edit_schedule.js"></script>
-	</fmt:bundle>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="date-picker/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="clockpicker/js/clockpicker.js"></script>
+	<script type="text/javascript" src="js/edit_schedule.js"></script>
 </body>
 </html>
