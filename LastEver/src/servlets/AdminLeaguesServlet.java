@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import beans.LeagueBean;
 import dao.League;
 
+/**
+ * AdminLeaguesServlet class handels HTTP GET requests to allow the admins to edit Leagues
+ * @author Liam Maloney
+ */
 public class AdminLeaguesServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

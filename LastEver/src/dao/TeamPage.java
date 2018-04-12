@@ -10,7 +10,8 @@ import java.util.List;
 import beans.TeamBean;
 import beans.UserBean;
 /**
- * The TeamPage class gets the standings for the current division
+ * The TeamPage class gets the standings for the current league
+ * @author Kevin Villemaire
  */
 public class TeamPage {
 

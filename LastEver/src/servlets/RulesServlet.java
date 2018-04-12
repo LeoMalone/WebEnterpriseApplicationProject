@@ -17,7 +17,7 @@ import dao.League;
 /**
  * RulesServlet class extends HttpServlet for GET/POST requests for the rules page
  * to get navbar and session info
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class RulesServlet extends HttpServlet {
 	

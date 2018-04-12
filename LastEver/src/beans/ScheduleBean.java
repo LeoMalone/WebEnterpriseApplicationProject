@@ -18,6 +18,8 @@ public class ScheduleBean {
 	private String awayTeam;
 	private String awayScore;
 	private String gameStatus;
+	private String referee;
+	private String venue;
 	
 	
 	/**************************** GETTERS *****************************/
@@ -62,6 +64,14 @@ public class ScheduleBean {
 		return this.gameStatus;
 	}
 	
+	public String getReferee() {
+		return this.referee;
+	}
+	
+	public String getVenue() {
+		return this.venue;
+	}
+	
 	/**************************** SETTERS *****************************/
 	public void setTitle(String id) {
 		this.title = id;
@@ -101,5 +111,13 @@ public class ScheduleBean {
 	
 	public void setGameStatus(String gs) {
 		this.gameStatus = gs;
+	}
+	
+	public void setReferee(String r) {
+		this.referee = r;
+	}
+	
+	public void setVenue(String v) {
+		this.venue = v;
 	}
 }

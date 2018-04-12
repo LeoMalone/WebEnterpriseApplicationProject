@@ -18,7 +18,7 @@ import dao.League;
 /**
  * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option View Users.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminUsersServlet extends HttpServlet{
 	

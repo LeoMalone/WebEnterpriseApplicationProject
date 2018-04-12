@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * The Player class gets info related to a player
+ * @author Kevin Villemaire
  */
 public class Player {
 

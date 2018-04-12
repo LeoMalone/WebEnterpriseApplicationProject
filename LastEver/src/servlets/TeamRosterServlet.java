@@ -21,7 +21,7 @@ import dao.TeamScheduleResults;
 /**
  * TeamRosterServlet class extends HttpServlet for GET/POST requests for the team roster page
  * to get navbar and session info, and team roster info
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamRosterServlet extends HttpServlet {
 

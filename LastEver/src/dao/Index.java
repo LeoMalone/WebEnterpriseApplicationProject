@@ -11,6 +11,7 @@ import beans.NewsBean;
 
 /**
  * The Index class gets all the news in the database regardless of what tags the news has
+ * @author Kevin Villemaire
  */
 public class Index {
 

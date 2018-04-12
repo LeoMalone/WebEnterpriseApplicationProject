@@ -10,6 +10,7 @@ import db.ConnectionManager;
 
 /**
  * The EditTeam class handles all db operation relating to editing a team
+ * @author Liam Maloney
  */
 public class EditTeam {
 	

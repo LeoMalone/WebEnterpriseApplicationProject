@@ -13,6 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * The Login class validates a UserBean's credentials
  * using a SELECT statement to compare credentials
+ * @author Liam Maloney
  */
 public class Login {
 

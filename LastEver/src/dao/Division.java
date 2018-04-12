@@ -14,6 +14,7 @@ import db.ConnectionManager;
 /**
  * The Division class gets all the divisions in the database, allows the user to create a new division, get the news associated
  * with the division, allow the user to delete a division, and get a specific division
+ * @author Kevin Villemaire, Liam Maloney
  */
 public class Division {
 

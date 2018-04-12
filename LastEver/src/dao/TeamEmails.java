@@ -11,7 +11,9 @@ import beans.UserBean;
 import db.ConnectionManager;
 
 /**
- * The TeamEmails class handles all db operation relating to emails from a Team Owner to its players, other team owners in the division, and Admins
+ * The TeamEmails class handles all db operation relating to emails from a Team Owner to its players,
+ *  other team owners in the division, and Admins
+ *  @author Kevin Read
  */
 public class TeamEmails {
 

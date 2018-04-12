@@ -15,14 +15,9 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
-<<<<<<< HEAD
  * RegistrationServlet class extends HttpServlet for GET/POST requests for the registration page
  * to get navbar and session info
- * @author Kevin Read and edited by Kevin Villemaire
-=======
- * RegistrationServlet class
  * @author Kevin Read, Kevin Villemaire
->>>>>>> branch 'master' of https://github.com/LeoMalone/WebEnterpriseApplicationProject.git
  */
 public class RegistrationServlet extends HttpServlet {
 	

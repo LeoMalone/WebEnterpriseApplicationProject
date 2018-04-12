@@ -13,6 +13,7 @@ import db.ConnectionManager;
 
 /**
  * The League class gets all the info about the league
+ * @author Kevin Villemaire
  */
 public class League {
 

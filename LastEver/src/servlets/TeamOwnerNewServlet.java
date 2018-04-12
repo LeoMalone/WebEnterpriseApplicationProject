@@ -19,7 +19,7 @@ import dao.Team;
 /**
  * TeamOwnerNewServlet class extends HttpServlet for GET/POST requests for the teamowner new page
  * to get navbar and session info, and to set all of the new team's attributes
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamOwnerNewServlet extends HttpServlet {
 

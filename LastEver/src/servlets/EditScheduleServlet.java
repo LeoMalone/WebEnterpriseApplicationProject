@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
+import beans.RefBean;
 import beans.ScheduleBean;
 import beans.TeamBean;
+import beans.VenueBean;
+import dao.AdminReferees;
 import dao.AdminSchedule;
 import dao.AdminTeams;
+import dao.AdminVenues;
 import dao.League;
 
 /**
@@ -84,11 +88,17 @@ public class EditScheduleServlet extends HttpServlet {
 				// If query is successful
 				if(AdminSchedule.getScheduleById(schedule)) {
 					List<TeamBean> teamList = new ArrayList<TeamBean>();
+					List<RefBean> refList = new ArrayList<RefBean>();
+					List<VenueBean> venueList = new ArrayList<VenueBean>();
+					
 					// If query is successful
-					if(AdminTeams.teamsForEditSchedule(teamList)) {						
+					if(AdminTeams.teamsForEditSchedule(teamList) && AdminReferees.getAllReferees(refList)
+							&& AdminVenues.getAllVenues(venueList)) {						
 						request.setAttribute("teamList", teamList);
 						request.setAttribute("userName", userName);
 						request.setAttribute("schedule", schedule);
+						request.setAttribute("referee", refList);
+						request.setAttribute("venue", venueList);
 						response.setContentType("text/html");
 						RequestDispatcher rd = request.getRequestDispatcher("edit_schedule.jsp");  
 				        rd.forward(request, response);	
@@ -117,9 +127,13 @@ public class EditScheduleServlet extends HttpServlet {
 		String newHomeScore = request.getParameter("editHomeScore");
 		String newAwayScore = request.getParameter("editAwayScore");
 		String newGameStatus = request.getParameter("editGameStatus");
+		String newReferee = request.getParameter("newReferee");
+		String newVenue = request.getParameter("newVenue");
 		
 		// If any parameter is null
-		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null || newAwayScore == "" || newGameStatus == null) {
+		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null 
+				|| newAwayScore == "" || newGameStatus == null || newHomeTeam == newAwayTeam || newReferee == null
+				|| newVenue == null || newReferee.equals("0") || newVenue.equals("0")) {
 			response.sendRedirect("./editSchedule?=" + sb.toString());
 		} else {
 			// Set ScheduleBean parameters
@@ -131,10 +145,15 @@ public class EditScheduleServlet extends HttpServlet {
 			schedule.setHomeScore(newHomeScore);
 			schedule.setAwayScore(newAwayScore);
 			schedule.setGameStatus(newGameStatus);
+			schedule.setReferee(newReferee);
+			schedule.setVenue(newVenue);
 			
 			// If query is successful
 			if(AdminSchedule.updateSchedule(schedule)) {
 				response.sendRedirect("./adminSchedule");
+			}
+			else {
+				response.sendRedirect("./editSchedule?=" + sb.toString());
 			}
 		}
 	}	

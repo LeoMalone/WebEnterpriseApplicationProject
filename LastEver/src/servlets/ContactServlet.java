@@ -17,7 +17,7 @@ import dao.League;
 /**
  * Contact Servlet class extends the HttpServlet class to handle the GET/POST requests for
  * the contact page
- * @author Kevin Read and edited by Kevin Villemaire and Neal Sen
+ * @author Kevin Read, Kevin Villemaire, Neal Sen
  */
 public class ContactServlet extends HttpServlet {
 

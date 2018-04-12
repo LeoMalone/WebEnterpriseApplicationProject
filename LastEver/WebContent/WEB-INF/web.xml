@@ -475,9 +475,6 @@
 		<url-pattern>/teamowner</url-pattern>
 	</servlet-mapping>
 
-
-
-
 	<servlet>
 		<servlet-name>TeamOwnerNewServlet</servlet-name>
 		<servlet-class>servlets.TeamOwnerNewServlet</servlet-class>
@@ -636,6 +633,16 @@
 	<servlet-mapping>
 		<servlet-name>CreateRefServlet</servlet-name>
 		<url-pattern>/createReferee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RefereeJsonServlet</servlet-name>
+		<servlet-class>servlets.RefereeJsonServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RefereeJsonServlet</servlet-name>
+		<url-pattern>/refereeJson</url-pattern>
 	</servlet-mapping>
 
 	<error-page>

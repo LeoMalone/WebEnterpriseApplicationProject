@@ -28,7 +28,7 @@ import dao.TeamScheduleResults;
 /**
  * TeamScheduleServlet class extends HttpServlet for GET/POST requests for the team schedule page
  * to get navbar and session info, and team and division info for statistics, results, and schedules
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamScheduleServlet extends HttpServlet {
 

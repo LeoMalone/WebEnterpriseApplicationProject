@@ -12,7 +12,6 @@ import dao.Division;
 /**
  * The DeleteDivisionServlet class extends the HttpServlet class to handle the
  * GET/POST requests for the administrator control panel option delete division.
- * 
  * @author Liam Maloney
  */
 public class DeleteDivisionServlet extends HttpServlet {
