@@ -34,7 +34,7 @@ public class Statistics {
 		try {
 			conn = ConnectionManager.getConnection();
 			getStatistics = conn.prepareStatement("select s.teamName, s.GP, s.playerName, s.goals, s.yellowCards,"
-					+ " s.redCards, s.playerID, s.teamID, s.playerHidePage, t.teamLogo from statistics s left outer join"
+					+ " s.redCards, s.playerID, s.teamID, s.playerHidePage, t.teamLogo from statistics s inner join"
 					+ " team t on t.teamName = s.teamName where leagueID = ? and playoffGame = 0 order by s.goals desc,"
 					+ " s.GP asc, s.playerName asc");
 			getStatistics.setString(1, id);
