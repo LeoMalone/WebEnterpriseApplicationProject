@@ -175,7 +175,7 @@
 						    <div class="card-header" id="headingTwo">
 						      <h5 class="mb-0">
 						        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          <fmt:message key="team_emails5"/>
+						          <fmt:message key="team_emails6"/>
 						        </button>
 						      </h5>
 						    </div>
@@ -186,7 +186,7 @@
 							      		<c:forEach items="${tos}" var="to">
 											<div class="form-check">
 											  <input name="tos" class="form-check-input" type="checkbox" value="${to.emailAddress}" id="defaultCheck1">
-											  <label class="form-check-label" for="defaultCheck1"><b>${to.firstName} ${to.lastName}:</b> ${to.emailAddress}</label>
+											  <label class="form-check-label" for="defaultCheck1"><b><c:out value="${to.firstName} ${to.lastName}:" /></b><c:out value=" ${to.emailAddress}" /></label>
 											</div>
 										</c:forEach>
 										<hr />
