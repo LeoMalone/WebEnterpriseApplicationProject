@@ -17,7 +17,8 @@ import dao.League;
 import dao.Team;
 
 /**
- * TeamOwnerSelectServlet class
+ * TeamOwnerSelectServlet class extends HttpServlet for GET/POST requests for the teamowner select page
+ * to get navbar and session info, and to insert a team into the usersxteam table
  * @author Kevin Read and edited by Kevin Villemaire
  */
 public class TeamOwnerSelectServlet extends HttpServlet {
@@ -36,9 +37,6 @@ public class TeamOwnerSelectServlet extends HttpServlet {
 
 		String teamNameFromParam = null;
 		teamNameFromParam = (String) request.getAttribute("selectTeam");
-		if (teamNameFromParam == null) {
-			teamNameFromParam = "coolTeam";
-		}
 
 		// Set leagues for navbar
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
