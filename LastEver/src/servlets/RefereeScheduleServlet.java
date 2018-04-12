@@ -23,7 +23,7 @@ public class RefereeScheduleServlet extends HttpServlet {
 	
 private static final long serialVersionUID = 1L;
 	
-	/**Admin and Referee Schedule separation COMING SOON
+	/**
 	 * 
 	 * doGet method mapped to /refereeSchedule
 	 */
@@ -76,7 +76,7 @@ private static final long serialVersionUID = 1L;
 				// Set content type and username and dispatch to jsp
 				request.setAttribute("userName", userName);
 				response.setContentType("text/html");
-				RequestDispatcher rd = request.getRequestDispatcher("admin_schedule.jsp");  
+				RequestDispatcher rd = request.getRequestDispatcher("ref_schedule.jsp");  
 		        rd.forward(request, response);	
 			}
 		}

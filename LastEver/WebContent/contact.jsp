@@ -240,23 +240,22 @@
 							<h4 class="card-header">
 								<fmt:message key="ab_head4" />
 							</h4>
-					<!-- Need to create getInTouch page - COMING SOON -->
-					<form action="./getInTouch" method="POST"> 
+					<!-- All attributes are required -->
+					<form action="mailto:youraddr@domain.tld?subject=GetInTouch" method="POST"> 
 							<div class="card-body">
 								<p class="card-text">
 									<div class="form-group" align="left">
 										<label for="newFirstName"><fmt:message key="signin_fname" /></label>
-										<input type="text" class="form-control" name="newFirstName" placeholder="<fmt:message key="signin_fname" />">
+										<input type="text" class="form-control" required name="newFirstName" placeholder="<fmt:message key="signin_fname"  />">
 									</div>
 									<div class="form-group" align="left">
 										<label for="newLastName"><fmt:message key="signin_lname" /></label>
-										<input type="text" class="form-control" name="newLastName" placeholder="<fmt:message key="signin_lname" />">
+										<input type="text" class="form-control" required name="newLastName" placeholder="<fmt:message key="signin_lname"  />">
 									</div>
 									<!-- ADD city -->
-									<br />
 									<div class="form-group" align="left">									
 										<label for="city"><fmt:message key="ab_city" /></label>
-									    <select id="city" name="city">
+									    <select class="form-control" id="city" name="city">
 									      <option value="ottawa"><fmt:message key="ab_ottawa" /></option>
 									      <option value="nepean"><fmt:message key="ab_nepean" /></option>
 									      <option value="gatineau"><fmt:message key="ab_gatineau" /></option>
@@ -266,7 +265,7 @@
 									<div class="form-group" align = "left">
 										<!-- Add subject -->
 										<label for="subject"><fmt:message key="email_subject" /></label> <br> 
-    									<textarea id="subject" name="subject" rows="3%" cols="40%" placeholder="<fmt:message key="email_subject" />..."></textarea>									
+    									<textarea id="subject" required name="subject" rows="3%" cols="40%" style="resize:none;" placeholder="<fmt:message key="email_subject" />..." ></textarea>									
 									</div>
 								</p>
 							</div>

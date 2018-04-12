@@ -383,6 +383,16 @@
 		<servlet-name>RefereeSchedule</servlet-name>
 		<url-pattern>/refSchedule</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RefCreateSchedule</servlet-name>
+		<servlet-class>servlets.RefCreateScheduleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RefCreateSchedule</servlet-name>
+		<url-pattern>/refCreateSchedule</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>RefereeUsers</servlet-name>
