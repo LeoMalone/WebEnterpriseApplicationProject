@@ -17,14 +17,9 @@ import dao.League;
 import dao.Team;
 
 /**
-<<<<<<< HEAD
  * TeamOwnerServlet class extends HttpServlet for GET/POST requests for the teamowner page
  * to get navbar and session info 
  * @author Kevin Read and edited by Kevin Villemaire
-=======
- * TeamOwnerServlet class
- * @author Kevin Read,Kevin Villemaire
->>>>>>> branch 'master' of https://github.com/LeoMalone/WebEnterpriseApplicationProject.git
  */
 public class TeamOwnerServlet extends HttpServlet {
 

@@ -15,14 +15,9 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
-<<<<<<< HEAD
  * TeamPhotoServlet class extends HttpServlet for GET/POST requests for the team photo page
  * to get navbar and session info - NOT YET IMPLEMENTED
  * @author Kevin Read and edited by Kevin Villemaire
-=======
- * TeamPhotoServlet class
- * @author Kevin Read, Kevin Villemaire
->>>>>>> branch 'master' of https://github.com/LeoMalone/WebEnterpriseApplicationProject.git
  */
 public class TeamPhotoServlet extends HttpServlet {
 
