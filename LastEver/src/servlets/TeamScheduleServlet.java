@@ -13,9 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import beans.DivisionBean;
 import beans.LeagueBean;
 import beans.ScheduleResultsBean;
+import beans.StandingsBean;
+import beans.StatisticsBean;
 import beans.TeamBean;
+import beans.UserBean;
 import dao.Division;
 import dao.League;
+import dao.ScheduleResults;
+import dao.Standings;
+import dao.Statistics;
+import dao.TeamPage;
 import dao.TeamScheduleResults;
 
 /**
@@ -67,28 +74,51 @@ public class TeamScheduleServlet extends HttpServlet {
 		}
 
 
-
-
-		List<ScheduleResultsBean> slb = new ArrayList<ScheduleResultsBean>();
-		String divID = TeamScheduleResults.getSchedule(slb, userName);	
-
-		// Set leagues for navbar
-		List<LeagueBean> llb = new ArrayList<LeagueBean>();
-		League.getAllLeagues(llb);
-		request.setAttribute("league", llb);;
-
-		List<DivisionBean> dlb = new ArrayList<DivisionBean>();	
-		Division.getSpecificDivision(dlb, divID);
-		request.setAttribute("currDiv", dlb);
-
 		TeamBean tb = new TeamBean();
 		String teamName = TeamScheduleResults.getTeamName(tb, userName);
+
+		//get the name of the team's division
+		String id = TeamScheduleResults.getTeamId(tb, teamName);
+		String div = TeamPage.getTeamDivision(id);
+		
+		response.setContentType("text/html");
+
+		//bean list variables used to set data on the page
+		List<StandingsBean> slb = new ArrayList<StandingsBean>();
+		List<ScheduleResultsBean> srlb = new ArrayList<ScheduleResultsBean>();	//Bean used for team schedule
+		List<ScheduleResultsBean> rlb = new ArrayList<ScheduleResultsBean>();	//Bean used for team results
+		List<TeamBean> tlb = new ArrayList<TeamBean>();
+		List<LeagueBean> llb = new ArrayList<LeagueBean>();
+		List<StatisticsBean> stlb = new ArrayList<StatisticsBean>();
+		List<UserBean> ulb = new ArrayList<UserBean>();
+		
+		/*
+		 * Gets ths teams standings, schedule, results, statistics, the team info, the team owner, and the 
+		 * current league of the team to be displayed on the team page
+		 */
+		Standings.getStandings(div, slb);
+		ScheduleResults.getScheduleWithTeam(id, div, srlb);
+		ScheduleResults.getResultsWithTeam(id, div, rlb);
+		Statistics.getStatisticsWithTeam(id, div, stlb);
+		TeamPage.getTeamInfo(id, tlb);
+		League.getAllLeagues(llb);
+		TeamPage.getTeamOwner(id, ulb);
+
+		
+		
 
 		//set content type and attributes, and dispatch to jsp
 		response.setContentType("text/html");
 		request.setAttribute("teamName", teamName);
-		request.setAttribute("schedule", slb);	
+		request.setAttribute("league", llb);
+		request.setAttribute("team", tlb);
+		request.setAttribute("standings", slb);
+		request.setAttribute("schedule", srlb);
+		request.setAttribute("statistics", stlb);
+		request.setAttribute("results", rlb);
+		request.setAttribute("teamowner", ulb);
 		request.setAttribute("userName", userName);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("team_schedule.jsp");  
 		rd.forward(request, response);		
 
