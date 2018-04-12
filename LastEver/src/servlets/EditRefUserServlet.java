@@ -23,7 +23,7 @@ import dao.League;
 /**
  * EditRefUserServlet extends the HttpServlet class to handle the GET/POST requests for
  * the referee user to edit their account details
- * @author Kevin Read, Kevin Villemaire, Neal Sen
+ * @author Kevin Read, Neal Sen and Kevin Villemaire
  */
 public class EditRefUserServlet extends HttpServlet{
 

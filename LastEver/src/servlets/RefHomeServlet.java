@@ -19,7 +19,7 @@ import dao.League;
 /**
  * RefHomeServlet classextends the HttpServlet class to handle the GET/POST requests for
  * the referee homepage
- * @author Kevin Read, Kevin Villemaire, Liam Maloney, Neal Sen
+ * @author Kevin Read, Neal Sen, Liam Maloney and Kevin Villemaire
  *
  */
 public class RefHomeServlet extends HttpServlet {
