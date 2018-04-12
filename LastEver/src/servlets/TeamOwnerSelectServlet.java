@@ -17,9 +17,14 @@ import dao.League;
 import dao.Team;
 
 /**
+<<<<<<< HEAD
  * TeamOwnerSelectServlet class extends HttpServlet for GET/POST requests for the teamowner select page
  * to get navbar and session info, and to insert a team into the usersxteam table
  * @author Kevin Read and edited by Kevin Villemaire
+=======
+ * TeamOwnerSelectServlet class
+ * @author Kevin Read,Kevin Villemaire
+>>>>>>> branch 'master' of https://github.com/LeoMalone/WebEnterpriseApplicationProject.git
  */
 public class TeamOwnerSelectServlet extends HttpServlet {
 

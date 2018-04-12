@@ -12,6 +12,7 @@ import beans.TeamBean;
 
 /**
  * The TeamScheduleResults class gets the schedule, results, and team name for the current logged in team owner
+ * @author Kevin Read
  */
 public class TeamScheduleResults {
 
@@ -264,5 +265,54 @@ public class TeamScheduleResults {
 			}
 		}
 		return teamName;
+	}
+	
+	public static String getTeamId(TeamBean team, String teamName) { 
+
+		Connection conn = null;					// DB connection
+		PreparedStatement userStatement = null;
+		ResultSet userRs = null;
+		String teamID = null;
+
+		// Connect to Database and execute SELECT query with UserBean data
+		try {
+			conn = ConnectionManager.getConnection();
+
+			userStatement = conn.prepareStatement("select teamID from team where teamName = ?");
+			userStatement.setNString(1, teamName);
+			userRs = userStatement.executeQuery();
+
+			if(userRs.next()) {
+				teamID = (userRs.getString(1));
+			}	 
+
+
+			// handle all possible exceptions
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (userStatement != null) {
+				try {
+					userStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (userRs != null) {
+				try {
+					userRs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return teamID;
 	}
 }
