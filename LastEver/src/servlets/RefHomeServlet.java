@@ -44,22 +44,19 @@ public class RefHomeServlet extends HttpServlet {
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");
 		} else {
+			//get the cookie list
 			Cookie[] cookies = request.getCookies();
+			
+			//if there are cookies then set userName and language to the cookie values if they exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
 						userName = cookie.getValue();
 					else if (cookie.getName().equals("language"))
 						language = cookie.getValue();
-					else if (cookie.getName().equals("userType"))
-					{
-						if (cookie.getValue() != "referee") //if they aren't a referee, don't let them access
-						{
-							response.sendRedirect("./login");
-						}
-					}
 				}
 			}
+			//if there is no cookies and the language has not been set then create the cookie with English as default language
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
@@ -67,13 +64,18 @@ public class RefHomeServlet extends HttpServlet {
 			}
 			else {
 
+				//get the current website language
 				language = request.getParameter("language");
+				//get all the cookies on the website
 				Cookie[] theCookies = request.getCookies();
 
+				//loop through the cookies and look for the language cookie
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
+						//if the language cookie exists then update the language with the websites language if it exists
 						if (language != null)
 							tempCookie.setValue(language);
+						//add the cookie back to the response headers
 						response.addCookie(tempCookie);
 						break;
 					}

@@ -12,6 +12,7 @@ import beans.TeamBean;
 
 /**
  * The TeamScheduleResults class gets the schedule, results, and team name for the current logged in team owner
+ * @author Kevin Read
  */
 public class TeamScheduleResults {
 

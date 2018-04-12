@@ -21,7 +21,7 @@ import dao.TeamEmails;
 /**
  * The TeamEmailsServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the team control panel option send emails.
- * @author Liam Maloney and edited by Kevin Villemaire, moved to Team by Kevin Read
+ * @author Liam Maloney, Kevin Villemaire, Kevin Read
  */
 public class TeamEmailsServlet extends HttpServlet{
 	

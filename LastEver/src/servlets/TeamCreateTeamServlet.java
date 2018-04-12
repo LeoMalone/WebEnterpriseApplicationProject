@@ -22,7 +22,7 @@ import dao.TeamCreateTeam;
 
 /**
  * TeamCreateTeamServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamCreateTeamServlet extends HttpServlet {
 

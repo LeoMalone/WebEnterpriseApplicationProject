@@ -25,29 +25,31 @@ import dao.League;
  * @author Kevin Read, Kevin Villemaire, Liam Maloney, Neal Sen
  */
 public class RefUsersServlet extends HttpServlet{
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * doGet method mapped to /refUsers
 	 */
 	@Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("text/html");
-		
+
 		String userName = null;
 		String language = null;
-		
+
 		// Set leagues for navbar
 		List<LeagueBean> llb = new ArrayList<LeagueBean>();
 		League.getAllLeagues(llb);
 		request.setAttribute("league", llb);
-		
+
 		if (!(request.getSession().getAttribute("signedIn").equals("Referee"))) {
 			response.sendRedirect("./index");
 		} else {
-
+			//get the cookie list
 			Cookie[] cookies = request.getCookies();
+
+			//if there are cookies then set userName and language to the cookie values if they exist
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if (cookie.getName().equals("username"))
@@ -56,53 +58,60 @@ public class RefUsersServlet extends HttpServlet{
 						language = cookie.getValue();
 				}
 			}
+			//if there is no cookies and the language has not been set then create the cookie with English as default language
 			if(language == null) {
 				Cookie cookieLanguage = new Cookie("language", "en");
 				cookieLanguage.setMaxAge(60 * 60 * 60 * 30);
 				response.addCookie(cookieLanguage);
 			}
 			else {
-	
+
+				//get the current website language
 				language = request.getParameter("language");
+				//get all the cookies on the website
 				Cookie[] theCookies = request.getCookies();
-	
+
+				//loop through the cookies and look for the language cookie
 				for (Cookie tempCookie : theCookies) {
 					if ("language".equals(tempCookie.getName())) {
+						//if the language cookie exists then update the language with the websites language if it exists
 						if (language != null)
 							tempCookie.setValue(language);
+						//add the cookie back to the response headers
 						response.addCookie(tempCookie);
 						break;
 					}
 				}
+
 				List<TeamBean> tbl = new ArrayList<TeamBean>();
 				List<DivisionBean> dbl = new ArrayList<DivisionBean>();
 				StringBuilder sb = new StringBuilder(request.getQueryString());
 				sb.deleteCharAt(0);				
 				AdminTeams.getAllTeams(sb.toString(), dbl, tbl);
-				
+
 				request.setAttribute("currentId", sb.toString());
 				request.setAttribute("userName", userName);
 				request.setAttribute("divList", dbl);
 				request.setAttribute("teamList", tbl);
-				
+
 				//get id from url and set RefBean id
 				StringBuilder sbref = new StringBuilder(URLDecoder.decode(request.getQueryString(), "UTF-8"));
 				sbref.deleteCharAt(0);
 				RefBean user = new RefBean();
 				user.setId(sbref.toString());
-				
+
 				if(EditRefUser.getUserForEdit(user, userName)) {
 					request.setAttribute("refUser", user);
 				}
-				
+
 				request.setAttribute("userName", userName);
 				RequestDispatcher rd = request.getRequestDispatcher("edit_ref_user.jsp");  
-		        rd.forward(request, response);
-		        
+				rd.forward(request, response);
+
 			}
 		}
 	}
-	
+
 	/**
 	 * doPost method mapped to /refUsers
 	 */

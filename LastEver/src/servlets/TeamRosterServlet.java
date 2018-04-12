@@ -20,7 +20,7 @@ import dao.TeamScheduleResults;
 
 /**
  * TeamRosterServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read,Kevin Villemaire
  */
 public class TeamRosterServlet extends HttpServlet {
 

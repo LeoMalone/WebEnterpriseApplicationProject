@@ -20,7 +20,7 @@ import dao.League;
 /**
  * The EditTeamPlayerServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the team owner control panel option edit Player.
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class EditTeamPlayerServlet extends HttpServlet{
 

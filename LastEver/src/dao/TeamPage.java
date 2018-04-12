@@ -11,6 +11,7 @@ import beans.TeamBean;
 import beans.UserBean;
 /**
  * The TeamPage class gets the standings for the current division
+ * @author Kevin Villemaire
  */
 public class TeamPage {
 

@@ -47,10 +47,10 @@ public class Weather {
 	        
 	        //checks the amount of minutes between the current time and the time of last update
 	        Minutes min = Minutes.minutesBetween(updateTime, currTime);
-	        //sets the interval to be 30 minutes
+	        //sets the interval to be 20 minutes
 	        Minutes interval = Minutes.minutes(20);
 	        
-	        //if 30 minutes has passed since last update then set update to true, otherwise data needs no updating
+	        //if 20 minutes has passed since last update then set update to true, otherwise data needs no updating
 	        if(min.isGreaterThan(interval))
 	        	update = true;
 	        else
@@ -89,7 +89,6 @@ public class Weather {
 	/**
 	 * The updateWeather updates the weather data with data from the OWM API
 	 * @param json - JSONObject which was returned from the API call
-	 * @param description_fr - the French weather description
 	 * @return status - boolean value
 	 */
 	public static boolean updateWeather(JSONObject json) { 

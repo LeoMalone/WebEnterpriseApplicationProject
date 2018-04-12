@@ -16,7 +16,7 @@ import dao.League;
 
 /**
  * TeamPhotoServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamPhotoServlet extends HttpServlet {
 

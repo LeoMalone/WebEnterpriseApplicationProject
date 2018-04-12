@@ -21,7 +21,7 @@ import dao.Team;
 
 /**
  * The LoginServlet class handles the POST from /login to login a user
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class LoginServlet extends HttpServlet {
 

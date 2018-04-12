@@ -11,6 +11,7 @@ import beans.VenueBean;
 
 /**
  * The Venue class gets the information about the venue
+ * @author Kevin Villemaire
  */
 public class Venue {
 	

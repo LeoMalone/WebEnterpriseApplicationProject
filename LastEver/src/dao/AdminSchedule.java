@@ -11,6 +11,7 @@ import db.ConnectionManager;
 
 /**
  * The AdminSchedule class handles all db operation relating to editing a Schedule entry by an Admin
+ * @author Liam Maloney
  */
 public class AdminSchedule {
 	

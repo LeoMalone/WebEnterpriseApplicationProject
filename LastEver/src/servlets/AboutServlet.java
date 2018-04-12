@@ -17,7 +17,7 @@ import dao.League;
 /**
  * AboutServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the about page.
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class AboutServlet extends HttpServlet {
 

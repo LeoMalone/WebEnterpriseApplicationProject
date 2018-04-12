@@ -12,6 +12,7 @@ import db.ConnectionManager;
 /**
  * The CreateAccount class creates new users in the db from
  * information from a UserBean and the create account servlet
+ * @author Liam Maloney
  */
 public class CreateAccount {
 

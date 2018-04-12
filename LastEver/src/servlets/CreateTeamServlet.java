@@ -20,7 +20,7 @@ import dao.League;
 /**
  * The CreateTeamServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option Create team.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class CreateTeamServlet extends HttpServlet {
 

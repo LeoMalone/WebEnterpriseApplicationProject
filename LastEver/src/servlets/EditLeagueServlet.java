@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import beans.LeagueBean;
 import dao.League;
 
+/**
+ * EditLeagueServlet class
+ * @author Liam Maloney
+ */
 public class EditLeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

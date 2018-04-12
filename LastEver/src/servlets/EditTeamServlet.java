@@ -21,7 +21,7 @@ import dao.League;
 /**
  * The EditTeamServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option edit Team.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class EditTeamServlet extends HttpServlet {
 	

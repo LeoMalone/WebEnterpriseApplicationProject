@@ -14,7 +14,6 @@ import dao.FindCreateRef;
  * FindRefServlet classextends the HttpServlet class to handle the POST requests for a referee user to try and
  * find a referee with their account information
  * @author Kevin Villemaire
- *
  */
 public class FindRefServlet extends HttpServlet {
 
@@ -35,6 +34,7 @@ public class FindRefServlet extends HttpServlet {
 			FindCreateRef.findReferee(user);
 		}
 		
+		//redirect to referee home page
 		response.sendRedirect("./referee");
 	}
 }

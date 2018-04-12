@@ -18,7 +18,7 @@ import dao.Team;
 
 /**
  * TeamOwnerNewServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamOwnerNewServlet extends HttpServlet {
 

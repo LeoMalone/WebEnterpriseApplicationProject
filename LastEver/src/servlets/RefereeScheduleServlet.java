@@ -17,7 +17,7 @@ import dao.League;
 	/**
  * The RefereeScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the referee to see their upcoming schedule
- * @author Liam Maloney and edited by Neal Sen
+ * @author Liam Maloney, Neal Sen
  */
 public class RefereeScheduleServlet extends HttpServlet {
 	
