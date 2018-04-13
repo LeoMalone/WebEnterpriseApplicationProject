@@ -84,13 +84,19 @@ public class RefEmail {
 	    // Connect to Database 
 	    try {
 	        conn = ConnectionManager.getConnection();
-	        allEmails = conn.prepareStatement("SELECT emailAddress from users");
-	        rs = allEmails.executeQuery();	        
+	        allEmails = conn.prepareStatement("SELECT userType, emailAddress from users");
+	        rs = allEmails.executeQuery();	               
 	        
 	        while(rs.next()) {
-	        	emails.add(rs.getString(1));
+       		
+	        	if(rs.getString(1).equals("Administrator"))
+	        		emails.add(rs.getString(2));
+	        	if(rs.getString(1).equals("Referee"))
+	        		emails.add(rs.getString(2));   	
+	        	
 	        	status = true;
-	        }	        
+	        }
+	              
 	        
 	    // Catch all possible Exceptions
 	    } catch (Exception e) {
