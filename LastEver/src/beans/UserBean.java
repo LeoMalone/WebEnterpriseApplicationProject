@@ -21,6 +21,7 @@ public class UserBean {
 	private Timestamp accountUpdated;
 	private Timestamp lastLogin;
 	private Timestamp accountCreated;
+	private int adminActivated;
 
 /**************************** CONTRUCTORS *****************************/	
 	public UserBean() {}
@@ -87,6 +88,9 @@ public class UserBean {
 		return this.accountCreated;
 	}
 
+	public int getAdminActivated() {
+		return this.adminActivated;
+	}
 /**************************** SETTERS *****************************/
 	public void setEmailValidated(int i) {
 		this.emailValidated = i;
@@ -130,5 +134,9 @@ public class UserBean {
 	
 	public void setAccountUpdated(Timestamp au) {
 		this.accountUpdated = au;
+	}
+	
+	public void setAdminActivated(int ad) {
+		this.adminActivated = ad;
 	}
 }

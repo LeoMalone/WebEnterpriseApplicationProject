@@ -13,7 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * The Login class validates a UserBean's credentials
  * using a SELECT statement to compare credentials
- * @author Liam Maloney
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class Login {
 
@@ -34,7 +34,8 @@ public class Login {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getusers = conn.prepareStatement("select username, userType, emailAddress, password, userID, password from users where emailAddress=?");
+			getusers = conn.prepareStatement("select username, userType, emailAddress, password, userID, adminActivated"
+					+ " from users where emailAddress=?");
 			getusers.setString(1, user.getEmailAddress());
 			resultSet = getusers.executeQuery();
 			status = resultSet.next();
@@ -45,7 +46,9 @@ public class Login {
 					matched = true;
 					user.setUsername(resultSet.getString(1));
 					user.setUserType(resultSet.getString(2));
+					user.setEmail(resultSet.getString(3));
 					user.setId(resultSet.getString(5));
+					user.setAdminActivated(resultSet.getInt(6));
 					lastLogin = conn.prepareStatement("UPDATE users SET lastLogin=? WHERE userID=?;");
 					lastLogin.setTimestamp(1, user.getLastLogin());
 					lastLogin.setString(2, user.getId());

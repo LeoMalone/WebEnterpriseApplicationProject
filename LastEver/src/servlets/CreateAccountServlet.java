@@ -7,11 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -19,7 +17,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import beans.UserBean;
 import dao.CreateAccount;
-import dao.Team;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
@@ -108,38 +105,7 @@ public class CreateAccountServlet extends HttpServlet {
 
 			// If createNewUser method returns true and the user passed the CAPTCHA
 			if (CreateAccount.createNewUser(user) && json.getBoolean("success") == true) {
-				// Get session and login newly created user
-				HttpSession session = request.getSession();
-				if (session != null) {
-					// Set up user cookie
-					Cookie cookie = new Cookie("username", user.getUsername());
-					session.setMaxInactiveInterval(30 * 60);
-					cookie.setMaxAge(30 * 60);
-					response.addCookie(cookie);
-
-					// Get userType homepage
-					String url = null;
-					if (user.getUserType().equals("Administrator")) {
-						session.setAttribute("signedIn", "Administrator");
-						url = "./admin";
-					} else if (user.getUserType().equals("Referee")) {
-						session.setAttribute("signedIn", "Referee");
-						url = "./referee";
-					} else if (user.getUserType().equals("Team Owner")) {
-						session.setAttribute("signedIn", "Team Owner");
-						boolean hasTeam = Team.hasTeam(newUsername);
-						if (!hasTeam){
-							url = "./teamCreateTeam";
-						}
-						else {
-							url = "./teamowner";
-						}
-					}
-
-					// redirect to home page
-					session.setAttribute("userType", url);
-					response.sendRedirect(url);
-				}
+				response.sendRedirect("./login");
 			} else {
 				response.sendRedirect("./login");
 			}

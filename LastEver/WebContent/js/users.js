@@ -41,3 +41,24 @@ $(document).ready(function() {
 		}
 	});
 });
+
+$(document).ready(function() {
+	$('#unactivated-users-table').DataTable({ 
+		order: [[0, "asc"]],
+		pageLength: 10,
+		"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+		"columns": [
+		    { "searchable": false },
+		    null,
+		    null,
+		    null,
+		    { "searchable": false },
+		    null,
+		    { "searchable": false },
+		    { "searchable": false }
+		  ],
+		"language": {
+			"url": lang[language]
+		}
+	});
+});

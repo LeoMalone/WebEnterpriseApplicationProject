@@ -101,38 +101,43 @@ public class LoginServlet extends HttpServlet {
 		// If login with given userBean is successful
 		if(Login.validateUserLogin(user)) {
 
-			// Start session and create use cookie
-			HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
-			if(session!=null) {
-				//Set up user cookie
-				Cookie cookie = new Cookie("username", user.getUsername());
-				session.setMaxInactiveInterval(30*60);
-				cookie.setMaxAge(30*60);
-				response.addCookie(cookie);
+			if(user.getAdminActivated() != 1) {
+				response.sendRedirect("./adminActivationNeeded");
+			}
+			else {
+				// Start session and create use cookie
+				HttpSession session = request.getSession(false); //false means: don't create if it doesn't exist
+				if(session!=null) {
+					//Set up user cookie
+					Cookie cookie = new Cookie("username", user.getUsername());
+					session.setMaxInactiveInterval(30*60);
+					cookie.setMaxAge(30*60);
+					response.addCookie(cookie);
 
-				// Get user home page
-				String url = null;
-				if(user.getUserType().equals("Administrator")) {
-					session.setAttribute("signedIn", "Administrator");
-					url = "./admin";
-				} else if(user.getUserType().equals("Referee")) {
-					session.setAttribute("signedIn", "Referee");
-					url = "./referee";
-				} else if(user.getUserType().equals("Team Owner")) {
-					session.setAttribute("signedIn", "Team Owner");
-					boolean hasTeam = Team.hasTeamByEmail(loginEmail);
-					if (!hasTeam){
-						url = "./teamCreateTeam";
+					// Get user home page
+					String url = null;
+					if(user.getUserType().equals("Administrator")) {
+						session.setAttribute("signedIn", "Administrator");
+						url = "./admin";
+					} else if(user.getUserType().equals("Referee")) {
+						session.setAttribute("signedIn", "Referee");
+						url = "./referee";
+					} else if(user.getUserType().equals("Team Owner")) {
+						session.setAttribute("signedIn", "Team Owner");
+						boolean hasTeam = Team.hasTeamByEmail(loginEmail);
+						if (!hasTeam){
+							url = "./teamCreateTeam";
+						}
+						else {
+							url = "./teamowner";
+						}
 					}
-					else {
-						url = "./teamowner";
-					}
-				}
 
-				// redirect to correct login page
-				session.setAttribute("userType", url);
-				response.sendRedirect(url);
-			}            
+					// redirect to correct login page
+					session.setAttribute("userType", url);
+					response.sendRedirect(url);
+				}     
+			}
 		} else {
 
 			Cookie[] cookies = request.getCookies();
@@ -159,7 +164,7 @@ public class LoginServlet extends HttpServlet {
 						break;
 					}
 				}
-				
+
 				response.sendRedirect("./login");
 			}
 		}  
