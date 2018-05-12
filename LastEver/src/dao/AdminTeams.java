@@ -12,6 +12,7 @@ import beans.DivisionBean;
 
 /**
  * The AdminTeams class handles all db operation relating to editing a Team by an Admin
+ * @author Liam Maloney
  */
 public class AdminTeams {
 	

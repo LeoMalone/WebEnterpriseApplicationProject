@@ -126,22 +126,27 @@
 									</c:otherwise>
 								</c:choose>
 							</div></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle active" href="#"
-								id="navbarDropdownPortfolio" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdownPortfolio">
-									<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a>
-									<a class="dropdown-item" href="adminUsers"><fmt:message	key="nav_admin_users" /></a>
-									<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-									<a class="dropdown-item" href="adminDivisions"><fmt:message	key="nav_admin_divs" /></a>
-									<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-									<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
-									<a class="dropdown-item" href="adminLeagues"><fmt:message key="nav_leagues" /></a>
-									<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-								</div>
-							</li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle active" href="#"
+							id="navbarDropdownPortfolio" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> <c:out
+									value="${userName}" />
+						</a>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="navbarDropdownPortfolio">
+								<a class="dropdown-item" href="${userType}"><c:out
+										value="${userName}" /></a> <a class="dropdown-item"
+									href="adminUsers"><fmt:message key="nav_admin_users" /></a> <a
+									class="dropdown-item" href="adminTeams"><fmt:message
+										key="nav_admin_teams" /></a> <a class="dropdown-item"
+									href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+								<a class="dropdown-item" href="adminSchedule"><fmt:message
+										key="nav_admin_sched" /></a> <a class="dropdown-item"
+									href="adminEmails"><fmt:message key="nav_admin_email" /></a> <a
+									class="dropdown-item" href="adminLeagues"><fmt:message
+										key="nav_leagues" /></a> <a class="dropdown-item" href="logout"><fmt:message
+										key="team_dd4" /></a>
+							</div></li>
 						<li class="nav-item">
 							<form action="./adminSchedule" method="GET">
 								<select class="form-control form-control-sm" name="language"
@@ -163,9 +168,10 @@
 		<div class="main-cover">
 			<!-- Page Content -->
 			<div class="cards-container container">
-				<h1 class="my-4"><c:out value="${userName}:"/>
+				<h1 class="my-4">
+					<c:out value="${userName}:" />
 					<fmt:message key="admin_es_title" />
-					<c:out value="${schedule.title}"/>
+					<c:out value="${schedule.title}" />
 				</h1>
 				<div class="row">
 					<div class="col-lg-12 mb-4">
@@ -220,6 +226,27 @@
 												key="admin_cs_as" /></label> <input type="text"
 											class="form-control" name="editAwayScore"
 											value="${schedule.awayScore}">
+									</div>
+									<div class="form-group">
+										<label for="newVenue">Select Venue</label> <select
+											class="custom-select my-1 mr-sm-2" id="newVenue"
+											name="newVenue">
+											<c:forEach items="${venue}" var="v">
+												<option value="${v.venueID}"
+													${v.venueID == schedule.venue ?'selected':''}>${v.venueName}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="newReferee">Select Referee</label> <select
+											class="custom-select my-1 mr-sm-2" id="newReferee"
+											name="newReferee">
+											<c:forEach items="${referee}" var="ref">
+												<option value="${ref.refId}"
+													${ref.refId == schedule.referee ?'selected':''}>${ref.firstName}
+													${ref.lastName}</option>
+											</c:forEach>
+										</select>
 									</div>
 									<div class="form-group">
 										<label for="editGameStatus"><fmt:message

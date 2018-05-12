@@ -10,6 +10,7 @@ import db.ConnectionManager;
 
 /**
  * The TeamCreateTeam class gets the teamID and creates new team
+ * @author Kevin Read
  */
 public class TeamCreateTeam {
 	

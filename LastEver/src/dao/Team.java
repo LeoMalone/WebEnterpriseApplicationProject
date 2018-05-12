@@ -12,6 +12,7 @@ import db.ConnectionManager;
 
 /**
  * The Team class gets the information for the team
+ * @author Kevin Read
  */
 public class Team {
 

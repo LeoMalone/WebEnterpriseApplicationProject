@@ -14,7 +14,6 @@ import dao.FindCreateRef;
  * RefHomeServlet classextends the HttpServlet class to handle the POST requests so that a referee user can create
  * a referee with their information
  * @author Kevin Villemaire
- *
  */
 public class CreateRefServlet extends HttpServlet {
 

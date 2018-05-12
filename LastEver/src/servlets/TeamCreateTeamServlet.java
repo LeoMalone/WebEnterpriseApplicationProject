@@ -21,8 +21,10 @@ import dao.Team;
 import dao.TeamCreateTeam;
 
 /**
- * TeamCreateTeamServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * TeamCreateTeamServlet class extends HttpServlet for GET/POST requests for the team create team page
+ * to get navbar and session info, and to determine if the signed in user is already associated with
+ * a team
+ * @author Kevin Read, Kevin Villemaire
  */
 public class TeamCreateTeamServlet extends HttpServlet {
 

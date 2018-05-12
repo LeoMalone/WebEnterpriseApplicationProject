@@ -99,7 +99,7 @@
 										key="team_dd4" /></a>
 							</div></li>
 						<li class="nav-item">
-							<form action="./adminDivisions" method="GET">
+							<form action="./refUsers?=${refUser.id}" method="GET">
 								<select class="form-control form-control-sm" name="language"
 									onchange="this.form.submit()">
 									<option value="en"

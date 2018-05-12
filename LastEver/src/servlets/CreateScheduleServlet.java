@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -11,16 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
+import beans.RefBean;
 import beans.ScheduleBean;
 import beans.TeamBean;
+import beans.VenueBean;
+import dao.AdminReferees;
 import dao.AdminSchedule;
 import dao.AdminTeams;
+import dao.AdminVenues;
 import dao.League;
 
 /**
  * The CreateScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option Create Schedule.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class CreateScheduleServlet extends HttpServlet {
 	
@@ -77,10 +82,16 @@ public class CreateScheduleServlet extends HttpServlet {
 				
 				// Team list drop drop down picked in jsp.
 				List<TeamBean> teamList = new ArrayList<TeamBean>();
+				List<RefBean> refList = new ArrayList<RefBean>();
+				List<VenueBean> venueList = new ArrayList<VenueBean>();
+				
 				// If query is successful
-				if(AdminTeams.teamsForEditSchedule(teamList)) {						
+				if(AdminTeams.teamsForEditSchedule(teamList) && AdminReferees.getAllReferees(refList)
+						&& AdminVenues.getAllVenues(venueList)) {						
 					request.setAttribute("teamList", teamList);
 					request.setAttribute("userName", userName);
+					request.setAttribute("referee", refList);
+					request.setAttribute("venue", venueList);
 					response.setContentType("text/html");
 					RequestDispatcher rd = request.getRequestDispatcher("admin_create_sched.jsp");  
 			        rd.forward(request, response);	
@@ -104,9 +115,13 @@ public class CreateScheduleServlet extends HttpServlet {
 		String newHomeScore = request.getParameter("newHomeScore");
 		String newAwayScore = request.getParameter("newAwayScore");
 		String newGameStatus = request.getParameter("newGameStatus");
+		String newReferee = request.getParameter("newReferee");
+		String newVenue = request.getParameter("newVenue");
 		
 		// If any parameter is null
-		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null || newAwayScore == "" || newGameStatus == null) {
+		if(newDate == null || newTime == null || newHomeTeam == null || newHomeScore == "" || newAwayTeam == null 
+				|| newAwayScore == "" || newGameStatus == null || newHomeTeam == newAwayTeam || newReferee == null
+				|| newVenue == null) {
 			response.sendRedirect("./scheduleCreate");
 		} else {
 			//Create Schedule bean and set parameters
@@ -118,10 +133,15 @@ public class CreateScheduleServlet extends HttpServlet {
 			schedule.setHomeScore(newHomeScore);
 			schedule.setAwayScore(newAwayScore);
 			schedule.setGameStatus(newGameStatus);
+			schedule.setReferee(newReferee);
+			schedule.setVenue(newVenue);
 			
 			// If query is successful
 			if(AdminSchedule.createNewGame(schedule)) {
 				response.sendRedirect("./adminSchedule");
+			}
+			else {
+				response.sendRedirect("./scheduleCreate");
 			}
 		}
 	}

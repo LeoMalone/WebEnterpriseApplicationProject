@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import beans.LeagueBean;
 import dao.League;
 
+/**
+ * CreateLeagueServlet class handels HTTP GET/POST requests which allows the admins to create leagues
+ * @author Liam Maloney
+ */
 public class CreateLeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

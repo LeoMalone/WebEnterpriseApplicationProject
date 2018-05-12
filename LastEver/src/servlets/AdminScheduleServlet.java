@@ -16,7 +16,7 @@ import dao.League;
 /**
  * The AdminScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel Schedule option.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminScheduleServlet extends HttpServlet {
 	

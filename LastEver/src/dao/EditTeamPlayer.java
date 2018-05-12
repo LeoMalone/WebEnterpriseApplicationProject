@@ -10,6 +10,7 @@ import db.ConnectionManager;
 
 /**
  * The EditTeamPlayer class handles all db operation relating to editing a team's player
+ * @author Kevin Read
  */
 public class EditTeamPlayer {
 	/**

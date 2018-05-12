@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.League;
 
+/**
+ * DeleteLeagueServlet class handles HTTP POST requests to allow an admin to delete a league
+ * @author Liam Maloney
+ */
 public class DeleteLeagueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

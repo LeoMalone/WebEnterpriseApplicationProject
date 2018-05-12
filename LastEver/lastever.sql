@@ -35,7 +35,7 @@ CREATE TABLE `division` (
   `divisionName` varchar(100) NOT NULL,
   `divisionLogo` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`divisionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `division` (
 
 LOCK TABLES `division` WRITE;
 /*!40000 ALTER TABLE `division` DISABLE KEYS */;
-INSERT INTO `division` VALUES (1,'Womens',NULL),(2,'Mens',NULL),(3,'Co-Ed East',NULL),(4,'Co-Ed West',NULL);
+INSERT INTO `division` VALUES (1,'Womens',NULL),(2,'Mens',NULL),(3,'Co-Ed East',NULL),(4,'Co-Ed West',NULL),(8,'div',NULL);
 /*!40000 ALTER TABLE `division` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `league` (
   `leaguePlayoffTeams` smallint(5) unsigned DEFAULT NULL,
   `leagueStatus` varchar(100) NOT NULL DEFAULT 'Newly Created',
   PRIMARY KEY (`leagueID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `leaguexdivision` (
 
 LOCK TABLES `leaguexdivision` WRITE;
 /*!40000 ALTER TABLE `leaguexdivision` DISABLE KEYS */;
-INSERT INTO `leaguexdivision` VALUES (1,1),(2,2),(3,3),(3,4);
+INSERT INTO `leaguexdivision` VALUES (1,1),(2,2),(3,3),(3,4),(2,8);
 /*!40000 ALTER TABLE `leaguexdivision` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +211,7 @@ CREATE TABLE `player` (
   `playerWeight` float DEFAULT NULL,
   `playerHidePage` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`playerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +220,7 @@ CREATE TABLE `player` (
 
 LOCK TABLES `player` WRITE;
 /*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES (1,NULL,'Emery','Forrest',21,'Forward','Canada',176.64,78.44,0),(2,NULL,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL,1),(3,NULL,'Trent','Garry',67,'Forward','United States',187,86.34,0),(4,NULL,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL,0),(5,NULL,'Hoyt','Braidy',72,'Goalkeeper',NULL,167.3,NULL,0),(6,NULL,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL,0),(7,NULL,'Wilmer','Hector',10,'Forward','Canada',NULL,NULL,0),(8,NULL,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL,0),(9,NULL,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL,0),(10,NULL,'Jed','Leonard',86,'Forward',NULL,NULL,NULL,0),(11,NULL,'Alva','Darwin',23,'Forward',NULL,NULL,NULL,0),(12,NULL,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL,0),(13,NULL,'Iona','Renae',25,'Forward',NULL,NULL,NULL,0),(14,NULL,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL,0),(15,NULL,'Shae','Joy',3,'Forward',NULL,NULL,NULL,0),(16,NULL,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL,0),(17,NULL,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL,0),(18,NULL,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL,0),(19,NULL,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL,0),(20,NULL,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL,0),(21,NULL,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL,0),(22,NULL,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL,0),(23,NULL,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL,0),(24,NULL,'Christi','Lana',4,'Forward',NULL,NULL,NULL,0);
+INSERT INTO `player` VALUES (1,NULL,'Emery','Forrest',21,'Forward','Canada',176.64,78.44,0),(2,NULL,'Ricki','Saxon',7,'Goalkeeper',NULL,NULL,NULL,1),(3,NULL,'Trent','Garry',67,'Forward','United States',187,86.34,0),(4,NULL,'Brand','Derrick',94,'Goalkeeper',NULL,NULL,NULL,0),(5,NULL,'Hoyt','Braidy',72,'Goalkeeper',NULL,167.3,NULL,0),(6,NULL,'Jaymes','Tom',49,'Forward',NULL,NULL,NULL,0),(7,NULL,'Wilmer','Hector',10,'Forward','Canada',NULL,NULL,0),(8,NULL,'Dawson','Edgar',53,'Forward',NULL,NULL,NULL,0),(9,NULL,'Kenzie','Orval',45,'Goalkeeper',NULL,NULL,NULL,0),(10,NULL,'Jed','Leonard',86,'Forward',NULL,NULL,NULL,0),(11,NULL,'Alva','Darwin',23,'Forward',NULL,NULL,NULL,0),(12,NULL,'Cecil','Hamnet',36,'Forward',NULL,NULL,NULL,0),(13,NULL,'Iona','Renae',25,'Forward',NULL,NULL,NULL,0),(14,NULL,'Medeia','Renita',66,'Goalkeeper',NULL,NULL,NULL,0),(15,NULL,'Shae','Joy',3,'Forward',NULL,NULL,NULL,0),(16,NULL,'Lynda','Sharyl',21,'Goalkeeper',NULL,NULL,NULL,0),(17,NULL,'Paulene','Trixie',77,'Forward',NULL,NULL,NULL,0),(18,NULL,'Emerson','Ruth',40,'Goalkeeper',NULL,NULL,NULL,0),(19,NULL,'Deirdre','Dinah',99,'Forward',NULL,NULL,NULL,0),(20,NULL,'Alexandria','Katheryne',1,'Forward',NULL,NULL,NULL,0),(21,NULL,'Elfrida','Nicola',52,'Forward',NULL,NULL,NULL,0),(22,NULL,'Oneida','Corinne',84,'Forward',NULL,NULL,NULL,0),(23,NULL,'Mattie','Eveline',13,'Goalkeeper',NULL,NULL,NULL,0),(24,NULL,'Ben','Lana',4,'Forward',NULL,NULL,NULL,0),(25,NULL,'Juno','Lana',5,'Forward',NULL,NULL,NULL,0),(26,NULL,'Frank','Byles',6,'Forward',NULL,NULL,NULL,0),(27,NULL,'Jim','Linko',7,'Defence',NULL,NULL,NULL,0),(28,NULL,'Bones','Linko',8,'Defence',NULL,NULL,NULL,0),(29,NULL,'Kirk','Kinko',9,'Defence',NULL,NULL,NULL,0),(30,NULL,'Kurt','Kinko',10,'Midfield',NULL,NULL,NULL,0),(31,NULL,'Franky','Lanabean',11,'Midfield',NULL,NULL,NULL,0),(32,NULL,'Chubo','Lanabean',12,'Midfield',NULL,NULL,NULL,0),(33,NULL,'Lankin','Dana',13,'Goalkeeper',NULL,NULL,NULL,0),(34,NULL,'Whachu','Dana',14,'Forward',NULL,NULL,NULL,0),(35,NULL,'Picu','Terry',15,'Forward',NULL,NULL,NULL,0),(36,NULL,'Ada','Terry',16,'Forward',NULL,NULL,NULL,0),(37,NULL,'Naka','Bobanna',17,'Defence',NULL,NULL,NULL,0),(38,NULL,'Dom','Ajshsa',18,'Defence',NULL,NULL,NULL,0),(39,NULL,'Harry','Juile',19,'Defence',NULL,NULL,NULL,0),(40,NULL,'Karry','Zalapski',20,'Midfield',NULL,NULL,NULL,0),(41,NULL,'Jimmy D','Trueblue',4,'Midfield',NULL,NULL,NULL,0),(42,NULL,'Aretemus','Waaka',5,'Midfield',NULL,NULL,NULL,0),(43,NULL,'Langdon','Polo',6,'Goalkeeper',NULL,NULL,NULL,0),(44,NULL,'Kyle','Oldman',7,'Forward',NULL,NULL,NULL,0),(45,NULL,'Wes','Guygax',8,'Forward',NULL,NULL,NULL,0),(46,NULL,'Quebon','Tanner',9,'Forward',NULL,NULL,NULL,0),(47,NULL,'Lubos','Labelle',10,'Defence',NULL,NULL,NULL,0),(48,NULL,'Zack','Zachary',11,'Defence',NULL,NULL,NULL,0),(49,NULL,'Niles','Zalapski',12,'Defence',NULL,NULL,NULL,0),(50,NULL,'Kurt','Kinko',10,'Midfield',NULL,NULL,NULL,0),(51,NULL,'Franky','Lanabean',11,'Midfield',NULL,NULL,NULL,0),(52,NULL,'Chubo','Lanabean',12,'Midfield',NULL,NULL,NULL,0),(53,NULL,'Lankin','Dana',13,'Goalkeeper',NULL,NULL,NULL,0),(54,NULL,'Whachu','Dana',14,'Forward',NULL,NULL,NULL,0),(55,NULL,'Picu','Terry',15,'Forward',NULL,NULL,NULL,0),(56,NULL,'Ada','Terry',16,'Forward',NULL,NULL,NULL,0),(57,NULL,'Naka','Bobanna',17,'Defence',NULL,NULL,NULL,0),(58,NULL,'Dom','Ajshsa',18,'Defence',NULL,NULL,NULL,0),(59,NULL,'Harry','Juile',19,'Defence',NULL,NULL,NULL,0),(60,NULL,'Karry','Zalapski',20,'Midfield',NULL,NULL,NULL,0),(61,NULL,'Jimmy D','Trueblue',4,'Midfield',NULL,NULL,NULL,0),(62,NULL,'Aretemus','Waaka',5,'Midfield',NULL,NULL,NULL,0),(63,NULL,'Langdon','Polo',6,'Goalkeeper',NULL,NULL,NULL,0),(64,NULL,'Kyle','Oldman',7,'Forward',NULL,NULL,NULL,0),(65,NULL,'Wes','Guygax',8,'Forward',NULL,NULL,NULL,0),(66,NULL,'Quebon','Tanner',9,'Forward',NULL,NULL,NULL,0),(67,NULL,'Lubos','Labelle',10,'Defence',NULL,NULL,NULL,0),(68,NULL,'Zack','Zachary',11,'Defence',NULL,NULL,NULL,0),(69,NULL,'Niles','Zalapski',12,'Defence',NULL,NULL,NULL,0),(70,NULL,'Kurt','Kinko',10,'Midfield',NULL,NULL,NULL,0),(71,NULL,'Franky','Lanabean',11,'Midfield',NULL,NULL,NULL,0),(72,NULL,'Chubo','Lanabean',12,'Midfield',NULL,NULL,NULL,0),(73,NULL,'Lankin','Dana',13,'Goalkeeper',NULL,NULL,NULL,0),(74,NULL,'Whachu','Dana',14,'Forward',NULL,NULL,NULL,0),(75,NULL,'Picu','Terry',15,'Forward',NULL,NULL,NULL,0),(76,NULL,'Ada','Terry',16,'Forward',NULL,NULL,NULL,0),(77,NULL,'Naka','Bobanna',17,'Defence',NULL,NULL,NULL,0),(78,NULL,'Dom','Ajshsa',18,'Defence',NULL,NULL,NULL,0),(79,NULL,'Harry','Juile',19,'Defence',NULL,NULL,NULL,0),(80,NULL,'Karry','Zalapski',20,'Midfield',NULL,NULL,NULL,0),(81,NULL,'Jimmy D','Trueblue',4,'Midfield',NULL,NULL,NULL,0),(82,NULL,'Aretemus','Waaka',5,'Midfield',NULL,NULL,NULL,0),(83,NULL,'Langdon','Polo',6,'Goalkeeper',NULL,NULL,NULL,0),(84,NULL,'Kyle','Oldman',7,'Forward',NULL,NULL,NULL,0),(85,NULL,'Wes','Guygax',8,'Forward',NULL,NULL,NULL,0),(86,NULL,'Quebon','Tanner',9,'Forward',NULL,NULL,NULL,0),(87,NULL,'Lubos','Labelle',10,'Defence',NULL,NULL,NULL,0),(88,NULL,'Zack','Zachary',11,'Defence',NULL,NULL,NULL,0),(89,NULL,'Niles','Zalapski',12,'Defence',NULL,NULL,NULL,0),(90,NULL,'Kurt','Kinko',10,'Midfield',NULL,NULL,NULL,0),(91,NULL,'Franky','Lanabean',11,'Midfield',NULL,NULL,NULL,0),(92,NULL,'Chubo','Lanabean',12,'Midfield',NULL,NULL,NULL,0),(93,NULL,'Lankin','Dana',13,'Goalkeeper',NULL,NULL,NULL,0),(94,NULL,'Whachu','Dana',14,'Forward',NULL,NULL,NULL,0),(95,NULL,'Picu','Terry',15,'Forward',NULL,NULL,NULL,0),(96,NULL,'Ada','Terry',16,'Forward',NULL,NULL,NULL,0),(97,NULL,'Naka','Bobanna',17,'Defence',NULL,NULL,NULL,0),(98,NULL,'Dom','Ajshsa',18,'Defence',NULL,NULL,NULL,0),(99,NULL,'Harry','Juile',19,'Defence',NULL,NULL,NULL,0),(100,NULL,'Karry','Zalapski',20,'Midfield',NULL,NULL,NULL,0),(101,NULL,'Jimmy D','Trueblue',4,'Midfield',NULL,NULL,NULL,0),(102,NULL,'Aretemus','Waaka',5,'Midfield',NULL,NULL,NULL,0),(103,NULL,'Langdon','Polo',6,'Goalkeeper',NULL,NULL,NULL,0),(104,NULL,'Kyle','Oldman',7,'Forward',NULL,NULL,NULL,0),(105,NULL,'Wes','Guygax',8,'Forward',NULL,NULL,NULL,0),(106,NULL,'Quebon','Tanner',9,'Forward',NULL,NULL,NULL,0),(107,NULL,'Lubos','Labelle',10,'Defence',NULL,NULL,NULL,0),(108,NULL,'Zack','Zachary',11,'Defence',NULL,NULL,NULL,0),(109,NULL,'Niles','Zalapski',12,'Defence',NULL,NULL,NULL,0),(110,NULL,'Karry','Zalapski',20,'Midfield',NULL,NULL,NULL,0),(111,NULL,'Jimmy D','Trueblue',4,'Midfield',NULL,NULL,NULL,0),(112,NULL,'Aretemus','Waaka',5,'Midfield',NULL,NULL,NULL,0),(113,NULL,'Langdon','Polo',6,'Goalkeeper',NULL,NULL,NULL,0),(114,NULL,'Kyle','Oldman',7,'Forward',NULL,NULL,NULL,0),(115,NULL,'Wes','Guygax',8,'Forward',NULL,NULL,NULL,0),(116,NULL,'Quebon','Tanner',9,'Forward',NULL,NULL,NULL,0),(117,NULL,'Lubos','Labelle',10,'Defence',NULL,NULL,NULL,0),(118,NULL,'Zack','Zachary',11,'Defence',NULL,NULL,NULL,0),(119,NULL,'Niles','Zalapski',12,'Defence',NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +247,7 @@ CREATE TABLE `playerxteam` (
 
 LOCK TABLES `playerxteam` WRITE;
 /*!40000 ALTER TABLE `playerxteam` DISABLE KEYS */;
-INSERT INTO `playerxteam` VALUES (5,1),(6,1),(12,1),(2,2),(3,2),(10,2),(4,3),(7,3),(11,3),(1,4),(8,4),(9,4),(16,5),(19,5),(22,5),(14,6),(20,6),(24,6),(13,7),(17,7),(23,7),(15,8),(18,8),(21,8);
+INSERT INTO `playerxteam` VALUES (5,1),(6,1),(12,1),(80,1),(81,1),(82,1),(83,1),(84,1),(2,2),(3,2),(10,2),(85,2),(86,2),(87,2),(88,2),(89,2),(4,3),(7,3),(11,3),(90,3),(91,3),(92,3),(93,3),(94,3),(1,4),(8,4),(9,4),(95,4),(96,4),(97,4),(98,4),(99,4),(16,5),(19,5),(22,5),(100,5),(101,5),(102,5),(103,5),(104,5),(14,6),(20,6),(24,6),(105,6),(106,6),(107,6),(108,6),(109,6),(13,7),(17,7),(23,7),(110,7),(111,7),(112,7),(113,7),(114,7),(15,8),(18,8),(21,8),(115,8),(116,8),(117,8),(118,8),(119,8),(25,9),(26,9),(27,9),(28,9),(29,9),(30,10),(31,10),(32,10),(33,10),(34,10),(35,10),(36,10),(37,10),(38,10),(39,10),(40,11),(41,11),(42,11),(43,11),(44,11),(45,11),(46,11),(47,11),(48,11),(49,11),(50,12),(51,12),(52,12),(53,12),(54,12),(55,12),(56,12),(57,12),(58,12),(59,12),(60,13),(61,13),(62,13),(63,13),(64,13),(65,13),(66,13),(67,13),(68,13),(69,13),(70,14),(71,14),(72,14),(73,14),(74,14),(75,14),(76,14),(77,14),(78,14),(79,14);
 /*!40000 ALTER TABLE `playerxteam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `referee` (
   `refereeLastName` varchar(100) NOT NULL,
   `refereeCountry` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`refereeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `referee` (
 
 LOCK TABLES `referee` WRITE;
 /*!40000 ALTER TABLE `referee` DISABLE KEYS */;
-INSERT INTO `referee` VALUES (1,'Opal','Taylor',NULL),(2,'Fitzroy','Hyland',NULL),(3,'Adam','Hale',NULL),(4,'Sapphire','Nonie',NULL);
+INSERT INTO `referee` VALUES (1,'Opal','Taylor',NULL),(2,'Fitzroy','Hyland',NULL),(3,'Adam','Hale',NULL),(4,'Sapphire','Nonie',NULL),(5,'Kevin','Read',NULL),(6,'Guy','Ferrari',NULL),(7,'Neal','Sengupta',NULL),(8,'Ref','Ref',NULL);
 /*!40000 ALTER TABLE `referee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +300,7 @@ CREATE TABLE `schedule` (
   KEY `AwayTeamToTeam` (`awayTeam`),
   CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE,
   CONSTRAINT `HomeTeamToTeam` FOREIGN KEY (`homeTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,7 +309,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final',0),(2,'2018-02-10','16:00:00',1,1,4,1,'Final',0),(3,'2018-02-13','18:30:00',3,3,4,2,'Final',0),(4,'2018-02-15','19:15:00',2,3,1,1,'Final',0),(5,'2018-02-09','18:45:00',7,0,8,3,'Final',0),(6,'2018-02-11','13:30:00',6,1,5,2,'Final',0),(7,'2018-02-15','19:15:00',5,2,8,2,'Final',0),(8,'2018-02-17','14:00:00',6,0,7,0,'Final',0),(9,'2018-02-18','13:45:00',4,5,2,3,'Final',0),(10,'2018-02-20','19:00:00',2,1,3,4,'Final',0),(11,'2018-02-20','20:30:00',1,3,4,2,'Final',0),(12,'2018-02-24','19:15:00',4,0,3,2,'Final',0),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled',0),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled',0),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled',0),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled',0),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled',0),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled',0),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled',0),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled',0),(21,'2018-03-15','19:15:00',6,0,8,0,'Scheduled',0),(22,'2018-03-30','19:30:00',2,NULL,3,NULL,'Scheduled',1),(23,'2018-04-02','16:45:00',3,NULL,2,NULL,'Scheduled',1),(24,'2018-04-04','20:15:00',2,NULL,3,NULL,'Scheduled',1);
+INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final',0),(2,'2018-02-10','16:00:00',1,1,4,1,'Final',0),(3,'2018-02-13','18:30:00',3,3,4,2,'Final',0),(4,'2018-02-15','19:15:00',2,3,1,1,'Final',0),(5,'2018-02-09','18:45:00',7,0,8,3,'Final',0),(6,'2018-02-11','13:30:00',6,1,5,2,'Final',0),(7,'2018-02-15','19:15:00',5,2,8,2,'Final',0),(8,'2018-02-17','14:00:00',6,0,7,0,'Final',0),(9,'2018-02-18','13:45:00',4,5,2,3,'Final',0),(10,'2018-02-20','19:00:00',2,1,3,4,'Final',0),(11,'2018-02-20','20:30:00',1,3,4,2,'Final',0),(12,'2018-02-24','19:15:00',4,0,3,2,'Final',0),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled',0),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled',0),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled',0),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled',0),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled',0),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled',0),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled',0),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled',0),(21,'2018-03-15','19:15:00',6,0,8,0,'Scheduled',0),(22,'2018-03-30','19:30:00',2,NULL,3,NULL,'Scheduled',1),(23,'2018-04-02','16:45:00',3,NULL,2,NULL,'Scheduled',1),(24,'2018-04-04','20:15:00',2,0,3,0,'Scheduled',1),(25,'2018-04-12','19:30:00',15,0,14,0,'Scheduled',0),(27,'2018-04-14','13:15:00',7,0,8,0,'Scheduled',0);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +336,7 @@ CREATE TABLE `schedulexreferee` (
 
 LOCK TABLES `schedulexreferee` WRITE;
 /*!40000 ALTER TABLE `schedulexreferee` DISABLE KEYS */;
-INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(1,2),(10,2),(13,2),(14,2),(16,2),(17,2),(19,2),(2,3),(3,3),(4,3),(9,3),(11,3),(12,3),(15,3),(18,3),(20,3),(6,4),(7,4);
+INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(23,1),(1,2),(10,2),(13,2),(14,2),(16,2),(17,2),(19,2),(2,3),(3,3),(4,3),(9,3),(11,3),(12,3),(15,3),(18,3),(20,3),(27,3),(6,4),(7,4),(24,4),(22,5),(25,5),(21,6);
 /*!40000 ALTER TABLE `schedulexreferee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +442,7 @@ CREATE TABLE `team` (
   `teamAbout` text,
   `teamAboutFR` text,
   PRIMARY KEY (`teamID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +451,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW',NULL,'We are Angry Wolves','Nous sommes des loups en colère'),(2,'Manotick Quick Men','MQM',NULL,'We Men We Quick','Nous Men We Quick'),(3,'Osgoode Never Reads','ONR',NULL,'This is a team description I have no idea what to write about','Ceci est une description de l\'équipe Je n\'ai aucune idée de quoi écrire'),(4,'Barrhaven Vicious Scorers','BVS',NULL,'We score a lot of goals. Only sometimes though.','Nous marquons beaucoup de buts. Seulement parfois cependant.'),(5,'Carleton Passive Players','CPP',NULL,'We can\'t play this soccer game','Nous ne pouvons pas jouer à ce jeu de football'),(6,'Almonte Good Gals','AGG',NULL,'We\'re good we think anyways','Nous sommes bons, nous pensons de toute façon'),(7,'Kanata Soccer Team','KST',NULL,'We play soccer and we\'re damn proud','Nous jouons au football et nous sommes sacrément fiers'),(8,'Vars FC','VFC',NULL,'GO VARS','GO VARS'),(9,'Barrhaven FC','BFC',NULL,NULL,NULL),(10,'Montreal Team','MTL',NULL,NULL,NULL),(11,'Ottawa Team','OTT',NULL,NULL,NULL),(12,'Rockland Team','ROC',NULL,NULL,NULL),(13,'Vanier Team','VAN',NULL,NULL,NULL),(14,'Blair Team','BLA',NULL,NULL,NULL),(15,'Kemptville Team','KEM',NULL,NULL,NULL),(16,'Kingston Team','KIN',NULL,NULL,NULL);
+INSERT INTO `team` VALUES (1,'Nepean Angry Wolves','NAW','http://www.usmedicalsoccerteam.org/wp-content/uploads/2014/08/P1000119-2.jpg','We are Angry Wolves','Nous sommes des loups en colère'),(2,'Manotick Quick Men','MQM','https://img2-placeit-net.s3-accelerate.amazonaws.com/uploads/stage/stage_image/9671/large_thumb_rams.jpg','We Men We Quick','Nous Men We Quick'),(3,'Osgoode Never Reads','ONR','https://i.imgur.com/WSXEUBi.png','This is a team description I have no idea what to write about','Ceci est une description de l\'équipe Je n\'ai aucune idée de quoi écrire'),(4,'Barrhaven Vicious Scorers','BVS','https://i.ytimg.com/vi/j-ghhdCeF74/maxresdefault.jpg','We score a lot of goals. Only sometimes though.','Nous marquons beaucoup de buts. Seulement parfois cependant.'),(5,'Carleton Passive Players','CPP','https://microlancer.lancerassets.com/v2/services/4a/7aa0303c9a11e7b66599334bed589b/large_A.jpg','We can\'t play this soccer game','Nous ne pouvons pas jouer à ce jeu de football'),(6,'Almonte Good Gals','AGG','https://i.pinimg.com/originals/c3/08/bf/c308bfc9f1b6f735fc0d8857a75af651.jpg','We\'re good we think anyways','Nous sommes bons, nous pensons de toute façon'),(7,'Kanata Soccer Team','KST','https://d3kq2xhl2rew87.cloudfront.net/team/bg_image/0/9/9/1140x320/img_1799_sMZBQH8.png','We play soccer and we\'re damn proud','Nous jouons au football et nous sommes sacrément fiers'),(8,'Vars FC','VFC','https://d33wubrfki0l68.cloudfront.net/95fa2a6ddf532a4832ec138864f8a7e709fe73b8/6d114/img/portfolio/goat.png','GO VARS','GO VARS'),(9,'Barrhaven FC','BFC','https://ae01.alicdn.com/kf/HTB175pBKFXXXXaUXXXXq6xXFXXXO/-.jpg_640x640.jpg',NULL,NULL),(10,'Montreal Team','MTL','https://i.pinimg.com/originals/47/86/2d/47862d1e95353cb3a5ba4571e2af5698.png',NULL,NULL),(11,'Ottawa Team','OTT','https://i.pinimg.com/originals/f2/87/29/f28729c260f01bf724443a9dbf964f76.png',NULL,NULL),(12,'Rockland Team','ROC','https://static.vecteezy.com/system/resources/previews/000/199/349/non_2x/fox-basketball-team-badge-mascot-design-logo-concept-vector.jpg',NULL,NULL),(13,'Vanier Team','VAN','https://i.pinimg.com/originals/83/24/50/8324508df5c9381dd31071da773b81db.jpg',NULL,NULL),(14,'Blair Team','BLA','https://i.ytimg.com/vi/IGmQO9sPMXc/maxresdefault.jpg',NULL,NULL),(15,'Kemptville Team','KEM','https://i.ytimg.com/vi/YhA3Pqo786k/maxresdefault.jpg',NULL,NULL),(16,'Kingston Team','KIN','https://i.pinimg.com/originals/a4/6c/5f/a46c5fd0de3b184be02ad800aad1d196.jpg',NULL,NULL);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -510,7 +510,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `refereeID_UNIQUE` (`refereeID`),
   KEY `UsersToReferee` (`refereeID`),
   CONSTRAINT `UsersToReferee` FOREIGN KEY (`refereeID`) REFERENCES `referee` (`refereeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -519,7 +519,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','admin','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-03-21 20:46:44','2018-04-05 01:15:59','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-03-21 20:17:31','2018-03-29 20:51:07','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-03-29 14:05:57','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-03-30 00:58:14','2018-04-05 00:58:08','Referee',NULL),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-04-05 00:51:33','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-04-06 19:30:22','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,0,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$h6nx5pO9F..sKc4f110TL.bXFhCjZsFM/wdtWa7GYIVF3YuR7GTRm','leo@malone.org',1,0,'2018-03-26 21:52:05','2018-03-26 21:52:05','2018-03-26 21:52:05','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$F/ITktBO6M5342wA6x81Dudiw9sf6Z14hPNqK/urrLVPp/7HEAhVi','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-04-05 01:15:25','2018-04-05 01:15:44','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,0,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','Administrator','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-04-11 20:19:35','2018-04-11 20:43:58','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-04-11 20:12:43','2018-04-11 20:12:17','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-04-12 01:53:39','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-04-11 20:30:52','2018-04-12 01:52:17','Referee',5),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-04-12 01:53:04','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-04-12 15:53:48','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,0,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$nOAdK1q8nOJI3OzvJDOpmeG4tHyEQsyHp7XeTkML2aBs4BnKTHb9y','leo@malone.org',1,0,'2018-03-26 21:52:05','2018-04-11 20:17:59','2018-04-11 21:22:19','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$F/ITktBO6M5342wA6x81Dudiw9sf6Z14hPNqK/urrLVPp/7HEAhVi','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-04-05 01:15:25','2018-04-05 01:15:44','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,0,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL),(32,NULL,'Doctor','King','DrKing','$2a$13$.Wq2zsTcHifTae2W9BTsgOK8niu4mNZO0s0bw1Ae.SXgTVdVSIVMW','b@b.b',1,0,'2018-04-11 20:15:14','2018-04-11 20:28:36','2018-04-11 20:41:33','Team Owner',NULL),(33,NULL,'A','A','Sa','$2a$13$igGvm0gToAkKssg85MoRmumkXcI0TuEZKE6s/hUCuStusIubFiv4K','a@a.z',1,0,'2018-04-11 20:39:30','2018-04-11 20:39:57','2018-04-11 20:39:30','Referee',6),(34,NULL,'Neal','Sengupta','NealSenIsCool','$2a$13$sgwW0piour6Pi/knGPAduuxRF6jwqDvnk2j3zohbFxpU.53lPT7Aa','z@z.z',1,0,'2018-04-11 20:46:03','2018-04-11 20:46:17','2018-04-11 20:46:03','Referee',7),(35,NULL,'Ref','Ref','asd','$2a$13$VmE/CGcGhfbXTbBBaN5HQeHhnqhszSdB4972rbrumYlEUDMyUkeQO','asd@asd.com',1,0,'2018-04-11 21:25:49','2018-04-11 21:26:16','2018-04-11 21:25:49','Referee',8);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +546,7 @@ CREATE TABLE `usersxteam` (
 
 LOCK TABLES `usersxteam` WRITE;
 /*!40000 ALTER TABLE `usersxteam` DISABLE KEYS */;
-INSERT INTO `usersxteam` VALUES (28,1),(3,8),(8,8),(5,9);
+INSERT INTO `usersxteam` VALUES (28,1),(32,4),(3,8),(8,8),(5,9);
 /*!40000 ALTER TABLE `usersxteam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -609,7 +609,7 @@ CREATE TABLE `venuexgame` (
 
 LOCK TABLES `venuexgame` WRITE;
 /*!40000 ALTER TABLE `venuexgame` DISABLE KEYS */;
-INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20);
+INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,27);
 /*!40000 ALTER TABLE `venuexgame` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -644,7 +644,7 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',1.49,'04n',803,'broken clouds',101.9,51,11.16,0,'night','2018-04-11 01:06:02');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',4.49,'04d',803,'broken clouds',101.4,90,14.76,0,'day','2018-04-12 15:37:14');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -753,7 +753,7 @@ USE `lastever`;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`admin`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,count(`p`.`playerID`) AS `GP`,sum(`g`.`goals`) AS `goals`,sum(`g`.`yellowCards`) AS `yellowCards`,sum(`g`.`redCards`) AS `redCards`,`ld`.`leagueID` AS `leagueID`,`p`.`playerID` AS `playerID`,`t`.`teamID` AS `teamID`,`s`.`playoffGame` AS `playoffGame`,`p`.`playerHidePage` AS `playerHidePage` from (((((((`gamestatistics` `g` join `schedule` `s` on((`s`.`gameID` = `g`.`gameID`))) join `player` `p` on((`p`.`playerID` = `g`.`playerID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) join `division` `d` on((`d`.`divisionID` = `td`.`divisionID`))) join `leaguexdivision` `ld` on((`ld`.`divisionID` = `d`.`divisionID`))) group by `playerName`,`t`.`teamName` */;
+/*!50001 VIEW `statistics` AS select `t`.`teamName` AS `teamName`,concat_ws(' ',`p`.`playerFirstName`,`p`.`playerLastName`) AS `playerName`,sum((case when (`s`.`gameStatus` = 'Final') then 1 else 0 end)) AS `GP`,coalesce(sum(`g`.`goals`),0) AS `goals`,coalesce(sum(`g`.`yellowCards`),0) AS `yellowCards`,coalesce(sum(`g`.`redCards`),0) AS `redCards`,`ld`.`leagueID` AS `leagueID`,`p`.`playerID` AS `playerID`,`t`.`teamID` AS `teamID`,coalesce(`s`.`playoffGame`,0) AS `playoffGame`,`p`.`playerHidePage` AS `playerHidePage` from (((((((`player` `p` left join `gamestatistics` `g` on((`g`.`playerID` = `p`.`playerID`))) left join `schedule` `s` on((`s`.`gameID` = `g`.`gameID`))) join `playerxteam` `pt` on((`pt`.`playerID` = `p`.`playerID`))) join `team` `t` on((`t`.`teamID` = `pt`.`teamID`))) join `teamxdivision` `td` on((`td`.`teamID` = `t`.`teamID`))) join `division` `d` on((`d`.`divisionID` = `td`.`divisionID`))) join `leaguexdivision` `ld` on((`ld`.`divisionID` = `d`.`divisionID`))) group by `playerName`,`t`.`teamName` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -767,4 +767,4 @@ USE `lastever`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-10 21:25:05
+-- Dump completed on 2018-04-12 11:57:41

@@ -26,6 +26,10 @@
 	type="text/css" />
 <!-- Custom styles for this template -->
 <link href="css/cover.css" rel="stylesheet">
+<!-- include the style -->
+<link rel="stylesheet" href="css/alertify.min.css" />
+<!-- include a theme -->
+<link rel="stylesheet" href="css/themes/default.min.css" />
 
 <c:choose>
 	<c:when test="${cookie.language.value eq 'fr'}">
@@ -137,7 +141,7 @@
 							<h4 class="card-header">
 								<fmt:message key="signin_head1" />
 							</h4>
-							<form action="login" method="POST">
+							<form action="login" method="POST" id="login">
 								<div class="card-body">
 									<div class="form-group">
 										<label for="loginEmail"><fmt:message
@@ -173,7 +177,7 @@
 							<h4 class="card-header">
 								<fmt:message key="signin_createnew" />
 							</h4>
-							<form action="createAccount" method="POST">
+							<form action="createAccount" method="POST" id="createAccount">
 								<div class="card-body">
 									<div class="form-group">
 										<label for="newFirstName"><fmt:message
@@ -206,14 +210,14 @@
 									<div class="form-group">
 										<label for="newPass"><fmt:message
 												key="signin_password" /></label> <input type="password"
-											class="form-control" name="newPass"
+											class="form-control" name="newPass" id="newPass"
 											placeholder="<fmt:message key='signin_enter_password' />"
 											required>
 									</div>
 									<div class="form-group">
 										<label for="newPass"><fmt:message key="signin_confirm" /></label>
 										<input type="password" class="form-control"
-											name="newPassConfirm"
+											name="newPassConfirm" id="newPassConfirm"
 											placeholder="<fmt:message key='signin_retype_pass' />"
 											required>
 									</div>									
@@ -237,7 +241,7 @@
 
 								</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-secondary">
+									<button class="btn btn-secondary" id="btnCreate">
 										<fmt:message key="signin_button1" />
 									</button>
 								</div>
@@ -267,5 +271,7 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/alertify.min.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

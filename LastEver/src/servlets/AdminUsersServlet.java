@@ -18,7 +18,7 @@ import dao.League;
 /**
  * The AdminUsersServlet class extends the HttpServlet class to handle the GET/POST requests for
  * the administrator control panel option View Users.
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class AdminUsersServlet extends HttpServlet{
 	
@@ -75,10 +75,16 @@ public class AdminUsersServlet extends HttpServlet{
 			
 				// User list for display on page
 				List<UserBean> ulb = new ArrayList<UserBean>();
+				List<UserBean> unlb = new ArrayList<UserBean>();
+				int count = AdminUsers.getUnactivatedUsers(unlb);
 				
 				// If query is successful
 				if(AdminUsers.getAllUsers(ulb)) {
 					// Set content type, username, userList and dispatch to jsp
+					if(count != 0) {
+						request.setAttribute("unactivatedUser", unlb);
+						request.setAttribute("numUsers", count);
+					}
 					request.setAttribute("userList", ulb);
 					request.setAttribute("userName", userName);
 					response.setContentType("text/html");

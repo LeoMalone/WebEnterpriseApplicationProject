@@ -162,8 +162,6 @@
 			crossorigin="anonymous"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<!-- FullCalendar Scripts + Other -->
-		<script type="text/javascript" src="fullcalendar/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="fullcalendar/lib/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="fullcalendar/lib/moment.min.js"></script>
 		<script type="text/javascript" src="fullcalendar/fullcalendar.js"></script>
 		<c:choose>
@@ -172,7 +170,7 @@
 				<script type="text/javascript" src="js/custom_fullcalendar_fr.js"></script>
 			</c:when>
 			<c:otherwise>
-				<script type="text/javascript" src="fullcalendar/locale/en.js"></script>
+				<script type="text/javascript" src="fullcalendar/locale/en-ca.js"></script>
 				<script type="text/javascript" src="js/custom_fullcalendar.js"></script>
 			</c:otherwise>
 		</c:choose>

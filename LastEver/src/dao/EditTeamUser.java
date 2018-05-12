@@ -11,6 +11,7 @@ import db.ConnectionManager;
 
 /**
  * The EditTeamUser class handles all db operation relating to editing a team owner
+ * @author Kevin Read
  */
 public class EditTeamUser {
 

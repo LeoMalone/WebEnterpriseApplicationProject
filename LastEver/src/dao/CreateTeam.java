@@ -10,6 +10,7 @@ import db.ConnectionManager;
 
 /**
  * The CreateTeam class handles all db operation relating to creating a team
+ * @author Liam Maloney
  */
 public class CreateTeam {
 	

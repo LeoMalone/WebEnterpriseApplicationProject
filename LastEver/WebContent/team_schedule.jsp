@@ -139,22 +139,22 @@
 			</div>
 		</div>
 	</nav>
-
+<fmt:bundle basename="TestBundle">
 	<div class="main-cover">
 		<!-- Page Content -->
 		<div class="cards-container container">
-			<fmt:bundle basename="TestBundle">
 				<h1 class="my-4">
-					${teamName}:<br />
+					<c:out value="${teamName}:" /><br />
 					<fmt:message key="team_view_schedule1" />
 				</h1>				
-									<div class="col-lg-12 mb-5 mt-5">
+						<div class="row">
+					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<h4 class="card-header">
-								<fmt:message key="div_head2" />
-							</h4>
-							<div class="card-body">
-								<table id="standings"
+							<div class="card-body table-responsive">
+								<h4 class="card-header">
+									<fmt:message key="div_head2" />
+								</h4>
+								<table id="schedule"
 									class="table table-bordered table-striped table-dark table-hover table-sm">
 									<thead>
 										<tr>
@@ -166,7 +166,8 @@
 													key="div_head2_text3" /></th>
 											<th scope="col" style="text-align: center"><fmt:message
 													key="div_head2_text4" /></th>
-											<th scope="col" style="text-align: center"><fmt:message key="team_view_schedule2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="venue_head1" /></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -180,10 +181,10 @@
 													<tr>
 														<td scope="row" style="text-align: center"><c:if
 																test="${cookie.language.value eq 'fr'}">
-																<fmt:formatDate type="date" pattern="d MMM y"
+																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
 																	value="${sched.date}" />
 															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
-																<fmt:formatDate type="date" pattern="MMM d y"
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
 																	value="${sched.date}" />
 															</c:if></td>
 														<td style="text-align: center"><c:if
@@ -194,9 +195,32 @@
 																<fmt:formatDate type="time" pattern="h:mm a"
 																	value="${sched.time}" />
 															</c:if></td>
-														<td><c:out value="${sched.homeTeam}" /></td>
-														<td><c:out value="${sched.awayTeam}" /></td>
-														<td><c:out value="${sched.venue}" /></td>
+														<td><c:choose>
+																<c:when test="${not empty sched.homeTeamLogo}">
+																	<img class="responsive-sm" src="${sched.homeTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${sched.homeID}">${sched.homeTeam}</a></td>
+														<td><c:choose>
+																<c:when test="${not empty sched.awayTeamLogo}">
+																	<img class="responsive-sm" src="${sched.awayTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${sched.awayID}">${sched.awayTeam}</a></td>
+														<c:choose>
+															<c:when test="${empty sched.venue}">
+																<td><fmt:message key="div_novenue" /></td>
+															</c:when>
+															<c:otherwise>
+																<td><a href="venue?id=${sched.venueID}">${sched.venue}</a></td>
+															</c:otherwise>
+														</c:choose>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
@@ -205,12 +229,158 @@
 								</table>
 							</div>
 						</div>
-					</div>			
-				<!-- /row -->
-
+					</div>
+					<div class="col-lg-12 mb-5">
+						<div class="card">
+							<div class="card-body table-responsive">
+								<h4 class="card-header">
+									<fmt:message key="div_head3" />
+								</h4>
+								<table id="results"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head3_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head3_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head3_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head3_text4" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head3_text5" /></th>
+											<th scope="col"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty results}">
+												<td colspan=7 style="text-align: center"><b><fmt:message
+															key="div_noresults" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${results}" var="res">
+													<tr>
+														<td scope="row" style="text-align: center"><c:if
+																test="${cookie.language.value eq 'fr'}">
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
+																	value="${res.date}" />
+															</c:if> <c:if test="${cookie.language.value ne 'fr'}">
+																<fmt:formatDate type="date" pattern="YYYY-MM-dd"
+																	value="${res.date}" />
+															</c:if></td>
+														<td><c:choose>
+																<c:when test="${not empty res.homeTeamLogo}">
+																	<img class="responsive-sm" src="${res.homeTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${res.homeID}"><c:out
+																	value="${res.homeTeam}" /></a></td>
+														<td style="text-align: center"><c:out
+																value="${res.homeScore}" /></td>
+														<td><c:choose>
+																<c:when test="${not empty res.awayTeamLogo}">
+																	<img class="responsive-sm" src="${res.awayTeamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose><a href="team?id=${res.awayID}"><c:out
+																	value="${res.awayTeam}" /></a></td>
+														<td style="text-align: center"><c:out
+																value="${res.awayScore}" /></td>
+														<td style="text-align: center"><a
+															href="gamePage?id=${res.gameID}"><c:out
+																	value="${res.status}" /></a></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 mb-5">
+						<div class="card">
+							<div class="card-body table-responsive">
+								<h4 class="card-header">
+									<fmt:message key="div_head5" />
+								</h4>
+								<table id="statistics"
+									class="table table-bordered table-striped table-dark table-hover table-sm">
+									<thead>
+										<tr>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text1" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text2" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text3" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text4" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text5" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text6" /></th>
+											<th scope="col" style="text-align: center"><fmt:message
+													key="div_head5_text7" /></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+											<c:when test="${empty statistics}">
+												<td colspan=7 style="text-align: center"><b><fmt:message
+															key="div_noplayers" /></b></td>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${statistics}" var="stats">
+													<tr>
+														<td scope="row" style="text-align: center"><c:out
+																value="${stats.rank}" /></td>
+														<td scope="row"><c:choose>
+																<c:when test="${not empty stats.teamLogo}">
+																	<img class="responsive-sm" src="${stats.teamLogo}" />
+																</c:when>
+																<c:otherwise>
+																	<img class="responsive-sm"
+																		src="https://i.imgur.com/zSAVaUJ.png" />
+																</c:otherwise>
+															</c:choose> <c:out value="${stats.teamName}" /></td>
+														<td><a href="player?id=${stats.playerID}"><c:choose>
+																	<c:when test="${stats.hidePage eq true }">
+																		<fmt:message key="name_withheld" />
+																	</c:when>
+																	<c:otherwise>
+																		<c:out value="${stats.name}" />
+																	</c:otherwise>
+																</c:choose></a></td>
+														<td style="text-align: center"><c:out
+																value="${stats.gamesPlayed}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.goals}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.yellowCard}" /></td>
+														<td style="text-align: center"><c:out
+																value="${stats.redCard}" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- /.row -->
 		</div>
 	</div>
-
 	<!-- Footer -->
 	<footer class="page-footer py-3 bg-dark">
 		<div class="container-fluid">

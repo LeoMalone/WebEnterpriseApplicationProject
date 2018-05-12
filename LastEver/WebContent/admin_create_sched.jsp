@@ -183,6 +183,24 @@
 											placeholder="<fmt:message key="admin_cs_ph" />">
 									</div>
 									<div class="form-group">
+										<label for="newVenue">Select Venue</label> <select
+											class="custom-select my-1 mr-sm-2" id="newVenue"
+											name="newVenue">
+											<c:forEach items="${venue}" var="v">
+												<option value="${v.venueID}">${v.venueName}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="newReferee">Select Referee</label> <select
+											class="custom-select my-1 mr-sm-2" id="newReferee"
+											name="newReferee">
+											<c:forEach items="${referee}" var="ref">
+												<option value="${ref.refId}">${ref.firstName} ${ref.lastName}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="form-group">
 										<label for="newGameStatus"><fmt:message
 												key="admin_cs_gs" /></label> <select
 											class="custom-select my-1 mr-sm-2" id="newGameStatus"

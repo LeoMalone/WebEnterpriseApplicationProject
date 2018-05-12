@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * The LogoutServlet class handles the POST data from /logout to logout a user
- * @author Liam Maloney and edited by Kevin Villemaire
+ * @author Liam Maloney, Kevin Villemaire
  */
 public class LogoutServlet extends HttpServlet {
 

@@ -15,8 +15,9 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
- * RulesSummaryServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * RulesSummaryServlet class extends HttpServlet for GET/POST requests for the rules summary page
+ * to get navbar and session info
+ * @author Kevin Read, Kevin Villemaire
  */
 public class RulesSummaryServlet extends HttpServlet {
 

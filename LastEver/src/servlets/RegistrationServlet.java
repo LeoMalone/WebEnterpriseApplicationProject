@@ -15,8 +15,9 @@ import beans.LeagueBean;
 import dao.League;
 
 /**
- * RegistrationServlet class
- * @author Kevin Read and edited by Kevin Villemaire
+ * RegistrationServlet class extends HttpServlet for GET/POST requests for the registration page
+ * to get navbar and session info
+ * @author Kevin Read, Kevin Villemaire
  */
 public class RegistrationServlet extends HttpServlet {
 	
@@ -33,7 +34,9 @@ public class RegistrationServlet extends HttpServlet {
 		String language = null;		
 		
 		//get cookies
+		//get the cookie list
 		Cookie[] cookies = request.getCookies();
+		
 		//if there are cookies then set userName and language to the cookie values if they exist
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -51,13 +54,18 @@ public class RegistrationServlet extends HttpServlet {
 		}
 		else {
 
+			//get the current website language
 			language = request.getParameter("language");
+			//get all the cookies on the website
 			Cookie[] theCookies = request.getCookies();
 
+			//loop through the cookies and look for the language cookie
 			for (Cookie tempCookie : theCookies) {
 				if ("language".equals(tempCookie.getName())) {
+					//if the language cookie exists then update the language with the websites language if it exists
 					if (language != null)
 						tempCookie.setValue(language);
+					//add the cookie back to the response headers
 					response.addCookie(tempCookie);
 					break;
 				}

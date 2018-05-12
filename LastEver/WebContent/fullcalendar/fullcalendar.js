@@ -805,6 +805,7 @@ function htmlEscape(s) {
         .replace(/>/g, '&gt;')
         .replace(/'/g, '&#039;')
         .replace(/"/g, '&quot;')
+		.replace(/&lt;br\s?\/?&gt;/g, '<br />')
         .replace(/\n/g, '<br />');
 }
 exports.htmlEscape = htmlEscape;
