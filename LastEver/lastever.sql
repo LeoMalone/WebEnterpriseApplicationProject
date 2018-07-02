@@ -369,7 +369,7 @@ DROP TABLE IF EXISTS `scorers`;
 /*!50001 DROP VIEW IF EXISTS `scorers`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `scorers` AS SELECT 
+/*!50001 CREATE VIEW `scorers` AS SELECT
  1 AS `teamName`,
  1 AS `playerName`,
  1 AS `goals`,
@@ -388,7 +388,7 @@ DROP TABLE IF EXISTS `standings`;
 /*!50001 DROP VIEW IF EXISTS `standings`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `standings` AS SELECT 
+/*!50001 CREATE VIEW `standings` AS SELECT
  1 AS `team`,
  1 AS `GP`,
  1 AS `W`,
@@ -410,7 +410,7 @@ DROP TABLE IF EXISTS `statistics`;
 /*!50001 DROP VIEW IF EXISTS `statistics`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `statistics` AS SELECT 
+/*!50001 CREATE VIEW `statistics` AS SELECT
  1 AS `teamName`,
  1 AS `playerName`,
  1 AS `GP`,
@@ -665,7 +665,7 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',17,'03d',802,'scattered clouds',101.8,25,5.4,0,'day','2018-05-12 20:01:52');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',29.51,'03n',802,'scattered clouds',101.3,74,14.76,0,'night','2018-07-01 21:40:21');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -686,7 +686,7 @@ CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_div`(In x bigint(20), In y 
 begin
   IF EXISTS (select divisionID from leaguexdivision where divisionID = x) THEN
     UPDATE leaguexdivision SET leagueID=y WHERE divisionID=x;
-  ELSE 
+  ELSE
     insert into leaguexdivision (divisionID, leagueID) values (x, y);
   END IF;
 end ;;
@@ -709,7 +709,7 @@ CREATE DEFINER=`admin`@`localhost` PROCEDURE `update_team`(In x bigint(20), In y
 begin
   IF EXISTS (select teamID from teamxdivision where teamID = x) THEN
     UPDATE teamxdivision SET divisionID=y WHERE teamID=x;
-  ELSE 
+  ELSE
     insert into teamxdivision (teamId, divisionID) values (x, y);
   END IF;
 end ;;
