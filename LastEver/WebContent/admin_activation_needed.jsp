@@ -27,13 +27,13 @@
 <link href="css/cover.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="news_header" /></title>
+	<title>Last Ever - <fmt:message key="admin_activation_title" /></title>
 </fmt:bundle>
 </head>
 <body>
 	<fmt:bundle basename="TestBundle">
 
-		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in 
+		<!-- nav bar - home, league(about, rules, register, contact us), divisions (womens, mens), sign in
 		- sets parent link active
 		- in dropdown, sets active with full bar color
 		-->
@@ -208,21 +208,18 @@
 		- widgets
 		-->
 			<div class="cards-container container">
-				<h1 class="my-4">Admin Activation Needed</h1>
+				<h1 class="my-4"><fmt:message key="admin_activation_title" /></h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
 					<div class="col-lg-12 mb-5">
 						<div class="card">
-							<h4 class="card-header">Account Activation Needed</h4>
+							<h4 class="card-header"><fmt:message key="admin_activation_head" /></h4>
 							<div class="card-body">
-								Hello,
+								<fmt:message key="admin_activation_hello" />
 								<br><br>
-								Your account currently is not activated by the administrators and will need to be approved before 
-								you can access your control panel. If it has been more than one week since your account has been 
-								created and you have not been activated then feel free to send the administrators an email 
-								regarding your account.
+								<fmt:message key="admin_activation_body" />
 								<br><br>
-								LastEver Administration Team
+								<fmt:message key="admin_activation_team" />
 							</div>
 						</div>
 					</div>
