@@ -108,18 +108,20 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/><fmt:message
-														key="team_dd1" /></a> <a class="dropdown-item"
-													href="teamRoster"><fmt:message key="team_dd2" /></a> <a
-													class="dropdown-item" href="teamSchedule"><fmt:message
-														key="team_dd3" /></a> <a class="dropdown-item"
-													href="teamEmails"><fmt:message key="team_dd6" /></a> <a
-													class="dropdown-item" href="logout" method="post"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /> <fmt:message key="team_dd1" /></a> <a
+													class="dropdown-item" href="teamRoster"><fmt:message
+														key="team_dd2" /></a> <a class="dropdown-item"
+													href="teamSchedule"><fmt:message key="team_dd3" /></a> <a
+													class="dropdown-item" href="teamEmails"><fmt:message
+														key="team_dd6" /></a> <a class="dropdown-item" href="logout"
+													method="post"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 									<%--  IF SIGNED IN AS A TEAM OWNER WITH NO TEAM --%>
@@ -127,7 +129,9 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
 
@@ -144,12 +148,14 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}"/> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}"/></a>
-												<a class="dropdown-item" href="logout"><fmt:message
-														key="team_dd4" /></a>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
 											</div></li>
 									</c:when>
 								</c:choose>
@@ -160,19 +166,24 @@
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle active" href="#"
 											id="navbarDropdownPortfolio" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"> <c:out value="${userName}" /> </a>
+											aria-haspopup="true" aria-expanded="false"> <c:out
+													value="${userName}" />
+										</a>
 											<div class="dropdown-menu dropdown-menu-right"
 												aria-labelledby="navbarDropdownPortfolio">
-												<a class="dropdown-item" href="${userType}"><c:out value="${userName}" /></a>
-												<a class="dropdown-item" href="adminUsers"><fmt:message	key="nav_admin_users" /></a>
-												<a class="dropdown-item" href="adminTeams"><fmt:message key="nav_admin_teams" /></a>
-												<a class="dropdown-item" href="adminDivisions"><fmt:message	key="nav_admin_divs" /></a>
-												<a class="dropdown-item" href="adminSchedule"><fmt:message key="nav_admin_sched" /></a>
-												<a class="dropdown-item" href="adminEmails"><fmt:message key="nav_admin_email" /></a>
-												<a class="dropdown-item" href="adminLeagues"><fmt:message key="nav_leagues" /></a>
-												<a class="dropdown-item" href="logout"><fmt:message key="team_dd4" /></a>
-											</div>
-										</li>
+												<a class="dropdown-item" href="${userType}"><c:out
+														value="${userName}" /></a> <a class="dropdown-item"
+													href="adminUsers"><fmt:message key="nav_admin_users" /></a>
+												<a class="dropdown-item" href="adminTeams"><fmt:message
+														key="nav_admin_teams" /></a> <a class="dropdown-item"
+													href="adminDivisions"><fmt:message key="nav_admin_divs" /></a>
+												<a class="dropdown-item" href="adminSchedule"><fmt:message
+														key="nav_admin_sched" /></a> <a class="dropdown-item"
+													href="adminEmails"><fmt:message key="nav_admin_email" /></a>
+												<a class="dropdown-item" href="adminLeagues"><fmt:message
+														key="nav_leagues" /></a> <a class="dropdown-item"
+													href="logout"><fmt:message key="team_dd4" /></a>
+											</div></li>
 									</c:when>
 								</c:choose>
 							</c:otherwise>
@@ -251,25 +262,12 @@
 									<c:otherwise>
 										<table style="width: 100%">
 											<tr>
-												<td><b><c:out value="${weather.weatherCity }" />,
-														<c:out value="${weather.weatherCountry }" /> <br></b> <fmt:bundle
-														basename="weather">
-														<fmt:message key="${weather.weatherDescription}" />
-													</fmt:bundle></td>
-												<td id="weather" style="width: 45%"><c:choose>
-														<c:when
-															test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
-															<!-- Show day/night weather icons for codes 800-803 otherwise show generic ones -->
-															<i
-																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
-														</c:when>
-														<c:otherwise>
-															<i class="wi wi-owm-${weather.weatherCode}"></i>
-														</c:otherwise>
-													</c:choose>
+												<td colspan="2" id="weather-city"><b><c:out
+															value="${weather.weatherCity }" />, <c:out
+															value="${weather.weatherCountry }" /> <br></b></td>
 											</tr>
-											<tr id="weather-temp">
-												<td><b><c:choose>
+											<tr>
+												<td id="weather-temp"><b><c:choose>
 
 															<c:when
 																test="${weather.weatherTemp gt -0.5 and weather.weatherTemp lt 0 }">
@@ -283,25 +281,56 @@
 																	value="${weather.weatherTemp}" />&deg;C
 															</c:otherwise>
 														</c:choose> </b></td>
+												<td id="weather" style="width: 45%"><c:choose>
+														<c:when
+															test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
+															<!-- Show day/night weather icons for codes 800-803 otherwise show generic ones -->
+															<i
+																class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+														</c:when>
+														<c:otherwise>
+															<i class="wi wi-owm-${weather.weatherCode}"></i>
+														</c:otherwise>
+													</c:choose></td>
+											</tr>
+											<tr>
+												<td id="weather-details" colspan="2"><fmt:bundle basename="weather">
+														<fmt:message key="${weather.weatherDescription}" />
+													</fmt:bundle></td>
+											</tr>
+											<tr id="wind">
 												<td id="weather-details"><b><fmt:message
-															key="weather_wind" /></b> <!-- Wind comes through as m/s this converts to km/h -->
-													<fmt:formatNumber maxFractionDigits="0"
-														value="${weather.weatherWind}" /> km/h <br> <c:if
-														test="${weather.weatherGust gt 0.0}">
-														<b><fmt:message key="weather_gust" /></b>
-														<fmt:formatNumber maxFractionDigits="0"
-															value="${weather.weatherGust}" /> km/h
-													</c:if> <b><fmt:message key="weather_humidity" /></b> <c:out
-														value="${weather.weatherHumidity}" />% <br> <b><fmt:message
-															key="weather_pressure" /></b> <fmt:formatNumber
-														maxFractionDigits="1"
+															key="weather_wind" /></b></td>
+												<td><fmt:formatNumber maxFractionDigits="0"
+														value="${weather.weatherWind}" /> km/h</td>
+											</tr>
+
+											<!-- Only show wind gust if there is a wind gust occurring -->
+											<c:if test="${weather.weatherGust gt 0.0}">
+											<tr id="wind-gust">
+													<td id="weather-details"><b><fmt:message
+																key="weather_gust" /></b></td>
+													<td><fmt:formatNumber maxFractionDigits="0"
+															value="${weather.weatherGust}" /> km/h</td>
+												</tr>
+											</c:if>
+											<tr id="humidity">
+												<td id="weather-details"><b><fmt:message
+															key="weather_humidity" /></b></td>
+												<td><c:out value="${weather.weatherHumidity}" /> %</td>
+											</tr>
+											<tr id="pressure">
+												<td id="weather-details"><b><fmt:message
+															key="weather_pressure" /></b></td>
+												<td><fmt:formatNumber maxFractionDigits="1"
 														value="${weather.weatherPressure}" /> hPa</td>
 											</tr>
 											<tr>
 												<!-- Link to where the data was fetched from -->
 												<td><a href="https://openweathermap.org/">OpenWeatherMap</a></td>
 												<td id="weather-update"><fmt:formatDate type="both"
-														pattern="YYYY-MM-dd H:mm" value="${currtime}" /></td>
+														pattern="YYYY-MM-dd H:mm" value="${currtime}"
+														timeZone="America/Toronto" /></td>
 											</tr>
 										</table>
 									</c:otherwise>
