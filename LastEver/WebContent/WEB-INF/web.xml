@@ -652,7 +652,7 @@
 
 	<servlet-mapping>
 		<servlet-name>AdminActivationServlet</servlet-name>
-		<url-pattern>/adminActivationNeeded</url-pattern>
+		<url-pattern>/activationNeeded</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -663,6 +663,16 @@
 	<servlet-mapping>
 		<servlet-name>ActivateUserServlet</servlet-name>
 		<url-pattern>/activateUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ActivateEmailServlet</servlet-name>
+		<servlet-class>servlets.ActivateEmailServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ActivateEmailServlet</servlet-name>
+		<url-pattern>/activate</url-pattern>
 	</servlet-mapping>
 
 	<error-page>

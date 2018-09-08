@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.LeagueBean;
 import beans.UserBean;
+import dao.EmailActivation;
 import dao.League;
 import dao.Login;
 import dao.Team;
@@ -101,8 +102,14 @@ public class LoginServlet extends HttpServlet {
 		// If login with given userBean is successful
 		if(Login.validateUserLogin(user)) {
 
-			if(user.getAdminActivated() != 1) {
-				response.sendRedirect("./adminActivationNeeded");
+			if(user.getAdminActivated() != 1 || user.getEmailValidated() != 1) {
+				//upon login of an account not email activated it will delete and send the user a new email
+				if(user.getEmailValidated() != 1) {
+					EmailActivation.deleteToken(user);
+					EmailActivation.generateToken(user);
+					EmailActivation.sendEmail(user);
+				}
+				response.sendRedirect("./activationNeeded");
 			}
 			else {
 				// Start session and create use cookie

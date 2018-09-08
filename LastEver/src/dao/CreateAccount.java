@@ -32,7 +32,7 @@ public class CreateAccount {
 		// Connect to Database and execute INSERT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();        
-			insertUser = conn.prepareStatement("INSERT INTO users (username, userFirstName, userLastName, password, emailAddress, userType, lastLogin, emailValidated) VALUES (?, ?, ?, ?, ?, ?, ?, 1);");
+			insertUser = conn.prepareStatement("INSERT INTO users (username, userFirstName, userLastName, password, emailAddress, userType, lastLogin, emailValidated) VALUES (?, ?, ?, ?, ?, ?, ?, 0);");
 			insertUser.setString(1, user.getUsername());
 			insertUser.setString(2, user.getFirstName());
 			insertUser.setString(3, user.getLastName());
