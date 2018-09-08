@@ -34,8 +34,8 @@ public class Login {
 		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();
-			getusers = conn.prepareStatement("select username, userType, emailAddress, password, userID, adminActivated"
-					+ " from users where emailAddress=?");
+			getusers = conn.prepareStatement("select username, userType, emailAddress, password, userID, adminActivated,"
+					+ " emailValidated from users where emailAddress=?");
 			getusers.setString(1, user.getEmailAddress());
 			resultSet = getusers.executeQuery();
 			status = resultSet.next();
@@ -49,6 +49,7 @@ public class Login {
 					user.setEmail(resultSet.getString(3));
 					user.setId(resultSet.getString(5));
 					user.setAdminActivated(resultSet.getInt(6));
+					user.setEmailValidated(resultSet.getInt(7));
 					lastLogin = conn.prepareStatement("UPDATE users SET lastLogin=? WHERE userID=?;");
 					lastLogin.setTimestamp(1, user.getLastLogin());
 					lastLogin.setString(2, user.getId());

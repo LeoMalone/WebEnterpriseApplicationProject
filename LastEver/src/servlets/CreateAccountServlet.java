@@ -17,6 +17,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import beans.UserBean;
 import dao.CreateAccount;
+import dao.EmailActivation;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for
@@ -105,6 +106,8 @@ public class CreateAccountServlet extends HttpServlet {
 
 			// If createNewUser method returns true and the user passed the CAPTCHA
 			if (CreateAccount.createNewUser(user) && json.getBoolean("success") == true) {
+				EmailActivation.generateToken(user);
+				EmailActivation.sendEmail(user);
 				response.sendRedirect("./login");
 			} else {
 				response.sendRedirect("./login");

@@ -17,8 +17,8 @@ import dao.League;
 
 
 /**
- * The EditUserServlet class extends the HttpServlet class to handle the GET/POST requests for
- * the administrator control panel option edit User.
+ * The ActivateUser class extends the HttpServlet class to handle the GET/POST requests for
+ * the administrator control panel option to activate a user
  * @author Kevin Villemaire
  */
 public class ActivateUserServlet extends HttpServlet{
@@ -26,7 +26,7 @@ public class ActivateUserServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * doGet method mapped to /editUser
+	 * doGet method mapped to /activateUser
 	 */
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

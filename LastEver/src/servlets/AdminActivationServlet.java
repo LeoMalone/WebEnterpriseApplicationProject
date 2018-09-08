@@ -82,7 +82,7 @@ public class AdminActivationServlet extends HttpServlet {
 			request.setAttribute("userName", userName);
 			
 			//forward to contact page
-			RequestDispatcher rd = request.getRequestDispatcher("admin_activation_needed.jsp");  
+			RequestDispatcher rd = request.getRequestDispatcher("activation_needed.jsp");  
 			rd.forward(request, response);	
 		}
 	}

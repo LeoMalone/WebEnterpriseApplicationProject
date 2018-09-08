@@ -161,6 +161,7 @@
 									<button type="submit" class="btn btn-secondary">
 										<fmt:message key="signin_button1" />
 									</button>
+									<a href="#" class="btn btn-danger btn-disabled"><fmt:message key="signin_button2" /></a>
 								</div>
 							</form>
 						</div>
