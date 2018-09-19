@@ -176,14 +176,14 @@ public class EmailActivation {
 					}
 				}
 				
-				final String email = "lasteversoccer";
+				final String email = "lasteversoccer@outlook.com";
 				final String password = "";
 
 				Properties properties = new Properties();
 
 				properties.put("mail.smtp.auth", "true");
 				properties.put("mail.smtp.starttls.enable", "true");
-				properties.put("mail.smtp.host", "smtp.gmail.com");
+				properties.put("mail.smtp.host", "smtp-mail.outlook.com");
 				properties.put("mail.smtp.port", "587");
 
 				Session session = Session.getInstance(properties,
@@ -196,14 +196,14 @@ public class EmailActivation {
 				try {
 
 					Message message = new MimeMessage(session);
-					message.setFrom(new InternetAddress("lasteversoccer@gmail.com"));
+					message.setFrom(new InternetAddress("lasteversoccer@outlook.com"));
 					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmailAddress()));
 					message.setSubject("Welcome to LastEver");
-					message.setText("Hello " + user.getUsername() + "\n Welcome to LastEver Soccer Management Systems!"
+					message.setText("Hello " + user.getUsername() + ",\n\nWelcome to LastEver Soccer Management Systems!"
 							+ " Before you can get started with your account you need to first activate your email address"
-							+ "which you can do by clicking the following link below.\n\n http://lastever.azurewebsites.net/activate?id="
+							+ "which you can do by clicking the following link below.\n\nhttp://lastever.azurewebsites.net/activate?id="
 							+ user.getId() + "&token=" + userToken + "\n The activation link will expire in 24 hours. \n\n"
-							+ "LastEver Administration Team \n\n --\n This email account is not monitored and your"
+							+ "LastEver Administration Team \n\n --\nThis email account is not monitored and your"
 							+ "replies will be ignored.");
 					Transport.send(message);
 
