@@ -30,13 +30,13 @@ public class ActivateUser {
 		Connection conn = null;					// DB Connection
 		PreparedStatement getUser = null;		// # of executed queries
 		PreparedStatement updateUser = null;	// # of executed queries
-		DateTime currTime = new DateTime(new Timestamp(System.currentTimeMillis()));
-		DateTime activationTime;
+		DateTime currTime = new DateTime(new Timestamp(System.currentTimeMillis()));	//Current time
+		DateTime activationTime;				// The end of the users Activation period
 		ResultSet result;						// resultSet of query
 		@SuppressWarnings("unused")
 		int stat = 0;
 
-		// Connect to Database and execute INSERT query with UserBean data
+		// Connect to Database and execute SELECT query with UserId and token
 		try {
 			conn = ConnectionManager.getConnection();        
 			getUser = conn.prepareStatement("select activationTo from activation where userID=? and activationCode=?");
@@ -46,11 +46,14 @@ public class ActivateUser {
 
 			// Return true if 1 query executes
 			if(result.next()) {
+				// Update the activation end time
 				activationTime = new DateTime(result.getTimestamp(1));
 
+				// Compares the time in-between now and the end of the users activation period
 				Seconds sec = Seconds.secondsBetween(activationTime, currTime);
 				Seconds interval = Seconds.seconds(1);
 
+				// If within activation period then activate the user by updating emailValidated
 				if(interval.isGreaterThan(sec)) {
 					updateUser = conn.prepareStatement("update users set emailValidated=?, accountUpdated=? where userID=?");
 					updateUser.setInt(1, 1);
@@ -58,8 +61,9 @@ public class ActivateUser {
 					updateUser.setString(3, user.getId());
 					stat = updateUser.executeUpdate();
 
+					//Call the deleteToken method to delete the activation token of the user
 					if(EmailActivation.deleteToken(user))
-						stat = 1;
+						status = true;
 
 				}
 			}

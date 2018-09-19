@@ -43,15 +43,17 @@ public class EmailActivation {
 		DateTime time = new DateTime(currTime).plusDays(1);
 		int result = 0;	  
 
+		//Generates bytes that will be used for the token
 		SecureRandom rand = new SecureRandom();
 		byte bytes[] = new byte[45];
 		rand.nextBytes(bytes);
 
+		//Encodes the bytes to create the new token
 		byte[] token = Base64.getEncoder().encode(bytes);
 
-		// Connect to Database and execute INSERT query with UserBean data
+		// Connect to Database and execute INSERT query with the Users ID, token, and validity date
 		try {
-			conn = ConnectionManager.getConnection();        
+			conn = ConnectionManager.getConnection();
 			insertToken = conn.prepareStatement("INSERT INTO activation (userID, activationCode, activationFrom, activationTo)"
 					+ " VALUES (?, ?, ?, ?);");
 			insertToken.setString(1, user.getId());
@@ -100,7 +102,7 @@ public class EmailActivation {
 		PreparedStatement deleteActivation = null;	// # of executed queries
 		int result = 0;	  
 
-		// Connect to Database and execute INSERT query with UserBean data
+		// Connect to Database and execute DELETE query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();        
 			deleteActivation = conn.prepareStatement("delete from activation using activation where "
@@ -143,14 +145,14 @@ public class EmailActivation {
 	 */
 	public static boolean sendEmail(UserBean user) { 
 
-		boolean status = false;					// Status of createNewUser
+		boolean status = false;					// Status of sendEmail
 		Connection conn = null;					// DB Connection
 		PreparedStatement getToken = null;	// # of executed queries
 		PreparedStatement getEmail = null;	// # of executed queries
 		ResultSet token = null;				// result of query
 		String userToken = null;			// the activationCode of the user
 
-		// Connect to Database and execute INSERT query with UserBean data
+		// Connect to Database and execute SELECT query with UserBean data
 		try {
 			conn = ConnectionManager.getConnection();        
 			getToken = conn.prepareStatement("select activationCode from activation where userID=?");
@@ -161,24 +163,28 @@ public class EmailActivation {
 			if(token.next()) {
 				userToken = token.getString(1);
 
-				//gets a users email in case the bean does not contain that information
-				if(user.getEmailAddress() == null) {
-					getEmail = conn.prepareStatement("select emailAddress from users where userID=?");
+				//gets a users email and username in case the bean does not contain that information
+				if(user.getEmailAddress() == null || user.getUsername() == null) {
+					getEmail = conn.prepareStatement("select emailAddress, username from users where userID=?");
 					getEmail.setString(1, user.getId());
 					token = getEmail.executeQuery();
 
+					//sets the email in the UserBean to be the users email address
 					if(token.next()) {
 						user.setEmail(token.getString(1));
+						user.setUsername(token.getString(2));
 					}
 					else {
 						//if the query fails then return and do not attempt to send the email
 						return false;
 					}
 				}
-				
+
+				//Connection information to the email address to send emails from
 				final String email = "lasteversoccer@outlook.com";
 				final String password = "";
 
+				//Create a new properties file which has the information about connecting to the email
 				Properties properties = new Properties();
 
 				properties.put("mail.smtp.auth", "true");
@@ -186,6 +192,7 @@ public class EmailActivation {
 				properties.put("mail.smtp.host", "smtp-mail.outlook.com");
 				properties.put("mail.smtp.port", "587");
 
+				//Creates a new session with the email and password using PasswordAuthentication
 				Session session = Session.getInstance(properties,
 						new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
@@ -194,19 +201,28 @@ public class EmailActivation {
 				});
 
 				try {
-
+					//Creates a new message and sets from and to email addresses
 					Message message = new MimeMessage(session);
 					message.setFrom(new InternetAddress("lasteversoccer@outlook.com"));
 					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmailAddress()));
-					message.setSubject("Welcome to LastEver");
+					//The subject of the email sent to the user
+					message.setSubject("Welcome to LastEver / Bienvenue chez LastEver");
+					//The message of the email sent to the user
 					message.setText("Hello " + user.getUsername() + ",\n\nWelcome to LastEver Soccer Management Systems!"
 							+ " Before you can get started with your account you need to first activate your email address"
-							+ "which you can do by clicking the following link below.\n\nhttp://lastever.azurewebsites.net/activate?id="
-							+ user.getId() + "&token=" + userToken + "\n The activation link will expire in 24 hours. \n\n"
-							+ "LastEver Administration Team \n\n --\nThis email account is not monitored and your"
-							+ "replies will be ignored.");
+							+ " which you can do by clicking the following link below.\n\nhttp://lastever.azurewebsites.net/activate?id="
+							+ user.getId() + "&token=" + userToken + "\nThe activation link will expire in 24 hours. \n\n"
+							+ "LastEver Administration Team \n\n --\nThis email account is not monitored and your "
+							+ "replies will be ignored.\n\n---------\nBienvenue " + user.getUsername() + ",\n\nBienvenue sur LastEver Soccer Management Systems!"
+							+ " Avant de commencer à utiliser votre compte, vous devez d'abord activer votre adresse e-mail."
+							+ "que vous pouvez faire en cliquant sur le lien ci-dessous.\n\nhttp://lastever.azurewebsites.net/activate?id="
+							+ user.getId() + "&token=" + userToken + "\nLe lien d'activation expirera dans 24 heures. \n\n"
+							+ "LastEver Administration Team \n\n --\nCe compte de messagerie n'est pas surveillé et votre"
+							+ "les réponses seront ignorées.");
+					//Sens the message
 					Transport.send(message);
 
+				//Catch any exceptions
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
@@ -214,7 +230,7 @@ public class EmailActivation {
 				status = true;
 			}
 
-			// Catch all possible Exceptions
+		// Catch all possible Exceptions
 
 		}catch (Exception e) {
 			System.out.println(e);

@@ -323,7 +323,7 @@
 												<td id="weather-details"><b><fmt:message
 															key="weather_pressure" /></b></td>
 												<td><fmt:formatNumber maxFractionDigits="1"
-														value="${weather.weatherPressure}" /> hPa</td>
+														value="${weather.weatherPressure}" /> kPa</td>
 											</tr>
 											<tr>
 												<!-- Link to where the data was fetched from -->

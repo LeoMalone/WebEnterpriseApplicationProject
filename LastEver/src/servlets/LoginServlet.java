@@ -104,11 +104,7 @@ public class LoginServlet extends HttpServlet {
 
 			if(user.getAdminActivated() != 1 || user.getEmailValidated() != 1) {
 				//upon login of an account not email activated it will delete and send the user a new email
-				if(user.getEmailValidated() != 1) {
-					EmailActivation.deleteToken(user);
-					EmailActivation.generateToken(user);
-					EmailActivation.sendEmail(user);
-				}
+				request.getSession().setAttribute("user", user);
 				response.sendRedirect("./activationNeeded");
 			}
 			else {

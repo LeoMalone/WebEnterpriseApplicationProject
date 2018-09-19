@@ -6,12 +6,10 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import beans.LeagueBean;
+import beans.UserBean;
 import dao.League;
 
 /**
@@ -71,7 +69,7 @@ public class AdminActivationServlet extends HttpServlet {
 					response.addCookie(tempCookie);
 					break;
 				}
-			}		
+			}
 
 			//get league list
 			List<LeagueBean> llb = new ArrayList<LeagueBean>();
@@ -80,7 +78,8 @@ public class AdminActivationServlet extends HttpServlet {
 			//set request attributes
 			request.setAttribute("league", llb);
 			request.setAttribute("userName", userName);
-			
+			request.setAttribute("user", (UserBean) request.getSession().getAttribute("user"));
+
 			//forward to contact page
 			RequestDispatcher rd = request.getRequestDispatcher("activation_needed.jsp");  
 			rd.forward(request, response);	
