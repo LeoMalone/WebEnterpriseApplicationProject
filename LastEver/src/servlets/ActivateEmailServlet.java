@@ -33,11 +33,8 @@ public class ActivateEmailServlet extends HttpServlet{
 
 		UserBean user = new UserBean();
 		user.setId(userID);
-		// If query is successful
-		if(ActivateUser.activate(user, token) == false) {
-			EmailActivation.generateToken(user);
-			EmailActivation.sendEmail(user);
-		}
+		// Try to activate user, if unsuccessful keep the activation code in database
+		ActivateUser.activate(user, token);
 		
 		response.sendRedirect("./login");
 	}
