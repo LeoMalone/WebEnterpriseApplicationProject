@@ -1,15 +1,15 @@
 package dao;
 
+import beans.DivisionBean;
+import beans.LeagueBean;
+import beans.NewsBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import beans.DivisionBean;
-import beans.LeagueBean;
-import beans.NewsBean;
-import db.ConnectionManager;
 
 /**
  * The League class gets all the info about the league

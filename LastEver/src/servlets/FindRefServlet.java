@@ -1,14 +1,13 @@
 package servlets;
 
-import java.io.IOException;
+import beans.RefBean;
+import dao.FindCreateRef;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.RefBean;
-import dao.FindCreateRef;
+import java.io.IOException;
 
 /**
  * FindRefServlet classextends the HttpServlet class to handle the POST requests for a referee user to try and

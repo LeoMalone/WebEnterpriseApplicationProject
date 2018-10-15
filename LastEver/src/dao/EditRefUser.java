@@ -1,14 +1,13 @@
 package dao;
 
+import beans.RefBean;
+import db.ConnectionManager;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.mindrot.jbcrypt.BCrypt;
-
-import beans.RefBean;
-import db.ConnectionManager;
 
 /**
  * The EditRefUser class handles all db operation relating to editing a ref user

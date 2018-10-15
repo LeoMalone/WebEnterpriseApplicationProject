@@ -1,26 +1,16 @@
 package dao;
 
-import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Base64;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import org.joda.time.DateTime;
-
 import beans.UserBean;
 import db.ConnectionManager;
+import org.joda.time.DateTime;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.security.SecureRandom;
+import java.sql.*;
+import java.util.Base64;
+import java.util.Properties;
 
 /**
  * The EmailActivation creates a token for the user to click in an email

@@ -1,15 +1,15 @@
 package dao;
 
+import beans.ScheduleResultsBean;
+import beans.ScorerBean;
 import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import beans.ScheduleResultsBean;
-import beans.ScorerBean;
 
 /**
  * The ScheduleResults class gets the schedule or results for league or venue

@@ -1,17 +1,5 @@
 package servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import beans.DivisionBean;
 import beans.LeagueBean;
 import beans.TeamBean;
@@ -19,6 +7,13 @@ import dao.Division;
 import dao.League;
 import dao.Team;
 import dao.TeamCreateTeam;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TeamCreateTeamServlet class extends HttpServlet for GET/POST requests for the team create team page

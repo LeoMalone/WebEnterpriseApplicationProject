@@ -5,11 +5,11 @@ package servlets;
  * the league page to get the news related to the league
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import beans.LeagueBean;
+import beans.NewsBean;
+import dao.Division;
+import dao.League;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +17,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.NewsBean;
-import dao.Division;
-import dao.League;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LeagueServlet extends HttpServlet {
 

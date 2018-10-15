@@ -1,17 +1,17 @@
 package servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import beans.ScheduleBean;
+import com.google.gson.Gson;
+import dao.AdminSchedule;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
-
-import beans.ScheduleBean;
-import dao.AdminSchedule;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The CalendarJsonServlet class extends the HttpServlet class to handle the GET requests for

@@ -1,8 +1,7 @@
 package servlets;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import beans.LeagueBean;
+import dao.League;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import dao.League;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The ErrorServlet class extends HttpServlet for GET/POST requests to a generic error page
@@ -91,12 +90,12 @@ public class ErrorServlet extends HttpServlet {
 			//if 404 error (page not found) occurs then say page not found
 			if(statusCode == 404) {
 				request.setAttribute("error", "The specified page: " + requestUri + " could not be found.");
-				request.setAttribute("error_fr", "La page spécifiée: " + requestUri + " ne peut être trouvé.");
+				request.setAttribute("error_fr", "La page spï¿½cifiï¿½e: " + requestUri + " ne peut ï¿½tre trouvï¿½.");
 			}
 			//if 405 error (method not supported) occurs then say the page does not support request method
 			else if(statusCode == 405) {
 				request.setAttribute("error", requestUri + " does not support this request method.");
-				request.setAttribute("error_fr", requestUri + " ne supporte pas cette méthode de requête.");
+				request.setAttribute("error_fr", requestUri + " ne supporte pas cette mï¿½thode de requï¿½te.");
 			}
 			//if 500 (internal server error) then display the class and the message of the error
 			//This will be changed when the website goes live to a generic error message

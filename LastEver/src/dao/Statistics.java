@@ -1,13 +1,13 @@
 package dao;
 
+import beans.StatisticsBean;
 import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import beans.StatisticsBean;
 
 /**
  * The Statistics class gets the statistics for the current league

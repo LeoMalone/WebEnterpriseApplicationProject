@@ -1,15 +1,15 @@
 package dao;
 
+import beans.DivisionBean;
+import beans.StandingsBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import beans.DivisionBean;
-import beans.StandingsBean;
-import db.ConnectionManager;
 
 /**
  * The Division class gets all the divisions in the database, allows the user to create a new division, get the news associated

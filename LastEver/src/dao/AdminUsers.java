@@ -1,13 +1,13 @@
 package dao;
 
+import beans.UserBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import db.ConnectionManager;
-import beans.UserBean;
 
 /**
  * The AdminUsers class handles all db operation relating to editing a User by an Admin

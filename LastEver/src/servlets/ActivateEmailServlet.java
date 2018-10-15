@@ -1,15 +1,13 @@
 package servlets;
 
-import java.io.IOException;
+import beans.UserBean;
+import dao.ActivateUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.UserBean;
-import dao.ActivateUser;
-import dao.EmailActivation;
+import java.io.IOException;
 
 
 /**

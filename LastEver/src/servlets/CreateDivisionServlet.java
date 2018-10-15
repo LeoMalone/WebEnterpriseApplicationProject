@@ -1,19 +1,19 @@
 package servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import beans.DivisionBean;
+import beans.LeagueBean;
+import dao.Division;
+import dao.League;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.DivisionBean;
-import beans.LeagueBean;
-import dao.Division;
-import dao.League;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The CreateDivisionServlet class extends the HttpServlet class to handle the GET/POST requests for

@@ -1,13 +1,13 @@
 package dao;
 
+import beans.VenueBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import beans.VenueBean;
-import db.ConnectionManager;
 
 /**
  * The AdminVenues class handles all db operation relating to getting all venues

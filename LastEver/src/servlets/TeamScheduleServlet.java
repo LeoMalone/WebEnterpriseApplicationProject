@@ -1,29 +1,17 @@
 package servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import beans.*;
+import dao.*;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.DivisionBean;
-import beans.LeagueBean;
-import beans.ScheduleResultsBean;
-import beans.StandingsBean;
-import beans.StatisticsBean;
-import beans.TeamBean;
-import beans.UserBean;
-import dao.Division;
-import dao.League;
-import dao.ScheduleResults;
-import dao.Standings;
-import dao.Statistics;
-import dao.TeamPage;
-import dao.TeamScheduleResults;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TeamScheduleServlet class extends HttpServlet for GET/POST requests for the team schedule page

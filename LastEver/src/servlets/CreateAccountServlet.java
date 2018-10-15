@@ -1,23 +1,21 @@
 package servlets;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
+import beans.UserBean;
+import dao.CreateAccount;
+import dao.EmailActivation;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.mindrot.jbcrypt.BCrypt;
-
-import beans.UserBean;
-import dao.CreateAccount;
-import dao.EmailActivation;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
 
 /**
  * The CreateAccountServlet class handles the POST from /createAccount for

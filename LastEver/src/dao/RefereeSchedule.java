@@ -1,13 +1,13 @@
 package dao;
 
+import beans.ScheduleBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import beans.ScheduleBean;
-import db.ConnectionManager;
 
 /**
  * The RefereeSchedule class handles all db operation relating to viewing a referees schedule

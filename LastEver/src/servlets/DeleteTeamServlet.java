@@ -1,13 +1,12 @@
 package servlets;
 
-import java.io.IOException;
+import dao.EditTeam;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.EditTeam;
+import java.io.IOException;
 
 /**
  * The DeleteTeamServlet class extends the HttpServlet class to handle the GET/POST requests for

@@ -1,14 +1,14 @@
 package dao;
 
+import beans.UserBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import beans.UserBean;
-import db.ConnectionManager;
 
 /**
  * The TeamEmails class handles all db operation relating to emails from a Team Owner to its players,

@@ -5,20 +5,21 @@ package servlets;
  * the schedule page to show the upcoming schedule for the league
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import beans.LeagueBean;
+import beans.ScheduleResultsBean;
+import dao.League;
+import dao.ScheduleResults;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.ScheduleResultsBean;
-import dao.League;
-import dao.ScheduleResults;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleServlet extends HttpServlet {
 

@@ -1,12 +1,12 @@
 package servlets;
 
-import java.io.IOException;
+import dao.AdminSchedule;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.AdminSchedule;
+import java.io.IOException;
 
 /**
  * The DeleteScheduleServlet class extends the HttpServlet class to handle the GET/POST requests for
