@@ -91,10 +91,10 @@ public class LeagueServlet extends HttpServlet {
 			Pattern p = Pattern.compile("^[1-9][0-9]*$");
 			Matcher m1;
 
-			m1 = p.matcher((String)request.getParameter("page"));
+			m1 = p.matcher(request.getParameter("page"));
 
 			if(m1.matches()) {
-				page = Integer.parseInt((String)request.getParameter("page"));
+				page = Integer.parseInt(request.getParameter("page"));
 			}
 		}
 

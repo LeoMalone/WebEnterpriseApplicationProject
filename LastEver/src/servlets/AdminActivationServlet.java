@@ -80,7 +80,7 @@ public class AdminActivationServlet extends HttpServlet {
 			//set request attributes
 			request.setAttribute("league", llb);
 			request.setAttribute("userName", userName);
-			request.setAttribute("user", (UserBean) request.getSession().getAttribute("user"));
+			request.setAttribute("user", request.getSession().getAttribute("user"));
 
 			//forward to contact page
 			RequestDispatcher rd = request.getRequestDispatcher("activation_needed.jsp");  

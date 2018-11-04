@@ -51,8 +51,8 @@ public class Index {
 				NewsBean nb = new NewsBean();
 				nb.setUserName(rs.getString(1));
 				nb.setTitle(rs.getString(2));
-				nb.setTitleFR(rs.getString(3));;
-				nb.setPostedTime(rs.getTimestamp(4), lang);
+				nb.setTitleFR(rs.getString(3));
+                nb.setPostedTime(rs.getTimestamp(4), lang);
 				nb.setContent(rs.getString(5));
 				nb.setContentFR(rs.getString(6));
 				news.add(nb);

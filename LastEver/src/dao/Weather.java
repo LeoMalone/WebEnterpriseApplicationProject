@@ -46,10 +46,7 @@ public class Weather {
 	        Minutes interval = Minutes.minutes(20);
 	        
 	        //if 30 minutes has passed since last update then set update to true, otherwise data needs no updating
-	        if(min.isGreaterThan(interval))
-	        	update = true;
-	        else
-	        	update = false;
+            update = min.isGreaterThan(interval);
 	      
 	        
 	    // close all connections and handle all possible exceptions

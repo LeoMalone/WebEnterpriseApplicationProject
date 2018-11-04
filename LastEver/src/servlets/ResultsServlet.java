@@ -87,11 +87,11 @@ public class ResultsServlet extends HttpServlet {
 				Pattern p = Pattern.compile("^[1-9][0-9]*$");
 				Matcher m1;
 				
-				m1 = p.matcher((String)request.getParameter("page"));
+				m1 = p.matcher(request.getParameter("page"));
 				
 				//if the query string matches the format then set the page to be the current page of the user
 				if(m1.matches()) {
-					page = Integer.parseInt((String)request.getParameter("page"));
+					page = Integer.parseInt(request.getParameter("page"));
 				}
 			}
 			
