@@ -12,4 +12,4 @@ $('#btnCreate').on("click", function(event){
     	alertify.error('Account Creation Unsuccessful: Passwords do not match'); 
     	return false;
     }
-})
+});

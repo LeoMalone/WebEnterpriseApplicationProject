@@ -15,6 +15,7 @@
 package org.mindrot.jbcrypt;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 /**
@@ -533,8 +534,8 @@ public class BCrypt {
 	 * Initialise the Blowfish key schedule
 	 */
 	private void init_key() {
-		P = (int[])P_orig.clone();
-		S = (int[])S_orig.clone();
+		P = P_orig.clone();
+		S = S_orig.clone();
 	}
 
 	/**
@@ -672,17 +673,13 @@ public class BCrypt {
 		rounds = Integer.parseInt(salt.substring(off, off + 2));
 
 		real_salt = salt.substring(off + 3, off + 25);
-		try {
-			passwordb = (password + (minor >= 'a' ? "\000" : "")).getBytes("UTF-8");
-		} catch (UnsupportedEncodingException uee) {
-			throw new AssertionError("UTF-8 is not supported");
-		}
+		passwordb = (password + (minor >= 'a' ? "\000" : "")).getBytes(StandardCharsets.UTF_8);
 
 		saltb = decode_base64(real_salt, BCRYPT_SALT_LEN);
 
 		B = new BCrypt();
 		hashed = B.crypt_raw(passwordb, saltb, rounds,
-		    (int[])bf_crypt_ciphertext.clone());
+				bf_crypt_ciphertext.clone());
 
 		rs.append("$2");
 		if (minor >= 'a')
@@ -760,13 +757,9 @@ public class BCrypt {
 	public static boolean checkpw(String plaintext, String hashed) {
 		byte hashed_bytes[];
 		byte try_bytes[];
-		try {
-			String try_pw = hashpw(plaintext, hashed);
-			hashed_bytes = hashed.getBytes("UTF-8");
-			try_bytes = try_pw.getBytes("UTF-8");
-		} catch (UnsupportedEncodingException uee) {
-			return false;
-		}
+		String try_pw = hashpw(plaintext, hashed);
+		hashed_bytes = hashed.getBytes(StandardCharsets.UTF_8);
+		try_bytes = try_pw.getBytes(StandardCharsets.UTF_8);
 		if (hashed_bytes.length != try_bytes.length)
 			return false;
 		byte ret = 0;

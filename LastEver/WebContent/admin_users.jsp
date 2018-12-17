@@ -247,7 +247,7 @@
 			<div class="container-fluid">
 				<p class="m-0 text-center text-white">
 					<fmt:message key="footer_copyright" />
-					&copy; <img src="images/logo_sm4.png" /> 2018
+					&copy; <img src="images/logo_sm4.png" /> <script>document.writenew Date.getFullYear</script>
 				</p>
 			</div>
 		</footer>
