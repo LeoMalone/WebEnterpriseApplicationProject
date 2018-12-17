@@ -293,8 +293,8 @@
 							<c:forEach items="${news}" var="n">
 								<div class="col-lg-12 mb-5 mt-5">
 									<div class="card">
-										<div class="card-header d-flex flex-row table-responsive">
-											<h4 class="d-flex">
+										<div class="card-header">
+											<h4>
 												<c:choose>
 													<c:when test="${cookie.language.value == 'fr' }">
 														<c:out value="${n.titleFR}" />
@@ -304,13 +304,12 @@
 													</c:otherwise>
 												</c:choose>
 											</h4>
-											<h4 class="ml-auto d-flex">
-												<span class="badge badge badge-info"><c:out
-														value="${n.postedTime}" /> | <fmt:message key="news_by" />
-													<c:out value="${n.userName}" /></span>
-											</h4>
 										</div>
 										<div class="card-body">
+											<b>
+												<c:out value="${n.userName}" />
+											</b> <c:out value="${n.postedTime}" />
+											<br />
 											<c:choose>
 												<c:when test="${cookie.language.value == 'fr' }">
 													<c:out value="${n.contentFR}" escapeXml="false" />
