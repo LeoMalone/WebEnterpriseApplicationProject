@@ -41,7 +41,7 @@
 </c:choose>
 
 <fmt:bundle basename="TestBundle">
-	<title>Last Ever - <fmt:message key="login" /></title>
+	<title>Last Ever - <fmt:message key="forgot_head1" /></title>
 </fmt:bundle>
 </head>
 <body>
@@ -132,117 +132,27 @@
 
 			<div class="cards-container container">
 				<h1 class="my-4">
-					<fmt:message key="signin_header" />
+					<fmt:message key="forgot_head1" />
 				</h1>
 				<!-- Marketing Icons Section -->
 				<div class="row">
 					<div class="col-lg-12 mb-4">
 						<div class="card h-100">
 							<h4 class="card-header">
-								<fmt:message key="signin_head1" />
+								<fmt:message key="forgot_head2" />
 							</h4>
-							<form action="login" method="POST" id="login">
+							<form action="forgot" method="POST" id="forgot">
 								<div class="card-body">
 									<div class="form-group">
 										<label for="loginEmail"><fmt:message
-												key="signin_email" /></label> <input type="email"
+												key="signin_email" /></label> <input required type="email"
 											class="form-control" name="loginEmail"
 											aria-describedby="emailHelp"
 											placeholder="<fmt:message key='signin_enter_email' />">
 									</div>
-									<div class="form-group">
-										<label for="loginPass"><fmt:message
-												key="signin_password" /></label> <input type="password"
-											class="form-control" name="loginPass"
-											placeholder="<fmt:message key='signin_enter_password' />">
-									</div>
 								</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-secondary">
-										<fmt:message key="signin_button1" />
-									</button>
-									<a href="./forgot" class="btn btn-danger"><fmt:message key="signin_button2" /></a>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- /.row -->
-
-				<h1 class="my-4">
-					<fmt:message key="signin_register" />
-				</h1>
-				<div class="row">
-					<div class="col-lg-12 mb-4">
-						<div class="card h-100">
-							<h4 class="card-header">
-								<fmt:message key="signin_createnew" />
-							</h4>
-							<form action="createAccount" method="POST" id="createAccount">
-								<div class="card-body">
-									<div class="form-group">
-										<label for="newFirstName"><fmt:message
-												key="signin_fname" /></label> <input type="text"
-											class="form-control" name="newFirstName"
-											placeholder="<fmt:message key='signin_enter_fname' />"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newLastName"><fmt:message
-												key="signin_lname" /></label> <input type="text"
-											class="form-control" name="newLastName"
-											placeholder="<fmt:message key='signin_enter_lname' />"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newUsername"><fmt:message
-												key="signin_user" /></label> <input type="text"
-											class="form-control" name="newUsername"
-											placeholder="<fmt:message key='signin_enter_user' />"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newEmail"><fmt:message key="signin_email" /></label>
-										<input type="email" class="form-control" name="newEmail"
-											aria-describedby="emailHelp"
-											placeholder="<fmt:message key='signin_enter_email' />"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newPass"><fmt:message
-												key="signin_password" /></label> <input type="password"
-											class="form-control" name="newPass" id="newPass"
-											placeholder="<fmt:message key='signin_enter_password' />"
-											required>
-									</div>
-									<div class="form-group">
-										<label for="newPass"><fmt:message key="signin_confirm" /></label>
-										<input type="password" class="form-control"
-											name="newPassConfirm" id="newPassConfirm"
-											placeholder="<fmt:message key='signin_retype_pass' />"
-											required>
-									</div>									
-									<div class="form-check">
-										<input class="form-check-input" type="radio"
-											name="createRadio" value="Team Owner"> <label
-											class="form-check-label" for="createRadio"> <fmt:message
-												key="signin_prop2" />
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio"
-											name="createRadio" value="Referee"> <label
-											class="form-check-label" for="createRadio"> <fmt:message
-												key="signin_prop3" />
-										</label>
-									</div>
-									<br />
-									<div class="g-recaptcha"
-										data-sitekey="6LcxBE8UAAAAAG51y2iFhJTeUiVYMUC70QhFTbqM"></div>
-
-								</div>
-								<div class="card-footer">
-									<button class="btn btn-secondary" id="btnCreate">
 										<fmt:message key="signin_button1" />
 									</button>
 								</div>
