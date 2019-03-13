@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `lastever` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `lastever`;
 -- MySQL dump 10.13  Distrib 5.7.21, for Win64 (x86_64)
 --
 -- Host: localhost    Database: lastever
@@ -23,7 +25,7 @@ DROP TABLE IF EXISTS `activation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `activation` (
-  `activationID` bigint(20) NOT NULL,
+  `activationID` bigint(20) NOT NULL AUTO_INCREMENT,
   `userID` bigint(20) NOT NULL,
   `activationCode` varchar(100) DEFAULT NULL,
   `activationFrom` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -31,7 +33,7 @@ CREATE TABLE `activation` (
   PRIMARY KEY (`activationID`),
   KEY `ActivationToUser_idx` (`userID`),
   CONSTRAINT `ActivationToUser` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +42,7 @@ CREATE TABLE `activation` (
 
 LOCK TABLES `activation` WRITE;
 /*!40000 ALTER TABLE `activation` DISABLE KEYS */;
+INSERT INTO `activation` VALUES (27,60,'OLdEdkXnh+v8hzepcVZoqqMhGfsh7egUynUpYa+icyEfG3BfMdaiTL7Hkfmy','2018-10-04 21:49:21','2018-10-05 21:49:21'),(28,62,'LdDRnLoYNDFjTwuN8GTcPEqotrCa214c9k4Uzofz4AOnKsDUnQNl1MAdXdYA','2019-01-07 14:40:42','2019-01-08 14:40:42'),(29,63,'38wViMFOwb9ChnpslW3Rx6hWXX6P8ReC1GXqgEwqEfShCCmzYRq2zfu1j7+O','2019-01-07 14:45:21','2019-01-08 14:45:21'),(30,64,'JKQ/kwhmn8/y/g2j05HdcV1WVBxtbZa2ZM6xtPmoA8YJNfJZJ+Bkz1/ZnA3c','2019-01-07 14:56:45','2019-01-08 14:56:45');
 /*!40000 ALTER TABLE `activation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +324,7 @@ CREATE TABLE `schedule` (
   KEY `AwayTeamToTeam` (`awayTeam`),
   CONSTRAINT `AwayTeamToTeam` FOREIGN KEY (`awayTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE,
   CONSTRAINT `HomeTeamToTeam` FOREIGN KEY (`homeTeam`) REFERENCES `team` (`teamID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +333,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final',0),(2,'2018-02-10','16:00:00',1,1,4,1,'Final',0),(3,'2018-02-13','18:30:00',3,3,4,2,'Final',0),(4,'2018-02-15','19:15:00',2,3,1,1,'Final',0),(5,'2018-02-09','18:45:00',7,0,8,3,'Final',0),(6,'2018-02-11','13:30:00',6,1,5,2,'Final',0),(7,'2018-02-15','19:15:00',5,2,8,2,'Final',0),(8,'2018-02-17','14:00:00',6,0,7,0,'Final',0),(9,'2018-02-18','13:45:00',4,5,2,3,'Final',0),(10,'2018-02-20','19:00:00',2,1,3,4,'Final',0),(11,'2018-02-20','20:30:00',1,3,4,2,'Final',0),(12,'2018-02-24','19:15:00',4,0,3,2,'Final',0),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled',0),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled',0),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled',0),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled',0),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled',0),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled',0),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled',0),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled',0),(21,'2018-03-15','19:15:00',6,0,8,0,'Scheduled',0),(22,'2018-03-30','19:30:00',2,NULL,3,NULL,'Scheduled',1),(23,'2018-04-02','16:45:00',3,NULL,2,NULL,'Scheduled',1),(24,'2018-04-04','20:15:00',2,0,3,0,'Scheduled',1),(25,'2018-04-12','19:30:00',15,0,14,0,'Scheduled',0),(27,'2018-04-14','13:15:00',7,0,8,0,'Scheduled',0);
+INSERT INTO `schedule` VALUES (1,'2018-02-10','14:30:00',2,2,3,0,'Final',0),(2,'2018-02-10','16:00:00',1,1,4,1,'Final',0),(3,'2018-02-13','18:30:00',3,3,4,2,'Final',0),(4,'2018-02-15','19:15:00',2,3,1,1,'Final',0),(5,'2018-02-09','18:45:00',7,0,8,3,'Final',0),(6,'2018-02-11','13:30:00',6,1,5,2,'Final',0),(7,'2018-02-15','19:15:00',5,2,8,2,'Final',0),(8,'2018-02-17','14:00:00',6,0,7,0,'Final',0),(9,'2018-02-18','13:45:00',4,5,2,3,'Final',0),(10,'2018-02-20','19:00:00',2,1,3,4,'Final',0),(11,'2018-02-20','20:30:00',1,3,4,2,'Final',0),(12,'2018-02-24','19:15:00',4,0,3,2,'Final',0),(13,'2018-02-26','18:30:00',3,NULL,1,NULL,'Scheduled',0),(14,'2018-02-28','17:15:00',4,NULL,2,NULL,'Scheduled',0),(15,'2018-03-02','18:45:00',2,NULL,1,NULL,'Scheduled',0),(16,'2018-03-03','15:00:00',1,NULL,3,NULL,'Scheduled',0),(17,'2018-03-05','20:45:00',1,NULL,4,NULL,'Scheduled',0),(18,'2018-03-08','21:00:00',2,NULL,1,NULL,'Scheduled',0),(19,'2018-03-10','11:15:00',3,NULL,2,NULL,'Scheduled',0),(20,'2018-03-13','16:30:00',3,NULL,4,NULL,'Scheduled',0),(21,'2018-03-15','19:15:00',6,0,8,0,'Scheduled',0),(22,'2018-03-30','19:30:00',2,NULL,3,NULL,'Scheduled',1),(23,'2018-04-02','16:45:00',3,NULL,2,NULL,'Scheduled',1),(24,'2018-04-04','20:15:00',2,0,3,0,'Scheduled',1),(25,'2018-04-12','19:30:00',15,0,14,0,'Scheduled',0),(27,'2018-04-14','13:15:00',7,0,8,0,'Scheduled',0),(28,'2018-11-19','22:30:00',13,0,12,0,'Scheduled',0);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,12 +360,12 @@ CREATE TABLE `schedulexreferee` (
 
 LOCK TABLES `schedulexreferee` WRITE;
 /*!40000 ALTER TABLE `schedulexreferee` DISABLE KEYS */;
-INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(23,1),(1,2),(10,2),(13,2),(14,2),(16,2),(17,2),(19,2),(2,3),(3,3),(4,3),(9,3),(11,3),(12,3),(15,3),(18,3),(20,3),(27,3),(6,4),(7,4),(24,4),(22,5),(25,5),(21,6);
+INSERT INTO `schedulexreferee` VALUES (5,1),(8,1),(23,1),(1,2),(10,2),(13,2),(14,2),(16,2),(17,2),(19,2),(2,3),(3,3),(4,3),(9,3),(11,3),(12,3),(15,3),(18,3),(20,3),(27,3),(6,4),(7,4),(24,4),(22,5),(25,5),(28,5),(21,6);
 /*!40000 ALTER TABLE `schedulexreferee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Temporary table structure for view `scorers`
+-- Temporary view structure for view `scorers`
 --
 
 DROP TABLE IF EXISTS `scorers`;
@@ -381,7 +384,7 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `standings`
+-- Temporary view structure for view `standings`
 --
 
 DROP TABLE IF EXISTS `standings`;
@@ -403,7 +406,7 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `statistics`
+-- Temporary view structure for view `statistics`
 --
 
 DROP TABLE IF EXISTS `statistics`;
@@ -531,7 +534,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `refereeID_UNIQUE` (`refereeID`),
   KEY `UsersToReferee` (`refereeID`),
   CONSTRAINT `UsersToReferee` FOREIGN KEY (`refereeID`) REFERENCES `referee` (`refereeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -540,7 +543,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','Administrator','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-04-11 20:19:35','2018-05-12 19:55:58','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-04-11 20:12:43','2018-04-11 20:12:17','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-04-13 16:35:06','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-04-12 21:35:52','2018-04-16 14:34:18','Referee',5),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-04-13 16:34:12','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-05-12 19:23:16','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,1,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$nOAdK1q8nOJI3OzvJDOpmeG4tHyEQsyHp7XeTkML2aBs4BnKTHb9y','leo@malone.org',1,1,'2018-03-26 21:52:05','2018-04-11 20:17:59','2018-05-12 20:07:36','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$F/ITktBO6M5342wA6x81Dudiw9sf6Z14hPNqK/urrLVPp/7HEAhVi','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-04-05 01:15:25','2018-04-05 01:15:44','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,0,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL),(32,NULL,'Doctor','King','DrKing','$2a$13$.Wq2zsTcHifTae2W9BTsgOK8niu4mNZO0s0bw1Ae.SXgTVdVSIVMW','b@b.b',1,0,'2018-04-11 20:15:14','2018-04-11 20:28:36','2018-04-11 20:41:33','Team Owner',NULL),(33,NULL,'A','A','Sa','$2a$13$igGvm0gToAkKssg85MoRmumkXcI0TuEZKE6s/hUCuStusIubFiv4K','a@a.z',1,0,'2018-04-11 20:39:30','2018-04-11 20:39:57','2018-04-11 20:39:30','Referee',6),(34,NULL,'Neal','Sengupta','NealSenIsCool','$2a$13$sgwW0piour6Pi/knGPAduuxRF6jwqDvnk2j3zohbFxpU.53lPT7Aa','z@z.z',1,0,'2018-04-11 20:46:03','2018-04-11 20:46:17','2018-04-11 20:46:03','Referee',7),(35,NULL,'Ref','Ref','asd','$2a$13$VmE/CGcGhfbXTbBBaN5HQeHhnqhszSdB4972rbrumYlEUDMyUkeQO','asd@asd.com',1,0,'2018-04-11 21:25:49','2018-04-11 21:26:16','2018-04-11 21:25:49','Referee',8),(38,NULL,'Test','Account','testing','$2a$13$AVpaN9lQ6XwQS/5av5jj2O8aa99Lo6s5IpS.2c94sslwHOVerWz1a','test@test.com',1,0,'2018-05-12 18:27:07','2018-05-12 18:27:07','2018-05-12 18:27:35','Team Owner',NULL),(39,NULL,'Zero','Two','zero-two','$2a$13$7MJERMp4ezwbSbtBxCHVUOj0bkKd3cpWS15axXKCT5x1PVcAp2GmO','zero@two.org',1,0,'2018-05-12 18:28:41','2018-05-12 18:28:41','2018-05-12 18:28:39','Referee',NULL),(40,NULL,'a','a','aaaaaaaaaaaaaaaa','$2a$13$cbzxaWs.Pdyl4VA16GLcI.VR6Mn6IV4ZV/oMHh88Pz/2KKPQFleN2','asdkjh@ajkshdajksd.com',1,0,'2018-05-12 18:32:40','2018-05-12 18:32:40','2018-05-12 18:32:37','Referee',NULL),(41,NULL,'a','a','aasdsamdbgzfdsjkhvghsjdkgfkhjg','$2a$13$D7hNgbqC3BsI8Y7uBKR.EOFcMDMg2jP21zhcvopOva2thH4YS.p/m','aksjghdskhdjfgk@ajkshdgsjkhgf',1,0,'2018-05-12 18:33:18','2018-05-12 18:33:18','2018-05-12 18:33:18','Team Owner',NULL),(42,NULL,'b','b','b','$2a$13$b1SjkTUha1iIVcrGPua/CeV9cAuhhMAjNvV8osi6Fnl24RIhm8pV.','b@b',1,0,'2018-05-12 18:36:33','2018-05-12 18:36:33','2018-05-12 18:36:30','Team Owner',NULL);
+INSERT INTO `users` VALUES (1,NULL,'Fred','Guy','Administrator','$2a$13$Xkb7N2yamdDkNBga.ln7MOJdNyOei05fUGxoUG9PMOrJ7pS3gFQ1i','admin@example.com',1,1,'2018-02-26 23:14:02','2018-04-11 20:19:35','2018-11-19 16:05:52','Administrator',NULL),(2,NULL,'Sapphire','Nonie','referee','$2a$13$rS2zoWEv7UqSr5yxQ4hjquXmkba1O45z5KCsLGOsMjuoUrbQKbJd.','ref@refcorps.org',1,1,'2018-02-26 23:14:02','2018-04-11 20:12:43','2018-04-11 20:12:17','Referee',4),(3,NULL,'Marge','Walters','varsfc','$2a$13$qya3unqqQSDc/oHnE.UooeicrLYV8hdfM/dLJBZVKW6Ot6BPdyk3W','varsfc@varsfc.co.biz',1,1,'2018-02-26 23:14:02','2018-03-21 20:22:28','2018-04-13 16:35:06','Team Owner',NULL),(4,NULL,'Kevin','Read','ref','$2a$13$f7JkZyQo0g9Rtve.4gQxM.K7fVuRvQuo98JuqrQmVcoPFlKQdg4Ci','r@r.com',1,1,'2018-03-14 20:09:12','2018-04-12 21:35:52','2018-04-16 14:34:18','Referee',5),(5,NULL,'Liam','Maloney','team','$2a$13$dqH0xUFLw.biQYKi1JUHJuphSAnN809o0OS9621bVO4ExOnhsVN56','t@t.com',1,1,'2018-03-14 20:09:51','2018-03-21 20:21:37','2018-04-13 16:34:12','Team Owner',NULL),(6,NULL,'Kevin','V','owner','$2a$13$EwBmMAZAf0ynK0scykY12Oucq8luUQWEeZD7pYxdFwNQzzSx3tZvi','a@a.com',1,1,'2018-03-14 20:10:46','2018-03-21 20:21:20','2018-08-21 00:53:47','Administrator',NULL),(8,NULL,'Kevin','Read','kevsummer','$2a$13$42cxm2kVtQHbbZ1i40SeAeNDOaIMBYhAQ/g6X2No1J6HncGj76jrq','123@123.com',1,1,'2018-03-14 21:47:53','2018-03-21 20:22:11','2018-03-14 21:47:53','Team Owner',NULL),(9,NULL,'Bob','Dole','bd','$2a$13$TvZc2GrV.tOPqolBH9HVVeU.VJLItVXNQj2UJnjEmvpoZ/pjKfoLW','bd@bd.net',1,1,'2018-03-21 18:38:52','2018-03-21 18:48:18','2018-03-21 20:13:28','Administrator',NULL),(10,NULL,'123','123','123','$2a$13$ixPauj1xj5A0P8KthVMe8OjGEiaSnMfzcfs6D8J4pIpX.J7iQYLEC','ab@ab.com',1,1,'2018-03-26 19:32:58','2018-03-26 19:32:58','2018-03-26 19:32:58','Team Owner',NULL),(24,NULL,'Kevy','Villy','kvilly','$2a$13$aH7K.eiHsJAHcxETLR6PJ.jOYuXyvON6Rp5ymOLzq6mfM9VhKwJhO','kev@kev.com',1,1,'2018-03-26 21:45:49','2018-03-26 21:45:49','2018-03-26 21:45:48','Administrator',NULL),(25,NULL,'Leo','Malone','LeoMalone','$2a$13$nOAdK1q8nOJI3OzvJDOpmeG4tHyEQsyHp7XeTkML2aBs4BnKTHb9y','leo@malone.org',1,1,'2018-03-26 21:52:05','2018-04-11 20:17:59','2018-05-12 20:07:36','Administrator',NULL),(26,NULL,'asdsad','asdsdf','asdsdf','$2a$13$p6dWTouRadUvn3R5YxLE0uYzVbNX8RiVtSAv9QFSBSGoh3/Wb0ojG','asd@asd.ca',1,0,'2018-03-26 22:39:47','2018-03-26 22:39:47','2018-03-26 22:39:46','Administrator',NULL),(27,NULL,'reCaptcha','IsCool','captchaBois','$2a$13$ho6KHV2UOs9qzII/5xt6o.N1mMDm7lpCUXJw7dIBFzM12bYVuE9yG','captcha@is.awsome',1,0,'2018-03-26 22:40:41','2018-03-26 22:40:41','2018-03-26 22:40:41','Administrator',NULL),(28,NULL,'NotRobot','TotallyHuman','totally_not_robot','$2a$13$F/ITktBO6M5342wA6x81Dudiw9sf6Z14hPNqK/urrLVPp/7HEAhVi','nota@ro.bot',1,0,'2018-03-26 23:16:03','2018-04-05 01:15:25','2018-04-05 01:15:44','Team Owner',NULL),(29,NULL,'John','Rogers','johnrogers','$2a$13$Xq8ez0.xzptREq0K8fkEue4sZmdY0B9SiPiNSc.ACBRSWT8sIURA6','john@rogers.net',1,0,'2018-03-27 15:20:27','2018-03-27 15:20:27','2018-03-27 15:20:26','Team Owner',NULL),(30,NULL,'p','p','p','$2a$13$wcVVQgutzN5kpEzV34x/JuoQKE5tWm4.xER28aLEOOt021x3YnkLO','p@p.com',1,1,'2018-03-29 20:55:25','2018-03-29 20:55:25','2018-03-29 20:55:25','Administrator',NULL),(32,NULL,'Doctor','King','DrKing','$2a$13$.Wq2zsTcHifTae2W9BTsgOK8niu4mNZO0s0bw1Ae.SXgTVdVSIVMW','b@b.b',1,0,'2018-04-11 20:15:14','2018-04-11 20:28:36','2018-04-11 20:41:33','Team Owner',NULL),(33,NULL,'A','A','Sa','$2a$13$igGvm0gToAkKssg85MoRmumkXcI0TuEZKE6s/hUCuStusIubFiv4K','a@a.z',1,0,'2018-04-11 20:39:30','2018-04-11 20:39:57','2018-04-11 20:39:30','Referee',6),(34,NULL,'Neal','Sengupta','NealSenIsCool','$2a$13$sgwW0piour6Pi/knGPAduuxRF6jwqDvnk2j3zohbFxpU.53lPT7Aa','z@z.z',1,0,'2018-04-11 20:46:03','2018-04-11 20:46:17','2018-04-11 20:46:03','Referee',7),(35,NULL,'Ref','Ref','asd','$2a$13$VmE/CGcGhfbXTbBBaN5HQeHhnqhszSdB4972rbrumYlEUDMyUkeQO','asd@asd.com',1,0,'2018-04-11 21:25:49','2018-04-11 21:26:16','2018-04-11 21:25:49','Referee',8),(38,NULL,'Test','Account','testing','$2a$13$AVpaN9lQ6XwQS/5av5jj2O8aa99Lo6s5IpS.2c94sslwHOVerWz1a','test@test.com',1,0,'2018-05-12 18:27:07','2018-05-12 18:27:07','2018-05-12 18:27:35','Team Owner',NULL),(39,NULL,'Zero','Two','zero-two','$2a$13$7MJERMp4ezwbSbtBxCHVUOj0bkKd3cpWS15axXKCT5x1PVcAp2GmO','zero@two.org',1,0,'2018-05-12 18:28:41','2018-05-12 18:28:41','2018-05-12 18:28:39','Referee',NULL),(40,NULL,'a','a','aaaaaaaaaaaaaaaa','$2a$13$cbzxaWs.Pdyl4VA16GLcI.VR6Mn6IV4ZV/oMHh88Pz/2KKPQFleN2','asdkjh@ajkshdajksd.com',1,0,'2018-05-12 18:32:40','2018-05-12 18:32:40','2018-05-12 18:32:37','Referee',NULL),(41,NULL,'a','a','aasdsamdbgzfdsjkhvghsjdkgfkhjg','$2a$13$D7hNgbqC3BsI8Y7uBKR.EOFcMDMg2jP21zhcvopOva2thH4YS.p/m','aksjghdskhdjfgk@ajkshdgsjkhgf',1,0,'2018-05-12 18:33:18','2018-05-12 18:33:18','2018-05-12 18:33:18','Team Owner',NULL),(42,NULL,'b','b','b','$2a$13$b1SjkTUha1iIVcrGPua/CeV9cAuhhMAjNvV8osi6Fnl24RIhm8pV.','b@b',1,0,'2018-05-12 18:36:33','2018-05-12 18:36:33','2018-05-12 18:36:30','Team Owner',NULL),(43,NULL,'Homer','Sampson','homer','$2a$13$jkJVRuIefJYIkfFHPtOuRuEMD118P8Dpa4OWoP983N3zhUUntEDxq','homer@sampson.com',1,0,'2018-07-25 01:45:04','2018-07-25 01:45:04','2018-07-25 01:45:17','Referee',NULL),(44,NULL,'Kev','Read','KevRead123','$2a$13$9V8wGYrx5Wzg7lm1Rta27.jV4a2Vj2LTZGUzmfWItu2RsYynxQ9gy','kev@read.com',1,1,'2018-07-25 12:14:14','2018-07-25 12:14:14','2018-07-25 12:14:25','Team Owner',NULL),(53,NULL,'Bart','Simpson','bartman','$2a$13$sMHz.rrfNzI/gJpVoHSy2ONYdib/3H2ryyaDuW7/wd9/feNuZxDAi','thisisnotanemail45@gmail.com',0,0,'2018-08-03 00:23:58','2018-08-03 00:23:58','2018-08-02 20:23:58','Team Owner',NULL),(54,NULL,'Test','TestTest','testtest','$2a$13$cwd51kmPBnm4LLrJxRU0/.yPy8TbWX3M.ebCOgK5ykHbi24Ls20PW','f3n1x_08@live.com',1,0,'2018-08-03 14:38:57','2018-08-03 10:57:17','2018-09-19 11:17:24','Team Owner',NULL),(55,NULL,'ahhhhhhhhhhhh','ahhhhhhhhhhhhh','ahhhhhh','$2a$13$rebcZO6XztVgBvgReoByx.YtVlIwvqVowN78PX6WtY.yZJwCA0qvy','kvillema8@gmail.com',1,0,'2018-08-03 14:43:03','2018-08-03 10:53:44','2018-08-03 10:42:59','Referee',NULL),(56,NULL,'Joe','Test','joetest','$2a$13$dLZQpUACVjY/pwFoNIO0WuRfRcV11MP28vPcC6dN0GsG2vM9I9gC.','kevinvillemaire@algonquinlive.com',0,0,'2018-08-23 21:14:27','2018-08-23 21:14:27','2018-08-23 17:14:24','Team Owner',NULL),(57,NULL,'Hello','World','helloworld','$2a$13$n/46cF26jELgRfw19kd4wO5QglUNxYlUWWztY2BgxLXcZ/XI7jMry','vill0296@algonquinlive.com',1,0,'2018-08-23 21:17:45','2018-09-19 00:20:15','2018-09-19 11:17:43','Referee',NULL),(58,NULL,'Dylan','Smyth','dsmyth','$2a$13$ld.i1fokA0j5TJm3IBcjZ.k8a4ceAeDTViEFvCSTve7cjQkUT0kE.','graysuller@gmail.com',1,0,'2018-09-19 15:18:56','2018-09-19 21:28:28','2018-09-19 21:51:12','Referee',NULL),(59,NULL,'Bill','Simpson','bills','$2a$13$c7MGFYizmKnNDwPP.k2iX.u2h/Hi4N1d.1T1Q/z5N.Jaz3WzJtkdW','thisisnotanemail45+lastever@gmail.com',1,0,'2018-10-05 01:24:47','2018-10-05 01:33:00','2018-10-05 01:33:14','Team Owner',NULL),(60,NULL,'No','Name','noname','$2a$13$H8zYjOtzpocIbvqBAZLmT.lq7cdCWxzpZ6vfSASjMmY6gV36xTVt6','thisisnotanemail45+noname@gmail.com',0,0,'2018-10-05 01:47:33','2018-10-05 01:47:33','2018-10-04 21:50:51','Team Owner',NULL),(61,NULL,'Homer','Sampson','newacct','$2a$13$10TI8.GttCXHtjP82text.FcZJEqJFHlJcdVp0oFT.UXPOS8uhtyC','thisisnotanemail45+a@gmail.com',1,0,'2018-10-12 23:33:17','2018-10-12 19:35:16','2018-10-12 19:35:43','Team Owner',NULL),(62,NULL,'Async','Test','async','$2a$13$qsZoDrq/SyOD0Ei.Qc//KO5EYeunwExu0jimMfhJwurSVaUdbChZu','lasteversoccer+async@gmail.com',0,0,'2019-01-07 19:40:40','2019-01-07 19:40:40','2019-01-07 14:40:40','Team Owner',NULL),(63,NULL,'Async','Test2','async2','$2a$13$npa3cEsChklKjunPsvI3qe/lEnj/h21AxlkGDjKgsR0I0msUGEZlW','lasteversoccer+async2@gmail.com',0,0,'2019-01-07 19:45:19','2019-01-07 19:45:19','2019-01-07 14:45:19','Team Owner',NULL),(64,NULL,'Async','Test3','async3','$2a$13$D/W/Pav7IaVdgd.wGnr.1.CC/b8TFLU2CK9jjNWI6vJTGyWsPVbFy','lasteversoccer+async3@gmail.com',0,0,'2019-01-07 19:56:44','2019-01-07 19:56:44','2019-01-07 14:56:44','Referee',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,7 +633,7 @@ CREATE TABLE `venuexgame` (
 
 LOCK TABLES `venuexgame` WRITE;
 /*!40000 ALTER TABLE `venuexgame` DISABLE KEYS */;
-INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,27);
+INSERT INTO `venuexgame` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,27),(1,28);
 /*!40000 ALTER TABLE `venuexgame` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -665,9 +668,13 @@ CREATE TABLE `weather` (
 
 LOCK TABLES `weather` WRITE;
 /*!40000 ALTER TABLE `weather` DISABLE KEYS */;
-INSERT INTO `weather` VALUES (1,'Ottawa','CA',29.51,'03n',802,'scattered clouds',101.3,74,14.76,0,'night','2018-07-01 21:40:21');
+INSERT INTO `weather` VALUES (1,'Ottawa','CA',-11.13,'09n',521,'shower rain',101.8,43,22.32,33.480000000000004,'night','2019-03-06 23:05:38');
 /*!40000 ALTER TABLE `weather` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'lastever'
+--
 
 --
 -- Dumping routines for database 'lastever'
@@ -782,4 +789,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-27 17:22:26
+-- Dump completed on 2019-03-13 14:17:08
