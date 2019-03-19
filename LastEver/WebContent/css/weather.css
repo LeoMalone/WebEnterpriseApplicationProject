@@ -1,0 +1,373 @@
+@font-face {
+  font-family: "iconvault";
+  src: url("iconvault_forecastfont.eot");
+  src: url("iconvault_forecastfont.eot?#iefix") format("embedded-opentype"),
+  url("iconvault_forecastfont.woff") format("woff"),
+  url("iconvault_forecastfont.ttf") format("truetype"),
+  url("iconvault_forecastfont.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon,
+.icon-sm{
+  font-family: "iconvault";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 0;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: inherit;
+}
+
+.icon { font-size:2em; }
+.icon-sm{ font-size:1.7em; }
+
+/* -----Precipitation Clouds----- */
+.owm-230-c:before,  /* light drizzle thunderstorm */
+.owm-300-c:before,  /* light drizzle */
+.owm-310-c:before,  /* light shower drizzle */
+.owm-500-c:before,  /* light rain */
+.owm-520-c:before,  /* light showers */
+.owm-600-c:before,  /* light snow */
+.owm-620-c:before,  /* light shower snow */
+.owm-615-c:before,  /* light rain/snow */
+.owm-200-c:before,  /* light rain thunderstorm */
+.owm-210-c:before,  /* light thunderstorm */
+.owm-221-c:before,  /* ragged thunderstorm */
+.owm-231-c:before,  /* drizzle thunderstorm */
+.owm-301-c:before,  /* drizzle */
+.owm-311-c:before,  /* drizzle rain */
+.owm-313-c:before,  /* showers and drizzle */
+.owm-321-c:before,  /* shower drizzle */
+.owm-501-c:before,  /* rain */
+.owm-511-c:before,  /* freezing rain */
+.owm-521-c:before,  /* showers */
+.owm-531-c:before,  /* ragged showers */
+.owm-601-c:before,  /* snow */
+.owm-621-c:before,  /* shower snow */
+.owm-611-c:before,   /* sleet */
+.owm-612-c:before,   /* shower sleet */
+.owm-616-c:before,   /* rain/snow */
+.owm-201-c:before,  /* rain thunderstorm */
+.owm-211-c:before,  /* thunderstorm */
+.owm-232-c:before,  /* heavy drizzle thunderstorm */
+.owm-302-c:before,  /* heavy drizzle */
+.owm-312-c:before,  /* heavy drizzle rain */
+.owm-314-c:before,  /* heavy showers and drizzle */
+.owm-502-c:before,  /* heavy rain */
+.owm-522-c:before,  /* heavy showers */
+.owm-602-c:before,  /* heavy snow */
+.owm-622-c:before,  /* heavy shower snow */
+.owm-202-c:before,  /* heavy rain thunderstorm */
+.owm-212-c:before,  /* heavy thunderstorm */
+.owm-503-c:before,  /* very heavy rain */
+.owm-504-c:before{  /* extreme rain */
+  position:absolute;
+  content: '\f105';
+}
+
+/* -----Light Precipitation Cloud----- */
+.owm-230-c:before,  /* light drizzle thunderstorm */
+.owm-300-c:before,  /* light drizzle */
+.owm-310-c:before,  /* light shower drizzle */
+.owm-500-c:before,  /* light rain */
+.owm-520-c:before,  /* light showers */
+.owm-600-c:before,  /* light snow */
+.owm-620-c:before,  /* light shower snow */
+.owm-615-c:before{  /* light rain/snow */
+  color: rgb(160, 160, 160);
+}
+
+/* -----Precipitation Cloud----- */
+.owm-200-c:before,  /* light rain thunderstorm */
+.owm-210-c:before,  /* light thunderstorm */
+.owm-221-c:before,  /* ragged thunderstorm */
+.owm-231-c:before,  /* drizzle thunderstorm */
+.owm-301-c:before,  /* drizzle */
+.owm-311-c:before,  /* drizzle rain */
+.owm-313-c:before,  /* showers and drizzle */
+.owm-321-c:before,  /* shower drizzle */
+.owm-501-c:before,  /* rain */
+.owm-511-c:before,  /* freezing rain */
+.owm-521-c:before,  /* showers */
+.owm-531-c:before,  /* ragged showers */
+.owm-601-c:before,  /* snow */
+.owm-621-c:before,  /* shower snow */
+.owm-611-c:before,   /* sleet */
+.owm-612-c:before,   /* shower sleet */
+.owm-616-c:before{   /* rain/snow */
+  color: rgb(125, 125, 125);
+}
+
+/* -----Heavy Precipitation Cloud----- */
+.owm-201-c:before,  /* rain thunderstorm */
+.owm-211-c:before,  /* thunderstorm */
+.owm-232-c:before,  /* heavy drizzle thunderstorm */
+.owm-302-c:before,  /* heavy drizzle */
+.owm-312-c:before,  /* heavy drizzle rain */
+.owm-314-c:before,  /* heavy showers and drizzle */
+.owm-502-c:before,  /* heavy rain */
+.owm-522-c:before,  /* heavy showers */
+.owm-602-c:before,  /* heavy snow */
+.owm-622-c:before{  /* heavy shower snow */
+  color: rgb(87, 87, 87);
+}
+
+/* -----Heavy thunderstorm Cloud----- */
+.owm-202-c:before,  /* heavy rain thunderstorm */
+.owm-212-c:before,  /* heavy thunderstorm */
+.owm-503-c:before,  /* very heavy rain */
+.owm-504-c:before{  /* extreme rain */
+  color: rgb(45, 45, 45);
+}
+
+/* -----Light Rain----- */
+.owm-230:before,  /* light drizzle thunderstorm */
+.owm-300:before,  /* light drizzle */
+.owm-310:before,  /* light shower drizzle */
+.owm-500:before,  /* light rain */
+.owm-520:before{  /* light showers */
+  position:absolute;
+  color: rgb(130, 178, 228);
+}
+
+/* -----Rain----- */
+.owm-200:before,  /* light rain thunderstorm */
+.owm-210:before,  /* light thunderstorm */
+.owm-221:before,  /* ragged thunderstorm */
+.owm-231:before,  /* drizzle thunderstorm */
+.owm-301:before,  /* drizzle */
+.owm-311:before,  /* drizzle rain */
+.owm-313:before,  /* showers and drizzle */
+.owm-321:before,  /* shower drizzle */
+.owm-501:before,  /* rain */
+.owm-521:before,  /* showers */
+.owm-531:before{  /* ragged showers */
+  position:absolute;
+  color: rgb(106, 160, 216)
+}
+
+
+.owm-201:before,  /* rain thunderstorm */
+.owm-211:before,  /* thunderstorm */
+.owm-232:before,  /* heavy drizzle thunderstorm */
+.owm-302:before,  /* heavy drizzle */
+.owm-312:before,  /* heavy drizzle rain */
+.owm-314:before,  /* heavy showers and drizzle */
+.owm-502:before,  /* heavy rain */
+.owm-503:before,  /* very heavy rain */
+.owm-522:before{  /* heavy showers */
+  position:absolute;
+  color: rgb(70, 129, 195);
+}
+
+
+/* -----Extreme Rain----- */
+.owm-202:before,  /* heavy rain thunderstorm */
+.owm-212:before,  /* heavy thunderstorm */
+.owm-504:before{  /* extreme rain */
+  position:absolute;
+  color: rgb(45, 104, 169)
+}
+
+/* -----Drizzle----- */
+.owm-300:before,  /* light drizzle */
+.owm-301:before,  /* drizzle */
+.owm-302:before,  /* heavy drizzle */
+.owm-310:before,  /* light shower drizzle */
+.owm-311:before,  /* drizzle rain */
+.owm-312:before,  /* heavy drizzle rain */
+.owm-313:before,  /* showers and drizzle */
+.owm-314:before,  /* heavy showers and drizzle */
+.owm-321:before{  /* shower drizzle */
+  position:absolute;
+  content: '\f10a';
+}
+
+/* -----Rain----- */
+.owm-500:before,  /* light rain */
+.owm-501:before,  /* rain */
+.owm-502:before,  /* heavy rain */
+.owm-503:before,  /* very heavy rain */
+.owm-504:before{  /* extreme rain */
+  position:absolute;
+  content: '\f107';
+}
+
+/* -----Showers----- */
+.owm-520:before,  /* light showers */
+.owm-521:before,  /* showers */
+.owm-522:before,  /* heavy showers */
+.owm-531:before{  /* ragged showers */
+  position:absolute;
+  content: '\f104';
+}
+
+/* -----Thunderstorm Rain/Rain-Snow----- */
+.owm-200:before,  /* light rain thunderstorm */
+.owm-201:before,  /* rain thunderstorm */
+.owm-202:before,  /* heavy rain thunderstorm */
+.owm-210:before,  /* light thunderstorm */
+.owm-211:before,  /* thunderstorm */
+.owm-212:before,  /* heavy thunderstorm */
+.owm-221:before,  /* ragged thunderstorm */
+.owm-231:before,  /* drizzle thunderstorm */
+.owm-232:before,  /* heavy drizzle thunderstorm */
+.owm-615:before,   /* light rain/snow */
+.owm-616:before{   /* rain/snow */
+  position:absolute;
+  content: '\f10e';
+}
+
+/* -----Thunder----- */
+.owm-200:after,  /* light rain thunderstorm */
+.owm-201:after,  /* rain thunderstorm */
+.owm-202:after,  /* heavy rain thunderstorm */
+.owm-210:after,  /* light thunderstorm */
+.owm-211:after,  /* thunderstorm */
+.owm-212:after,  /* heavy thunderstorm */
+.owm-221:after,  /* ragged thunderstorm */
+.owm-231:after,  /* drizzle thunderstorm */
+.owm-232:after{  /* heavy drizzle thunderstorm */
+  position:absolute;
+  content: '\f114';
+  color: rgb(255, 165, 0);
+  transform: translateX(-5px);
+}
+
+/* -----Light Snow/Sleet----- */
+.owm-600:before,  /* light snow */
+.owm-615:before,   /* light rain/snow */
+.owm-620:before{  /* light shower snow */
+  color: rgb(185, 216, 241);
+}
+
+/* -----Snow/Sleet----- */
+.owm-601:before,  /* snow */
+.owm-611:after,   /* sleet */
+.owm-612:after,   /* shower sleet */
+.owm-616:after,   /* rain/snow */
+.owm-621:before{  /* shower snow */
+  color: rgb(172, 211, 243);
+}
+
+/* -----Heavy Snow/Sleet----- */
+.owm-511:after,   /* freezing rain */
+.owm-602:before,  /* heavy snow */
+.owm-622:before{  /* heavy shower snow */
+  color: rgb(155, 195, 227);
+}
+
+/* -----Snow----- */
+.owm-600:before,  /* light snow */
+.owm-601:before,  /* snow */
+.owm-602:before,  /* heavy snow */
+.owm-620:before,  /* light shower snow */
+.owm-621:before,  /* shower snow */
+.owm-622:before{  /* heavy shower snow */
+  position:absolute;
+  content: '\f10b';
+}
+
+/* -----Sleet----- */
+.owm-511:after,   /* freezing rain */
+.owm-611:after,   /* sleet */
+.owm-612:after{   /* shower sleet */
+  position:absolute;
+  content: '\f10c';
+}
+
+/* -----Rain Snow Mix----- */
+.owm-615:after,   /* light rain/snow */
+.owm-616:after{   /* rain/snow */
+  position:absolute;
+  content: '\f103';
+  transform: translateX(-15px);
+}
+
+/* -----Atmosphere----- */
+.owm-701:after,   /* mist */
+.owm-711:after,   /* smoke */
+.owm-721:after,   /* haze */
+.owm-731:after,   /* sand */
+.owm-741:after,   /* fog */
+.owm-751:after,   /* sand */
+.owm-761:after,   /* dust */
+.owm-762:after,   /* ash */
+.owm-771:after,   /* squalls */
+.owm-781:after{   /* tornado */
+  position:absolute;
+  content: '\f108';
+  color: rgb(204, 204, 204);
+}
+
+/* -----Sun----- */
+.owm-800-day::after {
+  content: "\f113";
+  color: rgb(255, 165, 0);
+}
+
+/* -----Moon----- */
+.owm-800-night:after {
+  content: "\f10d";
+  color: rgb(255, 165, 0);
+  transform: scaleX(-1);
+}
+
+/* -----Sun Icons----- */
+.owm-800-day:after,
+.owm-800-night:after,
+.owm-801:before{
+  position:absolute;
+}
+
+/* -----Sun behind cloud----- */
+.owm-801-day:before,
+.owm-802-day:before,
+.owm-803-day:before {
+  content: "\f101";
+  color: rgb(255, 165, 0);
+  position:absolute;
+}
+
+/* -----Moon behind cloud----- */
+.owm-801-night:before,
+.owm-802-night:before,
+.owm-803-night:before {
+  content: "\f100";
+  color: rgb(255, 165, 0);
+  position:absolute;
+}
+
+/* -----Mostly Sunny----- */
+.owm-801-c:before {
+  color: rgb(210, 210, 210);
+}
+
+/* -----Partly Cloudy----- */
+.owm-802-c:before {
+  color: rgb(195, 195, 195);
+}
+
+/* -----Mostly Cloudy----- */
+.owm-803-c:before {
+  color: rgb(175, 175, 175);
+}
+
+/* -----Cloudy----- */
+.owm-804:before {
+  position:absolute;
+  content: '\f106';
+  color: rgb(150, 150, 150);
+}
+
+/* -----Sun with clouds----- */
+.owm-801-c:before,
+.owm-802-c:before,
+.owm-803-c:before{
+  position:absolute;
+  content: '\f106';
+  transform: translateX(8px);
+}

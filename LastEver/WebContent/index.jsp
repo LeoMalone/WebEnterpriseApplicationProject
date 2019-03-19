@@ -26,7 +26,7 @@
 	<!-- Custom styles for this template -->
 	<link href="css/cover.css" rel="stylesheet">
 	<link href="css/carousel.css" rel="stylesheet">
-	<link href="css/weather-icons.min.css" rel="stylesheet">
+	<link href="css/weather.css" rel="stylesheet">
 	<fmt:bundle basename="TestBundle">
 		<title>Last Ever - <fmt:message key="home" /></title>
 	</fmt:bundle>
@@ -292,17 +292,25 @@
 												</c:otherwise>
 											</c:choose> </b></td>
 											<td id="weather" style="width: 45%"><c:choose>
+                                                <c:when
+                                                        test="${weather.weatherCode eq 800}">
+                                                    <!-- Show day/night weather icons for codes 800 -->
+                                                    <i class="icon owm-${weather.weatherCode}-c"></i>
+                                                    <i class="icon owm-${weather.weatherCode}-${weather.weatherDay}"></i>
+                                                </c:when>
 												<c:when
-														test="${weather.weatherCode gt 799 and weather.weatherCode lt 804}">
+														test="${weather.weatherCode gt 800 and weather.weatherCode lt 804}">
 													<!-- Show day/night weather icons for codes 800-803 otherwise show generic ones -->
-													<i
-															class="wi wi-owm-${weather.weatherDay}-${weather.weatherCode}"></i>
+                                                    <i class="icon-sm owm-${weather.weatherCode}-c"></i>
+                                                    <i class="icon owm-${weather.weatherCode}-${weather.weatherDay}"></i>
 												</c:when>
 												<c:when test="${weather.weatherCode eq 0}">
-													<i class="wi wi-na"></i>
+                                                    <i class="icon owm-800-c"></i>
+                                                    <i class="icon owm-800-day"></i>
 												</c:when>
 												<c:otherwise>
-													<i class="wi wi-owm-${weather.weatherCode}"></i>
+                                                    <i class="icon owm-${weather.weatherCode}-c"></i>
+                                                    <i class="icon owm-${weather.weatherCode}"></i>
 												</c:otherwise>
 											</c:choose></td>
 										</tr>
