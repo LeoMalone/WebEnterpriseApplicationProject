@@ -1,14 +1,13 @@
 package dao;
 
+import beans.UserBean;
+import db.ConnectionManager;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.mindrot.jbcrypt.BCrypt;
-
-import beans.UserBean;
-import db.ConnectionManager;
 
 /**
  * The EditUser class handles all db operation relating to editing a user

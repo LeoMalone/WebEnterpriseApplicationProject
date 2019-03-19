@@ -5,15 +5,6 @@ package servlets;
  * the player page to display all the player info
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import beans.LeagueBean;
 import beans.PlayerBean;
@@ -21,6 +12,16 @@ import beans.StatisticsBean;
 import dao.League;
 import dao.Player;
 import dao.Statistics;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerPageServlet extends HttpServlet {
 

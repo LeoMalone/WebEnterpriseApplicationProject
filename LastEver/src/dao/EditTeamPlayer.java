@@ -1,12 +1,12 @@
 package dao;
 
+import beans.PlayerBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import beans.PlayerBean;
-import db.ConnectionManager;
 
 /**
  * The EditTeamPlayer class handles all db operation relating to editing a team's player

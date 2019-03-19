@@ -5,20 +5,21 @@ package servlets;
  * the statistics page to show the leading scorers of a league
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import beans.LeagueBean;
+import beans.StatisticsBean;
+import dao.League;
+import dao.Statistics;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.StatisticsBean;
-import dao.League;
-import dao.Statistics;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatisticsServlet extends HttpServlet {
 

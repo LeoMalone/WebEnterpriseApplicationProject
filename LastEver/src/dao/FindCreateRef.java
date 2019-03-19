@@ -1,13 +1,9 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import beans.RefBean;
 import db.ConnectionManager;
+
+import java.sql.*;
 
 /**
  * The FindCreateRef class handles all db operation relating to finding or creating an actual referee

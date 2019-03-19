@@ -1,17 +1,12 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
+import beans.WeatherBean;
+import db.ConnectionManager;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.json.JSONObject;
 
-import beans.WeatherBean;
-import db.ConnectionManager;
+import java.sql.*;
 
 /**
  * The Weather class handles checking to see if the weather from the database needs to be updated,
@@ -51,10 +46,7 @@ public class Weather {
 	        Minutes interval = Minutes.minutes(20);
 	        
 	        //if 30 minutes has passed since last update then set update to true, otherwise data needs no updating
-	        if(min.isGreaterThan(interval))
-	        	update = true;
-	        else
-	        	update = false;
+            update = min.isGreaterThan(interval);
 	      
 	        
 	    // close all connections and handle all possible exceptions

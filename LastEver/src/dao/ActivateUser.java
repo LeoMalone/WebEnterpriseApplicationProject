@@ -1,16 +1,11 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
+import beans.UserBean;
+import db.ConnectionManager;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
-import beans.UserBean;
-import db.ConnectionManager;
+import java.sql.*;
 
 /**
  * The ActivateUser tries to activate a user based on userID and token

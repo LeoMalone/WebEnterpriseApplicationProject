@@ -1,8 +1,11 @@
 package servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import beans.LeagueBean;
+import beans.PlayerBean;
+import beans.TeamBean;
+import dao.EditTeamUser;
+import dao.League;
+import dao.TeamScheduleResults;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +13,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.PlayerBean;
-import beans.TeamBean;
-import dao.EditTeamUser;
-import dao.League;
-import dao.TeamScheduleResults;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TeamRosterServlet class extends HttpServlet for GET/POST requests for the team roster page

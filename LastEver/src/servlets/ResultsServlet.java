@@ -5,11 +5,11 @@ package servlets;
  * the results page to show the leagues results
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import beans.LeagueBean;
+import beans.ScheduleResultsBean;
+import dao.League;
+import dao.ScheduleResults;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +17,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.ScheduleResultsBean;
-import dao.League;
-import dao.ScheduleResults;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ResultsServlet extends HttpServlet {
 
@@ -87,11 +87,11 @@ public class ResultsServlet extends HttpServlet {
 				Pattern p = Pattern.compile("^[1-9][0-9]*$");
 				Matcher m1;
 				
-				m1 = p.matcher((String)request.getParameter("page"));
+				m1 = p.matcher(request.getParameter("page"));
 				
 				//if the query string matches the format then set the page to be the current page of the user
 				if(m1.matches()) {
-					page = Integer.parseInt((String)request.getParameter("page"));
+					page = Integer.parseInt(request.getParameter("page"));
 				}
 			}
 			

@@ -6,24 +6,6 @@ package servlets;
  * from the OpenWeatherMap API
  * @author Kevin Villemaire
  */
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.joda.time.DateTime;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import beans.LeagueBean;
 import beans.NewsBean;
@@ -31,6 +13,23 @@ import beans.WeatherBean;
 import dao.Index;
 import dao.League;
 import dao.Weather;
+import org.joda.time.DateTime;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IndexServlet extends HttpServlet {
 

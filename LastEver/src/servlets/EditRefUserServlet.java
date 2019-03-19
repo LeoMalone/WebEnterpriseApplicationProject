@@ -1,17 +1,5 @@
 package servlets;
 
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import beans.DivisionBean;
 import beans.LeagueBean;
 import beans.RefBean;
@@ -19,6 +7,17 @@ import beans.TeamBean;
 import dao.AdminTeams;
 import dao.EditRefUser;
 import dao.League;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * EditRefUserServlet extends the HttpServlet class to handle the GET/POST requests for

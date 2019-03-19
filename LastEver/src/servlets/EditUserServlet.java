@@ -1,10 +1,9 @@
 package servlets;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import beans.LeagueBean;
+import beans.UserBean;
+import dao.EditUser;
+import dao.League;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +11,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.LeagueBean;
-import beans.UserBean;
-import dao.EditUser;
-import dao.League;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**

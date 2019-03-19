@@ -1,13 +1,13 @@
 package dao;
 
+import beans.PlayerBean;
+import beans.UserBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import beans.PlayerBean;
-import beans.UserBean;
-import db.ConnectionManager;
 
 /**
  * The CreateAccount class creates new users in the db from

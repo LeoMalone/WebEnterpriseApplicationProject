@@ -1,14 +1,14 @@
 package dao;
 
+import beans.DivisionBean;
+import beans.TeamBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import db.ConnectionManager;
-import beans.TeamBean;
-import beans.DivisionBean;
 
 /**
  * The AdminTeams class handles all db operation relating to editing a Team by an Admin

@@ -1,13 +1,13 @@
 package dao;
 
+import beans.RefBean;
+import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import db.ConnectionManager;
-import beans.RefBean;
 
 /**
  * The RefUsers class gets info related to a referee

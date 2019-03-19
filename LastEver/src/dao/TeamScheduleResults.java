@@ -1,14 +1,14 @@
 package dao;
 
+import beans.ScheduleResultsBean;
+import beans.TeamBean;
 import db.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import beans.ScheduleResultsBean;
-import beans.TeamBean;
 
 /**
  * The TeamScheduleResults class gets the schedule, results, and team name for the current logged in team owner
